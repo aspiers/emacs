@@ -1130,7 +1130,7 @@ command."
 
 ;;------------------------------------------------------------
 
-(autoload 'ignore-errors "cl-macs")
+(autoload 'ignore-errors "cl" "ignore-errors" nil 'macro)
 (defun rpm-spec-field-value (field max)
   "Get the value of FIELD, searching up to buffer position MAX.
 See `search-forward-regexp'."
