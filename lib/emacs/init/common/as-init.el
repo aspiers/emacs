@@ -1197,7 +1197,8 @@ Can be optionally given a numeric prefix which
                                           (lambda () 
                                             (interactive)
                                             (bury-buffer)
-                                            (delete-window)))))))
+                                            (cond ((> (length (window-list)) 1)
+                                                   (delete-window)))))))))
 
 ;;}}}
 
