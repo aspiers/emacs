@@ -1,13 +1,19 @@
 # TODO: rewrite in Perl.  Gah.
 
 srcdirs=init/common major-modes minor-modes utils
-loadpaths=$(HOME)/lib/emacs/minor-modes \
-          $(HOME)/lib/emacs/major-modes/mmm \
-          $(HOME)/lib/emacs/major-modes
-gnuinstalldir=$(HOME)/lib/emacs/GNU_Emacs
-xinstalldir=$(HOME)/lib/emacs/XEmacs
+EMACSLIB=$(HOME)/lib/emacs
+loadpaths=$(EMACSLIB)/minor-modes \
+          $(EMACSLIB)/major-modes/mmm \
+          $(EMACSLIB)/major-modes/tdtd \
+          $(EMACSLIB)/major-modes
+gnuinstalldir=$(EMACSLIB)/GNU_Emacs
+xinstalldir=$(EMACSLIB)/XEmacs
 
-ELs=$(shell find $(srcdirs) -name \*.el ! -name psgml\* )
+ELs=$(shell find $(srcdirs) -name \*.el \
+			    ! -name psgml\* \
+			    ! -name tdtd\* \
+			    ! -name sdf.el \
+     )
 ELCs=$(addsuffix c,$(ELs))
 
 ifndef EMACS
@@ -38,10 +44,9 @@ list:
 	@echo $(ELs)o
 
 install: $(ELCs) psgml uninstall
-	@echo "Installing in $(installdir):"
+	@echo "Installing all .elcs in $(installdir)"
 	@[ -d $(installdir) ] || mkdir -p $(installdir)
 	@for elc in $(ELCs) major-modes/psgml/*.elc; do \
-	  echo "    $$elc"; \
 	  cp -i $$elc $(installdir); \
 	done
 
@@ -50,7 +55,7 @@ install: $(ELCs) psgml uninstall
 	@$(COMPILER) $<
 
 clean: uninstall
-	@-rm -f $(ELCs)
+	@-find $(EMACSLIB) -name \*.elc | xargs rm -f
 
 uninstall:
 	@-rm -f $(wildcard $(installdir)/*.elc)

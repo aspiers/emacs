@@ -427,7 +427,7 @@ a prefix argument."
 ;;}}}
 ;;{{{ Mouse
 
-(and window-system
+(and window-system (not running-xemacs)
      (global-set-key [(M-mouse-4)] 'raise-frame)
      (global-set-key [(M-mouse-5)] 'lower-frame))
 
@@ -570,6 +570,12 @@ a prefix argument."
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
                 ("\\.xml$"                               . xml-mode)
+                ("\\.dcl$" . dtd-mode)
+                ("\\.dec$" . dtd-mode)
+                ("\\.dtd$" . dtd-mode)
+                ("\\.ele$" . dtd-mode)
+                ("\\.ent$" . dtd-mode)
+                ("\\.mod$" . dtd-mode)
                 )
               auto-mode-alist))
 
@@ -936,6 +942,18 @@ Can be optionally given a numeric prefix which
 (autoload 'mmm-mode "mmm-auto" "mmm mode" t)
 
 ;;}}}
+;;{{{ DTD
+
+(autoload 'dtd-mode "tdtd" "Major mode for SGML and XML DTDs." t)
+(autoload 'dtd-etags "tdtd"
+  "Execute etags on FILESPEC and match on DTD-specific regular expressions."
+  t)
+(autoload 'dtd-grep "tdtd" "Grep for PATTERN in files matching FILESPEC." t)
+
+;; Turn on font lock when in DTD mode
+(add-hook 'dtd-mode-hooks 'turn-on-font-lock)
+
+;;}}}
 ;;{{{ psgml (SGML and XML)
 
 (autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
@@ -1159,6 +1177,8 @@ Can be optionally given a numeric prefix which
 (autoload 'folding-mode-find-file "folding" "folding mode")
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
 (autoload 'fold-set-marks "folding" "folding mode")
+(defun folding-mode)
+(defun folding-mode-add-find-file-hook)
 (cond ((as-quick-startup)
        (defun lf () "Loads folding-mode." (interactive) (folding-mode)))
       (t
