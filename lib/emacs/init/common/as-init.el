@@ -377,6 +377,7 @@ that name."
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
+(global-set-key "\C-c+"   'make-directory)
 
 ;;}}}
 ;;{{{ Function keys f5--f9 (no modifiers)
