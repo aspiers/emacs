@@ -112,10 +112,14 @@ line before and after the text."
   (insert "http://tigerpig.org/"))
 
 (defun as-insert-email-address (&optional prefix)
-  "Inserts Adam's e-mail address"
+  "Inserts Adam's e-mail address."
   (interactive)
-  (if prefix (insert prefix))
-  (insert "@adamspiers.org"))
+  (let ((p (point)))
+    (if prefix (insert prefix))
+    (insert "@adamspiers.org")
+    ;; If no prefix provided, leave point where we can type it
+    ;; straight away.
+    (or prefix (goto-char p))))
 
 (defvar as-work-email-address "aspiers@lehman.com"
   "Adam's work email address.")
