@@ -875,6 +875,7 @@ that name."
     (fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
     (fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
     (fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
     (fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
     (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
     (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
