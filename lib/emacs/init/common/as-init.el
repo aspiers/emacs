@@ -757,12 +757,17 @@ to the beginning of the buffer name."
 (autoload 'mutt-mode "mutt" "mode for editing mutt files")
 
 ;;}}}
+;;{{{ MMM mode
+
+(load "mmm-auto" t)
+
+;;}}}
 
 ;; Minor modes
 
 ;;{{{ vc
 
-(if running-xemacs (load-library "vc"))
+(require 'vc)
 
 ;;}}}
 ;;{{{ iswitchb - better buffer switching
@@ -858,7 +863,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Load paren library
 
-(if window-system (load-library "paren"))
+(require 'paren)
 
 ;;}}}
 ;;{{{ Time-stamp mode
@@ -878,7 +883,11 @@ to the beginning of the buffer name."
 (auto-compression-mode)
 
 ;;}}}
+;;{{{ auto-recomp for .el files
 
+(load "auto-recomp" t)
+
+;;}}}
 ;;{{{ comment-start
 
 (add-hook 'lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
@@ -888,5 +897,13 @@ to the beginning of the buffer name."
 (add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
 
 ;;}}}
+
+;;}}}
+
+;;{{{ local variables
+
+;;; Local Variables:
+;;; auto-recompile: t
+;;; End:
 
 ;;}}}
