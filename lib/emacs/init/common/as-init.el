@@ -311,6 +311,9 @@ that name."
 (autoload 'as-insert-email-address "as-autotext" "Insert work email address" t)
 (global-set-key "\C-ciw" 'as-insert-work-email-address)
 
+(autoload 'as-insert-name-and-work-email "as-autotext" "Insert name and work email address" t)
+(global-set-key "\C-ciW" 'as-insert-name-and-work-email)
+
 (autoload 'as-insert-homepage-url "as-autotext" "Insert homepage url" t)
 (global-set-key "\C-cih" 'as-insert-homepage-url)
 
@@ -327,7 +330,7 @@ that name."
 (global-set-key "\C-ciL" 'as-insert-log-datestamp)
 
 (autoload 'as-insert-name-and-email "as-autotext" "Insert name and email" t)
-(global-set-key "\C-ciM" 'as-insert-name-and-email)
+(global-set-key "\C-ciN" 'as-insert-name-and-email)
 
 (autoload 'as-insert-name "as-autotext" "Insert name" t)
 (global-set-key "\C-cin" 'as-insert-name)
