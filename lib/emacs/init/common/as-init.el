@@ -535,12 +535,16 @@ that name."
 ;;}}}
 ;;{{{ Shell-script
 
-;;{{{ Autoload sh-script on invocation
-
+;; Autoload sh-script on invocation
 (autoload 'shell-script-mode "sh-script"
   "Major mode for editing shell scripts" t)
 
-;;}}}
+(autoload 'sh-ins-template "as-sh-mode-exts"
+  "Template for new shell script texts" t)
+(autoload 'make-buffer-file-executable-if-script-p "as-sh-mode-exts"
+  "Make shell scripts executable" t)
+(add-hook 'sh-mode-hook 'sh-ins-template)
+(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
 
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
