@@ -453,14 +453,14 @@ to the beginning of the buffer name."
 
 (setq auto-mode-alist
       (append (list
-               '("\\.prehtml\\'" . html-mode)
-               '("\\.php3\\'" . html-mode)
-               '("\\.sdf\\'" . sdf-mode)
+               '("\\.pod\\'"              . cperl-mode)
+               '("\\.prehtml\\'"          . html-mode)
+               '("\\.php3\\'"             . html-mode)
+               '("\\.sdf\\'"              . sdf-mode)
 ;;             '("\\.info\\(\\.gz\\)?\\'" . info)
                '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
-               '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'"
-                 . sawfish-mode)
-               '(".ly\\'" . lilypond-mode)
+               '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode)
+               '(".ly\\'"                 . lilypond-mode)
                )
               auto-mode-alist))
 
