@@ -2,6 +2,8 @@
 (custom-set-variables
  '(fast-lock-minimum-size 4096)
  '(lazy-lock-defer-on-scrolling t)
+ '(scroll-margin -1 t)
+ '(scroll-step 2)
  '(show-paren-delay 0)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-minimum-size 4096)
