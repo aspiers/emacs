@@ -275,6 +275,8 @@ that name."
 ;;{{{ C-c - 
 
 (global-set-key "\C-ca"   'bury-buffer)
+(fset 'as-next-cvs-buffer "\C-xb*cvs*") ;; must be something nicer than this
+(global-set-key "\C-cb"   'as-next-cvs-buffer)
 (global-set-key "\C-cc"   'comment-region)
 (global-set-key "\C-cd"   'as-duplicate-line)
 (global-set-key "\C-ce"   'cvs-examine)
