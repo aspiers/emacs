@@ -763,8 +763,10 @@ to the beginning of the buffer name."
 ;; ... I think.  RTF info page, dude.
 
 (autoload 'po-find-file-coding-system "po-mode")
-(modify-coding-system-alist 'file "\\.po[tx]?\\'\\|\\.po\\."
-                            'po-find-file-coding-system)
+
+(if (not running-xemacs)
+    (modify-coding-system-alist 'file "\\.po[tx]?\\'\\|\\.po\\."
+                                'po-find-file-coding-system))
 
 ;;}}}
 
