@@ -133,6 +133,8 @@ that name."
 (autoload 'as-join-line-with-next "as-editing" "Join line with next"        t)
 (autoload 'as-copy-previous-line-suffix
                                   "as-editing" "Copy previous line suffix"  t)
+(autoload 'as-align-to-previous-line
+                                  "as-editing" "Align to previous line"     t)
 (autoload 'vim-yy                 "as-editing" "Simulate vim's yy command"  t)
 
 ;;}}}
@@ -369,6 +371,7 @@ that name."
 
 (global-set-key [(f5)] 'as-duplicate-line)
 (global-set-key [(f6)] 'as-bounce-buffer)
+(global-set-key [(f7)] 'as-align-to-previous-line)
 
 ;;}}}
 
@@ -678,6 +681,7 @@ that name."
                       (auto-fill-mode -1)
 ;;                    (setq truncate-lines t)
                       )))
+(setq tempo-interactive t)
 
 ;;}}}
 ;;{{{ Apache
