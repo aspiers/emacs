@@ -1,10 +1,20 @@
 srcdirs=init/common major-modes minor-modes utils
 loadpaths=$(HOME)/lib/emacs/major-modes/mmm
-installdir=$(HOME)/lib/emacs/GNU_Emacs
-EMACS=emacs
+gnuinstalldir=$(HOME)/lib/emacs/GNU_Emacs
+xinstalldir=$(HOME)/lib/emacs/XEmacs
+GNUEMACS=emacs
+XEMACS=xemacs
 
 ELs=$(shell find $(srcdirs) -name \*.el)
 ELCs=$(addsuffix c,$(ELs))
+
+ifdef X
+  EMACS=$(XEMACS)
+  installdir=$(xinstalldir)
+else
+  EMACS=$(GNUEMACS)
+  installdir=$(gnuinstalldir)
+endif
 
 .PHONY: all install
 
