@@ -41,6 +41,19 @@ a prefix argument."
       (insert suffix))))
 
 ;;}}}
+;;{{{ as-align-to-previous-line
+
+(defun as-align-to-previous-line ()
+  "Runs indent-relative on the current line and moves down to enable repeating."
+  (interactive)
+  (save-excursion
+    (re-search-forward "[^ ]")
+    (backward-char 1)
+    (indent-relative))
+  (next-line 1) ;; sorry FSF
+  )
+
+;;}}}
 ;;{{{ as-transpose-lines
 
 (defun as-transpose-lines (arg)
