@@ -142,6 +142,14 @@ in all the directories in that path."
   (if window-system (font-lock-mode)))
 
 ;;}}}
+;;{{{ set-tab-width
+
+(defun set-tab-width (width)
+  "Sets the tab-width variable to the given argument."
+  (interactive "Nnew hard tab width: ")
+  (setq tab-width width))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Key bindings
@@ -214,6 +222,7 @@ in all the directories in that path."
 (global-set-key "\C-x9r"        'toggle-read-only)
 (global-set-key "\C-x9t"        'toggle-truncate-lines)
 (global-set-key "\C-x9v"        'set-variable)
+(global-set-key "\C-x9w"        'set-tab-width)
 (global-set-key "\C-x9z"        'suspend-emacs)
 
 ;;}}}
