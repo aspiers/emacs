@@ -11,7 +11,7 @@
 ;;}}}
 ;;{{{ as-cperl-insert-self-and-args-line
 
-(defun cperl-indent-command (&optional whole-exp))
+(eval-when-compile (defun cperl-indent-command (&optional whole-exp)))
 (defun as-cperl-insert-self-and-args-line ()
   "Inserts a
 
@@ -132,7 +132,8 @@ Can be optionally given a numeric prefix which
 
 ;;}}}
 
-(defun as-cperl-setup
+(defun as-cperl-setup ()
+  "Set up cperl-mode the way Adam likes it."
   (local-set-key "\C-cma"      'as-cperl-insert-args-line)
   (local-set-key "\C-cmc"      'as-cperl-insert-self-method-call)
   (local-set-key "\C-cmC"      'as-cperl-insert-carp-line)
