@@ -441,6 +441,7 @@ that name."
 
 (custom-set-variables
  '(find-function-source-path
+   (append load-path
       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
               (list
                "fun" 
@@ -451,7 +452,7 @@ that name."
                "major-modes" 
                "minor-modes" 
                "utils" 
-               ))))
+               )))))
 
 ;;}}}
 ;;{{{ e-mail address
