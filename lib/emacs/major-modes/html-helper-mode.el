@@ -463,7 +463,7 @@ See code for an example."
     (head    . (html-helper-head-map "\C-c\C-h" 
 				     html-helper-head-menu 
 				     "Insert Structural Elements"))
-    (header  . (html-helper-header-map "\C-c\M-h" 
+    (header  . (html-helper-header-map "\C-c" 
 				       html-helper-header-menu 
 				       "Insert Headers"))
     (anchor  . (html-helper-anchor-map "\C-c\C-a" 
