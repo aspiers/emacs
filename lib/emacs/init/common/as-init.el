@@ -761,6 +761,11 @@ that name."
 (defvar gnus-sum-thread-tree-root "")
 
 ;;}}}
+;;{{{ outline
+
+(eval-after-load "outline" '(require 'foldout))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
