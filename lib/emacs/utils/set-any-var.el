@@ -48,7 +48,7 @@ as a starting point for convenient editing."
                                           arg))
                  (read (read-string "New value: "
                                     (pp (symbol-value var))
-                                    'set-any-variable-value-history)))))
+                                    'set-variable-value-history)))))
      (list var val)))
 
   (let ((type (get var 'custom-type)))
