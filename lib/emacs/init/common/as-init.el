@@ -456,7 +456,7 @@ a prefix argument."
 (global-set-key [(insert)] 'overwrite-mode)
 (global-set-key [(meta o)] 'overwrite-mode)
 
-(global-set-key [(control meta y)] 'join-line-with-next)
+(global-set-key [(control meta y)] 'as-join-line-with-next)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
