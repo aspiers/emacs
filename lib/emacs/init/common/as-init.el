@@ -17,122 +17,6 @@
 
 ;;{{{ Function definitions
 
-;;{{{ join-line-with-next
-
-(defun join-line-with-next ()
-  "Joins the current line with the next.  This just calls join-line with
-a prefix argument."
-  (interactive)
-  (join-line 1))
-
-;;}}}
-;;{{{ toggle-truncate-lines
-
-(defun toggle-truncate-lines
-  ()
-  "Toggles the value of truncate lines in the current buffer"
-  (interactive)
-  (setq truncate-lines (not truncate-lines))
-  (message "truncate-lines set to %s" truncate-lines)
-)
-
-;;}}}
-;;{{{ toggle-indent-tabs-mode
-
-(defun toggle-indent-tabs-mode
-  () 
-  "Toggles the value of indent-tabs-mode in the current buffer"
-  (interactive)
-  (setq indent-tabs-mode (not indent-tabs-mode))
-  (message "indent-tabs-mode set to %s" indent-tabs-mode)
-)
-
-;;}}}
-;;{{{ duplicate-line
-
-(defun duplicate-line
-  () 
-  "Duplicates the current line."
-  (interactive)
-  (beginning-of-line)
-  (push-mark (point) t t)
-  (end-of-line)
-  (kill-new (buffer-substring (mark) (point)))
-  (insert "\n")
-  (yank))
-
-;;}}}
-;;{{{ insert-date-and-time
-
-(defun insert-date-and-time
-  ()
-  "Inserts the current date and time into the current buffer at the point."
-  (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-;;(insert (current-time-string))
-)
-
-;;}}}
-;;{{{ insert-log-timestamp
-
-(defun insert-log-timestamp
-  ()
-  "Inserts the current date, time and username into the current buffer at the point."
-  (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-  (insert
-;;   (current-time-string)
-   " "
-   (user-login-name))
-)
-
-;;}}}
-;;{{{ emacs-Info
-
-(defun emacs-Info (&optional file)
-  "Enter Info, the documentation browser.
-Optional argument FILE specifies the file to examine;
-the default is the top-level directory of Info.
-
-In interactive use, a prefix argument directs this command
-to read a file name from the minibuffer.
-
-The search path for Info files is in the variable `Info-directory-list'.
-The top-level Info directory is made by combining all the files named `dir' 
-in all the directories in that path."
-  (interactive
-   (if current-prefix-arg
-       (list
-        (read-file-name
-         "Info file name: " ;; PROMPT
-         nil                ;; DIR
-         nil                ;; DEFAULT-FILENAME
-         t                  ;; MUSTMATCH
-         nil                ;; INITIAL 
-         ))))
-  (if file
-      (info file)
-    (if (get-buffer "*info*")
-        (pop-to-buffer "*info*")
-      (info "/usr/info/emacs.gz"))))
-
-;;}}}
-;;{{{ kill-whole-line
-
-;; (defun kill-whole-line
-;;   ()
-;;   "Kills the current line."
-;;   (interactive) 
-;;   (beginning-of-line)
-;;   (kill-line 1))
-
-;;}}}
 ;;{{{ font-lock-mode-if-window-system
 
 (defun font-lock-mode-if-window-system
@@ -140,14 +24,6 @@ in all the directories in that path."
   "Turns on font-lock mode if X windows is active."
   (interactive)
   (if window-system (font-lock-mode)))
-
-;;}}}
-;;{{{ set-tab-width
-
-(defun set-tab-width (width)
-  "Sets the tab-width variable to the given argument."
-  (interactive "Nnew hard tab width: ")
-  (setq tab-width width))
 
 ;;}}}
 
@@ -213,15 +89,76 @@ in all the directories in that path."
 
 (global-set-key "\C-x9 "        'set-mark-command)
 (global-set-key "\C-x9a"        'save-buffer)
+;;{{{ toggle-indent-tabs-mode
+
+(defun toggle-indent-tabs-mode
+  () 
+  "Toggles the value of indent-tabs-mode in the current buffer"
+  (interactive)
+  (setq indent-tabs-mode (not indent-tabs-mode))
+  (message "indent-tabs-mode set to %s" indent-tabs-mode)
+)
+
+;;}}}
 (global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
 (global-set-key "\C-x9c"        'comment-region)
+;;{{{ insert-date-and-time
+
+(defun insert-date-and-time
+  ()
+  "Inserts the current date and time into the current buffer at the point."
+  (interactive)
+  (insert
+   (shell-command-to-string "date")
+   )
+  (backward-delete-char 1)
+;;(insert (current-time-string))
+)
+
+;;}}}
 (global-set-key "\C-x9d"        'insert-date-and-time)
 (global-set-key "\C-x9g"        'goto-line)
 (global-set-key "\C-x9i"        'auto-fill-mode)
+;;{{{ insert-log-timestamp
+
+(defun insert-log-timestamp
+  ()
+  "Inserts the current date, time and username into the current buffer at the point."
+  (interactive)
+  (insert
+   (shell-command-to-string "date")
+   )
+  (backward-delete-char 1)
+  (insert
+;;   (current-time-string)
+   " "
+   (user-login-name))
+)
+
+;;}}}
 (global-set-key "\C-x9l"        'insert-log-timestamp)
 (global-set-key "\C-x9r"        'toggle-read-only)
+;;{{{ toggle-truncate-lines
+
+(defun toggle-truncate-lines
+  ()
+  "Toggles the value of truncate lines in the current buffer"
+  (interactive)
+  (setq truncate-lines (not truncate-lines))
+  (message "truncate-lines set to %s" truncate-lines)
+)
+
+;;}}}
 (global-set-key "\C-x9t"        'toggle-truncate-lines)
 (global-set-key "\C-x9v"        'set-variable)
+;;{{{ set-tab-width
+
+(defun set-tab-width (width)
+  "Sets the tab-width variable to the given argument."
+  (interactive "Nnew hard tab width: ")
+  (setq tab-width width))
+
+;;}}}
 (global-set-key "\C-x9w"        'set-tab-width)
 (global-set-key "\C-x9z"        'suspend-emacs)
 
@@ -326,10 +263,64 @@ in all the directories in that path."
 (global-set-key [(meta i)]              'indent-relative)
 
 (global-set-key [(f1)]             'ispell-word)
+;;{{{ emacs-Info
+
+(defun emacs-Info (&optional file)
+  "Enter Info, the documentation browser.
+Optional argument FILE specifies the file to examine;
+the default is the top-level directory of Info.
+
+In interactive use, a prefix argument directs this command
+to read a file name from the minibuffer.
+
+The search path for Info files is in the variable `Info-directory-list'.
+The top-level Info directory is made by combining all the files named `dir' 
+in all the directories in that path."
+  (interactive
+   (if current-prefix-arg
+       (list
+        (read-file-name
+         "Info file name: " ;; PROMPT
+         nil                ;; DIR
+         nil                ;; DEFAULT-FILENAME
+         t                  ;; MUSTMATCH
+         nil                ;; INITIAL 
+         ))))
+  (if file
+      (info file)
+    (if (get-buffer "*info*")
+        (pop-to-buffer "*info*")
+      (info "/usr/info/emacs.gz"))))
+
+;;}}}
 (global-set-key [(f2)]             'emacs-Info)
+;;{{{ duplicate-line
+
+(defun duplicate-line
+  () 
+  "Duplicates the current line."
+  (interactive)
+  (beginning-of-line)
+  (push-mark (point) t t)
+  (end-of-line)
+  (kill-new (buffer-substring (mark) (point)))
+  (insert "\n")
+  (yank))
+
+;;}}}
 (global-set-key [(f4)]             'duplicate-line)
 (global-set-key [(insert)]         'overwrite-mode)
 (global-set-key [(meta o)]         'overwrite-mode)
+
+;;{{{ join-line-with-next
+
+(defun join-line-with-next ()
+  "Joins the current line with the next.  This just calls join-line with
+a prefix argument."
+  (interactive)
+  (join-line 1))
+
+;;}}}
 (global-set-key [(control meta y)] 'join-line-with-next)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers
