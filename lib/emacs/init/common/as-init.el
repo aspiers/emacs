@@ -1189,6 +1189,16 @@ Can be optionally given a numeric prefix which
 (autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
+;;{{{ diff-mode
+
+(add-hook 'diff-mode-hook
+          (function 
+           (lambda () (local-set-key "q" (function 
+                                          (lambda () 
+                                            (interactive)
+                                            (delete-window)))))))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
