@@ -4,22 +4,6 @@
 ;;{{{ To do list
 
 ;;
-;;  - fix compile warnings:
-;;
-;;  you must predefine autoloads for used functions so that compiler knows
-;;  about them.
-;;  (eval-and-compile
-;;     (autoload 'fold-set-marks "folding)
-;;     etc...
-;;     )
-;;  for variables, use `defvar' trick in hooks, where you are sure that
-;;  module has already defined the variable. `defvar' is no-op if variable
-;;  has already been defined, but it makes compiler happy; thinking that
-;;  you DID define variable before using it.
-;;      ...in hook
-;;          (defvar folding-mode-map)
-;;          (define-key folding-mode-map [kp-7] 'fold-enter)  
-;;
 ;;  - Start using same-window-regexps?
 ;;
 
@@ -27,15 +11,6 @@
 
 ;;{{{ Function definitions
 
-;;{{{ set-fill-column-to-normal
-
-(defun set-fill-column-to-normal
-  () 
-  "Sets the fill column to 75."
-  (interactive)
-  (setq fill-column 75))
-
-;;}}}
 ;;{{{ toggle-truncate-lines
 
 (defun toggle-truncate-lines
@@ -218,7 +193,6 @@ in all the directories in that path."
 (global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
 (global-set-key "\C-x9c"        'comment-region)
 (global-set-key "\C-x9d"        'insert-date-and-time)
-(global-set-key "\C-x9f"        'set-fill-column-to-normal)
 (global-set-key "\C-x9g"        'goto-line)
 (global-set-key "\C-x9i"        'auto-fill-mode)
 (global-set-key "\C-x9l"        'insert-log-timestamp)
@@ -767,7 +741,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ sawfish
 
-(autoload 'sawfish-mode "sawfish" "mode for editing sawfish rep (lisp) files" t)
+(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
 ;;(add-hook 'sawfish-mode-hook
 ;;          (function (lambda () (turn-on-font-lock))))
 ;;(add-hook 'sawfish-mode-hook 'font-lock-mode-if-window-system)
@@ -775,17 +749,17 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ lilypond
 
-(autoload 'lilypond-mode "lilypond" "mode for editing lilypond files" t)
+(autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
 ;;{{{ SDF
 
-(autoload 'sdf-mode "sdf-mode" "mode for editing SDF files" t)
+(autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
 
 ;;}}}
 ;;{{{ mutt
 
-(autoload 'mutt-mode "mutt" "mode for editing mutt files")
+(autoload 'mutt-mode "mutt" "Mode for editing mutt files")
 
 ;;}}}
 ;;{{{ MMM mode
@@ -820,7 +794,58 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Folding mode
 
+;;{{{ Fix compiler warnings
+
+(defun fold-point-folded-p (arg))
+(defun fold-top-level)
+(defun fold-use-overlays-p)
+(defun fold-show (&optional arg1 &optional arg2 &optional arg3))
+(defun fold-enter (&optional arg))
+(defun fold-narrow-to-region (&optional arg1 &optional arg2 &optional arg3))
+(defun fold-open-buffer)
+
+;;}}}
+
+;;{{{ Set marks for individual modes
+
+(autoload 'fold-add-to-marks-list "folding" "folding mode")
+(eval-after-load "folding"
+  (progn
+    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+    (fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
+    (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
+    (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
+    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+    (fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
+    ))
+
+;;}}}
+;;{{{ Autoload mode via local variables
+
+(autoload 'folding-mode "folding" "folding mode")
+(autoload 'folding-mode-find-file "folding" "folding mode")
+
+(folding-mode-add-find-file-hook)
+
+;;(or (memq 'folding-mode-find-file find-file-hooks)
+;;    (add-hook 'find-file-hooks 'folding-mode-find-file 'end))
+
+;;}}}
+;;{{{ Set default marks
+
+;;(autoload 'fold-set-marks "folding" "folding mode")
+(fold-set-marks "{{{" "}}}")
+
+;;}}}
 ;;{{{ Key bindings
+
+(defvar folding-mode-map) ;; avoid compile warnings
+(autoload 'fold-show "folding")
 
 (add-hook 'folding-mode-hook
           (lambda ()
@@ -848,41 +873,11 @@ to the beginning of the buffer name."
 (setq fold-default-keys-function 'fold-bind-backward-compatible-keys)
 
 ;;}}}
-;;{{{ Load folding mode
-
-(autoload 'folding-mode "folding" "folding mode")
-
-;;}}}
-;;{{{ Set default marks
-
-(fold-set-marks "{{{" "}}}")
-
-;;}}}
-;;{{{ Enable auto-loading of mode via local variables
-
-(folding-mode-add-find-file-hook)
-
-;;}}}
-;;{{{ Set marks for individual modes
-
-(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-(fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-(fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-(fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
-
-;;}}}
 
 ;;}}}
 ;;{{{ Transient Mark mode
 
-(if (not (functionp 'transient-mark-mode))
+(if (not (boundp 'transient-mark-mode))
     (defun transient-mark-mode (arg1) nil))
 (if (not running-xemacs) (transient-mark-mode 1))
 
@@ -947,6 +942,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ blinking-cursor
 
+(defun blinking-cursor-mode (&optional arg))
 (cond 
  ((load "blinking-cursor" t)
   (blinking-cursor-mode 1)))
