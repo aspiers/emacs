@@ -301,6 +301,7 @@ The variable ruby-indent-level controls the amount of indentation.
 		  (goto-char (match-beginning 1))
 		  (setq w (buffer-substring (match-beginning 1)
 					    (match-end 1)))
+;;                  (message (format "w is %s" w))
 		  (cond
 		   ((string= w "[") (setq w "\\]"))
 		   ((string= w "{") (setq w "}"))
@@ -661,6 +662,7 @@ An end of a defun is found by moving forward from the beginning of one."
 (defvar font-lock-type-face)
 (defvar font-lock-variable-name-face)
 (defun hilit-set-mode-patterns (arg1 arg2))
+
 (cond
  ((featurep 'font-lock)
   (or (boundp 'font-lock-variable-name-face)
@@ -673,6 +675,11 @@ An end of a defun is found by moving forward from the beginning of one."
 	       (setq font-lock-syntactic-keywords
 		     '(("\\$\\([#\"'`$\\]\\)" 1 (1 . nil))
 		       ("\\(#\\)[{$@]" 1 (1 . nil))
+		       ("\\(%[rqQx]?\\(.\\)\\)\\(.*?\\)\\(\1\\)"
+                        (1 "'")
+                        (2 "'")
+                        (3 " ")
+                        (4 "'"))
 		       ("\\(/\\)\\([^/\n]\\|\\\\/\\)*\\(/\\)"
 			(1 (7 . ?'))
 			(3 (7 . ?')))))
