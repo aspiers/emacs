@@ -52,33 +52,6 @@ Controlled by `as-find-file-matching-regexp-alist'."
 (add-hook 'find-file-hooks 'as-find-file-matching-regexp-hook)
 
 ;;}}}
-;;{{{ as-bounce-buffer
-
-(defvar as-bounce-buffer-regexp-alist '()
-  "Controls the behaviour of `as-bounce-buffer'.")
-
-(defun as-bounce-buffer ()
-  "For each element of `as-bounce-buffer-regexp-alist', attempts a search
-and replace on the current buffer's filename.  (The CARs are the
-search regexps, and the CDRs the corresponding strings to replace the
-matches with).  As soon a search is successful, the filename resulting
-from the replace is visited via `find-file'."
-  (interactive)
-  (catch 'gotcha
-    (mapcar
-     (lambda (x)
-       (let ((case-fold-search nil) 
-             (match (car x))
-             (replace (cdr x)))
-         (cond
-          ((string-match match (buffer-file-name))
-           (let ((bounce-to (replace-match replace t t (buffer-file-name) nil)))
-             (message (format "Bounced to %s" bounce-to))
-             (find-file bounce-to))
-           (throw 'gotcha nil)))))
-     as-bounce-buffer-regexp-alist)))
-
-;;}}}
 ;;{{{ as-buffer-rename-via-alist-hook
 
 (defvar as-buffer-renamings-alist '() 
@@ -145,91 +118,20 @@ that name."
 (add-hook 'find-file-hooks 'as-buffer-rename-remove-unique-id)
 
 ;;}}}
-;;{{{ as-display-buffer-filename
 
-(defun as-display-buffer-filename
-  ()
-  "Displays the current buffer's filename in the minibuffer."
-  (interactive)
-  (message buffer-file-name))
-
-;;}}}
-;;{{{ as-destroy-buffer
-
-(defun as-destroy-buffer ()
-  "Kill the current buffer without leaving crappy auto-save files around."
-  (interactive)
-  (let ((tmpfile (format "/tmp/.emacs.as-destroy-buffer.%d" (emacs-pid)))
-        (buf (buffer-name)))
-    (write-file tmpfile)
-    (kill-buffer nil)
-    (delete-file tmpfile)
-    (message (concat "Destroyed buffer " buf))))
-
-;;}}}
+(autoload 'as-bounce-buffer      "as-bufs-files" "Bounce buffers"           t)
+(autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffers"          t)
+(autoload 'bury-and-close-buffer "as-bufs-files" "Bury and close buffers"   t)
+(autoload 'mhj-set-q-to-close    "as-bufs-files" "Bind q to bury and close" t)
 
 ;;}}}
 ;;{{{ Editing
 
-;;{{{ as-duplicate-line
-
-(defun as-duplicate-line
-  () 
-  "Duplicates the current line."
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (push-mark (point) t t)
-    (end-of-line)
-    (kill-new (buffer-substring (mark) (point)))
-    (insert "\n")
-    (yank))
-  (next-line 1))
-
-;;}}}
-;;{{{ as-join-line-with-next
-
-(defun as-join-line-with-next ()
-  "Joins the current line with the next.  This just calls join-line with
-a prefix argument."
-  (interactive)
-  (join-line 1))
-
-;;}}}
-;;{{{ as-copy-previous-line-suffix
-
-(fset 'as-copy-previous-line-suffix
-   [?\C-p ?\C-  ?\C-e ?\M-w ?\C-n ?\C-u ?\C-y])
-
-;;}}}
-;;{{{ vim-yy
-
-(defun vim-yy (&optional lines) "doc string"
-  (interactive "p")
-  (save-excursion
-    (setq lines (if (or (null lines)
-                        (< lines 1)) 1 lines))
-    (beginning-of-line)
-    (push-mark (point) nil t)
-    (next-line lines)
-    (kill-ring-save (mark) (point))))
-
-;;}}}
-;;{{{ bury-and-close-buffer
-
-(defun bury-and-close-buffer ()
-  (interactive)
-  (bury-buffer) 
-  (when (> (length (window-list)) 1) 
-    (delete-window)))
-
-;;}}}
-;;{{{ mhj-set-q-to-close
-
-(defun mhj-set-q-to-close ()
-  (local-set-key "q" 'bury-and-close-buffer))
-
-;;}}}
+(autoload 'as-duplicate-line      "as-editing" "Duplicate the current line" t)
+(autoload 'as-join-line-with-next "as-editing" "Join line with next"        t)
+(autoload 'as-copy-previous-line-suffix
+                                  "as-editing" "Copy previous line suffix"  t)
+(autoload 'vim-yy                 "as-editing" "Simulate vim's yy command"  t)
 
 ;;}}}
 ;;{{{ Appearance
@@ -255,43 +157,51 @@ a prefix argument."
 ;;}}}
 
 ;;}}}
-;;{{{ Global key bindings
+;;{{{ Key bindings
 
-;;{{{ Keypad maps
+;;{{{ Global keymap (possibly naughty)
 
-(global-set-key [(kp-4)]        'backward-char)
-(global-set-key [(kp-6)]        'forward-char)
-(global-set-key [(kp-2)]        'next-line)
-(global-set-key [(kp-8)]        'previous-line)
-(global-set-key [(kp-7)]        'beginning-of-buffer)
-(global-set-key [(kp-1)]        'end-of-buffer)
-(global-set-key [(kp-9)]        'scroll-down)
-(global-set-key [(kp-3)]        'scroll-up)
-(global-set-key [(meta kp-4)]   'backward-word)
-(global-set-key [(meta kp-6)]   'forward-word)
+;;{{{ Rebinding for improvement - naughty but nice
 
-;;}}}
-;;{{{ Delete key
+(global-set-key "\M-\\"         'fixup-whitespace)  ;; was delete-horizontal-space
+(global-set-key "\M-g"          'goto-line)         ;; was set-face
+(global-set-key "\C-ha"         'apropos)           ;; was apropos-command
 
 (global-set-key [(delete)] 'delete-char)
+(global-set-key [(insert)] 'overwrite-mode)
+(global-set-key [(meta o)] 'overwrite-mode)
+
+;; Set C-x C-b to buffer-menu rather than list-buffers so that the
+;; point automatically gets put in the buffer menu.
+(global-set-key "\C-x\C-b" 'buffer-menu)
+
+;; But if bs-show is available, choose that cos it's much nicer.
+(and (functionp 'bs-show)
+     (global-set-key "\C-x\C-b" (function (lambda (arg)
+                                            (interactive "P")
+                                            (bs-show arg)
+                                            (let ((inhibit-read-only t))
+                                              (save-excursion
+                                                (end-of-buffer)
+                                                (insert "\n")))))))
 
 ;;}}}
-;;{{{ Define fast scroll keys
+;;{{{ Additions (hope for no conflicts)
 
-(defun as-fast-up () "Move up two lines." (interactive) (forward-line -2))
-(defun as-fast-down () "Move down two lines." (interactive) (forward-line 2))
-
-;;; Can only use M-down and M-up in X
-
-(if window-system
-    (progn
-      (global-set-key [(meta down)] 'as-fast-down)
-      (global-set-key [(meta up)]   'as-fast-up)
-      (global-set-key [(meta kp-2)] 'as-fast-down)
-      (global-set-key [(meta kp-8)] 'as-fast-up)))
+(global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
+(global-set-key [(control meta y)] 'as-join-line-with-next)
+(global-set-key [(control x) (control y)] 'vim-yy)
 
 ;;}}}
-;;{{{ hippie-expand ROCKS!
+;;{{{ TAB and family
+
+(global-set-key "\C-c\C-i"      'indent-region)
+(global-set-key [(control tab)]         'other-window)
+(global-set-key [(control meta $)]      'ispell-buffer)
+(global-set-key [(control meta tab)]    'ispell-complete-word)
+(global-set-key [(meta i)]              'indent-relative)
+
+;;{{{ hippie-expand
 
 (global-set-key [(meta tab)] 'hippie-expand)
 (global-set-key "\e\C-i"     'hippie-expand)
@@ -311,166 +221,37 @@ a prefix argument."
         ))
 
 ;;}}}
-;;{{{ C-x 9
-
-(global-set-key "\C-x9 "   'set-mark-command)
-(global-set-key "\C-x9a"   'save-buffer)
-;;{{{ toggle-indent-tabs-mode
-
-(defun as-toggle-indent-tabs-mode
-  () 
-  "Toggles the value of indent-tabs-mode in the current buffer"
-  (interactive)
-  (setq indent-tabs-mode (not indent-tabs-mode))
-  (message "indent-tabs-mode set to %s" indent-tabs-mode)
-)
 
 ;;}}}
-(global-set-key "\C-x9b"   'as-toggle-indent-tabs-mode)
-(global-set-key "\C-x9c"   'comment-region)
-;;{{{ insert-date-and-time
-
-(defun as-insert-date-and-time
-  ()
-  "Inserts the current date and time into the current buffer at the point."
-  (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-;;(insert (current-time-string))
-)
 
 ;;}}}
-(global-set-key "\C-x9d"   'as-insert-date-and-time)
-(global-set-key "\C-x9g"   'goto-line)
-(global-set-key "\C-x9i"   'auto-fill-mode)
-;;{{{ insert-log-timestamp
+;;{{{ Keypad
 
-(defun as-insert-log-timestamp
-  ()
-  "Inserts the current date, time and username into the current buffer at the point."
-  (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-  (insert
-;;   (current-time-string)
-   " "
-   (user-login-name))
-)
+(global-set-key [(kp-4)]        'backward-char)
+(global-set-key [(kp-6)]        'forward-char)
+(global-set-key [(kp-2)]        'next-line)
+(global-set-key [(kp-8)]        'previous-line)
+(global-set-key [(kp-7)]        'beginning-of-buffer)
+(global-set-key [(kp-1)]        'end-of-buffer)
+(global-set-key [(kp-9)]        'scroll-down)
+(global-set-key [(kp-3)]        'scroll-up)
+(global-set-key [(meta kp-4)]   'backward-word)
+(global-set-key [(meta kp-6)]   'forward-word)
 
 ;;}}}
-(global-set-key "\C-x9l"   'as-insert-log-timestamp)
-(global-set-key "\C-x9o"   'as-bounce-buffer)
-(global-set-key "\C-x9n"   'as-display-buffer-filename)
-(global-set-key "\C-x9p"   'as-copy-previous-line-suffix)
-(global-set-key "\C-x9r"   'toggle-read-only)
-;;{{{ toggle-truncate-lines
+;;{{{ Define fast scroll keys
 
-(defun as-toggle-truncate-lines
-  ()
-  "Toggles the value of truncate lines in the current buffer"
-  (interactive)
-  (setq truncate-lines (not truncate-lines))
-  (message "truncate-lines set to %s" truncate-lines)
-)
+(defun as-fast-up () "Move up two lines." (interactive) (forward-line -2))
+(defun as-fast-down () "Move down two lines." (interactive) (forward-line 2))
 
-;;}}}
-(global-set-key "\C-x9t"   'as-toggle-truncate-lines)
-(global-set-key "\C-x9u"   'as-duplicate-line)
-(global-set-key "\C-x9v"   'set-variable)
-;;{{{ set-tab-width
+;;; Can only use M-down and M-up in X
 
-(defun as-set-tab-width (width)
-  "Sets the tab-width variable to the given argument."
-  (interactive "Nnew hard tab width: ")
-  (setq tab-width width))
-
-;;}}}
-(global-set-key "\C-x9w"   'as-set-tab-width)
-(global-set-key "\C-x9z"   'suspend-emacs)
-
-;;}}}
-;;{{{ Auto-text
-
-(global-unset-key "\C-x\C-z")
-
-;;{{{ Signatures
-
-(defun as-insert-japh-sig ()
-  "Inserts Adam's cool JAPH .sig"
-  (interactive)
-  (insert-file "~/.sig/perl/japh_indirect"))
-
-(global-set-key "\C-x\C-zj" 'as-insert-japh-sig)
-
-;;}}}
-;;{{{ Scissors
-
-(defun as-insert-scissors ()
-  "Inserts a cut-here-with-scissors"
-  (interactive)
-  (open-line 1)
-  (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
-  (beginning-of-line)
-  (next-line 1))
-
-(global-set-key "\C-x\C-zs" 'as-insert-scissors)
-
-;;}}}
-;;{{{ Home pages
-
-(defun as-insert-homepage-url ()
-  "Inserts Adam's homepage URL"
-  (interactive)
-  (insert "http://adamspiers.org/"))
-(global-set-key "\C-x\C-zh" 'as-insert-homepage-url)
-
-(defun as-insert-old-homepage-url ()
-  "Inserts Adam's old homepage URL"
-  (interactive)
-  (insert "http://www.new.ox.ac.uk/~adam/"))
-(global-set-key "\C-x\C-zo" 'as-insert-old-homepage-url)
-
-(defun as-insert-tigerpig-url ()
-  "Inserts the tigerpig.org URL"
-  (interactive)
-  (insert "http://tigerpig.org/"))
-(global-set-key "\C-x\C-zt" 'as-insert-tigerpig-url)
-
-;;}}}
-;;{{{ e-mail address
-
-(defun as-insert-email-address ()
-  "Inserts Adam's e-mail address"
-  (interactive)
-  (insert "adam@spiers.net"))
-(global-set-key "\C-x\C-ze" 'as-insert-email-address)
-
-;;}}}
-;;{{{ Name (how lazy am I?)
-
-(defun as-insert-name ()
-  "Inserts Adam's name"
-  (interactive)
-  (insert "Adam Spiers"))
-(global-set-key "\C-x\C-zn" 'as-insert-name)
-
-;;}}}
-;;{{{ Me (name & e-mail)
-
-(defun as-insert-name-and-email ()
-  "Inserts Adam's name and e-mail address"
-  (interactive)
-  (as-insert-name)
-  (insert " <")
-  (as-insert-email-address)
-  (insert ">"))
-(global-set-key "\C-x\C-zm" 'as-insert-name-and-email)
-
-;;}}}
+(if window-system
+    (progn
+      (global-set-key [(meta down)] 'as-fast-down)
+      (global-set-key [(meta up)]   'as-fast-up)
+      (global-set-key [(meta kp-2)] 'as-fast-down)
+      (global-set-key [(meta kp-8)] 'as-fast-up)))
 
 ;;}}}
 ;;{{{ Mouse
@@ -480,87 +261,126 @@ a prefix argument."
      (global-set-key [(M-mouse-5)] 'lower-frame))
 
 ;;}}}
-;;{{{ Miscellaneous
+;;{{{ FSF-compliant user bindings
 
-(global-set-key "\C-x\C-a"      'bury-buffer)
-(global-set-key "\M-\\"         'fixup-whitespace)
-(global-set-key "\C-xt"         'revert-buffer)
-(global-set-key "\C-xK"         'as-destroy-buffer)
-(global-set-key "\C-ha"         'apropos)
-(global-set-key "\M-g"          'goto-line)
-(global-set-key "\C-ha"         'apropos)
-(global-set-key "\C-c\C-i"      'indent-region)
-(global-set-key "\C-cl"         'align) ;; new in emacs 21
+;;{{{ C-c - 
 
-(global-set-key [(control tab)]         'other-window)
-(global-set-key [(control meta $)]      'ispell-buffer)
-(global-set-key [(control meta tab)]    'ispell-complete-word)
-(global-set-key [(meta i)]              'indent-relative)
+(global-set-key "\C-ca"   'bury-buffer)
+(global-set-key "\C-cc"   'comment-region)
+(global-set-key "\C-cd"   'as-duplicate-line)
+(global-set-key "\C-cf"   'auto-fill-mode)
 
-;; (global-set-key [(f1)] 'ispell-word)
-(global-set-key [(f2)] 'as-bounce-buffer)
-;; (global-set-key [(f3)] 'as-display-buffer-filename)
-(global-set-key [(f4)] 'as-duplicate-line)
-;; (global-set-key [(f6)] 'as-copy-previous-line-suffix)
+;;{{{ Auto-text (C-c i)
 
-(global-set-key [(insert)] 'overwrite-mode)
-(global-set-key [(meta o)] 'overwrite-mode)
+(autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
+(global-set-key "\C-cid" 'as-insert-date-and-time)
 
-(global-set-key [(control meta y)] 'as-join-line-with-next)
-(global-set-key [(control x) (control y)] 'vim-yy)
+(autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
+(global-set-key "\C-cie" 'as-insert-email-address)
 
-;; Set C-x C-b to buffer-menu rather than list-buffers so that the
-;; point automatically gets put in the buffer menu.
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(autoload 'as-insert-homepage-url "as-autotext" "Insert homepage url" t)
+(global-set-key "\C-cih" 'as-insert-homepage-url)
 
-;; But if bs-show is available, choose that cos it's much nicer.
-(and (functionp 'bs-show)
-     (global-set-key "\C-x\C-b" (function (lambda (arg)
-                                            (interactive "P")
-                                            (bs-show arg)
-                                            (let ((inhibit-read-only t))
-                                              (save-excursion
-                                                (end-of-buffer)
-                                                (insert "\n")))))))
+(autoload 'as-insert-japh-sig "as-autotext" "Insert japh sig" t)
+(global-set-key "\C-cij" 'as-insert-japh-sig)
+
+(autoload 'as-insert-log-timestamp "as-autotext" "Insert log timestamp" t)
+(global-set-key "\C-cil" 'as-insert-log-timestamp)
+
+(autoload 'as-insert-name-and-email "as-autotext" "Insert name and email" t)
+(global-set-key "\C-cim" 'as-insert-name-and-email)
+
+(autoload 'as-insert-name "as-autotext" "Insert name" t)
+(global-set-key "\C-cin" 'as-insert-name)
+
+(autoload 'as-insert-old-homepage-url "as-autotext" "Insert old homepage url" t)
+(global-set-key "\C-cio" 'as-insert-old-homepage-url)
+
+(autoload 'as-insert-scissors "as-autotext" "Insert scissors" t)
+(global-set-key "\C-cis" 'as-insert-scissors)
+
+(autoload 'as-insert-tigerpig-url "as-autotext" "Insert tigerpig url" t)
+(global-set-key "\C-cit" 'as-insert-tigerpig-url)
+
+;;}}}
+
+(global-set-key "\C-cl"   'align)                      ;; new in emacs 21
+;; I reserve C-c m for mode-specific user bindings
+(global-set-key "\C-cn"   'as-display-buffer-filename)
+(global-set-key "\C-cr"   'revert-buffer)
+
+;;{{{ Toggles and settings (C-c t)
+
+;;{{{ as-toggle-indent-tabs-mode
+
+(defun as-toggle-indent-tabs-mode
+  () 
+  "Toggles the value of indent-tabs-mode in the current buffer"
+  (interactive)
+  (setq indent-tabs-mode (not indent-tabs-mode))
+  (message "indent-tabs-mode set to %s" indent-tabs-mode))
+
+;;}}}
+(global-set-key "\C-ctb"   'as-toggle-indent-tabs-mode)
+
+;;{{{ as-toggle-truncate-lines
+
+(defun as-toggle-truncate-lines
+  ()
+  "Toggles the value of truncate lines in the current buffer"
+  (interactive)
+  (setq truncate-lines (not truncate-lines))
+  (message "truncate-lines set to %s" truncate-lines))
+
+;;}}}
+(global-set-key "\C-cts"   'as-toggle-truncate-lines) ;; mnemonic: less -S
+
+;;{{{ as-set-tab-width
+
+(defun as-set-tab-width (width)
+  "Sets the tab-width variable to the given argument."
+  (interactive "NNew hard tab width: ")
+  (setq tab-width width))
+
+;;}}}
+(global-set-key "\C-ctw"   'as-set-tab-width)
+
+;;}}}
+
+(global-set-key "\C-cp"   'as-copy-previous-line-suffix)
+
+(autoload 'set-any-variable "set-any-var" "set-any-variable" t)
+(global-set-key "\C-cv"   'set-any-variable)
+
+;;}}}
+;;{{{ Function keys f5--f9 (no modifiers)
+
+(global-set-key [(f5)] 'as-duplicate-line)
+(global-set-key [(f6)] 'as-bounce-buffer)
+
+;;}}}
 
 ;;}}}
 
 ;;}}}
 ;;{{{ Point movement
 
-;;{{{ Track end of line
-
-;; This is turning out to be annoying
-;;(setq track-eol t)
-
-;;}}}
-;;{{{ Scrolling
-
+;; Scrolling
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
-;;}}}
-;;{{{ Show position in modeline
-
+;; Show position in modeline
 (line-number-mode 1)
 (column-number-mode 1)
 
-;;}}}
-;;{{{ Default right margin
-
+;; Default right margin
 (setq default-fill-column 70)
 
-;;}}}
-;;{{{ Stop down cursor adding newlines to end of buffer.
-
+;; Stop down cursor adding newlines to end of buffer.
 (setq next-line-add-newlines nil)
 
-;;}}}
-;;{{{ IntelliMouse
-
+;; IntelliMouse
 (cond (window-system (load "mwheel" t)))
-
-;;}}}
 
 ;;}}}
 ;;{{{ Little odds and ends
@@ -836,38 +656,20 @@ Can be optionally given a numeric prefix which
 (add-hook 'cperl-mode-hook 
           (function
            (lambda ()
-             (local-set-key "\C-ca" 'as-cperl-insert-args-line)
-             (local-set-key "\C-cc" 'as-cperl-insert-self-method-call)
-             (local-set-key "\C-cC" 'as-cperl-insert-carp-line)
-             (local-set-key "\C-cD" 'as-cperl-insert-data-dumper-line)
-             (local-set-key "\C-cm" 'as-cperl-make-method)
-             (local-set-key "\C-cp" 'cperl-find-pods-heres)
-             (local-set-key [(f5)]  'as-cperl-insert-unique-warning)
-             (local-set-key "\C-ci" 'as-cperl-set-indent-level)
-             (local-set-key "\C-cs" 'as-cperl-insert-self-and-args-line)
-             (local-set-key "\C-cS" 'as-cperl-insert-self-line)
+             (local-set-key "\C-cma"      'as-cperl-insert-args-line)
+             (local-set-key "\C-cmc"      'as-cperl-insert-self-method-call)
+             (local-set-key "\C-cmC"      'as-cperl-insert-carp-line)
+             (local-set-key "\C-cmD"      'as-cperl-insert-data-dumper-line)
+             (local-set-key "\C-cmj"      'imenu)
+             (local-set-key "\C-cmm"      'as-cperl-make-method)
+             (local-set-key "\C-cmp"      'cperl-find-pods-heres)
+             (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
+             (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
+             (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
+             (local-set-key [(f7)]        'as-cperl-insert-unique-warning)
              (local-set-key [(backspace)] 'cperl-electric-backspace)
-             (local-set-key [(control c) (control h) (control j)] 'imenu)
              (setq indent-tabs-mode nil)
              )))
-
-;;}}}
-;;{{{ Set faces
-
-;; (add-hook 
-;;  'cperl-mode-hook
-;;  (function
-;;   (lambda ()
-;;     (if window-system
-;;      (set-face-background 'font-lock-emphasized-face "black")
-;;       (set-face-background 'font-lock-other-emphasized-face "black")
-;;       (set-face-font
-;;        'font-lock-function-name-face
-;;        "-*-courier-bold-r-*-*-*-220-*-*-*-*-*-*")
-;;       (set-face-foreground
-;;        'font-lock-function-name-face
-;;        "steelblue"))
-;;     )))
 
 ;;}}}
 
@@ -877,63 +679,24 @@ Can be optionally given a numeric prefix which
 ;;{{{ Auto-fill
 
 ;; Turn on auto-fill if composing e-mail or news.
-;;
-;; For some reason the local buffer-file-name isn't set at the
-;; stage when text-mode-hook gets run (possibly because it isn't
-;; the current buffer at that stage?), but fortunately the
-;; symbol filename is set to the loading file so we can use that
-;; instead.
-
-;; Try to silence compile errors (I know what I'm doing, honest)
-(or (boundp 'filename) (defvar filename "" "sod knows"))
 
 (add-hook 'text-mode-hook
-          (lambda ()
-            (if (and (boundp 'filename)
-                     (not (eq filename t))
-                     (string-match 
-                      "mutt-thelonious\\|\\.article\\|\\.letter" filename))
-                (turn-on-auto-fill))))
-
+          (function (lambda ()
+                      (and
+                       (string-match "mutt-thelonious\\|\\.article\\|\\.letter"
+                                     (buffer-file-name))
+                       (turn-on-auto-fill)))))
+          
 ;;}}}
 ;;{{{ Expand all tabs to spaces
 
-(add-hook 'text-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
+(add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
 
 ;;}}}
 
 ;;}}}
 ;;{{{ Perl
 
-;;{{{ Tab widths
-
-(defvar perl-indent-level 2 "*")
-(defvar perl-continued-statement-offset 2 "*")
-(defvar perl-continued-brace-offset -2 "*")
-(defvar perl-label-offset -1 "*")
-
-(add-hook 
- 'perl-mode-hook
- (function (lambda () 
-             (setq 
-              perl-indent-level 2
-              perl-continued-statement-offset 2
-              perl-continued-brace-offset -2
-              perl-label-offset -1)
-;;           (set-face-background 'font-lock-emphasized-face "black")
-;;           (set-face-background 'font-lock-other-emphasized-face "black")
-             )))
-
-;;}}}
-;;{{{ Turn on tab/commenting
-
-(eval-when-compile
-  (defvar perl-tab-to-comment))
-(setq perl-tab-to-comment t)
-
-;;}}}
 ;;{{{ Turn on font-lock-mode on entry
 
 (add-hook 'perl-mode-hook 'as-font-lock-mode-if-window-system)
@@ -1010,9 +773,9 @@ Can be optionally given a numeric prefix which
 (setq-default sgml-auto-activate-dtd t)
 
 ;; Some convenient key definitions:
-;; (define-key sgml-mode-map "\C-c\C-x\C-e" 'sgml-describe-element-type)
-;; (define-key sgml-mode-map "\C-c\C-x\C-i" 'sgml-general-dtd-info)
-;; (define-key sgml-mode-map "\C-c\C-x\C-t" 'sgml-describe-entity)
+;; (define-key sgml-mode-map "\C-cm\C-e" 'sgml-describe-element-type)
+;; (define-key sgml-mode-map "\C-cm\C-i" 'sgml-general-dtd-info)
+;; (define-key sgml-mode-map "\C-cm\C-t" 'sgml-describe-entity)
 
 ;;{{{ faces
 
@@ -1136,50 +899,15 @@ Can be optionally given a numeric prefix which
       (if (eq window-system 'x) "xdvi" "dvi2tty * | cat -s"))
 
 ;;}}}
-;;{{{ Turn on font-lock mode on entry
+
+;; Turn on font-lock mode on entry
 
 (add-hook 'tex-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
-
-;;}}}
 ;;{{{ C
 
-;;{{{ C indentation setup
-
-;; for compiling
-(eval-when-compile
-  (defvar c-tab-always-indent)
-  (defvar c-indent-level)
-  (defvar c-continued-statement-offset)
-  (defvar c-brace-offset)
-  (defvar c-brace-imaginary-offset)
-  (defvar c-argdecl-indent)
-  (defvar c-label-offset)
-  (defvar )
-  (defvar )
-  (defvar )
-  )
-
-(setq c-tab-always-indent t
-      ;; setq c-auto-newline t
-      c-indent-level 4
-      c-continued-statement-offset 4
-      c-brace-offset -4
-      c-brace-imaginary-offset 0
-      c-argdecl-indent 0
-      c-label-offset -4)
-
-;; Whatever this is supposed to do, it buggers up XEmacs' idea of
-;; version compatability with byte-compiled code!
-;;(setq default-case-fold-search nil)
-
-;;}}}
-;;{{{ Turn on font-lock mode on entry
-
 (add-hook 'c-mode-hook 'as-font-lock-mode-if-window-system)
-
-;;}}}
 
 ;;}}}
 ;;{{{ man
@@ -1218,8 +946,10 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ pcl-cvs
 
-(global-set-key "\M-s" 'cvs-examine)
-(global-set-key "\M-S" 'cvs-quickdir)
+(global-set-key "\M-s"     'cvs-examine)
+(global-set-key "\C-xD"    'cvs-examine)
+(global-set-key "\M-S"     'cvs-quickdir)
+(global-set-key "\C-X\C-D" 'cvs-quickdir)
 
 ;;}}}
 
