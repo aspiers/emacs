@@ -48,7 +48,7 @@ line before the current line."
   (insert "my $self = shift;")
   (beginning-of-line)
   (forward-line 1)
-  ))
+  )
 
 ;;}}}
 ;;{{{ as-cperl-insert-args-line
