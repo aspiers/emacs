@@ -202,9 +202,10 @@ that name."
 (global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
 (autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
 (global-set-key [(control E)] 'bn-end-of-line-but-one)
-(global-set-key [(control semicolon)] 'speedbar-get-focus)
+(global-set-key [(control ?')] 'speedbar-get-focus)
 (global-set-key [(control ,)] 'delete-other-windows)
 (global-set-key [(control .)] 'delete-window)
+(global-set-key [(control \;)] 'bury-buffer)
 (global-set-key [(control meta y)] 'as-join-line-with-next)
 (global-set-key [(control x) (control y)] 'vim-yy)
 (global-set-key [(control x) (I)] 'insert-buffer)
@@ -212,7 +213,6 @@ that name."
 (global-set-key [(control meta return)] 'repeat-complex-command)
 (autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
 (global-set-key [(control meta \()] 'bn-strip-parentheses)
-
 
 ;;}}}
 ;;{{{ TAB and family
@@ -415,6 +415,7 @@ that name."
 (global-set-key [(f5)] 'as-duplicate-line)
 (global-set-key [(f6)] 'as-bounce-buffer)
 (global-set-key [(f7)] 'as-align-to-previous-line)
+(global-set-key [(f8)] 'as-copy-previous-line-suffix)
 
 ;;}}}
 
@@ -515,6 +516,7 @@ that name."
 (setq auto-mode-alist
       (append '(
                 ("\\.rb\\'"                              . ruby-mode)
+                ("\\.py\\'"                              . python-mode)
                 ("\\.\\(pod\\|t\\)\\'"                   . cperl-mode)
                 ("\\.prehtml\\'"                         . html-mode)
                 ("\\.php3\\'"                            . html-mode)
@@ -887,6 +889,11 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ gtypist-mode
 
 (autoload 'gtypist-mode "gtypist-mode")
+
+;;}}}
+;;{{{ python-mode
+
+(autoload 'python-mode "python-mode" t)
 
 ;;}}}
 
