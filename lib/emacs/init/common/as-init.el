@@ -492,8 +492,11 @@ that name."
                 ("\\.dump$"                              . tar-mode)
                 ("\\.typ\\'"                             . gtypist-mode)
                 ("/.zsh/functions/"                      . sh-mode)
+                ("\\.spec$"                              . rpm-spec-mode)
                 )
               auto-mode-alist))
+
+(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
 
 ;;}}}
 ;;{{{ Major modes
