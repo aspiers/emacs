@@ -155,3 +155,62 @@ Right Thing with `query-replace' and friends."
 (ad-activate 'perform-replace)
 
 ;;}}}
+;;{{{ bn-end-of-line-but-one
+
+(defun bn-end-of-line-but-one (arg)
+  "Move point to one character before the end of current line.
+With argument ARG not nil or 1, move forward ARG - 1 lines first.
+If scan reaches end of buffer, stop there without error.
+If the line is empty, doesn't do anything."
+  (interactive "p")
+  (end-of-line arg)
+  (unless (bolp)
+    (backward-char)))
+
+(define-key global-map [(control E)] 'bn-end-of-line-but-one)
+
+;;}}}
+;;{{{ bn-strip-parentheses
+
+(defun bn-strip-parentheses (arg)
+  "Delete the parenthesis character at point, and its match.
+If the character at point has either open-parenthesis or
+close-parenthesis syntax, delete it, and also delete its match.
+For instance, if point is at | in
+
+   a = b * |(c + d);
+
+then \\[bn-strip-parentheses] will result in
+
+   a = b * |c + d;
+
+With a prefix argument ARG, try to repeat the process ARG times.
+Stop as soon as point is not at a parenthesis character.  With
+just C-u as a prefix argument, repeat as many times as possible."
+  (interactive "P")
+  (let ((many-as-possible-p (and (not (null arg)) (listp arg)))
+        (n (prefix-numeric-value arg))
+        on-open-p
+        on-close-p)
+    (while (and (progn
+                  (setq on-open-p (looking-at "\\s(")
+                        on-close-p (looking-at "\\s)"))
+                  (or on-open-p on-close-p))
+                (or many-as-possible-p
+                    (> n 0)))
+      (when on-open-p
+        (save-excursion
+          (forward-sexp)
+          (delete-char -1))
+        (delete-char 1))
+      (when on-close-p
+        (save-excursion
+          (forward-char 1)
+          (forward-sexp -1)
+          (delete-char 1))
+        (delete-char 1))
+      (decf n))))
+
+(define-key global-map [(control meta \()] 'bn-strip-parentheses)
+
+;;}}}
