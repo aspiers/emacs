@@ -1,20 +1,30 @@
+# TODO: rewrite in Perl.  Gah.
+
 srcdirs=init/common major-modes minor-modes utils
-loadpaths=$(HOME)/lib/emacs/major-modes/mmm
+loadpaths=$(HOME)/lib/emacs/minor-modes $(HOME)/lib/emacs/major-modes/mmm
 gnuinstalldir=$(HOME)/lib/emacs/GNU_Emacs
 xinstalldir=$(HOME)/lib/emacs/XEmacs
-GNUEMACS=emacs
-XEMACS=xemacs
 
 ELs=$(shell find $(srcdirs) -name \*.el)
 ELCs=$(addsuffix c,$(ELs))
 
-ifdef X
-  EMACS=$(XEMACS)
-  installdir=$(xinstalldir)
-else
-  EMACS=$(GNUEMACS)
-  installdir=$(gnuinstalldir)
+ifndef EMACS
+  EMACS=emacs
 endif
+
+version=$(system $(EMACS) -version)
+
+ifeq ($(EMACS),emacs)
+  COMPILER=$(EMACS) $(addprefix -L ,$(loadpaths))
+  installdir=$(gnuinstalldir)
+else
+  # blegh!
+  LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
+  COMPILER=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
+  installdir=$(xinstalldir)
+endif
+
+COMPILER+= -batch -f batch-byte-compile
 
 .PHONY: all install
 
@@ -31,11 +41,9 @@ install: $(ELCs) uninstall
 	  cp -i $$elc $(installdir); \
 	done
 
-LOADPATHS=$(addprefix -L ,$(loadpaths))
-
 %.elc: %.el
 	@echo Compiling $< ...
-	@$(EMACS) $(LOADPATHS) -batch -f batch-byte-compile $<
+	@$(COMPILER) $<
 
 clean: uninstall
 	@-rm -f $(ELCs)
