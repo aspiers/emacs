@@ -14,16 +14,19 @@
       `(vc-annotate-background ,as-default-background)))
 
 (and (>= emacs-major-version 21)
-     (custom-set-faces
-      `(default
-         ((((class color) (background light))
-           (:background ,as-default-background))))
-      '(fringe
-        ((((class color) (background light))
-          (:background "wheat1"))))
-      `(mmm-default-submode-face
-        ((((class color) (background light))
-          (:background ,as-default-background))))))
+     (progn
+       (custom-set-faces
+        `(default
+           ((((class color) (background light))
+             (:background ,as-default-background))))
+        '(fringe
+          ((((class color) (background light))
+            (:background "wheat1"))))
+        `(mmm-default-submode-face
+          ((((class color) (background light))
+            (:background ,as-default-background))))))
+        (custom-set-variables
+         '(tool-bar-mode nil nil (tool-bar))))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -73,7 +76,6 @@
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
- '(tool-bar-mode nil nil (tool-bar))
  '(vc-follow-symlinks t))
 ;;(custom-set-faces
 ;; ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
