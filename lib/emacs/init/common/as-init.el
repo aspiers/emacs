@@ -324,6 +324,7 @@ that name."
 ;; I reserve C-c m for mode-specific user bindings
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
+(global-set-key "\C-cP"   'as-align-to-previous-line)
 (global-set-key "\C-cq"   'cvs-quickdir)
 (global-set-key "\C-cr"   'revert-buffer)
 (global-set-key "\C-cR"   'rename-file)
