@@ -119,6 +119,8 @@ that name."
 
 ;;}}}
 
+(autoload 'as-display-buffer-filename
+                                 "as-bufs-files" "Display buffer filename"  t)
 (autoload 'as-bounce-buffer      "as-bufs-files" "Bounce buffers"           t)
 (autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffers"          t)
 (autoload 'bury-and-close-buffer "as-bufs-files" "Bury and close buffers"   t)
@@ -350,6 +352,8 @@ that name."
 (global-set-key "\C-ctw"   'as-set-tab-width)
 
 ;;}}}
+
+(global-set-key "\C-cu"   'cvs-update)
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
