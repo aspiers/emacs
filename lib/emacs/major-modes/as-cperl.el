@@ -1,5 +1,7 @@
 ;; Adam's cperl setup
 
+(eval-when-compile (require 'cperl-mode))
+
 ;;{{{ as-cperl-set-indent-level
 
 (defvar cperl-indent-level)
@@ -13,7 +15,7 @@
 ;;}}}
 ;;{{{ as-cperl-insert-self-and-args-line
 
-(eval-when-compile (defun cperl-indent-command (&optional whole-exp)))
+;;(eval-when-compile (defun cperl-indent-command (&optional whole-exp)))
 (defun as-cperl-insert-self-and-args-line ()
   "Inserts
 
@@ -122,7 +124,6 @@ line before the current line."
 ;;}}}
 ;;{{{ as-cperl-make-method-and-pod
 
-(eval-when-compile (require 'cperl-mode))
 (defun as-cperl-make-method-and-pod (method)
   "Makes a new Perl method with an accompanying pod stub."
   (interactive "sMethod name: ")
@@ -133,6 +134,41 @@ line before the current line."
   (newline 2)
   (cperl-find-pods-heres)
   (as-cperl-make-method method)
+)
+
+;;}}}
+;;{{{ as-cperl-insert-head
+
+(defun as-cperl-insert-head ()
+  "Inserts an empty pod =head directive."
+  (interactive)
+  (beginning-of-line)
+  (insert "=head2 
+
+=cut
+
+")
+  (forward-line -4)
+  (end-of-line)
+  (cperl-find-pods-heres)
+)
+
+;;}}}
+;;{{{ as-cperl-insert-pod-list
+
+(defun as-cperl-insert-pod-list ()
+  "Inserts Makes a new Perl method with an accompanying pod stub."
+  (interactive)
+  (beginning-of-line)
+  (insert "=over 4
+
+=item * 
+
+=back
+
+")
+  (forward-line -4)
+  (end-of-line)
 )
 
 ;;}}}
@@ -174,10 +210,32 @@ Can be optionally given a numeric prefix which
   (beginning-of-buffer)
   (insert "package " pkg ";
 
+=head1 NAME
+
+" pkg " -
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=cut
+
 use strict;
 use warnings;
 
+=head1 CONSTRUCTORS
 
+=cut
+
+=head1 METHODS
+
+=cut
+
+=head1 BUGS
+
+=head1 SEE ALSO
+
+=cut
 
 1;
 ")
@@ -191,7 +249,9 @@ use warnings;
   (local-set-key "\C-cmc"      'as-cperl-insert-self-method-call)
   (local-set-key "\C-cmC"      'as-cperl-insert-carp-line)
   (local-set-key "\C-cmD"      'as-cperl-insert-data-dumper-line)
+  (local-set-key "\C-cmh"      'as-cperl-insert-head)
   (local-set-key "\C-cmj"      'imenu)
+  (local-set-key "\C-cml"      'as-cperl-insert-pod-list)
   (local-set-key "\C-cmm"      'as-cperl-make-method)
   (local-set-key "\C-cmM"      'as-cperl-make-method-and-pod)
   (local-set-key "\C-cmp"      'cperl-find-pods-heres)
