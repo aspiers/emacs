@@ -923,7 +923,7 @@ that name."
 ;;}}}
 ;;{{{ Time
 
-(display-time)
+;;(display-time)
 
 ;;}}}
 ;;{{{ Auto-compression mode
