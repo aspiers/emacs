@@ -875,13 +875,21 @@ With a prefix argument, prompt for cvs FLAGS to use."
 
 (defun cvs-mode-examine-directory (dir)
   "Run `cvs-examine' on a specified directory with the default flags."
-  (interactive "DCVS Examine (directory): ")
+  (interactive (cvs-query-directory-prompt "CVS Examine (directory): "))
   (cvs-examine dir t))
   
 (defun cvs-mode-examine-parent-directory ()
   "Run `cvs-examine' on a specified directory with the default flags."
   (interactive)
   (cvs-examine ".." t))
+  
+(defun cvs-query-directory-prompt (msg)
+  (let* ((cur-fi (ewoc-data (ewoc-locate cvs-cookies)))
+         (default-dir (if (cvs-fileinfo-p cur-fi)
+                          (expand-file-name (cvs-fileinfo->dir cur-fi)
+                                            default-directory)
+                        default-directory)))
+    (read-file-name msg default-dir default-dir nil)))
   
 (defun cvs-query-directory (msg)
   ;; last-command-char = ?\r hints that the command was run via M-x
