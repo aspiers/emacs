@@ -4,8 +4,6 @@
 ;;{{{ To do list
 
 ;;
-;;  - Fix fold-set-marks when folding.el not loaded
-;;
 ;;  - Start using same-window-regexps?
 ;;
 
@@ -697,31 +695,38 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Load folding mode
 
-(load "folding" t)
+(autoload 'folding-mode "folding")
 
 ;;}}}
 ;;{{{ Set default marks
 
-(fold-set-marks "{{{" "}}}")
+(add-hook 'folding-mode-hook
+	  (lambda ()
+	    (fold-set-marks "{{{" "}}}")))
 
 ;;}}}
 ;;{{{ Enable auto-loading of mode via local variables
 
-(folding-mode-add-find-file-hook)
+(add-hook 'folding-mode-hook
+	  (lambda ()
+	    (folding-mode-add-find-file-hook)))
 
 ;;}}}
 ;;{{{ Set marks for individual modes
 
-(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-(fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-(fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-(fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+(add-hook 'folding-mode-hook
+	  (lambda ()
+	    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+	    (fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
+	    (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
+	    (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
+	    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+	    ))
 
 ;;}}}
 
