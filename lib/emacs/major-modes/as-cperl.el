@@ -13,18 +13,23 @@
 
 (eval-when-compile (defun cperl-indent-command (&optional whole-exp)))
 (defun as-cperl-insert-self-and-args-line ()
-  "Inserts a
+  "Inserts
 
-  my ($self) = @_;
+  my $self = shift;
+  my () = @_;
 
 line before the current line, and leaves the point poised for adding
-more subroutine arguments."
+subroutine arguments."
   (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my ($self) = @_;")
-  (backward-char 7))
+;;   (beginning-of-line)
+;;   (open-line 1)
+;;   (cperl-indent-command)
+;;   (insert "my ($self) = @_;")
+;;   (backward-char 7)
+  (as-cperl-insert-self-line)
+  (next-line 1)
+  (as-cperl-insert-args-line)
+  )
 
 ;;}}}
 ;;{{{ as-cperl-insert-self-line
