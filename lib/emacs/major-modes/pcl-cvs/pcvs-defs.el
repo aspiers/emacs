@@ -229,6 +229,14 @@ The CMD used for `cvs-mode-commit' is \"message\".  For that special
 			     (function-item cvs-status-trees)
 			     function)))))
 
+(defcustom cvs-buffer-switch-list nil
+  "*For each operation, decides whether or not to switch to the
+new buffer created when the operation is performed."
+  :group 'pcl-cvs
+  :type '(set (const "diff")
+	      (const "status")
+	      (const "log")))
+
 (defvar cvs-buffer-name '(expand-file-name "*cvs*" dir) ;; "*cvs*"
   "Name of the cvs buffer.
 This expression will be evaluated in an environment where DIR is set to
