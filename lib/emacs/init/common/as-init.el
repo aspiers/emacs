@@ -466,6 +466,8 @@ that name."
 
 ;;{{{ find-function-source-path
 
+(defvar as-emacs-dir)
+
 (defvar nxml-sub-dir "major-modes/nxml-mode-20041004"
   "Path of nxml-mode subdirectory relative to Adam's emacs library root")
 
@@ -554,10 +556,11 @@ that name."
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
                 ("\\.xml$"                               . nxml-mode)
-;;                 ("\\.xml$"                               . xml-mode)
+                ("\\.xhtml$"                             . nxml-mode)
+;;              ("\\.xml$"                               . xml-mode)
                 ("\\.sgml$"                              . sgml-mode)
                 ("\\.dtd$"                               . sgml-mode)
-;;                ("\\.dtd$"                             . dtd-mode)
+;;              ("\\.dtd$"                               . dtd-mode)
                 ("\\.dcl$"                               . dtd-mode)
                 ("\\.dec$"                               . dtd-mode)
                 ("\\.ele$"                               . dtd-mode)
@@ -680,7 +683,8 @@ that name."
 
 (add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
 (load "rng-auto")
-;;(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
+(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
+(defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
 
 ;;}}}
 ;;{{{ psgml (SGML and XML)
