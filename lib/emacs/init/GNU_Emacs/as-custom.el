@@ -7,9 +7,10 @@
      (custom-set-variables
       '(vc-annotate-background "white")))
 
-(custom-set-faces
- `(default ((((class color) (background light)) (:background ,as-default-background))))
- `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background)))))
+(and (>= emacs-major-version 21)
+     (custom-set-faces
+      `(default ((((class color) (background light)) (:background ,as-default-background))))
+      `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background))))))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
