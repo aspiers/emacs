@@ -1104,30 +1104,45 @@ If a prefix argument is given, move by that many lines."
   (ewoc-goto-next cvs-cookies arg))
 
 (defun cvs-mode-previous-dir ()
-  "Go to the previous directory."
+  "Go to the previous directory.  Returns the destination node."
   (interactive)
-  (catch 'bail
-    (let ((this-node (ewoc-locate cvs-cookies)))
-      (while
-          (let* ((prev-node (ewoc-prev cvs-cookies this-node))
-                 (prev-fi (ewoc-data (or prev-node (throw 'bail nil))))
-                 (type (cvs-fileinfo->type prev-fi)))
-            (not (eq type 'DIRCHANGE)))
-        (setq this-node (ewoc-goto-prev cvs-cookies 1)))
-      (previous-line 1))))
+  (catch 'end
+    (do* ((cur-node (ewoc-goto-prev cvs-cookies 1))
+          (cur-fi (ewoc-data cur-node)))
+        ((and (cvs-fileinfo-p cur-fi)
+              (eq (cvs-fileinfo->type cur-fi) 'DIRCHANGE))
+         cur-node)
+      (setq cur-node (ewoc-goto-prev cvs-cookies 1))
+      (setq cur-fi (ewoc-data cur-node))
+      (or (cvs-fileinfo-p cur-fi) (throw 'end cur-node)))))
 
 (defun cvs-mode-next-dir ()
-  "Go to the next directory."
+  "Go to the next directory.  Returns the destination node."
   (interactive)
-  (catch 'bail
-    (let ((this-node (ewoc-locate cvs-cookies)))
-      (while
-          (let* ((next-node (ewoc-next cvs-cookies this-node))
-                 (next-fi (ewoc-data (or next-node (throw 'bail nil))))
-                 (type (cvs-fileinfo->type next-fi)))
-            (not (eq type 'DIRCHANGE)))
-        (setq this-node (ewoc-goto-next cvs-cookies 1)))
-      (forward-line 1))))
+  (catch 'end
+    (do* ((cur-node (ewoc-goto-next cvs-cookies 1))
+          (cur-fi (ewoc-data cur-node)))
+        ((and (cvs-fileinfo-p cur-fi)
+              (eq (cvs-fileinfo->type cur-fi) 'DIRCHANGE))
+         cur-node)
+      (setq cur-node (ewoc-goto-next cvs-cookies 1))
+      (setq cur-fi (ewoc-data cur-node))
+      (or (cvs-fileinfo-p cur-fi) (throw 'end cur-node)))))
+
+(defun cvs-mode-up-level ()
+  "Go to the containing directory.  Returns the new node."
+  (interactive)
+  (let* ((orig-node (ewoc-locate cvs-cookies))
+         (orig-fi (ewoc-data (or orig-node (error "Not on a fileinfo"))))
+         (orig-dir (cvs-fileinfo->dir orig-fi)))
+    (do* ((current-node (cvs-mode-previous-dir))
+          (current-fi (ewoc-data current-node))
+          (current-dir (cvs-fileinfo->dir current-fi)))
+        ((or (string-match (concat "^" (regexp-quote current-dir)) orig-dir)
+             (equal current-dir ".")) current-node)
+      (setq current-node (cvs-mode-previous-dir))
+      (setq current-fi (ewoc-data current-node))
+      (setq current-dir (cvs-fileinfo->dir current-fi)))))
 
 (defun cvs-mode-top-dir ()
   "Go to the top-level directory in the current buffer."
