@@ -38,6 +38,8 @@
   (autoload 'sgml-write-dtd	     "psgml-dtd")
   (autoload 'sgml-check-dtd-subset   "psgml-dtd") )
 
+(eval-when-compile (require 'cl))
+
 
 ;;;; Advise to do-auto-fill
 
@@ -2491,12 +2493,12 @@ overrides the entity type in entity look up."
     (when (eq sgml-scratch-buffer (default-value 'sgml-scratch-buffer))
       (make-local-variable 'sgml-scratch-buffer)
       (setq sgml-scratch-buffer nil))
-    (when after-change-function		;***
-      (message "OOPS: after-change-function not NIL in scratch buffer %s: %s"
+    (when after-change-functions		;***
+      (message "OOPS: after-change-functions not NIL in scratch buffer %s: %S"
 	       (current-buffer)
-	       after-change-function)
-      (setq before-change-function nil
-	    after-change-function nil))
+	       after-change-functions)
+      (setq before-change-functions nil
+	    after-change-functions nil))
     (setq sgml-last-entity-buffer (current-buffer))
     (erase-buffer)
     (setq default-directory dd)
@@ -2876,10 +2878,9 @@ overrides the entity type in entity look up."
 
 (defun sgml-set-initial-state (dtd)
   "Set initial state of parsing"
-  (make-local-variable 'before-change-function)
-  (setq before-change-function 'sgml-note-change-at)
-  (make-local-variable 'after-change-function)
-  (setq after-change-function 'sgml-set-face-after-change)
+  (set (make-local-variable 'before-change-functions) '(sgml-note-change-at))
+  (set (make-local-variable 'after-change-functions)
+       '(sgml-set-face-after-change))
   (sgml-set-active-dtd-indicator (sgml-dtd-doctype dtd))
   (let ((top-type			; Fake element type for the top
 					; node of the parse tree
@@ -3232,7 +3233,7 @@ Where the latter represents end-tags."
   (when sgml-throw-on-warning
     (apply 'message format things)
     (throw sgml-throw-on-warning t))
-  (when (or sgml-show-warnings sgml-parsing-dtd)
+  (when sgml-show-warnings
     (apply 'sgml-message format things)
     (apply 'sgml-log-message format things)))
 
@@ -3923,11 +3924,11 @@ Optional argument EXTRA-COND should be a function.  This function is
 called in the parser loop, and the loop is exited if the function returns t.
 If third argument QUIT is non-nil, no \"Parsing...\" message will be displayed."
   (sgml-need-dtd)
-  (unless before-change-function
-    (message "WARN: before-change-function has been lost, restoring (%s)"
+  (unless before-change-functions
+    (message "WARN: before-change-functions has been lost, restoring (%s)"
 	     (current-buffer))
-    (setq before-change-function 'sgml-note-change-at)
-    (setq after-change-function 'sgml-set-face-after-change))
+    (setq before-change-functions '(sgml-note-change-at))
+    (setq after-change-functions '(sgml-set-face-after-change)))
   (sgml-with-parser-syntax-ro
    (sgml-goto-start-point (min sgml-goal (point-max)))
    (setq quiet (or quiet (< (- sgml-goal (sgml-mainbuf-point)) 500)))

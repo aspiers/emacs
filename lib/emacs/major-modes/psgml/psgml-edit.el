@@ -262,8 +262,8 @@ region. And optional third argument true unhides."
 					; perhaps some old version of
 					; emacs does not understand
 					; inhibit-read-only
-	(before-change-function nil)
-	(after-change-function nil))
+	(before-change-functions nil)
+	(after-change-functions nil))
     (setq selective-display t)
     (unwind-protect
 	(subst-char-in-region beg end
@@ -1542,7 +1542,7 @@ value.  To abort edit kill buffer (\\[kill-buffer]) and remove window
   (let ((buffer-modified-p (buffer-modified-p))
 	(inhibit-read-only t)
 	(buffer-read-only nil)
-	(before-change-function nil)
+	(before-change-functions nil)
 	(markup-index			; match-data index in tag regexp
 	 (if attr-p 2 1))
 	(tagcount			; number tags to give them uniq
@@ -1594,7 +1594,7 @@ value.  To abort edit kill buffer (\\[kill-buffer]) and remove window
 ;;;; SGML mode: Normalize (and misc manipulations)
 
 (defun sgml-expand-shortref-to-text (name)
-  (let (before-change-function
+  (let (before-change-functions
 	(entity (sgml-lookup-entity name (sgml-dtd-entities sgml-dtd-info))))
     (cond
      ((null entity) (sgml-error "Undefined entity %s" name))
@@ -1611,7 +1611,7 @@ value.  To abort edit kill buffer (\\[kill-buffer]) and remove window
 (defun sgml-expand-shortref-to-entity (name)
   (let ((end (point))
 	(re-found nil)
-	before-change-function)
+	before-change-functions)
     (goto-char sgml-markup-start)
     (setq re-found (search-forward "\n" end t))
     (delete-region sgml-markup-start end)	   
@@ -1644,7 +1644,7 @@ references will be expanded."
   (let ((only-one (not (null element))))
     (setq element (or element (sgml-top-element)))
     (goto-char (sgml-element-end element)) 
-    (let ((before-change-function nil))
+    (let ((before-change-functions nil))
       (sgml-normalize-content element only-one)))
   (sgml-note-change-at (sgml-element-start element))
   (sgml-message "Done"))

@@ -30,6 +30,7 @@
 
 (require 'psgml)
 (require 'easymenu)
+(eval-when-compile (require 'cl))
 
 (defvar sgml-max-menu-size (/ (* (frame-height) 2) 3)
   "*Max number of entries in Tags and Entities menus before they are split
@@ -59,8 +60,13 @@ STRING."
 	     (loop for i from 1 while entries
 		   collect
 		   (let ((submenu
-			  (subseq entries 0 (min (length entries)
-						 sgml-max-menu-size))))
+;;; 			  (subseq entries 0 (min (length entries)
+;;; 						 sgml-max-menu-size))
+			  (let ((new (copy-sequence entries)))
+			    (setcdr (nthcdr (1- (min (length entries)
+						     sgml-max-menu-size))
+					    new) nil)
+			    new)))
 		     (setq entries (nthcdr sgml-max-menu-size entries))
 		     (cons
 		      (format "%s '%s'-'%s'"
@@ -111,13 +117,14 @@ if the item is selected."
     (cond
      (sgml-use-text-properties
       (let ((inhibit-read-only t)
-	    (after-change-function nil)	; obsolete variable
-	    (before-change-function nil) ; obsolete variable
 	    (after-change-functions nil)
-	    (before-change-functions nil))
+	    (before-change-functions nil)
+	    (modified (buffer-modified-p))
+	    (buffer-undo-list t)
+	    deactivate-mark)
 	(put-text-property start end 'face face)
-        (when (< start end)
-          (put-text-property (1- end) end 'rear-nonsticky '(face)))))
+	(when (and (not modified) (buffer-modified-p))
+	  (set-buffer-modified-p nil))))
      (t
       (let ((current (overlays-at start))
 	    (pos start)
