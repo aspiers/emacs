@@ -17,11 +17,15 @@
 (setq emacs-version-number
       (format "%d.%d" emacs-major-version emacs-minor-version))
 
+(setq edotdir (or (getenv "ZDOTDIR") "~"))
+
 (setq as-lib-dir
-      (concat "~/lib/emacs/"
+      (concat edotdir
+              "/lib/emacs/"
               (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
 (setq as-init-dir
-      (concat "~/lib/emacs/init/"
+      (concat edotdir
+              "/lib/emacs/init/"
               (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
 (setq as-version-lib-dir
       (concat as-lib-dir "/"
@@ -39,4 +43,4 @@
 (setq custom-file (concat as-init-dir "/as-custom.el"))
 (load (concat as-init-dir "/as-custom") 'noerror)
 (load (concat as-version-lib-dir "/as-init"))
-(load "~/.emacs.local" 'noerror)
+(load (concat edotdir "/.emacs.local") 'noerror)
