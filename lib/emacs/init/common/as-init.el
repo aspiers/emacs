@@ -26,6 +26,35 @@
   (if window-system (font-lock-mode)))
 
 ;;}}}
+;;{{{ find-file-matching-regexp-hook
+
+(defvar find-file-matching-regexp-alist '()
+  "alist mapping filename regexps to functions which will be evaluated when 
+filenames matching the regexps are visited.
+
+This allows you to set local variables specific to sets of files, e.g.
+
+(setq find-file-matching-regexp-alist
+      '((\"/foo/bar/.*\.pm\" . (lambda () (setq cperl-indent-level 2)))))")
+
+(defun find-file-matching-regexp-hook ()
+  "Hook to run arbitrary functions on newly visited files.
+
+Controlled by `find-file-matching-regexp-alist'."
+  (mapcar
+   (lambda (x)
+     (cond
+      ((string-match (concat ".*" (car x)) (buffer-file-name))
+       ;; (message (format "%s matched %s" (buffer-file-name) (car x)))
+       (funcall (cdr x)))
+      (t
+       ;; (message (format "%s didn't match %s" (buffer-file-name) (car x)))
+       )))
+   find-file-matching-regexp-alist))
+
+(add-hook 'find-file-hooks 'find-file-matching-regexp-hook)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Key bindings
@@ -660,28 +689,6 @@ to the beginning of the buffer name."
 
 (make-variable-buffer-local 'cperl-indent-level)
 (set-default 'cperl-indent-level 2)
-
-(defvar as-cperl-indentation-alist '()
-  "alist mapping filename regexps to buffer-local settings for
-`cperl-indent-level'.")
-
-(defun as-set-cperl-indentation-hook ()
-  "Hook to set cperl-indent-level on newly visited files."
-  (catch 'endloop
-    (mapcar
-     (lambda (x)
-       (cond
-        ((string-match (concat ".*" (car x)) (buffer-file-name))
-         (setq cperl-indent-level (cdr x))
-         (message (format "%s matched %s" (buffer-file-name) (car x)))
-         (throw 'endloop t))
-        (t
-         (message (format "%s didn't match %s" (buffer-file-name) (car x)))
-         )))
-     as-cperl-indentation-alist)))
-
-(add-hook 'find-file-hooks 'as-set-cperl-indentation-hook)
-
 
 ;;}}}
 ;;{{{ Hairy options
