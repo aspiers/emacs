@@ -699,6 +699,22 @@ line before the current line."
     (insert "my $self = shift;")))
 
 ;;}}}
+;;{{{ as-cperl-insert-args-line
+
+(defun as-cperl-insert-args-line ()
+  "Inserts a
+
+  my () = @_;
+
+line before the current line."
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "my () = @_;")
+  (backward-char 7)))
+
+;;}}}
 ;;{{{ as-cperl-make-method
 
 (fset 'as-cperl-make-method
@@ -709,6 +725,7 @@ line before the current line."
 (add-hook 'cperl-mode-hook 
           (function
            (lambda ()
+             (local-set-key "\C-ca" 'as-cperl-insert-args-line)
              (local-set-key "\C-cm" 'as-cperl-make-method)
              (local-set-key "\C-cp" 'cperl-find-pods-heres)
              (local-set-key "\C-ci" 'as-cperl-set-indent-level)
