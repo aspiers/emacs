@@ -5,9 +5,9 @@
 
 lispdir = $(prefix)/share/emacs/site-lisp
 
-EMACS = /nfs-home/adams/local/bin/emacs
-XEMACS = xemacs
-
+ifndef EMACS
+  EMACS=emacs
+endif
 
 FLAGS = -batch -q -no-site-file -l ./psgml-maint.el
 INSTALL = /usr/bin/install -c
