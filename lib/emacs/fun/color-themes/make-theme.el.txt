@@ -1,0 +1,94 @@
+;; Copyright (C) 2001  Alex Schroeder <alex@gnu.org>
+
+;; This file is not part of GNU Emacs.
+
+;; This is free software; you can redistribute it and/or modify it under
+;; the terms of the GNU General Public License as published by the Free
+;; Software Foundation; either version 2, or (at your option) any later
+;; version.
+;;
+;; This is distributed in the hope that it will be useful, but WITHOUT
+;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+;; for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+;; MA 02111-1307, USA.
+
+;;; Commentary:
+
+;; Use this file to take the original color-theme.el and split it into
+;; different parts.  The result will be one file `color-theme-base.el'
+;; with all the machinery, and one file per color theme X named
+;; `color-theme-X.el'.
+
+;; This assumes that all the color themes are at the end of the file.
+
+;;; Thanks
+
+;; "Girish Bharadwaj" <girishb@mvps.org>
+
+(require 'color-theme)
+
+(defun color-theme-split-source (source)
+  "Split SOURCE into several files."
+  (interactive "fColor-theme source file: ")
+  (unless source
+    (error "Color theme source file is required"))
+  (find-file "color-theme-base.el")
+  (message "Creating color-theme-base.el...")
+  (erase-buffer)
+  (insert-file-contents source)
+  (let ((themes color-themes)
+	theme)
+    (while themes
+      (setq theme (symbol-name (caar themes))
+	    themes (cdr themes))
+      (goto-char (point-min))
+      (when (and (re-search-forward (concat "defun\\s +" theme))
+		 (search-backward "("))
+	(let ((start (point))
+	      func)
+	  (forward-sexp)
+	  (setq func (buffer-substring start (point)))
+	  (save-excursion
+	    (find-file (concat theme ".el"))
+	    (message "Processing %s..." theme)
+	    (erase-buffer)
+	    (insert func)
+	    (insert "\n\n(provide '" theme ")\n"))
+	  (delete-region start (point))
+	  (when (looking-at "\n+")
+	    (replace-match ""))
+	  (insert "(autoload " theme " \"" theme "\" nil t)\n")))))
+  (message "Processing done.")
+  (buffer-menu))
+
+;; This is for support of Makefiles:
+;;
+;; emacs -batch -l ../color-theme.el \
+;;              -l make-theme.el \
+;;              -f color-theme-split \
+;;              -f color-theme-save-all-buffers
+
+(defun color-theme-split ()
+  "Determined location of source and call `color-theme-split-source'."
+  (let ((hist load-history)
+	file)
+    (message "Determining source file...")
+    (while (and (not file) hist)
+      (when (string-match "color-theme\\(.el\\)?$" (caar hist))
+	(setq file (caar hist)))
+      (setq hist (cdr hist)))
+    (unless file
+      (error "Color theme source not found"))
+    (unless (file-name-absolute-p file)
+      (setq file (locate-library file)))
+    (message "Determining source file...%s" file)
+    (color-theme-split-source file)))
+
+(defun color-theme-save-all-buffers ()
+  "Save all buffers."
+  (save-some-buffers t))
