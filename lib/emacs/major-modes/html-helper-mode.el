@@ -459,6 +459,7 @@ See code for an example."
 (mapcar 'html-helper-add-type-to-alist
   '((entity  . (nil nil html-helper-entity-menu "Insert Character Entities"))
     (textel  . (nil nil html-helper-textel-menu "Insert Text Elements"))
+    (misc    . (nil nil nil "Insert Misc Elements"))
     (head    . (html-helper-head-map "\C-c\C-h" 
 				     html-helper-head-menu 
 				     "Insert Structural Elements"))
@@ -631,8 +632,8 @@ appropriate keymap if a key is requested. Format:
 	 (menu (html-helper-menu-for type))
 	 (key (nth 1 l))
 	 (completer (nth 2 l))
-	 (tag (nth 4 l))
 	 (name (nth 3 l))
+	 (tag (nth 4 l))
 	 (doc (nth 5 l))
 	 (command (if (string-equal completer "function")
 		      (nth 4 l)
@@ -694,6 +695,9 @@ with a null string."
 (mapcar
  'html-helper-add-tag
  '(
+   (entity "\C-c," "Arbitrary element" "Arbitrary element"
+           ("<" (p "Element: " element) ">" 'p "</" (s element) ">"))
+
    ;;entities
    (entity  "\C-c#"   "&#"              "Ascii Code"      ("&#" (r "Ascii: ") ";"))
    (entity  "\C-c\""  "&quot;"          "Quotation mark"  ("&quot;"))
@@ -843,7 +847,7 @@ with a null string."
 	     (r "Anchor text: ") "</a>"))
    (anchor  "l"	      "<a href="        "Hyperlink"          	  
 	    ("<a href=\"" (p "href: ") "\">" 
-	     (r "Anchor text: ") "</a>"))                
+	     (r "Anchor text: ") "</a>")) 
 
    ;;graphics
 ;    (image   "a"       nil               "Aligned Image"	  
