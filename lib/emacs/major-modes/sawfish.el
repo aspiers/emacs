@@ -21,15 +21,13 @@
 ;;
 ;; Jan Vroonhof for his invaluable pointers regarding XEmacs.
 ;;
-;; Hubert Selhofer for the code to syntax highlight "#||#" comments and for
-;; the GNU emacs font-lock code to provide support for various rep and
-;; sawfish "keywords".
+;; Hubert Selhofer for the code to syntax highlight "#||#" comments, for the
+;; GNU emacs font-lock code to provide support for various rep and sawfish
+;; "keywords" and for the GNU emacs emacs-lisp menu removal kludge.
 
 ;;; BUGS:
 ;;
 ;; o The handling of the apropos buffer totally breaks down under XEmacs.
-;;
-;; o I can't figure out how to delete a menu in GNU emacs.
 
 ;;; INSTALLATION:
 ;;
@@ -230,8 +228,13 @@ already fontified."
 (defconst sawfish-defines-regexp
     (concat "(\\("
             (regexp-opt 
-             ;; A cute way to obtain the list below
-             ;; (mapcar #'symbol-name (sawfish-code (apropos "^define")))
+             ;; A cute way to obtain the list below would be:
+             ;; (sawfish-code (mapcar symbol-name (apropos "^define")))
+             ;;
+             ;; It would, however, mean that you'd have a list of "keywords"
+             ;; define in your running instance of sawfish. It would also
+             ;; mean that you'd have to have sawfish running at the time
+             ;; that this constant is defined.
              (list 
               "define" "define-command-args" "define-command-to-screen"
               "define-custom-deserializer" "define-custom-serializer"
@@ -242,7 +245,8 @@ already fontified."
               "define-match-window-formatter"
               "define-match-window-group" "define-match-window-property"
               "define-match-window-setter" "define-parse"
-              "define-placement-mode" "define-scan-body"
+              "define-placement-mode" "define-record-type"
+              "define-record-discloser" "define-scan-body"
               "define-scan-form" "define-scan-internals"
               "define-structure" "define-value"
               "define-window-animator"))
@@ -273,6 +277,7 @@ already fontified."
   "Some additonal keywords to highlight in `sawfish-mode'.")
 
 ;; Main code:
+
 (define-derived-mode sawfish-mode emacs-lisp-mode "Sawfish"
   "Major mode for editing sawfish files and for interacting with sawfish.
 
@@ -610,7 +615,8 @@ nil, otherwise the Info buffer is left as the `current-buffer'."
         (Info-menu (format "%s" symbol))
         t)
     (error
-     (kill-buffer (current-buffer))
+     (when (string= (buffer-name) "*info*")
+       (kill-buffer (current-buffer)))
      nil)))
 
 (defun sawfish-jump-to-info-documentaiton (symbol)
@@ -920,6 +926,22 @@ returned."
     ["Read Sawfish Documentation"      sawfish-info              t]
     ["Read librep Documentation"       sawfish-rep-info          t]))
 
+;; GNU emacs emacs-lisp menu removal kludge.
+
+(defvar sawfish-gnu-emacs-menu-kludged nil
+  "Check if we've kludged the menu in GNU emacs.")
+
+(unless (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
+  (unless sawfish-gnu-emacs-menu-kludged
+    (let ((old-emacs-lisp-mode-map (copy-keymap emacs-lisp-mode-map)))
+      ;; Remove the binding for the emacs-lisp menu.
+      (define-key emacs-lisp-mode-map [menu-bar emacs-lisp] 'undefinded)
+      ;; Initialise sawfish-mode.
+      (with-temp-buffer (sawfish-mode))
+      ;; Restore the emacs-lisp-mode keymap.
+      (setq emacs-lisp-mode-map (copy-keymap old-emacs-lisp-mode-map)))
+    (setq sawfish-gnu-emacs-menu-kludged t)))
+  
 (provide 'sawfish)
 
 ;;; sawfish.el ends here
