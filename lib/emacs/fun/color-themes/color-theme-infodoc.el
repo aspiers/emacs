@@ -42,6 +42,7 @@ Modified by Adam Spiers <adam@spiers.net>"
     (display-time-mail-balloon-enhance-face ((t (:bold t :background "wheat" :foreground "black"))))
     (display-time-mail-balloon-gnus-group-face ((t (:bold t :background "wheat" :foreground "blue"))))
     (display-time-time-balloon-face ((t (:bold t :background "light salmon" :foreground "dark green"))))
+    (font-lock-builtin-face ((t (:foreground "forest green"))))
     (font-lock-comment-face ((t (:bold t :background "wheat" :foreground "turquoise4"))))
     (font-lock-doc-string-face ((t (:bold t :background "wheat" :foreground "purple4"))))
     (font-lock-function-name-face ((t (:bold t :background "wheat" :foreground "blue4"))))
