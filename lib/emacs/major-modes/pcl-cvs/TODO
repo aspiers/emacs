@@ -1,7 +1,7 @@
 pcl-cvs wishlist, sorted by decreasing priority
 
 - fix handing of MESSAGE and DIRCHANGE
-- make = and other diffs switch window (so that we can use 'q' binding)
+- rebind q from cvs-bury-buffer to delete-window
 - bind ^ (or maybe .) go up a directory (u and U are already taken)
 - more useful naming convention than *cvs*<2>
 - add prefix (bind to L) for toggling recursion
