@@ -261,11 +261,6 @@ The remaining KEYS are passed directly to `cvs-create-fileinfo'."
 	(let ((dir (if (string= "." dir) "" (file-name-as-directory dir))))
 	  (cvs-parsed-fileinfo 'DIRCHANGE "." dir)))
 
-       ;; [-n update] A new (or pruned) directory appeared but isn't traversed
-       (and
-	(cvs-match "New directory `\\(.*\\)' -- ignored$" (dir 1))
-	(cvs-parsed-fileinfo 'MESSAGE " " (file-name-as-directory dir)))
-
        ;; File removed, since it is removed (by third party) in repository.
        (and
 	(cvs-or
