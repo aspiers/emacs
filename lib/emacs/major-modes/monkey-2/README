@@ -1,0 +1,109 @@
+
+
+	 This is Monkey -- a nice directory editor for Emacs
+
+
+This edition of monkey is being distributed (in the hope that people
+will find it useful) for three reaons:
+
+	1) as a _fund raiser_ for the projects at regexps.com.  
+	   If you obtained this package without paying
+	   a download fee to regexps.com, please consider paying 
+	   such a fee now by visiting http://www.regexps.com.
+	   It will help me to develop additional nice software 
+	   and avoid homelessness.
+
+	2) to get a sense of how portable this code is to the 
+	   various Emacs environments
+
+	3) to prepare for a major overhaul: I am in the middle of
+	   rewriting monkey (to make it more useful as a user
+	   interface component in another project).  Before I release
+	   the new version, I'd like to see if there is any feedback
+	   from users about the current user interface.
+
+
+
+Instead of looking at dired listing like this:
+
+  /home/lord/monkey-2:
+  total 154
+  drwxr-xr-x   2 lord  lord    512 Jul 22 06:04 .
+  lrwxr-xr-x   1 lord  lord     34 Jul 22 06:04 .#README -> lord@morrowfield.regexps.com.14798
+  drwxr-xr-x  52 lord  lord   6656 Jul 22 05:57 ..
+  -rw-rw-r--   1 lord  lord   1739 Jul 22 05:59 fields.el
+  -rw-rw-r--   1 lord  lord   8643 Jul 22 05:59 modal.el
+  -rw-rw-r--   1 lord  lord  50063 Jul 22 06:04 monkey-dir.el
+  -rw-rw-r--   1 lord  lord  50300 Jul 22 05:59 monkey-dir.el.~1~
+  -rw-rw-r--   1 lord  lord   3965 Jul 22 05:59 monkey-nenscript.el
+  -rw-rw-r--   1 lord  lord  31880 Jul 22 05:59 monkey.el
+
+
+Monkey gives you outline-style listings like this:
+
+	/^  .
+	/^  ..
+	@   =NEWS
+	    Makefile.in
+	/^  PLUGIN
+	/^  meta-x
+	/>  scheme-library
+	/^    scheme-library/.
+	/^    scheme-library/..
+	      scheme-library/Makefile.in
+	/^    scheme-library/PLUGIN
+	/^    scheme-library/cgi
+	/>    scheme-library/wiki
+	/^      scheme-library/wiki/.
+	/^      scheme-library/wiki/..
+	        scheme-library/wiki/=MAP
+	        scheme-library/wiki/=README
+	/^      scheme-library/wiki/=bitrot
+	        scheme-library/wiki/auth.scm
+	        scheme-library/wiki/cgi.scm
+	        scheme-library/wiki/config.scm
+	        scheme-library/wiki/config.scm.~1~
+	        scheme-library/wiki/edit.scm
+	        scheme-library/wiki/library.scm
+	        scheme-library/wiki/transactions.scm
+	        scheme-library/wiki/view.scm
+	        scheme-library/wiki/view.scm.~1~
+	/^  systas-web
+	/^  {arch}
+
+
+with expandable/contractable subdirectory listings, file hiding
+by-regexp, multiple file selection and operation, and file renaming by
+regular expression.
+
+A nice directory editor is a small but important thing: I can't
+imagine trying to get a lot of work done without monkey anymore --
+it's just too handy.
+
+
+The recommended `.emacs' for monkey is:
+
+
+(require 'monkey)
+
+;;;;;;;;;;;;;;;;
+;; monkey bindings:
+;;
+;; These replace the traditional bindings for "find-file" and
+;; similar functions.
+;;
+;; These bindings don't mess up dired which is still available
+;; when you want long directory listings.
+;;
+(global-set-key "\C-X\C-F" 'monkey-file)
+(global-set-key "\C-X\C-V" 'monkey-alternate-file)
+(global-set-key "\C-X4F" 'monkey-file-other-window)
+(global-set-key "\C-x4f" 'monkey-file-other-window)
+(global-set-key "\C-x4\C-f" 'monkey-file-other-window)
+(global-set-key "\M-g" 'monkey-current-directory)
+
+;;;;;;;;;;;;;;;;
+;; By default, dot files and backup files (ending in ~) will be
+;; hidden from view.
+;;
+(setq monkey-always-hide-regexp "\\(\\....*\\)\\|\\(\\.[^.]\\)\\|\\(.*~\\)")
