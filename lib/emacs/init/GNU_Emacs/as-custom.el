@@ -25,8 +25,7 @@
         `(mmm-default-submode-face
           ((((class color) (background light))
             (:background ,as-default-background)))))
-       (custom-set-variables
-        '(tool-bar-mode nil nil (tool-bar)))))
+       ))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -65,7 +64,7 @@
  '(cvs-parse-ignored-messages (quote ("Executing ssh-askpass to query the password.*$" ".*Remote host denied X11 forwarding.*$" ".*New directory `.*' -- ignored.*$" ".*warning: directory CVS specified in argument.*$" ".*but CVS uses CVS for its own purposes; skipping CVS directory.*$")))
  '(cvs-reuse-cvs-buffer (quote subdir))
  '(diff-switches "-u" t)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-l" t)
  '(echo-keystrokes 0.01)
  '(eldoc-minor-mode-string "" t)
  '(eldoc-mode t t)
@@ -89,6 +88,7 @@
  '(gnus-suppress-duplicates t)
  '(gnus-use-trees t)
  '(indent-tabs-mode nil)
+ '(ispell-program-name "aspell")
  '(iswitchb-case nil)
  '(jit-lock-stealth-nice 0.1)
  '(jit-lock-stealth-time 1)
