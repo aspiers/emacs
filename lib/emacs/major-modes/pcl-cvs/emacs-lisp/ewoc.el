@@ -410,29 +410,6 @@ Returns a list of all the results from all the calls to MAP-FUNCTION."
       (setq node (ewoc--node-next dll node)))
     result))
 
-(defun ewoc-dump (ewoc)
-  "Dump EWOC to a list which can be used with `ewoc-create-from-dump' to
-reconstruct the buffer from scratch."
-  (list
-   (buffer-substring 1 (point-max))
-   (ewoc--pretty-printer ewoc)
-   (ewoc-data (ewoc--header ewoc))
-   (ewoc-data (ewoc--footer ewoc))
-   (ewoc-map 'identity ewoc)))
-
-(defun ewoc-create-from-dump (dump)
-  "Reconstruct an ewoc buffer from a list dumped by `ewoc-dump'."
-  (let* ((buf (current-buffer))
-         (buffer-contents (car dump))
-         (pp              (cadr dump))
-         (header          (caddr dump))
-         (footer          (cadddr dump))
-         (nodes           (car (last dump)))
-         (ewoc (ewoc-create pp header footer)))
-    (ewoc--set-buffer-bind-dll ewoc
-      (dolist (new-node nodes t)
-        (ewoc-enter-last ewoc new-node)))))
-
 (defun ewoc-filter (ewoc predicate &rest args)
   "Remove all elements in EWOC for which PREDICATE returns nil.
 Note that the buffer for EWOC will be current-buffer when PREDICATE 
