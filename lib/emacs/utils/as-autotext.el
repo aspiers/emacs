@@ -101,7 +101,7 @@ the point.  Suitable for use in rpm spec file %changelog sections."
 
 (defun as-insert-name-and-email (&optional email)
   "Inserts Adam's name and e-mail address"
-  (interactive)
+  (interactive "MPrefix for '@adamspiers.org' ? ")
   (as-insert-name)
   (insert " <")
   (cond (email (insert email "@adamspiers.org"))
