@@ -282,7 +282,6 @@ use warnings;
     (delete-region ws-start expr-end-ws)
     (goto-char ws-start)
     (back-to-indentation)
-    (message (format "mod '%s', expr '%s'" modifier expr))
     (insert modifier " (" expr ") {")
     (newline-and-indent)
     (backward-up-list)
