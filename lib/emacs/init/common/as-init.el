@@ -798,6 +798,7 @@ that name."
 ;;}}}
 ;;{{{ iswitchb - better buffer switching
 
+(eval-when-compile (require 'iswitchb))
 (iswitchb-default-keybindings)
 (add-hook 'iswitchb-define-mode-map-hook 'as-iswitchb-keys)
 
