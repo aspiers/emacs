@@ -1,0 +1,124 @@
+--- psgml-1.2.1/psgml-edit.el	Wed Oct 20 14:31:26 1999
++++ psgml.fixed/psgml-edit.el	Mon Nov 27 09:31:19 2000
+@@ -261,6 +261,7 @@
+ 					; perhaps some old version of
+ 					; emacs does not understand
+ 					; inhibit-read-only
++	(inhibit-modification-hooks t)
+ 	(before-change-function nil)
+ 	(after-change-function nil))
+     (setq selective-display t)
+@@ -670,7 +671,6 @@
+ 	    (when tem			; more than one req elem
+ 	      (insert "\n")
+ 	      (when sgml-insert-missing-element-comment
+-		(insert (format "<!-- one of %s -->" tem))
+ 		(sgml-indent-line nil element)))))
+ 	(setq newpos (or newpos (point)))
+ 	(when sgml-insert-end-tag-on-new-line
+@@ -1472,6 +1472,7 @@
+   (let ((buffer-modified-p (buffer-modified-p))
+ 	(inhibit-read-only t)
+ 	(buffer-read-only nil)
++	(inhibit-modification-hooks t)
+ 	(before-change-function nil)
+ 	(markup-index			; match-data index in tag regexp
+ 	 (if attr-p 2 1))
+@@ -1524,7 +1525,8 @@
+ ;;;; SGML mode: Normalize (and misc manipulations)
+ 
+ (defun sgml-expand-shortref-to-text (name)
+-  (let (before-change-function
++  (let ((before-change-function nil)
++	(inhibit-modification-hooks t)
+ 	(entity (sgml-lookup-entity name (sgml-dtd-entities sgml-dtd-info))))
+     (cond
+      ((null entity) (sgml-error "Undefined entity %s" name))
+@@ -1541,7 +1543,8 @@
+ (defun sgml-expand-shortref-to-entity (name)
+   (let ((end (point))
+ 	(re-found nil)
+-	before-change-function)
++	(before-change-function nil)
++	(inhibit-modification-hooks t))
+     (goto-char sgml-markup-start)
+     (setq re-found (search-forward "\n" end t))
+     (delete-region sgml-markup-start end)	   
+@@ -1574,7 +1577,8 @@
+   (let ((only-one (not (null element))))
+     (setq element (or element (sgml-top-element)))
+     (goto-char (sgml-element-end element)) 
+-    (let ((before-change-function nil))
++    (let ((before-change-function nil)
++	  (inhibit-modification-hooks t))
+       (sgml-normalize-content element only-one)))
+   (sgml-note-change-at (sgml-element-start element))
+   (sgml-message "Done"))
+diff -Naur psgml-1.2.1/psgml-other.el psgml.fixed/psgml-other.el
+--- psgml-1.2.1/psgml-other.el	Wed Oct 20 14:31:26 1999
++++ psgml.fixed/psgml-other.el	Mon Nov 27 09:32:22 2000
+@@ -111,8 +111,7 @@
+     (cond
+      (sgml-use-text-properties
+       (let ((inhibit-read-only t)
+-	    (after-change-function nil)	; obsolete variable
+-	    (before-change-function nil) ; obsolete variable
++	    (inhibit-modification-hooks t)
+ 	    (after-change-functions nil)
+ 	    (before-change-functions nil))
+ 	(put-text-property start end 'face face)))
+diff -Naur psgml-1.2.1/psgml-parse.el psgml.fixed/psgml-parse.el
+--- psgml-1.2.1/psgml-parse.el	Wed Oct 20 14:31:25 1999
++++ psgml.fixed/psgml-parse.el	Mon Nov 27 09:27:07 2000
+@@ -2472,12 +2472,12 @@
+     (when (eq sgml-scratch-buffer (default-value 'sgml-scratch-buffer))
+       (make-local-variable 'sgml-scratch-buffer)
+       (setq sgml-scratch-buffer nil))
+-    (when after-change-function		;***
++    (when (memq 'sgml-set-face-after-change after-change-functions) ;***
+       (message "OOPS: after-change-function not NIL in scratch buffer %s: %s"
+ 	       (current-buffer)
+-	       after-change-function)
+-      (setq before-change-function nil
+-	    after-change-function nil))
++	       after-change-functions)
++      (remove-hook 'before-change-function 'sgml-note-change-at t)
++      (remove-hook 'after-change-functions 'sgml-set-face-after-change t))
+     (setq sgml-last-entity-buffer (current-buffer))
+     (erase-buffer)
+     (setq default-directory dd)
+@@ -2843,11 +2843,11 @@
+   (sgml-element-mixed sgml-current-tree))
+ 
+ (defun sgml-set-initial-state (dtd)
+-  "Set initial state of parsing"
+-  (make-local-variable 'before-change-function)
+-  (setq before-change-function 'sgml-note-change-at)
+-  (make-local-variable 'after-change-function)
+-  (setq after-change-function 'sgml-set-face-after-change)
++  "Set initial state of parsing."
++  (make-local-hook 'before-change-functions)
++  (add-hook 'before-change-functions 'sgml-note-change-at nil t)
++  (make-local-hook 'after-change-functions)
++  (add-hook 'after-change-functions 'sgml-set-face-after-change nil t)
+   (sgml-set-active-dtd-indicator (sgml-dtd-doctype dtd))
+   (let ((top-type			; Fake element type for the top
+ 					; node of the parse tree
+@@ -3885,12 +3885,11 @@
+ If third argument QUIT is non-nil, no \"Parsing...\" message will be displayed."
+   (sgml-need-dtd)
+ 
+-  (unless before-change-function
++  (unless (memq 'sgml-note-change-at before-change-functions)
+     (message "WARN: before-change-function has been lost, restoring (%s)"
+ 	     (current-buffer))
+-    (setq before-change-function 'sgml-note-change-at)
+-    (setq after-change-function 'sgml-set-face-after-change)
+-    )
++    (add-hook 'before-change-functions 'sgml-note-change-at nil t)
++    (add-hook 'after-change-functions 'sgml-set-face-after-change nil t))
+   
+   (sgml-find-start-point (min sgml-goal (point-max)))
+   (assert sgml-current-tree)
+
+
