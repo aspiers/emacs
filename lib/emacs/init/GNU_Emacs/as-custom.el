@@ -1,9 +1,7 @@
-(cond
- (window-system
-  (let ((as-default-background "seashell1"))
-    (custom-set-faces
-     `(mmm-default-submode-face ((t (:background ,as-default-background))))
-     `(default ((t (:background ,as-default-background))))))))
+(setq as-default-background "seashell1")
+(setq frame-background-mode
+      (cond (window-system 'light)
+            (t 'dark)))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -56,8 +54,11 @@
   ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
  '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
- '(cperl-hash-face ((((class color) (background dark)) (:bold t :italic t :foreground "Firebrick"))))
+ '(cperl-hash-face ((t (:bold t :italic t :foreground "red"))))
+ `(default ((((class color) (background light)) (:background ,as-default-background))))
  '(font-lock-comment-face ((((class color) (background dark)) (:foreground "aquamarine"))))
+ '(font-lock-comment-face ((((class color) (background light)) (:foreground "Firebrick"))))
  '(highlight ((t (:foreground "white" :background "orange"))))
+ `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background))))
  '(show-paren-match-face ((((class color)) (:background "MediumBlue"))))
- '(underline ((t (:underline t :foreground "Yellow")))))
+ '(underline ((((class color) (background light)) (:underline t :foreground "Yellow Green")))))
