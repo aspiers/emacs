@@ -112,7 +112,8 @@ line before the current line."
   (cperl-indent-command)
   (insert "sub " method " {")
   (newline-and-indent)
-  (insert "}")
+  (insert "}\n")
+  (forward-line -1)
   (cperl-indent-command)
   (beginning-of-line)
   (as-cperl-insert-self-and-args-line)
@@ -130,6 +131,7 @@ line before the current line."
   (newline 2)
   (insert "=cut")
   (newline 2)
+  (cperl-find-pods-heres)
   (as-cperl-make-method method)
 )
 
