@@ -272,6 +272,18 @@ in all the directories in that path."
 		(function (lambda () (interactive)
 			    (insert "adam@spiers.net"))))
 
+;; name (how lazy am I?)
+
+(global-set-key "\C-x\C-zn"
+		(function (lambda () (interactive)
+			    (insert "Adam Spiers"))))
+
+;; me (name & e-mail)
+
+(global-set-key "\C-x\C-zn"
+		(function (lambda () (interactive)
+			    (insert "Adam Spiers <adam@spiers.net>"))))
+
 ;;}}}
 
 ;;}}}
@@ -339,7 +351,7 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ IntelliMouse
 
-(load "mwheel" t)
+;;(load "mwheel" t)
 
 ;;}}}
 
@@ -376,6 +388,11 @@ in all the directories in that path."
 ;;{{{ Default major mode
 
 (setq default-major-mode 'indented-text-mode)
+
+;;}}}
+;;{{{ Load mutt mode
+
+(load "mutt" t)
 
 ;;}}}
 
@@ -519,6 +536,7 @@ in all the directories in that path."
 	     (local-set-key "(" 'self-insert-command)
 	     (local-set-key "<" 'self-insert-command)
 	     (local-set-key "[" 'self-insert-command)
+	     (local-set-key [(control c) (control h) (control j)] 'imenu)
 	     (setq indent-tabs-mode nil)
 )))
 
@@ -698,38 +716,31 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Load folding mode
 
-(autoload 'folding-mode "folding")
+(load "folding" t)
 
 ;;}}}
 ;;{{{ Set default marks
 
-(add-hook 'folding-mode-hook
-	  (lambda ()
-	    (fold-set-marks "{{{" "}}}")))
+(fold-set-marks "{{{" "}}}")
 
 ;;}}}
 ;;{{{ Enable auto-loading of mode via local variables
 
-(add-hook 'folding-mode-hook
-	  (lambda ()
-	    (folding-mode-add-find-file-hook)))
+(folding-mode-add-find-file-hook)
 
 ;;}}}
 ;;{{{ Set marks for individual modes
 
-(add-hook 'folding-mode-hook
-	  (lambda ()
-	    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-	    (fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-	    (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-	    (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-	    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-	    ))
+(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+(fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
+(fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
+(fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
+(fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
 
 ;;}}}
 
@@ -765,7 +776,7 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Time-stamp mode
 
-(load "time-stamp" t)
+(autoload 'time-stamp "time-stamp")
 ;;(time-stamp)
 ;;(setq time-stamp-format "------ %02d %03b %4y %2H%2M %2H%2M  : %u")
 
