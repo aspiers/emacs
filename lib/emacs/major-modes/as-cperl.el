@@ -101,8 +101,19 @@ line before the current line."
 ;;}}}
 ;;{{{ as-cperl-make-method
 
-(fset 'as-cperl-make-method
-      "\C-asub \C-e {\C-m\C-imy ($self) = @_;\C-m}\C-o\C-a\C-o\C-i")
+(defun as-cperl-make-method (method)
+  "Makes a new Perl method."
+  (interactive "sMethod name: ")
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "sub " method " {")
+  (newline-and-indent)
+  (insert "}")
+  (cperl-indent-command)
+  (beginning-of-line)
+  (as-cperl-insert-self-and-args-line)
+)
 
 ;;}}}
 ;;{{{ as-cperl-insert-unique-warning
