@@ -156,5 +156,4 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-group-tag-face ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag-face ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
  '(cvs-msg-face ((t (:slant italic))))
- '(fringe ((((class color) (background light)) (:background "wheat1"))))
- '(mmm-default-submode-face ((((class color) (background light)) (:background "wheat")))))
+)
