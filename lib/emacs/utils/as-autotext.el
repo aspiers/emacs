@@ -2,50 +2,34 @@
 
 ;; Should be autoloaded by as-init.el
 
-;;{{{ as-insert-date-and-time
+;;{{{ Date/time stamps
 
-(defun as-insert-date-and-time
-  ()
-  "Inserts the current date and time into the current buffer at the point."
+;; Functions I used to use for this:
+;;
+;; (current-time-string)
+;; (shell-command-to-string "date")
+
+(defun as-insert-date-and-time ()
+  "Inserts the current date and time into the current buffer at the
+point."
   (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-;;(insert (current-time-string))
-)
-
-;;}}}
-;;{{{ as-insert-log-timestamp
+  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y")))
 
 (defun as-insert-log-timestamp ()
-  "Inserts the current date, time and username into the current buffer at the point."
+  "Inserts the current date, time and username into the current buffer
+at the point."
   (interactive)
-  (insert
-   (shell-command-to-string "date")
-   )
-  (backward-delete-char 1)
-  (insert
-;;   (current-time-string)
-   " Adam Spiers <>")
-  (backward-char 1)
-)
-
-;;}}}
-;;{{{ as-insert-log-datestamp
+  (as-insert-date-and-time)
+  (insert " Adam Spiers <>")
+  (backward-char 1))
 
 (defun as-insert-log-datestamp ()
-  "Inserts the current date and username into the current buffer at the point."
+  "Inserts the current date and username into the current buffer at
+the point.  Suitable for use in rpm spec file %changelog sections."
   (interactive)
-  (insert
-   (shell-command-to-string "date '+%a %b %e %Y'")
-   )
-  (backward-delete-char 1)
-  (insert
-;;   (current-time-string)
-   " Adam Spiers <>")
-  (backward-char 1)
-)
+  (insert (format-time-string "* %a %b %e %Y")
+          " Adam Spiers <>")
+  (backward-char 1))
 
 ;;}}}
 ;;{{{ as-insert-local-mode
@@ -56,11 +40,9 @@
   (interactive)
   (beginning-of-buffer)
   (insert "# -*- mode:  -*-\n\n")
-  (backward-char 6)
-)
+  (backward-char 6))
 
 ;;}}}
-
 ;;{{{ Signatures
 
 (defun as-insert-japh-indirect-sig ()
@@ -84,7 +66,7 @@
   (forward-line 1))
 
 ;;}}}
-;;{{{ Home pages
+;;{{{ Information about me
 
 (defun as-insert-homepage-url ()
   "Inserts Adam's homepage URL"
@@ -101,9 +83,6 @@
   (interactive)
   (insert "http://tigerpig.org/"))
 
-;;}}}
-;;{{{ e-mail addresses
-
 (defun as-insert-email-address (&optional prefix)
   "Inserts Adam's e-mail address"
   (interactive)
@@ -115,16 +94,10 @@
   (interactive)
   (insert "aspiers@lehman.com"))
 
-;;}}}
-;;{{{ Name (how lazy am I?)
-
 (defun as-insert-name ()
   "Inserts Adam's name"
   (interactive)
   (insert "Adam Spiers"))
-
-;;}}}
-;;{{{ Name & e-mail
 
 (defun as-insert-name-and-email (&optional email)
   "Inserts Adam's name and e-mail address"
