@@ -80,7 +80,7 @@
 (defun as-insert-email-address ()
   "Inserts Adam's e-mail address"
   (interactive)
-  (insert "adam@spiers.net"))
+  (insert "@adamspiers.org"))
 
 ;;}}}
 ;;{{{ Name (how lazy am I?)
