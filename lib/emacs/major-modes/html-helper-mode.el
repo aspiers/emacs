@@ -696,7 +696,7 @@ with a null string."
  'html-helper-add-tag
  '(
    (entity "\C-c," "Arbitrary element" "Arbitrary element"
-           ("<" (p "Element: " element) ">" 'p "</" (s element) ">"))
+           ("<" (p "Element: " element) ">" 'r "</" (s element) ">"))
 
    ;;entities
    (entity  "\C-c#"   "&#"              "Ascii Code"      ("&#" (r "Ascii: ") ";"))
