@@ -4,18 +4,18 @@
 ;; See http://www.kolumbus.fi/toni.tammisalo/emacs-pjb-manager.html for
 ;; usage instructions.
 ;; 
-;;   C-c r  Load TOC from pjb and show it in editable buffer
-;;   C-c w  Write TOC from buffer to PJB. Set/Disk/Track reordering, 
-;;          renaming and removing works by manually editing the TOC.
-;;          This command also uploads any added files to PJB
-;;   C-c a  Add new track(s) to TOC.  Single track is added by selecting
-;;          single mp3 file. Multiple files are added by selecting
-;;          directory containing them. In such case tracks are added to
-;;          disc named after the directory. If there are subdirectories,
-;;          a set is created which will wuther contain all the discs
-;;          made out of those directories.
-;;   C-c v  Verify edited TOC without commiting it.
-;;   C-c i  Print statistics
+;;   C-c C-r  Load TOC from pjb and show it in editable buffer
+;;   C-c C-w  Write TOC from buffer to PJB. Set/Disk/Track reordering, 
+;;            renaming and removing works by manually editing the TOC.
+;;            This command also uploads any added files to PJB
+;;   C-c C-a  Add new track(s) to TOC.  Single track is added by selecting
+;;            single mp3 file. Multiple files are added by selecting
+;;            directory containing them. In such case tracks are added to
+;;            disc named after the directory. If there are subdirectories,
+;;            a set is created which will wuther contain all the discs
+;;            made out of those directories.
+;;   C-c C-v  Verify edited TOC without commiting it.
+;;   C-c C-s  Print statistics
 ;;
 ;; This requires modified pjb commandline utility 'pjb' which can upload 
 ;; new tracks, handle cue files and print id3 tags.
@@ -178,45 +178,6 @@ If commit was succesful, TOC will be automatically reloaded."
       (set-process-sentinel pjb-process-handle 
 			    'pjb-backup-process-sentinel))))
 
-
-(defun print-help-text ()
-  (insert 
-   "Interactive PJB management mode\n"
-   "Author: Toni Tammisalo <ttammisa@cc.hut.fi>\n"
-   "Version " pjb-version-string "\n"
-   "Available key bindings:\n"
-   "  C-c r       - Read TOC from PJB.  This discards the currently\n"
-   "                loaded (and possibly modified) TOC.\n"
-   "  C-c w       - Write TOC to PJB.  This commits all ordering and\n"
-   "                naming changes, removes deleted tracks and \n"
-   "                automatically uploads newly added files. If commit is\n"
-   "                already in progress, it will be aborted instead.\n"
-   "  C-c a       - Add new track to current cursor position.\n"
-   "  C-c s       - Sort current set or disc (based on cursor position) in\n"
-   "                alphabetical, reverse alphabetical or random order.\n"
-   "  C-c p       - Play selected track by downloading it to external\n"
-   "                command. Stops playing when used without track.\n"
-   "  C-c C-p     - Prettify track names inside a region.\n"
-   "                Currently just replaces '_' with ' '.\n"
-   "  C-c i       - Retrieve information from PJB.\n"
-   "  C-c C-i     - Get statistics on current (based on cursor position)\n"
-   "                disc or set.\n"      
-   "  C-c c       - Count total file size for new (added) tracks.\n"
-   "  C-c v       - Verify edited TOC but don't commit it.\n"
-   "  C-c C-b     - Backup current set, disc or track.\n"
-   "  C-c C-c C-b - Backup whole PJB contents.\n"
-   "  C-c C-t     - Toggle id3tag reading on and off.\n"
-   "  C-c h       - Show this help text.\n\n"
-   "  Shift up/down jump between sets and control up/down between discs.\n"
-   "  Shift right/left increase and decrease hiding level.\n"
-   "\n"))
-
-(defun pjb-print-help-text ()
-  (interactive)
-  (save-excursion
-    (set-buffer (get-buffer-create "*pjb-toc-output*"))
-    (erase-buffer)
-    (print-help-text)))
 
 (defun pjb-get-current-context ()
   (save-excursion
@@ -408,25 +369,25 @@ If commit was succesful, TOC will be automatically reloaded."
 				     (pjb-get-track-name ctx)))
 	    (t (message "Only single tracks can be played."))))))
 
-(defun get-last-path-component (path)
+(defun pjb-get-last-path-component (path)
   (if (string-match "^.*/\\([^/]+\\)/?$" path)
       (substring path (match-beginning 1) (match-end 1))
     path))
 
-(defun replace-char (str chr rpl)
+(defun pjb--replace-char (str chr rpl)
   (while (string-match chr str)
     (setq str (replace-match rpl t t str)))
   str)
 
-(defun trim-whitespace (str)
+(defun pjb--trim-whitespace (str)
   (if (string-match "^[ \t]*\\(\\w\\|\\w.*\\w\\)[ \t]*$" str)
       (substring str (match-beginning 1) (match-end 1))
     str))
 
-(defun us-to-sp (str)
-  (replace-char (trim-whitespace str) "_" " "))
+(defun pjb--us-to-sp (str)
+  (pjb--replace-char (pjb--trim-whitespace str) "_" " "))
 
-(defun get-mp3-info (path)
+(defun pjb--get-mp3-info (path)
   (if pjb-use-id3tags
       (condition-case err
 	  (save-excursion
@@ -448,18 +409,18 @@ If commit was succesful, TOC will be automatically reloaded."
 	      (if sr1 (list track album artist)))))
     nil))
 
-(defun get-track-name (info)
+(defun pjb-get-track-name (info)
   (nth 0 info))
-(defun get-album-name (info)
+(defun pjb--get-album-name (info)
   (nth 1 info))
-(defun get-artist-name (info)
+(defun pjb--get-artist-name (info)
   (nth 2 info))
 
-(defun insert-new-track (fname)
-  (let* ((info (get-mp3-info fname))
+(defun pjb--insert-new-track (fname)
+  (let* ((info (pjb--get-mp3-info fname))
 	 (tname (if info
-		    (get-track-name info)
-		  (us-to-sp (file-name-sans-extension 
+		    (pjb-get-track-name info)
+		  (pjb--us-to-sp (file-name-sans-extension 
 			     (file-name-nondirectory fname))))))
     (insert "        Track: " tname "\n"
 	    "               Filename=\"" fname "\"\n"
@@ -481,20 +442,20 @@ If commit was succesful, TOC will be automatically reloaded."
 	       (string-match "\\.[mM][pP]3$" (car entries)))
 	  (progn
 	    (if (= count 0)
-		(let* ((info (get-mp3-info (car entries)))
-		       (discname (us-to-sp (get-last-path-component dirname))))
+		(let* ((info (pjb--get-mp3-info (car entries)))
+		       (discname (pjb--us-to-sp (pjb-get-last-path-component dirname))))
 		  (if (and first 
 			   (stringp setname))
 		      (insert "Set: " setname "\n"))
 		  (if info
 		      (progn
-			(setq artist (get-artist-name info))
-			(setq discname (get-album-name info))))
+			(setq artist (pjb--get-artist-name info))
+			(setq discname (pjb--get-album-name info))))
 		  (if (and (stringp artist)
 			   pjb-artist-in-discname)
 		      (insert "    Disc: " discname " (" artist ")\n")
 		    (insert "    Disc: " discname "\n"))))
-	    (insert-new-track (car entries))
+	    (pjb--insert-new-track (car entries))
 	    (setq count (+ count 1))))
       (setq entries (cdr entries)))
     ;; Then rescan for any subdirectories.
@@ -507,7 +468,7 @@ If commit was succesful, TOC will be automatically reloaded."
 	    (let* ((set (file-name-nondirectory (car entries))))
 	      (if (or (string= set ".") (string= set ".."))
 		  nil
-		(handle-directory (us-to-sp (get-last-path-component dirname))
+		(handle-directory (pjb--us-to-sp (pjb-get-last-path-component dirname))
 				  (car entries) (+ level 1) (= count 0))
 		(setq count (+ count 1)))))
 	(setq entries (cdr entries))))))
@@ -532,7 +493,7 @@ If commit was succesful, TOC will be automatically reloaded."
 	  (handle-directory nil filename 0 t)
 	(if (or (not (file-exists-p filename)) (string= "" track))
 	    (message "Can't find file")
-	  (insert-new-track filename))))))
+	  (pjb--insert-new-track filename))))))
 
 (defun insert-cue-file (filename)
   (save-excursion
@@ -612,7 +573,7 @@ If commit was succesful, TOC will be automatically reloaded."
          (label (match-string 1))
          (name (match-string 2)))
     (if search-result
-        (let* ((newname (replace-char name "_" " ")))
+        (let* ((newname (pjb--replace-char name "_" " ")))
           (delete-region start end)
           (insert label ": " newname)
           t)
@@ -810,22 +771,21 @@ If commit was succesful, TOC will be automatically reloaded."
 (defvar pjb-mode-map nil "*Local keymap for PJB mode listings.")
 (setq pjb-mode-map (make-keymap))
 
-(define-key pjb-mode-map "\C-cr" 'pjb-reload-toc)
 (define-key pjb-mode-map "\C-c\C-a" 'pjb-add-files)
-(define-key pjb-mode-map "\C-c\C-A" 'pjb-add-cue-file)
-(define-key pjb-mode-map "\C-cw" 'pjb-commit-toc)
-;(define-key pjb-mode-map "\C-cs" 'pjb-sort-set)
-(define-key pjb-mode-map "\C-cs" 'pjb-sort-context)
-(define-key pjb-mode-map "\C-ci" 'pjb-print-info)
-(define-key pjb-mode-map "\C-c\C-i" 'pjb-print-current-context-info)
-(define-key pjb-mode-map "\C-c\C-c\C-b" 'pjb-backup)
 (define-key pjb-mode-map "\C-c\C-b" 'pjb-backup-current-context)
-(define-key pjb-mode-map "\C-cv" 'pjb-verify-toc)
+(define-key pjb-mode-map "\C-c\C-c" 'pjb-count-file-sizes)
+(define-key pjb-mode-map "\C-c\C-k" 'pjb-backup)
+(define-key pjb-mode-map "\C-c\C-l" 'pjb-play-current-track)
+(define-key pjb-mode-map "\C-c\C-m" 'pjb-print-info)
+(define-key pjb-mode-map "\C-c\C-n" 'pjb-print-current-context-info)
 (define-key pjb-mode-map "\C-c\C-p" 'pjb-prettify-track-names)
-(define-key pjb-mode-map "\C-ch" 'pjb-print-help-text)
+(define-key pjb-mode-map "\C-c\C-r" 'pjb-reload-toc)
+(define-key pjb-mode-map "\C-c\C-s" 'pjb-sort-context)
+;(define-key pjb-mode-map "\C-c\C-s" 'pjb-sort-set)
 (define-key pjb-mode-map "\C-c\C-t" 'pjb-toggle-id3tags)
-(define-key pjb-mode-map "\C-cc" 'pjb-count-file-sizes)
-(define-key pjb-mode-map "\C-cp" 'pjb-play-current-track)
+(define-key pjb-mode-map "\C-c\C-u" 'pjb-add-cue-file)
+(define-key pjb-mode-map "\C-c\C-v" 'pjb-verify-toc)
+(define-key pjb-mode-map "\C-c\C-w" 'pjb-commit-toc)
 
 (define-key pjb-mode-map (kbd "<S-down>") 'pjb-forward-set)
 (define-key pjb-mode-map (kbd "<S-up>") 'pjb-backward-set)
@@ -900,25 +860,68 @@ If commit was succesful, TOC will be automatically reloaded."
         mode-name "PJB Manager")
   (use-local-map pjb-mode-map))
 
-(defun pjb-manager-mode ()
-  "Major mode for interactive PJB TOC editing. "
+(defvar pjb-help-text
+  (format
+   (substitute-command-keys
+    "Interactive PJB management mode
+Author: Toni Tammisalo <ttammisa@cc.hut.fi>
+Version %s
+Available key bindings: \\<pjb-mode-map>
+  \\[pjb-reload-toc]             - Read TOC from PJB.  This discards the currently
+                        loaded (and possibly modified) TOC.
+  \\[pjb-commit-toc]             - Write TOC to PJB.  This commits all ordering and
+                        naming changes, removes deleted tracks and 
+                        automatically uploads newly added files. If commit is
+                        already in progress, it will be aborted instead.
+  \\[pjb-add-files]             - Add new track to current cursor position.
+  \\[pjb-sort-context\]             - Sort current set or disc (based on cursor position) in
+                        alphabetical, reverse alphabetical or random order.
+  \\[pjb-play-current-track]             - Play selected track by downloading it to external
+                        command. Stops playing when used without track.
+  \\[pjb-prettify-track-names]             - Prettify track names inside a region.
+                        Currently just replaces '_' with ' '.
+  \\[pjb-print-info]             - Retrieve information from PJB.
+  \\[pjb-print-current-context-info]             - Get statistics on current (based on cursor position)
+                        disc or set.      
+  \\[pjb-count-file-sizes]             - Count total file size for new (added) tracks.
+  \\[pjb-verify-toc]             - Verify edited TOC but don't commit it.
+  \\[pjb-backup-current-context]             - Backup current set, disc or track.
+  \\[pjb-backup]             - Backup whole PJB contents.
+  \\[pjb-toggle-id3tags]             - Toggle id3tag reading on and off.
+  \\[pjb-backward-set], \\[pjb-forward-set]    - jump between sets
+  \\[pjb-backward-disc], \\[pjb-forward-disc]    - jump between discs.
+  \\[pjb-inc-hiding-level], \\[pjb-dec-hiding-level] - increase and decrease hiding level.
+") pjb-version-string)
+  "Mode documentation for `pjb-mode'.")
+
+(defun pjb-print-help-text ()
   (interactive)
-  (pop-to-buffer "*pjb-toc-output*")
-  (pop-to-buffer "*pjb-toc-buffer*")
-  (print-help-text)
-  (setq coding-system-for-read 'iso-latin-1)
-  (setq paragraph-start "^[ \t]*$")
-  (setq paragraph-separate "^[ \t]*$")
-  (setq sentence-end "EncType=[A-Za-z0-9]*")
-  (setq page-delimiter "^[ \t]*Set:")
-  (make-local-variable 'font-lock-defaults)
-  (setq font-lock-defaults '(pjb-font-lock-keywords t))
-  (reset-pjb-mode)
-  (random t)
-  (run-hooks 'pjb-mode-hook))
+  (save-excursion
+    (set-buffer (get-buffer-create "*pjb-toc-output*"))
+    (erase-buffer)
+    (insert pjb-help-text)))
+
+(defun pjb-manager-mode ()
+  "Major mode for interactive PJB TOC editing.
+Press \\[pjb-print-help-text] for more help."
+    (interactive)
+    (pop-to-buffer "*pjb-toc-output*")
+    (pop-to-buffer "*pjb-toc-buffer*")
+    (pjb-print-help-text)
+    (setq coding-system-for-read 'iso-latin-1)
+    (setq paragraph-start "^[ \t]*$")
+    (setq paragraph-separate "^[ \t]*$")
+    (setq sentence-end "EncType=[A-Za-z0-9]*")
+    (setq page-delimiter "^[ \t]*Set:")
+    (make-local-variable 'font-lock-defaults)
+    (setq font-lock-defaults '(pjb-font-lock-keywords t))
+    (reset-pjb-mode)
+    (random t)
+    (run-hooks 'pjb-mode-hook))
 
 (defun pjb-manager ()
-  "Start PJB Manager mode."
+  "Major mode for interactive PJB TOC editing.
+Press \\[pjb-print-help-text] for more help."
   (interactive)
   (let ((buff (get-buffer "*pjb-toc-buffer*")))
     (if buff
