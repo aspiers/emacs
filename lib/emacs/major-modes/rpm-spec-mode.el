@@ -107,7 +107,7 @@ Set the macros _target, _target_arch and _target_os accordingly"
   :type 'string
   :group 'rpm-spec)
 
-(eval-when-compile
+(eval-and-compile
   (if (not (boundp 'running-xemacs))
       (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
   (or running-xemacs (defun define-obsolete-variable-alias (foo bar))))
