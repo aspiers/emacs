@@ -1120,14 +1120,21 @@ If a prefix argument is given, move by that many lines."
   "Go to the next directory.  Returns the destination node."
   (interactive)
   (catch 'end
-    (do* ((cur-node (ewoc-goto-next cvs-cookies 1))
-          (cur-fi (ewoc-data cur-node)))
-        ((and (cvs-fileinfo-p cur-fi)
-              (eq (cvs-fileinfo->type cur-fi) 'DIRCHANGE))
-         cur-node)
-      (setq cur-node (ewoc-goto-next cvs-cookies 1))
-      (setq cur-fi (ewoc-data cur-node))
-      (or (cvs-fileinfo-p cur-fi) (throw 'end cur-node)))))
+    ;; ewoc considers being in the header equivalent to being in
+    ;; the first node (doh), so we have to compare the point's
+    ;; position with the beginning of the first node
+    (let ((first-node (ewoc-nth cvs-cookies 0)))
+      (cond ((< (point) (marker-position (ewoc-location first-node)))
+             (ewoc-goto-node cvs-cookies first-node))
+            (t
+             (do* ((cur-node (ewoc-goto-next cvs-cookies 1))
+                   (cur-fi (ewoc-data cur-node)))
+                 ((and (cvs-fileinfo-p cur-fi)
+                       (eq (cvs-fileinfo->type cur-fi) 'DIRCHANGE))
+                  cur-node)
+               (setq cur-node (ewoc-goto-next cvs-cookies 1))
+               (setq cur-fi (ewoc-data cur-node))
+               (or (cvs-fileinfo-p cur-fi) (throw 'end cur-node))))))))
 
 (defun cvs-mode-up-level ()
   "Go to the containing directory.  Returns the new node."
