@@ -783,7 +783,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
 
-(defun hhm () "Loads html-helper-mode." (interactive) (html-helper-mode.))
+(defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
 ;;{{{ Apache
@@ -917,22 +917,22 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;{{{ Set marks for individual modes
 
-(autoload 'fold-add-to-marks-list "folding" "folding mode")
+(autoload 'folding-add-to-marks-list "folding" "folding mode")
 
 (eval-after-load "folding"
   '(progn
-    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-    (fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-    (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-    (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-    (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-    (fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
+    (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+    (folding-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
+    (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
+    (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+    (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
     ))
 
 (setq as-find-file-matching-regexp-alist
@@ -961,26 +961,26 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-hook 'folding-mode-hook
           (lambda ()
             ;; keypad
-            (define-key folding-mode-map [kp-7] 'fold-enter)
-            (define-key folding-mode-map [kp-9] 'fold-exit)
+            (define-key folding-mode-map [kp-7] 'folding-shift-in)
+            (define-key folding-mode-map [kp-9] 'folding-shift-out)
             (define-key folding-mode-map [kp-1] 'fold-show)
             (define-key folding-mode-map [kp-3] 'fold-hide)
             (define-key folding-mode-map [kp-4] 'fold-backward-char)
             (define-key folding-mode-map [kp-6] 'fold-forward-char)
 
             ;; These ones for VT100s (I think)
-            (define-key folding-mode-map "\M-Ow" 'fold-enter)
-            (define-key folding-mode-map "\M-Oy" 'fold-exit)
+            (define-key folding-mode-map "\M-Ow" 'folding-shift-in)
+            (define-key folding-mode-map "\M-Oy" 'folding-shift-out)
             (define-key folding-mode-map "\M-Oq" 'fold-show)
             (define-key folding-mode-map "\M-Os" 'fold-hide)
-            (define-key folding-mode-map "\M-OP" 'fold-enter)
-            (define-key folding-mode-map "\M-OQ" 'fold-exit)
+            (define-key folding-mode-map "\M-OP" 'folding-shift-in)
+            (define-key folding-mode-map "\M-OQ" 'folding-shift-out)
 
             ;; Quick navigation
-            (local-set-key [(control meta <)] 'fold-exit)
-            (local-set-key [(control meta >)] 'fold-enter)
-            (local-set-key [(shift left)] 'fold-exit)
-            (local-set-key [(shift right)] 'fold-enter)
+            (local-set-key [(control meta <)] 'folding-shift-out)
+            (local-set-key [(control meta >)] 'folding-shift-in)
+            (local-set-key [(shift left)] 'folding-shift-out)
+            (local-set-key [(shift right)] 'folding-shift-in)
             ))
 
 (eval-when-compile
