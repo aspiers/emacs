@@ -38,3 +38,4 @@
   ))
 
 
+(load "~/.emacs.local" t)
