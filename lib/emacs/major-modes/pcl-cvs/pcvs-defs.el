@@ -261,6 +261,19 @@ Output from cvs is placed here for asynchronous commands.")
 (defvar cvs-mode-hook nil
   "Run after `cvs-mode' was setup.")
 
+(defcustom cvs-use-fileinfo-caches nil
+  "Non-nil means cache a buffer's fileinfos when it's killed, so that
+`cvs-quickdir' can retrieve them from the cache rather than from CVS/Entries
+when populating a new buffer."
+  :group 'pcl-cvs
+  :type '(boolean))
+
+(defcustom cvs-cache-filename ".pcl-cvs-cache"
+  "The name for fileinfo cache files."
+  :group 'pcl-cvs
+  :type '(file))
+
+
 
 ;;;;
 ;;;; Internal variables, used in the process buffer.
