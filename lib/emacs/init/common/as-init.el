@@ -131,11 +131,18 @@ The buffer is then renamed to the result.")
 
 (defun as-buffer-rename-remove-unique-id ()
   "Attempt to remove the unique suffix (e.g. \"<1>\") from the current
-buffer's name.  It will fail if a buffer already exists with that name."
+buffer's name.  It will fail silently if a buffer already exists with
+that name."
   (interactive)
   (and
    (string-match "<[0-9]+>$" (buffer-name))
-   (rename-buffer (replace-match "" t t (buffer-name) nil))))
+   (condition-case nil
+       (rename-buffer (replace-match "" t t (buffer-name) nil))
+     (error nil))))
+
+;; Always try to do this; occasionally things screw up and leave
+;; you with a foo<2> buffer when there's no need.
+(add-hook 'find-file-hooks 'as-buffer-rename-remove-unique-id)
 
 ;;}}}
 ;;{{{ as-display-buffer-filename
