@@ -222,17 +222,17 @@ a prefix argument."
 ;;}}}
 ;;{{{ Define fast scroll keys
 
-(defun timsup () "Move up two lines." (interactive) (forward-line -2))
-(defun timsdown () "Move down two lines." (interactive) (forward-line 2))
+(defun as-fast-up () "Move up two lines." (interactive) (forward-line -2))
+(defun as-fast-down () "Move down two lines." (interactive) (forward-line 2))
 
 ;;; Can only use M-down and M-up in X
 
 (if window-system
     (progn
-      (global-set-key [(meta down)] 'timsdown)
-      (global-set-key [(meta up)]   'timsup)
-      (global-set-key [(meta kp-2)] 'timsdown)
-      (global-set-key [(meta kp-8)] 'timsup)))
+      (global-set-key [(meta down)] 'as-fast-down)
+      (global-set-key [(meta up)]   'as-fast-up)
+      (global-set-key [(meta kp-2)] 'as-fast-down)
+      (global-set-key [(meta kp-8)] 'as-fast-up)))
 
 ;;}}}
 ;;{{{ hippie-expand ROCKS!
@@ -417,6 +417,13 @@ a prefix argument."
                             (insert "Adam Spiers <adam@spiers.net>"))))
 
 ;;}}}
+
+;;}}}
+;;{{{ Mouse
+
+(and window-system
+     (global-set-key [(M-mouse-4)] 'raise-frame)
+     (global-set-key [(M-mouse-5)] 'lower-frame))
 
 ;;}}}
 ;;{{{ Miscellaneous
