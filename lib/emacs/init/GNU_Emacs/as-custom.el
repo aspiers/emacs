@@ -1,16 +1,29 @@
-(setq as-default-background "seashell1")
+;; If you're using color-theme.el, this background should match the
+;; background of your chosen theme
+(setq as-default-background
+;;    "seashell1"
+      "wheat"
+      )
+
 (setq frame-background-mode
       (cond ((and (= emacs-major-version 21) window-system) 'light)
             (t 'dark)))
 
 (and (eq frame-background-mode 'light)
      (custom-set-variables
-      '(vc-annotate-background "white")))
+      `(vc-annotate-background ,as-default-background)))
 
 (and (>= emacs-major-version 21)
      (custom-set-faces
-      `(default ((((class color) (background light)) (:background ,as-default-background))))
-      `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background))))))
+      `(default
+         ((((class color) (background light))
+           (:background ,as-default-background))))
+      '(fringe
+        ((((class color) (background light))
+          (:background "wheat1"))))
+      `(mmm-default-submode-face
+        ((((class color) (background light))
+          (:background ,as-default-background))))))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -23,6 +36,8 @@
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
  '(case-fold-search t)
+ '(color-theme-is-cumulative nil)
+ '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
  '(cperl-auto-newline nil)
  '(cperl-auto-newline-after-colon t)
  '(cperl-electric-keywords t)
@@ -58,14 +73,15 @@
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
- '(vc-annotate-background "white"))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
-  ;; Your init file should contain only one such instance.
- '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
- '(cperl-hash-face ((t (:bold t :italic t :foreground "red"))))
- '(font-lock-comment-face ((((class color) (background dark)) (:foreground "aquamarine"))))
- '(font-lock-comment-face ((((class color) (background light)) (:foreground "Firebrick"))))
- '(highlight ((t (:foreground "white" :background "orange"))))
- '(show-paren-match-face ((((class color)) (:background "MediumBlue"))))
- '(underline ((((class color) (background light)) (:underline t :foreground "Yellow Green")))))
+ '(tool-bar-mode nil nil (tool-bar))
+ '(vc-follow-symlinks t))
+;;(custom-set-faces
+;; ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+;; ;; Your init file should contain only one such instance.
+;;  '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
+;;  '(cperl-hash-face ((t (:bold t :italic t :foreground "red"))))
+;;  '(font-lock-comment-face ((((class color) (background light)) (:foreground "Firebrick"))))
+;;  '(highlight ((t (:foreground "white" :background "orange"))))
+;;  '(mmm-default-submode-face ((((class color) (background light)) (:background "seashell1"))))
+;;  '(show-paren-match-face ((((class color)) (:background "MediumBlue"))))
+;;  '(underline ((((class color) (background light)) (:underline t :foreground "Yellow Green")))))
