@@ -122,7 +122,9 @@ that name."
 (autoload 'as-display-buffer-filename
                                  "as-bufs-files" "Display buffer filename"  t)
 (autoload 'as-bounce-buffer      "as-bufs-files" "Bounce buffers"           t)
-(autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffers"          t)
+(autoload 'as-destroy-buffer-delete-file 
+                                 "as-bufs-files" "Destroy buffer & file"    t)
+(autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffer"           t)
 (autoload 'bury-and-close-buffer "as-bufs-files" "Bury and close buffers"   t)
 (autoload 'mhj-set-q-to-close    "as-bufs-files" "Bind q to bury and close" t)
 
@@ -313,6 +315,8 @@ that name."
 ;;}}}
 
 (global-set-key "\C-ck"   'delete-file)
+(global-set-key "\C-cK"   'as-destroy-buffer-delete-file)
+
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
 ;; I reserve C-c m for mode-specific user bindings
 (global-set-key "\C-cn"   'as-display-buffer-filename)
@@ -335,6 +339,8 @@ that name."
 
 ;;}}}
 (global-set-key "\C-ctb"   'as-toggle-indent-tabs-mode)
+
+(global-set-key "\C-ctf"   'auto-fill-mode)
 
 ;;{{{ as-toggle-truncate-lines
 

@@ -51,6 +51,19 @@ from the replace is visited via `find-file'."
     (message (concat "Destroyed buffer " buf))))
 
 ;;}}}
+;;{{{ as-destroy-buffer-delete-file
+
+(defun as-destroy-buffer-delete-file ()
+  "Kill the current buffer and delete the associated file."
+  (interactive)
+  (save-buffer)
+  (let ((fn (buffer-file-name)))
+    (delete-file fn)
+    (kill-buffer nil)
+    (message (format "Deleted %s" fn))))
+
+;;}}}
+
 ;;{{{ bury-and-close-buffer
 
 (defun bury-and-close-buffer ()
