@@ -75,8 +75,8 @@
   (define-key ruby-mode-map "}" 'ruby-electric-brace)
   (define-key ruby-mode-map "\e\C-a" 'ruby-beginning-of-defun)
   (define-key ruby-mode-map "\e\C-e" 'ruby-end-of-defun)
-  (define-key ruby-mode-map "\e\C-b" 'ruby-beginning-of-block)
-  (define-key ruby-mode-map "\e\C-f" 'ruby-end-of-block)
+;;   (define-key ruby-mode-map "\e\C-b" 'ruby-beginning-of-block)
+;;   (define-key ruby-mode-map "\e\C-f" 'ruby-end-of-block)
   (define-key ruby-mode-map "\e\C-p" 'ruby-beginning-of-block)
   (define-key ruby-mode-map "\e\C-n" 'ruby-end-of-block)
   (define-key ruby-mode-map "\e\C-h" 'ruby-mark-defun)
@@ -301,7 +301,6 @@ The variable ruby-indent-level controls the amount of indentation.
 		  (goto-char (match-beginning 1))
 		  (setq w (buffer-substring (match-beginning 1)
 					    (match-end 1)))
-;;                  (message (format "w is %s" w))
 		  (cond
 		   ((string= w "[") (setq w "\\]"))
 		   ((string= w "{") (setq w "}"))
@@ -314,8 +313,8 @@ The variable ruby-indent-level controls the amount of indentation.
 			   "\\\\[^\\]*\\\\"
 			 (concat "[^\\]\\(\\\\\\\\\\)*" w))
 		       indent-point t)
-		      nil
-		    (setq in-string (point))
+                      nil
+                    (setq in-string (point))
 		    (goto-char indent-point)))
 		 (t
 		  (goto-char pnt))))
@@ -539,8 +538,7 @@ The variable ruby-indent-level controls the amount of indentation.
 		 (and (looking-at ruby-operator-re)
 		      (not (eq (char-after (1- (point))) ??))
 		      (not (eq (char-after (1- (point))) ?$))
-		      (or (not (eq ?/ (char-after (point))))
-			  (null (nth 0 (ruby-parse-region parse-start (point)))))
+                      (null (nth 0 (ruby-parse-region parse-start (point))))
 		      (or (not (eq ?| (char-after (point))))
 			  (save-excursion
 			    (or (eolp) (forward-char -1))
@@ -668,18 +666,12 @@ An end of a defun is found by moving forward from the beginning of one."
   (or (boundp 'font-lock-variable-name-face)
       (setq font-lock-variable-name-face font-lock-type-face))
 
-
   (add-hook 'ruby-mode-hook
 	    '(lambda ()
 	       (make-local-variable 'font-lock-syntactic-keywords)
 	       (setq font-lock-syntactic-keywords
 		     '(("\\$\\([#\"'`$\\]\\)" 1 (1 . nil))
 		       ("\\(#\\)[{$@]" 1 (1 . nil))
-		       ("\\(%[rqQx]?\\(.\\)\\)\\(.*?\\)\\(\1\\)"
-                        (1 "'")
-                        (2 "'")
-                        (3 " ")
-                        (4 "'"))
 		       ("\\(/\\)\\([^/\n]\\|\\\\/\\)*\\(/\\)"
 			(1 (7 . ?'))
 			(3 (7 . ?')))))
@@ -743,6 +735,27 @@ An end of a defun is found by moving forward from the beginning of one."
 	     "\\|")
 	    "\\)\\>\\([^_]\\|$\\)")
 	   2)
+     ;; string literals (yuck)
+     '("%[qQrx]?\\(.\\)\\(.*?\\)\\(\\1\\)"
+       (1 font-lock-string-face)
+       (2 font-lock-string-face)
+       (3 font-lock-string-face))
+     ;; %[] etc.
+     '("%\\([qQrx]?\\)\\(\\[.*?\\]\\)"
+       (1 'default)
+       (2 font-lock-string-face))
+     ;; %() etc.
+     '("%\\([qQrx]?\\)\\((.*?)\\)"
+       (1 'default)
+       (2 font-lock-string-face))
+     ;; %{} etc.
+     '("%\\([qQrx]?\\)\\({.*?}\\)"
+       (1 'default)
+       (2 font-lock-string-face))
+     ;; %<> etc.
+     '("%\\([qQrx]?\\)\\(<.*?>\\)"
+       (1 'default)
+       (2 font-lock-string-face))
      ;; variables
      '("\\(^\\|[^_:.@$]\\|\\.\\.\\)\\b\\(nil\\|self\\|true\\|false\\)\\b\\([^_]\\|$\\)"
        2 font-lock-variable-name-face)
