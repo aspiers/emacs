@@ -7,7 +7,7 @@
 (defvar cperl-indent-level)
 (defvar cperl-close-paren-offset)
 (defun as-cperl-set-indent-level (width)
-  "Sets the cperl-indent-level variable to the given argument."
+  "Sets the `cperl-indent-level' variable to the given argument."
   (interactive "NNew cperl-indent-level: ")
   (setq cperl-indent-level width)
   (setq cperl-close-paren-offset (- width)))
@@ -246,7 +246,7 @@ use warnings;
 ;;{{{ as-cperl-reinvert-if-unless
 
 (defun as-cperl-reinvert-if-unless ()
-  "Performs the opposite of cperl-invert-if-unless.  Position your
+  "Performs the opposite of `cperl-invert-if-unless'.  Position your
 point somewhere *before* the if/unless/while/until modifier."
   (interactive)
   (let ((modifier-start-re
@@ -308,6 +308,7 @@ point somewhere *before* the if/unless/while/until modifier."
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
   (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
+  (local-set-key "\C-cmt"      'as-cperl-reinvert-if-unless)
   (local-set-key [(f10)]        'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
   (setq indent-tabs-mode nil)
