@@ -31,6 +31,8 @@ from the replace is visited via `find-file'."
 ;;}}}
 ;;{{{ as-display-buffer-filename
 
+(eval-when-compile
+  (autoload 'x-select-text "term/x-win" nil t))
 (defun as-display-buffer-filename (&optional save-to-clipboard)
   "Displays the current buffer's filename in the minibuffer.
 
