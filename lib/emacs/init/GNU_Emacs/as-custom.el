@@ -31,7 +31,6 @@
  '(cperl-lazy-help-time 2)
  '(cperl-auto-newline nil))
 (custom-set-faces
- '(default ((t (:underline nil :foreground "White"))))
  '(font-lock-comment-face ((((class color) (background dark)) (:foreground "aquamarine"))))
  '(underline ((t (:underline t :foreground "Yellow"))))
  '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
