@@ -75,12 +75,17 @@
   (insert "http://tigerpig.org/"))
 
 ;;}}}
-;;{{{ e-mail address
+;;{{{ e-mail addresses
 
 (defun as-insert-email-address ()
   "Inserts Adam's e-mail address"
   (interactive)
   (insert "@adamspiers.org"))
+
+(defun as-insert-work-email-address ()
+  "Inserts Adam's e-mail address"
+  (interactive)
+  (insert "aspiers@lehman.com"))
 
 ;;}}}
 ;;{{{ Name (how lazy am I?)
