@@ -26,16 +26,17 @@ endif
 
 version=$(shell $(EMACS) --version)
 version_number=$(shell echo "$(version)" | \
-            perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
+                   perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
+system_type=$(shell $(EMACS) --batch --eval '(message (format "%s" system-type))' 2>&1)
 
 ifeq (, $(findstring XEmacs,$(version)))
   COMPILER=$(EMACS) $(addprefix -L ,$(loadpaths))
-  installdir=$(gnuinstalldir)/$(version_number)/$(OSTYPE)
+  installdir=$(gnuinstalldir)/$(version_number)/$(system_type)
 else
   # blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
   COMPILER=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
-  installdir=$(xinstalldir)/$(version_number)/$(OSTYPE)
+  installdir=$(xinstalldir)/$(version_number)/$(system_type)
 endif
 
 COMPILER+= -batch -f batch-byte-compile
