@@ -33,6 +33,7 @@
   ;; Your init file should contain only one such instance.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(auto-save-interval 120)
+ '(backup-directory-alist (quote (("." . ".emacs.backup"))))
  '(blinking-cursor-blink-frequency 4)
  '(blinking-cursor-colors (quote ("coral" "blue" "gold")))
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
