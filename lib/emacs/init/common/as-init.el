@@ -22,6 +22,26 @@
 
 ;;{{{ Buffers/files
 
+;;{{{ Obselete functions, may come in handy another time
+
+;; (defun as-containing-dir (filename)
+;;   "Return the containing directory of a filename when given the full path."
+;;   (string-match "\\([^/]+\\)/[^/]+$" filename)
+;;   (match-string 1 filename))
+
+;; (defun as-last-dir-and-filename (filename)
+;;   "Strip a full path of all of its directory components but the last."
+;;   (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
+;;   (replace-match "" t t (buffer-file-name) 1))
+
+;; (defun as-buffer-rename-add-one-dir ()
+;;   "Add the name of the containing directory of the buffer's file
+;; to the beginning of the buffer name."
+;;   (interactive)
+;;   (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
+
+;;}}}
+
 ;;{{{ as-find-file-matching-regexp-hook
 
 (defvar as-find-file-matching-regexp-alist '()
@@ -81,26 +101,6 @@ The buffer is then renamed to the result.")
      as-buffer-renamings-alist)))
 
 (add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
-
-;; These are now obselete:
-;;
-;; (defun as-containing-dir (filename)
-;;   "Return the containing directory of a filename when given the full path."
-;;   (string-match "\\([^/]+\\)/[^/]+$" filename)
-;;   (match-string 1 filename))
-;;
-;; (defun as-last-dir-and-filename (filename)
-;;   "Strip a full path of all of its directory components but the last."
-;;   (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
-;;   (replace-match "" t t (buffer-file-name) 1))
-;;
-;; (defun as-buffer-rename-add-one-dir ()
-;;   "Add the name of the containing directory of the buffer's file
-;; to the beginning of the buffer name."
-;;   (interactive)
-;;   (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
-;;
-;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
 
 (defun as-buffer-rename-remove-unique-id ()
   "Attempt to remove the unique suffix (e.g. \"<1>\") from the current
@@ -823,8 +823,7 @@ that name."
 ;;}}}
 ;;{{{ Transient Mark mode
 
-(if (not (boundp 'transient-mark-mode))
-    (defun transient-mark-mode (arg1) nil))
+(eval-when-compile (defun transient-mark-mode (arg1) nil))
 (if (not running-xemacs) (transient-mark-mode 1))
 
 ;;}}}
@@ -876,7 +875,7 @@ that name."
 ;;}}}
 ;;{{{ blinking-cursor
 
-(defun blinking-cursor-mode (&optional arg))
+(eval-when-compile (defun blinking-cursor-mode (&optional arg)))
 (and window-system
      (not running-xemacs)
      (= emacs-major-version 20)
