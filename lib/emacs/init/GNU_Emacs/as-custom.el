@@ -1,7 +1,11 @@
 (setq as-default-background "seashell1")
 (setq frame-background-mode
-      (cond (window-system 'light)
+      (cond ((and (= emacs-major-version 21) window-system) 'light)
             (t 'dark)))
+
+(and (eq frame-background-mode 'light)
+     (custom-set-variables
+      '(vc-annotate-background "white")))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -16,13 +20,13 @@
  '(case-fold-search t)
  '(cperl-auto-newline nil)
  '(cperl-auto-newline-after-colon t)
- '(cperl-electric-keywords t t)
- '(cperl-electric-linefeed t t)
- '(cperl-electric-parens t t)
+ '(cperl-electric-keywords t)
+ '(cperl-electric-linefeed t)
+ '(cperl-electric-parens t)
  '(cperl-electric-parens-string "{}()")
- '(cperl-font-lock t t)
+ '(cperl-font-lock t)
  '(cperl-invalid-face (quote (quote default)))
- '(cperl-lazy-help-time 2 t)
+ '(cperl-lazy-help-time 2)
  '(cperl-lineup-step 1)
  '(cperl-syntaxify-by-font-lock t)
  '(cperl-under-as-char nil)
