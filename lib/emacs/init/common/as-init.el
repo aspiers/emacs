@@ -598,8 +598,8 @@ a prefix argument."
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
                 ("\\.xml$"                               . xml-mode)
-                ("\\.sgml$"                              . sgml-mode)
-                ("\\.dtd$"                               . sgml-mode)
+                ("\\.sgml$"                              . psgml-mode)
+                ("\\.dtd$"                               . psgml-mode)
                 ("\\.dcl$" . dtd-mode)
                 ("\\.dec$" . dtd-mode)
 ;;                ("\\.dtd$" . dtd-mode)
@@ -986,6 +986,7 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ psgml (SGML and XML)
 
+(autoload 'psgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
