@@ -481,6 +481,10 @@ to the beginning of the buffer name."
                '("\\.\\(mason\\|m[cd]\\)\\'"  . html-mode)
                '("\\(auto\\|d\\)handler\\'"   . html-mode)
                '("\\.css\\'"                  . css-mode)
+               '("\\.htaccess$"               . apache-mode)
+               '("httpd\\.conf$"              . apache-mode)
+               '("srm\\.conf$"                . apache-mode)
+               '("access\\.conf$"             . apache-mode)
                )
               auto-mode-alist))
 
@@ -794,6 +798,11 @@ to the beginning of the buffer name."
 (load "css-mode" t)
 
 ;;}}}
+;;{{{ Apache
+
+(autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
+
+;;}}}
 
 ;; Minor modes
 
@@ -929,6 +938,15 @@ to the beginning of the buffer name."
 (add-hook 'text-mode-hook (function (lambda () (setq comment-start "> "))))
 (add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
 (add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
+
+;;}}}
+;;{{{ blinking-cursor
+
+(cond 
+ ((load "blinking-cursor" t)
+    ;; bug - goes wrong if you switch on twice in a row
+  (blinking-cursor-mode 0)
+  (blinking-cursor-mode 1)))
 
 ;;}}}
 
