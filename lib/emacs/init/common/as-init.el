@@ -850,6 +850,7 @@ to the beginning of the buffer name."
 (fold-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
 (fold-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
 (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+(fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
 
 ;;}}}
 
