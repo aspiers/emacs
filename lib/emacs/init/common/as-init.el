@@ -142,7 +142,6 @@ that name."
 (autoload 'vim-yy                 "as-editing" "Simulate vim's yy command"  t)
 ;; bn-end-of-line-but-one autoloaded elsewhere
 
-
 ;;}}}
 ;;{{{ Appearance
 
@@ -170,22 +169,33 @@ that name."
 ;;}}}
 ;;{{{ Key bindings
 
+;; Ben uses (define-key global-map ...)
+;; instead of (global-set-key ...)
+;; Think maybe the latter is better?
+
 ;;{{{ Global keymap (possibly naughty)
 
 ;;{{{ Rebinding for improvement - naughty but nice
 
-(global-set-key "\M-\\"    'fixup-whitespace)   ;; was delete-horizontal-space
-(global-set-key "\M-g"     'goto-line)          ;; was set-face
-(global-set-key "\C-ha"    'apropos)            ;; was apropos-command
+(global-set-key "\M-\\"        'fixup-whitespace)   ;; was delete-horizontal-space
+(global-set-key "\M-g"         'goto-line)          ;; was set-face
+(global-set-key "\C-ha"        'apropos)            ;; was apropos-command
 (autoload 'as-transpose-lines "as-editing" "as-transpose-lines" t)
-(global-set-key "\C-x\C-t" 'as-transpose-lines) ;; was transpose-lines
+(global-set-key "\C-x\C-t"     'as-transpose-lines) ;; was transpose-lines
 
-(global-set-key [(delete)] 'delete-char)        ;; to make sure
-(global-set-key [(insert)] 'overwrite-mode)     ;; to make sure
+(autoload 'bn-kill-region-or-backword-word "as-editing" "bn-kill-region-or-backword-word" t)
+(global-set-key [(control w)]  'bn-kill-region-or-backword-word) ;; was kill-region
+(autoload 'bn-kill-line-or-region-save "as-editing" "bn-kill-line-or-region-save" t)
+(global-set-key [(meta w)]     'bn-kill-line-or-region-save)     ;; kill-ring-save
+(autoload 'bn-zap-nearly-to-char "as-editing" "bn-zap-nearly-to-char" t)
+(global-set-key [(meta z)]     'bn-zap-nearly-to-char)           ;; was zap-to-char
+
+(global-set-key [(delete)]     'delete-char)        ;; to make sure
+(global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(global-set-key "\C-x\C-b"     'buffer-menu)
 
 ;; But if bs-show is available, choose that cos it's much nicer.
 (and (functionp 'bs-show)

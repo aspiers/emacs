@@ -210,3 +210,109 @@ just C-u as a prefix argument, repeat as many times as possible."
       (setq n (- n 1)))))
 
 ;;}}}
+;;{{{ bn-kill-region-or-backword-word
+
+(defun bn-kill-region-or-backword-word (arg)
+  "If mark is active, do `kill-region'.  If not, do `backward-kill-word'.
+\(This doesn't make very much sense unless you also have
+transient-mark-mode turned on.\)  In the case that the mark is not
+active, ARG specifies how many words backwards to kill."
+  (interactive "p")
+  (if mark-active
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word arg)))
+
+;;}}}
+;;{{{ bn-kill-line-or-region-save
+
+(defun bn-kill-line-or-region-save (arg)
+  "If mark is active, do `kill-ring-save'; else copy current line\(s\).
+ARG is ignored if mark is active.  If mark is not active,
+copy-as-if-killed ARG lines forward, starting with the one point is
+currently on.  ARG can be negative, in which case the current line is
+not included in the text copied."
+  (interactive "p")
+  (if mark-active
+      (kill-ring-save (region-beginning) (region-end))
+    (let ((bol (save-excursion (beginning-of-line) (point)))
+          (bonl (save-excursion (forward-line arg) (point))))
+      (kill-ring-save bol bonl))))
+
+;;}}}
+;;{{{ bn-zap-nearly-to-char
+
+(defun bn-zap-nearly-to-char (arg char)
+  "Kill up to but not including ARG'th occurrence of CHAR.
+Goes backward if ARG is negative; error if CHAR not found."
+  (interactive "*p\ncZap to char: ")
+  (let ((case-fold-search nil))
+    (let ((beg (point))
+          end)
+      (setq end (save-excursion
+                  ;; Want to avoid doing nothing if we're looking
+                  ;; at CHAR already.
+                  (forward-char (signum arg))
+                  (search-forward (char-to-string char) nil nil arg)
+                  (- (point) (signum arg))))
+      (kill-region beg end))))
+
+;;}}}
+
+;;{{{ Ben's secondary selection hacks (not active yet)
+
+(defun bn-make-region-into-secondary (start end)
+  "Turn the region into the secondary selection.
+The secondary selection is enabled if required, and set equal to
+the region.  The region is deactivated.  The buffer is not
+altered at all."
+  (interactive "r")
+  (if mouse-secondary-overlay
+      (move-overlay mouse-secondary-overlay start end (current-buffer))
+    (setq mouse-secondary-overlay (make-overlay start end)))
+  (overlay-put mouse-secondary-overlay 'face 'secondary-selection)
+  (x-set-selection
+   'SECONDARY
+   (buffer-substring (overlay-start mouse-secondary-overlay)
+                     (overlay-end mouse-secondary-overlay)))
+  (deactivate-mark))
+
+
+
+(defun bn-exchange-region-and-secondary (start end)
+  "Interchange the region and the secondary selection.
+The results are not well-defined if the region and the
+secondary selection overlap."
+  (interactive "r")
+  (or mouse-secondary-overlay
+      (error "The secondary selection is not active now"))
+  (let ((sec-start (overlay-start mouse-secondary-overlay))
+        (sec-end (overlay-end mouse-secondary-overlay)))
+    (let ((transpose-subr-start1 start)
+          (transpose-subr-end1 end)
+          (transpose-subr-start2 sec-start)
+          (transpose-subr-end2 sec-end))
+      (transpose-subr-1))
+    (delete-overlay mouse-secondary-overlay)
+    (setq mouse-secondary-overlay nil)))
+
+
+(defun bn-keyboard-quit ()
+  "Deactivate secondary region, deactivate region, or perform quit.
+If the secondary region is active, then deactivate it.  If not, then if
+the region is active, then deactivate it.  If not, then do
+`keyboard-quit'."
+  (interactive)
+  (cond ((and (overlayp mouse-secondary-overlay)
+              (overlay-buffer mouse-secondary-overlay))
+         (delete-overlay mouse-secondary-overlay))
+        ((and (boundp 'mark-active)
+              mark-active)
+         (deactivate-mark))
+        (t
+         (keyboard-quit))))
+
+;; (define-key global-map [(hyper ?\ )] 'bn-make-region-into-secondary)
+;; (define-key global-map [(hyper t)] 'bn-exchange-region-and-secondary)
+;; (define-key global-map [(control g)] 'bn-keyboard-quit)
+
+;;}}}
