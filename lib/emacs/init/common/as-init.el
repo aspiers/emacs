@@ -199,7 +199,7 @@ a prefix argument."
 ;;}}}
 
 ;;}}}
-;;{{{ Key bindings
+;;{{{ Global key bindings
 
 ;;{{{ Keypad maps
 
@@ -289,10 +289,10 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9d"        'insert-date-and-time)
+(global-set-key "\C-x9d"   'insert-date-and-time)
 
-(global-set-key "\C-x9g"    'goto-line)
-(global-set-key "\C-x9i"    'auto-fill-mode)
+(global-set-key "\C-x9g"   'goto-line)
+(global-set-key "\C-x9i"   'auto-fill-mode)
 
 ;;{{{ insert-log-timestamp
 
@@ -311,20 +311,9 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9l"    'insert-log-timestamp)
+(global-set-key "\C-x9l"   'insert-log-timestamp)
 
-;;{{{ set-cperl-indent-level
-
-(defvar cperl-indent-level)
-(defun set-cperl-indent-level (width)
-  "Sets the cperl-indent-level variable to the given argument."
-  (interactive "NNew cperl-indent-level: ")
-  (setq cperl-indent-level width))
-
-;;}}}
-(global-set-key "\C-x9p"    'set-cperl-indent-level)
-
-(global-set-key "\C-x9r"    'toggle-read-only)
+(global-set-key "\C-x9r"   'toggle-read-only)
 
 ;;{{{ toggle-truncate-lines
 
@@ -337,9 +326,9 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9t"    'toggle-truncate-lines)
+(global-set-key "\C-x9t"   'toggle-truncate-lines)
 
-(global-set-key "\C-x9v"    'set-variable)
+(global-set-key "\C-x9v"   'set-variable)
 
 ;;{{{ set-tab-width
 
@@ -349,9 +338,9 @@ a prefix argument."
   (setq tab-width width))
 
 ;;}}}
-(global-set-key "\C-x9w"    'set-tab-width)
+(global-set-key "\C-x9w"   'set-tab-width)
 
-(global-set-key "\C-x9z"    'suspend-emacs)
+(global-set-key "\C-x9z"   'suspend-emacs)
 
 ;;}}}
 ;;{{{ Auto-text
@@ -426,15 +415,6 @@ a prefix argument."
                             "Inserts Adam's name and e-mail address"
                             (interactive)
                             (insert "Adam Spiers <adam@spiers.net>"))))
-
-;;}}}
-
-;;{{{ Perl macros
-
-(fset 'cperl-make-method
-   "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-o\C-a\C-o\C-i")
-
-(global-set-key "\C-x\C-zpm" 'cperl-make-method)
 
 ;;}}}
 
@@ -692,23 +672,51 @@ a prefix argument."
 (setq cperl-font-lock t)
 
 ;;}}}
-;;{{{ Change some local key mappings
+;;{{{ Local key bindings
+
+;;{{{ as-cperl-set-indent-level
+
+(defvar cperl-indent-level)
+(defun as-cperl-set-indent-level (width)
+  "Sets the cperl-indent-level variable to the given argument."
+  (interactive "NNew cperl-indent-level: ")
+  (setq cperl-indent-level width))
+
+;;}}}
+;;{{{ as-cperl-insert-self-line
+
+(defun as-cperl-insert-self-line ()
+  "Inserts a
+
+  my $self = shift;
+
+line before the current line."
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (cperl-indent-command)
+    (insert "my $self = shift;")))
+
+;;}}}
+;;{{{ as-cperl-make-method
+
+(fset 'as-cperl-make-method
+      "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-o\C-a\C-o\C-i")
+
+;;}}}
 
 (add-hook 'cperl-mode-hook 
-          (function 
+          (function
            (lambda ()
-             (local-set-key "\C-xpr" 'cperl-find-pods-heres)
+             (local-set-key "\C-cm" 'as-cperl-make-method)
+             (local-set-key "\C-cp" 'cperl-find-pods-heres)
+             (local-set-key "\C-ci" 'as-cperl-set-indent-level)
+             (local-set-key "\C-cs" 'as-cperl-insert-self-line)
              (local-set-key [(backspace)] 'cperl-electric-backspace)
-
-;;           What the hell is this one??
-;;           (local-set-key [(delete)] 'backward-or-forward-delete-char)
-
-;;              (local-set-key "(" 'self-insert-command)
-;;              (local-set-key "<" 'self-insert-command)
-;;              (local-set-key "[" 'self-insert-command)
              (local-set-key [(control c) (control h) (control j)] 'imenu)
              (setq indent-tabs-mode nil)
-)))
+             )))
 
 ;;}}}
 ;;{{{ Set faces
