@@ -1,6 +1,5 @@
 pcl-cvs wishlist, sorted by decreasing priority
 
-- fix handing of MESSAGE and DIRCHANGE
 - rebind q from cvs-bury-buffer to delete-window
 - bind ^ (or maybe .) go up a directory (u and U are already taken)
 - add prefix (bind to L) for toggling recursion
