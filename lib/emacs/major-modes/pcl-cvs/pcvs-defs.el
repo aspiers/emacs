@@ -264,7 +264,10 @@ Output from cvs is placed here for asynchronous commands.")
 (defcustom cvs-use-fileinfo-caches nil
   "Non-nil means cache a buffer's fileinfos when it's killed, so that
 `cvs-quickdir' can retrieve them from the cache rather than from CVS/Entries
-when populating a new buffer."
+when populating a new buffer.
+
+If you enable this, it is recommended that you add the value of
+`cvs-cache-filename' to your global .cvsignore file."
   :group 'pcl-cvs
   :type '(boolean))
 
