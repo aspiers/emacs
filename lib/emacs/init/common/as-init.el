@@ -686,8 +686,9 @@ to the beginning of the buffer name."
 ;; symbol filename is set to the loading file so we can use that
 ;; instead.
 
-;; This screws things up badly! :
-;; (defvar filename nil "sod knows")
+;; Try to silence compile errors (I know what I'm doing, honest)
+(if (not (boundp 'filename))
+    (defvar filename nil "sod knows"))
 
 (add-hook 'text-mode-hook
           (lambda ()
@@ -751,26 +752,6 @@ to the beginning of the buffer name."
 (autoload 'sdf-mode "sdf-mode" "mode for editing SDF files" t)
 
 ;;}}}
-;;{{{ po
-
-;;{{{ Autoload
-
-(autoload 'po-mode "po-mode")
-
-;;}}}
-;;{{{ Autoload the international fonts where necessary
-
-;; ... I think.  RTF info page, dude.
-
-(autoload 'po-find-file-coding-system "po-mode")
-
-(if (not running-xemacs)
-    (modify-coding-system-alist 'file "\\.po[tx]?\\'\\|\\.po\\."
-                                'po-find-file-coding-system))
-
-;;}}}
-
-;;}}}
 ;;{{{ mutt
 
 (autoload 'mutt-mode "mutt" "mode for editing mutt files")
@@ -779,6 +760,11 @@ to the beginning of the buffer name."
 
 ;; Minor modes
 
+;;{{{ vc
+
+(if running-xemacs (load-library "vc"))
+
+;;}}}
 ;;{{{ iswitchb - better buffer switching
 
 (iswitchb-default-keybindings)
@@ -854,7 +840,8 @@ to the beginning of the buffer name."
 
 ;; Turn it on
 
-(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
+;; Do this via customisation since it's different for xemacs
+;;(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
 
 ;; This one probably a waste of time
 (font-lock-mode-if-window-system)
