@@ -1,3 +1,4 @@
 #!/bin/sh
 
-exec make -C ~/lib/emacs "$@"
+exec gmake -C ~/lib/emacs "$@"
+#exec ~/lib/emacs/compile "$@"
