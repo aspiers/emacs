@@ -495,6 +495,7 @@ that name."
                 ("\\.typ\\'"                             . gtypist-mode)
                 ("/.zsh/functions/"                      . sh-mode)
                 ("\\.spec$"                              . rpm-spec-mode)
+                ("\\.make$"                              . makefile-mode)
                 )
               auto-mode-alist))
 
