@@ -33,6 +33,18 @@
 )
 
 ;;}}}
+;;{{{ as-insert-local-mode
+
+(defun as-insert-local-mode
+  ()
+  "Inserts an emacs local variables line which will set the local major mode."
+  (interactive)
+  (beginning-of-buffer)
+  (insert "# -*- mode:  -*-\n\n")
+  (backward-char 6)
+)
+
+;;}}}
 
 ;;{{{ Signatures
 

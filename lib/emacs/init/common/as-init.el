@@ -293,6 +293,9 @@ that name."
 (autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
 (global-set-key "\C-cie" 'as-insert-email-address)
 
+(autoload 'as-insert-local-mode "as-autotext" "Insert emacs local mode setting" t)
+(global-set-key "\C-cim" 'as-insert-local-mode)
+
 (autoload 'as-insert-email-address "as-autotext" "Insert work email address" t)
 (global-set-key "\C-ciw" 'as-insert-work-email-address)
 
@@ -309,7 +312,7 @@ that name."
 (global-set-key "\C-cil" 'as-insert-log-timestamp)
 
 (autoload 'as-insert-name-and-email "as-autotext" "Insert name and email" t)
-(global-set-key "\C-cim" 'as-insert-name-and-email)
+(global-set-key "\C-ciM" 'as-insert-name-and-email)
 
 (autoload 'as-insert-name "as-autotext" "Insert name" t)
 (global-set-key "\C-cin" 'as-insert-name)
@@ -484,6 +487,7 @@ that name."
                 ("\\.mod$"                               . dtd-mode)
                 ("\\.dump$"                              . tar-mode)
                 ("\\.typ\\'"                             . gtypist-mode)
+                ("/.zsh/functions/"                      . sh-mode)
                 )
               auto-mode-alist))
 
