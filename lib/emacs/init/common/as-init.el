@@ -685,6 +685,7 @@ a prefix argument."
 ;;}}}
 ;;{{{ as-cperl-insert-self-line
 
+(defun cperl-indent-command (&optional whole-exp))
 (defun as-cperl-insert-self-line ()
   "Inserts a
 
@@ -814,6 +815,8 @@ line before the current line."
 (defvar mmm-mode-ext-classes-alist)
 (setq mmm-mode-ext-classes-alist
       '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+
+(defun mmm-add-mode-ext-class (a b c))
 (mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
 (autoload 'mmm-mode "mmm-auto" "mmm mode" t)
 
