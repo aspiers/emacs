@@ -385,7 +385,7 @@ This variable is buffer local and only used in the *cvs* buffer.")
     ("t" .	cvs-mode-tag)
     ("v" .      cvs-mode-examine-directory)
     ("^" .      cvs-mode-examine-parent-directory)
-    ("." .      cvs-mode-examine-parent-directory)
+    ("." .      cvs-mode-up-level)
     ;;("v" .	cvs-mode-diff-vendor)
     ("x" .	cvs-mode-remove-handled)
     ;; cvstree bindings
