@@ -1189,6 +1189,18 @@ Can be optionally given a numeric prefix which
 (autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
+;;{{{ bs-show
+
+(add-hook 'bs-mode-hook
+          (function (lambda ()
+                      (local-set-key "\M->"
+                                     (function (lambda ()
+                                                 (interactive)
+                                                 (end-of-buffer)
+                                                 (beginning-of-line)))))))
+
+;;}}}
+
 
 ;;}}}
 ;;{{{ Minor modes
