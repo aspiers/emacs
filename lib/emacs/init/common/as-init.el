@@ -866,6 +866,7 @@ to the beginning of the buffer name."
 (setq font-lock-support-mode 'lazy-lock-mode)
 
 ;; Turn it on
+(global-font-lock-mode 1)
 
 ;; Do this via customisation since it's different for xemacs
 ;;(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
