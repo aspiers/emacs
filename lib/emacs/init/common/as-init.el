@@ -241,7 +241,7 @@
 ;;{{{ Perl macros
 
 (fset 'cperl-make-method
-   "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-a\C-o\C-i")
+   "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-o\C-a\C-o\C-i")
 
 (global-set-key "\C-x\C-zpm" 'cperl-make-method)
 
