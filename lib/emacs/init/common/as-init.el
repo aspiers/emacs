@@ -1068,6 +1068,11 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
+;;{{{ Visible whitespace mode
+
+(autoload 'visible-whitespace-mode "visws" "Visible whitespace mode" t)
+
+;;}}}
 
 ;;}}}
 
