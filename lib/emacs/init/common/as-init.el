@@ -515,6 +515,11 @@ a prefix argument."
 (setq-default visible-bell t)
 
 ;;}}}
+;;{{{ Saving sessions
+
+(autoload 'desktop-save "desktop" "Saves desktop session state." t)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
