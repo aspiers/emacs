@@ -788,7 +788,7 @@ a prefix argument."
 (defvar mmm-mode-ext-classes-alist)
 (setq mmm-mode-ext-classes-alist
       '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
-
+(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
 (autoload 'mmm-mode "mmm-auto" "mmm mode" t)
 
 ;;}}}
