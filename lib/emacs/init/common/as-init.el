@@ -397,16 +397,39 @@ If a find-file is performed on a filename which matches one of these
 regexps, the buffer name is renamed to the corresponding entry in this
 alist.")
 
-(add-hook 'find-file-hooks 
-          (function (lambda ()
-                      (catch 'endloop
-                        (mapcar
-                         (lambda (x)
-                           (if (string-match (car x) (buffer-file-name))
-                               (progn
-                                 (rename-buffer (cdr x) t)
-                                 (throw 'endloop t))))
-                         as-buffer-renamings-alist)))))
+(defun as-buffer-rename-via-alist ()
+  "Function to rename a buffer by looking it up in an alist of matches.
+See the documentation for `as-buffer-renamings-alist'."
+  (catch 'endloop
+    (mapcar
+     (lambda (x)
+       (if (string-match (car x) (buffer-file-name))
+           (progn
+             (rename-buffer
+              (replace-match (cdr x) t nil (buffer-file-name) nil)
+              t)
+             (throw 'endloop t))))
+     as-buffer-renamings-alist)))
+
+(defun as-containing-dir (filename)
+  "Function which returns the containing directory of a filename when
+given the full path."
+  (string-match "\\([^/]+\\)/[^/]+$" filename)
+  (match-string 1 filename))
+
+(defun as-last-dir-and-filename (filename)
+  "Function which strips a full path of all of its directory components
+   but the last."
+  (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
+  (replace-match "" t t (buffer-file-name) 1))
+
+(defun as-buffer-rename-add-one-dir ()
+  "Function to add the name of the containing directory of the buffer's file
+to the beginning of the buffer name."
+  (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
+
+;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
+(add-hook 'find-file-hooks 'as-buffer-rename-via-alist)
 
 ;;}}}
 
