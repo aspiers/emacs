@@ -453,7 +453,7 @@ If commit was succesful, TOC will be automatically reloaded."
 			(setq discname (pjb--get-album-name info))))
 		  (if (and (stringp artist)
 			   pjb-artist-in-discname)
-		      (insert "    Disc: " discname " (" artist ")\n")
+		      (insert "    Disc: " artist ": " discname "\n")
 		    (insert "    Disc: " discname "\n"))))
 	    (pjb--insert-new-track (car entries))
 	    (setq count (+ count 1))))
