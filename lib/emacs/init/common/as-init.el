@@ -22,7 +22,7 @@
 
 ;;{{{ Buffers/files
 
-;;{{{ Obselete functions, may come in handy another time
+;;{{{ Obsolete functions, may come in handy another time
 
 ;; (defun as-containing-dir (filename)
 ;;   "Return the containing directory of a filename when given the full path."
@@ -459,7 +459,7 @@ that name."
 (setq user-mail-address "adam@spiers.net")
 
 ;;}}}
-;;{{{ Minibuffer (GNU Emacs 21 obseletes resize-minibuffer-mode)
+;;{{{ Minibuffer (GNU Emacs 21 obsoletes resize-minibuffer-mode)
 
 (cond ((or running-xemacs (<= emacs-major-version 20))
        (resize-minibuffer-mode)
