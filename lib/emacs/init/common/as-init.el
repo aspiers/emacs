@@ -688,7 +688,7 @@ to the beginning of the buffer name."
 
 ;; Try to silence compile errors (I know what I'm doing, honest)
 (if (not (boundp 'filename))
-    (defvar filename nil "sod knows"))
+    (defvar filename "" "sod knows"))
 
 (add-hook 'text-mode-hook
           (lambda ()
@@ -831,7 +831,9 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Transient Mark mode
 
-(if (eq running-xemacs t) t (transient-mark-mode 1))
+(if (not (functionp 'transient-mark-mode))
+    (defun transient-mark-mode (arg1) nil))
+(if (not running-xemacs) (transient-mark-mode 1))
 
 ;;}}}
 ;;{{{ Font-Lock mode
