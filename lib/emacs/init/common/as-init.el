@@ -897,6 +897,14 @@ that name."
 (and window-system (load "recentf" 'noerror))
 
 ;;}}}
+;;{{{ no toolbar
+
+(and window-system
+     (not running-xemacs)
+     (>= emacs-major-version 21)
+     (tool-bar-mode -1))
+
+;;}}}
 
 ;;}}}
 
