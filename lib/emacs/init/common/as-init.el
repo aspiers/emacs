@@ -473,6 +473,7 @@ to the beginning of the buffer name."
                '(".ly\\'"                     . lilypond-mode)
                '("\\.\\(mason\\|m[cd]\\)\\'"  . html-mode)
                '("\\(auto\\|d\\)handler\\'"   . html-mode)
+               '("\\.css\\'"                  . css-mode)
                )
               auto-mode-alist))
 
