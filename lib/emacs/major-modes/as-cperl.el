@@ -122,6 +122,7 @@ line before the current line."
 ;;}}}
 ;;{{{ as-cperl-make-method-and-pod
 
+(eval-when-compile (require 'cperl-mode))
 (defun as-cperl-make-method-and-pod (method)
   "Makes a new Perl method with an accompanying pod stub."
   (interactive "sMethod name: ")
@@ -166,6 +167,23 @@ Can be optionally given a numeric prefix which
 (fset 'as-cperl-insert-self-method-call "$self->")
 
 ;;}}}
+;;{{{ as-cperl-insert-pkg-template
+
+(defun as-cperl-insert-pkg-template (pkg)
+  (interactive "sPackage name: ")
+  (beginning-of-buffer)
+  (insert "package " pkg ";
+
+use strict;
+use warnings;
+
+
+
+1;
+")
+  (forward-line -3))
+
+;;}}}
 
 (defun as-cperl-setup ()
   "Set up cperl-mode the way Adam likes it."
@@ -177,6 +195,7 @@ Can be optionally given a numeric prefix which
   (local-set-key "\C-cmm"      'as-cperl-make-method)
   (local-set-key "\C-cmM"      'as-cperl-make-method-and-pod)
   (local-set-key "\C-cmp"      'cperl-find-pods-heres)
+  (local-set-key "\C-cmP"      'as-cperl-insert-pkg-template)
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
   (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
