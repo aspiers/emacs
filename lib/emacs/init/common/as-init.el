@@ -174,6 +174,12 @@ a prefix argument."
   (join-line 1))
 
 ;;}}}
+;;{{{ as-copy-previous-line-suffix
+
+(fset 'as-copy-previous-line-suffix
+   [?\C-p ?\C-  ?\C-e ?\M-w ?\C-n ?\C-u ?\C-y])
+
+;;}}}
 
 ;;}}}
 ;;{{{ Appearance
@@ -445,6 +451,7 @@ a prefix argument."
 (global-set-key [(f2)] 'as-bounce-buffer)
 (global-set-key [(f3)] 'as-display-buffer-filename)
 (global-set-key [(f4)] 'as-duplicate-line)
+(global-set-key [(f6)] 'as-copy-previous-line-suffix)
 
 (global-set-key [(insert)] 'overwrite-mode)
 (global-set-key [(meta o)] 'overwrite-mode)
