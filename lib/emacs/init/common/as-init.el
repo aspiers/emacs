@@ -413,8 +413,6 @@ alist.")
 ;;}}}
 ;;{{{ Mode-related settings
 
-;; Major modes
-
 ;;{{{ Startup mode selection
 
 ;;{{{ Mode selection based on filename
@@ -447,11 +445,6 @@ alist.")
 ;;{{{ Default major mode
 
 (setq default-major-mode 'indented-text-mode)
-
-;;}}}
-;;{{{ Load mutt mode
-
-(load "mutt" t)
 
 ;;}}}
 
@@ -730,7 +723,6 @@ alist.")
 (autoload 'lilypond-mode "lilypond" "mode for editing lilypond files" t)
 
 ;;}}}
-
 ;;{{{ SDF
 
 (autoload 'sdf-mode "sdf-mode" "mode for editing SDF files" t)
@@ -743,7 +735,6 @@ alist.")
 (autoload 'po-mode "po-mode")
 
 ;;}}}
-
 ;;{{{ Autoload the international fonts where necessary
 
 ;; ... I think.  RTF info page, dude.
@@ -755,9 +746,19 @@ alist.")
 ;;}}}
 
 ;;}}}
+;;{{{ mutt
+
+(autoload 'mutt-mode "mutt" "mode for editing mutt files")
+
+;;}}}
 
 ;; Minor modes
 
+;;{{{ iswitchb - better buffer switching
+
+(iswitchb-default-keybindings)
+
+;;}}}
 ;;{{{ Folding mode
 
 ;;{{{ Key bindings
@@ -870,5 +871,7 @@ alist.")
 (add-hook 'emacs-lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
 (add-hook 'text-mode-hook (function (lambda () (setq comment-start "> "))))
 (add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
+
+;;}}}
 
 ;;}}}
