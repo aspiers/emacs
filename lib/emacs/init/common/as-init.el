@@ -690,7 +690,7 @@ that name."
                       (auto-fill-mode -1)
 ;;                    (setq truncate-lines t)
                       )))
-(setq tempo-interactive t)
+(defvar tempo-interactive t)
 
 ;;}}}
 ;;{{{ Apache
