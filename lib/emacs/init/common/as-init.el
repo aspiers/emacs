@@ -274,6 +274,7 @@ that name."
 (global-set-key "\C-cd"   'as-duplicate-line)
 (global-set-key "\C-ce"   'cvs-examine)
 (global-set-key "\C-cf"   'auto-fill-mode)
+(global-set-key "\C-cF"   'font-lock-fontify-buffer)
 
 ;;{{{ Auto-text (C-c i)
 
