@@ -8,6 +8,7 @@
  '(show-paren-mode t nil (paren))
  '(font-lock-support-mode (quote lazy-lock-mode))
  '(mouse-yank-at-point t)
+ '(diff-switches "-u" t)
  '(lazy-lock-defer-time 0.5)
  '(lazy-lock-stealth-verbose t)
  '(show-paren-ring-bell-on-mismatch nil)
