@@ -239,6 +239,7 @@ in all the directories in that path."
 (global-set-key [(f2)]		'emacs-Info)
 (global-set-key [(f4)]		'duplicate-line)
 (global-set-key [(insert)]	'overwrite-mode)
+(global-set-key [(meta o)]	'overwrite-mode)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers
 ;; so that the point automatically gets put in the
@@ -367,7 +368,7 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ IntelliMouse
 
-;;(load "mwheel" t)
+(load "mwheel" t)
 
 ;;}}}
 
@@ -397,6 +398,7 @@ in all the directories in that path."
 		       '("\\.sdf\\'" . sdf-mode)
 ;;		       '("\\.info\\(\\.gz\\)?\\'" . info)
 		       '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
+		       '(".sawmillrc\\'\\|/sawmill/" . sawmill-mode)
 		       )
 			      auto-mode-alist))
 
@@ -675,6 +677,12 @@ in all the directories in that path."
 (setq Man-notify-method 'pushy)
 
 ;;}}}
+;;{{{ sawmill
+
+(autoload 'sawmill-mode "sawmill" "mode for editing sawmill rep (lisp) files" t)
+
+;;}}}
+
 ;;{{{ SDF
 
 (autoload 'sdf-mode "sdf-mode" "mode for editing SDF files" t)

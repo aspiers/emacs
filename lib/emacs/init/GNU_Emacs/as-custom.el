@@ -8,6 +8,7 @@
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-minimum-size 4096)
  '(show-paren-mode t nil (paren))
+ '(cperl-electric-keywords t)
  '(font-lock-support-mode (quote lazy-lock-mode))
  '(mouse-yank-at-point t)
  '(cperl-invalid-face (quote (quote default)))
