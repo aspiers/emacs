@@ -584,8 +584,6 @@ a prefix argument."
 
 ;;{{{ Auto-fill
 
-;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
 ;; Turn on auto-fill if composing e-mail or news.
 ;;
 ;; For some reason the local buffer-file-name isn't set at the
@@ -595,8 +593,7 @@ a prefix argument."
 ;; instead.
 
 ;; Try to silence compile errors (I know what I'm doing, honest)
-(if (not (boundp 'filename))
-    (defvar filename "" "sod knows"))
+(or (boundp 'filename) (defvar filename "" "sod knows"))
 
 (add-hook 'text-mode-hook
           (lambda ()
