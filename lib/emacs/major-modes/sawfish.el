@@ -21,7 +21,9 @@
 ;;
 ;; Jan Vroonhof for his invaluable pointers regarding XEmacs.
 ;;
-;; Hubert Selhofer for the code to syntax highlight "#||#" comments.
+;; Hubert Selhofer for the code to syntax highlight "#||#" comments and for
+;; the GNU emacs font-lock code to provide support for various rep and
+;; sawfish "keywords".
 
 ;;; BUGS:
 ;;
@@ -29,17 +31,13 @@
 ;;
 ;; o I can't figure out how to delete a menu in GNU emacs.
 
-;;; TODO:
-;;
-;; o Syntax highlighting for extra librep/sawfish "keywords".
-
 ;;; INSTALLATION:
 ;;
 ;; o Drop sawfish.el somwehere into your `load-path'. Try your site-lisp
 ;;   directory for example (you might also want to byte-compile the file).
 ;;
 ;; o Add autoloads for the various sawfish functions to ~/.emacs. At the
-;;   very last you want to do something like:
+;;   very least you want to do something like:
 ;;
 ;;   (autoload 'sawfish-mode "sawfish" "sawfish-mode" t)
 ;;
@@ -57,6 +55,7 @@
   (require 'info))
 (require 'thingatpt)
 (require 'font-lock)
+(require 'regexp-opt)
 (require 'pp)
 (require 'easymenu)
 (require 'inf-lisp)
@@ -166,6 +165,22 @@ This is a list of lists. Each entry in the list is of the format:
   :type  'regexp
   :group 'sawfish)
 
+(defcustom sawfish-extra-keyword-list
+  '("add-frame-style" "call-after-load" "call-after-property-changed" 
+    "call-after-state-changed" "custom-set-property")
+  "List of extra keywords for Sawfish used in highlighting.
+Highlight these expressions with `font-lock-keyword-face'."
+  :group 'sawfish
+  :type '(repeat (string :tag "Keyword: ")))
+
+(defcustom sawfish-warning-keyword-list 
+  '("fixme" "FIXME" "Fixme" "fix me" "Fix me" "!!!" "Grrr" "Bummer")
+  "List of keywords for Sawfish used in highlighting.
+Highlight these expressions with `font-lock-warning-face' even if
+already fontified."
+  :group 'sawfish
+  :type '(repeat (string :tag "Keyword: ")))
+
 ;; Non customising variables.
 
 (defvar sawfish-function-list nil
@@ -210,8 +225,54 @@ This is a list of lists. Each entry in the list is of the format:
       "Symbol"))
   "Closure to pass to sawfish-client that will describe a symbol's binding.")
 
-;; Main code:
+;; Constants.
 
+(defconst sawfish-defines-regexp
+    (concat "(\\("
+            (regexp-opt 
+             ;; A cute way to obtain the list below
+             ;; (mapcar #'symbol-name (sawfish-code (apropos "^define")))
+             (list 
+              "define" "define-command-args" "define-command-to-screen"
+              "define-custom-deserializer" "define-custom-serializer"
+              "define-custom-setter" "define-datum-printer"
+              "define-file-handler" "define-focus-mode"
+              "define-frame-class" "define-frame-type-mapper"
+              "define-interface" "define-linear-viewport-commands"
+              "define-match-window-formatter"
+              "define-match-window-group" "define-match-window-property"
+              "define-match-window-setter" "define-parse"
+              "define-placement-mode" "define-scan-body"
+              "define-scan-form" "define-scan-internals"
+              "define-structure" "define-value"
+              "define-window-animator"))
+            "\\)\\>[ \t'(]*\\(\\sw+\\)?")
+  "List of define-structures known by Sawfish.")
+
+(defconst sawfish-additional-keywords
+    (append lisp-font-lock-keywords-2
+            (list 
+             ;; highlight define-* 
+             (list
+              sawfish-defines-regexp
+              '(1 font-lock-keyword-face)
+              `(,(regexp-opt-depth sawfish-defines-regexp)
+                font-lock-variable-name-face nil t))
+             ;; extra keywords
+             (if sawfish-extra-keyword-list
+                 (list (concat "\\<" 
+                               `,(regexp-opt sawfish-extra-keyword-list) 
+                               "\\>")
+                       '(0 font-lock-keyword-face)))
+             ;; highlight warnings
+             (if sawfish-warning-keyword-list
+                 (list (concat "\\<" 
+                               `,(regexp-opt sawfish-warning-keyword-list) 
+                               "\\>")
+                       '(0 font-lock-warning-face prepend)))))
+  "Some additonal keywords to highlight in `sawfish-mode'.")
+
+;; Main code:
 (define-derived-mode sawfish-mode emacs-lisp-mode "Sawfish"
   "Major mode for editing sawfish files and for interacting with sawfish.
 
@@ -223,13 +284,19 @@ Special commands:
   ;; need to drag those settings down to us in different ways (hmm)....
   (if (boundp 'running-xemacs)
       ;; XEmacs appears to do something like this...
-      (put 'sawfish-mode 'font-lock-defaults (get 'emacs-lisp-mode 'font-lock-defaults))
+      (put 'sawfish-mode 'font-lock-defaults 
+           (get 'emacs-lisp-mode 'font-lock-defaults))
     ;; ...with GNU Emacs we need to pull it from `font-lock-defaults-alist'.
     (unless font-lock-defaults
-      ;; If `font-lock-defaults-alist' is bound...
-      (when (boundp 'font-lock-defaults-alist)
-        (set (make-local-variable 'font-lock-defaults)
-             (cdr (assoc 'emacs-lisp-mode font-lock-defaults-alist))))))
+      (set (make-local-variable 'font-lock-defaults)
+           (cdr (assoc 'emacs-lisp-mode font-lock-defaults-alist)))
+      ;; Add the additional font-lock pattern to `font-lock-defaults'
+      ;; only once
+      (unless (memq 'sawfish-additional-keywords (car font-lock-defaults))
+        (setq font-lock-defaults (copy-alist font-lock-defaults))
+        (setcar font-lock-defaults 
+                (append (car font-lock-defaults) 
+                        '(sawfish-additional-keywords))))))
   ;; Menu stuff.
   (if (boundp 'running-xemacs)
       ;; XEmacs.
@@ -437,7 +504,9 @@ set by the variable `sawfish-result-buffer'"
 
 (defun sawfish-documentation (symbol &optional is-variable)
   "Get the documentation for SYMBOL."
-  (sawfish-eval-read `(documentation (quote ,symbol) ,is-variable)))
+  (sawfish-eval-read `(progn
+                       (require (quote lisp-doc))
+                       (documentation (quote ,symbol) ,is-variable))))
 
 (defun sawfish-funcall-at-point ()
   "Try and work out the function being called at or near `point'."
@@ -567,7 +636,7 @@ Returns NIL if the documentation could not be found. Note that the
       (with-output-to-string nil
         (princ (with-current-buffer info-buffer
                  (buffer-substring-no-properties
-                  (+ (point) 3)             ; Strip the leading " - ".
+                  (+ (point) 3)         ; Strip the leading " - ".
                   (save-excursion
                     (end-of-line)
                     (point)))))
@@ -711,13 +780,15 @@ returned."
   "Show all bound sawfish symbols whose names match REGEXP."
   (interactive "sSawfish Apropos (regexp): ")
   (let ((hits (sort (sawfish-eval-read
-                     `(mapcar
-                       (lambda (s)
-                         (list s
-                               (,sawfish-describe-symbol s)
-                               (,sawfish-variable-p s)
-                               (documentation s (,sawfish-variable-p s))))
-                       (apropos ,regexp)))
+                     `(progn
+                       (require (quote lisp-doc))
+                       (mapcar
+                        (lambda (s)
+                          (list s
+                                (,sawfish-describe-symbol s)
+                                (,sawfish-variable-p s)
+                                (documentation s (,sawfish-variable-p s))))
+                        (apropos ,regexp))))
                     (lambda (symX symY)
                       (string< (sawfish-apropos-symbol-name symX)
                                (sawfish-apropos-symbol-name symY))))))
@@ -812,6 +883,9 @@ returned."
   (setq sawfish-interaction-mode-map (make-sparse-keymap))
   (set-keymap-parent sawfish-interaction-mode-map sawfish-mode-map)
   (define-key sawfish-interaction-mode-map [(control j)] #'sawfish-eval-print-last-sexp))
+
+;; Indentation hints for macros and functions provided by sawfish.el
+(put 'sawfish-code 'lisp-indent-function 0)
 
 ;;; Menus
 
