@@ -5,6 +5,7 @@ EMACSLIB=$(HOME)/lib/emacs
 loadpaths=$(EMACSLIB)/minor-modes \
           $(EMACSLIB)/major-modes/mmm \
           $(EMACSLIB)/major-modes/tdtd \
+          $(EMACSLIB)/major-modes/pcl-cvs \
           $(EMACSLIB)/major-modes
 gnuinstalldir=$(EMACSLIB)/GNU_Emacs
 xinstalldir=$(EMACSLIB)/XEmacs
