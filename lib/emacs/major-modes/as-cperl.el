@@ -144,7 +144,7 @@ Can be optionally given a numeric prefix which
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
   (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
-  (local-set-key [(f7)]        'as-cperl-insert-unique-warning)
+  (local-set-key [(f10)]        'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
   (setq indent-tabs-mode nil)
   (make-variable-buffer-local 'cperl-indent-level)
