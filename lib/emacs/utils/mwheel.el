@@ -63,22 +63,20 @@ This can be slightly disconcerting, but some people may prefer it."
   :group 'mouse
   :type 'boolean)
 
-(if (not (fboundp 'event-button))
-    (defun mwheel-event-button (event)
-      (let ((x (symbol-name (event-basic-type event))))
-	(if (not (string-match "^mouse-\\([0-9]+\\)" x))
-	    (error "Not a button event: %S" event))
-	(string-to-int (substring x (match-beginning 1) (match-end 1)))))
-  (fset 'mwheel-event-button 'event-button))
+(eval-and-compile
+  (if (not (fboundp 'event-button))
+      (defun mwheel-event-button (event)
+        (let ((x (symbol-name (event-basic-type event))))
+          (if (not (string-match "^mouse-\\([0-9]+\\)" x))
+              (error "Not a button event: %S" event))
+          (string-to-int (substring x (match-beginning 1) (match-end 1)))))
+    (fset 'mwheel-event-button 'event-button)))
 
 (eval-and-compile
   (if (not (fboundp 'event-window))
       (defun mwheel-event-window (event)
         (posn-window (event-start event)))
     (fset 'mwheel-event-window 'event-window)))
-
-(eval-when-compile
-  (defun mwheel-event-button (e)))
 
 (defun mwheel-scroll (event)
   (interactive "e")
@@ -94,7 +92,8 @@ This can be slightly disconcerting, but some people may prefer it."
     (case (mwheel-event-button event)
       (4 (scroll-down amt))
       (5 (scroll-up amt))
-      (otherwise (error "Bad binding in mwheel-scroll")))
+      (otherwise (error (format "Bad binding in mwheel-scroll: %s"
+                                event))))
     (if curwin (select-window curwin))))
 
 (define-key global-map (if mwheel-running-xemacs 'button4 [mouse-4])
