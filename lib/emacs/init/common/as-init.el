@@ -506,7 +506,13 @@ a prefix argument."
 
 ;; But if bs-show is available, choose that cos it's much nicer.
 (and (functionp 'bs-show)
-     (global-set-key "\C-x\C-b" 'bs-show))
+     (global-set-key "\C-x\C-b" (function (lambda (arg)
+                                            (interactive "P")
+                                            (bs-show arg)
+                                            (let ((inhibit-read-only t))
+                                              (save-excursion
+                                                (end-of-buffer)
+                                                (insert "\n")))))))
 
 ;;}}}
 
@@ -1189,18 +1195,6 @@ Can be optionally given a numeric prefix which
 (autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
-;;{{{ bs-show
-
-(add-hook 'bs-mode-hook
-          (function (lambda ()
-                      (local-set-key "\M->"
-                                     (function (lambda ()
-                                                 (interactive)
-                                                 (end-of-buffer)
-                                                 (beginning-of-line)))))))
-
-;;}}}
-
 
 ;;}}}
 ;;{{{ Minor modes
