@@ -948,30 +948,6 @@ Can be optionally given a numeric prefix which
 ;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
-;;{{{ HTML
-
-(add-hook 'html-mode-hook 
-          (function (lambda ()
-                      (auto-fill-mode -1)
-;;                    (setq truncate-lines t)
-                      )))
-
-;;}}}
-;;{{{ MMM mode
-
-(defvar mmm-mode-ext-classes-alist)
-(defvar mmm-global-mode)
-(setq mmm-global-mode 'maybe)
-
-(defvar mmm-mode-ext-classes-alist)
-(setq mmm-mode-ext-classes-alist
-      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
-
-(defun mmm-add-mode-ext-class (a b c))
-(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
-(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
-
-;;}}}
 ;;{{{ DTD
 
 (autoload 'dtd-mode "tdtd" "Major mode for SGML and XML DTDs." t)
@@ -1016,17 +992,19 @@ Can be optionally given a numeric prefix which
 (make-face 'sgml-short-ref-face)
 (make-face 'sgml-start-tag-face)
 
-(set-face-foreground 'sgml-comment-face   "dark green")
-(set-face-foreground 'sgml-doctype-face   "dark red")
-(set-face-foreground 'sgml-start-tag-face "dark cyan")
-(set-face-foreground 'sgml-end-tag-face   "dark cyan")
-(set-face-foreground 'sgml-entity-face    "magenta")
-(set-face-foreground 'sgml-ignored-face   "gray40")
-(set-face-foreground 'sgml-ms-end-face    "green")
-(set-face-foreground 'sgml-ms-start-face  "yellow")
-(set-face-foreground 'sgml-pi-face        "dark blue")
-(set-face-foreground 'sgml-sgml-face      "brown")
-(set-face-foreground 'sgml-short-ref-face "deep sky blue")
+(add-hook 'sgml-mode-hook
+          (lambda ()
+            (set-face-foreground 'sgml-comment-face   "dark green")
+            (set-face-foreground 'sgml-doctype-face   "dark red")
+            (set-face-foreground 'sgml-start-tag-face "dark cyan")
+            (set-face-foreground 'sgml-end-tag-face   "dark cyan")
+            (set-face-foreground 'sgml-entity-face    "magenta")
+            (set-face-foreground 'sgml-ignored-face   "gray40")
+            (set-face-foreground 'sgml-ms-end-face    "green")
+            (set-face-foreground 'sgml-ms-start-face  "yellow")
+            (set-face-foreground 'sgml-pi-face        "dark blue")
+            (set-face-foreground 'sgml-sgml-face      "brown")
+            (set-face-foreground 'sgml-short-ref-face "deep sky blue")))
 
 (setq-default sgml-markup-faces
               '((CDATA      . font-lock-doc-face)
@@ -1074,6 +1052,33 @@ Can be optionally given a numeric prefix which
 ;;{{{ CSS
 
 (autoload 'css-mode "css-mode" "mode for editing CSS files")
+
+;;}}}
+;;{{{ MMM mode
+
+(defvar mmm-mode-ext-classes-alist)
+(defvar mmm-global-mode)
+(setq mmm-global-mode 'maybe)
+
+(defvar mmm-mode-ext-classes-alist)
+(setq mmm-mode-ext-classes-alist
+      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+
+(defun mmm-add-mode-ext-class (a b c))
+(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
+(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
+
+;;}}}
+;;{{{ HTML
+
+(defalias 'html-mode 'html-helper-mode)
+(autoload 'html-helper-mode "html-helper-mode")
+(add-hook 'html-mode-hook 
+          (function (lambda ()
+                      (auto-fill-mode -1)
+                      (mmm-mode)
+;;                    (setq truncate-lines t)
+                      )))
 
 ;;}}}
 ;;{{{ Apache
