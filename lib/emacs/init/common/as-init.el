@@ -541,6 +541,7 @@ a prefix argument."
 
 (setq auto-mode-alist
       (append '(
+                ("\\.rb\\'"                              . ruby-mode)
                 ("\\.\\(pod\\|t\\)\\'"                   . cperl-mode)
                 ("\\.prehtml\\'"                         . html-mode)
                 ("\\.php3\\'"                            . html-mode)
@@ -760,6 +761,11 @@ line before the current line."
 ;;     )))
 
 ;;}}}
+
+;;}}}
+;;{{{ Ruby
+
+(autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
 
 ;;}}}
 ;;{{{ Shell-script
