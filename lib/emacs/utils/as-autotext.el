@@ -89,10 +89,13 @@ the point."
   (if prefix (insert prefix))
   (insert "@adamspiers.org"))
 
+(defvar as-work-email-address "aspiers@lehman.com"
+  "Adam's work email address.")
+
 (defun as-insert-work-email-address ()
   "Inserts Adam's e-mail address"
   (interactive)
-  (insert "aspiers@lehman.com"))
+  (insert as-work-email-address))
 
 (defun as-insert-name ()
   "Inserts Adam's name"
@@ -107,5 +110,11 @@ the point."
   (cond (email (insert email "@adamspiers.org"))
         (t (as-insert-email-address)))
   (insert ">"))
+
+(defun as-insert-name-and-work-email ()
+  "Inserts Adam's name and work e-mail address"
+  (interactive)
+  (as-insert-name)
+  (insert " <" as-work-email-address ">"))
 
 ;;}}}
