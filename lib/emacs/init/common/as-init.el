@@ -383,7 +383,7 @@ in all the directories in that path."
 ;; Screen is aliased to ~/lib/screen which on entry aliases emacs to
 ;; emacsclient, and on exit unaliases it.
 
-;;(load-if-exists "server-x")
+;;(load "server-x" t)
 
 ;;(server-start)
 
