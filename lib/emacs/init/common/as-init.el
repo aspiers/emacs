@@ -202,6 +202,7 @@ that name."
 (global-set-key [(control meta y)] 'as-join-line-with-next)
 (global-set-key [(control x) (control y)] 'vim-yy)
 (global-set-key [(meta o)] 'overwrite-mode)
+(global-set-key [(control meta return)] 'repeat-complex-command)
 
 ;;}}}
 ;;{{{ TAB and family
