@@ -327,6 +327,7 @@ point somewhere *before* the if/unless/while/until/for/foreach modifier."
   (local-set-key "\C-cml"      'as-cperl-insert-pod-list)
   (local-set-key "\C-cmm"      'as-cperl-make-method)
   (local-set-key "\C-cmM"      'as-cperl-make-method-and-pod)
+  (local-set-key "\C-cmo"      'as-cperl-insert-check-syscall)
   (local-set-key "\C-cmp"      'cperl-find-pods-heres)
   (local-set-key "\C-cmP"      'as-cperl-insert-pkg-template)
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
