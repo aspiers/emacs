@@ -75,11 +75,12 @@ When Blinking Cursor mode is enabled, the cursor blinks when Emacs is idle."
          (cancel-function-timers 'blinking-cursor-start-blinking)
 	 (blinking-cursor-stop-blinking))
 	(t
-         (run-with-idle-timer 0.2 t 'blinking-cursor-start-blinking))))
+         (run-with-idle-timer 0 t 'blinking-cursor-start-blinking))))
 
 (defun blinking-cursor-start-blinking ()
   "Make the cursor start blinking."
   (add-hook 'pre-command-hook 'blinking-cursor-stop-blinking)
+  (setq blinking-cursor-tick 0)
   (blinking-cursor-blink))
 
 (defun blinking-cursor-stop-blinking ()
@@ -127,10 +128,11 @@ Internal variable, do not set this.")
   "Sets the blinking cursor color and shape in all frames."
   ;; there's probably a nicer, lispier way of doing this assignment
   (let ((color-name (car state))
-        (shape (cadr state)))        
-    (mapcar (lambda (frame)
-              (set-cursor-state frame color-name shape))
-            (frame-list))))
+        (shape (cadr state)))
+    (set-cursor-state (selected-frame) color-name shape)))
+;;      (mapcar (lambda (frame)
+;;                (set-cursor-state frame color-name shape))
+;;              (frame-list))))
 
 (defun set-cursor-state (frame color-name shape)
   "Sets the blinking cursor color and shape for the given frame."
