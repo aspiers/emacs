@@ -90,6 +90,8 @@ Modified by Adam Spiers <adam@spiers.net>"
     (shell-output-3-face ((t (:bold t :background "wheat" :foreground "dark goldenrod"))))
     (shell-output-face ((t (:bold t :background "wheat" :foreground "black"))))
     (shell-prompt-face ((t (:bold t :background "wheat" :foreground "dark orchid"))))
+    (show-paren-match-face ((t (:background "turquoise" :foreground "white"))))
+    (show-paren-mismatch-face ((t (:background "purple" :foreground "white"))))
     (text-cursor ((t (:bold t :background "red" :foreground "wheat"))))
     (toolbar ((t (:bold t :background "wheat" :foreground "black"))))
     (underline ((t (:underline t :bold t :background "wheat" :foreground "black"))))
