@@ -33,7 +33,7 @@
 (require 'timer)
 (require 'custom)
 
-(defconst blinking-cursor-version "1.01")
+(defconst blinking-cursor-version "1.02")
 
 (defgroup blinking-cursor nil
   "Group for customizing Blinking Cursor mode."
