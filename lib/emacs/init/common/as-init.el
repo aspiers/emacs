@@ -12,6 +12,9 @@
 ;;{{{ Compiler declarations
 
 (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs")
+(defun as-quick-startup nil
+  "Non-nil if the current emacs was required to start up quickly."
+  (getenv "QUICK_EMACS"))
 
 ;;}}}
 
@@ -508,9 +511,11 @@ a prefix argument."
 
 ;;{{{ Minibuffer
 
-(resize-minibuffer-mode)
-(setq resize-minibuffer-window-max-height 5 
-      resize-minibuffer-frame-max-height 5)
+;; GNU emacs 21 obseletes resize-minibuffer-mode
+(cond ((or running-xemacs (<= emacs-major-version 20))
+       (resize-minibuffer-mode)
+       (setq resize-minibuffer-window-max-height 5 
+             resize-minibuffer-frame-max-height 5)))
 
 ;;}}}
 ;;{{{ Apropos extension
@@ -549,23 +554,20 @@ a prefix argument."
 ;; Add in other modes
 
 (setq auto-mode-alist
-      (append (list
-               '("\\.\\(pod\\|t\\)\\'"        . cperl-mode)
-               '("\\.prehtml\\'"              . html-mode)
-               '("\\.php3\\'"                 . html-mode)
-               '("\\.sdf\\'"                  . sdf-mode)
-;;             '("\\.info\\(\\.gz\\)?\\'"     . info)
-               '("\\.po[tx]?\\'\\|\\.po\\."   . po-mode)
-               '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode)
-               '(".ly\\'"                     . lilypond-mode)
-               '("\\.\\(mason\\|m[cd]\\)\\'"  . html-mode)
-               '("\\(auto\\|d\\)handler\\'"   . html-mode)
-               '("\\.css\\'"                  . css-mode)
-               '("\\.htaccess$"               . apache-mode)
-               '("httpd\\.conf$"              . apache-mode)
-               '("srm\\.conf$"                . apache-mode)
-               '("access\\.conf$"             . apache-mode)
-               )
+      (append '(
+                ("\\.\\(pod\\|t\\)\\'"                   . cperl-mode)
+                ("\\.prehtml\\'"                         . html-mode)
+                ("\\.php3\\'"                            . html-mode)
+                ("\\.sdf\\'"                             . sdf-mode)
+                ("\\.po[tx]?\\'\\|\\.po\\."              . po-mode)
+                (".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode)
+                (".ly\\'"                                . lilypond-mode)
+                ("\\.\\(mason\\|m[cd]\\)\\'"             . html-mode)
+                ("\\(auto\\|d\\)handler\\'"              . html-mode)
+                ("\\.css\\'"                             . css-mode)
+                ("\\.htaccess$"                          . apache-mode)
+                ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
+                )
               auto-mode-alist))
 
 ;;}}}
@@ -929,8 +931,9 @@ a prefix argument."
 ;;{{{ Set marks for individual modes
 
 (autoload 'fold-add-to-marks-list "folding" "folding mode")
+
 (eval-after-load "folding"
-  (progn
+  '(progn
     (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
     (fold-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
     (fold-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
@@ -954,17 +957,11 @@ a prefix argument."
 (autoload 'folding-mode "folding" "folding mode")
 (autoload 'folding-mode-find-file "folding" "folding mode")
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
-
-(folding-mode-add-find-file-hook)
-
-;;(or (memq 'folding-mode-find-file find-file-hooks)
-;;    (add-hook 'find-file-hooks 'folding-mode-find-file 'end))
-
-;;}}}
-;;{{{ Set default marks
-
 (autoload 'fold-set-marks "folding" "folding mode")
-(fold-set-marks "{{{" "}}}")
+(cond ((as-quick-startup)
+       (defun lf () "Loads folding-mode." (interactive) (folding-mode)))
+      (t
+       (folding-mode-add-find-file-hook)))
 
 ;;}}}
 ;;{{{ Key bindings
@@ -1051,20 +1048,27 @@ a prefix argument."
 ;;}}}
 ;;{{{ Auto-compression mode
 
-(auto-compression-mode)
+(cond ((as-quick-startup)
+       (defun lac () "Load auto-compression-mode."
+         (interactive)
+         (auto-compression-mode)))
+      (t
+       (auto-compression-mode)))
 
 ;;}}}
 ;;{{{ blinking-cursor
 
 (defun blinking-cursor-mode (&optional arg))
-(cond 
- ((and (not running-xemacs) (load "blinking-cursor" t))
-  (blinking-cursor-mode 1)))
+(and window-system
+     (not running-xemacs)
+     (= emacs-major-version 20)
+     (load "blinking-cursor" t)
+     (blinking-cursor-mode 1))
 
 ;;}}}
 ;;{{{ recentf
 
-(load "recentf" 'noerror)
+(and window-system (load "recentf" 'noerror))
 
 ;;}}}
 
