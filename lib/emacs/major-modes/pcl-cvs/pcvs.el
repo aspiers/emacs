@@ -899,6 +899,17 @@ With a prefix argument, prompt for cvs FLAGS to use."
       default-directory
     (read-file-name msg nil default-directory nil)))
 
+(defun cvs-cache-buffer-fileinfos ()
+  "Cache the buffer of fileinfos representing a directory's CVS status
+into a file whose name is defined by `cvs-cache-filename'."
+  (when (eq major-mode 'cvs-mode)
+    (let ((cookies cvs-cookies))
+      (with-temp-file (expand-file-name cvs-cache-filename)
+        (prin1 (ewoc-map 'identity cookies) (current-buffer))))))
+
+(add-hook 'kill-buffer-hook 'cvs-cache-buffer-fileinfos)
+(add-hook 'kill-emacs-hook  'cvs-cache-buffer-fileinfos)
+
 ;;;###autoload
 (defun cvs-quickdir (dir &optional flags noshow)
   "Open a *cvs* buffer on DIR without running cvs.
@@ -920,14 +931,27 @@ FLAGS is ignored."
     (unless (file-directory-p (expand-file-name "CVS" dir))
       (error "%s does not contain CVS controlled files" dir))
     (set-buffer cvsbuf)
-    (dolist (fi (cvs-fileinfo-from-entries ""))
+    (dolist (fi (or (cvs-fileinfo-from-cache "")
+                    (cvs-fileinfo-from-entries "")))
       (setq last (cvs-addto-collection cvs-cookies fi last)))
     (cvs-cleanup-collection cvs-cookies
-			    (eq cvs-auto-remove-handled t)
-			    cvs-auto-remove-directories
-			    nil)
+                            (eq cvs-auto-remove-handled t)
+                            cvs-auto-remove-directories
+                            nil)
     (if noshow cvsbuf
       (let ((pop-up-windows nil)) (pop-to-buffer cvsbuf)))))
+
+(defun cvs-fileinfo-from-cache (dir)
+  "If caching is enabled and a cache file exists for the given
+directory DIR, reads fileinfos from it, and returns them.  Otherwise
+returns nil."
+  (and cvs-use-fileinfo-caches
+       (let ((cache (expand-file-name cvs-cache-filename dir)))
+         (file-readable-p cache)
+         (with-temp-buffer
+           (insert-file-contents cache)
+           (message (format "Reading fileinfos from cache %s" cache))
+           (read (buffer-substring 1 (point-max)))))))
 
 ;;;###autoload
 (defun cvs-examine (directory flags &optional noshow)
