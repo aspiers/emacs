@@ -110,7 +110,7 @@ array."
   (remove-hook 'pre-command-hook 'blinking-cursor-stop-blinking)
   (let ((color-name (nth 0 blinking-cursor-non-idle-state))
         (shape      (nth 1 blinking-cursor-non-idle-state)))
-    (set-cursor-state (selected-frame) color-name shape)))
+    (set-cursor-state color-name shape)))
 
 (defun blinking-cursor-blink (&rest ignored)
   "Changes the cursor color and shape, and sets a timer to do it again soon.
@@ -120,7 +120,7 @@ Uses colors, shapes, and timer durations from blinking-cursor-idle-states."
       (progn
         (let ((color-name (nth 0 (blinking-cursor-current-state)))
               (shape      (nth 1 (blinking-cursor-current-state))))
-          (set-cursor-state (selected-frame) color-name shape))
+          (set-cursor-state color-name shape))
         (blinking-cursor-tick-advance)
         (let ((timeout (blinking-cursor-next-timeout)))
           (run-with-timer timeout nil 'blinking-cursor-blink)))
@@ -146,11 +146,11 @@ Internal variable, do not set this.")
   "Returns how long in seconds the current cursor state lasts."
   (nth 2 (blinking-cursor-current-state)))
 
-(defun set-cursor-state (frame color-name shape)
-  "Sets the blinking cursor color and shape for the given frame."
+(defun set-cursor-state (color-name shape)
+  "Sets the blinking cursor color and shape for the focused frame."
   ;; code fragments borrowed from frame.el
   (modify-frame-parameters
-   frame
+   (nth 0 (mouse-position))
    (list (cons 'cursor-color color-name)
          (cons 'cursor-type
                (cond ((stringp shape) shape)
