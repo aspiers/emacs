@@ -268,6 +268,7 @@ that name."
 (global-set-key "\C-ca"   'bury-buffer)
 (global-set-key "\C-cc"   'comment-region)
 (global-set-key "\C-cd"   'as-duplicate-line)
+(global-set-key "\C-ce"   'cvs-examine)
 (global-set-key "\C-cf"   'auto-fill-mode)
 
 ;;{{{ Auto-text (C-c i)
@@ -307,7 +308,10 @@ that name."
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
 ;; I reserve C-c m for mode-specific user bindings
 (global-set-key "\C-cn"   'as-display-buffer-filename)
+(global-set-key "\C-cp"   'as-copy-previous-line-suffix)
+(global-set-key "\C-cq"   'cvs-quickdir)
 (global-set-key "\C-cr"   'revert-buffer)
+(global-set-key "\C-cs"   'cvs-status)
 
 ;;{{{ Toggles and settings (C-c t)
 
@@ -346,8 +350,6 @@ that name."
 (global-set-key "\C-ctw"   'as-set-tab-width)
 
 ;;}}}
-
-(global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
@@ -468,218 +470,27 @@ that name."
               auto-mode-alist))
 
 ;;}}}
-;;{{{ Default major mode
 
 (setq default-major-mode 'indented-text-mode)
 
 ;;}}}
-
-;;}}}
 ;;{{{ Major modes
 
-;;{{{ CPerl
-
-;;{{{ Autoload
+;;{{{ CPerl/Perl
 
 ;; one of these two will work
 (autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (defalias 'perl-mode 'cperl-mode)
 
-;;}}}
-;;{{{ Indentation
+(add-hook 'perl-mode-hook 'as-font-lock-mode-if-window-system)
 
-(make-variable-buffer-local 'cperl-indent-level)
-(set-default 'cperl-indent-level 2)
-
-;;}}}
-;;{{{ Hairy options
-
-(eval-when-compile
-  (defvar cperl-font-lock)
-  (defvar cperl-electric-lbrace-space)
-  (defvar cperl-electric-parens)
-  (defvar cperl-electric-linefeed)
-  (defvar cperl-electric-keywords)
-  (defvar cperl-info-on-command-no-prompt)
-  (defvar cperl-clobber-lisp-bindings)
-  (defvar cperl-lazy-help-time))
-
-(setq cperl-font-lock t
-      cperl-electric-lbrace-space nil
-      cperl-electric-parens nil
-      cperl-electric-linefeed nil
-      cperl-electric-keywords nil
-      cperl-info-on-command-no-prompt t
-      cperl-clobber-lisp-bindings nil
-      cperl-lazy-help-time 5)
-
-;;}}}
-;;{{{ Font-lock on
-
-(setq cperl-font-lock t)
-
-;;}}}
-;;{{{ Local key bindings
-
-;;{{{ as-cperl-set-indent-level
-
-(defvar cperl-indent-level)
-(defun as-cperl-set-indent-level (width)
-  "Sets the cperl-indent-level variable to the given argument."
-  (interactive "NNew cperl-indent-level: ")
-  (setq cperl-indent-level width))
-
-;;}}}
-;;{{{ as-cperl-insert-self-and-args-line
-
-(defun cperl-indent-command (&optional whole-exp))
-(defun as-cperl-insert-self-and-args-line ()
-  "Inserts a
-
-  my ($self) = @_;
-
-line before the current line, and leaves the point poised for adding
-more subroutine arguments."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my ($self) = @_;")
-  (backward-char 7))
-
-;;}}}
-;;{{{ as-cperl-insert-self-line
-
-(defun as-cperl-insert-self-line ()
-  "Inserts a
-
-  my $self = shift;
-
-line before the current line."
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (cperl-indent-command)
-    (insert "my $self = shift;")))
-
-;;}}}
-;;{{{ as-cperl-insert-args-line
-
-(defun as-cperl-insert-args-line ()
-  "Inserts a
-
-  my () = @_;
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my () = @_;")
-  (backward-char 7))
-
-;;}}}
-;;{{{ as-cperl-insert-data-dumper-line
-
-(defun as-cperl-insert-data-dumper-line ()
-  "Inserts a
-
-  use Data::Dumper;
-  warn Dumper();
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "use Data::Dumper;")
-  (newline-and-indent)
-  (insert "warn Dumper();")
-  (backward-char 2))
-
-;;}}}
-;;{{{ as-cperl-insert-carp-line
-
-(defun as-cperl-insert-carp-line ()
-  "Inserts a
-
-  use Carp qw(carp cluck croak confess);
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "use Carp qw(carp cluck croak confess);")
-  (newline-and-indent))
-
-;;}}}
-;;{{{ as-cperl-make-method
-
-(fset 'as-cperl-make-method
-      "\C-asub \C-e {\C-m\C-imy ($self) = @_;\C-m}\C-o\C-a\C-o\C-i")
-
-;;}}}
-;;{{{ as-cperl-insert-unique-warning
-
-(defvar as-cperl-unique-warning-counter 0
-  "Counter for `as-cperl-insert-unique-warning'.")
-
-(defun as-cperl-insert-unique-warning (&optional start)
-  "Inserts a
-
-  warn <n>;
-
-line, where <n> is incremented each invocation.
-
-Can be optionally given a numeric prefix which 
-"
-  (interactive "p")
-  (message (format "%s" start))
-  (and current-prefix-arg (setq as-cperl-unique-warning-counter start))
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (insert "warn ")
-    (insert (format "%d" as-cperl-unique-warning-counter))
-    (insert ";"))
-  (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
-
-;;}}}
-;;{{{ as-cperl-insert-self-method-call
-
-(fset 'as-cperl-insert-self-method-call "$self->")
-
-;;}}}
-
-(add-hook 'cperl-mode-hook 
-          (function
-           (lambda ()
-             (local-set-key "\C-cma"      'as-cperl-insert-args-line)
-             (local-set-key "\C-cmc"      'as-cperl-insert-self-method-call)
-             (local-set-key "\C-cmC"      'as-cperl-insert-carp-line)
-             (local-set-key "\C-cmD"      'as-cperl-insert-data-dumper-line)
-             (local-set-key "\C-cmj"      'imenu)
-             (local-set-key "\C-cmm"      'as-cperl-make-method)
-             (local-set-key "\C-cmp"      'cperl-find-pods-heres)
-             (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
-             (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
-             (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
-             (local-set-key [(f7)]        'as-cperl-insert-unique-warning)
-             (local-set-key [(backspace)] 'cperl-electric-backspace)
-             (setq indent-tabs-mode nil)
-             )))
-
-;;}}}
+(autoload 'as-cperl-setup "as-cperl" "as-cperl-setup")
+(add-hook 'cperl-mode-hook 'as-cperl-setup)
 
 ;;}}}
 ;;{{{ Text
 
-;;{{{ Auto-fill
-
 ;; Turn on auto-fill if composing e-mail or news.
-
 (add-hook 'text-mode-hook
           (function (lambda ()
                       (and
@@ -687,21 +498,8 @@ Can be optionally given a numeric prefix which
                                      (buffer-file-name))
                        (turn-on-auto-fill)))))
           
-;;}}}
-;;{{{ Expand all tabs to spaces
-
+;; Expand all tabs to spaces
 (add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
-
-;;}}}
-
-;;}}}
-;;{{{ Perl
-
-;;{{{ Turn on font-lock-mode on entry
-
-(add-hook 'perl-mode-hook 'as-font-lock-mode-if-window-system)
-
-;;}}}
 
 ;;}}}
 ;;{{{ Ruby
@@ -717,21 +515,15 @@ Can be optionally given a numeric prefix which
   "Major mode for editing shell scripts" t)
 
 ;;}}}
-;;{{{ Turn on font-lock mode on entry
 
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
-
-;;}}}
 ;;{{{ Lisp
-
-;;{{{ Turn on font-lock mode on entry
 
 (add-hook 'lisp-mode-hook 'as-font-lock-mode-if-window-system)
 
-;;}}}
 ;;{{{ local-unset-key M-tab for hippie-expand
 
 (if (eq running-xemacs t)
@@ -942,14 +734,6 @@ Can be optionally given a numeric prefix which
 
 ;; log-view mode
 (add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
-
-;;}}}
-;;{{{ pcl-cvs
-
-(global-set-key "\M-s"     'cvs-examine)
-(global-set-key "\C-xD"    'cvs-examine)
-(global-set-key "\M-S"     'cvs-quickdir)
-(global-set-key "\C-X\C-D" 'cvs-quickdir)
 
 ;;}}}
 
