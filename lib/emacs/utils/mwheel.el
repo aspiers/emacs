@@ -25,6 +25,10 @@
 
 ;;; Commentary:
 
+;; 2000-07-28  Adam Spiers  <adam@spiers.net>
+;;
+;;         * enhanced to support scrolling with Control depressed
+
 ;;; Code:
 
 (require 'custom)
