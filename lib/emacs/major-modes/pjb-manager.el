@@ -57,14 +57,6 @@ One useful value to include is `turn-on-font-lock' to highlight the pieces."
 
 (defvar pjb-process-handle nil)
 
-(defun reset-pjb-mode ()
-  (setq pjb-process-handle nil)
-  (setq major-mode 'pjb-manager)
-  (setq mode-name "PJB Manager")
-  (use-local-map pjb-mode-map)
-  (make-local-variable 'font-lock-defaults)
-  (setq font-lock-defaults '(pjb-font-lock-keywords t)))
-
 (defun get-error-line ()
   (save-excursion
     (set-buffer "*pjb-toc-output*")
@@ -84,6 +76,7 @@ One useful value to include is `turn-on-font-lock' to highlight the pieces."
   (erase-buffer)
   (shell-command (concat pjb-program-name " ls " pjb-ls-options) 
 		 "*pjb-toc-buffer*")
+  (font-lock-fontify-buffer)
   (goto-char (point-min)))
 
 (defun pjb-print-info ()
@@ -567,11 +560,12 @@ If commit was succesful, TOC will be automatically reloaded."
 	  (message "Can't find file")
 	(insert-cue-file filename)))))
 
-(defun pjb-count-file-sizes ()
-  "Count total size of new files to be added."
-  (defun fsize (fname)
+(defun pjb--fsize (fname)
     (let ((attr (file-attributes fname)))
       (if attr (/ (+ (nth 7 attr) 1023) 1024) 0)))
+
+(defun pjb-count-file-sizes ()
+  "Count total size of new files to be added."
   (interactive)
   (save-excursion
     (goto-char (point-min))
@@ -583,7 +577,7 @@ If commit was succesful, TOC will be automatically reloaded."
 		      (name (match-string 1)))
 		 (if search-result
 		     (progn 
-		       (setq kbytes (+ kbytes (fsize name)))
+		       (setq kbytes (+ kbytes (pjb--fsize name)))
 		       (setq files (+ files 1))
 		       t)
 		   nil))))
@@ -608,66 +602,71 @@ If commit was succesful, TOC will be automatically reloaded."
 	    (shell-command (concat pjb-program-name " ls " pjb-ls-options)
 			   "*pjb-toc-buffer*"))))))
       
+(defun pjb--prettify ()
+  (beginning-of-line)
+  (let* ((search-result (re-search-forward 
+                         "\\(Track|Disc\\): \\([^\n\r]*\\)[ \t]*$"
+                         nil t))
+         (start (match-beginning 0))
+         (end (match-end 0))
+         (label (match-string 1))
+         (name (match-string 2)))
+    (if search-result
+        (let* ((newname (replace-char name "_" " ")))
+          (delete-region start end)
+          (insert label ": " newname)
+          t)
+      nil)))
+
 (defun pjb-prettify-track-names (point mark)
-  (defun prettify ()
-    (beginning-of-line)
-    (let* ((search-result (re-search-forward 
-			   "\\(Track|Disc\\): \\([^\n\r]*\\)[ \t]*$"
-			   nil t))
-	   (start (match-beginning 0))
-	   (end (match-end 0))
-	   (label (match-string 1))
-	   (name (match-string 2)))
-      (if search-result
-	  (let* ((newname (replace-char name "_" " ")))
-	    (delete-region start end)
-	    (insert label ": " newname)
-	    t)
-	nil)))
   (interactive "r")
   (save-excursion
     (narrow-to-region point mark)
     (goto-char point)
-    (while (prettify)
+    (while (pjb--prettify)
       (forward-line 1))
     (widen)))
+
+(defun pjb--narrow-to-block (startexp stopexp) 
+  (let* ((sr1 (re-search-backward startexp nil t))
+         (start (match-beginning 0)))
+    (if sr1
+        (progn
+          (forward-line 1)
+          (let* ((sr2 (re-search-forward stopexp nil t))
+                 (end (if sr2
+                          (match-beginning 0)
+                        (point-max))))
+            (narrow-to-region start end))))))
+
+(defun pjb--next-record (recstart)
+  (let* ((sr1 (re-search-forward recstart nil t))
+         (start (match-beginning 0)))
+    (if sr1
+        (goto-char start)
+      (goto-char (point-max)))))
+
+(defun pjb--end-of-record (recstart)
+  (let* ((sr1 (re-search-forward recstart nil t))
+         (start (match-beginning 0)))
+    (if sr1
+        (progn
+          (goto-char start)
+          (forward-line -1)
+          (end-of-line))
+      (goto-char (point-max)))))
+
+(defun pjb--sort-key ()
+  (let* ((sr (re-search-forward "\\(Disc\\|Track\\): \\(.*\\)$" nil t)))
+    (if sr
+        (match-string 2)
+      "z")))
 
 (defun pjb-sort-blocks (startexp stopexp recstart reverse random-order)
   (if (not stopexp)
       (setq stopexp startexp))
   (save-excursion
     (save-restriction
-      (defun narrow-to-block ()   
-	(let* ((sr1 (re-search-backward startexp nil t))
-	       (start (match-beginning 0)))
-	  (if sr1
-	      (progn
-		(forward-line 1)
-		(let* ((sr2 (re-search-forward stopexp nil t))
-		       (end (if sr2
-				(match-beginning 0)
-			      (point-max))))
-		  (narrow-to-region start end))))))
-      (defun next-record ()
-	(let* ((sr1 (re-search-forward recstart nil t))
-	       (start (match-beginning 0)))
-	  (if sr1
-	      (goto-char start)
-	    (goto-char (point-max)))))
-      (defun end-of-record ()
-	(let* ((sr1 (re-search-forward recstart nil t))
-	       (start (match-beginning 0)))
-	  (if sr1
-	      (progn
-		(goto-char start)
-		(forward-line -1)
-		(end-of-line))
-	    (goto-char (point-max)))))
-      (defun sort-key ()
-	(let* ((sr (re-search-forward "\\(Disc\\|Track\\): \\(.*\\)$" nil t)))
-	  (if sr
-	      (match-string 2)
-	    "z")))
       (let ((alst '()))
 	(defun random-key ()
 	  (let* ((sr (re-search-forward "Start=\\([0-9\\.]+\\) " nil t)))
@@ -680,13 +679,13 @@ If commit was succesful, TOC will be automatically reloaded."
 		      (setq alst (cons (cons string rnd) alst))
 		      rnd)))		  
 	      "z")))
-	(narrow-to-block)
+	(pjb--narrow-to-block startexp stopexp)
 	(goto-char (point-min))
-	(next-record)
+	(pjb--next-record recstart)
 	(sort-subr reverse 'next-record 'end-of-record 
 		   (if random-order
 		       'random-key
-		     'sort-key))))))
+		     'pjb--sort-key))))))
 (defun pjb-sort-discs (&optional reverse random-order)
   (interactive)
   (pjb-sort-blocks "^[ \t]*Set:" nil "^[ \t]*Disc:" reverse random-order))
@@ -706,14 +705,7 @@ If commit was succesful, TOC will be automatically reloaded."
 (defun pjb-sort-tracks-random ()
   (interactive)
   (pjb-sort-tracks nil t))
-(defun pjb-sort-context-internal (ask &optional reverse random)
-  (beginning-of-line)
-  (let* ((sr (re-search-forward "^.*$" nil t))
-	 (line (match-string 0))
-	 (sort-set nil))
-    (cond ((string-match "Set:" line)
-	   (setq sort-set t)))
-    (defun get-sort-order ()      
+(defun pjb--get-sort-order (sort-set reverse random) 
       (let ((answer (completing-read
 		     (concat "Sort " 
 			     (if sort-set "discs" "tracks")
@@ -726,9 +718,16 @@ If commit was succesful, TOC will be automatically reloaded."
 	       (setq reverse t))
 	      ((string= answer "random") 
 	       (setq random t))
-	      (t (get-sort-order)))))
+	      (t (pjb--get-sort-order)))))
+(defun pjb-sort-context-internal (ask &optional reverse random)
+  (beginning-of-line)
+  (let* ((sr (re-search-forward "^.*$" nil t))
+	 (line (match-string 0))
+	 (sort-set nil))
+    (cond ((string-match "Set:" line)
+	   (setq sort-set t)))    
     (if ask
-	(get-sort-order))
+	(pjb--get-sort-order sort-set reverse random))
     (if sort-set
 	(pjb-sort-discs reverse random)
       (pjb-sort-tracks reverse random))))
@@ -812,8 +811,8 @@ If commit was succesful, TOC will be automatically reloaded."
 (setq pjb-mode-map (make-keymap))
 
 (define-key pjb-mode-map "\C-cr" 'pjb-reload-toc)
-(define-key pjb-mode-map "\C-ca" 'pjb-add-files)
-(define-key pjb-mode-map "\C-c\C-a" 'pjb-add-cue-file)
+(define-key pjb-mode-map "\C-c\C-a" 'pjb-add-files)
+(define-key pjb-mode-map "\C-c\C-A" 'pjb-add-cue-file)
 (define-key pjb-mode-map "\C-cw" 'pjb-commit-toc)
 ;(define-key pjb-mode-map "\C-cs" 'pjb-sort-set)
 (define-key pjb-mode-map "\C-cs" 'pjb-sort-context)
@@ -895,11 +894,15 @@ If commit was succesful, TOC will be automatically reloaded."
     ("\\(Disc\\|Set\\): \\(.*\\)$" 2 pjb-font-lock-discname-face))
   "Expressions to highlight in pjb-manager mode.")
 
+(defun reset-pjb-mode ()
+  (setq pjb-process-handle nil)
+  (setq major-mode 'pjb-manager
+        mode-name "PJB Manager")
+  (use-local-map pjb-mode-map))
+
 (defun pjb-manager-mode ()
   "Major mode for interactive PJB TOC editing. "
   (interactive)
-  (setq major-mode 'pjb-mode
-        mode-name "PJB Manager")
   (pop-to-buffer "*pjb-toc-output*")
   (pop-to-buffer "*pjb-toc-buffer*")
   (print-help-text)
@@ -924,4 +927,5 @@ If commit was succesful, TOC will be automatically reloaded."
 
 (provide 'pjb-manager)
 (add-hook 'pjb-mode-hook 'turn-on-font-lock)
+(add-hook 'pjb-mode-hook 'font-lock-fontify-buffer)
 
