@@ -118,6 +118,21 @@ line before the current line."
 )
 
 ;;}}}
+;;{{{ as-cperl-make-method-and-pod
+
+(defun as-cperl-make-method-and-pod (method)
+  "Makes a new Perl method with an accompanying pod stub."
+  (interactive "sMethod name: ")
+  (beginning-of-line)
+  (open-line 1)
+  (insert "=head2 " method "()")
+  (newline 2)
+  (insert "=cut")
+  (newline 2)
+  (as-cperl-make-method method)
+)
+
+;;}}}
 ;;{{{ as-cperl-insert-unique-warning
 
 (defvar as-cperl-unique-warning-counter 0
@@ -158,6 +173,7 @@ Can be optionally given a numeric prefix which
   (local-set-key "\C-cmD"      'as-cperl-insert-data-dumper-line)
   (local-set-key "\C-cmj"      'imenu)
   (local-set-key "\C-cmm"      'as-cperl-make-method)
+  (local-set-key "\C-cmM"      'as-cperl-make-method-and-pod)
   (local-set-key "\C-cmp"      'cperl-find-pods-heres)
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
