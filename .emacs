@@ -13,28 +13,27 @@
 ;; N.B. Personal .elc archive gets added to start of load-path,
 ;; so that right version of stuff like mwheel gets loaded.
 
+;; XEmacs adds crap to emacs-version
+(setq emacs-version-number
+      (format "%d.%d" emacs-major-version emacs-minor-version))
+
+(setq as-lib-dir
+      (concat "~/lib/emacs/"
+              (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
+(setq as-init-dir
+      (concat "~/lib/emacs/init/"
+              (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
+(setq as-version-lib-dir (concat as-lib-dir "/" emacs-version-number))
+(add-to-list 'load-path as-version-lib-dir)
+
 (cond 
  (running-xemacs
-  (add-to-list 'load-path "~/lib/emacs/XEmacs")
-
   ;; XEmacs automatically saved settings go here:
-  (setq save-options-init-file "~/lib/emacs/init/XEmacs/as-options-init.el")
-  (setq save-options-file "~/lib/emacs/init/XEmacs/as-options.el")
-  (load "~/lib/emacs/init/XEmacs/as-options" 'noerror)
+  (setq save-options-init-file (concat as-init-dir "/as-options-init.el"))
+  (setq save-options-file (concat as-init-dir "/as-options.el"))
+  (load (concat as-init-dir "/as-options") 'noerror)))
 
-  (setq custom-file "~/lib/emacs/init/XEmacs/as-custom.el")
-  (load "~/lib/emacs/init/XEmacs/as-custom" 'noerror)
-
-  (load "~/lib/emacs/XEmacs/as-init")
-  )
- (t
-  (add-to-list 'load-path "~/lib/emacs/GNU_Emacs")
-
-  (setq custom-file "~/lib/emacs/init/GNU_Emacs/as-custom.el")
-  (load "~/lib/emacs/init/GNU_Emacs/as-custom" 'noerror)
-
-  (load "~/lib/emacs/GNU_Emacs/as-init")
-  ))
-
+(setq custom-file (concat as-init-dir "/as-custom.el"))
+(load (concat as-init-dir "/as-custom") 'noerror)
+(load (concat as-version-lib-dir "/as-init"))
 (load "~/.emacs.local" 'noerror)
-
