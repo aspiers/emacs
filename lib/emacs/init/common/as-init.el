@@ -712,7 +712,7 @@ line before the current line."
   (open-line 1)
   (cperl-indent-command)
   (insert "my () = @_;")
-  (backward-char 7)))
+  (backward-char 7))
 
 ;;}}}
 ;;{{{ as-cperl-make-method
