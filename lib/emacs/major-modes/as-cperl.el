@@ -206,6 +206,7 @@ Can be optionally given a numeric prefix which
 ;;{{{ as-cperl-insert-pkg-template
 
 (defun as-cperl-insert-pkg-template (pkg)
+  "Inserts a template for a complete Perl package."
   (interactive "sPackage name: ")
   (beginning-of-buffer)
   (insert "package " pkg ";
@@ -240,6 +241,53 @@ use warnings;
 1;
 ")
   (forward-line -3))
+
+;;}}}
+;;{{{ as-cperl-reinvert-if-unless
+
+(defun as-cperl-reinvert-if-unless ()
+  "Performs the opposite of cperl-invert-if-unless."
+  (interactive)
+  (let ((modifier-start-re
+         "[\t\n ]*\\(\\<\\(if\\|unless\\|while\\|until\\)\\>\\)[\t\n ]*")
+        (modifier-end-re ";[\t\n ]*")
+        expr-search-bound ws-start
+        modifier-start modifier-end
+        expr-start expr-end expr-end-ws
+        modifier expr)
+    (save-excursion
+      (re-search-forward ";")
+      (or (cperl-after-expr-p)
+          (error "Couldn't find ; terminating expr"))
+      (setq expr-search-bound (match-beginning 0)))
+    (save-excursion
+      (or (looking-at modifier-start-re)
+          (re-search-forward modifier-start-re
+                             expr-search-bound
+                             'noerror)
+          (error "Not in statement with an `if', `unless', `while', or `until'")))
+    (setq ws-start (match-beginning 0))
+    (setq modifier-start (match-beginning 1))
+    (setq modifier-end (match-end 1))
+    (setq modifier (buffer-substring modifier-start modifier-end))
+    (setq expr-start (match-end 0))
+
+    (re-search-forward modifier-end-re)
+    (setq expr-end (match-beginning 0))
+    (setq expr-end-ws (match-end 0))
+    (setq expr (buffer-substring expr-start expr-end))
+    ;; Insert closing brace first.
+    (newline-and-indent)
+    (insert "}")
+    (delete-region ws-start expr-end-ws)
+    (goto-char ws-start)
+    (back-to-indentation)
+    (message (format "mod '%s', expr '%s'" modifier expr))
+    (insert modifier " (" expr ") {")
+    (newline-and-indent)
+    (backward-up-list)
+    (cperl-indent-exp)
+    ))
 
 ;;}}}
 
