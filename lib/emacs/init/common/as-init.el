@@ -390,8 +390,12 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Buffer renaming based on filename
 
-;; as-buffer-renamings-alist should map regexps matching file names
-;; to new buffer names
+(defvar as-buffer-renamings-alist '() 
+  "Maps regexps matching file names to new buffer names.
+
+If a find-file is performed on a filename which matches one of these
+regexps, the buffer name is renamed to the corresponding entry in this
+alist.")
 
 (add-hook 'find-file-hooks 
           (function (lambda ()
