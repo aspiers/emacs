@@ -56,7 +56,7 @@ from the replace is visited via `find-file'."
 (defun bury-and-close-buffer ()
   (interactive)
   (bury-buffer) 
-  (when (> (length (window-list)) 1) 
+  (when (not (one-window-p))
     (delete-window)))
 
 ;;}}}
