@@ -480,6 +480,7 @@ that name."
                 ("\\.ent$"                               . dtd-mode)
                 ("\\.mod$"                               . dtd-mode)
                 ("\\.dump$"                              . tar-mode)
+                ("\\.typ\\'"                             . gtypist-mode)
                 )
               auto-mode-alist))
 
@@ -789,6 +790,11 @@ that name."
             (local-set-key [(shift left)] 'foldout-exit-fold)
             (local-set-key [(shift right)] 'foldout-zoom-subtree)
             ))
+
+;;}}}
+;;{{{ gtypist-mode
+
+(autoload 'gtypist-mode "gtypist-mode")
 
 ;;}}}
 
