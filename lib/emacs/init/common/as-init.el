@@ -778,6 +778,11 @@ to the beginning of the buffer name."
 (setq mmm-global-mode 'maybe)
 
 ;;}}}
+;;{{{ CSS
+
+(load "css-mode" t)
+
+;;}}}
 
 ;; Minor modes
 
