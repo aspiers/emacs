@@ -944,8 +944,6 @@ to the beginning of the buffer name."
 
 (cond 
  ((load "blinking-cursor" t)
-    ;; bug - goes wrong if you switch on twice in a row
-  (blinking-cursor-mode 0)
   (blinking-cursor-mode 1)))
 
 ;;}}}
