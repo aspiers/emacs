@@ -68,6 +68,18 @@ a prefix argument."
     (move-to-column col)))
 
 ;;}}}
+;;{{{ mark-list
+
+(defun mark-list ()
+  "Put point at end of this list, mark at beginning.
+The list marked is the one that contains point or follows point."
+  (interactive)
+  (forward-list)
+  (push-mark (point) t t)
+  (backward-list)
+)
+
+;;}}}
 ;;{{{ vim-yy
 
 (defun vim-yy (&optional lines) "doc string"
