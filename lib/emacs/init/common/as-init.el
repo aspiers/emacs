@@ -514,6 +514,11 @@ a prefix argument."
 ;;}}}
 ;;{{{ Little odds and ends
 
+;;{{{ My e-mail address
+
+(setq user-mail-address "adam@spiers.net")
+
+;;}}}
 ;;{{{ Minibuffer
 
 ;; GNU emacs 21 obseletes resize-minibuffer-mode
