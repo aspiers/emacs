@@ -871,6 +871,7 @@ alist.")
 (add-hook 'emacs-lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
 (add-hook 'text-mode-hook (function (lambda () (setq comment-start "> "))))
 (add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
+(add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
 
 ;;}}}
 
