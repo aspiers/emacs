@@ -137,7 +137,11 @@ that name."
                                   "as-editing" "Copy previous line suffix"  t)
 (autoload 'as-align-to-previous-line
                                   "as-editing" "Align to previous line"     t)
+;; as-transpose-lines autoloaded elsewhere
+;; mark-list not bound
 (autoload 'vim-yy                 "as-editing" "Simulate vim's yy command"  t)
+;; bn-end-of-line-but-one autoloaded elsewhere
+
 
 ;;}}}
 ;;{{{ Appearance
@@ -196,6 +200,8 @@ that name."
 ;;{{{ Additions (hope for no conflicts)
 
 (global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
+(autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
+(global-set-key [(control E)] 'bn-end-of-line-but-one)
 (global-set-key [(control semicolon)] 'speedbar-get-focus)
 (global-set-key [(control ,)] 'delete-other-windows)
 (global-set-key [(control .)] 'delete-window)
@@ -204,6 +210,9 @@ that name."
 (global-set-key [(control x) (I)] 'insert-buffer)
 (global-set-key [(meta o)] 'overwrite-mode)
 (global-set-key [(control meta return)] 'repeat-complex-command)
+(autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
+(global-set-key [(control meta \()] 'bn-strip-parentheses)
+
 
 ;;}}}
 ;;{{{ TAB and family

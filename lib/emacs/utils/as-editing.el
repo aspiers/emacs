@@ -167,8 +167,6 @@ If the line is empty, doesn't do anything."
   (unless (bolp)
     (backward-char)))
 
-(define-key global-map [(control E)] 'bn-end-of-line-but-one)
-
 ;;}}}
 ;;{{{ bn-strip-parentheses
 
@@ -210,7 +208,5 @@ just C-u as a prefix argument, repeat as many times as possible."
           (delete-char 1))
         (delete-char 1))
       (decf n))))
-
-(define-key global-map [(control meta \()] 'bn-strip-parentheses)
 
 ;;}}}
