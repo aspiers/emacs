@@ -157,12 +157,14 @@ buffer's name.  It will fail if a buffer already exists with that name."
   () 
   "Duplicates the current line."
   (interactive)
-  (beginning-of-line)
-  (push-mark (point) t t)
-  (end-of-line)
-  (kill-new (buffer-substring (mark) (point)))
-  (insert "\n")
-  (yank))
+  (save-excursion
+    (beginning-of-line)
+    (push-mark (point) t t)
+    (end-of-line)
+    (kill-new (buffer-substring (mark) (point)))
+    (insert "\n")
+    (yank))
+  (next-line 1))
 
 ;;}}}
 ;;{{{ as-join-line-with-next
