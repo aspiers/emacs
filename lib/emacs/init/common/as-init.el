@@ -1096,7 +1096,6 @@ Can be optionally given a numeric prefix which
 (add-hook 'html-mode-hook 
           (function (lambda ()
                       (auto-fill-mode -1)
-                      (mmm-mode)
 ;;                    (setq truncate-lines t)
                       )))
 
