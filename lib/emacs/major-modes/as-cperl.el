@@ -3,6 +3,7 @@
 ;;{{{ as-cperl-set-indent-level
 
 (defvar cperl-indent-level)
+(defvar cperl-close-paren-offset)
 (defun as-cperl-set-indent-level (width)
   "Sets the cperl-indent-level variable to the given argument."
   (interactive "NNew cperl-indent-level: ")
