@@ -4,6 +4,22 @@
 ;;{{{ To do list
 
 ;;
+;;  - fix compile warnings:
+;;
+;;  you must predefine autoloads for used functions so that compiler knows
+;;  about them.
+;;  (eval-and-compile
+;;     (autoload 'fold-set-marks "folding)
+;;     etc...
+;;     )
+;;  for variables, use `defvar' trick in hooks, where you are sure that
+;;  module has already defined the variable. `defvar' is no-op if variable
+;;  has already been defined, but it makes compiler happy; thinking that
+;;  you DID define variable before using it.
+;;      ...in hook
+;;          (defvar folding-mode-map)
+;;          (define-key folding-mode-map [kp-7] 'fold-enter)  
+;;
 ;;  - Start using same-window-regexps?
 ;;
 
