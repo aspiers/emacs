@@ -737,24 +737,24 @@ An end of a defun is found by moving forward from the beginning of one."
 	    "\\)\\>\\([^_]\\|$\\)")
 	   2)
      ;; string literals (yuck)
-     '("%[qQrx]?\\(.\\)\\(.*?\\)\\(\\1\\)"
+     '("%[qQrxw]?\\(.\\)\\(.*?\\)\\(\\1\\)"
        (1 font-lock-string-face)
        (2 font-lock-string-face)
        (3 font-lock-string-face))
      ;; %[] etc.
-     '("%\\([qQrx]?\\)\\(\\[.*?\\]\\)"
+     '("%\\([qQrxw]?\\)\\(\\[.*?\\]\\)"
        (1 'default)
        (2 font-lock-string-face))
      ;; %() etc.
-     '("%\\([qQrx]?\\)\\((.*?)\\)"
+     '("%\\([qQrxw]?\\)\\((.*?)\\)"
        (1 'default)
        (2 font-lock-string-face))
      ;; %{} etc.
-     '("%\\([qQrx]?\\)\\({.*?}\\)"
+     '("%\\([qQrxw]?\\)\\({.*?}\\)"
        (1 'default)
        (2 font-lock-string-face))
      ;; %<> etc.
-     '("%\\([qQrx]?\\)\\(<.*?>\\)"
+     '("%\\([qQrxw]?\\)\\(<.*?>\\)"
        (1 'default)
        (2 font-lock-string-face))
      ;; regexps
