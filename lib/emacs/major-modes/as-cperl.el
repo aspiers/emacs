@@ -246,11 +246,11 @@ use warnings;
 ;;{{{ as-cperl-reinvert-if-unless
 
 (defun as-cperl-reinvert-if-unless ()
-  "Performs the opposite of `cperl-invert-if-unless'.  Position your
-point somewhere *before* the if/unless/while/until modifier."
+  "Performs the rough opposite of `cperl-invert-if-unless'.  Position your
+point somewhere *before* the if/unless/while/until/for/foreach modifier."
   (interactive)
   (let ((modifier-start-re
-         "[\t\n ]*\\(\\<\\(if\\|unless\\|while\\|until\\)\\>\\)[\t\n ]*")
+         "[\t\n ]*\\(\\<\\(if\\|unless\\|while\\|until\\|for\\|foreach\\)\\>\\)[\t\n ]*")
         (modifier-end-re ";[\t\n ]*")
         expr-search-bound ws-start
         modifier-start modifier-end
@@ -266,7 +266,7 @@ point somewhere *before* the if/unless/while/until modifier."
           (re-search-forward modifier-start-re
                              expr-search-bound
                              'noerror)
-          (error "Not in statement with an `if', `unless', `while', or `until'")))
+          (error "Not in statement with an `if', `unless', `while', `until', `for', or `foreach'")))
     (setq ws-start (match-beginning 0))
     (setq modifier-start (match-beginning 1))
     (setq modifier-end (match-end 1))
