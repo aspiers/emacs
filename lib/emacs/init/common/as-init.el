@@ -167,7 +167,7 @@ buffer's name.  It will fail if a buffer already exists with that name."
 ;;}}}
 ;;{{{ as-join-line-with-next
 
-(defun join-line-with-next ()
+(defun as-join-line-with-next ()
   "Joins the current line with the next.  This just calls join-line with
 a prefix argument."
   (interactive)
@@ -184,9 +184,9 @@ a prefix argument."
 ;;}}}
 ;;{{{ Appearance
 
-;;{{{ font-lock-mode-if-window-system
+;;{{{ as-font-lock-mode-if-window-system
 
-(defun font-lock-mode-if-window-system
+(defun as-font-lock-mode-if-window-system
   ()
   "Turns on font-lock mode if X windows is active."
   (interactive)
@@ -268,7 +268,7 @@ a prefix argument."
 
 ;;{{{ toggle-indent-tabs-mode
 
-(defun toggle-indent-tabs-mode
+(defun as-toggle-indent-tabs-mode
   () 
   "Toggles the value of indent-tabs-mode in the current buffer"
   (interactive)
@@ -277,13 +277,13 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9b"   'toggle-indent-tabs-mode)
+(global-set-key "\C-x9b"   'as-toggle-indent-tabs-mode)
 
 (global-set-key "\C-x9c"   'comment-region)
 
 ;;{{{ insert-date-and-time
 
-(defun insert-date-and-time
+(defun as-insert-date-and-time
   ()
   "Inserts the current date and time into the current buffer at the point."
   (interactive)
@@ -295,14 +295,14 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9d"   'insert-date-and-time)
+(global-set-key "\C-x9d"   'as-insert-date-and-time)
 
 (global-set-key "\C-x9g"   'goto-line)
 (global-set-key "\C-x9i"   'auto-fill-mode)
 
 ;;{{{ insert-log-timestamp
 
-(defun insert-log-timestamp
+(defun as-insert-log-timestamp
   ()
   "Inserts the current date, time and username into the current buffer at the point."
   (interactive)
@@ -317,13 +317,13 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9l"   'insert-log-timestamp)
+(global-set-key "\C-x9l"   'as-insert-log-timestamp)
 
 (global-set-key "\C-x9r"   'toggle-read-only)
 
 ;;{{{ toggle-truncate-lines
 
-(defun toggle-truncate-lines
+(defun as-toggle-truncate-lines
   ()
   "Toggles the value of truncate lines in the current buffer"
   (interactive)
@@ -332,19 +332,19 @@ a prefix argument."
 )
 
 ;;}}}
-(global-set-key "\C-x9t"   'toggle-truncate-lines)
+(global-set-key "\C-x9t"   'as-toggle-truncate-lines)
 
 (global-set-key "\C-x9v"   'set-variable)
 
 ;;{{{ set-tab-width
 
-(defun set-tab-width (width)
+(defun as-set-tab-width (width)
   "Sets the tab-width variable to the given argument."
   (interactive "Nnew hard tab width: ")
   (setq tab-width width))
 
 ;;}}}
-(global-set-key "\C-x9w"   'set-tab-width)
+(global-set-key "\C-x9w"   'as-set-tab-width)
 
 (global-set-key "\C-x9z"   'suspend-emacs)
 
@@ -861,7 +861,7 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ Turn on font-lock-mode on entry
 
-(add-hook 'perl-mode-hook 'font-lock-mode-if-window-system)
+(add-hook 'perl-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 
@@ -882,7 +882,7 @@ Can be optionally given a numeric prefix which
 ;;{{{ Turn on font-lock mode on entry
 
 ;; This doesn't work for some strange reason.
-(add-hook 'shell-script-mode-hook 'font-lock-mode-if-window-system)
+(add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 
@@ -891,7 +891,7 @@ Can be optionally given a numeric prefix which
 
 ;;{{{ Turn on font-lock mode on entry
 
-(add-hook 'lisp-mode-hook 'font-lock-mode-if-window-system)
+(add-hook 'lisp-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 ;;{{{ local-unset-key M-tab for hippie-expand
@@ -908,7 +908,7 @@ Can be optionally given a numeric prefix which
 (autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
 ;;(add-hook 'sawfish-mode-hook
 ;;          (function (lambda () (turn-on-font-lock))))
-;;(add-hook 'sawfish-mode-hook 'font-lock-mode-if-window-system)
+;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 ;;{{{ HTML
@@ -960,7 +960,7 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ Turn on font-lock mode on entry
 
-(add-hook 'tex-mode-hook 'font-lock-mode-if-window-system)
+(add-hook 'tex-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 
@@ -999,7 +999,7 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ Turn on font-lock mode on entry
 
-(add-hook 'c-mode-hook 'font-lock-mode-if-window-system)
+(add-hook 'c-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 
@@ -1159,7 +1159,7 @@ Can be optionally given a numeric prefix which
 ;;(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
 
 ;; This one probably a waste of time
-(font-lock-mode-if-window-system)
+(as-font-lock-mode-if-window-system)
 
 ;; Set some colours
 
