@@ -29,7 +29,6 @@ subroutine arguments."
 ;;   (insert "my ($self) = @_;")
 ;;   (backward-char 7)
   (as-cperl-insert-self-line)
-  (next-line 1)
   (as-cperl-insert-args-line)
   )
 
@@ -43,11 +42,13 @@ subroutine arguments."
 
 line before the current line."
   (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (cperl-indent-command)
-    (insert "my $self = shift;")))
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "my $self = shift;")
+  (beginning-of-line)
+  (forward-line 1)
+  ))
 
 ;;}}}
 ;;{{{ as-cperl-insert-args-line
