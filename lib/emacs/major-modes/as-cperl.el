@@ -256,6 +256,17 @@ use warnings;
 "))
 
 ;;}}}
+;;{{{ as-cperl-insert-check-syscall
+
+(defun as-cperl-insert-check-syscall ()
+  "Inserts a template for checking system calls."
+  (interactive)
+  (insert " or die \"")
+  (save-excursion (insert "() failed: $!\\n\";")))
+
+;;}}}
+
+
 ;;{{{ as-cperl-reinvert-if-unless
 
 (defun as-cperl-reinvert-if-unless ()
