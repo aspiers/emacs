@@ -502,8 +502,11 @@ a prefix argument."
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
+(global-set-key "\C-x\C-b" 'buffer-menu)
 
-(global-set-key "\C-x\C-b"      'buffer-menu)
+;; But if bs-show is available, choose that cos it's much nicer.
+(and (functionp 'bs-show)
+     (global-set-key "\C-x\C-b" 'bs-show))
 
 ;;}}}
 
