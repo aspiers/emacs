@@ -1,6 +1,6 @@
 ;;; Blinking cursor mode for GNU Emacs
 ;;; Copyright (C) 1997 Kyle E. Jones
-;;; Customizability added by Adam Spiers <adam@spiers.net>, 23/1/2001
+;;; Various extensions by Adam Spiers <adam@spiers.net>, 23/1/2001
 ;;;
 ;;; This program is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published by
