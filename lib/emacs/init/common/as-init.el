@@ -427,6 +427,7 @@ a prefix argument."
 (global-set-key "\C-ha"         'apropos)
 (global-set-key "\M-g"          'goto-line)
 (global-set-key "\C-ha"         'apropos)
+(global-set-key "\C-c\C-i"      'indent-region)
 
 (global-set-key [(control tab)]         'other-window)
 (global-set-key [(control meta $)]      'ispell-buffer)
