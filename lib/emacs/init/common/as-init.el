@@ -293,6 +293,9 @@ that name."
 (autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
 (global-set-key "\C-cie" 'as-insert-email-address)
 
+(autoload 'as-insert-email-address "as-autotext" "Insert work email address" t)
+(global-set-key "\C-cie" 'as-insert-work-email-address)
+
 (autoload 'as-insert-homepage-url "as-autotext" "Insert homepage url" t)
 (global-set-key "\C-cih" 'as-insert-homepage-url)
 
