@@ -2,12 +2,13 @@
 
 srcdirs=init/common major-modes minor-modes utils fun
 EMACSLIB=$(HOME)/lib/emacs
-loadpaths=$(EMACSLIB)/minor-modes \
-          $(EMACSLIB)/major-modes/mmm \
-          $(EMACSLIB)/major-modes/tdtd \
-          $(EMACSLIB)/major-modes/pcl-cvs \
-          $(EMACSLIB)/major-modes/monkey-2 \
-          $(EMACSLIB)/major-modes
+loadpaths = $(EMACSLIB)/minor-modes 		\
+          $(EMACSLIB)/major-modes/mmm 		\
+          $(EMACSLIB)/major-modes/tdtd 		\
+          $(EMACSLIB)/major-modes/pcl-cvs 	\
+          $(EMACSLIB)/major-modes/monkey-2 	\
+          $(EMACSLIB)/major-modes		\
+          $(EMACSLIB)/utils/tree-widget-2.0
 gnuinstalldir=$(EMACSLIB)/GNU_Emacs
 xinstalldir=$(EMACSLIB)/XEmacs
 
