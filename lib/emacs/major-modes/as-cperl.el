@@ -6,7 +6,8 @@
 (defun as-cperl-set-indent-level (width)
   "Sets the cperl-indent-level variable to the given argument."
   (interactive "NNew cperl-indent-level: ")
-  (setq cperl-indent-level width))
+  (setq cperl-indent-level width)
+  (setq cperl-close-paren-offset (- width)))
 
 ;;}}}
 ;;{{{ as-cperl-insert-self-and-args-line
