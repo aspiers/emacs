@@ -241,6 +241,8 @@ not included in the text copied."
 ;;}}}
 ;;{{{ bn-zap-nearly-to-char
 
+(autoload 'signum "cl" "signum")
+
 (defun bn-zap-nearly-to-char (arg char)
   "Kill up to but not including ARG'th occurrence of CHAR.
 Goes backward if ARG is negative; error if CHAR not found."
