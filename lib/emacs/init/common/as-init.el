@@ -223,23 +223,18 @@ in all the directories in that path."
 
 ;; Signatures
 
-(global-set-key "\C-x\C-zc"     
-                (function (lambda () (interactive)
-                            (insert-file "~/.sig/cool"))))
 (global-set-key "\C-x\C-zj"     
-                (function (lambda () (interactive)
-                            (insert-file "~/.sig/japh_indirect"))))
-(global-set-key "\C-x\C-zp"     
-                (function (lambda () (interactive)
-                            (insert-file "~/.sig/personal"))))
-(global-set-key "\C-x\C-zr"     
-                (function (lambda () (interactive)
-                            (insert-file "~/.sig/RTFM"))))
+                (function (lambda ()
+                            "Inserts Adam's cool JAPH .sig"
+                            (interactive)
+                            (insert-file "~/.sig/perl/japh_indirect"))))
 
 ;; Scissors
 
 (global-set-key "\C-x\C-zs"
-                (function (lambda () (interactive)
+                (function (lambda ()
+                            "Inserts a cut-here-with-scissors"
+                            (interactive)
                             (open-line 1)
                             (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
                             (beginning-of-line)
@@ -249,28 +244,45 @@ in all the directories in that path."
 ;; Home-page
 
 (global-set-key "\C-x\C-zh"
-                (function (lambda () (interactive)
+                (function (lambda ()
+                            "Inserts Adam's homepage URL"
+                            (interactive)
+                            (insert "http://adamspiers.org/"))))
+
+(global-set-key "\C-x\C-zo"
+                (function (lambda ()
+                            "Inserts Adam's old homepage URL"
+                            (interactive)
                             (insert "http://www.new.ox.ac.uk/~adam/"))))
-(global-set-key "\C-x\C-zu"
-                (function (lambda () (interactive)
-                            (insert "http://www.new.ox.ac.uk/~adam/"))))
+
+(global-set-key "\C-x\C-zt"
+                (function (lambda ()
+                            "Inserts the tigerpig.org URL"
+                            (interactive)
+                            (insert "http://tigerpig.org/"))))
 
 ;; e-mail address
 
 (global-set-key "\C-x\C-ze"
-                (function (lambda () (interactive)
+                (function (lambda ()
+                            "Inserts Adam's e-mail address"
+                            (interactive)
                             (insert "adam@spiers.net"))))
 
 ;; name (how lazy am I?)
 
-(global-set-key "\C-x\C-zn"
-                (function (lambda () (interactive)
+(global-set-key "\C-x\C-zm"
+                (function (lambda ()
+                            "Inserts Adam's name"
+                            (interactive)
                             (insert "Adam Spiers"))))
 
 ;; me (name & e-mail)
 
 (global-set-key "\C-x\C-zn"
-                (function (lambda () (interactive)
+                (function (lambda ()
+                            "Inserts Adam's name and e-mail address"
+                            (interactive)
                             (insert "Adam Spiers <adam@spiers.net>"))))
 
 ;;}}}
