@@ -713,11 +713,11 @@ line before the current line."
 
 line before the current line."
   (interactive)
-    (beginning-of-line)
-    (open-line 1)
-    (cperl-indent-command)
-    (insert "use Carp qw(carp cluck croak confess);")
-    (backward-char))
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "use Carp qw(carp cluck croak confess);")
+  (newline-and-indent))
 
 ;;}}}
 ;;{{{ as-cperl-make-method
