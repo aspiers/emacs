@@ -873,6 +873,16 @@ With a prefix argument, prompt for cvs FLAGS to use."
   (interactive)
   (cvs-examine default-directory t))
 
+(defun cvs-mode-examine-directory (dir)
+  "Run `cvs-examine' on a specified directory with the default flags."
+  (interactive "DCVS Examine (directory): ")
+  (cvs-examine dir t))
+  
+(defun cvs-mode-examine-parent-directory ()
+  "Run `cvs-examine' on a specified directory with the default flags."
+  (interactive)
+  (cvs-examine ".." t))
+  
 (defun cvs-query-directory (msg)
   ;; last-command-char = ?\r hints that the command was run via M-x
   (if (and (cvs-buffer-p)
@@ -1092,6 +1102,39 @@ If a prefix argument is given, move by that many lines."
 If a prefix argument is given, move by that many lines."
   (interactive "p")
   (ewoc-goto-next cvs-cookies arg))
+
+(defun cvs-mode-previous-dir ()
+  "Go to the previous directory."
+  (interactive)
+  (catch 'bail
+    (let ((this-node (ewoc-locate cvs-cookies)))
+      (while
+          (let* ((prev-node (ewoc-prev cvs-cookies this-node))
+                 (prev-fi (ewoc-data (or prev-node (throw 'bail nil))))
+                 (type (cvs-fileinfo->type prev-fi)))
+            (not (eq type 'DIRCHANGE)))
+        (setq this-node (ewoc-goto-prev cvs-cookies 1)))
+      (previous-line 1))))
+
+(defun cvs-mode-next-dir ()
+  "Go to the next directory."
+  (interactive)
+  (catch 'bail
+    (let ((this-node (ewoc-locate cvs-cookies)))
+      (while
+          (let* ((next-node (ewoc-next cvs-cookies this-node))
+                 (next-fi (ewoc-data (or next-node (throw 'bail nil))))
+                 (type (cvs-fileinfo->type next-fi)))
+            (not (eq type 'DIRCHANGE)))
+        (setq this-node (ewoc-goto-next cvs-cookies 1)))
+      (next-line 1))))
+
+(defun cvs-mode-top-dir ()
+  "Go to the top-level directory in the current buffer."
+  (interactive)
+  (beginning-of-buffer)
+  (ewoc-goto-next cvs-cookies 1)
+  (previous-line 1))
 
 ;;;;
 ;;;; Mark handling
