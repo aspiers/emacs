@@ -13,6 +13,7 @@ xinstalldir=$(EMACSLIB)/XEmacs
 
 ELs=$(shell find $(srcdirs) -name \*.el \
 			    ! -name psgml\* \
+			    ! -name monkey\* \
 			    ! -name tdtd\* \
 			    ! -name sdf.el \
      )
