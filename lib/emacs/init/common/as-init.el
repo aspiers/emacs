@@ -748,7 +748,7 @@ line before the current line."
   "Inserts a
 
   use Data::Dumper;
-  warn Dumper ;
+  warn Dumper();
 
 line before the current line."
   (interactive)
@@ -757,8 +757,8 @@ line before the current line."
   (cperl-indent-command)
   (insert "use Data::Dumper;")
   (newline-and-indent)
-  (insert "warn Dumper ;")
-  (backward-char))
+  (insert "warn Dumper();")
+  (backward-char 2))
 
 ;;}}}
 ;;{{{ as-cperl-insert-carp-line
