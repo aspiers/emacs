@@ -339,7 +339,9 @@ This variable is buffer local and only used in the *cvs* buffer.")
   ;;(define-prefix-command 'cvs-mode-map-control-c-prefix)
   '(;; simulate `suppress-keymap'
     (self-insert-command . undefined)
-    (("0" "1" "2" "3" "4" "5" "6" "7" "8" "9") . digit-argument)
+    (("2" "3" "4" "5" "6" "7" "8" "9") . digit-argument)
+    ("0" .      delete-window)
+    ("1" .      delete-other-windows)
     ("-" .	negative-argument)
     ;; various
     ;; (undo .	cvs-mode-undo)
