@@ -569,6 +569,7 @@ a prefix argument."
                 ("\\.css\\'"                             . css-mode)
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
+                ("\\.xml$"                               . xml-mode)
                 )
               auto-mode-alist))
 
@@ -935,6 +936,83 @@ Can be optionally given a numeric prefix which
 (autoload 'mmm-mode "mmm-auto" "mmm mode" t)
 
 ;;}}}
+;;{{{ psgml (SGML and XML)
+
+(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
+(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+
+(setq-default sgml-set-face t)
+
+(make-face 'sgml-comment-face)
+(make-face 'sgml-doctype-face)
+(make-face 'sgml-end-tag-face)
+(make-face 'sgml-entity-face)
+(make-face 'sgml-ignored-face)
+(make-face 'sgml-ms-end-face)
+(make-face 'sgml-ms-start-face)
+(make-face 'sgml-pi-face)
+(make-face 'sgml-sgml-face)
+(make-face 'sgml-short-ref-face)
+(make-face 'sgml-start-tag-face)
+
+(set-face-foreground 'sgml-comment-face "dark green")
+(set-face-foreground 'sgml-doctype-face "dark red")
+(set-face-foreground 'sgml-start-tag-face "dark cyan")
+(set-face-foreground 'sgml-end-tag-face "dark cyan")
+(set-face-foreground 'sgml-entity-face "magenta")
+(set-face-foreground 'sgml-ignored-face "gray40")
+(set-face-foreground 'sgml-ms-end-face "green")
+(set-face-foreground 'sgml-ms-start-face "yellow")
+(set-face-foreground 'sgml-pi-face "dark blue")
+(set-face-foreground 'sgml-sgml-face "brown")
+(set-face-foreground 'sgml-short-ref-face "deep sky blue")
+
+(setq-default sgml-markup-faces
+              '((comment . sgml-comment-face)
+                (doctype . sgml-doctype-face)
+                (end-tag . sgml-end-tag-face)
+                (entity . sgml-entity-face)
+                (ignored . sgml-ignored-face)
+                (ms-end . sgml-ms-end-face)
+                (ms-start . sgml-ms-start-face)
+                (pi . sgml-pi-face)
+                (sgml . sgml-sgml-face)
+                (short-ref . sgml-short-ref-face)
+                (start-tag . sgml-start-tag-face)))
+
+;; (setq sgml-markup-faces '((start-tag . font-lock-function-name-face)
+;;                           (end-tag . font-lock-function-name-face)
+;;                           (comment . font-lock-comment-face)
+;;                           (pi . bold)
+;;                           (sgml . bold)
+;;                           (doctype . bold)
+;;                           (entity . font-lock-type-face)
+;;                           (shortref . font-lock-function-name-face)))
+
+(setq-default sgml-indent-data t)
+;; Some convenient key definitions:
+;; (define-key sgml-mode-map "\C-c\C-x\C-e" 'sgml-describe-element-type)
+;; (define-key sgml-mode-map "\C-c\C-x\C-i" 'sgml-general-dtd-info)
+;; (define-key sgml-mode-map "\C-c\C-x\C-t" 'sgml-describe-entity)
+
+;;}}}
+;;{{{ SGML
+
+;;{{{ Set sgml-specials
+
+;; See the documentation for this.  The default is (34 45) which
+;; includes - as a special character for comments.  The problem
+;; is that emacs doesn't allow predicates to context sensitively
+;; confirm the syntax of characters, so the fontifying of comments
+;; often screws up.
+
+(eval-when-compile
+  (defvar sgml-specials))
+(setq sgml-specials '(34))
+
+;;}}}
+
+;;}}}
 ;;{{{ CSS
 
 (autoload 'css-mode "css-mode" "mode for editing CSS files")
@@ -1000,23 +1078,6 @@ Can be optionally given a numeric prefix which
 ;;{{{ Turn on font-lock mode on entry
 
 (add-hook 'c-mode-hook 'as-font-lock-mode-if-window-system)
-
-;;}}}
-
-;;}}}
-;;{{{ SGML
-
-;;{{{ Set sgml-specials
-
-;; See the documentation for this.  The default is (34 45) which
-;; includes - as a special character for comments.  The problem
-;; is that emacs doesn't allow predicates to context sensitively
-;; confirm the syntax of characters, so the fontifying of comments
-;; often screws up.
-
-(eval-when-compile
-  (defvar sgml-specials))
-(setq sgml-specials '(34))
 
 ;;}}}
 
