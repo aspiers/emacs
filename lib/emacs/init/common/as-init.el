@@ -17,51 +17,45 @@
 
 ;;{{{ Functions
 
-;;{{{ font-lock-mode-if-window-system
+;;{{{ Buffers/files
 
-(defun font-lock-mode-if-window-system
-  ()
-  "Turns on font-lock mode if X windows is active."
-  (interactive)
-  (if window-system (font-lock-mode)))
+;;{{{ as-find-file-matching-regexp-hook
 
-;;}}}
-;;{{{ find-file-matching-regexp-hook
-
-(defvar find-file-matching-regexp-alist '()
+(defvar as-find-file-matching-regexp-alist '()
   "alist mapping filename regexps to functions which will be evaluated when 
 filenames matching the regexps are visited.
 
 This allows you to set local variables specific to sets of files, e.g.
 
-(setq find-file-matching-regexp-alist
+(setq as-find-file-matching-regexp-alist
       '((\"/foo/bar/.*\.pm\" . (lambda () (setq cperl-indent-level 2)))))")
 
-(defun find-file-matching-regexp-hook ()
+(defun as-find-file-matching-regexp-hook ()
   "Hook to run arbitrary functions on newly visited files.
 
-Controlled by `find-file-matching-regexp-alist'."
+Controlled by `as-find-file-matching-regexp-alist'."
   (mapcar
    (lambda (x)
      (cond
-      ((string-match (concat ".*" (car x)) (buffer-file-name))
+      ((let ((case-fold-search nil))
+         (string-match (concat ".*" (car x)) (buffer-file-name)))
        ;; (message (format "%s matched %s" (buffer-file-name) (car x)))
        (funcall (cdr x)))
       (t
        ;; (message (format "%s didn't match %s" (buffer-file-name) (car x)))
        )))
-   find-file-matching-regexp-alist))
+   as-find-file-matching-regexp-alist))
 
-(add-hook 'find-file-hooks 'find-file-matching-regexp-hook)
+(add-hook 'find-file-hooks 'as-find-file-matching-regexp-hook)
 
 ;;}}}
-;;{{{ bounce-buffer
+;;{{{ as-bounce-buffer
 
-(defvar bounce-buffer-regexp-alist '()
-  "Controls the behaviour of `bounce-buffer'.")
+(defvar as-bounce-buffer-regexp-alist '()
+  "Controls the behaviour of `as-bounce-buffer'.")
 
-(defun bounce-buffer ()
-  "For each element of `bounce-buffer-regexp-alist', attempts a search
+(defun as-bounce-buffer ()
+  "For each element of `as-bounce-buffer-regexp-alist', attempts a search
 and replace on the current buffer's filename.  (The CARs are the
 search regexps, and the CDRs the corresponding strings to replace the
 matches with).  As soon a search is successful, the filename resulting
@@ -79,55 +73,68 @@ from the replace is visited via `find-file'."
              (message (format "Bounced to %s" bounce-to))
              (find-file bounce-to))
            (throw 'gotcha nil)))))
-     bounce-buffer-regexp-alist)))
+     as-bounce-buffer-regexp-alist)))
 
 ;;}}}
 ;;{{{ as-buffer-rename-via-alist-hook
 
 (defvar as-buffer-renamings-alist '() 
-  "Maps regexps matching file names to new buffer names.
+  "Each element in this alist is a buffer renaming directive of the form
 
-If a find-file is performed on a filename which matches one of these
-regexps, the buffer name is renamed to the corresponding entry in this
-alist.")
+  (REGEXP . REPLACE)
+
+When a find-file is performed, this hook matches the filename against
+each REGEXP, and for the first one that matches, the matching part of
+the buffer name is replaced with REPLACE.
+
+The buffer is then renamed to the result.")
 
 (defun as-buffer-rename-via-alist-hook ()
-  "Hook to rename a buffer by looking it up in an alist of matches.
-See the documentation for `as-buffer-renamings-alist'."
+  "Hook to rename a buffer by matching it against regexps in
+`as-buffer-renamings-alist', for which see the documentation."
   (catch 'endloop
     (mapcar
      (lambda (x)
-       (if (let ((case-fold-search nil))
-             (string-match (concat ".*" (car x)) (buffer-file-name)))
-           (progn
-             (rename-buffer
-              (replace-match (cdr x) t nil (buffer-file-name) nil)
-              t)
-             (throw 'endloop t))))
+       (cond ((let ((case-fold-search nil))
+                (string-match (concat ".*" (car x)) (buffer-file-name)))
+              (let ((rename-to
+                     (replace-match (cdr x) t nil (buffer-file-name) nil)))
+                (rename-buffer rename-to t)
+;;              (message (format "renamed to %s" rename-to))
+                (throw 'endloop t)))))
      as-buffer-renamings-alist)))
 
-(defun as-containing-dir (filename)
-  "Function which returns the containing directory of a filename when
-given the full path."
-  (string-match "\\([^/]+\\)/[^/]+$" filename)
-  (match-string 1 filename))
-
-(defun as-last-dir-and-filename (filename)
-  "Function which strips a full path of all of its directory components
-   but the last."
-  (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
-  (replace-match "" t t (buffer-file-name) 1))
-
-(defun as-buffer-rename-add-one-dir ()
-  "Function to add the name of the containing directory of the buffer's file
-to the beginning of the buffer name."
-  (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
-
-;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
 (add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
 
+;; These are now obselete:
+;;
+;; (defun as-containing-dir (filename)
+;;   "Return the containing directory of a filename when given the full path."
+;;   (string-match "\\([^/]+\\)/[^/]+$" filename)
+;;   (match-string 1 filename))
+;;
+;; (defun as-last-dir-and-filename (filename)
+;;   "Strip a full path of all of its directory components but the last."
+;;   (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
+;;   (replace-match "" t t (buffer-file-name) 1))
+;;
+;; (defun as-buffer-rename-add-one-dir ()
+;;   "Add the name of the containing directory of the buffer's file
+;; to the beginning of the buffer name."
+;;   (interactive)
+;;   (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
+;;
+;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
+
+(defun as-buffer-rename-remove-unique-id ()
+  "Attempt to remove the unique suffix (e.g. \"<1>\") from the current
+buffer's name.  It will fail if a buffer already exists with that name."
+  (interactive)
+  (string-match "<[0-9]+>$" (buffer-name))
+  (rename-buffer (replace-match "" t t (buffer-name) nil)))
+
 ;;}}}
-;;{{{ display-buffer-filename
+;;{{{ as-display-buffer-filename
 
 (defun display-buffer-filename
   ()
@@ -136,9 +143,13 @@ to the beginning of the buffer name."
   (message buffer-file-name))
 
 ;;}}}
-;;{{{ duplicate-line
 
-(defun duplicate-line
+;;}}}
+;;{{{ Editing
+
+;;{{{ as-duplicate-line
+
+(defun as-duplicate-line
   () 
   "Duplicates the current line."
   (interactive)
@@ -150,13 +161,28 @@ to the beginning of the buffer name."
   (yank))
 
 ;;}}}
-;;{{{ join-line-with-next
+;;{{{ as-join-line-with-next
 
 (defun join-line-with-next ()
   "Joins the current line with the next.  This just calls join-line with
 a prefix argument."
   (interactive)
   (join-line 1))
+
+;;}}}
+
+;;}}}
+;;{{{ Appearance
+
+;;{{{ font-lock-mode-if-window-system
+
+(defun font-lock-mode-if-window-system
+  ()
+  "Turns on font-lock mode if X windows is active."
+  (interactive)
+  (if window-system (font-lock-mode)))
+
+;;}}}
 
 ;;}}}
 
@@ -185,12 +211,12 @@ a prefix argument."
 (global-set-key [(meta kp-6)]   'forward-word)
 
 ;;}}}
-;;{{{ delete key
+;;{{{ Delete key
 
 (global-set-key [(delete)] 'delete-char)
 
 ;;}}}
-;;{{{ define fast scroll keys
+;;{{{ Define fast scroll keys
 
 (defun timsup () "Move up two lines." (interactive) (forward-line -2))
 (defun timsdown () "Move down two lines." (interactive) (forward-line 2))
@@ -324,7 +350,7 @@ a prefix argument."
 (global-set-key "\C-x9z"    'suspend-emacs)
 
 ;;}}}
-;;{{{ auto-text
+;;{{{ Auto-text
 
 (global-unset-key "\C-x\C-z")
 
@@ -409,7 +435,7 @@ a prefix argument."
 ;;}}}
 
 ;;}}}
-;;{{{ miscellaneous
+;;{{{ Miscellaneous
 
 (global-set-key "\C-x\C-a"      'bury-buffer)
 (global-set-key "\M-\\"         'fixup-whitespace)
@@ -424,9 +450,9 @@ a prefix argument."
 (global-set-key [(meta i)]              'indent-relative)
 
 (global-set-key [(f1)] 'ispell-word)
-(global-set-key [(f2)] 'bounce-buffer)
-(global-set-key [(f3)] 'display-buffer-filename)
-(global-set-key [(f4)] 'duplicate-line)
+(global-set-key [(f2)] 'as-bounce-buffer)
+(global-set-key [(f3)] 'as-display-buffer-filename)
+(global-set-key [(f4)] 'as-duplicate-line)
 
 (global-set-key [(insert)] 'overwrite-mode)
 (global-set-key [(meta o)] 'overwrite-mode)
@@ -918,9 +944,9 @@ a prefix argument."
     (fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
     ))
 
-(setq find-file-matching-regexp-alist
+(setq as-find-file-matching-regexp-alist
       (append '(("\*\.rdb$" . (lambda () (fold-set-marks "! {{{ " "! }}} "))))
-              find-file-matching-regexp-alist))
+              as-find-file-matching-regexp-alist))
 
 ;;}}}
 ;;{{{ Autoload mode via local variables
@@ -1053,9 +1079,9 @@ a prefix argument."
 (add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
 (add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
 
-(setq find-file-matching-regexp-alist
+(setq as-find-file-matching-regexp-alist
       (append '(("\*\.rdb$" . (lambda () (setq comment-start "! "))))
-              find-file-matching-regexp-alist))
+              as-find-file-matching-regexp-alist))
 
 ;;}}}
 ;;{{{ hippie-expand
