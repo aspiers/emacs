@@ -797,7 +797,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ CSS
 
-(load "css-mode" t)
+(autoload 'css-mode "css-mode" "mode for editing CSS files")
 
 ;;}}}
 ;;{{{ Apache
@@ -850,7 +850,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Load folding mode
 
-(load "folding" t)
+(autoload 'folding-mode "folding" "folding mode")
 
 ;;}}}
 ;;{{{ Set default marks
@@ -932,6 +932,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ auto-recomp for .el files
 
+;; This is tiny, so we load at startup
 (load "auto-recomp" t)
 
 ;;}}}
