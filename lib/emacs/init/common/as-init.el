@@ -87,8 +87,9 @@
 ;;}}}
 ;;{{{ C-x 9
 
-(global-set-key "\C-x9 "        'set-mark-command)
-(global-set-key "\C-x9a"        'save-buffer)
+(global-set-key "\C-x9 "   'set-mark-command)
+(global-set-key "\C-x9a"   'save-buffer)
+
 ;;{{{ toggle-indent-tabs-mode
 
 (defun toggle-indent-tabs-mode
@@ -100,8 +101,10 @@
 )
 
 ;;}}}
-(global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
-(global-set-key "\C-x9c"        'comment-region)
+(global-set-key "\C-x9b"   'toggle-indent-tabs-mode)
+
+(global-set-key "\C-x9c"   'comment-region)
+
 ;;{{{ insert-date-and-time
 
 (defun insert-date-and-time
@@ -117,8 +120,10 @@
 
 ;;}}}
 (global-set-key "\C-x9d"        'insert-date-and-time)
-(global-set-key "\C-x9g"        'goto-line)
-(global-set-key "\C-x9i"        'auto-fill-mode)
+
+(global-set-key "\C-x9g"    'goto-line)
+(global-set-key "\C-x9i"    'auto-fill-mode)
+
 ;;{{{ insert-log-timestamp
 
 (defun insert-log-timestamp
@@ -136,8 +141,21 @@
 )
 
 ;;}}}
-(global-set-key "\C-x9l"        'insert-log-timestamp)
-(global-set-key "\C-x9r"        'toggle-read-only)
+(global-set-key "\C-x9l"    'insert-log-timestamp)
+
+;;{{{ set-cperl-indent-level
+
+(defvar cperl-indent-level)
+(defun set-cperl-indent-level (width)
+  "Sets the cperl-indent-level variable to the given argument."
+  (interactive "NNew cperl-indent-level: ")
+  (setq cperl-indent-level width))
+
+;;}}}
+(global-set-key "\C-x9p"    'set-cperl-indent-level)
+
+(global-set-key "\C-x9r"    'toggle-read-only)
+
 ;;{{{ toggle-truncate-lines
 
 (defun toggle-truncate-lines
@@ -149,8 +167,10 @@
 )
 
 ;;}}}
-(global-set-key "\C-x9t"        'toggle-truncate-lines)
-(global-set-key "\C-x9v"        'set-variable)
+(global-set-key "\C-x9t"    'toggle-truncate-lines)
+
+(global-set-key "\C-x9v"    'set-variable)
+
 ;;{{{ set-tab-width
 
 (defun set-tab-width (width)
@@ -159,8 +179,9 @@
   (setq tab-width width))
 
 ;;}}}
-(global-set-key "\C-x9w"        'set-tab-width)
-(global-set-key "\C-x9z"        'suspend-emacs)
+(global-set-key "\C-x9w"    'set-tab-width)
+
+(global-set-key "\C-x9z"    'suspend-emacs)
 
 ;;}}}
 ;;{{{ auto-text
@@ -424,8 +445,8 @@ If a find-file is performed on a filename which matches one of these
 regexps, the buffer name is renamed to the corresponding entry in this
 alist.")
 
-(defun as-buffer-rename-via-alist ()
-  "Function to rename a buffer by looking it up in an alist of matches.
+(defun as-buffer-rename-via-alist-hook ()
+  "Hook to rename a buffer by looking it up in an alist of matches.
 See the documentation for `as-buffer-renamings-alist'."
   (catch 'endloop
     (mapcar
@@ -456,7 +477,7 @@ to the beginning of the buffer name."
   (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
 
 ;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
-(add-hook 'find-file-hooks 'as-buffer-rename-via-alist)
+(add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
 
 ;;}}}
 ;;{{{ Display current buffer's filename
@@ -520,16 +541,6 @@ to the beginning of the buffer name."
 
 ;; Major modes
 
-;;{{{ Fundamental
-
-;;{{{ Tab widths
-
-(add-hook 'fundamental-mode-hook
-          (function (lambda () (setq tab-width 4))))
-
-;;}}}
-
-;;}}}
 ;;{{{ C
 
 ;;{{{ C indentation setup
@@ -645,6 +656,34 @@ to the beginning of the buffer name."
 (defalias 'perl-mode 'cperl-mode)
 
 ;;}}}
+;;{{{ Indentation
+
+(make-variable-buffer-local 'cperl-indent-level)
+(set-default 'cperl-indent-level 2)
+
+(defvar as-cperl-indentation-alist '()
+  "alist mapping filename regexps to buffer-local settings for
+`cperl-indent-level'.")
+
+(defun as-set-cperl-indentation-hook ()
+  "Hook to set cperl-indent-level on newly visited files."
+  (catch 'endloop
+    (mapcar
+     (lambda (x)
+       (cond
+        ((string-match (concat ".*" (car x)) (buffer-file-name))
+         (setq cperl-indent-level (cdr x))
+         (message (format "%s matched %s" (buffer-file-name) (car x)))
+         (throw 'endloop t))
+        (t
+         (message (format "%s didn't match %s" (buffer-file-name) (car x)))
+         )))
+     as-cperl-indentation-alist)))
+
+(add-hook 'find-file-hooks 'as-set-cperl-indentation-hook)
+
+
+;;}}}
 ;;{{{ Hairy options
 
 (eval-when-compile
@@ -713,12 +752,6 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Shell-script
 
-;;{{{ Tab widths
-
-(add-hook 'shell-script-mode-hook
-          (lambda () (setq tab-width 4)))
-
-;;}}}
 ;;{{{ Autoload sh-script on invocation
 
 (autoload 'shell-script-mode "sh-script"
@@ -741,12 +774,6 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Text
 
-;;{{{ Tab widths
-
-(add-hook 'text-mode-hook
-          (lambda () (setq tab-width 4)))
-
-;;}}}
 ;;{{{ Auto-fill
 
 ;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
