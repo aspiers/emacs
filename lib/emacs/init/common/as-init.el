@@ -17,6 +17,15 @@
 
 ;;{{{ Function definitions
 
+;;{{{ join-line-with-next
+
+(defun join-line-with-next ()
+  "Joins the current line with the next.  This just calls join-line with
+a prefix argument."
+  (interactive)
+  (join-line 1))
+
+;;}}}
 ;;{{{ toggle-truncate-lines
 
 (defun toggle-truncate-lines
@@ -284,7 +293,7 @@ in all the directories in that path."
 (global-set-key [(f4)]             'duplicate-line)
 (global-set-key [(insert)]         'overwrite-mode)
 (global-set-key [(meta o)]         'overwrite-mode)
-(global-set-key [(control meta y)] 'join-line) ;; also on M-^
+(global-set-key [(control meta y)] 'join-line-with-next)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers
 ;; so that the point automatically gets put in the
