@@ -959,6 +959,14 @@ Can be optionally given a numeric prefix which
 (autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
+(setq-default sgml-indent-data t)
+;; Some convenient key definitions:
+;; (define-key sgml-mode-map "\C-c\C-x\C-e" 'sgml-describe-element-type)
+;; (define-key sgml-mode-map "\C-c\C-x\C-i" 'sgml-general-dtd-info)
+;; (define-key sgml-mode-map "\C-c\C-x\C-t" 'sgml-describe-entity)
+
+;;{{{ faces
+
 (setq-default sgml-set-face t)
 
 (make-face 'sgml-comment-face)
@@ -1007,11 +1015,7 @@ Can be optionally given a numeric prefix which
 ;;                           (entity . font-lock-type-face)
 ;;                           (shortref . font-lock-function-name-face)))
 
-(setq-default sgml-indent-data t)
-;; Some convenient key definitions:
-;; (define-key sgml-mode-map "\C-c\C-x\C-e" 'sgml-describe-element-type)
-;; (define-key sgml-mode-map "\C-c\C-x\C-i" 'sgml-general-dtd-info)
-;; (define-key sgml-mode-map "\C-c\C-x\C-t" 'sgml-describe-entity)
+;;}}}
 
 ;;}}}
 ;;{{{ SGML
