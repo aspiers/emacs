@@ -78,7 +78,9 @@
  '(gnus-select-method (quote (nntp "news.guideguide.com")))
  '(gnus-startup-hook (quote ((lambda nil (if (<= (frame-width) 80) (gnus-add-configuration (quote (article (vertical 1.0 (horizontal 0.25 (summary 0.75 point) (tree 1.0)) (article 1.0))))))))))
  '(gnus-summary-exit-hook (quote (gnus-summary-bubble-group)))
- '(gnus-summary-line-format "%U%R%z%4L:%(%[%1{%-15,15n%}%]%) %2t %3{%B%} %2{%s%}
+ '(gnus-group-line-format "%M%S%p%P%3y: %(%g%)%l
+")
+ '(gnus-summary-line-format "%U%R%z%4L:%([%1{%-15,15n%}]%) %2t %3{%B%}%2{%s%}
 ")
  '(gnus-suppress-duplicates t)
  '(gnus-use-trees t)
@@ -117,3 +119,4 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-group-tag-face ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag-face ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
  '(cvs-msg-face ((t (:slant italic))))
+ )
