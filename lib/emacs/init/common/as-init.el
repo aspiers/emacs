@@ -211,9 +211,7 @@ in all the directories in that path."
         ))
 
 ;;}}}
-;;{{{ miscellaneous
-
-(global-set-key "\C-x\C-a"      'bury-buffer)
+;;{{{ C-x 9
 
 (global-set-key "\C-x9 "        'set-mark-command)
 (global-set-key "\C-x9a"        'save-buffer)
@@ -228,29 +226,6 @@ in all the directories in that path."
 (global-set-key "\C-x9t"        'toggle-truncate-lines)
 (global-set-key "\C-x9v"        'set-variable)
 (global-set-key "\C-x9z"        'suspend-emacs)
-
-(global-set-key "\M-\\"         'fixup-whitespace)
-(global-set-key "\C-xt"         'revert-buffer)
-(global-set-key "\C-ha"         'apropos)
-(global-set-key "\M-g"          'goto-line)
-(global-set-key "\C-ha"         'apropos)
-
-(global-set-key [(control tab)]         'other-window)
-(global-set-key [(control meta $)]      'ispell-buffer)
-(global-set-key [(control meta tab)]    'ispell-complete-word)
-(global-set-key [(meta i)]              'indent-relative)
-
-(global-set-key [(f1)]          'ispell-word)
-(global-set-key [(f2)]          'emacs-Info)
-(global-set-key [(f4)]          'duplicate-line)
-(global-set-key [(insert)]      'overwrite-mode)
-(global-set-key [(meta o)]      'overwrite-mode)
-
-;; Set C-x C-b to buffer-menu rather than list-buffers
-;; so that the point automatically gets put in the
-;; buffer menu.
-
-(global-set-key "\C-x\C-b"      'buffer-menu)
 
 ;;}}}
 ;;{{{ auto-text
@@ -308,6 +283,33 @@ in all the directories in that path."
 (global-set-key "\C-x\C-zn"
                 (function (lambda () (interactive)
                             (insert "Adam Spiers <adam@spiers.net>"))))
+
+;;}}}
+;;{{{ miscellaneous
+
+(global-set-key "\C-x\C-a"      'bury-buffer)
+(global-set-key "\M-\\"         'fixup-whitespace)
+(global-set-key "\C-xt"         'revert-buffer)
+(global-set-key "\C-ha"         'apropos)
+(global-set-key "\M-g"          'goto-line)
+(global-set-key "\C-ha"         'apropos)
+
+(global-set-key [(control tab)]         'other-window)
+(global-set-key [(control meta $)]      'ispell-buffer)
+(global-set-key [(control meta tab)]    'ispell-complete-word)
+(global-set-key [(meta i)]              'indent-relative)
+
+(global-set-key [(f1)]          'ispell-word)
+(global-set-key [(f2)]          'emacs-Info)
+(global-set-key [(f4)]          'duplicate-line)
+(global-set-key [(insert)]      'overwrite-mode)
+(global-set-key [(meta o)]      'overwrite-mode)
+
+;; Set C-x C-b to buffer-menu rather than list-buffers
+;; so that the point automatically gets put in the
+;; buffer menu.
+
+(global-set-key "\C-x\C-b"      'buffer-menu)
 
 ;;}}}
 
@@ -636,9 +638,9 @@ to the beginning of the buffer name."
 ;;           What the hell is this one??
 ;;           (local-set-key [(delete)] 'backward-or-forward-delete-char)
 
-             (local-set-key "(" 'self-insert-command)
-             (local-set-key "<" 'self-insert-command)
-             (local-set-key "[" 'self-insert-command)
+;;              (local-set-key "(" 'self-insert-command)
+;;              (local-set-key "<" 'self-insert-command)
+;;              (local-set-key "[" 'self-insert-command)
              (local-set-key [(control c) (control h) (control j)] 'imenu)
              (setq indent-tabs-mode nil)
 )))
@@ -822,6 +824,7 @@ to the beginning of the buffer name."
 
 (add-hook 'folding-mode-hook
           (lambda ()
+            ;; keypad
             (define-key folding-mode-map [kp-7] 'fold-enter)
             (define-key folding-mode-map [kp-9] 'fold-exit)
             (define-key folding-mode-map [kp-1] 'fold-show)
@@ -837,8 +840,9 @@ to the beginning of the buffer name."
             (define-key folding-mode-map "\M-OP" 'fold-enter)
             (define-key folding-mode-map "\M-OQ" 'fold-exit)
 
-            ;; Override C-b binding
-            ;; (define-key folding-mode-map "\C-b"  'kill-whole-line)
+            ;; Quick navigation
+            (local-set-key [(control meta <)] 'fold-exit)
+            (local-set-key [(control meta >)] 'fold-enter)
             ))
 
 (setq fold-default-keys-function 'fold-bind-backward-compatible-keys)
