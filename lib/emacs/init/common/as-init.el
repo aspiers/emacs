@@ -764,6 +764,13 @@ that name."
 ;;{{{ outline
 
 (eval-after-load "outline" '(require 'foldout))
+(add-hook 'outline-mode-hook
+          (lambda ()
+            ;; Quick navigation
+            (auto-fill-mode 1)
+            (local-set-key [(shift left)] 'foldout-exit-fold)
+            (local-set-key [(shift right)] 'foldout-zoom-subtree)
+            ))
 
 ;;}}}
 
