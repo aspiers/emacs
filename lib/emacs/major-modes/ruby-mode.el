@@ -75,8 +75,6 @@
   (define-key ruby-mode-map "}" 'ruby-electric-brace)
   (define-key ruby-mode-map "\e\C-a" 'ruby-beginning-of-defun)
   (define-key ruby-mode-map "\e\C-e" 'ruby-end-of-defun)
-;;   (define-key ruby-mode-map "\e\C-b" 'ruby-beginning-of-block)
-;;   (define-key ruby-mode-map "\e\C-f" 'ruby-end-of-block)
   (define-key ruby-mode-map "\e\C-p" 'ruby-beginning-of-block)
   (define-key ruby-mode-map "\e\C-n" 'ruby-end-of-block)
   (define-key ruby-mode-map "\e\C-h" 'ruby-mark-defun)
