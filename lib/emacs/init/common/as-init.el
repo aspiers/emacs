@@ -771,6 +771,13 @@ that name."
             (local-set-key [(shift left)] 'foldout-exit-fold)
             (local-set-key [(shift right)] 'foldout-zoom-subtree)
             ))
+(add-hook 'outline-minor-mode-hook
+          (lambda ()
+            ;; Quick navigation
+            (auto-fill-mode 1)
+            (local-set-key [(shift left)] 'foldout-exit-fold)
+            (local-set-key [(shift right)] 'foldout-zoom-subtree)
+            ))
 
 ;;}}}
 
