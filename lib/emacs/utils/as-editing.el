@@ -94,3 +94,54 @@ The list marked is the one that contains point or follows point."
     (kill-ring-save (mark) (point))))
 
 ;;}}}
+;;{{{ Ben's query-replace history advice hack
+
+;; The default behaviour of `query-replace' is slightly
+;; annoying.  If we perform a query-replace with the region
+;; active, to restrict activity to that region, then want to
+;; perform the same query-replace on another region, we can't
+;; use `repeat-complex-command' because the evaluated values of
+;; `region-beginning' and `region-end' get stored in the command
+;; history.  We fix that by defining some advice for the common
+;; worker function for all replacement-type functions,
+;; `perform-replace'.
+
+(defvar bn-replace-functions-to-fix-up
+  (list 'query-replace
+        'query-replace-regexp
+        'query-replace-regexp-eval
+        'map-query-replace-regexp
+        'replace-string
+        'replace-regexp)
+  "List of functions for which the `bn-fix-command-history' advice
+will doctor `command-history'.")
+
+(defun bn-safe-region-beginning ()
+  "Return the beginning of region, or nil if region not active"
+  (if mark-active
+      (region-beginning)
+    nil))
+
+(defun bn-safe-region-end ()
+  "Return the end of region, or nil if region not active"
+  (if mark-active
+      (region-end)
+    nil))
+
+(defadvice perform-replace (after bn-fix-command-history)
+  "Fix up the most recent entry in `command-history' so that the
+START and END arguments are replaced by calls to
+`bn-safe-region-beginning' and `bn-safe-region-end'
+respectively.  This allows `repeat-complex-command' to do the
+Right Thing with `query-replace' and friends."
+  (let ((ch-top (car command-history)))
+    ;; This check may be unnecessary, but just in case we get
+    ;; called as part of another interactive function, make sure
+    ;; we're only changing history for suitable functions.
+    (when (memq (car-safe ch-top) bn-replace-functions-to-fix-up)
+      (setcar (cddddr ch-top) (list 'bn-safe-region-beginning))
+      (setcar (cdr (cddddr ch-top)) (list 'bn-safe-region-end)))))
+
+(ad-activate 'perform-replace)
+
+;;}}}
