@@ -55,6 +55,31 @@ Controlled by `find-file-matching-regexp-alist'."
 (add-hook 'find-file-hooks 'find-file-matching-regexp-hook)
 
 ;;}}}
+;;{{{ bounce-buffer
+
+(defvar bounce-buffer-regexp-alist '()
+  "Controls the behaviour of `bounce-buffer'.")
+
+(defun bounce-buffer ()
+  "For each element of `bounce-buffer-regexp-alist', attempts a search
+and replace on the current buffer's filename.  (The CARs are the
+search regexps, and the CDRs the corresponding strings to replace the
+matches with).  As soon a search is successful, the filename resulting
+from the replace is visited via `find-file'."
+  (interactive)
+  (catch 'gotcha
+    (mapcar
+     (lambda (x)
+       (let ((case-fold-search nil) 
+             (match (car x))
+             (replace (cdr x)))
+         (cond
+          ((string-match match (buffer-file-name))
+           (find-file (replace-match replace t t (buffer-file-name) nil))
+           (throw 'gotcha nil)))))
+     bounce-buffer-regexp-alist)))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Key bindings
@@ -359,6 +384,7 @@ in all the directories in that path."
 
 ;;}}}
 (global-set-key [(f4)]             'duplicate-line)
+(global-set-key [(control meta ,)] 'bounce-buffer)
 (global-set-key [(insert)]         'overwrite-mode)
 (global-set-key [(meta o)]         'overwrite-mode)
 
@@ -480,7 +506,8 @@ See the documentation for `as-buffer-renamings-alist'."
   (catch 'endloop
     (mapcar
      (lambda (x)
-       (if (string-match (concat ".*" (car x)) (buffer-file-name))
+       (if (let ((case-fold-search nil))
+             (string-match (concat ".*" (car x)) (buffer-file-name)))
            (progn
              (rename-buffer
               (replace-match (cdr x) t nil (buffer-file-name) nil)
