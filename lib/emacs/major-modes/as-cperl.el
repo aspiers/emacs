@@ -259,7 +259,7 @@ point somewhere *before* the if/unless/while/until modifier."
     (save-excursion
       (re-search-forward ";")
       (or (cperl-after-expr-p)
-          (error "Couldn't find ; terminating expr"))
+          (error "Couldn't find `;' terminating expr"))
       (setq expr-search-bound (match-beginning 0)))
     (save-excursion
       (or (looking-at modifier-start-re)
@@ -282,6 +282,7 @@ point somewhere *before* the if/unless/while/until modifier."
     (insert "}")
     (delete-region ws-start expr-end-ws)
     (goto-char ws-start)
+    (insert ";")
     (back-to-indentation)
     (insert modifier " (" expr ") {")
     (newline-and-indent)
