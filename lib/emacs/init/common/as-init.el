@@ -338,6 +338,7 @@ that name."
   "Toggles the value of truncate lines in the current buffer"
   (interactive)
   (setq truncate-lines (not truncate-lines))
+  (redraw-display)
   (message "truncate-lines set to %s" truncate-lines))
 
 ;;}}}
