@@ -1162,6 +1162,11 @@ Can be optionally given a numeric prefix which
 (autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
+;;{{{ pjb-manager
+
+(autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
@@ -1255,6 +1260,8 @@ Can be optionally given a numeric prefix which
             ;; Quick navigation
             (local-set-key [(control meta <)] 'fold-exit)
             (local-set-key [(control meta >)] 'fold-enter)
+            (local-set-key [(shift left)] 'fold-exit)
+            (local-set-key [(shift right)] 'fold-enter)
             ))
 
 (eval-when-compile
