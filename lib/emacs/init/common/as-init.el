@@ -509,7 +509,7 @@ that name."
 		       (boundp 'filename)
 		       (not (eq filename t))
                        (string-match
-			"mutt-thelonious\\|\\.article\\|\\.letter"
+			"mutt-\\|\\.article\\|\\.letter"
 			filename)
                        (turn-on-auto-fill)))))
 
