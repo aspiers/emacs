@@ -875,7 +875,7 @@ With a prefix argument, prompt for cvs FLAGS to use."
 
 (defun cvs-mode-examine-directory (dir)
   "Run `cvs-examine' on a specified directory with the default flags."
-  (interactive (cvs-query-directory-prompt "CVS Examine (directory): "))
+  (interactive (list (cvs-query-directory-prompt "CVS Examine (directory): ")))
   (cvs-examine dir t))
   
 (defun cvs-mode-examine-parent-directory ()
