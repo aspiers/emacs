@@ -566,7 +566,8 @@ that name."
 ;; fontify straight away
 (setq-default sgml-auto-activate-dtd t)
 
-(setq sgml-warn-about-undefined-elements nil)
+(defvar sgml-warn-about-undefined-elements nil)
+(defvar sgml-warn-about-undefined-entities nil)
 
 ;; Some convenient key definitions:
 ;; (define-key sgml-mode-map "\C-cm\C-e" 'sgml-describe-element-type)
