@@ -243,6 +243,19 @@ use warnings;
   (forward-line -3))
 
 ;;}}}
+;;{{{ as-cperl-insert-script-template
+
+(defun as-cperl-insert-script-template ()
+  "Inserts a template for a Perl script."
+  (interactive)
+  (insert "#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+"))
+
+;;}}}
 ;;{{{ as-cperl-reinvert-if-unless
 
 (defun as-cperl-reinvert-if-unless ()
@@ -309,6 +322,7 @@ point somewhere *before* the if/unless/while/until/for/foreach modifier."
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
   (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
   (local-set-key "\C-cmt"      'as-cperl-reinvert-if-unless)
+  (local-set-key "\C-cmT"      'as-cperl-insert-script-template)
   (local-set-key [(f10)]       'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
   (setq indent-tabs-mode nil)
