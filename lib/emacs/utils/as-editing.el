@@ -41,7 +41,9 @@ backslash and then calls `join-line'."
   (interactive)
   (save-excursion
     (let ((suffix (save-excursion
-                    (previous-line 1) ;; sorry FSF
+                    (let ((col (current-column)))
+                      (forward-line -1)
+                      (move-to-column col))
                     (let ((suffix-start (point)))
                       (end-of-line)
                       (buffer-substring suffix-start (point))))))
