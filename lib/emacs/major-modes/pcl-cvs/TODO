@@ -1,6 +1,5 @@
 pcl-cvs wishlist, sorted by decreasing priority
 
-- add prefix (bind to L) for toggling recursion
 - implement per-directory caching of *cvs* buffers and their corresponding
   ewocs:
    + add ewoc-dump-to-string which dumps a whole ewoc, omitting
@@ -11,3 +10,4 @@ pcl-cvs wishlist, sorted by decreasing priority
      ewoc dumps first
 - option to toggle unknown fileinfos
 - allow diffing between arbitrary versions
+- add prefix (bind to L) for toggling recursion
