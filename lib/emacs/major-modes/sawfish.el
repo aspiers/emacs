@@ -282,7 +282,7 @@ Special commands:
   ;; `define-derived-mode' in both GNU Emacs and XEmacs doesn't appear to
   ;; derive the font-lock settings. So, depending on the editor in use we
   ;; need to drag those settings down to us in different ways (hmm)....
-  (if (boundp 'running-xemacs)
+  (if (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
       ;; XEmacs appears to do something like this...
       (put 'sawfish-mode 'font-lock-defaults 
            (get 'emacs-lisp-mode 'font-lock-defaults))
@@ -298,7 +298,7 @@ Special commands:
                 (append (car font-lock-defaults) 
                         '(sawfish-additional-keywords))))))
   ;; Menu stuff.
-  (if (boundp 'running-xemacs)
+  (if (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
       ;; XEmacs.
       (progn
         ;; For some odd reason `delete-menu-item' doesn't seem to always work.
@@ -892,7 +892,7 @@ returned."
 ;; GNU Emacs/XEmacs difference crap.
 (defun sawfish-region-active-p ()
   "Is there an active region?"
-  (if (boundp 'running-xemacs)
+  (if (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
       (funcall (symbol-function 'region-exists-p))
     (symbol-value 'mark-active)))
   
