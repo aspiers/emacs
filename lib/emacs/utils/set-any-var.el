@@ -33,8 +33,8 @@ as a starting point for convenient editing."
           (var-in (completing-read
                    (if (symbolp default-var)
                        (format
-                        "Set value of variable (default %s): " default-var)
-                     "Set value of variable: ")
+                        "Set variable (default %s): " default-var)
+                     "Set variable: ")
                    obarray 'boundp t nil nil
                    (if (symbolp default-var) (symbol-name default-var))))
           (var (intern (cond ((equal var-in "") default-var)
@@ -46,7 +46,7 @@ as a starting point for convenient editing."
                    (call-interactively `(lambda (arg)
                                           (interactive ,prop)
                                           arg))
-                 (read (read-string "New value: "
+                 (read (read-string (format "Set %s to: " var)
                                     (pp (symbol-value var))
                                     'set-variable-value-history)))))
      (list var val)))
