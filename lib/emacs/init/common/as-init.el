@@ -483,9 +483,9 @@ a prefix argument."
 (global-set-key [(meta i)]              'indent-relative)
 
 ;; (global-set-key [(f1)] 'ispell-word)
-;; (global-set-key [(f2)] 'as-bounce-buffer)
+(global-set-key [(f2)] 'as-bounce-buffer)
 ;; (global-set-key [(f3)] 'as-display-buffer-filename)
-;; (global-set-key [(f4)] 'as-duplicate-line)
+(global-set-key [(f4)] 'as-duplicate-line)
 ;; (global-set-key [(f6)] 'as-copy-previous-line-suffix)
 
 (global-set-key [(insert)] 'overwrite-mode)
