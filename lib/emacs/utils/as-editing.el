@@ -24,9 +24,13 @@
 ;;{{{ as-join-line-with-next
 
 (defun as-join-line-with-next ()
-  "Joins the current line with the next.  This just calls `join-line' with
-a prefix argument."
+  "Joins the current line with the next.  Removes any trailing
+backslash and then calls `join-line'."
   (interactive)
+  (save-excursion
+    (end-of-line)
+    (forward-char -1)
+    (and (looking-at "\\\\") (delete-char 1)))
   (join-line 1))
 
 ;;}}}
