@@ -296,8 +296,11 @@ that name."
 (autoload 'as-insert-homepage-url "as-autotext" "Insert homepage url" t)
 (global-set-key "\C-cih" 'as-insert-homepage-url)
 
-(autoload 'as-insert-japh-sig "as-autotext" "Insert japh sig" t)
-(global-set-key "\C-cij" 'as-insert-japh-sig)
+(autoload 'as-insert-japh-method-chain-sig "as-autotext" "Insert JAPH method chain sig" t)
+(global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
+
+(autoload 'as-insert-japh-indirect-sig "as-autotext" "Insert JAPH indirect method sig" t)
+(global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
 
 (autoload 'as-insert-log-timestamp "as-autotext" "Insert log timestamp" t)
 (global-set-key "\C-cil" 'as-insert-log-timestamp)
