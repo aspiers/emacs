@@ -41,7 +41,7 @@ COMPILER+= -batch -f batch-byte-compile
 all: install
 
 list:
-	@echo $(ELs)o
+	@for el in $(ELs); do echo $$el; done
 
 install: $(ELCs) psgml uninstall
 	@echo "Installing all .elcs in $(installdir)"
