@@ -116,8 +116,16 @@ to read a file name from the minibuffer.
 The search path for Info files is in the variable `Info-directory-list'.
 The top-level Info directory is made by combining all the files named `dir' 
 in all the directories in that path."
-  (interactive (if current-prefix-arg
-                   (list (read-file-name "Info file name: " nil nil t))))
+  (interactive
+   (if current-prefix-arg
+       (list
+        (read-file-name
+         "Info file name: " ;; PROMPT
+         nil                ;; DIR
+         nil                ;; DEFAULT-FILENAME
+         t                  ;; MUSTMATCH
+         nil                ;; INITIAL 
+         ))))
   (if file
       (info file)
     (if (get-buffer "*info*")
@@ -750,9 +758,12 @@ to the beginning of the buffer name."
 (setq Man-notify-method 'pushy)
 
 ;;}}}
-;;{{{ sawmill
+;;{{{ sawfish
 
 (autoload 'sawfish-mode "sawfish" "mode for editing sawfish rep (lisp) files" t)
+;;(add-hook 'sawfish-mode-hook
+;;          (function (lambda () (turn-on-font-lock))))
+;;(add-hook 'sawfish-mode-hook 'font-lock-mode-if-window-system)
 
 ;;}}}
 ;;{{{ lilypond
