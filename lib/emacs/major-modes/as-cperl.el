@@ -309,7 +309,7 @@ point somewhere *before* the if/unless/while/until modifier."
   (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
   (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
   (local-set-key "\C-cmt"      'as-cperl-reinvert-if-unless)
-  (local-set-key [(f10)]        'as-cperl-insert-unique-warning)
+  (local-set-key [(f10)]       'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
   (setq indent-tabs-mode nil)
   (make-variable-buffer-local 'cperl-indent-level)
