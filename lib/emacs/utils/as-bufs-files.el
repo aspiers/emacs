@@ -31,11 +31,17 @@ from the replace is visited via `find-file'."
 ;;}}}
 ;;{{{ as-display-buffer-filename
 
-(defun as-display-buffer-filename
-  ()
-  "Displays the current buffer's filename in the minibuffer."
-  (interactive)
-  (message (or buffer-file-name "No file associated with this buffer")))
+(defun as-display-buffer-filename (&optional save-to-clipboard)
+  "Displays the current buffer's filename in the minibuffer.
+
+If a prefix argument is given, stores the result in the X selection."
+  (interactive "P")
+  (or buffer-file-name (error "No file associated with this buffer"))
+  (let ((msg buffer-file-name))
+    (cond (save-to-clipboard
+           (x-select-text buffer-file-name)
+           (setq msg (concat msg " (stored in X selection)"))))
+    (message msg)))
 
 ;;}}}
 ;;{{{ as-destroy-buffer
