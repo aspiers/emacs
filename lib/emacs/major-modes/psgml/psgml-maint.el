@@ -40,7 +40,7 @@
 
 (defconst psgml-common-files
   '("psgml.el" "psgml-parse.el" "psgml-edit.el" "psgml-dtd.el" 
-    "psgml-info.el" "psgml-charent.el" "psgml-api.el"))
+    "psgml-info.el" "psgml-charent.el" "psgml-api.el" "psgml-html.el"))
 
 (defconst psgml-emacs-files '("psgml-other.el"))
 (defconst psgml-xemacs-files '("psgml-lucid.el"))

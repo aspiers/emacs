@@ -35,8 +35,8 @@
 ;;; HISTORY
 ;;; senda -  8 Apr 1998: Created.
 ;;;	 $Log$
-;;;	 Revision 1.1  2001/06/06 15:31:47  adam
-;;;	 ruby
+;;;	 Revision 1.2  2001/08/23 17:01:53  adam
+;;;	 more handy stuff
 ;;;
 ;;;	 Revision 1.3  1999/12/01 09:24:18  matz
 ;;;	 19991201
