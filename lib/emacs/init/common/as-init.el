@@ -709,14 +709,14 @@ line before the current line."
 (defun as-cperl-insert-carp-line ()
   "Inserts a
 
-  use Carp;
+  use Carp qw(carp cluck croak confess);
 
 line before the current line."
   (interactive)
     (beginning-of-line)
     (open-line 1)
     (cperl-indent-command)
-    (insert "use Carp;")
+    (insert "use Carp qw(carp cluck croak confess);")
     (backward-char))
 
 ;;}}}
