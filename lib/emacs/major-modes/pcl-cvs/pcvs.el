@@ -123,6 +123,7 @@
 ;;; Code:
 
 (eval-when-compile (require 'cl))
+(eval-when-compile (require 'vc))
 (require 'ewoc)				;Ewoc was once cookie
 (require 'pcvs-defs)
 (require 'pcvs-util)
