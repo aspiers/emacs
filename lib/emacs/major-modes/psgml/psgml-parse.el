@@ -3233,6 +3233,9 @@ Where the latter represents end-tags."
   (when sgml-throw-on-warning
     (apply 'message format things)
     (throw sgml-throw-on-warning t))
+;; Wed Jun  6 22:09:12 BST 2001 adams
+;;  Don't moan if we don't have a DTD
+;;  (when (or sgml-show-warnings sgml-parsing-dtd)
   (when sgml-show-warnings
     (apply 'sgml-message format things)
     (apply 'sgml-log-message format things)))
