@@ -317,6 +317,7 @@ that name."
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cq"   'cvs-quickdir)
 (global-set-key "\C-cr"   'revert-buffer)
+(global-set-key "\C-cR"   'rename-file)
 (global-set-key "\C-cs"   'cvs-status)
 
 ;;{{{ Toggles and settings (C-c t)
