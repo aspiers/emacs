@@ -1,4 +1,4 @@
 -- 
-Adam Spiers -=- musician & hacker -=- me@adamspiers.org -=- http://tigerpig.org/
-$_=q{*{$Just =bless{},'$another ';"\$Perl \::$hacker,"}=sub{print$%[$.++];!$@||$
-;$_[0]},eval join+v45.62,('$z ')x6};s((?<=\$)([a-z]*[\s,]))(push@%,$+;f)egi;eval
+## Adam Spiers ## musician & hacker ## me@adamspiers.org ## http://tigerpig.org
+$@=>$_=q{*{$Just =bless{},'$another ';"\$Perl \::$hacker,"}=sub{print$%[$.++];$
+;$_[0]},eval join+v45.62,('$z ')x6},s.(?<=\$)([a-z]*[\s,]).push@%,$+;f.ieg;eval
