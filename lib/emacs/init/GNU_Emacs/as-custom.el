@@ -2,7 +2,7 @@
 (custom-set-variables
  '(fast-lock-minimum-size 4096)
  '(lazy-lock-defer-on-scrolling t)
- '(scroll-margin -1 t)
+ '(scroll-margin -1)
  '(scroll-step 2)
  '(show-paren-delay 0)
  '(lazy-lock-stealth-time 15)
@@ -22,4 +22,4 @@
  '(font-lock-comment-face ((((class color) (background dark)) (:foreground "aquamarine"))))
  '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
  '(show-paren-match-face ((((class color)) (:background "MediumBlue"))))
- '(cperl-hash-face ((((class color) (background dark)) (:bold t :italic t :foreground "Red")))))
+ '(cperl-hash-face ((((class color) (background dark)) (:bold nil :italic nil :foreground "Red")))))
