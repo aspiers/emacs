@@ -377,72 +377,76 @@ a prefix argument."
 
 ;;{{{ Signatures
 
-(global-set-key "\C-x\C-zj"     
-                (function (lambda ()
-                            "Inserts Adam's cool JAPH .sig"
-                            (interactive)
-                            (insert-file "~/.sig/perl/japh_indirect"))))
+(defun as-insert-japh-sig ()
+  "Inserts Adam's cool JAPH .sig"
+  (interactive)
+  (insert-file "~/.sig/perl/japh_indirect"))
+
+(global-set-key "\C-x\C-zj" 'as-insert-japh-sig)
 
 ;;}}}
 ;;{{{ Scissors
 
-(global-set-key "\C-x\C-zs"
-                (function (lambda ()
-                            "Inserts a cut-here-with-scissors"
-                            (interactive)
-                            (open-line 1)
-                            (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
-                            (beginning-of-line)
-                            (next-line 1)
-                            )))
+(defun as-insert-scissors ()
+  "Inserts a cut-here-with-scissors"
+  (interactive)
+  (open-line 1)
+  (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
+  (beginning-of-line)
+  (next-line 1))
+
+(global-set-key "\C-x\C-zs" 'as-insert-scissors)
 
 ;;}}}
 ;;{{{ Home pages
 
-(global-set-key "\C-x\C-zh"
-                (function (lambda ()
-                            "Inserts Adam's homepage URL"
-                            (interactive)
-                            (insert "http://adamspiers.org/"))))
+(defun as-insert-homepage-url ()
+  "Inserts Adam's homepage URL"
+  (interactive)
+  (insert "http://adamspiers.org/"))
+(global-set-key "\C-x\C-zh" 'as-insert-homepage-url)
 
-(global-set-key "\C-x\C-zo"
-                (function (lambda ()
-                            "Inserts Adam's old homepage URL"
-                            (interactive)
-                            (insert "http://www.new.ox.ac.uk/~adam/"))))
+(defun as-insert-old-homepage-url ()
+  "Inserts Adam's old homepage URL"
+  (interactive)
+  (insert "http://www.new.ox.ac.uk/~adam/"))
+(global-set-key "\C-x\C-zo" 'as-insert-old-homepage-url)
 
-(global-set-key "\C-x\C-zt"
-                (function (lambda ()
-                            "Inserts the tigerpig.org URL"
-                            (interactive)
-                            (insert "http://tigerpig.org/"))))
+(defun as-insert-tigerpig-url ()
+  "Inserts the tigerpig.org URL"
+  (interactive)
+  (insert "http://tigerpig.org/"))
+(global-set-key "\C-x\C-zt" 'as-insert-tigerpig-url)
 
 ;;}}}
 ;;{{{ e-mail address
 
-(global-set-key "\C-x\C-ze"
-                (function (lambda ()
-                            "Inserts Adam's e-mail address"
-                            (interactive)
-                            (insert "adam@spiers.net"))))
+(defun as-insert-email-address ()
+  "Inserts Adam's e-mail address"
+  (interactive)
+  (insert "adam@spiers.net"))
+(global-set-key "\C-x\C-ze" 'as-insert-email-address)
 
 ;;}}}
 ;;{{{ Name (how lazy am I?)
 
-(global-set-key "\C-x\C-zm"
-                (function (lambda ()
-                            "Inserts Adam's name"
-                            (interactive)
-                            (insert "Adam Spiers"))))
+(defun as-insert-name ()
+  "Inserts Adam's name"
+  (interactive)
+  (insert "Adam Spiers"))
+(global-set-key "\C-x\C-zn" 'as-insert-name)
 
 ;;}}}
 ;;{{{ Me (name & e-mail)
 
-(global-set-key "\C-x\C-zn"
-                (function (lambda ()
-                            "Inserts Adam's name and e-mail address"
-                            (interactive)
-                            (insert "Adam Spiers <adam@spiers.net>"))))
+(defun as-insert-name-and-email ()
+  "Inserts Adam's name and e-mail address"
+  (interactive)
+  (as-insert-name)
+  (insert " <")
+  (as-insert-email-address)
+  (insert ">"))
+(global-set-key "\C-x\C-zm" 'as-insert-name-and-email)
 
 ;;}}}
 
