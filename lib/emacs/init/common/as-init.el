@@ -1,32 +1,6 @@
 ;; emacs startup file
 ;; Adam Spiers
 
-;;{{{ History
-
-;;  
-;;  Fri Apr 16 13:00:40 BST 1999
-;;  
-;;    - global-set-key delete -> delete-char
-;;  
-;;  Wed Apr 14 16:16:19 BST 1999
-;;
-;;    - track-eol is turning out to be annoying.
-;;
-;;  Tue Apr 13 18:10:04 BST 1999
-;;  
-;;    - Ditto with track-eol.  Yum.
-;;    - Scrolling behaviour changed as an experiment.
-;;	I think I like it already though.
-;;    - M-i is globally set to indent-relative.  Thank God!
-;;
-;;  Fri Apr  9 12:34:31 BST 1999
-;;
-;;    - Added support for po-mode
-;;    - Added enabling of set-goal-column
-;;    - Started history and to do sections 
-;;
-
-;;}}}
 ;;{{{ To do list
 
 ;;
