@@ -582,6 +582,151 @@ a prefix argument."
 ;;}}}
 ;;{{{ Major modes
 
+;;{{{ CPerl
+
+;;{{{ Autoload
+
+;; one of these two will work
+(autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
+(defalias 'perl-mode 'cperl-mode)
+
+;;}}}
+;;{{{ Indentation
+
+(make-variable-buffer-local 'cperl-indent-level)
+(set-default 'cperl-indent-level 2)
+
+;;}}}
+;;{{{ Hairy options
+
+(eval-when-compile
+  (defvar cperl-font-lock)
+  (defvar cperl-electric-lbrace-space)
+  (defvar cperl-electric-parens)
+  (defvar cperl-electric-linefeed)
+  (defvar cperl-electric-keywords)
+  (defvar cperl-info-on-command-no-prompt)
+  (defvar cperl-clobber-lisp-bindings)
+  (defvar cperl-lazy-help-time))
+
+(setq cperl-font-lock t
+      cperl-electric-lbrace-space nil
+      cperl-electric-parens nil
+      cperl-electric-linefeed nil
+      cperl-electric-keywords nil
+      cperl-info-on-command-no-prompt t
+      cperl-clobber-lisp-bindings nil
+      cperl-lazy-help-time 5)
+
+;;}}}
+;;{{{ Font-lock on
+
+(setq cperl-font-lock t)
+
+;;}}}
+;;{{{ Local key bindings
+
+;;{{{ as-cperl-set-indent-level
+
+(defvar cperl-indent-level)
+(defun as-cperl-set-indent-level (width)
+  "Sets the cperl-indent-level variable to the given argument."
+  (interactive "NNew cperl-indent-level: ")
+  (setq cperl-indent-level width))
+
+;;}}}
+;;{{{ as-cperl-insert-self-and-args-line
+
+(defun cperl-indent-command (&optional whole-exp))
+(defun as-cperl-insert-self-and-args-line ()
+  "Inserts a
+
+  my ($self) = @_;
+
+line before the current line, and leaves the point poised for adding
+more subroutine arguments."
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "my ($self) = @_;")
+  (backward-char 7))
+
+;;}}}
+;;{{{ as-cperl-insert-self-line
+
+(defun as-cperl-insert-self-line ()
+  "Inserts a
+
+  my $self = shift;
+
+line before the current line."
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (cperl-indent-command)
+    (insert "my $self = shift;")))
+
+;;}}}
+;;{{{ as-cperl-insert-args-line
+
+(defun as-cperl-insert-args-line ()
+  "Inserts a
+
+  my () = @_;
+
+line before the current line."
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (cperl-indent-command)
+  (insert "my () = @_;")
+  (backward-char 7))
+
+;;}}}
+;;{{{ as-cperl-make-method
+
+(fset 'as-cperl-make-method
+      "\C-asub \C-e {\C-m\C-imy ($self) = @_;\C-m}\C-o\C-a\C-o\C-i")
+
+;;}}}
+
+(add-hook 'cperl-mode-hook 
+          (function
+           (lambda ()
+             (local-set-key "\C-ca" 'as-cperl-insert-args-line)
+             (local-set-key "\C-cm" 'as-cperl-make-method)
+             (local-set-key "\C-cp" 'cperl-find-pods-heres)
+             (local-set-key "\C-ci" 'as-cperl-set-indent-level)
+             (local-set-key "\C-cs" 'as-cperl-insert-self-and-args-line)
+             (local-set-key "\C-cS" 'as-cperl-insert-self-line)
+             (local-set-key [(backspace)] 'cperl-electric-backspace)
+             (local-set-key [(control c) (control h) (control j)] 'imenu)
+             (setq indent-tabs-mode nil)
+             )))
+
+;;}}}
+;;{{{ Set faces
+
+;; (add-hook 
+;;  'cperl-mode-hook
+;;  (function
+;;   (lambda ()
+;;     (if window-system
+;;      (set-face-background 'font-lock-emphasized-face "black")
+;;       (set-face-background 'font-lock-other-emphasized-face "black")
+;;       (set-face-font
+;;        'font-lock-function-name-face
+;;        "-*-courier-bold-r-*-*-*-220-*-*-*-*-*-*")
+;;       (set-face-foreground
+;;        'font-lock-function-name-face
+;;        "steelblue"))
+;;     )))
+
+;;}}}
+
+;;}}}
 ;;{{{ Text
 
 ;;{{{ Auto-fill
@@ -647,133 +792,6 @@ a prefix argument."
 ;;{{{ Turn on font-lock-mode on entry
 
 (add-hook 'perl-mode-hook 'font-lock-mode-if-window-system)
-
-;;}}}
-
-;;}}}
-;;{{{ CPerl
-
-;;{{{ Autoload
-
-;; one of these two will work
-(autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
-(defalias 'perl-mode 'cperl-mode)
-
-;;}}}
-;;{{{ Indentation
-
-(make-variable-buffer-local 'cperl-indent-level)
-(set-default 'cperl-indent-level 2)
-
-;;}}}
-;;{{{ Hairy options
-
-(eval-when-compile
-  (defvar cperl-font-lock)
-  (defvar cperl-electric-lbrace-space)
-  (defvar cperl-electric-parens)
-  (defvar cperl-electric-linefeed)
-  (defvar cperl-electric-keywords)
-  (defvar cperl-info-on-command-no-prompt)
-  (defvar cperl-clobber-lisp-bindings)
-  (defvar cperl-lazy-help-time))
-
-(setq cperl-font-lock t
-      cperl-electric-lbrace-space nil
-      cperl-electric-parens nil
-      cperl-electric-linefeed nil
-      cperl-electric-keywords nil
-      cperl-info-on-command-no-prompt t
-      cperl-clobber-lisp-bindings nil
-      cperl-lazy-help-time 5)
-
-;;}}}
-;;{{{ Font-lock on
-
-(setq cperl-font-lock t)
-
-;;}}}
-;;{{{ Local key bindings
-
-;;{{{ as-cperl-set-indent-level
-
-(defvar cperl-indent-level)
-(defun as-cperl-set-indent-level (width)
-  "Sets the cperl-indent-level variable to the given argument."
-  (interactive "NNew cperl-indent-level: ")
-  (setq cperl-indent-level width))
-
-;;}}}
-;;{{{ as-cperl-insert-self-line
-
-(defun cperl-indent-command (&optional whole-exp))
-(defun as-cperl-insert-self-line ()
-  "Inserts a
-
-  my $self = shift;
-
-line before the current line."
-  (interactive)
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (cperl-indent-command)
-    (insert "my $self = shift;")))
-
-;;}}}
-;;{{{ as-cperl-insert-args-line
-
-(defun as-cperl-insert-args-line ()
-  "Inserts a
-
-  my () = @_;
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my () = @_;")
-  (backward-char 7))
-
-;;}}}
-;;{{{ as-cperl-make-method
-
-(fset 'as-cperl-make-method
-      "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-o\C-a\C-o\C-i")
-
-;;}}}
-
-(add-hook 'cperl-mode-hook 
-          (function
-           (lambda ()
-             (local-set-key "\C-ca" 'as-cperl-insert-args-line)
-             (local-set-key "\C-cm" 'as-cperl-make-method)
-             (local-set-key "\C-cp" 'cperl-find-pods-heres)
-             (local-set-key "\C-ci" 'as-cperl-set-indent-level)
-             (local-set-key "\C-cs" 'as-cperl-insert-self-line)
-             (local-set-key [(backspace)] 'cperl-electric-backspace)
-             (local-set-key [(control c) (control h) (control j)] 'imenu)
-             (setq indent-tabs-mode nil)
-             )))
-
-;;}}}
-;;{{{ Set faces
-
-;; (add-hook 
-;;  'cperl-mode-hook
-;;  (function
-;;   (lambda ()
-;;     (if window-system
-;;      (set-face-background 'font-lock-emphasized-face "black")
-;;       (set-face-background 'font-lock-other-emphasized-face "black")
-;;       (set-face-font
-;;        'font-lock-function-name-face
-;;        "-*-courier-bold-r-*-*-*-220-*-*-*-*-*-*")
-;;       (set-face-foreground
-;;        'font-lock-function-name-face
-;;        "steelblue"))
-;;     )))
 
 ;;}}}
 
