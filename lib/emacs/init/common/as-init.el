@@ -165,13 +165,14 @@ that name."
 
 ;;{{{ Rebinding for improvement - naughty but nice
 
-(global-set-key "\M-\\"         'fixup-whitespace)  ;; was delete-horizontal-space
-(global-set-key "\M-g"          'goto-line)         ;; was set-face
-(global-set-key "\C-ha"         'apropos)           ;; was apropos-command
+(global-set-key "\M-\\"    'fixup-whitespace)   ;; was delete-horizontal-space
+(global-set-key "\M-g"     'goto-line)          ;; was set-face
+(global-set-key "\C-ha"    'apropos)            ;; was apropos-command
+(autoload 'as-transpose-lines "as-editing" "as-transpose-lines" t)
+(global-set-key "\C-x\C-t" 'as-transpose-lines) ;; was transpose-lines
 
-(global-set-key [(delete)] 'delete-char)    ;; to make sure
-(global-set-key [(insert)] 'overwrite-mode) ;; to make sure
-(global-set-key [(meta o)] 'overwrite-mode)
+(global-set-key [(delete)] 'delete-char)        ;; to make sure
+(global-set-key [(insert)] 'overwrite-mode)     ;; to make sure
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
@@ -193,6 +194,7 @@ that name."
 (global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
 (global-set-key [(control meta y)] 'as-join-line-with-next)
 (global-set-key [(control x) (control y)] 'vim-yy)
+(global-set-key [(meta o)] 'overwrite-mode)
 
 ;;}}}
 ;;{{{ TAB and family
@@ -833,21 +835,10 @@ that name."
 ;;}}}
 ;;{{{ Font-Lock mode
 
-;; Turn it on
-;;(global-font-lock-mode 1)
+;;(global-font-lock-mode t)
 
 ;; Do this via customisation since it's different for xemacs
-;;(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
-
-;; This one probably a waste of time
-;;(as-font-lock-mode-if-window-system)
-
-;; Set some colours
-
-(if window-system
-    (progn
-;;      (set-face-foreground 'font-lock-comment-face "PaleGreen")
-      (set-face-underline-p 'underline nil)))
+;;(and window-system (not running-xemacs) (global-font-lock-mode t))
 
 ;;}}}
 ;;{{{ Load paren library
