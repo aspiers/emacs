@@ -71,10 +71,14 @@ This can be slightly disconcerting, but some people may prefer it."
 	(string-to-int (substring x (match-beginning 1) (match-end 1)))))
   (fset 'mwheel-event-button 'event-button))
 
-(if (not (fboundp 'event-window))
-    (defun mwheel-event-window (event)
-      (posn-window (event-start event)))
-  (fset 'mwheel-event-window 'event-window))
+(eval-and-compile
+  (if (not (fboundp 'event-window))
+      (defun mwheel-event-window (event)
+        (posn-window (event-start event)))
+    (fset 'mwheel-event-window 'event-window)))
+
+(eval-when-compile
+  (defun mwheel-event-button (e)))
 
 (defun mwheel-scroll (event)
   (interactive "e")

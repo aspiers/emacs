@@ -9,6 +9,8 @@
 
 ;;}}}
 
+(defvar running-xemacs nil "non-nil if the current emacs is an XEmacs")
+
 ;;{{{ Function definitions
 
 ;;{{{ toggle-truncate-lines
@@ -338,6 +340,7 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Apropos extension
 
+(defvar apropos-do-all)
 (setq apropos-do-all t)
 
 ;;}}}
@@ -489,6 +492,20 @@ to the beginning of the buffer name."
 
 ;;{{{ C indentation setup
 
+;; for compiling
+(eval-when-compile
+  (defvar c-tab-always-indent)
+  (defvar c-indent-level)
+  (defvar c-continued-statement-offset)
+  (defvar c-brace-offset)
+  (defvar c-brace-imaginary-offset)
+  (defvar c-argdecl-indent)
+  (defvar c-label-offset)
+  (defvar )
+  (defvar )
+  (defvar )
+  )
+
 (setq c-tab-always-indent t
       ;; setq c-auto-newline t
       c-indent-level 4
@@ -565,6 +582,8 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Turn on tab/commenting
 
+(eval-when-compile
+  (defvar perl-tab-to-comment))
 (setq perl-tab-to-comment t)
 
 ;;}}}
@@ -585,6 +604,16 @@ to the beginning of the buffer name."
 
 ;;}}}
 ;;{{{ Hairy options
+
+(eval-when-compile
+  (defvar cperl-font-lock)
+  (defvar cperl-electric-lbrace-space)
+  (defvar cperl-electric-parens)
+  (defvar cperl-electric-linefeed)
+  (defvar cperl-electric-keywords)
+  (defvar cperl-info-on-command-no-prompt)
+  (defvar cperl-clobber-lisp-bindings)
+  (defvar cperl-lazy-help-time))
 
 (setq cperl-font-lock t
       cperl-electric-lbrace-space nil
@@ -729,6 +758,8 @@ to the beginning of the buffer name."
 ;; confirm the syntax of characters, so the fontifying of comments
 ;; often screws up.
 
+(eval-when-compile
+  (defvar sgml-specials))
 (setq sgml-specials '(34))
 
 ;;}}}
@@ -736,6 +767,8 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ man
 
+(eval-when-compile
+  (defvar Man-notify-method))
 (setq Man-notify-method 'pushy)
 
 ;;}}}
@@ -764,9 +797,15 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ MMM mode
 
-(load "mmm-auto" t)
-(setq mmm-mode-ext-classes-alist '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+(defvar mmm-mode-ext-classes-alist)
+(defvar mmm-global-mode)
 (setq mmm-global-mode 'maybe)
+
+(defvar mmm-mode-ext-classes-alist)
+(setq mmm-mode-ext-classes-alist
+      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+
+(load "mmm-auto" t)
 
 ;;}}}
 ;;{{{ CSS
@@ -831,6 +870,7 @@ to the beginning of the buffer name."
 
 (autoload 'folding-mode "folding" "folding mode")
 (autoload 'folding-mode-find-file "folding" "folding mode")
+(autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
 
 (folding-mode-add-find-file-hook)
 
@@ -840,7 +880,7 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Set default marks
 
-;;(autoload 'fold-set-marks "folding" "folding mode")
+(autoload 'fold-set-marks "folding" "folding mode")
 (fold-set-marks "{{{" "}}}")
 
 ;;}}}
@@ -872,6 +912,8 @@ to the beginning of the buffer name."
             (local-set-key [(control meta >)] 'fold-enter)
             ))
 
+(eval-when-compile
+  (defvar fold-default-keys-function))
 (setq fold-default-keys-function 'fold-bind-backward-compatible-keys)
 
 ;;}}}
@@ -886,6 +928,8 @@ to the beginning of the buffer name."
 ;;}}}
 ;;{{{ Font-Lock mode
 
+(eval-when-compile
+  (defvar font-lock-support-mode))
 (setq font-lock-support-mode 'lazy-lock-mode)
 
 ;; Turn it on
@@ -956,7 +1000,7 @@ to the beginning of the buffer name."
 ;;{{{ local variables
 
 ;;; Local Variables:
-;;; auto-recompile: t
+;;; auto-recompile: nil
 ;;; End:
 
 ;;}}}

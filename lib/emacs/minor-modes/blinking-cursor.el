@@ -95,6 +95,10 @@ When Blinking Cursor mode is enabled, the cursor blinks when emacs is idle."
           (t
            (run-with-idle-timer 0.3 t 'blinking-cursor-start-blinking))))))
 
+(defvar blinking-cursor-tick 0
+  "Blinking cursor's internal tick clock.
+Internal variable, do not set this.")
+
 (defun blinking-cursor-start-blinking ()
   "Make the cursor start blinking."
   (add-hook 'pre-command-hook 'blinking-cursor-stop-blinking)
@@ -127,10 +131,6 @@ Uses colors, shapes, and timer durations from blinking-cursor-idle-states."
     ;; if emacs can't get a color don't throw an error.
     (error
      (message "blinking-cursor-blink signaled: %S" err-data))))
-
-(defvar blinking-cursor-tick 0
-  "Blinking cursor's internal tick clock.
-Internal variable, do not set this.")
 
 (defun blinking-cursor-tick-advance ()
   "Advances the blinking cursor's internal tick clock."

@@ -250,6 +250,21 @@
 
 ;;; ------------------------------- variables --------------------------------
 
+(eval-when-compile
+  (defvar current-menubar)
+  (defvar font-lock-keywords)
+  (defun make-style ())
+  (defun set-style-foreground (a b))
+  (defun make-extent (a b))
+  (defun set-extent-face (a b))
+  (defun set-extent-data (a b))
+  (defun add-zone (a b c))
+  (defun epoch::set-zone-data (a b))
+  (defun html-add-zone (a b c))
+  (defun set-buffer-menubar (a))
+  (defun add-menu (a b c))
+  )
+
 (defvar html-quotify-hrefs-on-find t
   "*If non-nil, all HREF's in a file will be automatically quotified
 when the file is loaded.  This is useful for converting ancient HTML

@@ -10,38 +10,28 @@
 (if (not (boundp 'running-xemacs))
     (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
 
-
-;; Set load-path and load in all options from relevant places
-
-(setq load-path
-      (append '(
-                "~/lib/emacs/init"
-                "~/lib/emacs"
-                ) load-path))
-
 (cond 
  (running-xemacs
-  (setq load-path (append '("~/lib/emacs/XEmacs") load-path))
+  (add-to-list 'load-path "~/lib/emacs/XEmacs" )
 
   ;; XEmacs automatically saved settings go here:
-  (setq save-options-init-file "~/lib/emacs/init/XEmacs/options-init.el")
-  (setq save-options-file "~/lib/emacs/init/XEmacs/options.el")
-  (load save-options-file t)
+  (setq save-options-init-file "~/lib/emacs/init/XEmacs/as-options-init.el")
+  (setq save-options-file "~/lib/emacs/init/XEmacs/as-options.el")
+  (load "~/lib/emacs/init/XEmacs/as-options" 'noerror)
 
-  (setq custom-file "~/lib/emacs/init/XEmacs/custom.el")
-  (load custom-file t)
+  (setq custom-file "~/lib/emacs/init/XEmacs/as-custom.el")
+  (load "~/lib/emacs/init/XEmacs/as-custom" 'noerror)
 
-  (load "~/lib/emacs/init/common/XEmacs" t)
+  (load "~/lib/emacs/XEmacs/as-init")
   )
  (t
-  (setq load-path (append '("~/lib/emacs/GNU_Emacs") load-path))
+  (add-to-list 'load-path "~/lib/emacs/GNU_Emacs" 'append)
 
-  (setq custom-file "~/lib/emacs/init/GNU_Emacs/custom.el")
-  (load custom-file t)
+  (setq custom-file "~/lib/emacs/init/GNU_Emacs/as-custom.el")
+  (load "~/lib/emacs/init/GNU_Emacs/as-custom" 'noerror)
 
-  (load "~/lib/emacs/init/common/emacs" t)
+  (load "~/lib/emacs/GNU_Emacs/as-init")
   ))
 
-
-(load "~/.emacs.local" t)
+(load "~/.emacs.local" 'noerror)
 

@@ -533,6 +533,8 @@ Whenever it is needed again it will be rebuilt."
 ;;;
 ;;; tempo-build-collection
 
+(defvar tempo-dirty)
+
 (defun tempo-build-collection ()
   "Build a collection of all the tags and return it.
 If `tempo-dirty-collection' is NIL, the old collection is reused."

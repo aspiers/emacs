@@ -153,6 +153,9 @@ is t")
 ;; this is what the byte compiler does to see if its emacs18. You probably
 ;; don't need to change this.
 
+(eval-when-compile
+  (or (boundp 'epoch::version) (defvar epoch::version)))
+
 (defvar html-helper-emacs18
   (and (boundp 'emacs-version)
        (or (and (boundp 'epoch::version) epoch::version)
@@ -162,6 +165,11 @@ is t")
 ;;}}}
 
 (require 'tempo)
+(eval-when-compile
+  (defun tempo-template-html-definition-item (a))
+  (defun tempo-template-html-item (a))
+  (defun tempo-template-html-skeleton ())
+  (defun hilit-set-mode-patterns (a b c d)))
 
 ;;{{{ html-helper-mode-syntax-table
 

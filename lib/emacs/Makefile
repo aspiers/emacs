@@ -1,4 +1,4 @@
-srcdirs=init/common init/GNU_Emacs major-modes minor-modes utils
+srcdirs=init/common major-modes minor-modes utils
 loadpaths=$(HOME)/lib/emacs/major-modes/mmm
 installdir=$(HOME)/lib/emacs/GNU_Emacs
 EMACS=emacs
@@ -28,7 +28,7 @@ LOADPATHS=$(addprefix -L ,$(loadpaths))
 	@$(EMACS) $(LOADPATHS) -batch -f batch-byte-compile $<
 
 clean: uninstall
-	@-rm $(ELCs)
+	@-rm -f $(ELCs)
 
 uninstall:
-	@-rm $(wildcard $(installdir)/*.elc)
+	@-rm -f $(wildcard $(installdir)/*.elc)

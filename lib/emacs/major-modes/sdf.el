@@ -2,6 +2,8 @@
 ;;; SDF minor mode
 ;;;
 
+(eval-when-compile
+  (require 'hilit19))
 
 (cond (window-system
        (require 'hilit19)
