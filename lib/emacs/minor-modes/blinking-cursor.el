@@ -45,14 +45,14 @@
   :type  'boolean
   :group 'blinking-cursor)
 
-(defcustom blinking-cursor-states '(("blue" "box" 0.5) ("gold" "box" 0.5))
-  "List of states that will be cycled through to blink the cursor.
+(defcustom blinking-cursor-idle-states '(("blue" "box" 0.5) ("gold" "box" 0.5))
+  "List of states that will be cycled through to blink the cursor when emacs is idle.
 
 The list should contain at least two states.  Each state compromises
 of a color, a cursor type, and corresponding to the `cursor-type'
 window frame parameter.
 
-The cursor will not cycle states unless Emacs is idle."
+The cursor will not cycle states unless emacs is idle."
   :type  '(repeat
            (list :tag "Cursor state" :offset 4
                  (color :tag "color")
@@ -64,10 +64,23 @@ The cursor will not cycle states unless Emacs is idle."
                  (number :tag "duration, seconds")))
   :group 'blinking-cursor)
 
+(defcustom blinking-cursor-non-idle-state '("blue" "box")
+  "State which the cursor is kept in when emacs is not idle.
+
+The state compromises of a color, and a cursor type."
+  :type  '(list :tag "Cursor state" :offset 4
+                 (color :tag "color")
+                 (radio :tag "shape"
+                        (const "box")
+                        (radio :tag "bar"
+                               (const :tag "normal" "bar")
+                               (integer :tag "custom width, pixels"))))
+  :group 'blinking-cursor)
+
 (defun blinking-cursor-mode (&optional arg)
   "Toggle Blinking Cursor mode.
 With arg, turn Blinking Cursor mode on iff arg is positive.
-When Blinking Cursor mode is enabled, the cursor blinks when Emacs is idle."
+When Blinking Cursor mode is enabled, the cursor blinks when emacs is idle."
   (interactive "P")
   (setq blinking-cursor-mode (or (and arg (> (prefix-numeric-value arg) 0))
 				 (and (null arg) (null blinking-cursor-mode))))
@@ -75,7 +88,12 @@ When Blinking Cursor mode is enabled, the cursor blinks when Emacs is idle."
          (cancel-function-timers 'blinking-cursor-start-blinking)
 	 (blinking-cursor-stop-blinking))
 	(t
-         (run-with-idle-timer 0 t 'blinking-cursor-start-blinking))))
+         (cond
+          ((< (length blinking-cursor-idle-states) 2)
+           (setq blinking-cursor-mode nil)
+           (error "blinking-cursor-idle-states needs at least two states"))
+          (t
+           (run-with-idle-timer 0.3 t 'blinking-cursor-start-blinking))))))
 
 (defun blinking-cursor-start-blinking ()
   "Make the cursor start blinking."
@@ -90,20 +108,23 @@ Returns the cursor's color to the first color in the blinking-cursor-colors
 array."
   (cancel-function-timers 'blinking-cursor-blink)
   (remove-hook 'pre-command-hook 'blinking-cursor-stop-blinking)
-  (setq blinking-cursor-tick 0)
-  (set-all-cursor-states (blinking-cursor-current-state)))
+  (let ((color-name (nth 0 blinking-cursor-non-idle-state))
+        (shape      (nth 1 blinking-cursor-non-idle-state)))
+    (set-cursor-state (selected-frame) color-name shape)))
 
 (defun blinking-cursor-blink (&rest ignored)
   "Changes the cursor color and shape, and sets a timer to do it again soon.
 
-Uses colors, shapes, and timer durations from blinking-cursor-states."
+Uses colors, shapes, and timer durations from blinking-cursor-idle-states."
   (condition-case err-data
       (progn
-        (set-all-cursor-states (blinking-cursor-current-state))
+        (let ((color-name (nth 0 (blinking-cursor-current-state)))
+              (shape      (nth 1 (blinking-cursor-current-state))))
+          (set-cursor-state (selected-frame) color-name shape))
         (blinking-cursor-tick-advance)
         (let ((timeout (blinking-cursor-next-timeout)))
           (run-with-timer timeout nil 'blinking-cursor-blink)))
-    ;; if Emacs can't get a color don't throw an error.
+    ;; if emacs can't get a color don't throw an error.
     (error
      (message "blinking-cursor-blink signaled: %S" err-data))))
 
@@ -118,22 +139,12 @@ Internal variable, do not set this.")
 (defun blinking-cursor-current-state ()
   "Returns the blinking cursor's current state."
   (nth
-   (% blinking-cursor-tick (length blinking-cursor-states))
-   blinking-cursor-states))
+   (% blinking-cursor-tick (length blinking-cursor-idle-states))
+   blinking-cursor-idle-states))
 
 (defun blinking-cursor-next-timeout ()
   "Returns how long in seconds the current cursor state lasts."
   (nth 2 (blinking-cursor-current-state)))
-
-(defun set-all-cursor-states (state)
-  "Sets the blinking cursor color and shape in all frames."
-  ;; there's probably a nicer, lispier way of doing this assignment
-  (let ((color-name (car state))
-        (shape (cadr state)))
-    (set-cursor-state (selected-frame) color-name shape)))
-;;      (mapcar (lambda (frame)
-;;                (set-cursor-state frame color-name shape))
-;;              (frame-list))))
 
 (defun set-cursor-state (frame color-name shape)
   "Sets the blinking cursor color and shape for the given frame."
