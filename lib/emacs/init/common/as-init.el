@@ -154,12 +154,12 @@ that name."
   (message buffer-file-name))
 
 ;;}}}
-;;{{{ as-kill-buffer
+;;{{{ as-destroy-buffer
 
-(defun as-kill-buffer ()
+(defun as-destroy-buffer ()
   "Kill the current buffer without leaving crappy auto-save files around."
   (interactive)
-  (let ((tmpfile (format "/tmp/.emacs.as-kill-buffer.%d" (emacs-pid)))
+  (let ((tmpfile (format "/tmp/.emacs.as-destroy-buffer.%d" (emacs-pid)))
         (buf (buffer-name)))
     (write-file tmpfile)
     (kill-buffer nil)
@@ -476,11 +476,12 @@ a prefix argument."
 (global-set-key "\C-x\C-a"      'bury-buffer)
 (global-set-key "\M-\\"         'fixup-whitespace)
 (global-set-key "\C-xt"         'revert-buffer)
-(global-set-key "\C-xK"         'as-kill-buffer)
+(global-set-key "\C-xK"         'as-destroy-buffer)
 (global-set-key "\C-ha"         'apropos)
 (global-set-key "\M-g"          'goto-line)
 (global-set-key "\C-ha"         'apropos)
 (global-set-key "\C-c\C-i"      'indent-region)
+(global-set-key "\C-cl"         'align) ;; new in emacs 21
 
 (global-set-key [(control tab)]         'other-window)
 (global-set-key [(control meta $)]      'ispell-buffer)
