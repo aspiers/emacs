@@ -207,6 +207,6 @@ just C-u as a prefix argument, repeat as many times as possible."
           (forward-sexp -1)
           (delete-char 1))
         (delete-char 1))
-      (decf n))))
+      (setq n (- n 1)))))
 
 ;;}}}
