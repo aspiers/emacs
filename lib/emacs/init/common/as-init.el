@@ -437,28 +437,57 @@ that name."
 ;;}}}
 ;;{{{ Little odds and ends
 
-;; e-mail address
+;;{{{ find-function-source-path
+
+(custom-set-variables
+ '(find-function-source-path
+      (mapcar (lambda (p) (concat as-emacs-dir "/" p))
+              (list
+               "fun" 
+               "major-modes/monkey-2"
+               "major-modes/mmm" 
+               "major-modes/tdtd" 
+               "major-modes/pcl-cvs" 
+               "major-modes" 
+               "minor-modes" 
+               "utils" 
+               ))))
+
+;;}}}
+;;{{{ e-mail address
 
 (setq user-mail-address "adam@spiers.net")
 
-;; Minibuffer (GNU Emacs 21 obseletes resize-minibuffer-mode)
+;;}}}
+;;{{{ Minibuffer (GNU Emacs 21 obseletes resize-minibuffer-mode)
+
 (cond ((or running-xemacs (<= emacs-major-version 20))
        (resize-minibuffer-mode)
        (setq resize-minibuffer-window-max-height 5 
              resize-minibuffer-frame-max-height 5)))
 
-;; Apropos extension
+;;}}}
+;;{{{ Apropos extension
+
 (defvar apropos-do-all)
 (setq apropos-do-all t)
 
-;; kill-line kill whole line if at beginning of line
+;;}}}
+;;{{{ kill-line kill whole line if at beginning of line
+
 (setq kill-whole-line t)
 
-;; Visible bell
+;;}}}
+;;{{{ Visible bell
+
 (setq-default visible-bell t)
 
-;; Saving sessions
+;;}}}
+;;{{{ Saving sessions
+
 (autoload 'desktop-save "desktop" "Saves desktop session state." t)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
