@@ -18,8 +18,7 @@
 ;;}}}
 ;;{{{ as-insert-log-timestamp
 
-(defun as-insert-log-timestamp
-  ()
+(defun as-insert-log-timestamp ()
   "Inserts the current date, time and username into the current buffer at the point."
   (interactive)
   (insert
@@ -28,8 +27,24 @@
   (backward-delete-char 1)
   (insert
 ;;   (current-time-string)
-   " "
-   (user-login-name))
+   " Adam Spiers <>")
+  (backward-char 1)
+)
+
+;;}}}
+;;{{{ as-insert-log-datestamp
+
+(defun as-insert-log-datestamp ()
+  "Inserts the current date and username into the current buffer at the point."
+  (interactive)
+  (insert
+   (shell-command-to-string "date '+%a %b %e %Y'")
+   )
+  (backward-delete-char 1)
+  (insert
+;;   (current-time-string)
+   " Adam Spiers <>")
+  (backward-char 1)
 )
 
 ;;}}}
@@ -89,9 +104,10 @@
 ;;}}}
 ;;{{{ e-mail addresses
 
-(defun as-insert-email-address ()
+(defun as-insert-email-address (&optional prefix)
   "Inserts Adam's e-mail address"
   (interactive)
+  (if prefix (insert prefix))
   (insert "@adamspiers.org"))
 
 (defun as-insert-work-email-address ()
@@ -108,14 +124,15 @@
   (insert "Adam Spiers"))
 
 ;;}}}
-;;{{{ Me (name & e-mail)
+;;{{{ Name & e-mail
 
-(defun as-insert-name-and-email ()
+(defun as-insert-name-and-email (&optional email)
   "Inserts Adam's name and e-mail address"
   (interactive)
   (as-insert-name)
   (insert " <")
-  (as-insert-email-address)
+  (cond (email (insert email "@adamspiers.org"))
+        (t (as-insert-email-address)))
   (insert ">"))
 
 ;;}}}

@@ -311,6 +311,9 @@ that name."
 (autoload 'as-insert-log-timestamp "as-autotext" "Insert log timestamp" t)
 (global-set-key "\C-cil" 'as-insert-log-timestamp)
 
+(autoload 'as-insert-log-datestamp "as-autotext" "Insert log datestamp" t)
+(global-set-key "\C-ciL" 'as-insert-log-datestamp)
+
 (autoload 'as-insert-name-and-email "as-autotext" "Insert name and email" t)
 (global-set-key "\C-ciM" 'as-insert-name-and-email)
 
