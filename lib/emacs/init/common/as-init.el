@@ -15,7 +15,7 @@
 
 ;;}}}
 
-;;{{{ Function definitions
+;;{{{ Functions
 
 ;;{{{ font-lock-mode-if-window-system
 
@@ -80,6 +80,91 @@ from the replace is visited via `find-file'."
      bounce-buffer-regexp-alist)))
 
 ;;}}}
+;;{{{ as-buffer-rename-via-alist-hook
+
+(defvar as-buffer-renamings-alist '() 
+  "Maps regexps matching file names to new buffer names.
+
+If a find-file is performed on a filename which matches one of these
+regexps, the buffer name is renamed to the corresponding entry in this
+alist.")
+
+(defun as-buffer-rename-via-alist-hook ()
+  "Hook to rename a buffer by looking it up in an alist of matches.
+See the documentation for `as-buffer-renamings-alist'."
+  (catch 'endloop
+    (mapcar
+     (lambda (x)
+       (if (let ((case-fold-search nil))
+             (string-match (concat ".*" (car x)) (buffer-file-name)))
+           (progn
+             (rename-buffer
+              (replace-match (cdr x) t nil (buffer-file-name) nil)
+              t)
+             (throw 'endloop t))))
+     as-buffer-renamings-alist)))
+
+(defun as-containing-dir (filename)
+  "Function which returns the containing directory of a filename when
+given the full path."
+  (string-match "\\([^/]+\\)/[^/]+$" filename)
+  (match-string 1 filename))
+
+(defun as-last-dir-and-filename (filename)
+  "Function which strips a full path of all of its directory components
+   but the last."
+  (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
+  (replace-match "" t t (buffer-file-name) 1))
+
+(defun as-buffer-rename-add-one-dir ()
+  "Function to add the name of the containing directory of the buffer's file
+to the beginning of the buffer name."
+  (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
+
+;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
+(add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
+
+;;}}}
+;;{{{ display-buffer-filename
+
+(defun display-buffer-filename
+  ()
+  "Displays the current buffer's filename in the minibuffer."
+  (interactive)
+  (message buffer-file-name))
+
+;;}}}
+;;{{{ duplicate-line
+
+(defun duplicate-line
+  () 
+  "Duplicates the current line."
+  (interactive)
+  (beginning-of-line)
+  (push-mark (point) t t)
+  (end-of-line)
+  (kill-new (buffer-substring (mark) (point)))
+  (insert "\n")
+  (yank))
+
+;;}}}
+;;{{{ join-line-with-next
+
+(defun join-line-with-next ()
+  "Joins the current line with the next.  This just calls join-line with
+a prefix argument."
+  (interactive)
+  (join-line 1))
+
+;;}}}
+
+;;{{{ Enable disabled functions
+
+(put 'eval-expression 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'set-goal-column 'disabled nil)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Key bindings
@@ -100,7 +185,6 @@ from the replace is visited via `find-file'."
 ;;}}}
 ;;{{{ delete key
 
-;;(define-key function-key-map (as-key-sequence [delete] [(delete)]) "\C-d")
 (global-set-key [(delete)] 'delete-char)
 
 ;;}}}
@@ -337,78 +421,28 @@ from the replace is visited via `find-file'."
 (global-set-key [(control meta tab)]    'ispell-complete-word)
 (global-set-key [(meta i)]              'indent-relative)
 
-(global-set-key [(f1)]             'ispell-word)
-;;{{{ emacs-Info
+(global-set-key [(f1)]          'ispell-word)
 
-(defun emacs-Info (&optional file)
-  "Enter Info, the documentation browser.
-Optional argument FILE specifies the file to examine;
-the default is the top-level directory of Info.
 
-In interactive use, a prefix argument directs this command
-to read a file name from the minibuffer.
+(global-set-key [(f3)] 'display-buffer-filename)
 
-The search path for Info files is in the variable `Info-directory-list'.
-The top-level Info directory is made by combining all the files named `dir' 
-in all the directories in that path."
-  (interactive
-   (if current-prefix-arg
-       (list
-        (read-file-name
-         "Info file name: " ;; PROMPT
-         nil                ;; DIR
-         nil                ;; DEFAULT-FILENAME
-         t                  ;; MUSTMATCH
-         nil                ;; INITIAL 
-         ))))
-  (if file
-      (info file)
-    (if (get-buffer "*info*")
-        (pop-to-buffer "*info*")
-      (info "/usr/info/emacs.gz"))))
+(global-set-key [(f4)]          'duplicate-line)
 
-;;}}}
-(global-set-key [(f2)]             'emacs-Info)
-;;{{{ duplicate-line
+(global-set-key [(f5)]          'bounce-buffer)
+(global-set-key [(insert)]      'overwrite-mode)
+(global-set-key [(meta o)]      'overwrite-mode)
 
-(defun duplicate-line
-  () 
-  "Duplicates the current line."
-  (interactive)
-  (beginning-of-line)
-  (push-mark (point) t t)
-  (end-of-line)
-  (kill-new (buffer-substring (mark) (point)))
-  (insert "\n")
-  (yank))
-
-;;}}}
-(global-set-key [(f4)]             'duplicate-line)
-(global-set-key [(control meta ,)] 'bounce-buffer)
-(global-set-key [(insert)]         'overwrite-mode)
-(global-set-key [(meta o)]         'overwrite-mode)
-
-;;{{{ join-line-with-next
-
-(defun join-line-with-next ()
-  "Joins the current line with the next.  This just calls join-line with
-a prefix argument."
-  (interactive)
-  (join-line 1))
-
-;;}}}
 (global-set-key [(control meta y)] 'join-line-with-next)
 
-;; Set C-x C-b to buffer-menu rather than list-buffers
-;; so that the point automatically gets put in the
-;; buffer menu.
+;; Set C-x C-b to buffer-menu rather than list-buffers so that the
+;; point automatically gets put in the buffer menu.
 
 (global-set-key "\C-x\C-b"      'buffer-menu)
 
 ;;}}}
 
 ;;}}}
-;;{{{ Little odds and ends
+;;{{{ Point movement
 
 ;;{{{ Track end of line
 
@@ -433,27 +467,25 @@ a prefix argument."
 (setq default-fill-column 70)
 
 ;;}}}
+;;{{{ Stop down cursor adding newlines to end of buffer.
+
+(setq next-line-add-newlines nil)
+
+;;}}}
+;;{{{ IntelliMouse
+
+(cond (window-system (load "mwheel" t)))
+
+;;}}}
+
+;;}}}
+;;{{{ Little odds and ends
+
 ;;{{{ Minibuffer
 
 (resize-minibuffer-mode)
 (setq resize-minibuffer-window-max-height 5 
       resize-minibuffer-frame-max-height 5)
-
-;;}}}
-;;{{{ Enable disabled functions
-
-(put 'eval-expression 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
-;;}}}
-;;{{{ Enable set-goal-column
-
-(put 'set-goal-column 'disabled nil)
-
-;;}}}
-;;{{{ Stop down cursor adding newlines to end of buffer.
-
-(setq next-line-add-newlines nil)
 
 ;;}}}
 ;;{{{ Apropos extension
@@ -470,81 +502,6 @@ a prefix argument."
 ;;{{{ Visible bell
 
 (setq-default visible-bell t)
-
-;;}}}
-;;{{{ IntelliMouse
-
-(load "mwheel" t)
-
-;;}}}
-;;{{{ Start server
-
-;; Set Emacs as server for all other emacsclients.
-;; This needs EDITOR enviroment variable (and VISUAL etc.) to be
-;; set to 'emacsclient'.
-;;
-;; Screen is aliased to ~/lib/screen which on entry aliases emacs to
-;; emacsclient, and on exit unaliases it.
-
-;;(load "server-x" t)
-
-;;(server-start)
-
-;;}}}
-;;{{{ Buffer renaming based on filename
-
-(defvar as-buffer-renamings-alist '() 
-  "Maps regexps matching file names to new buffer names.
-
-If a find-file is performed on a filename which matches one of these
-regexps, the buffer name is renamed to the corresponding entry in this
-alist.")
-
-(defun as-buffer-rename-via-alist-hook ()
-  "Hook to rename a buffer by looking it up in an alist of matches.
-See the documentation for `as-buffer-renamings-alist'."
-  (catch 'endloop
-    (mapcar
-     (lambda (x)
-       (if (let ((case-fold-search nil))
-             (string-match (concat ".*" (car x)) (buffer-file-name)))
-           (progn
-             (rename-buffer
-              (replace-match (cdr x) t nil (buffer-file-name) nil)
-              t)
-             (throw 'endloop t))))
-     as-buffer-renamings-alist)))
-
-(defun as-containing-dir (filename)
-  "Function which returns the containing directory of a filename when
-given the full path."
-  (string-match "\\([^/]+\\)/[^/]+$" filename)
-  (match-string 1 filename))
-
-(defun as-last-dir-and-filename (filename)
-  "Function which strips a full path of all of its directory components
-   but the last."
-  (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
-  (replace-match "" t t (buffer-file-name) 1))
-
-(defun as-buffer-rename-add-one-dir ()
-  "Function to add the name of the containing directory of the buffer's file
-to the beginning of the buffer name."
-  (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
-
-;;(add-hook 'find-file-hooks 'as-buffer-rename-add-one-dir)
-(add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
-
-;;}}}
-;;{{{ Display current buffer's filename
-
-(defun as-display-buffer-filename
-  ()
-  "Displays the current buffer's filename in the minibuffer."
-  (interactive)
-  (message buffer-file-name))
-(global-set-key "\C-x9n" 'as-display-buffer-filename)
-(global-set-key [(f3)] 'as-display-buffer-filename)
 
 ;;}}}
 
@@ -594,75 +551,40 @@ to the beginning of the buffer name."
 ;;}}}
 
 ;;}}}
+;;{{{ Major modes
 
-;; Major modes
+;;{{{ Text
 
-;;{{{ C
+;;{{{ Auto-fill
 
-;;{{{ C indentation setup
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; for compiling
-(eval-when-compile
-  (defvar c-tab-always-indent)
-  (defvar c-indent-level)
-  (defvar c-continued-statement-offset)
-  (defvar c-brace-offset)
-  (defvar c-brace-imaginary-offset)
-  (defvar c-argdecl-indent)
-  (defvar c-label-offset)
-  (defvar )
-  (defvar )
-  (defvar )
-  )
+;; Turn on auto-fill if composing e-mail or news.
+;;
+;; For some reason the local buffer-file-name isn't set at the
+;; stage when text-mode-hook gets run (possibly because it isn't
+;; the current buffer at that stage?), but fortunately the
+;; symbol filename is set to the loading file so we can use that
+;; instead.
 
-(setq c-tab-always-indent t
-      ;; setq c-auto-newline t
-      c-indent-level 4
-      c-continued-statement-offset 4
-      c-brace-offset -4
-      c-brace-imaginary-offset 0
-      c-argdecl-indent 0
-      c-label-offset -4)
+;; Try to silence compile errors (I know what I'm doing, honest)
+(if (not (boundp 'filename))
+    (defvar filename "" "sod knows"))
 
-;; Whatever this is supposed to do, it buggers up XEmacs' idea of
-;; version compatability with byte-compiled code!
-;;(setq default-case-fold-search nil)
+(add-hook 'text-mode-hook
+          (lambda ()
+            (if (and (boundp 'filename)
+                     (not (eq filename t))
+                     (string-match 
+                      "mutt-thelonious\\|\\.article\\|\\.letter" filename))
+                (turn-on-auto-fill))))
 
 ;;}}}
-;;{{{ Turn on font-lock mode on entry
+;;{{{ Expand all tabs to spaces
 
-(add-hook 'c-mode-hook 'font-lock-mode-if-window-system)
-
-;;}}}
-
-;;}}}
-;;{{{ TeX
-
-;;{{{ Set up tex-dvi-view (C-c C-v)
-
-(setq tex-dvi-view-command
-      (if (eq window-system 'x) "xdvi" "dvi2tty * | cat -s"))
-
-;;}}}
-;;{{{ Turn on font-lock mode on entry
-
-(add-hook 'tex-mode-hook 'font-lock-mode-if-window-system)
-
-;;}}}
-
-;;}}}
-;;{{{ Lisp
-
-;;{{{ Turn on font-lock mode on entry
-
-(add-hook 'lisp-mode-hook 'font-lock-mode-if-window-system)
-
-;;}}}
-;;{{{ local-unset-key M-tab for hippie-expand
-
-(if (eq running-xemacs t)
-    (add-hook 'emacs-lisp-mode-hook
-              (function (lambda () (local-unset-key [(meta tab)])))))
+(add-hook 'text-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)))
 
 ;;}}}
 
@@ -800,46 +722,28 @@ to the beginning of the buffer name."
 ;;}}}
 
 ;;}}}
-;;{{{ Info
+;;{{{ Lisp
 
-;; (global-set-key [\s-TAB]     'Info-prev-reference)
-;; (global-set-key "\C-hi"              'emacs-Info)
+;;{{{ Turn on font-lock mode on entry
 
-;;}}}
-;;{{{ Text
-
-;;{{{ Auto-fill
-
-;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; Turn on auto-fill if composing e-mail or news.
-;;
-;; For some reason the local buffer-file-name isn't set at the
-;; stage when text-mode-hook gets run (possibly because it isn't
-;; the current buffer at that stage?), but fortunately the
-;; symbol filename is set to the loading file so we can use that
-;; instead.
-
-;; Try to silence compile errors (I know what I'm doing, honest)
-(if (not (boundp 'filename))
-    (defvar filename "" "sod knows"))
-
-(add-hook 'text-mode-hook
-          (lambda ()
-            (if (and (boundp 'filename)
-                     (not (eq filename t))
-                     (string-match 
-                      "mutt-thelonious\\|\\.article\\|\\.letter" filename))
-                (turn-on-auto-fill))))
+(add-hook 'lisp-mode-hook 'font-lock-mode-if-window-system)
 
 ;;}}}
-;;{{{ Expand all tabs to spaces
+;;{{{ local-unset-key M-tab for hippie-expand
 
-(add-hook 'text-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
+(if (eq running-xemacs t)
+    (add-hook 'emacs-lisp-mode-hook
+              (function (lambda () (local-unset-key [(meta tab)])))))
 
 ;;}}}
+
+;;}}}
+;;{{{ sawfish
+
+(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
+;;(add-hook 'sawfish-mode-hook
+;;          (function (lambda () (turn-on-font-lock))))
+;;(add-hook 'sawfish-mode-hook 'font-lock-mode-if-window-system)
 
 ;;}}}
 ;;{{{ HTML
@@ -849,6 +753,88 @@ to the beginning of the buffer name."
                       (auto-fill-mode -1)
 ;;                    (setq truncate-lines t)
                       )))
+
+;;}}}
+;;{{{ MMM mode
+
+(defvar mmm-mode-ext-classes-alist)
+(defvar mmm-global-mode)
+(setq mmm-global-mode 'maybe)
+
+(defvar mmm-mode-ext-classes-alist)
+(setq mmm-mode-ext-classes-alist
+      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+
+(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
+
+;;}}}
+;;{{{ CSS
+
+(autoload 'css-mode "css-mode" "mode for editing CSS files")
+
+;;}}}
+;;{{{ Apache
+
+(autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
+
+;;}}}
+;;{{{ mutt
+
+(autoload 'mutt-mode "mutt" "Mode for editing mutt files")
+
+;;}}}
+;;{{{ TeX
+
+;;{{{ Set up tex-dvi-view (C-c C-v)
+
+(setq tex-dvi-view-command
+      (if (eq window-system 'x) "xdvi" "dvi2tty * | cat -s"))
+
+;;}}}
+;;{{{ Turn on font-lock mode on entry
+
+(add-hook 'tex-mode-hook 'font-lock-mode-if-window-system)
+
+;;}}}
+
+;;}}}
+;;{{{ C
+
+;;{{{ C indentation setup
+
+;; for compiling
+(eval-when-compile
+  (defvar c-tab-always-indent)
+  (defvar c-indent-level)
+  (defvar c-continued-statement-offset)
+  (defvar c-brace-offset)
+  (defvar c-brace-imaginary-offset)
+  (defvar c-argdecl-indent)
+  (defvar c-label-offset)
+  (defvar )
+  (defvar )
+  (defvar )
+  )
+
+(setq c-tab-always-indent t
+      ;; setq c-auto-newline t
+      c-indent-level 4
+      c-continued-statement-offset 4
+      c-brace-offset -4
+      c-brace-imaginary-offset 0
+      c-argdecl-indent 0
+      c-label-offset -4)
+
+;; Whatever this is supposed to do, it buggers up XEmacs' idea of
+;; version compatability with byte-compiled code!
+;;(setq default-case-fold-search nil)
+
+;;}}}
+;;{{{ Turn on font-lock mode on entry
+
+(add-hook 'c-mode-hook 'font-lock-mode-if-window-system)
+
+;;}}}
 
 ;;}}}
 ;;{{{ SGML
@@ -875,12 +861,9 @@ to the beginning of the buffer name."
 (setq Man-notify-method 'pushy)
 
 ;;}}}
-;;{{{ sawfish
+;;{{{ SDF
 
-(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
-;;(add-hook 'sawfish-mode-hook
-;;          (function (lambda () (turn-on-font-lock))))
-;;(add-hook 'sawfish-mode-hook 'font-lock-mode-if-window-system)
+(autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
 
 ;;}}}
 ;;{{{ lilypond
@@ -888,41 +871,9 @@ to the beginning of the buffer name."
 (autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
-;;{{{ SDF
-
-(autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
 
 ;;}}}
-;;{{{ mutt
-
-(autoload 'mutt-mode "mutt" "Mode for editing mutt files")
-
-;;}}}
-;;{{{ MMM mode
-
-(defvar mmm-mode-ext-classes-alist)
-(defvar mmm-global-mode)
-(setq mmm-global-mode 'maybe)
-
-(defvar mmm-mode-ext-classes-alist)
-(setq mmm-mode-ext-classes-alist
-      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
-
-(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
-
-;;}}}
-;;{{{ CSS
-
-(autoload 'css-mode "css-mode" "mode for editing CSS files")
-
-;;}}}
-;;{{{ Apache
-
-(autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
-
-;;}}}
-
-;; Minor modes
+;;{{{ Minor modes
 
 ;;{{{ vc
 
@@ -967,6 +918,10 @@ to the beginning of the buffer name."
     (fold-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
     (fold-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
     ))
+
+(setq find-file-matching-regexp-alist
+      (append '(("\*\.rdb$" . (lambda () (fold-set-marks "! {{{ " "! }}} "))))
+              find-file-matching-regexp-alist))
 
 ;;}}}
 ;;{{{ Autoload mode via local variables
@@ -1074,12 +1029,23 @@ to the beginning of the buffer name."
 (auto-compression-mode)
 
 ;;}}}
-;;{{{ auto-recomp for .el files
+;;{{{ blinking-cursor
 
-;; This is tiny, so we load at startup
-;;(load "auto-recomp" t) ;; we use Makefiles now
+(defun blinking-cursor-mode (&optional arg))
+(cond 
+ ((and (not running-xemacs) (load "blinking-cursor" t))
+  (blinking-cursor-mode 1)))
 
 ;;}}}
+;;{{{ recentf
+
+(load "recentf" 'noerror)
+
+;;}}}
+
+;;}}}
+;;{{{ Hooks
+
 ;;{{{ comment-start
 
 (add-hook 'lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
@@ -1088,13 +1054,16 @@ to the beginning of the buffer name."
 (add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
 (add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
 
-;;}}}
-;;{{{ blinking-cursor
+(setq find-file-matching-regexp-alist
+      (append '(("\*\.rdb$" . (lambda () (setq comment-start "! "))))
+              find-file-matching-regexp-alist))
 
-(defun blinking-cursor-mode (&optional arg))
-(cond 
- ((and (not running-xemacs) (load "blinking-cursor" t))
-  (blinking-cursor-mode 1)))
+;;}}}
+;;{{{ hippie-expand
+
+(add-hook 'text-mode-hook (function (lambda () (local-unset-key "\e\t"))))
+
+;;}}}
 
 ;;}}}
 
