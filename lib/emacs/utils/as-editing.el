@@ -241,7 +241,7 @@ ARG is ignored if mark is active.  If mark is not active,
 copy-as-if-killed ARG lines forward, starting with the one point is
 currently on.  ARG can be negative, in which case the current line is
 not included in the text copied."
-  (interactive "*p")
+  (interactive "p")
   (if mark-active
       (kill-ring-save (region-beginning) (region-end))
     (let ((bol (save-excursion (beginning-of-line) (point)))
