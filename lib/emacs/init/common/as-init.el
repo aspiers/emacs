@@ -215,6 +215,21 @@ a prefix argument."
     (kill-ring-save (mark) (point))))
 
 ;;}}}
+;;{{{ bury-and-close-buffer
+
+(defun bury-and-close-buffer ()
+  (interactive)
+  (bury-buffer) 
+  (when (> (length (window-list)) 1) 
+    (delete-window)))
+
+;;}}}
+;;{{{ mhj-set-q-to-close
+
+(defun mhj-set-q-to-close ()
+  (local-set-key "q" 'bury-and-close-buffer))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Appearance
@@ -1189,16 +1204,16 @@ Can be optionally given a numeric prefix which
 (autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
-;;{{{ diff-mode
+;;{{{ cvs helper modes
 
-(add-hook 'diff-mode-hook
-          (function 
-           (lambda () (local-set-key "q" (function 
-                                          (lambda () 
-                                            (interactive)
-                                            (bury-buffer)
-                                            (cond ((> (length (window-list)) 1)
-                                                   (delete-window)))))))))
+;; diff mode
+(add-hook 'diff-mode-hook 'mhj-set-q-to-close)
+
+;; cvs-status mode
+(add-hook 'cvs-status-mode-hook 'mhj-set-q-to-close)
+
+;; log-view mode
+(add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
 
 ;;}}}
 ;;{{{ pcl-cvs
