@@ -450,8 +450,8 @@ that name."
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
                 ("\\.xml$"                               . xml-mode)
-                ("\\.sgml$"                              . psgml-mode)
-                ("\\.dtd$"                               . psgml-mode)
+                ("\\.sgml$"                              . sgml-mode)
+                ("\\.dtd$"                               . sgml-mode)
                 ("\\.dcl$"                               . dtd-mode)
                 ("\\.dec$"                               . dtd-mode)
 ;;                ("\\.dtd$"                             . dtd-mode)
@@ -558,7 +558,6 @@ that name."
 ;;}}}
 ;;{{{ psgml (SGML and XML)
 
-(autoload 'psgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
@@ -737,6 +736,14 @@ that name."
 
 ;; log-view mode
 (add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
+
+;;}}}
+;;{{{ gnus
+
+(defvar gnus-face-1 'gnus-cite-face-1)
+(defvar gnus-face-2 'italic)
+(defvar gnus-face-3 'gnus-cite-face-4)
+(defvar gnus-sum-thread-tree-root "")
 
 ;;}}}
 
