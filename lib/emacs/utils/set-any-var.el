@@ -20,6 +20,8 @@
 
 ;;; Code:
 
+(require 'wid-edit)
+
 (defun set-any-variable (var val)
   "Just like `set-variable', but allows you to set any variable, not just
 so-called \`user variables' (ones whose documentation begins with a \`*'
@@ -46,8 +48,8 @@ as a starting point for convenient editing."
                                           arg))
                  (read (read-string "New value: "
                                     (pp (symbol-value var))
-                                    'set-any-variable-value-history))))
-     (list var val))))
+                                    'set-any-variable-value-history)))))
+     (list var val)))
 
   (let ((type (get var 'custom-type)))
     (when type
