@@ -1,4 +1,4 @@
-;;; ewoc.el -- Utility to maintain a view of a list of objects in a buffer
+;;; ewoc.el --- utility to maintain a view of a list of objects in a buffer
 
 ;; Copyright (C) 1991, 92, 93, 94, 95, 96, 97, 98, 99, 2000   Free Software Foundation
 
@@ -396,14 +396,42 @@ is called.  MAP-FUNCTION must restore the current buffer to BUFFER before
 it returns, if it changes it.
 
 If more than two arguments are given, the remaining
-arguments will be passed to MAP-FUNCTION."
+arguments will be passed to MAP-FUNCTION.
+
+Returns a list of all the results from all the calls to MAP-FUNCTION."
   (ewoc--set-buffer-bind-dll-let* ewoc
       ((footer (ewoc--footer ewoc))
-       (node (ewoc--node-nth dll 1)))
+       (node (ewoc--node-nth dll 1))
+       (result nil))
     (while (not (eq node footer))
-      (if (apply map-function (ewoc--node-data node) args)
-	  (ewoc--refresh-node (ewoc--pretty-printer ewoc) node))
-      (setq node (ewoc--node-next dll node)))))
+      (let ((mapped (apply map-function (ewoc--node-data node) args)))
+        (setq result (append result (list mapped)))
+        (if mapped (ewoc--refresh-node (ewoc--pretty-printer ewoc) node)))
+      (setq node (ewoc--node-next dll node)))
+    result))
+
+(defun ewoc-dump (ewoc)
+  "Dump EWOC to a list which can be used with `ewoc-create-from-dump' to
+reconstruct the buffer from scratch."
+  (list
+   (buffer-substring 1 (point-max))
+   (ewoc--pretty-printer ewoc)
+   (ewoc-data (ewoc--header ewoc))
+   (ewoc-data (ewoc--footer ewoc))
+   (ewoc-map 'identity ewoc)))
+
+(defun ewoc-create-from-dump (dump)
+  "Reconstruct an ewoc buffer from a list dumped by `ewoc-dump'."
+  (let* ((buf (current-buffer))
+         (buffer-contents (car dump))
+         (pp              (cadr dump))
+         (header          (caddr dump))
+         (footer          (cadddr dump))
+         (nodes           (car (last dump)))
+         (ewoc (ewoc-create pp header footer)))
+    (ewoc--set-buffer-bind-dll ewoc
+      (dolist (new-node nodes t)
+        (ewoc-enter-last ewoc new-node)))))
 
 (defun ewoc-filter (ewoc predicate &rest args)
   "Remove all elements in EWOC for which PREDICATE returns nil.
