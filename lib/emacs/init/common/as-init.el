@@ -278,6 +278,7 @@ that name."
 ;;{{{ C-c - 
 
 (global-set-key "\C-ca"   'bury-buffer)
+(global-set-key "\C-cA"   'as-align-to-previous-line)
 (fset 'as-next-cvs-buffer "\C-xb*cvs*") ;; must be something nicer than this
 (global-set-key "\C-cb"   'as-next-cvs-buffer)
 (global-set-key "\C-cc"   'comment-region)
@@ -1000,10 +1001,16 @@ that name."
 ;;}}}
 ;;{{{ no toolbar
 
-(and window-system
-     (not running-xemacs)
-     (>= emacs-major-version 21)
-     (tool-bar-mode -1))
+;; This is best done with X resources, otherwise you get funny
+;; frame-resizing problems.  See ~/.Xresources/emacs.rdb.
+
+;; (and window-system
+;;      (not running-xemacs)
+;;      (>= emacs-major-version 21)
+;;      (tool-bar-mode -1))
+
+;; (setq default-frame-alist
+;;       '((tool-bar-lines . 0)))
 
 ;;}}}
 
