@@ -960,6 +960,10 @@ Can be optionally given a numeric prefix which
 (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
 (setq-default sgml-indent-data t)
+
+;; fontify straight away
+(setq-default sgml-auto-activate-dtd t)
+
 ;; Some convenient key definitions:
 ;; (define-key sgml-mode-map "\C-c\C-x\C-e" 'sgml-describe-element-type)
 ;; (define-key sgml-mode-map "\C-c\C-x\C-i" 'sgml-general-dtd-info)
@@ -994,7 +998,8 @@ Can be optionally given a numeric prefix which
 (set-face-foreground 'sgml-short-ref-face "deep sky blue")
 
 (setq-default sgml-markup-faces
-              '((comment    . sgml-comment-face)
+              '((CDATA      . font-lock-doc-face)
+                (comment    . sgml-comment-face)
                 (doctype    . sgml-doctype-face)
                 (end-tag    . sgml-end-tag-face)
                 (entity     . sgml-entity-face)
