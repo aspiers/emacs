@@ -403,7 +403,7 @@ See the documentation for `as-buffer-renamings-alist'."
   (catch 'endloop
     (mapcar
      (lambda (x)
-       (if (string-match (car x) (buffer-file-name))
+       (if (string-match (concat ".*" (car x)) (buffer-file-name))
            (progn
              (rename-buffer
               (replace-match (cdr x) t nil (buffer-file-name) nil)
