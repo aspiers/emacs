@@ -117,11 +117,11 @@ The search path for Info files is in the variable `Info-directory-list'.
 The top-level Info directory is made by combining all the files named `dir' 
 in all the directories in that path."
   (interactive (if current-prefix-arg
-		   (list (read-file-name "Info file name: " nil nil t))))
+                   (list (read-file-name "Info file name: " nil nil t))))
   (if file
       (info file)
     (if (get-buffer "*info*")
-	(pop-to-buffer "*info*")
+        (pop-to-buffer "*info*")
       (info "/usr/info/emacs.gz"))))
 
 ;;}}}
@@ -150,16 +150,16 @@ in all the directories in that path."
 
 ;;{{{ Keypad maps
 
-(global-set-key	[(kp-4)]	'backward-char)
-(global-set-key	[(kp-6)]	'forward-char)
-(global-set-key	[(kp-2)]	'next-line)
-(global-set-key	[(kp-8)]	'previous-line)
-(global-set-key	[(kp-7)]	'beginning-of-buffer)
-(global-set-key	[(kp-1)]	'end-of-buffer)
-(global-set-key	[(kp-9)]	'scroll-down)
-(global-set-key	[(kp-3)]	'scroll-up)
-(global-set-key	[(meta kp-4)]	'backward-word)
-(global-set-key	[(meta kp-6)]	'forward-word)
+(global-set-key [(kp-4)]        'backward-char)
+(global-set-key [(kp-6)]        'forward-char)
+(global-set-key [(kp-2)]        'next-line)
+(global-set-key [(kp-8)]        'previous-line)
+(global-set-key [(kp-7)]        'beginning-of-buffer)
+(global-set-key [(kp-1)]        'end-of-buffer)
+(global-set-key [(kp-9)]        'scroll-down)
+(global-set-key [(kp-3)]        'scroll-up)
+(global-set-key [(meta kp-4)]   'backward-word)
+(global-set-key [(meta kp-6)]   'forward-word)
 
 ;;}}}
 ;;{{{ Function keys
@@ -185,21 +185,21 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Personal (including c-x 9) extensions
 
-(global-set-key "\C-x\C-a"	'bury-buffer)
+(global-set-key "\C-x\C-a"      'bury-buffer)
 
-(global-set-key "\C-x9 "	'set-mark-command)
-(global-set-key "\C-x9a"	'save-buffer)
-(global-set-key "\C-x9b"	'toggle-indent-tabs-mode)
-(global-set-key "\C-x9c"	'comment-region)
-(global-set-key "\C-x9d"	'insert-date-and-time)
-(global-set-key "\C-x9f"	'set-fill-column-to-normal)
-(global-set-key "\C-x9g"	'goto-line)
-(global-set-key "\C-x9i"	'auto-fill-mode)
-(global-set-key "\C-x9l"	'insert-log-timestamp)
-(global-set-key "\C-x9r"	'toggle-read-only)
-(global-set-key "\C-x9t"	'toggle-truncate-lines)
-(global-set-key "\C-x9v"	'set-variable)
-(global-set-key "\C-x9z"	'suspend-emacs)
+(global-set-key "\C-x9 "        'set-mark-command)
+(global-set-key "\C-x9a"        'save-buffer)
+(global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
+(global-set-key "\C-x9c"        'comment-region)
+(global-set-key "\C-x9d"        'insert-date-and-time)
+(global-set-key "\C-x9f"        'set-fill-column-to-normal)
+(global-set-key "\C-x9g"        'goto-line)
+(global-set-key "\C-x9i"        'auto-fill-mode)
+(global-set-key "\C-x9l"        'insert-log-timestamp)
+(global-set-key "\C-x9r"        'toggle-read-only)
+(global-set-key "\C-x9t"        'toggle-truncate-lines)
+(global-set-key "\C-x9v"        'set-variable)
+(global-set-key "\C-x9z"        'suspend-emacs)
 
 ;;}}}
 ;;{{{ Hippie expand ROCKS!
@@ -209,43 +209,43 @@ in all the directories in that path."
 
 (setq hippie-expand-try-functions-list 
       '(
-	try-expand-all-abbrevs
-	try-expand-dabbrev
-	try-expand-dabbrev-all-buffers 
-	try-expand-line
-	try-expand-dabbrev-from-kill
-	try-complete-file-name-partially 
-	try-complete-file-name
-	try-expand-list
-	try-complete-lisp-symbol-partially 
-	try-complete-lisp-symbol
-	))
+        try-expand-all-abbrevs
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers 
+        try-expand-line
+        try-expand-dabbrev-from-kill
+        try-complete-file-name-partially 
+        try-complete-file-name
+        try-expand-list
+        try-complete-lisp-symbol-partially 
+        try-complete-lisp-symbol
+        ))
 
 ;;}}}
 ;;{{{ Miscellaneous
 
-(global-set-key "\M-\\"		'fixup-whitespace)
-(global-set-key "\C-xt"		'revert-buffer)
-(global-set-key "\C-ha"		'apropos)
-(global-set-key "\M-g"		'goto-line)
-(global-set-key "\C-ha"		'apropos)
+(global-set-key "\M-\\"         'fixup-whitespace)
+(global-set-key "\C-xt"         'revert-buffer)
+(global-set-key "\C-ha"         'apropos)
+(global-set-key "\M-g"          'goto-line)
+(global-set-key "\C-ha"         'apropos)
 
-(global-set-key [(control tab)]		'other-window)
-(global-set-key [(control meta $)]	'ispell-buffer)
-(global-set-key [(control meta tab)]	'ispell-complete-word)
-(global-set-key [(meta i)]		'indent-relative)
+(global-set-key [(control tab)]         'other-window)
+(global-set-key [(control meta $)]      'ispell-buffer)
+(global-set-key [(control meta tab)]    'ispell-complete-word)
+(global-set-key [(meta i)]              'indent-relative)
 
-(global-set-key [(f1)]		'ispell-word)
-(global-set-key [(f2)]		'emacs-Info)
-(global-set-key [(f4)]		'duplicate-line)
-(global-set-key [(insert)]	'overwrite-mode)
-(global-set-key [(meta o)]	'overwrite-mode)
+(global-set-key [(f1)]          'ispell-word)
+(global-set-key [(f2)]          'emacs-Info)
+(global-set-key [(f4)]          'duplicate-line)
+(global-set-key [(insert)]      'overwrite-mode)
+(global-set-key [(meta o)]      'overwrite-mode)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers
 ;; so that the point automatically gets put in the
 ;; buffer menu.
 
-(global-set-key "\C-x\C-b"	'buffer-menu)
+(global-set-key "\C-x\C-b"      'buffer-menu)
 
 ;;}}}
 ;;{{{ Autotext
@@ -254,55 +254,55 @@ in all the directories in that path."
 
 ;; Signatures
 
-(global-set-key "\C-x\C-zc"	
-		(function (lambda () (interactive)
-			    (insert-file "~/.sig/cool"))))
-(global-set-key "\C-x\C-zj"	
-		(function (lambda () (interactive)
-			    (insert-file "~/.sig/japh_indirect"))))
-(global-set-key "\C-x\C-zp"	
-		(function (lambda () (interactive)
-			    (insert-file "~/.sig/personal"))))
-(global-set-key "\C-x\C-zr"	
-		(function (lambda () (interactive)
-			    (insert-file "~/.sig/RTFM"))))
+(global-set-key "\C-x\C-zc"     
+                (function (lambda () (interactive)
+                            (insert-file "~/.sig/cool"))))
+(global-set-key "\C-x\C-zj"     
+                (function (lambda () (interactive)
+                            (insert-file "~/.sig/japh_indirect"))))
+(global-set-key "\C-x\C-zp"     
+                (function (lambda () (interactive)
+                            (insert-file "~/.sig/personal"))))
+(global-set-key "\C-x\C-zr"     
+                (function (lambda () (interactive)
+                            (insert-file "~/.sig/RTFM"))))
 
 ;; Scissors
 
 (global-set-key "\C-x\C-zs"
-		(function (lambda () (interactive)
-			    (open-line 1)
-			    (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
-			    (beginning-of-line)
-			    (next-line 1)
-			    )))
+                (function (lambda () (interactive)
+                            (open-line 1)
+                            (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
+                            (beginning-of-line)
+                            (next-line 1)
+                            )))
 
 ;; Home-page
 
 (global-set-key "\C-x\C-zh"
-		(function (lambda () (interactive)
-			    (insert "http://www.new.ox.ac.uk/~adam/"))))
+                (function (lambda () (interactive)
+                            (insert "http://www.new.ox.ac.uk/~adam/"))))
 (global-set-key "\C-x\C-zu"
-		(function (lambda () (interactive)
-			    (insert "http://www.new.ox.ac.uk/~adam/"))))
+                (function (lambda () (interactive)
+                            (insert "http://www.new.ox.ac.uk/~adam/"))))
 
 ;; e-mail address
 
 (global-set-key "\C-x\C-ze"
-		(function (lambda () (interactive)
-			    (insert "adam@spiers.net"))))
+                (function (lambda () (interactive)
+                            (insert "adam@spiers.net"))))
 
 ;; name (how lazy am I?)
 
 (global-set-key "\C-x\C-zn"
-		(function (lambda () (interactive)
-			    (insert "Adam Spiers"))))
+                (function (lambda () (interactive)
+                            (insert "Adam Spiers"))))
 
 ;; me (name & e-mail)
 
 (global-set-key "\C-x\C-zn"
-		(function (lambda () (interactive)
-			    (insert "Adam Spiers <adam@spiers.net>"))))
+                (function (lambda () (interactive)
+                            (insert "Adam Spiers <adam@spiers.net>"))))
 
 ;;}}}
 
@@ -394,15 +394,15 @@ in all the directories in that path."
 ;; to new buffer names
 
 (add-hook 'find-file-hooks 
-	  (function (lambda ()
-		      (catch 'endloop
-			(mapcar
-			 (lambda (x)
-			   (if (string-match (car x) (buffer-file-name))
-			       (progn
-				 (rename-buffer (cdr x) t)
-				 (throw 'endloop t))))
-			 as-buffer-renamings-alist)))))
+          (function (lambda ()
+                      (catch 'endloop
+                        (mapcar
+                         (lambda (x)
+                           (if (string-match (car x) (buffer-file-name))
+                               (progn
+                                 (rename-buffer (cdr x) t)
+                                 (throw 'endloop t))))
+                         as-buffer-renamings-alist)))))
 
 ;;}}}
 
@@ -419,23 +419,25 @@ in all the directories in that path."
 ;; with "indented-text-mode".
 
 (mapcar (function
-	 (lambda (x) 
-	   (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
-	auto-mode-alist)
+         (lambda (x) 
+           (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
+        auto-mode-alist)
 
 
 ;; Add in other modes
 
-(setq auto-mode-alist (append (list
-		       '("\\.prehtml\\'" . html-mode)
-		       '("\\.php3\\'" . html-mode)
-		       '("\\.sdf\\'" . sdf-mode)
-;;		       '("\\.info\\(\\.gz\\)?\\'" . info)
-		       '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
-		       '(".sawmillrc\\'\\|/sawmill/" . sawmill-mode)
-		       '(".ly\\'" . lilypond-mode)
-		       )
-			      auto-mode-alist))
+(setq auto-mode-alist
+      (append (list
+               '("\\.prehtml\\'" . html-mode)
+               '("\\.php3\\'" . html-mode)
+               '("\\.sdf\\'" . sdf-mode)
+;;             '("\\.info\\(\\.gz\\)?\\'" . info)
+               '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
+               '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'"
+                 . sawfish-mode)
+               '(".ly\\'" . lilypond-mode)
+               )
+              auto-mode-alist))
 
 ;;}}}
 ;;{{{ Default major mode
@@ -458,7 +460,7 @@ in all the directories in that path."
 ;;{{{ Tab widths
 
 (add-hook 'fundamental-mode-hook
-	  (function (lambda () (setq tab-width 4))))
+          (function (lambda () (setq tab-width 4))))
 
 ;;}}}
 
@@ -514,7 +516,7 @@ in all the directories in that path."
 
 (if (eq running-xemacs t)
     (add-hook 'emacs-lisp-mode-hook
-	      (function (lambda () (local-unset-key [(meta tab)])))))
+              (function (lambda () (local-unset-key [(meta tab)])))))
 
 ;;}}}
 
@@ -531,14 +533,14 @@ in all the directories in that path."
 (add-hook 
  'perl-mode-hook
  (function (lambda () 
-	     (setq 
-	      perl-indent-level 2
-	      perl-continued-statement-offset 2
-	      perl-continued-brace-offset -2
-	      perl-label-offset -1)
-;;	     (set-face-background 'font-lock-emphasized-face "black")
-;;	     (set-face-background 'font-lock-other-emphasized-face "black")
-	     )))
+             (setq 
+              perl-indent-level 2
+              perl-continued-statement-offset 2
+              perl-continued-brace-offset -2
+              perl-label-offset -1)
+;;           (set-face-background 'font-lock-emphasized-face "black")
+;;           (set-face-background 'font-lock-other-emphasized-face "black")
+             )))
 
 ;;}}}
 ;;{{{ Turn on tab/commenting
@@ -580,19 +582,19 @@ in all the directories in that path."
 ;;{{{ Change some local key mappings
 
 (add-hook 'cperl-mode-hook 
-	  (function 
-	   (lambda ()
-	     (local-set-key "\C-xpr" 'cperl-find-pods-heres)
-	     (local-set-key [(backspace)] 'cperl-electric-backspace)
+          (function 
+           (lambda ()
+             (local-set-key "\C-xpr" 'cperl-find-pods-heres)
+             (local-set-key [(backspace)] 'cperl-electric-backspace)
 
-;;	     What the hell is this one??
-;;	     (local-set-key [(delete)] 'backward-or-forward-delete-char)
+;;           What the hell is this one??
+;;           (local-set-key [(delete)] 'backward-or-forward-delete-char)
 
-	     (local-set-key "(" 'self-insert-command)
-	     (local-set-key "<" 'self-insert-command)
-	     (local-set-key "[" 'self-insert-command)
-	     (local-set-key [(control c) (control h) (control j)] 'imenu)
-	     (setq indent-tabs-mode nil)
+             (local-set-key "(" 'self-insert-command)
+             (local-set-key "<" 'self-insert-command)
+             (local-set-key "[" 'self-insert-command)
+             (local-set-key [(control c) (control h) (control j)] 'imenu)
+             (setq indent-tabs-mode nil)
 )))
 
 ;;}}}
@@ -603,7 +605,7 @@ in all the directories in that path."
 ;;  (function
 ;;   (lambda ()
 ;;     (if window-system
-;; 	(set-face-background 'font-lock-emphasized-face "black")
+;;      (set-face-background 'font-lock-emphasized-face "black")
 ;;       (set-face-background 'font-lock-other-emphasized-face "black")
 ;;       (set-face-font
 ;;        'font-lock-function-name-face
@@ -621,7 +623,7 @@ in all the directories in that path."
 ;;{{{ Tab widths
 
 (add-hook 'shell-script-mode-hook
-	  (lambda () (setq tab-width 4)))
+          (lambda () (setq tab-width 4)))
 
 ;;}}}
 ;;{{{ Autoload sh-script on invocation
@@ -640,8 +642,8 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ Info
 
-;; (global-set-key [\s-TAB]	'Info-prev-reference)
-;; (global-set-key "\C-hi"		'emacs-Info)
+;; (global-set-key [\s-TAB]     'Info-prev-reference)
+;; (global-set-key "\C-hi"              'emacs-Info)
 
 ;;}}}
 ;;{{{ Text
@@ -649,7 +651,7 @@ in all the directories in that path."
 ;;{{{ Tab widths
 
 (add-hook 'text-mode-hook
-	  (lambda () (setq tab-width 4)))
+          (lambda () (setq tab-width 4)))
 
 ;;}}}
 ;;{{{ Auto-fill
@@ -668,19 +670,19 @@ in all the directories in that path."
 ;; (defvar filename nil "sod knows")
 
 (add-hook 'text-mode-hook
-	  (lambda ()
-	    (if (and (boundp 'filename)
-		     (not (eq filename t))
-		     (string-match 
-		      "mutt-thelonious\\|\\.article\\|\\.letter" filename))
-		(turn-on-auto-fill))))
+          (lambda ()
+            (if (and (boundp 'filename)
+                     (not (eq filename t))
+                     (string-match 
+                      "mutt-thelonious\\|\\.article\\|\\.letter" filename))
+                (turn-on-auto-fill))))
 
 ;;}}}
 ;;{{{ Expand all tabs to spaces
 
 (add-hook 'text-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode nil)))
+          (lambda ()
+            (setq indent-tabs-mode nil)))
 
 ;;}}}
 
@@ -688,10 +690,10 @@ in all the directories in that path."
 ;;{{{ HTML
 
 (add-hook 'html-mode-hook 
-	  (function (lambda ()
-		      (auto-fill-mode -1)
-;;		      (setq truncate-lines t)
-		      )))
+          (function (lambda ()
+                      (auto-fill-mode -1)
+;;                    (setq truncate-lines t)
+                      )))
 
 ;;}}}
 ;;{{{ SGML
@@ -716,7 +718,7 @@ in all the directories in that path."
 ;;}}}
 ;;{{{ sawmill
 
-(autoload 'sawmill-mode "sawmill" "mode for editing sawmill rep (lisp) files" t)
+(autoload 'sawfish-mode "sawfish" "mode for editing sawfish rep (lisp) files" t)
 
 ;;}}}
 ;;{{{ lilypond
@@ -744,7 +746,7 @@ in all the directories in that path."
 
 (autoload 'po-find-file-coding-system "po-mode")
 (modify-coding-system-alist 'file "\\.po[tx]?\\'\\|\\.po\\."
-			    'po-find-file-coding-system)
+                            'po-find-file-coding-system)
 
 ;;}}}
 
@@ -757,25 +759,25 @@ in all the directories in that path."
 ;;{{{ Key bindings
 
 (add-hook 'folding-mode-hook
-	  (lambda ()
-	    (define-key folding-mode-map [kp-7] 'fold-enter)
-	    (define-key folding-mode-map [kp-9] 'fold-exit)
-	    (define-key folding-mode-map [kp-1] 'fold-show)
-	    (define-key folding-mode-map [kp-3] 'fold-hide)
-	    (define-key folding-mode-map [kp-4] 'fold-backward-char)
-	    (define-key folding-mode-map [kp-6] 'fold-forward-char)
+          (lambda ()
+            (define-key folding-mode-map [kp-7] 'fold-enter)
+            (define-key folding-mode-map [kp-9] 'fold-exit)
+            (define-key folding-mode-map [kp-1] 'fold-show)
+            (define-key folding-mode-map [kp-3] 'fold-hide)
+            (define-key folding-mode-map [kp-4] 'fold-backward-char)
+            (define-key folding-mode-map [kp-6] 'fold-forward-char)
 
-	    ;; These ones for VT100s (I think)
-	    (define-key folding-mode-map "\M-Ow" 'fold-enter)
-	    (define-key folding-mode-map "\M-Oy" 'fold-exit)
-	    (define-key folding-mode-map "\M-Oq" 'fold-show)
-	    (define-key folding-mode-map "\M-Os" 'fold-hide)
-	    (define-key folding-mode-map "\M-OP" 'fold-enter)
-	    (define-key folding-mode-map "\M-OQ" 'fold-exit)
+            ;; These ones for VT100s (I think)
+            (define-key folding-mode-map "\M-Ow" 'fold-enter)
+            (define-key folding-mode-map "\M-Oy" 'fold-exit)
+            (define-key folding-mode-map "\M-Oq" 'fold-show)
+            (define-key folding-mode-map "\M-Os" 'fold-hide)
+            (define-key folding-mode-map "\M-OP" 'fold-enter)
+            (define-key folding-mode-map "\M-OQ" 'fold-exit)
 
-	    ;; Override C-b binding
-	    ;; (define-key folding-mode-map "\C-b"  'kill-whole-line)
-	    ))
+            ;; Override C-b binding
+            ;; (define-key folding-mode-map "\C-b"  'kill-whole-line)
+            ))
 
 (setq fold-default-keys-function 'fold-bind-backward-compatible-keys)
 
