@@ -12,7 +12,7 @@
 
 (cond 
  (running-xemacs
-  (add-to-list 'load-path "~/lib/emacs/XEmacs" )
+  (add-to-list 'load-path "~/lib/emacs/XEmacs")
 
   ;; XEmacs automatically saved settings go here:
   (setq save-options-init-file "~/lib/emacs/init/XEmacs/as-options-init.el")
@@ -25,7 +25,7 @@
   (load "~/lib/emacs/XEmacs/as-init")
   )
  (t
-  (add-to-list 'load-path "~/lib/emacs/GNU_Emacs" 'append)
+  (add-to-list 'load-path "~/lib/emacs/GNU_Emacs")
 
   (setq custom-file "~/lib/emacs/init/GNU_Emacs/as-custom.el")
   (load "~/lib/emacs/init/GNU_Emacs/as-custom" 'noerror)
