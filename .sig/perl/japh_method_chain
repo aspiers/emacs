@@ -1,4 +1,4 @@
 -- 
 Adam Spiers -=- musician & hacker -- adam@spiers.net --- http://tigerpig.org/
 $_=q{*{$Just =bless{},'$another ';"\$Perl \::$Hacker"}=sub{print$%[$.++];$,,$
-;$_[0]},eval join v45.62,('$z')x6};s/(?<=\$)([a-z\n]+ ?)/push@%,$+;f/egi;eval
+;$_[0]},eval join+v45.62,('$z')x6};s/(?<=\$)([a-z\n]+ ?)/push@%,$+;f/egi;eval
