@@ -139,7 +139,7 @@ buffer's name.  It will fail if a buffer already exists with that name."
 ;;}}}
 ;;{{{ as-display-buffer-filename
 
-(defun display-buffer-filename
+(defun as-display-buffer-filename
   ()
   "Displays the current buffer's filename in the minibuffer."
   (interactive)
