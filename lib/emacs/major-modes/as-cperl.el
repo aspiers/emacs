@@ -126,7 +126,6 @@ line before the current line."
   "Makes a new Perl method with an accompanying pod stub."
   (interactive "sMethod name: ")
   (beginning-of-line)
-  (open-line 1)
   (insert "=head2 " method "()")
   (newline 2)
   (insert "=cut")
