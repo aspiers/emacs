@@ -75,7 +75,9 @@ from the replace is visited via `find-file'."
              (replace (cdr x)))
          (cond
           ((string-match match (buffer-file-name))
-           (find-file (replace-match replace t t (buffer-file-name) nil))
+           (let ((bounce-to (replace-match replace t t (buffer-file-name) nil)))
+             (message (format "Bounced to %s" bounce-to))
+             (find-file bounce-to))
            (throw 'gotcha nil)))))
      bounce-buffer-regexp-alist)))
 
@@ -421,16 +423,13 @@ a prefix argument."
 (global-set-key [(control meta tab)]    'ispell-complete-word)
 (global-set-key [(meta i)]              'indent-relative)
 
-(global-set-key [(f1)]          'ispell-word)
-
-
+(global-set-key [(f1)] 'ispell-word)
+(global-set-key [(f2)] 'bounce-buffer)
 (global-set-key [(f3)] 'display-buffer-filename)
+(global-set-key [(f4)] 'duplicate-line)
 
-(global-set-key [(f4)]          'duplicate-line)
-
-(global-set-key [(f5)]          'bounce-buffer)
-(global-set-key [(insert)]      'overwrite-mode)
-(global-set-key [(meta o)]      'overwrite-mode)
+(global-set-key [(insert)] 'overwrite-mode)
+(global-set-key [(meta o)] 'overwrite-mode)
 
 (global-set-key [(control meta y)] 'join-line-with-next)
 
