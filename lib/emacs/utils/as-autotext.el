@@ -152,10 +152,10 @@ line before and after the text."
 (defun as-insert-snail-mail () 
   "Inserts Adam's snail mail address"
   (interactive)
-  (insert "Flat A306
-West India Quay Apartments
-20 Hertsmere Road
-London E14 4AZ
+  (insert "70 Ocean Wharf
+60 Westferry Road
+London
+E14 8JS
 "))
 
 ;;}}}
