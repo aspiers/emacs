@@ -271,8 +271,11 @@ in all the directories in that path."
 
 (global-set-key "\C-x\C-zs"
 		(function (lambda () (interactive)
-			    (insert "-------- 8< -------- 8< --------")
-			    (newline))))
+			    (open-line 1)
+			    (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
+			    (beginning-of-line)
+			    (next-line 1)
+			    )))
 
 ;; Home-page
 
