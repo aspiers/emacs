@@ -947,11 +947,11 @@ directory DIR, reads fileinfos from it, and returns them.  Otherwise
 returns nil."
   (and cvs-use-fileinfo-caches
        (let ((cache (expand-file-name cvs-cache-filename dir)))
-         (file-readable-p cache)
-         (with-temp-buffer
-           (insert-file-contents cache)
-           (message (format "Reading fileinfos from cache %s" cache))
-           (read (buffer-substring 1 (point-max)))))))
+         (and (file-readable-p cache)
+              (with-temp-buffer
+                (insert-file-contents cache)
+                (message (format "Reading fileinfos from %s" cache))
+                (read (buffer-substring 1 (point-max))))))))
 
 ;;;###autoload
 (defun cvs-examine (directory flags &optional noshow)
