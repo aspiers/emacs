@@ -41,6 +41,17 @@ a prefix argument."
       (insert suffix))))
 
 ;;}}}
+;;{{{ as-transpose-lines
+
+(defun as-transpose-lines (arg)
+  "Just like `transpose-lines', but preserves the point's position."
+  (interactive "*p")
+  (let ((col (current-column)))
+    (transpose-lines arg)
+    (forward-line (- arg))
+    (move-to-column col)))
+
+;;}}}
 ;;{{{ vim-yy
 
 (defun vim-yy (&optional lines) "doc string"
