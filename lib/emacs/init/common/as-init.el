@@ -300,7 +300,6 @@ a prefix argument."
 
 (global-set-key "\C-x9 "   'set-mark-command)
 (global-set-key "\C-x9a"   'save-buffer)
-
 ;;{{{ toggle-indent-tabs-mode
 
 (defun as-toggle-indent-tabs-mode
@@ -313,9 +312,7 @@ a prefix argument."
 
 ;;}}}
 (global-set-key "\C-x9b"   'as-toggle-indent-tabs-mode)
-
 (global-set-key "\C-x9c"   'comment-region)
-
 ;;{{{ insert-date-and-time
 
 (defun as-insert-date-and-time
@@ -331,10 +328,8 @@ a prefix argument."
 
 ;;}}}
 (global-set-key "\C-x9d"   'as-insert-date-and-time)
-
 (global-set-key "\C-x9g"   'goto-line)
 (global-set-key "\C-x9i"   'auto-fill-mode)
-
 ;;{{{ insert-log-timestamp
 
 (defun as-insert-log-timestamp
@@ -353,9 +348,10 @@ a prefix argument."
 
 ;;}}}
 (global-set-key "\C-x9l"   'as-insert-log-timestamp)
-
+(global-set-key "\C-x9o"   'as-bounce-buffer)
+(global-set-key "\C-x9n"   'as-display-buffer-filename)
+(global-set-key "\C-x9p"   'as-copy-previous-line-suffix)
 (global-set-key "\C-x9r"   'toggle-read-only)
-
 ;;{{{ toggle-truncate-lines
 
 (defun as-toggle-truncate-lines
@@ -368,9 +364,8 @@ a prefix argument."
 
 ;;}}}
 (global-set-key "\C-x9t"   'as-toggle-truncate-lines)
-
+(global-set-key "\C-x9u"   'as-duplicate-line)
 (global-set-key "\C-x9v"   'set-variable)
-
 ;;{{{ set-tab-width
 
 (defun as-set-tab-width (width)
@@ -380,7 +375,6 @@ a prefix argument."
 
 ;;}}}
 (global-set-key "\C-x9w"   'as-set-tab-width)
-
 (global-set-key "\C-x9z"   'suspend-emacs)
 
 ;;}}}
@@ -488,11 +482,11 @@ a prefix argument."
 (global-set-key [(control meta tab)]    'ispell-complete-word)
 (global-set-key [(meta i)]              'indent-relative)
 
-(global-set-key [(f1)] 'ispell-word)
-(global-set-key [(f2)] 'as-bounce-buffer)
-(global-set-key [(f3)] 'as-display-buffer-filename)
-(global-set-key [(f4)] 'as-duplicate-line)
-(global-set-key [(f6)] 'as-copy-previous-line-suffix)
+;; (global-set-key [(f1)] 'ispell-word)
+;; (global-set-key [(f2)] 'as-bounce-buffer)
+;; (global-set-key [(f3)] 'as-display-buffer-filename)
+;; (global-set-key [(f4)] 'as-duplicate-line)
+;; (global-set-key [(f6)] 'as-copy-previous-line-suffix)
 
 (global-set-key [(insert)] 'overwrite-mode)
 (global-set-key [(meta o)] 'overwrite-mode)
