@@ -348,7 +348,7 @@ If it is \\[universal-argument] \\[universal-argument], behave just
 				 &optional qtypedesc hist-sym)
   (let ((cps (cvs-prefix-sym sym)))
     `(progn
-       (defvar ,sym nil ,(cons (or docstring "") "
+       (defvar ,sym nil ,(concat (or docstring "") "
 See `cvs-prefix-set' for further description of the behavior."))
        (defconst ,cps
 	 (let ((defaults ,defaults))
