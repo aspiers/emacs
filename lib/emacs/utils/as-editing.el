@@ -50,6 +50,7 @@ a prefix argument."
   "Runs indent-relative on the current line and moves down to enable repeating."
   (interactive)
   (save-excursion
+    (re-search-forward "[ \t]")
     (re-search-forward "[^ ]")
     (backward-char 1)
     (indent-relative))
