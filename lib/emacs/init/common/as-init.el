@@ -341,6 +341,9 @@ that name."
 (autoload 'as-insert-scissors "as-autotext" "Insert scissors" t)
 (global-set-key "\C-cis" 'as-insert-scissors)
 
+(autoload 'as-snip-region "as-autotext" "Snip region" t)
+(global-set-key "\C-ciS" 'as-snip-region)
+
 (autoload 'as-insert-tigerpig-url "as-autotext" "Insert tigerpig url" t)
 (global-set-key "\C-cit" 'as-insert-tigerpig-url)
 

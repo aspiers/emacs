@@ -66,6 +66,24 @@ the point."
   (forward-line 1))
 
 ;;}}}
+;;{{{ Snipping text
+
+(defun as-snip-region ()
+  "Replaces a region with `[snipped]' text, ensuring one blank
+line before and after the text."
+  (interactive)
+  (kill-region (region-beginning) (region-end))
+  (insert "\n[snipped]\n")
+  (if (re-search-forward "\n*" nil t)
+    (replace-match "\n" nil nil))
+  (re-search-backward "\\[snipped\\]" nil t)
+  (re-search-backward "[^\n]" nil t)
+  (forward-char 1)
+  (if (re-search-forward "\n*" nil t)
+    (replace-match "\n\n" nil nil))
+  (re-search-forward "\\[snipped\\]\n\n" nil t))
+
+;;}}}
 ;;{{{ Information about me
 
 (defun as-insert-homepage-url ()
