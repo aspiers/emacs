@@ -490,14 +490,14 @@ that name."
 ;;}}}
 ;;{{{ Text
 
-;; Turn on auto-fill if composing e-mail or news.
 (add-hook 'text-mode-hook
           (function (lambda ()
+                      (local-unset-key "\e\t")
                       (and
                        (string-match "mutt-thelonious\\|\\.article\\|\\.letter"
-                                     (buffer-file-name))
+                                     (or (buffer-file-name) ""))
                        (turn-on-auto-fill)))))
-          
+
 ;; Expand all tabs to spaces
 (add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
 
@@ -914,7 +914,6 @@ that name."
 ;;}}}
 
 ;;}}}
-;;{{{ Hooks
 
 ;;{{{ comment-start
 
@@ -927,13 +926,6 @@ that name."
 (setq as-find-file-matching-regexp-alist
       (append '(("\*\.rdb$" . (lambda () (setq comment-start "! "))))
               as-find-file-matching-regexp-alist))
-
-;;}}}
-;;{{{ hippie-expand
-
-(add-hook 'text-mode-hook (function (lambda () (local-unset-key "\e\t"))))
-
-;;}}}
 
 ;;}}}
 
