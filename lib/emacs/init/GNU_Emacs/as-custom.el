@@ -7,10 +7,14 @@
      (custom-set-variables
       '(vc-annotate-background "white")))
 
+(custom-set-faces
+ `(default ((((class color) (background light)) (:background ,as-default-background))))
+ `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background)))))
+
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
- '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info")))
+ '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(auto-save-interval 120)
  '(blinking-cursor-blink-frequency 4)
  '(blinking-cursor-colors (quote ("coral" "blue" "gold")))
@@ -52,16 +56,15 @@
  '(search-upper-case t)
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
- '(show-paren-ring-bell-on-mismatch nil))
+ '(show-paren-ring-bell-on-mismatch nil)
+ '(vc-annotate-background "white"))
 (custom-set-faces
   ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
  '(cperl-array-face ((((class color) (background dark)) (:bold t :foreground "yellow"))))
  '(cperl-hash-face ((t (:bold t :italic t :foreground "red"))))
- `(default ((((class color) (background light)) (:background ,as-default-background))))
  '(font-lock-comment-face ((((class color) (background dark)) (:foreground "aquamarine"))))
  '(font-lock-comment-face ((((class color) (background light)) (:foreground "Firebrick"))))
  '(highlight ((t (:foreground "white" :background "orange"))))
- `(mmm-default-submode-face ((((class color) (background light)) (:background ,as-default-background))))
  '(show-paren-match-face ((((class color)) (:background "MediumBlue"))))
  '(underline ((((class color) (background light)) (:underline t :foreground "Yellow Green")))))
