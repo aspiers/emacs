@@ -1,5 +1,6 @@
 ;;; Blinking cursor mode for GNU Emacs
 ;;; Copyright (C) 1997 Kyle E. Jones
+;;; Customizability added by Adam Spiers <adam@spiers.net>, 23/1/2001
 ;;;
 ;;; This program is free software; you can redistribute it and/or modify
 ;;; it under the terms of the GNU General Public License as published by
@@ -30,27 +31,36 @@
 (provide 'blinking-cursor)
 
 (require 'timer)
+(require 'custom)
 
-(defconst blinking-cursor-version "1.00")
+(defconst blinking-cursor-version "1.01")
 
-(defvar blinking-cursor-mode nil
-  "Non-nil value means Blinking Cursor mode is active.")
+(defgroup blinking-cursor nil
+  "Group for customizing Blinking Cursor mode."
+  :prefix "blinking-cursor-"
+  :group 'display)
 
-(defvar blinking-cursor-blink-frequency 2
+(defcustom blinking-cursor-mode nil
+  "Non-nil value means Blinking Cursor mode is active."
+  :type  'boolean
+  :group 'blinking-cursor)
+
+(defcustom blinking-cursor-blink-frequency 2
   "Number of times the cursor should change color per second.
-This can be a floating point value.")
+This can be a floating point value."
+  :type  'number
+  :group 'blinking-cursor)
 
-(defvar blinking-cursor-colors ["gold" "blue"]
-  "Array of colors that will be cycled through to blink the cursor.
-You can set it like this in your .emacs file:
+(defcustom blinking-cursor-colors '("gold" "blue")
+  "List of colors that will be cycled through to blink the cursor.
 
-   (setq blinking-cursor-colors [\"gold\" \"blue\"])
+The list should contain at least two color names.
 
-The array should contain at least two color names.
-
-The first color in the vector is the one Emacs will return to
+The first color in the list is the one Emacs will return to
 while you are typing.  The cursor will not blink unless Emacs is
-idle.")
+idle."
+  :type  '(repeat color)
+  :group 'blinking-cursor)
 
 (defun blinking-cursor-mode (&optional arg)
   "Toggle Blinking Cursor mode.
@@ -84,9 +94,9 @@ Uses colors in blinking-cursor-colors and indexed by blinking-cursor-tick.
 Increments blinking-cursor-tick."
   (condition-case err-data
       (cond (blinking-cursor-should-blink
-	     (set-cursor-color (aref blinking-cursor-colors
-				     (% blinking-cursor-tick
-					(length blinking-cursor-colors))))
+	     (set-cursor-color (nth (% blinking-cursor-tick
+					(length blinking-cursor-colors))
+                                    blinking-cursor-colors))
 	     (setq blinking-cursor-tick (1+ blinking-cursor-tick))))
     ;; if Emacs can't get a color don't throw an error .
     (error
