@@ -565,6 +565,8 @@ that name."
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
 
+(defun sm () "Abbreviation for `sm-mode'." (interactive) (sh-mode))
+
 ;;}}}
 ;;{{{ Lisp
 
