@@ -374,6 +374,37 @@ in all the directories in that path."
 (load "mwheel" t)
 
 ;;}}}
+;;{{{ Start server
+
+;; Set Emacs as server for all other emacsclients.
+;; This needs EDITOR enviroment variable (and VISUAL etc.) to be
+;; set to 'emacsclient'.
+;;
+;; Screen is aliased to ~/lib/screen which on entry aliases emacs to
+;; emacsclient, and on exit unaliases it.
+
+;;(load-if-exists "server-x")
+
+;;(server-start)
+
+;;}}}
+;;{{{ Buffer renaming based on filename
+
+;; as-buffer-renamings-alist should map regexps matching file names
+;; to new buffer names
+
+(add-hook 'find-file-hooks 
+	  (function (lambda ()
+		      (catch 'endloop
+			(mapcar
+			 (lambda (x)
+			   (if (string-match (car x) (buffer-file-name))
+			       (progn
+				 (rename-buffer (cdr x) t)
+				 (throw 'endloop t))))
+			 as-buffer-renamings-alist)))))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
@@ -402,6 +433,7 @@ in all the directories in that path."
 ;;		       '("\\.info\\(\\.gz\\)?\\'" . info)
 		       '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
 		       '(".sawmillrc\\'\\|/sawmill/" . sawmill-mode)
+		       '(".ly\\'" . lilypond-mode)
 		       )
 			      auto-mode-alist))
 
@@ -418,6 +450,8 @@ in all the directories in that path."
 ;;}}}
 
 ;;}}}
+
+;; Major modes
 
 ;;{{{ Fundamental
 
@@ -685,6 +719,11 @@ in all the directories in that path."
 (autoload 'sawmill-mode "sawmill" "mode for editing sawmill rep (lisp) files" t)
 
 ;;}}}
+;;{{{ lilypond
+
+(autoload 'lilypond-mode "lilypond" "mode for editing lilypond files" t)
+
+;;}}}
 
 ;;{{{ SDF
 
@@ -826,19 +865,5 @@ in all the directories in that path."
 (add-hook 'text-mode-hook (function (lambda () (setq comment-start "> "))))
 
 ;;}}}
-
-;;}}}
-;;{{{ Start server
-
-;; Set Emacs as server for all other emacsclients.
-;; This needs EDITOR enviroment variable (and VISUAL etc.) to be
-;; set to 'emacsclient'.
-;;
-;; Screen is aliased to ~/lib/screen which on entry aliases emacs to
-;; emacsclient, and on exit unaliases it.
-
-;;(load-if-exists "server-x")
-
-;;(server-start)
 
 ;;}}}
