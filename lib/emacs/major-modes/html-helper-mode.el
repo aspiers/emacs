@@ -463,9 +463,7 @@ See code for an example."
     (head    . (html-helper-head-map "\C-c\C-h" 
 				     html-helper-head-menu 
 				     "Insert Structural Elements"))
-    (header  . (html-helper-header-map "\C-c" 
-				       html-helper-header-menu 
-				       "Insert Headers"))
+    (header  . (nil nil html-helper-header-menu "Insert Headers"))
     (anchor  . (html-helper-anchor-map "\C-c\C-a" 
 				       html-helper-anchor-menu 
 				       "Insert Hyperlinks"))
@@ -763,17 +761,17 @@ with a null string."
  
 
    ;;headers
-   (header  "6"       "<h6>"		"Header 6"       	  
+   (header  "\C-c6"   "<h6>"		"Header 6"       	  
 	    ("<h6>" (r "Header: ") "</h6>"))
-   (header  "5"       "<h5>"		"Header 5"       	  
+   (header  "\C-c5"   "<h5>"		"Header 5"       	  
 	    ("<h5>" (r "Header: ") "</h5>"))
-   (header  "4"       "<h4>"		"Header 4"       	  
+   (header  "\C-c4"   "<h4>"		"Header 4"       	  
 	    ("<h4>" (r "Header: ") "</h4>"))
-   (header  "3"       "<h3>"		"Header 3"       	  
+   (header  "\C-c3"   "<h3>"		"Header 3"       	  
 	    ("<h3>" (r "Header: ") "</h3>"))
-   (header  "2"       "<h2>"		"Header 2"       	  
+   (header  "\C-c2"   "<h2>"		"Header 2"       	  
 	    ("<h2>" (r "Header: ") "</h2>"))
-   (header  "1"	      "<h1>"     	"Header 1"       	  
+   (header  "\C-c1"   "<h1>"     	"Header 1"       	  
 	    ("<h1>" (r "Header: ") "</h1>"))
 
    ;; forms
