@@ -1,4 +1,5 @@
 pcl-cvs wishlist, sorted by decreasing priority
 
 - add prefix (bind to L) for toggling recursion
+- option to toggle unknown fileinfos
 - allow diffing between arbitrary versions
