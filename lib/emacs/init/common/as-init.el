@@ -466,6 +466,9 @@ that name."
 
 ;;{{{ find-function-source-path
 
+(defvar nxml-sub-dir "major-modes/nxml-mode-20041004"
+  "Path of nxml-mode subdirectory relative to Adam's emacs library root")
+
 (custom-set-variables
  '(find-function-source-path
    (append load-path
@@ -476,6 +479,7 @@ that name."
                "major-modes/mmm" 
                "major-modes/tdtd" 
                "major-modes/pcl-cvs" 
+               nxml-sub-dir
                "major-modes" 
                "minor-modes" 
                "utils" 
@@ -549,12 +553,13 @@ that name."
                 ("\\.css\\'"                             . css-mode)
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
-                ("\\.xml$"                               . xml-mode)
+                ("\\.xml$"                               . nxml-mode)
+;;                 ("\\.xml$"                               . xml-mode)
                 ("\\.sgml$"                              . sgml-mode)
                 ("\\.dtd$"                               . sgml-mode)
+;;                ("\\.dtd$"                             . dtd-mode)
                 ("\\.dcl$"                               . dtd-mode)
                 ("\\.dec$"                               . dtd-mode)
-;;                ("\\.dtd$"                             . dtd-mode)
                 ("\\.ele$"                               . dtd-mode)
                 ("\\.ent$"                               . dtd-mode)
                 ("\\.mod$"                               . dtd-mode)
@@ -669,6 +674,13 @@ that name."
 
 ;; Turn on font lock when in DTD mode
 (add-hook 'dtd-mode-hooks 'turn-on-font-lock)
+
+;;}}}
+;;{{{ nxml
+
+(add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
+(load "rng-auto")
+;;(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
 
 ;;}}}
 ;;{{{ psgml (SGML and XML)
