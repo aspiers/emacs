@@ -1177,9 +1177,6 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ Autoload mode via local variables
 
-(defun folding-mode)
-(defun folding-mode-add-find-file-hook)
-
 (autoload 'folding-mode "folding" "folding mode")
 (autoload 'folding-mode-find-file "folding" "folding mode")
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
