@@ -4,7 +4,7 @@
 
 ;; Author:   Stig Bjørlykke, <stigb@tihlde.org>
 ;; Keywords: unix, languages
-;; Version:  0.12
+;; Version:  0.13
 
 ;; This file is part of XEmacs.
 
@@ -33,6 +33,8 @@
 ;;     Tim Powers <timp@redhat.com> and Trond Eivind Glomsrød
 ;;          <teg@redhat.com> for Red Hat adaptions and some fixes.
 ;;     Chmouel Boudjnah <chmouel@mandrakesoft.com> for Mandrake fixes.
+;;     Adam Spiers <elisp@adamspiers.org> for GNU emacs compilation
+;;          and other misc fixes.
 
 ;;; ToDo:
 
@@ -105,7 +107,10 @@ Set the macros _target, _target_arch and _target_os accordingly"
   :type 'string
   :group 'rpm-spec)
 
-(defun define-obsolete-variable-alias (foo bar))
+(eval-when-compile
+  (if (not (boundp 'running-xemacs))
+      (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
+  (or running-xemacs (defun define-obsolete-variable-alias (foo bar))))
 (define-obsolete-variable-alias
   'rpm-completion-ignore-case 'rpm-spec-completion-ignore-case)
 
@@ -188,18 +193,19 @@ value returned by function `user-mail-address'."
 ;;------------------------------------------------------------
 ;; variables used by navigation functions.
 
-(defconst rpm-sections
-  '("preamble" "description" "prep" "setup" "build" "install" "clean"
-    "changelog" "files")
-  "Partial list of section names.")
-(defvar rpm-section-list
-  '(("preamble") ("description") ("prep") ("setup") ("build") ("install")
-    ("clean") ("changelog") ("files"))
-  "Partial list of section names.")
 (defconst rpm-scripts
   '("pre" "post" "preun" "postun"
-    "trigger" "triggerin" "triggerun" "triggerpostun")
+    "trigger" "triggerin" "triggerun" "triggerpostun"
+    "verifyscript")
   "List of rpm scripts.")
+(defconst rpm-sections
+  (append '("preamble" "description" "prep" "setup" "build" "install" "clean"
+            "changelog" "files")
+          rpm-scripts)
+  "Partial list of section names.")
+(defvar rpm-section-list
+  (mapcar (lambda (el) (list el)) rpm-sections)
+  "Partial list of section names.")
 (defconst rpm-section-seperate "^%\\(\\w+\\)\\s-")
 (defconst rpm-section-regexp
   (eval-when-compile
@@ -386,6 +392,7 @@ value returned by function `user-mail-address'."
   (modify-syntax-entry ?| "." rpm-spec-mode-syntax-table)
   (modify-syntax-entry ?\' "." rpm-spec-mode-syntax-table))
 
+(eval-when-compile (or running-xemacs (defun set-keymap-name (a b))))
 (defvar rpm-spec-mode-map nil
   "Keymap used in `rpm-spec-mode'.")
 (unless rpm-spec-mode-map
@@ -598,12 +605,16 @@ with no args, if that value is non-nil."
 
 ;;------------------------------------------------------------
 
+(eval-when-compile
+  (or running-xemacs (defun user-mail-address ())))
 (defun rpm-add-change-log-entry (&optional change-log-entry)
   "Find change log and add an entry for today."
   (interactive "sChange log entry: ")
-  (save-excursion
     (rpm-goto-section "changelog")
-    (let* ((address (or rpm-spec-user-mail-address (user-mail-address)))
+    (let* ((address (or rpm-spec-user-mail-address
+                        (if (functionp 'user-mail-address)
+                            (user-mail-address)
+                          user-mail-address)))
            (fullname (or rpm-spec-user-full-name (user-full-name)))
            (string (concat "* " (substring (current-time-string) 0 11)
                            (substring (current-time-string) -4) " "
@@ -613,7 +624,7 @@ with no args, if that value is non-nil."
       (if (not (search-forward string nil t))
           (insert "\n" string "\n")
         (forward-line 2))
-      (insert "- " change-log-entry "\n"))))
+      (insert "- " change-log-entry "\n")))
 
 ;;------------------------------------------------------------
 
@@ -672,25 +683,26 @@ controls whether case is significant."
 
 (defun rpm-insert (&optional what file-completion)
   "Insert given tag.  Use file-completion if argument is t."
-  (beginning-of-line)
-  (if (not what)
-      (setq what (rpm-completing-read "Tag: " rpm-tags-list)))
-  (if (string-match "^%" what)
-      (setq read-text (concat "Packagename for " what ": ")
-            insert-text (concat what " "))
-    (setq read-text (concat what ": ")
-          insert-text (concat what ": ")))
-  (cond
-   ((string-equal what "Group")
-    (rpm-insert-group))
-   ((string-equal what "Source")
-    (rpm-insert-n "Source"))
-   ((string-equal what "Patch")
-    (rpm-insert-n "Patch"))
-   (t
-    (if file-completion
-        (insert insert-text (read-file-name (concat read-text) "" "" nil) "\n")
-      (insert insert-text (read-from-minibuffer (concat read-text)) "\n")))))
+  (let (read-text insert-text)
+    (beginning-of-line)
+    (if (not what)
+        (setq what (rpm-completing-read "Tag: " rpm-tags-list)))
+    (if (string-match "^%" what)
+        (setq read-text (concat "Packagename for " what ": ")
+              insert-text (concat what " "))
+      (setq read-text (concat what ": ")
+            insert-text (concat what ": ")))
+    (cond
+     ((string-equal what "Group")
+      (call-interactively 'rpm-insert-group))
+     ((string-equal what "Source")
+      (rpm-insert-n "Source"))
+     ((string-equal what "Patch")
+      (rpm-insert-n "Patch"))
+     (t
+      (if file-completion
+          (insert insert-text (read-file-name (concat read-text) "" "" nil) "\n")
+        (insert insert-text (read-from-minibuffer (concat read-text)) "\n"))))))
 
 (defun rpm-topdir ()
   (or
@@ -879,50 +891,50 @@ leave point at previous location."
 
 (defun rpm-build (buildoptions)
   "Build this RPM package."
-  (setq rpm-buffer-name
-        (concat "*" rpm-spec-build-command " " buildoptions " "
-                (file-name-nondirectory buffer-file-name) "*"))
-  (rpm-process-check rpm-buffer-name)
-  (if (get-buffer rpm-buffer-name)
-      (kill-buffer rpm-buffer-name))
-  (create-file-buffer rpm-buffer-name)
-  (display-buffer rpm-buffer-name)
-  (setq buildoptions (list buildoptions buffer-file-name))
-  (if (or rpm-spec-short-circuit rpm-spec-nobuild)
-      (setq rpm-no-gpg t))
-  (if rpm-spec-rmsource
-      (setq buildoptions (cons "--rmsource" buildoptions)))
-  (if rpm-spec-clean
-      (setq buildoptions (cons "--clean" buildoptions)))
-  (if rpm-spec-short-circuit
-      (setq buildoptions (cons "--short-circuit" buildoptions)))
-  (if (and (not (equal rpm-spec-timecheck "0"))
-           (not (equal rpm-spec-timecheck "")))
-      (setq buildoptions (cons "--timecheck" (cons rpm-spec-timecheck
-                                                   buildoptions))))
-  (if (not (equal rpm-spec-buildroot ""))
-      (setq buildoptions (cons "--buildroot" (cons rpm-spec-buildroot
-                                                   buildoptions))))
-  (if (not (equal rpm-spec-target ""))
-      (setq buildoptions (cons "--target" (cons rpm-spec-target
-                                                buildoptions))))
-  (if rpm-spec-nobuild
-      (setq buildoptions (cons (if rpm-spec-old-rpm "--test" "--nobuild")
-			       buildoptions)))
-  (if rpm-spec-nodeps
-      (setq buildoptions (cons "--nodeps" buildoptions)))
-  (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
-      (setq buildoptions (cons "--sign" buildoptions)))
-  (save-excursion
-    (set-buffer (get-buffer rpm-buffer-name))
-    (goto-char (point-max)))
-  (let ((process
-         (apply 'start-process rpm-spec-build-command rpm-buffer-name
-		rpm-spec-build-command buildoptions)))
+  (let ((rpm-buffer-name
+         (concat "*" rpm-spec-build-command " " buildoptions " "
+                 (file-name-nondirectory buffer-file-name) "*")))
+    (rpm-process-check rpm-buffer-name)
+    (if (get-buffer rpm-buffer-name)
+        (kill-buffer rpm-buffer-name))
+    (create-file-buffer rpm-buffer-name)
+    (display-buffer rpm-buffer-name)
+    (setq buildoptions (list buildoptions buffer-file-name))
+    (if (or rpm-spec-short-circuit rpm-spec-nobuild)
+        (setq rpm-no-gpg t))
+    (if rpm-spec-rmsource
+        (setq buildoptions (cons "--rmsource" buildoptions)))
+    (if rpm-spec-clean
+        (setq buildoptions (cons "--clean" buildoptions)))
+    (if rpm-spec-short-circuit
+        (setq buildoptions (cons "--short-circuit" buildoptions)))
+    (if (and (not (equal rpm-spec-timecheck "0"))
+             (not (equal rpm-spec-timecheck "")))
+        (setq buildoptions (cons "--timecheck" (cons rpm-spec-timecheck
+                                                     buildoptions))))
+    (if (not (equal rpm-spec-buildroot ""))
+        (setq buildoptions (cons "--buildroot" (cons rpm-spec-buildroot
+                                                     buildoptions))))
+    (if (not (equal rpm-spec-target ""))
+        (setq buildoptions (cons "--target" (cons rpm-spec-target
+                                                  buildoptions))))
+    (if rpm-spec-nobuild
+        (setq buildoptions (cons (if rpm-spec-old-rpm "--test" "--nobuild")
+                                 buildoptions)))
+    (if rpm-spec-nodeps
+        (setq buildoptions (cons "--nodeps" buildoptions)))
     (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
-        (let ((rpm-passwd-cache (read-passwd "GPG passphrase: ")))
-          (process-send-string process (concat rpm-passwd-cache "\n"))))
-    (set-process-filter process 'rpm-command-filter)))
+        (setq buildoptions (cons "--sign" buildoptions)))
+    (save-excursion
+      (set-buffer (get-buffer rpm-buffer-name))
+      (goto-char (point-max)))
+    (let ((process
+           (apply 'start-process rpm-spec-build-command rpm-buffer-name
+                  rpm-spec-build-command buildoptions)))
+      (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
+          (let ((rpm-passwd-cache (read-passwd "GPG passphrase: ")))
+            (process-send-string process (concat rpm-passwd-cache "\n"))))
+      (set-process-filter process 'rpm-command-filter))))
 
 (defun rpm-build-prepare (&optional arg)
   "Run a `rpmbuild -bp'."
@@ -1052,17 +1064,17 @@ command."
 
 (defun rpm-update-mode-name ()
   "Update `mode-name' according to values set."
-  (setq mode-name "RPM-SPEC")
-  (setq modes (concat (if rpm-spec-add-attr      "A")
-                      (if rpm-spec-clean         "C")
-                      (if rpm-spec-nodeps        "D")
-                      (if rpm-spec-sign-gpg      "G")
-                      (if rpm-spec-nobuild       "N")
-                      (if rpm-spec-rmsource      "R")
-                      (if rpm-spec-short-circuit "S")
-                      ))
-  (if (not (equal modes ""))
-      (setq mode-name (concat mode-name ":" modes))))
+  (let ((mode-name "RPM-SPEC")
+        (modes (concat (if rpm-spec-add-attr      "A")
+                       (if rpm-spec-clean         "C")
+                       (if rpm-spec-nodeps        "D")
+                       (if rpm-spec-sign-gpg      "G")
+                       (if rpm-spec-nobuild       "N")
+                       (if rpm-spec-rmsource      "R")
+                       (if rpm-spec-short-circuit "S")
+                       )))
+    (if (not (equal modes ""))
+        (setq mode-name (concat mode-name ":" modes)))))
 
 ;;------------------------------------------------------------
 
@@ -1107,17 +1119,18 @@ command."
   (interactive "p")
   (save-excursion
     (goto-char (point-min))
-    (if (search-forward-regexp "^Release:[ \t]*\\([0-9]+\\)\\(.*\\)" nil t)
-        (let ((release (1+ (string-to-int (match-string 1)))))
-          (setq release (concat (int-to-string release) (match-string 2)))
-          (replace-match (concat "Release: " release))
+    (if (search-forward-regexp "^\\(Release[ \t]*:[ \t]*\\)\\([0-9]+\\)\\(.*\\)" nil t)
+        (let ((release (1+ (string-to-int (match-string 2)))))
+          (setq release (concat (int-to-string release) (match-string 3)))
+          (replace-match (concat (match-string 1) release))
           (message (concat "Release tag changed to " release ".")))
-      (if (search-forward-regexp "^Release:[ \t]*%{?\\([^}]*\\)}?$" nil t)
+      (if (search-forward-regexp "^Release[ \t]*:[ \t]*%{?\\([^}]*\\)}?$" nil t)
           (rpm-increase-release-with-macros)
         (message "No Release tag found...")))))
 
 ;;------------------------------------------------------------
 
+(autoload 'ignore-errors "cl-macs")
 (defun rpm-spec-field-value (field max)
   "Get the value of FIELD, searching up to buffer position MAX.
 See `search-forward-regexp'."
@@ -1126,8 +1139,8 @@ See `search-forward-regexp'."
       (let ((str
              (progn
                (goto-char (point-min))
-               (search-forward-regexp (concat
-                                       field ":[ \t]*\\(.*?\\)[ \t]*$") max)
+               (search-forward-regexp
+                (concat field "[ \t]*:[ \t]*\\(.*?\\)[ \t]*$") max)
                (match-string 1))))
         (if (string-match "%{?\\([^}]*\\)}?$" str)
             (progn
@@ -1160,11 +1173,12 @@ if one is present in the file."
     (let ((str
            (progn
              (goto-char (point-min))
-             (search-forward-regexp (concat "Release:[ \t]*\\(.+\\).*$") nil)
+             (search-forward-regexp
+              (concat "Release[ \t]*:[ \t]*\\(.+\\).*$") nil)
              (match-string 1))))
       (let ((inrel
              (if (string-match "%{?\\([^}]*\\)}?$" str)
-                 (progn
+                 (let (macros)
                    (goto-char (point-min))
                    (setq macros (substring str (match-beginning 1)
                                            (match-end 1)))
@@ -1175,9 +1189,8 @@ if one is present in the file."
                                                           (match-string 1))))
                            (match-string 3)))
                str)))
-        (setq dinrel inrel)
-        (replace-match (concat "%define " dinrel))
-        (message (concat "Release tag changed to " dinrel "."))))))
+        (replace-match (concat "%define " inrel))
+        (message (concat "Release tag changed to " inrel "."))))))
 
 ;;------------------------------------------------------------
 
