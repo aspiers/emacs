@@ -14,21 +14,32 @@
 ;; so that right version of stuff like mwheel gets loaded.
 
 ;; XEmacs adds crap to emacs-version
-(setq emacs-version-number
-      (format "%d.%d" emacs-major-version emacs-minor-version))
+(defvar emacs-version-number
+  (format "%d.%d" emacs-major-version emacs-minor-version)
+  "emacs major.minor version number")
 
-(setq edotdir (or (getenv "ZDOTDIR") "~"))
+(defvar edotdir
+  (or (getenv "ZDOTDIR") "~")
+  "Home directory to be used to retrieve emacs init files.")
 
-(setq as-emacs-dir (concat edotdir "/lib/emacs"))
+(defvar as-emacs-dir
+  (concat edotdir "/lib/emacs")
+  "Path to root of emacs libraries, regardless of emacs vendor.")
 
-(setq as-lib-dir
-      (concat as-emacs-dir "/"
-              (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
-(setq as-init-dir
-      (concat as-emacs-dir "/init/"
-              (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
-(setq as-version-lib-dir
-      (format "%s/%s/%s" as-lib-dir emacs-version-number system-type))
+(defvar as-lib-dir
+  (concat as-emacs-dir "/"
+          (cond (running-xemacs "XEmacs") (t "GNU_Emacs")))
+  "Path to emacs libraries for a specific emacs vendor.")
+
+(defvar as-init-dir
+  (concat as-emacs-dir "/init/"
+          (cond (running-xemacs "XEmacs") (t "GNU_Emacs")))
+  "Path to emacs init libraries for a specific emacs vendor.")
+
+(defvar as-version-lib-dir
+  (format "%s/%s/%s" as-lib-dir emacs-version-number system-type)
+  "Path to emacs libraries for a particular system's emacs install.")
+
 (add-to-list 'load-path as-version-lib-dir)
 
 (cond 
