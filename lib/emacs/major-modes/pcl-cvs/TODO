@@ -2,4 +2,5 @@ pcl-cvs wishlist, sorted by decreasing priority
 
 - rebind q from cvs-bury-buffer to delete-window
 - bind ^ (or maybe .) go up a directory (u and U are already taken)
+- functions for moving up and down directories, bind to C-up and C-down
 - add prefix (bind to L) for toggling recursion
