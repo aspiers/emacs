@@ -685,6 +685,9 @@ that name."
 (load "rng-auto")
 (autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
 (defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
+(autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
+(add-hook 'nxml-mode-hook
+          (lambda () (local-set-key [(control meta q)] 'mhj-format-xml)))
 
 ;;}}}
 ;;{{{ psgml (SGML and XML)
