@@ -432,6 +432,16 @@ to the beginning of the buffer name."
 (add-hook 'find-file-hooks 'as-buffer-rename-via-alist)
 
 ;;}}}
+;;{{{ Display current buffer's filename
+
+(defun as-display-buffer-filename
+  ()
+  "Displays the current buffer's filename in the minibuffer."
+  (interactive)
+  (message buffer-file-name))
+(global-set-key "\C-x9n" 'as-display-buffer-filename)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
@@ -579,7 +589,9 @@ to the beginning of the buffer name."
 
 ;;{{{ Autoload
 
+;; one of these two will work
 (autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
+(defalias 'perl-mode 'cperl-mode)
 
 ;;}}}
 ;;{{{ Hairy options
