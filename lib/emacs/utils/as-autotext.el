@@ -9,6 +9,16 @@
 ;; (current-time-string)
 ;; (shell-command-to-string "date")
 
+(defun as-insert-date ()
+  "Inserts the current date into the current buffer at the point."
+  (interactive)
+  (insert (format-time-string "%a %b %e %Y")))
+
+(defun as-insert-time ()
+  "Inserts the current time into the current buffer at the point."
+  (interactive)
+  (insert (format-time-string "%H:%M:%S %Z")))
+
 (defun as-insert-date-and-time ()
   "Inserts the current date and time into the current buffer at the
 point."

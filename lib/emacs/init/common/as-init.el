@@ -303,6 +303,9 @@ that name."
 (autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
 (global-set-key "\C-cid" 'as-insert-date-and-time)
 
+(autoload 'as-insert-date "as-autotext" "Insert date" t)
+(global-set-key "\C-ciD" 'as-insert-date)
+
 (autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
 (global-set-key "\C-cie" 'as-insert-email-address)
 
@@ -345,8 +348,11 @@ that name."
 (autoload 'as-snip-region "as-autotext" "Snip region" t)
 (global-set-key "\C-ciS" 'as-snip-region)
 
+(autoload 'as-insert-time "as-autotext" "Insert time" t)
+(global-set-key "\C-cit" 'as-insert-time)
+
 (autoload 'as-insert-tigerpig-url "as-autotext" "Insert tigerpig url" t)
-(global-set-key "\C-cit" 'as-insert-tigerpig-url)
+(global-set-key "\C-ciT" 'as-insert-tigerpig-url)
 
 ;;}}}
 
