@@ -10,6 +10,9 @@
 (if (not (boundp 'running-xemacs))
     (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
 
+;; N.B. Personal .elc archive gets added to start of load-path,
+;; so that right version of stuff like mwheel gets loaded.
+
 (cond 
  (running-xemacs
   (add-to-list 'load-path "~/lib/emacs/XEmacs")
