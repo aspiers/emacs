@@ -230,7 +230,7 @@ in all the directories in that path."
 
 (global-unset-key "\C-x\C-z")
 
-;; Signatures
+;;{{{ Signatures
 
 (global-set-key "\C-x\C-zj"     
                 (function (lambda ()
@@ -238,7 +238,8 @@ in all the directories in that path."
                             (interactive)
                             (insert-file "~/.sig/perl/japh_indirect"))))
 
-;; Scissors
+;;}}}
+;;{{{ Scissors
 
 (global-set-key "\C-x\C-zs"
                 (function (lambda ()
@@ -250,7 +251,8 @@ in all the directories in that path."
                             (next-line 1)
                             )))
 
-;; Home-page
+;;}}}
+;;{{{ Home pages
 
 (global-set-key "\C-x\C-zh"
                 (function (lambda ()
@@ -270,7 +272,8 @@ in all the directories in that path."
                             (interactive)
                             (insert "http://tigerpig.org/"))))
 
-;; e-mail address
+;;}}}
+;;{{{ e-mail address
 
 (global-set-key "\C-x\C-ze"
                 (function (lambda ()
@@ -278,7 +281,8 @@ in all the directories in that path."
                             (interactive)
                             (insert "adam@spiers.net"))))
 
-;; name (how lazy am I?)
+;;}}}
+;;{{{ Name (how lazy am I?)
 
 (global-set-key "\C-x\C-zm"
                 (function (lambda ()
@@ -286,13 +290,25 @@ in all the directories in that path."
                             (interactive)
                             (insert "Adam Spiers"))))
 
-;; me (name & e-mail)
+;;}}}
+;;{{{ Me (name & e-mail)
 
 (global-set-key "\C-x\C-zn"
                 (function (lambda ()
                             "Inserts Adam's name and e-mail address"
                             (interactive)
                             (insert "Adam Spiers <adam@spiers.net>"))))
+
+;;}}}
+
+;;{{{ Perl macros
+
+(fset 'cperl-make-method
+   "\C-asub \C-e {\C-m\C-imy $self = shift;\C-m}\C-a\C-o\C-i")
+
+(global-set-key "\C-x\C-zpm" 'cperl-make-method)
+
+;;}}}
 
 ;;}}}
 ;;{{{ miscellaneous
