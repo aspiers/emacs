@@ -463,14 +463,16 @@ to the beginning of the buffer name."
 
 (setq auto-mode-alist
       (append (list
-               '("\\.pod\\'"              . cperl-mode)
-               '("\\.prehtml\\'"          . html-mode)
-               '("\\.php3\\'"             . html-mode)
-               '("\\.sdf\\'"              . sdf-mode)
-;;             '("\\.info\\(\\.gz\\)?\\'" . info)
-               '("\\.po[tx]?\\'\\|\\.po\\." . po-mode)
+               '("\\.pod\\'"                  . cperl-mode)
+               '("\\.prehtml\\'"              . html-mode)
+               '("\\.php3\\'"                 . html-mode)
+               '("\\.sdf\\'"                  . sdf-mode)
+;;             '("\\.info\\(\\.gz\\)?\\'"     . info)
+               '("\\.po[tx]?\\'\\|\\.po\\."   . po-mode)
                '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode)
-               '(".ly\\'"                 . lilypond-mode)
+               '(".ly\\'"                     . lilypond-mode)
+               '("\\.\\(mason\\|m[cd]\\)\\'"  . html-mode)
+               '("\\(auto\\|d\\)handler\\'"   . html-mode)
                )
               auto-mode-alist))
 
@@ -772,6 +774,8 @@ to the beginning of the buffer name."
 ;;{{{ MMM mode
 
 (load "mmm-auto" t)
+(setq mmm-mode-ext-classes-alist '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+(setq mmm-global-mode 'maybe)
 
 ;;}}}
 
