@@ -233,9 +233,12 @@ in all the directories in that path."
 (global-set-key "\C-x\C-b"	'buffer-menu)
 
 ;;}}}
-;;{{{ Signatures
+;;{{{ Autotext
 
 (global-unset-key "\C-x\C-z")
+
+;; Signatures
+
 (global-set-key "\C-x\C-zc"	
 		(function (lambda () (interactive)
 			    (insert-file "~/.sig/cool"))))
@@ -245,9 +248,30 @@ in all the directories in that path."
 (global-set-key "\C-x\C-zr"	
 		(function (lambda () (interactive)
 			    (insert-file "~/.sig/RTFM"))))
-(global-set-key "\C-x\C-zs"	
+
+;; Scissors
+
+(global-set-key "\C-x\C-zs"
 		(function (lambda () (interactive)
 			    (insert "-------- 8< -------- 8< --------")
+			    (newline))))
+
+;; Home-page
+
+(global-set-key "\C-x\C-zh"
+		(function (lambda () (interactive)
+			    (insert "http://www.new.ox.ac.uk/~adam/")
+			    (newline))))
+(global-set-key "\C-x\C-zu"
+		(function (lambda () (interactive)
+			    (insert "http://www.new.ox.ac.uk/~adam/")
+			    (newline))))
+
+;; e-mail address
+
+(global-set-key "\C-x\C-ze"
+		(function (lambda () (interactive)
+			    (insert "adam@spiers.net")
 			    (newline))))
 
 ;;}}}
