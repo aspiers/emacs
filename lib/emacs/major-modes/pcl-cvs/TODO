@@ -1,5 +1,13 @@
 pcl-cvs wishlist, sorted by decreasing priority
 
 - add prefix (bind to L) for toggling recursion
+- implement per-directory caching of *cvs* buffers and their corresponding
+  ewocs:
+   + add ewoc-dump-to-string which dumps a whole ewoc, omitting
+     ewoc--buffer and every ewoc--node-start-marker
+   + add ewoc-read-to-buffer, which reads a dumped ewoc into
+     a given fresh buffer
+   + use the above two to overload cvs-quickdir to search for cached
+     ewoc dumps first
 - option to toggle unknown fileinfos
 - allow diffing between arbitrary versions
