@@ -35,7 +35,7 @@ from the replace is visited via `find-file'."
   ()
   "Displays the current buffer's filename in the minibuffer."
   (interactive)
-  (message buffer-file-name))
+  (message (or buffer-file-name "No file associated with this buffer")))
 
 ;;}}}
 ;;{{{ as-destroy-buffer
