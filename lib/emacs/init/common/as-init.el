@@ -919,7 +919,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'fold-set-marks "folding" "folding mode")
 
 (cond ((as-quick-startup)
-       (defun lf () "Loads folding-mode." (interactive) (folding-mode)))
+       (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
       (t
        (folding-mode-add-find-file-hook)))
 
