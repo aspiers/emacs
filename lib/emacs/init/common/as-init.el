@@ -691,6 +691,32 @@ line before the current line."
       "\C-asub \C-e {\C-m\C-imy ($self) = @_;\C-m}\C-o\C-a\C-o\C-i")
 
 ;;}}}
+;;{{{ as-cperl-insert-unique-warning
+
+(defvar as-cperl-unique-warning-counter 0
+  "Counter for `as-cperl-insert-unique-warning'.")
+
+(defun as-cperl-insert-unique-warning (&optional start)
+  "Inserts a
+
+  warn <n>;
+
+line, where <n> is incremented each invocation.
+
+Can be optionally given a numeric prefix which 
+"
+  (interactive "p")
+  (message (format "%s" start))
+  (and current-prefix-arg (setq as-cperl-unique-warning-counter start))
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (insert "warn ")
+    (insert (format "%d" as-cperl-unique-warning-counter))
+    (insert ";"))
+  (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
+
+;;}}}
 
 (add-hook 'cperl-mode-hook 
           (function
@@ -698,8 +724,10 @@ line before the current line."
              (local-set-key "\C-ca" 'as-cperl-insert-args-line)
              (local-set-key "\C-cm" 'as-cperl-make-method)
              (local-set-key "\C-cp" 'cperl-find-pods-heres)
+             (local-set-key "f5"    'as-cperl-insert-unique-warning)
              (local-set-key "\C-ci" 'as-cperl-set-indent-level)
              (local-set-key "\C-cs" 'as-cperl-insert-self-and-args-line)
+             (local-set-key "\C-cS" 'as-cperl-insert-self-line)
              (local-set-key "\C-cS" 'as-cperl-insert-self-line)
              (local-set-key [(backspace)] 'cperl-electric-backspace)
              (local-set-key [(control c) (control h) (control j)] 'imenu)
