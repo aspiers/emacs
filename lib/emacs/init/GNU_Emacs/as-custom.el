@@ -2,7 +2,8 @@
 ;; background of your chosen theme
 (setq as-default-background
 ;;    "seashell1"
-      "wheat"
+    "wheat"
+;;    "gray90"
       )
 
 (setq frame-background-mode
@@ -60,8 +61,9 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
+ '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
- '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil nil))))
+ '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
  '(bs-default-sort-name "by nothing")
  '(bs-max-window-height 24)
  '(bs-maximal-buffer-name-column 22)
@@ -77,6 +79,7 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-invalid-face (quote (quote default)))
  '(cperl-lineup-step 1)
+ '(cperl-merge-trailing-else nil)
  '(cperl-syntaxify-by-font-lock t)
  '(cperl-under-as-char nil)
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
@@ -89,7 +92,7 @@
  '(delete-old-versions t)
  '(diff-switches "-u" t)
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-l" t)
  '(echo-keystrokes 0.01)
  '(eldoc-minor-mode-string "" t)
  '(eldoc-mode t t)
