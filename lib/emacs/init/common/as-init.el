@@ -754,6 +754,8 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
 
+(defun hhm () "Loads html-helper-mode." (interactive) (html-helper-mode.))
+
 ;;}}}
 ;;{{{ Apache
 
