@@ -989,8 +989,8 @@ C-style indentation, use cssm-c-style-indenter.")
             ))
 
 (eval-when-compile
-  (defvar fold-default-keys-function))
-(setq fold-default-keys-function 'fold-bind-backward-compatible-keys)
+  (defvar folding-default-keys-function))
+(setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
 
 ;;}}}
 
