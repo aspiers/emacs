@@ -36,10 +36,15 @@
 
 ;;{{{ Signatures
 
-(defun as-insert-japh-sig ()
-  "Inserts Adam's cool JAPH .sig"
+(defun as-insert-japh-indirect-sig ()
+  "Inserts Adam's cool japh_indirect .sig"
   (interactive)
   (insert-file "~/.sig/perl/japh_indirect"))
+
+(defun as-insert-japh-method-chain-sig ()
+  "Inserts Adam's cool japh_method_chain .sig"
+  (interactive)
+  (insert-file "~/.sig/perl/japh_method_chain"))
 
 ;;}}}
 ;;{{{ Scissors
