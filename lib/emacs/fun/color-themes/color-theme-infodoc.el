@@ -1,7 +1,9 @@
 (defun color-theme-infodoc ()
   "Color theme by Frederic Giroud, created 2001-01-18.
 Black on wheat scheme.	Based on infodoc (xemacs variant distribution),
-with my favorit fontlock color."
+with my favorite font-lock colors.
+
+Modified by Adam Spiers <adam@spiers.net>"
   (interactive)
   (color-theme-install
    '(color-theme-infodoc
@@ -34,6 +36,8 @@ with my favorit fontlock color."
     (custom-state-face ((t (:bold t :background "wheat" :foreground "dark green"))))
     (custom-variable-button-face ((t (:underline t))))
     (custom-variable-tag-face ((t (:underline t :bold t :background "wheat" :foreground "blue"))))
+    (cvs-handled-face ((t (:foreground "grey40"))))
+    (cvs-msg-face ((t (:foreground "gray50"))))
     (diary-face ((t (:bold t :foreground "red"))))
     (display-time-mail-balloon-enhance-face ((t (:bold t :background "wheat" :foreground "black"))))
     (display-time-mail-balloon-gnus-group-face ((t (:bold t :background "wheat" :foreground "blue"))))
@@ -48,6 +52,7 @@ with my favorit fontlock color."
     (font-lock-type-face ((t (:bold t :background "wheat" :foreground "brown"))))
     (font-lock-variable-name-face ((t (:bold t :background "wheat" :foreground "chocolate"))))
     (font-lock-warning-face ((t (:bold t :background "wheat" :foreground "black"))))
+    (fringe ((t (:background "wheat1"))))
     (gdb-arrow-face ((t (:bold t :background "LightGreen" :foreground "black"))))
     (green ((t (:bold t :foreground "green"))))
     (gui-button-face ((t (:bold t :background "wheat" :foreground "red"))))
@@ -67,13 +72,15 @@ with my favorit fontlock color."
     (message-headers ((t (:bold t :background "wheat" :foreground "black"))))
     (message-highlighted-header-contents ((t (:bold t :background "wheat" :foreground "blue"))))
     (message-url ((t (nil))))
-    (modeline ((t (:bold t :background "light salmon" :foreground "dark green"))))
+    (modeline ((t (:bold t :background "light salmon" :foreground "dark green" :box (:line-width 2 :style released-button) :weight bold))))
     (modeline-buffer-id ((t (:bold t :background "light salmon" :foreground "blue4"))))
     (modeline-mousable ((t (:bold t :background "light salmon" :foreground "firebrick"))))
     (modeline-mousable-minor-mode ((t (:bold t :background "light salmon" :foreground "green4"))))
+    (mmm-default-submode-face ((t (:background "wheat"))))
     (pointer ((t (:bold t :background "wheat" :foreground "red"))))
     (primary-selection ((t (:bold t :background "medium sea green"))))
     (red ((t (:bold t :foreground "red"))))
+    (region ((t (:background "light goldenrod yellow"))))
     (right-margin ((t (:bold t :background "wheat" :foreground "black"))))
     (secondary-selection ((t (:bold t :background "paleturquoise" :foreground "black"))))
     (shell-input-face ((t (:bold t :background "wheat" :foreground "blue"))))
