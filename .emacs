@@ -5,21 +5,23 @@
 ;;
 
 
-;; Include private stuff on load path
-
-(setq load-path (append '("~/lib/emacs" "~/lib/emacs/init") load-path))
-
-
 ;; Make sure running-xemacs exists for testing
 
 (if (not (boundp 'running-xemacs))
-    (setq running-xemacs nil))
+    (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
 
 
-;; Load in all options from relevant places
+;; Set load-path and load in all options from relevant places
+
+(setq load-path
+      (append '("~/local/share/emacs/site-lisp"
+                "~/lib/emacs"
+                "~/lib/emacs/init") load-path))
 
 (cond 
  (running-xemacs
+  (setq load-path (append '("~/lib/emacs/XEmacs") load-path))
+
   ;; XEmacs automatically saved settings go here:
   (setq save-options-init-file "~/lib/emacs/init/XEmacs/options-init.el")
   (setq save-options-file "~/lib/emacs/init/XEmacs/options.el")
@@ -31,6 +33,8 @@
   (load "~/lib/emacs/init/common/XEmacs" t)
   )
  (t
+  (setq load-path (append '("~/lib/emacs/GNU_Emacs") load-path))
+
   (setq custom-file "~/lib/emacs/init/GNU_Emacs/custom.el")
   (load custom-file t)
 
