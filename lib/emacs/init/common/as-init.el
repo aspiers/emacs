@@ -167,8 +167,8 @@ that name."
 (global-set-key "\M-g"          'goto-line)         ;; was set-face
 (global-set-key "\C-ha"         'apropos)           ;; was apropos-command
 
-(global-set-key [(delete)] 'delete-char)
-(global-set-key [(insert)] 'overwrite-mode)
+(global-set-key [(delete)] 'delete-char)    ;; to make sure
+(global-set-key [(insert)] 'overwrite-mode) ;; to make sure
 (global-set-key [(meta o)] 'overwrite-mode)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
