@@ -50,17 +50,19 @@ backslash and then calls `join-line'."
 ;;}}}
 ;;{{{ as-align-to-previous-line
 
-(defun as-align-to-previous-line ()
+(defun as-align-to-previous-line (&optional count)
   "Runs indent-relative on the current line and moves down to enable repeating."
-  (interactive)
-  (save-excursion
-    (backward-char 1)
-    (re-search-forward "[ \t]")
-    (re-search-forward "[^ ]")
-    (backward-char 1)
-    (indent-relative))
-  (next-line 1) ;; sorry FSF
-  )
+  (interactive "p")
+  (let ((i 0))
+    (while (< i count)
+      (save-excursion
+        (backward-char 1)
+        (re-search-forward "[ \t]")
+        (re-search-forward "[^ \t]")
+        (backward-char 1)
+        (indent-relative))
+      (next-line 1) ;; sorry FSF
+      (setq i (1+ i)))))
 
 ;;}}}
 ;;{{{ as-transpose-lines
