@@ -1218,7 +1218,8 @@ Can be optionally given a numeric prefix which
 ;;}}}
 ;;{{{ pcl-cvs
 
-(global-set-key "\C-xD" 'cvs-examine)
+(global-set-key "\M-s" 'cvs-examine)
+(global-set-key "\M-S" 'cvs-quickdir)
 
 ;;}}}
 
