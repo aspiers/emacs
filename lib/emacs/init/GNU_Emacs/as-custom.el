@@ -32,7 +32,6 @@
  '(font-lock-support-mode (quote lazy-lock-mode))
  '(global-font-lock-mode t nil (font-lock))
  '(indent-tabs-mode nil)
- '(iswitchb-buffer-ignore (quote ("^[* ]")))
  '(iswitchb-case nil)
  '(lazy-lock-defer-on-scrolling t)
  '(lazy-lock-defer-time 0.1)
