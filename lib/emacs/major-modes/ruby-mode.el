@@ -658,6 +658,9 @@ An end of a defun is found by moving forward from the beginning of one."
   (ruby-beginning-of-defun)
   (re-search-backward "^\n" (- (point) 1) t))
 
+(defvar font-lock-type-face)
+(defvar font-lock-variable-name-face)
+(defun hilit-set-mode-patterns (arg1 arg2))
 (cond
  ((featurep 'font-lock)
   (or (boundp 'font-lock-variable-name-face)
