@@ -246,7 +246,8 @@ use warnings;
 ;;{{{ as-cperl-reinvert-if-unless
 
 (defun as-cperl-reinvert-if-unless ()
-  "Performs the opposite of cperl-invert-if-unless."
+  "Performs the opposite of cperl-invert-if-unless.  Position your
+point somewhere *before* the if/unless/while/until modifier."
   (interactive)
   (let ((modifier-start-re
          "[\t\n ]*\\(\\<\\(if\\|unless\\|while\\|until\\)\\>\\)[\t\n ]*")
