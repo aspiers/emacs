@@ -344,9 +344,10 @@ in all the directories in that path."
       resize-minibuffer-frame-max-height 5)
 
 ;;}}}
-;;{{{ Enable eval-expression
+;;{{{ Enable disabled functions
 
 (put 'eval-expression 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;;}}}
 ;;{{{ Enable set-goal-column
