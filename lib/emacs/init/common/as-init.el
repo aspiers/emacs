@@ -387,52 +387,38 @@ that name."
 ;;}}}
 ;;{{{ Little odds and ends
 
-;;{{{ My e-mail address
+;; e-mail address
 
 (setq user-mail-address "adam@spiers.net")
 
-;;}}}
-;;{{{ Minibuffer
-
-;; GNU emacs 21 obseletes resize-minibuffer-mode
+;; Minibuffer (GNU Emacs 21 obseletes resize-minibuffer-mode)
 (cond ((or running-xemacs (<= emacs-major-version 20))
        (resize-minibuffer-mode)
        (setq resize-minibuffer-window-max-height 5 
              resize-minibuffer-frame-max-height 5)))
 
-;;}}}
-;;{{{ Apropos extension
-
+;; Apropos extension
 (defvar apropos-do-all)
 (setq apropos-do-all t)
 
-;;}}}
-;;{{{ Make kill-line kill whole line if at beginning of line
-
+;; kill-line kill whole line if at beginning of line
 (setq kill-whole-line t)
 
-;;}}}
-;;{{{ Visible bell
-
+;; Visible bell
 (setq-default visible-bell t)
 
-;;}}}
-;;{{{ Saving sessions
-
+;; Saving sessions
 (autoload 'desktop-save "desktop" "Saves desktop session state." t)
-
-;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
 
 ;;{{{ Startup mode selection
 
-;;{{{ Mode selection based on filename
+(setq default-major-mode 'indented-text-mode)
 
 ;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
 ;; with "indented-text-mode".
-
 (mapcar (function
          (lambda (x) 
            (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
@@ -440,7 +426,6 @@ that name."
 
 
 ;; Add in other modes
-
 (setq auto-mode-alist
       (append '(
                 ("\\.rb\\'"                              . ruby-mode)
@@ -470,10 +455,6 @@ that name."
               auto-mode-alist))
 
 ;;}}}
-
-(setq default-major-mode 'indented-text-mode)
-
-;;}}}
 ;;{{{ Major modes
 
 ;;{{{ CPerl/Perl
@@ -490,12 +471,26 @@ that name."
 ;;}}}
 ;;{{{ Text
 
+;; Turn on auto-fill if composing e-mail or news.
+;;
+;; For some reason the local buffer-file-name isn't set at the
+;; stage when text-mode-hook gets run (possibly because it isn't
+;; the current buffer at that stage?), but fortunately the
+;; symbol filename is set to the loading file so we can use that
+;; instead.
+
+;; Silence compile errors (I know what I'm doing, honest)
+(or (boundp 'filename) (defvar filename "" "sod knows"))
+
 (add-hook 'text-mode-hook
           (function (lambda ()
                       (local-unset-key "\e\t")
                       (and
-                       (string-match "mutt-thelonious\\|\\.article\\|\\.letter"
-                                     (or (buffer-file-name) ""))
+		       (boundp 'filename)
+		       (not (eq filename t))
+                       (string-match
+			"mutt-thelonious\\|\\.article\\|\\.letter"
+			filename)
                        (turn-on-auto-fill)))))
 
 ;; Expand all tabs to spaces
@@ -752,20 +747,6 @@ that name."
 ;;}}}
 ;;{{{ Folding mode
 
-;;{{{ Fix compiler warnings
-
-(eval-and-compile
-  (defun fold-point-folded-p (arg))
-  (defun fold-top-level ())
-  (defun fold-use-overlays-p ())
-  (defun fold-show (&optional arg1 &optional arg2 &optional arg3))
-  (defun fold-enter (&optional arg))
-  (defun fold-narrow-to-region (&optional arg1 &optional arg2 &optional arg3))
-  (defun fold-open-buffer ())
-  )
-
-;;}}}
-
 ;;{{{ Set marks for individual modes
 
 (autoload 'fold-add-to-marks-list "folding" "folding mode")
@@ -849,10 +830,6 @@ that name."
 ;;}}}
 ;;{{{ Font-Lock mode
 
-(eval-when-compile
-  (defvar font-lock-support-mode))
-(setq font-lock-support-mode 'lazy-lock-mode)
-
 ;; Turn it on
 ;;(global-font-lock-mode 1)
 
@@ -860,7 +837,7 @@ that name."
 ;;(if (and window-system (not running-xemacs)) (global-font-lock-mode t))
 
 ;; This one probably a waste of time
-(as-font-lock-mode-if-window-system)
+;;(as-font-lock-mode-if-window-system)
 
 ;; Set some colours
 
