@@ -1196,6 +1196,7 @@ Can be optionally given a numeric prefix which
            (lambda () (local-set-key "q" (function 
                                           (lambda () 
                                             (interactive)
+                                            (bury-buffer)
                                             (delete-window)))))))
 
 ;;}}}
