@@ -240,6 +240,9 @@ in all the directories in that path."
 (global-set-key "\C-x\C-zc"	
 		(function (lambda () (interactive)
 			    (insert-file "~/.sig/cool"))))
+(global-set-key "\C-x\C-zj"	
+		(function (lambda () (interactive)
+			    (insert-file "~/.sig/japh_indirect"))))
 (global-set-key "\C-x\C-zp"	
 		(function (lambda () (interactive)
 			    (insert-file "~/.sig/personal"))))
