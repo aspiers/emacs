@@ -92,7 +92,7 @@
  '(delete-old-versions t)
  '(diff-switches "-u" t)
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l" t)
+ '(dired-listing-switches "-l")
  '(echo-keystrokes 0.01)
  '(eldoc-minor-mode-string "" t)
  '(eldoc-mode t t)
