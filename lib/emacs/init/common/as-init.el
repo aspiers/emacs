@@ -133,8 +133,9 @@ The buffer is then renamed to the result.")
   "Attempt to remove the unique suffix (e.g. \"<1>\") from the current
 buffer's name.  It will fail if a buffer already exists with that name."
   (interactive)
-  (string-match "<[0-9]+>$" (buffer-name))
-  (rename-buffer (replace-match "" t t (buffer-name) nil)))
+  (and
+   (string-match "<[0-9]+>$" (buffer-name))
+   (rename-buffer (replace-match "" t t (buffer-name) nil))))
 
 ;;}}}
 ;;{{{ as-display-buffer-filename
