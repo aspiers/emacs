@@ -509,6 +509,7 @@ that name."
 (autoload 'as-cperl-setup "as-cperl" "as-cperl-setup")
 (add-hook 'cperl-mode-hook 'as-cperl-setup)
 (add-hook 'cperl-mode-hook 'turn-on-auto-fill)
+(defun cp () "Abbreviation for `cperl-mode'." (interactive) (cperl-mode))
 
 ;;}}}
 ;;{{{ Text
