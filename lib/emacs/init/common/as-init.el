@@ -701,6 +701,23 @@ that name."
                       )))
 (defvar tempo-interactive t)
 
+;; htmltidy support
+(autoload 'tidy-buffer "htmltidy" "Run Tidy HTML parser on current buffer" t)
+(autoload 'tidy-parse-config-file "htmltidy" "Parse the `tidy-config-file'" t)
+(autoload 'tidy-save-settings "htmltidy" "Save settings to `tidy-config-file'" t)
+(autoload 'tidy-build-menu  "htmltidy" "Install an options menu for HTML Tidy." t)
+
+(eval-when-compile
+  (defvar html-helper-mode-map)
+  (defvar sgml-validate-command))
+
+(defun as-html-mode-tidy-hook () "Add htmltidy support to an HTML mode."
+  (tidy-build-menu html-helper-mode-map)
+  (local-set-key [(control c) (control c)] 'tidy-buffer)
+  (setq sgml-validate-command "htmltidy"))
+
+(add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
+
 ;;}}}
 ;;{{{ Apache
 
