@@ -685,6 +685,38 @@ line before the current line."
   (backward-char 7))
 
 ;;}}}
+;;{{{ as-cperl-insert-data-dumper-line
+
+(defun as-cperl-insert-data-dumper-line ()
+  "Inserts a
+
+  use Data::Dumper;
+
+line before the current line."
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (open-line 1)
+    (cperl-indent-command)
+    (insert "use Data::Dumper;")))
+
+;;}}}
+;;{{{ as-cperl-insert-carp-line
+
+(defun as-cperl-insert-carp-line ()
+  "Inserts a
+
+  use Carp;
+
+line before the current line."
+  (interactive)
+    (beginning-of-line)
+    (open-line 1)
+    (cperl-indent-command)
+    (insert "use Carp;")
+    (backward-char))
+
+;;}}}
 ;;{{{ as-cperl-make-method
 
 (fset 'as-cperl-make-method
@@ -728,12 +760,13 @@ Can be optionally given a numeric prefix which
            (lambda ()
              (local-set-key "\C-ca" 'as-cperl-insert-args-line)
              (local-set-key "\C-cc" 'as-cperl-insert-self-method-call)
+             (local-set-key "\C-cC" 'as-cperl-insert-carp-line)
+             (local-set-key "\C-cD" 'as-cperl-insert-data-dumper-line)
              (local-set-key "\C-cm" 'as-cperl-make-method)
              (local-set-key "\C-cp" 'cperl-find-pods-heres)
              (local-set-key [(f5)]  'as-cperl-insert-unique-warning)
              (local-set-key "\C-ci" 'as-cperl-set-indent-level)
              (local-set-key "\C-cs" 'as-cperl-insert-self-and-args-line)
-             (local-set-key "\C-cS" 'as-cperl-insert-self-line)
              (local-set-key "\C-cS" 'as-cperl-insert-self-line)
              (local-set-key [(backspace)] 'cperl-electric-backspace)
              (local-set-key [(control c) (control h) (control j)] 'imenu)
