@@ -57,10 +57,10 @@ install: $(ELCs) psgml uninstall
 	@$(COMPILER) $<
 
 clean: uninstall
-	@-find $(EMACSLIB) -name \*.elc | xargs rm -f
+	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
 
 uninstall:
-	@-rm -f $(wildcard $(installdir)/*.elc)
+	-find $(installdir) -name \*.elc -print | xargs rm -f
 
 psgml:
 	cd major-modes/psgml && $(MAKE)
