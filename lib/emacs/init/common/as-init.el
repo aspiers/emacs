@@ -310,6 +310,7 @@ that name."
 
 ;;}}}
 
+(global-set-key "\C-ck"   'delete-file)
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
 ;; I reserve C-c m for mode-specific user bindings
 (global-set-key "\C-cn"   'as-display-buffer-filename)
