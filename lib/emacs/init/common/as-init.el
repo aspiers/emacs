@@ -310,6 +310,9 @@ that name."
 
 ;;{{{ Auto-text (C-c i)
 
+(autoload 'as-insert-snail-mail "as-autotext" "Insert snail mail" t)
+(global-set-key "\C-cia" 'as-insert-snail-mail)
+
 (autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
 (global-set-key "\C-cid" 'as-insert-date-and-time)
 

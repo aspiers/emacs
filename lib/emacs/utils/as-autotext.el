@@ -149,4 +149,13 @@ line before and after the text."
   (as-insert-name)
   (insert " <" as-work-email-address ">"))
 
+(defun as-insert-snail-mail () 
+  "Inserts Adam's snail mail address"
+  (interactive)
+  (insert "Flat A306
+West India Quay Apartments
+20 Hertsmere Road
+London E14 4AZ
+"))
+
 ;;}}}
