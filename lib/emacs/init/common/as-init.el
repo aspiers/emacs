@@ -796,13 +796,15 @@ to the beginning of the buffer name."
 
 ;;{{{ Fix compiler warnings
 
-(defun fold-point-folded-p (arg))
-(defun fold-top-level)
-(defun fold-use-overlays-p)
-(defun fold-show (&optional arg1 &optional arg2 &optional arg3))
-(defun fold-enter (&optional arg))
-(defun fold-narrow-to-region (&optional arg1 &optional arg2 &optional arg3))
-(defun fold-open-buffer)
+(eval-and-compile
+  (defun fold-point-folded-p (arg))
+  (defun fold-top-level ())
+  (defun fold-use-overlays-p ())
+  (defun fold-show (&optional arg1 &optional arg2 &optional arg3))
+  (defun fold-enter (&optional arg))
+  (defun fold-narrow-to-region (&optional arg1 &optional arg2 &optional arg3))
+  (defun fold-open-buffer ())
+  )
 
 ;;}}}
 
