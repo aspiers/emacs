@@ -162,7 +162,7 @@ in all the directories in that path."
 (global-set-key [(meta kp-6)]   'forward-word)
 
 ;;}}}
-;;{{{ Function keys
+;;{{{ delete key
 
 ;;(define-key function-key-map (as-key-sequence [delete] [(delete)]) "\C-d")
 (global-set-key [(delete)] 'delete-char)
@@ -183,26 +183,7 @@ in all the directories in that path."
       (global-set-key [(meta kp-8)] 'timsup)))
 
 ;;}}}
-;;{{{ Personal (including c-x 9) extensions
-
-(global-set-key "\C-x\C-a"      'bury-buffer)
-
-(global-set-key "\C-x9 "        'set-mark-command)
-(global-set-key "\C-x9a"        'save-buffer)
-(global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
-(global-set-key "\C-x9c"        'comment-region)
-(global-set-key "\C-x9d"        'insert-date-and-time)
-(global-set-key "\C-x9f"        'set-fill-column-to-normal)
-(global-set-key "\C-x9g"        'goto-line)
-(global-set-key "\C-x9i"        'auto-fill-mode)
-(global-set-key "\C-x9l"        'insert-log-timestamp)
-(global-set-key "\C-x9r"        'toggle-read-only)
-(global-set-key "\C-x9t"        'toggle-truncate-lines)
-(global-set-key "\C-x9v"        'set-variable)
-(global-set-key "\C-x9z"        'suspend-emacs)
-
-;;}}}
-;;{{{ Hippie expand ROCKS!
+;;{{{ hippie-expand ROCKS!
 
 (global-set-key [(meta tab)] 'hippie-expand)
 (global-set-key "\e\C-i"     'hippie-expand)
@@ -222,7 +203,23 @@ in all the directories in that path."
         ))
 
 ;;}}}
-;;{{{ Miscellaneous
+;;{{{ miscellaneous
+
+(global-set-key "\C-x\C-a"      'bury-buffer)
+
+(global-set-key "\C-x9 "        'set-mark-command)
+(global-set-key "\C-x9a"        'save-buffer)
+(global-set-key "\C-x9b"        'toggle-indent-tabs-mode)
+(global-set-key "\C-x9c"        'comment-region)
+(global-set-key "\C-x9d"        'insert-date-and-time)
+(global-set-key "\C-x9f"        'set-fill-column-to-normal)
+(global-set-key "\C-x9g"        'goto-line)
+(global-set-key "\C-x9i"        'auto-fill-mode)
+(global-set-key "\C-x9l"        'insert-log-timestamp)
+(global-set-key "\C-x9r"        'toggle-read-only)
+(global-set-key "\C-x9t"        'toggle-truncate-lines)
+(global-set-key "\C-x9v"        'set-variable)
+(global-set-key "\C-x9z"        'suspend-emacs)
 
 (global-set-key "\M-\\"         'fixup-whitespace)
 (global-set-key "\C-xt"         'revert-buffer)
@@ -248,7 +245,7 @@ in all the directories in that path."
 (global-set-key "\C-x\C-b"      'buffer-menu)
 
 ;;}}}
-;;{{{ Autotext
+;;{{{ auto-text
 
 (global-unset-key "\C-x\C-z")
 
@@ -440,6 +437,7 @@ to the beginning of the buffer name."
   (interactive)
   (message buffer-file-name))
 (global-set-key "\C-x9n" 'as-display-buffer-filename)
+(global-set-key [(f3)] 'as-display-buffer-filename)
 
 ;;}}}
 
@@ -463,7 +461,7 @@ to the beginning of the buffer name."
 
 (setq auto-mode-alist
       (append (list
-               '("\\.pod\\'"                  . cperl-mode)
+               '("\\.\\(pod\\|t\\)\\'"        . cperl-mode)
                '("\\.prehtml\\'"              . html-mode)
                '("\\.php3\\'"                 . html-mode)
                '("\\.sdf\\'"                  . sdf-mode)
