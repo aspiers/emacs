@@ -198,6 +198,7 @@ that name."
 (global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
 (global-set-key [(control semicolon)] 'speedbar-get-focus)
 (global-set-key [(control ,)] 'delete-other-windows)
+(global-set-key [(control .)] 'delete-window)
 (global-set-key [(control meta y)] 'as-join-line-with-next)
 (global-set-key [(control x) (control y)] 'vim-yy)
 (global-set-key [(meta o)] 'overwrite-mode)
