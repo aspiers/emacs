@@ -363,4 +363,92 @@ C-style indentation, use cssm-c-style-indenter.")
 ; internal
 (defun cssm-maximum-common(alt1 alt2)
   "Returns the maximum common starting substring of alt1 and alt2."
-  (let* ((maxlen (min (length alt1) (length alt2))
+  (let* ((maxlen (min (length alt1) (length alt2)))
+	 (alt1 (substring alt1 0 maxlen))
+	 (alt2 (substring alt2 0 maxlen)))
+    (while (not (string= (substring alt1 0 maxlen)
+			 (substring alt2 0 maxlen)))
+      (setq maxlen (- maxlen 1)))
+    (substring alt1 0 maxlen)))
+
+; internal
+(defun cssm-common-beginning(alts)
+  "Returns the maximum common starting substring of all alts elements."
+  (let ((common (car alts)))
+    (dolist (alt (cdr alts) common)
+      (setq common (cssm-maximum-common alt common)))))
+
+(defun cssm-complete-property-frame(completions)
+  ; This code stolen from message.el. Kudos to larsi.
+  (let ((cur (current-buffer)))
+    (pop-to-buffer "*Completions*")
+    (buffer-disable-undo (current-buffer))
+    (let ((buffer-read-only nil))
+      (erase-buffer)
+      (let ((standard-output (current-buffer)))
+	(display-completion-list (sort completions 'string<)))
+      (goto-char (point-min))
+      (pop-to-buffer cur))))
+  
+(defun cssm-complete-property()
+  "Completes the CSS property being typed at point."
+  (interactive)
+  (let* ((prop (cssm-property-at-point))
+	 (alts (all-completions prop cssm-properties-alist)))
+    (if (= (length alts) 1)
+	(insert (substring (car alts) (length prop)))
+      (let ((beg (cssm-common-beginning alts)))
+	(if (not (string= beg prop))
+	    (insert (substring beg (length prop)))
+	  (insert (substring
+		   (completing-read "Property: " cssm-properties-alist nil
+				    nil prop)
+		   (length prop)))
+	)))))
+
+(defun css-mode()
+  "Major mode for editing CSS style sheets.
+\\{cssm-mode-map}"
+  (interactive)
+
+  ; Initializing
+  (kill-all-local-variables)
+
+  ; Setting up indentation handling
+  (make-local-variable 'indent-line-function)
+  (setq indent-line-function 'cssm-indent-line)
+  
+  ; Setting up font-locking
+  (make-local-variable 'font-lock-defaults)
+  (setq font-lock-defaults '(cssm-font-lock-keywords nil t nil nil))
+
+  ; Setting up typing shortcuts
+  (make-local-variable 'skeleton-end-hook)
+  (setq skeleton-end-hook nil)
+  
+  (when cssm-mirror-mode
+	(cssm-enter-mirror-mode))
+  
+  (use-local-map cssm-mode-map)
+  
+  ; Setting up syntax recognition
+  (make-local-variable 'comment-start)
+  (make-local-variable 'comment-end)
+  (make-local-variable 'comment-start-skip)
+
+  (setq comment-start "/* "
+	comment-end " */"
+	comment-start-skip "/\\*[ \n\t]+")
+
+  ; Setting up syntax table
+  (modify-syntax-entry ?* ". 23")
+  (modify-syntax-entry ?/ ". 14")
+  
+  ; Final stuff, then we're done
+  (setq mode-name "CSS"
+	major-mode 'css-mode)
+  (run-hooks 'css-mode-hook))
+
+(provide 'css-mode)
+
+;; CSS-mode ends here
