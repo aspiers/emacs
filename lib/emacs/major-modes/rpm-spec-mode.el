@@ -501,7 +501,7 @@ value returned by function `user-mail-address'."
     ("^\\([a-zA-Z0-9]+\\):" 1 rpm-spec-tag-face)
     ("%\\(de\\(fine\\|scription\\)\\|files\\|package\\)[ \t]+\\([^-][^ \t\n]*\\)"
      (3 rpm-spec-package-face))
-    ("%p\\(ost\\|re\\)\\(un\\)?[ \t]+\\([^-][^ \t\n]*\\)"
+    ("^%p\\(ost\\|re\\)\\(un\\)?[ \t]+\\([^-][^ \t\n]*\\)"
      (3 rpm-spec-package-face))
     ("%configure " 0 rpm-spec-macro-face)
     ("%dir[ \t]+\\([^ \t\n]+\\)[ \t]*" 1 rpm-spec-dir-face)
