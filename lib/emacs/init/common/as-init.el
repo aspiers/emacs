@@ -694,7 +694,10 @@ that name."
 ;;}}}
 ;;{{{ CSS
 
-(autoload 'css-mode "css-mode" "mode for editing CSS files")
+(autoload 'css-mode "css-mode" "mode for editing CSS files" t)
+(defvar cssm-indent-function 'cssm-c-style-indenter
+  "Which function to use when deciding which column to indent to. To get
+C-style indentation, use cssm-c-style-indenter.")
 
 ;;}}}
 ;;{{{ MMM mode
@@ -715,7 +718,7 @@ that name."
 ;;{{{ HTML
 
 (defalias 'html-mode 'html-helper-mode)
-(autoload 'html-helper-mode "html-helper-mode")
+(autoload 'html-helper-mode "html-helper-mode" t)
 (add-hook 'html-mode-hook 
           (function (lambda ()
                       (auto-fill-mode -1)
