@@ -1201,6 +1201,11 @@ Can be optionally given a numeric prefix which
                                                    (delete-window)))))))))
 
 ;;}}}
+;;{{{ pcl-cvs
+
+(global-set-key "\C-xD" 'cvs-examine)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
