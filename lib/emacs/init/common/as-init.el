@@ -532,6 +532,7 @@ that name."
                 ("\\.mod$"                               . dtd-mode)
                 ("\\.dump$"                              . tar-mode)
                 ("\\.typ\\'"                             . gtypist-mode)
+                ("/.zsh\\(env\\|rc\\)"                   . sh-mode)
                 ("/.zsh/functions/"                      . sh-mode)
                 ("\\.spec$"                              . rpm-spec-mode)
                 ("\\.make$"                              . makefile-mode)
