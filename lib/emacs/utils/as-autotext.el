@@ -25,9 +25,9 @@ at the point."
 
 (defun as-insert-log-datestamp ()
   "Inserts the current date and username into the current buffer at
-the point.  Suitable for use in rpm spec file %changelog sections."
+the point."
   (interactive)
-  (insert (format-time-string "* %a %b %e %Y")
+  (insert (format-time-string "%a %b %e %Y")
           " Adam Spiers <>")
   (backward-char 1))
 
