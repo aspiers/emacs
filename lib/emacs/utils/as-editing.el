@@ -24,7 +24,7 @@
 ;;{{{ as-join-line-with-next
 
 (defun as-join-line-with-next ()
-  "Joins the current line with the next.  This just calls join-line with
+  "Joins the current line with the next.  This just calls `join-line' with
 a prefix argument."
   (interactive)
   (join-line 1))
@@ -83,7 +83,8 @@ The list marked is the one that contains point or follows point."
 ;;}}}
 ;;{{{ vim-yy
 
-(defun vim-yy (&optional lines) "doc string"
+(defun vim-yy (&optional lines)
+  "Simulates vi's yy command."
   (interactive "p")
   (save-excursion
     (setq lines (if (or (null lines)
