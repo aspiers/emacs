@@ -260,19 +260,16 @@ in all the directories in that path."
 
 (global-set-key "\C-x\C-zh"
 		(function (lambda () (interactive)
-			    (insert "http://www.new.ox.ac.uk/~adam/")
-			    (newline))))
+			    (insert "http://www.new.ox.ac.uk/~adam/"))))
 (global-set-key "\C-x\C-zu"
 		(function (lambda () (interactive)
-			    (insert "http://www.new.ox.ac.uk/~adam/")
-			    (newline))))
+			    (insert "http://www.new.ox.ac.uk/~adam/"))))
 
 ;; e-mail address
 
 (global-set-key "\C-x\C-ze"
 		(function (lambda () (interactive)
-			    (insert "adam@spiers.net")
-			    (newline))))
+			    (insert "adam@spiers.net"))))
 
 ;;}}}
 
