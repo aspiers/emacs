@@ -1,27 +1,30 @@
 # TODO: rewrite in Perl.  Gah.
 
 srcdirs=init/common major-modes minor-modes utils
-loadpaths=$(HOME)/lib/emacs/minor-modes $(HOME)/lib/emacs/major-modes/mmm
+loadpaths=$(HOME)/lib/emacs/minor-modes \
+          $(HOME)/lib/emacs/major-modes/mmm \
+          $(HOME)/lib/emacs/major-modes
 gnuinstalldir=$(HOME)/lib/emacs/GNU_Emacs
 xinstalldir=$(HOME)/lib/emacs/XEmacs
 
-ELs=$(shell find $(srcdirs) -name \*.el)
+ELs=$(shell find $(srcdirs) -name \*.el ! -name psgml\* )
 ELCs=$(addsuffix c,$(ELs))
 
 ifndef EMACS
   EMACS=emacs
 endif
 
-version=$(system $(EMACS) -version)
+version=$(shell $(EMACS) --version | \
+            perl -ne '/^(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
 
 ifeq ($(EMACS),emacs)
   COMPILER=$(EMACS) $(addprefix -L ,$(loadpaths))
-  installdir=$(gnuinstalldir)
+  installdir=$(gnuinstalldir)/$(version)
 else
   # blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
   COMPILER=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
-  installdir=$(xinstalldir)
+  installdir=$(xinstalldir)/$(version)
 endif
 
 COMPILER+= -batch -f batch-byte-compile
@@ -31,12 +34,12 @@ COMPILER+= -batch -f batch-byte-compile
 all: install
 
 list:
-	@echo $(ELs)
+	@echo $(ELs)o
 
-install: $(ELCs) uninstall
+install: $(ELCs) psgml uninstall
 	@echo "Installing in $(installdir):"
 	@[ -d $(installdir) ] || mkdir -p $(installdir)
-	@for elc in $(ELCs); do \
+	@for elc in $(ELCs) major-modes/psgml/*.elc; do \
 	  echo "    $$elc"; \
 	  cp -i $$elc $(installdir); \
 	done
@@ -50,3 +53,6 @@ clean: uninstall
 
 uninstall:
 	@-rm -f $(wildcard $(installdir)/*.elc)
+
+psgml:
+	cd major-modes/psgml && $(MAKE)
