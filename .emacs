@@ -14,9 +14,10 @@
 ;; Set load-path and load in all options from relevant places
 
 (setq load-path
-      (append '("~/local/share/emacs/site-lisp"
+      (append '(
+                "~/lib/emacs/init"
                 "~/lib/emacs"
-                "~/lib/emacs/init") load-path))
+                ) load-path))
 
 (cond 
  (running-xemacs
