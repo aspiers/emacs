@@ -80,6 +80,7 @@ When Blinking Cursor mode is enabled, the cursor blinks when Emacs is idle."
 (defun blinking-cursor-start-blinking ()
   "Make the cursor start blinking."
   (add-hook 'pre-command-hook 'blinking-cursor-stop-blinking)
+  (cancel-function-timers 'blinking-cursor-blink)
   (setq blinking-cursor-tick 0)
   (blinking-cursor-blink))
 
