@@ -1,0 +1,5 @@
+-- 
+--- adam@spiers.net --- musician and hacker --- http://www.new.ox.ac.uk/~adam/
+echo '$_=bless[q]]],q;_;;sub s;{local$_=shift;push@$_,++$0,pop(@$_).$s;;$_}($,
+=eval((join"\$_->[",qw)Just Another Perl Hacker)).q)$_->[1]]]])))=~s~((?<=.(?{
+++$*})))?_::~$*&&$"~egx,print""=>""'|perl -ln0e';s;s\;;_::AUTOLOAD$1;g;eval'##
