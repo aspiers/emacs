@@ -440,8 +440,15 @@ This variable is buffer local and only used in the *cvs* buffer.")
   "Prefix key for the `cvs-mode' bindings in `cvs-minor-mode'."
   :group 'pcl-cvs)
 
+(defun cvs-bury-and-close ()
+  (interactive)
+  (bury-buffer) 
+  (when (> (length (window-list)) 1) 
+    (delete-window)))
+
 (easy-mmode-defmap cvs-minor-mode-map
-  `((,cvs-minor-mode-prefix . cvs-mode-map))
+  `((,cvs-minor-mode-prefix . cvs-mode-map)
+    ("q" . cvs-bury-and-close))
   "Keymap for `cvs-minor-mode', used in buffers related to PCL-CVS.")
 
 (defvar cvs-buffer nil
