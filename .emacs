@@ -19,13 +19,13 @@
 
 (setq edotdir (or (getenv "ZDOTDIR") "~"))
 
+(setq as-emacs-dir (concat edotdir "/lib/emacs"))
+
 (setq as-lib-dir
-      (concat edotdir
-              "/lib/emacs/"
+      (concat as-emacs-dir "/"
               (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
 (setq as-init-dir
-      (concat edotdir
-              "/lib/emacs/init/"
+      (concat as-emacs-dir "/init/"
               (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
 (setq as-version-lib-dir
       (concat as-lib-dir "/"
