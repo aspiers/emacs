@@ -9,7 +9,11 @@
 
 ;;}}}
 
+;;{{{ Compiler declarations
+
 (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs")
+
+;;}}}
 
 ;;{{{ Function definitions
 
@@ -275,11 +279,12 @@ in all the directories in that path."
 (global-set-key [(control meta tab)]    'ispell-complete-word)
 (global-set-key [(meta i)]              'indent-relative)
 
-(global-set-key [(f1)]          'ispell-word)
-(global-set-key [(f2)]          'emacs-Info)
-(global-set-key [(f4)]          'duplicate-line)
-(global-set-key [(insert)]      'overwrite-mode)
-(global-set-key [(meta o)]      'overwrite-mode)
+(global-set-key [(f1)]             'ispell-word)
+(global-set-key [(f2)]             'emacs-Info)
+(global-set-key [(f4)]             'duplicate-line)
+(global-set-key [(insert)]         'overwrite-mode)
+(global-set-key [(meta o)]         'overwrite-mode)
+(global-set-key [(control meta y)] 'join-line) ;; also on M-^
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers
 ;; so that the point automatically gets put in the
@@ -805,7 +810,7 @@ to the beginning of the buffer name."
 (setq mmm-mode-ext-classes-alist
       '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
 
-(load "mmm-auto" t)
+(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
 
 ;;}}}
 ;;{{{ CSS
@@ -974,7 +979,7 @@ to the beginning of the buffer name."
 ;;{{{ auto-recomp for .el files
 
 ;; This is tiny, so we load at startup
-(load "auto-recomp" t)
+;;(load "auto-recomp" t) ;; we use Makefiles now
 
 ;;}}}
 ;;{{{ comment-start
