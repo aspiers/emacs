@@ -56,6 +56,7 @@ install: $(ELCs) psgml uninstall
 	@echo Compiling $< ...
 	@$(COMPILER) $<
 
+# Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 clean: uninstall
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
 
