@@ -6,7 +6,7 @@
 
 (defun as-duplicate-line (&optional count) 
   "Duplicates the current line."
-  (interactive "p")
+  (interactive "*p")
   (save-excursion
     (let ((i 0))
       (while (< i count)
@@ -23,22 +23,32 @@
 ;;}}}
 ;;{{{ as-join-line-with-next
 
-(defun as-join-line-with-next ()
-  "Joins the current line with the next.  Removes any trailing
-backslash and then calls `join-line'."
-  (interactive)
+(defun as-join-line-with-next (&optional preserve-comment)
+  "Joins the current line with the next.  Removes any continuation
+backslash from the end of the line, and any comment prefix from the
+beginning of the next (unless a prefix argument is given) before
+joining."
+  (interactive "*P")
+
   (save-excursion
     (end-of-line)
     (forward-char -1)
-    (and (looking-at "\\\\") (delete-char 1)))
-  (join-line 1))
+    (and (looking-at "\\\\") (delete-char 1))
+    (message (format "preserve-comment is %s" preserve-comment))
+    (or preserve-comment
+        (save-excursion
+          (forward-line 1)
+          (let ((beg (point)))
+            (forward-line 1)
+            (uncomment-region beg (point)))))
+    (join-line 1)))
 
 ;;}}}
 ;;{{{ as-copy-previous-line-suffix
 
 (defun as-copy-previous-line-suffix ()
   "Copy the suffix of the line directly above the point and yank it at the point."
-  (interactive)
+  (interactive "*")
   (save-excursion
     (let ((suffix (save-excursion
                     (let ((col (current-column)))
@@ -54,7 +64,7 @@ backslash and then calls `join-line'."
 
 (defun as-align-to-previous-line (&optional count)
   "Runs indent-relative on the current line and moves down to enable repeating."
-  (interactive "p")
+  (interactive "*p")
   (let ((i 0))
     (while (< i count)
       (save-excursion
@@ -162,7 +172,7 @@ Right Thing with `query-replace' and friends."
 With argument ARG not nil or 1, move forward ARG - 1 lines first.
 If scan reaches end of buffer, stop there without error.
 If the line is empty, doesn't do anything."
-  (interactive "p")
+  (interactive "*p")
   (end-of-line arg)
   (unless (bolp)
     (backward-char)))
@@ -185,7 +195,7 @@ then \\[bn-strip-parentheses] will result in
 With a prefix argument ARG, try to repeat the process ARG times.
 Stop as soon as point is not at a parenthesis character.  With
 just C-u as a prefix argument, repeat as many times as possible."
-  (interactive "P")
+  (interactive "*P")
   (let ((many-as-possible-p (and (not (null arg)) (listp arg)))
         (n (prefix-numeric-value arg))
         on-open-p
@@ -217,7 +227,7 @@ just C-u as a prefix argument, repeat as many times as possible."
 \(This doesn't make very much sense unless you also have
 transient-mark-mode turned on.\)  In the case that the mark is not
 active, ARG specifies how many words backwards to kill."
-  (interactive "p")
+  (interactive "*p")
   (if mark-active
       (kill-region (region-beginning) (region-end))
     (backward-kill-word arg)))
@@ -231,7 +241,7 @@ ARG is ignored if mark is active.  If mark is not active,
 copy-as-if-killed ARG lines forward, starting with the one point is
 currently on.  ARG can be negative, in which case the current line is
 not included in the text copied."
-  (interactive "p")
+  (interactive "*p")
   (if mark-active
       (kill-ring-save (region-beginning) (region-end))
     (let ((bol (save-excursion (beginning-of-line) (point)))
