@@ -28,12 +28,12 @@ version_number=$(shell echo "$(version)" | \
 
 ifeq (, $(findstring XEmacs,$(version)))
   COMPILER=$(EMACS) $(addprefix -L ,$(loadpaths))
-  installdir=$(gnuinstalldir)/$(version_number)
+  installdir=$(gnuinstalldir)/$(version_number)/$(OSTYPE)
 else
   # blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
   COMPILER=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
-  installdir=$(xinstalldir)/$(version_number)
+  installdir=$(xinstalldir)/$(version_number)/$(OSTYPE)
 endif
 
 COMPILER+= -batch -f batch-byte-compile

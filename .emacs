@@ -23,7 +23,10 @@
 (setq as-init-dir
       (concat "~/lib/emacs/init/"
               (cond (running-xemacs "XEmacs") (t "GNU_Emacs"))))
-(setq as-version-lib-dir (concat as-lib-dir "/" emacs-version-number))
+(setq as-version-lib-dir
+      (concat as-lib-dir "/"
+              emacs-version-number "/"
+              (getenv "OSTYPE")))
 (add-to-list 'load-path as-version-lib-dir)
 
 (cond 
