@@ -14,17 +14,18 @@ ifndef EMACS
   EMACS=emacs
 endif
 
-version=$(shell $(EMACS) --version | \
-            perl -ne '/^(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
+version=$(shell $(EMACS) --version)
+version_number=$(shell echo "$(version)" | \
+            perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
 
-ifeq ($(EMACS),emacs)
+ifeq (, $(findstring XEmacs,$(version)))
   COMPILER=$(EMACS) $(addprefix -L ,$(loadpaths))
-  installdir=$(gnuinstalldir)/$(version)
+  installdir=$(gnuinstalldir)/$(version_number)
 else
   # blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
   COMPILER=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
-  installdir=$(xinstalldir)/$(version)
+  installdir=$(xinstalldir)/$(version_number)
 endif
 
 COMPILER+= -batch -f batch-byte-compile
