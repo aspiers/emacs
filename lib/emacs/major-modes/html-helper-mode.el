@@ -631,8 +631,8 @@ appropriate keymap if a key is requested. Format:
 	 (menu (html-helper-menu-for type))
 	 (key (nth 1 l))
 	 (completer (nth 2 l))
-	 (name (nth 3 l))
 	 (tag (nth 4 l))
+	 (name (nth 3 l))
 	 (doc (nth 5 l))
 	 (command (if (string-equal completer "function")
 		      (nth 4 l)
@@ -658,7 +658,6 @@ appropriate keymap if a key is requested. Format:
 ;;}}}
 
 ;;{{{ most of the HTML tags
-
 
 (defun html-helper-insert-or-wipe (string)
   "Propmts for the value of an optional attribute named STRING and
@@ -843,7 +842,7 @@ with a null string."
 	    ("<a " (html-helper-insert-or-wipe "name") ">" 
 	     (r "Anchor text: ") "</a>"))
    (anchor  "l"	      "<a href="        "Hyperlink"          	  
-	    ("<a href=\"" (p "href: ") "\" >" 
+	    ("<a href=\"" (p "href: ") "\">" 
 	     (r "Anchor text: ") "</a>"))                
 
    ;;graphics
@@ -2462,6 +2461,7 @@ html-helper-mode-local-JSP-not-ASP are nil"
 ;;}}}
 
 ;; folding tags: End of code tree
+
 ;;}}}
 
 ;;{{{ Epilogue
