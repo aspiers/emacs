@@ -189,12 +189,12 @@ Can be optionally given a numeric prefix which
   (interactive "p")
   (message (format "%s" start))
   (and current-prefix-arg (setq as-cperl-unique-warning-counter start))
-  (save-excursion
-    (beginning-of-line)
-    (open-line 1)
-    (insert "warn ")
-    (insert (format "%d" as-cperl-unique-warning-counter))
-    (insert ";"))
+  (beginning-of-line)
+  (open-line 1)
+  (insert "warn ")
+  (insert (format "%d" as-cperl-unique-warning-counter))
+  (insert ";")
+  (forward-line 2)
   (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
 
 ;;}}}
