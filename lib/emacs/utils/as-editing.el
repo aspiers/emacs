@@ -4,17 +4,20 @@
 
 ;;{{{ as-duplicate-line
 
-(defun as-duplicate-line () 
+(defun as-duplicate-line (&optional count) 
   "Duplicates the current line."
-  (interactive)
+  (interactive "p")
   (save-excursion
-    (beginning-of-line)
-    (let ((bol (point))
-          line-to-copy)
-      (end-of-line)
-      (setq line-to-copy (buffer-substring bol (point)))
-      (insert "\n" line-to-copy)))
-  (next-line 1) ;; sorry FSF
+    (let ((i 0))
+      (while (< i count)
+        (beginning-of-line)
+        (let ((bol (point))
+              line-to-copy)
+          (end-of-line)
+          (setq line-to-copy (buffer-substring bol (point)))
+          (insert "\n" line-to-copy))
+        (setq i (1+ i)))))
+  (next-line count) ;; sorry FSF
   )
 
 ;;}}}
