@@ -2,7 +2,9 @@
 ;; background of your chosen theme
 (setq as-default-background
 ;;    "seashell1"
-    "wheat"
+;;    "wheat"
+;;    "blanched almond"
+      "antique white"
 ;;    "gray90"
       )
 
@@ -20,9 +22,9 @@
         `(default
            ((((class color) (background light))
              (:background ,as-default-background))))
-        '(fringe
+        `(fringe
           ((((class color) (background light))
-            (:background "wheat1"))))
+            (:background ,as-default-background))))
         `(mmm-default-submode-face
           ((((class color) (background light))
             (:background ,as-default-background)))))
@@ -53,7 +55,7 @@
 ]") (repeat . t) (modes append align-perl-modes (quote (python-mode))) (run-if lambda nil current-prefix-arg)) (c++-comment (regexp . "\\(\\s-*\\)\\(//.*\\|/\\*.*\\*/\\s-*\\)$") (modes . align-c++-modes) (column . comment-column) (valid lambda nil (save-excursion (goto-char (match-beginning 1)) (not (bolp))))) (c-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-c++-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(/[*/]\\|$\\)")))) (perl-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-perl-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\)")))) (perl-short-method-braces (regexp . "^\\s-*sub\\(\\s-+\\)[a-zA-Z0-9_]+\\(\\s-*\\){\\(\\s-*\\).*?\\(\\s-*\\)}\\s-*$") (modes . align-perl-modes) (group 1 2 3 4) (separate . "^dontmatchthis$")) (python-chain-logic (regexp . "\\(\\s-*\\)\\(\\<and\\>\\|\\<or\\>\\)") (modes quote (python-mode)) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\|\\\\\\)")))) (c-macro-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes . align-c++-modes) (column . c-backslash-column)) (basic-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes quote (python-mode makefile-mode sh-mode))) (tex-record-separator (regexp lambda (end reverse) (align-match-tex-pattern "&" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t)) (tex-tabbing-separator (regexp lambda (end reverse) (align-match-tex-pattern "\\\\[=>]" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t) (run-if lambda nil (eq major-mode (quote latex-mode)))) (tex-record-break (regexp . "\\(\\s-*\\)\\\\\\\\") (modes . align-tex-modes)) (text-column (regexp . "\\(^\\|\\S-\\)\\(\\s-+\\)\\(\\S-\\|$\\)") (group . 2) (modes . align-text-modes) (repeat . t) (run-if lambda nil (and current-prefix-arg (not (eq (quote -) current-prefix-arg))))) (text-dollar-figure (regexp . "\\$?\\(\\s-+[0-9]+\\)\\.") (modes . align-text-modes) (justify . t) (run-if lambda nil (eq (quote -) current-prefix-arg))))))
  '(align-sq-string-modes (quote (python-mode)))
  '(auto-save-interval 120)
- '(backup-directory-alist (quote (("/home/.*" . "/tmp/.emacs.d/backup") ("." . ".emacs.backup"))))
+ '(backup-directory-alist (quote (("." . ".emacs.backup"))))
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.3)
  '(blinking-cursor-blink-frequency 4)
@@ -92,10 +94,10 @@
  '(delete-old-versions t)
  '(diff-switches "-u" t)
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l" t)
+ '(dired-listing-switches "-l")
  '(echo-keystrokes 0.01)
- '(eldoc-minor-mode-string "" t)
- '(eldoc-mode t t)
+ '(eldoc-minor-mode-string "")
+ '(eldoc-mode t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(folding-mode-key-prefix "")
@@ -156,4 +158,4 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-group-tag-face ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag-face ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
  '(cvs-msg-face ((t (:slant italic))))
-)
+ '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab")))))
