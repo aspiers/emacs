@@ -1,6 +1,6 @@
 # TODO: rewrite in Perl.  Gah.
 
-srcdirs=init/common major-modes minor-modes utils
+srcdirs=init/common major-modes minor-modes utils fun
 EMACSLIB=$(HOME)/lib/emacs
 loadpaths=$(EMACSLIB)/minor-modes \
           $(EMACSLIB)/major-modes/mmm \
