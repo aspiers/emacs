@@ -1127,14 +1127,14 @@ If a prefix argument is given, move by that many lines."
                  (type (cvs-fileinfo->type next-fi)))
             (not (eq type 'DIRCHANGE)))
         (setq this-node (ewoc-goto-next cvs-cookies 1)))
-      (next-line 1))))
+      (forward-line 1))))
 
 (defun cvs-mode-top-dir ()
   "Go to the top-level directory in the current buffer."
   (interactive)
-  (beginning-of-buffer)
+  (goto-char 0)
   (ewoc-goto-next cvs-cookies 1)
-  (previous-line 1))
+  (forward-line -1))
 
 ;;;;
 ;;;; Mark handling
