@@ -15,6 +15,7 @@
  '(diff-switches "-u" t)
  '(lazy-lock-defer-time 0.5)
  '(lazy-lock-stealth-verbose t)
+ '(indent-tabs-mode nil)
  '(show-paren-ring-bell-on-mismatch nil)
  '(cperl-lazy-help-time 2))
 (custom-set-faces
