@@ -717,14 +717,20 @@ Can be optionally given a numeric prefix which
   (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
 
 ;;}}}
+;;{{{ as-cperl-insert-self-method-call
+
+(fset 'as-cperl-insert-self-method-call "$self->")
+
+;;}}}
 
 (add-hook 'cperl-mode-hook 
           (function
            (lambda ()
              (local-set-key "\C-ca" 'as-cperl-insert-args-line)
+             (local-set-key "\C-cc" 'as-cperl-insert-self-method-call)
              (local-set-key "\C-cm" 'as-cperl-make-method)
              (local-set-key "\C-cp" 'cperl-find-pods-heres)
-             (local-set-key "f5"    'as-cperl-insert-unique-warning)
+             (local-set-key [(f5)]  'as-cperl-insert-unique-warning)
              (local-set-key "\C-ci" 'as-cperl-set-indent-level)
              (local-set-key "\C-cs" 'as-cperl-insert-self-and-args-line)
              (local-set-key "\C-cS" 'as-cperl-insert-self-line)
