@@ -670,9 +670,12 @@ An end of a defun is found by moving forward from the beginning of one."
 	       (setq font-lock-syntactic-keywords
 		     '(("\\$\\([#\"'`$\\]\\)" 1 (1 . nil))
 		       ("\\(#\\)[{$@]" 1 (1 . nil))
-		       ("\\(/\\)\\([^/\n]\\|\\\\/\\)*\\(/\\)"
-			(1 (7 . ?'))
-			(3 (7 . ?')))))
+;;                     ("\\(/\\)\\(\\\\/\\|[^/\n]\\)*\\(/\\)\\([iop]*\\)"
+;;                         (1 (7 . ?'))
+;;                         (2 (1 . nil))
+;;                         (3 (7 . ?'))
+;;                         (4 (1 . nil)))
+                       ))
 	       (make-local-variable 'font-lock-defaults)
 	       (setq font-lock-defaults '((ruby-font-lock-keywords) nil nil))
 	       (setq font-lock-keywords ruby-font-lock-keywords)))
@@ -754,6 +757,10 @@ An end of a defun is found by moving forward from the beginning of one."
      '("%\\([qQrx]?\\)\\(<.*?>\\)"
        (1 'default)
        (2 font-lock-string-face))
+     ;; regexps
+     '("/\\(\\(\\\\/\\|[^/\n]\\)*\\)/\\([iop]*\\)"
+       (1 font-lock-string-face)
+       (3 font-lock-constant-face))
      ;; variables
      '("\\(^\\|[^_:.@$]\\|\\.\\.\\)\\b\\(nil\\|self\\|true\\|false\\)\\b\\([^_]\\|$\\)"
        2 font-lock-variable-name-face)
