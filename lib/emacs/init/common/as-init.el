@@ -189,6 +189,19 @@ a prefix argument."
    [?\C-p ?\C-  ?\C-e ?\M-w ?\C-n ?\C-u ?\C-y])
 
 ;;}}}
+;;{{{ vim-yy
+
+(defun vim-yy (&optional lines) "doc string"
+  (interactive "p")
+  (save-excursion
+    (setq lines (if (or (null lines)
+                        (< lines 1)) 1 lines))
+    (beginning-of-line)
+    (push-mark (point) nil t)
+    (next-line lines)
+    (kill-ring-save (mark) (point))))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Appearance
@@ -466,6 +479,7 @@ a prefix argument."
 (global-set-key [(meta o)] 'overwrite-mode)
 
 (global-set-key [(control meta y)] 'as-join-line-with-next)
+(global-set-key [(control x) (control y)] 'vim-yy)
 
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
