@@ -1663,7 +1663,8 @@ POSTPROC is a list of expressions to be evaluated at the very end (after
       (message "Running cvs %s ..." cmd)
       (cvs-run-process args fis postproc single-dir))
     (and (member cmd cvs-buffer-switch-list)
-         (select-window (get-buffer-window buf)))))
+         (let ((w (get-buffer-window buf)))
+           (and w (select-window (get-buffer-window buf)))))))
 
 
 (defun* cvs-mode-do (cmd flags filter
