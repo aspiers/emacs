@@ -34,13 +34,15 @@ joining."
     (end-of-line)
     (forward-char -1)
     (and (looking-at "\\\\") (delete-char 1))
-    (message (format "preserve-comment is %s" preserve-comment))
+;;  (message (format "preserve-comment is %s" preserve-comment))
     (or preserve-comment
         (save-excursion
           (forward-line 1)
           (let ((beg (point)))
             (forward-line 1)
-            (uncomment-region beg (point)))))
+            (condition-case err
+                (uncomment-region beg (point))
+              (error nil)))))
     (join-line 1)))
 
 ;;}}}
