@@ -471,6 +471,9 @@ that name."
 (defvar nxml-sub-dir "major-modes/nxml-mode-20041004"
   "Path of nxml-mode subdirectory relative to Adam's emacs library root")
 
+(defvar xtla-sub-dir "major-modes/xtla"
+  "Path of xtla mode subdirectory relative to Adam's emacs library root")
+
 (custom-set-variables
  '(find-function-source-path
    (append load-path
@@ -482,6 +485,7 @@ that name."
                "major-modes/tdtd" 
                "major-modes/pcl-cvs" 
                nxml-sub-dir
+               xtla-sub-dir
                "major-modes" 
                "minor-modes" 
                "utils" 
@@ -933,6 +937,21 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ python-mode
 
 (autoload 'python-mode "python-mode" t)
+
+;;}}}
+;;{{{ xtla
+
+;; Build xtla with:
+;;
+;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
+;; make
+;; make install
+;; emk
+
+;; not necessary
+;;(add-to-list 'load-path (concat as-emacs-dir "/" xtla-sub-dir))
+
+(require 'xtla-autoloads)
 
 ;;}}}
 
