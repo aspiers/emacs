@@ -35,7 +35,7 @@ joining."
     (forward-char -1)
     (and (looking-at "\\\\") (delete-char 1))
 ;;  (message (format "preserve-comment is %s" preserve-comment))
-    (or preserve-comment
+    (unless (or preserve-comment (not comment-start))
         (save-excursion
           (forward-line 1)
           (let ((beg (point)))
