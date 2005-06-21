@@ -576,6 +576,11 @@ that name."
                 ("/.zsh/functions/"                      . sh-mode)
                 ("\\.spec$"                              . rpm-spec-mode)
                 ("\\.make$"                              . makefile-mode)
+                ("\\.js$"                                . ecmascript-mode)
+
+                ;; TWiki
+                ("\\.tmpl$"                              . html-helper-mode)
+                ("TWiki\\.cfg$"                          . cperl-mode)
                 )
               auto-mode-alist))
 
@@ -937,6 +942,11 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ python-mode
 
 (autoload 'python-mode "python-mode" t)
+
+;;}}}
+;;{{{ ecmascript-mode
+
+(autoload 'ecmascript-mode "ecmascript-mode" t)
 
 ;;}}}
 ;;{{{ xtla
