@@ -57,7 +57,7 @@ install: nxml $(ELCs) psgml uninstall
 	done
 
 %.elc: %.el
-	@echo Compiling $< ...
+	@echo Compiling $< with $(EMACS) ...
 	@$(COMPILER) $<
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
