@@ -969,7 +969,31 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'etask "etask" "etask project management mode" t)
 
 ;;}}}
+;;{{{ w3m-mode
 
+(require 'w3m-loads)
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
+
+(defun dired-w3m-find-file ()
+  (interactive)
+  (require 'w3m)
+  (let ((file (dired-get-filename)))
+    (if (y-or-n-p (format "Open 'w3m' %s " (file-name-nondirectory file)))
+        (w3m-find-file file))))
+
+(defun mhj-w3m-browse-current-buffer ()
+  (interactive)
+  (let ((filename (concat (make-temp-file "w3m-" nil) ".html")))
+    (unwind-protect
+        (progn
+          (write-region (point-min) (point-max) filename)
+          (w3m-find-file filename))
+      (delete-file filename))))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
