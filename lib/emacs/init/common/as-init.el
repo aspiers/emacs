@@ -936,17 +936,17 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ gtypist-mode
 
-(autoload 'gtypist-mode "gtypist-mode")
+(autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
 
 ;;}}}
 ;;{{{ python-mode
 
-(autoload 'python-mode "python-mode" t)
+(autoload 'python-mode "python-mode" "python-mode" t)
 
 ;;}}}
 ;;{{{ ecmascript-mode
 
-(autoload 'ecmascript-mode "ecmascript-mode" t)
+(autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
 
 ;;}}}
 ;;{{{ xtla
@@ -964,6 +964,12 @@ C-style indentation, use cssm-c-style-indenter.")
 (require 'xtla-autoloads)
 
 ;;}}}
+;;{{{ etask-mode
+
+(autoload 'etask "etask" "etask project management mode" t)
+
+;;}}}
+
 
 ;;}}}
 ;;{{{ Minor modes
