@@ -3,14 +3,15 @@
 srcdirs=init/common major-modes minor-modes utils fun
 EMACSLIB=$(HOME)/lib/emacs
 loadpaths = $(EMACSLIB)/minor-modes 			\
-          $(EMACSLIB)/major-modes/mmm 			\
-          $(EMACSLIB)/major-modes/tdtd 			\
-          $(EMACSLIB)/major-modes/pcl-cvs 		\
-          $(EMACSLIB)/major-modes/monkey-2 		\
-          $(EMACSLIB)/major-modes/nxml-mode-20041004	\
-          $(EMACSLIB)/major-modes/xtla			\
-          $(EMACSLIB)/major-modes			\
-          $(EMACSLIB)/utils/tree-widget-2.0
+            $(EMACSLIB)/major-modes/mmm 		\
+            $(EMACSLIB)/major-modes/tdtd 		\
+            $(EMACSLIB)/major-modes/pcl-cvs 		\
+            $(EMACSLIB)/major-modes/monkey-2 		\
+            $(EMACSLIB)/major-modes/nxml-mode-20041004	\
+            $(EMACSLIB)/major-modes/xtla                \
+            $(EMACSLIB)/major-modes/etask-0.3.91a       \
+            $(EMACSLIB)/major-modes			\
+            $(EMACSLIB)/utils/tree-widget-2.0
 gnuinstalldir=$(EMACSLIB)/GNU_Emacs
 xinstalldir=$(EMACSLIB)/XEmacs
 
@@ -54,7 +55,7 @@ install: nxml $(ELCs) psgml uninstall
 	@echo "Installing all .elcs in $(installdir)"
 	@[ -d $(installdir) ] || mkdir -p $(installdir)
 	@for elc in $(ELCs) major-modes/psgml/*.elc; do \
-	  cp -i $$elc $(installdir); \
+	  cp $$elc $(installdir); \
 	done
 
 %.elc: %.el
