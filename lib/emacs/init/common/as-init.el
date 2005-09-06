@@ -921,23 +921,6 @@ C-style indentation, use cssm-c-style-indenter.")
 (defvar gnus-sum-thread-tree-root "")
 
 ;;}}}
-;;{{{ outline
-
-(eval-after-load "outline" '(require 'foldout))
-(mapc (function
-       (lambda (x)
-         (add-hook x
-                   (lambda ()
-                     ;; Quick navigation
-                     (auto-fill-mode 1)
-                     (local-set-key [(shift left)] 'foldout-exit-fold)
-                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
-                     (local-set-key [(control shift left)] 'foldout-exit-fold)
-                     (local-set-key [(control shift right)] 'foldout-zoom-subtree)
-                     ))))
-      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
-
-;;}}}
 ;;{{{ rpm-spec-mode
 
 (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
@@ -1007,7 +990,21 @@ C-style indentation, use cssm-c-style-indenter.")
       (delete-file filename))))
 
 ;;}}}
-;;{{{ org-mode
+;;{{{ outline and org-mode
+
+(eval-after-load "outline" '(require 'foldout))
+(mapc (function
+       (lambda (x)
+         (add-hook x
+                   (lambda ()
+                     ;; Quick navigation
+                     (auto-fill-mode 1)
+                     (local-set-key [(shift left)] 'foldout-exit-fold)
+                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
+                     (local-set-key [(control shift left)] 'foldout-exit-fold)
+                     (local-set-key [(control shift right)] 'foldout-zoom-subtree)
+                     ))))
+      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 ;; (define-key global-map "\C-cl" 'org-store-link)
