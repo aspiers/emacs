@@ -40,6 +40,9 @@
   (format "%s/%s/%s" as-lib-dir emacs-version-number system-type)
   "Path to emacs libraries for a particular system's emacs install.")
 
+;; save original load-path - e.g. useful for finding site-lisp directory
+(setq orig-load-path load-path)
+
 (add-to-list 'load-path as-version-lib-dir)
 
 (cond 
