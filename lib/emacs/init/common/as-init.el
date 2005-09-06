@@ -541,50 +541,23 @@ that name."
            (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
         auto-mode-alist)
 
-
-;; Add in other modes
+;; Each mode has its own block of elisp which will usually modify
+;; auto-mode-alist, but here we add in some misc modes.
 (setq auto-mode-alist
       (append '(
-                ("\\.rb\\'"                              . ruby-mode)
-                ("\\.py\\'"                              . python-mode)
-                ("\\.\\(pod\\|t\\)\\'"                   . cperl-mode)
-                ("\\.prehtml\\'"                         . html-mode)
-                ("\\.php3\\'"                            . html-mode)
-                ("\\.sdf\\'"                             . sdf-mode)
                 ("\\.po[tx]?\\'\\|\\.po\\."              . po-mode)
-                (".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode)
-                (".ly\\'"                                . lilypond-mode)
-                ("\\.\\(mason\\|m[cd]\\)\\'"             . html-mode)
-                ("\\(auto\\|d\\)handler\\'"              . html-mode)
-                ("\\.css\\'"                             . css-mode)
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
-                ("\\.xml$"                               . nxml-mode)
-                ("\\.xhtml$"                             . nxml-mode)
-;;              ("\\.xml$"                               . xml-mode)
-                ("\\.sgml$"                              . sgml-mode)
-                ("\\.dtd$"                               . sgml-mode)
-;;              ("\\.dtd$"                               . dtd-mode)
-                ("\\.dcl$"                               . dtd-mode)
-                ("\\.dec$"                               . dtd-mode)
-                ("\\.ele$"                               . dtd-mode)
-                ("\\.ent$"                               . dtd-mode)
-                ("\\.mod$"                               . dtd-mode)
                 ("\\.dump$"                              . tar-mode)
-                ("\\.typ\\'"                             . gtypist-mode)
                 ("/.zsh\\(env\\|rc\\)"                   . sh-mode)
                 ("/.zsh/functions/"                      . sh-mode)
-                ("\\.spec$"                              . rpm-spec-mode)
                 ("\\.make$"                              . makefile-mode)
-                ("\\.js$"                                . ecmascript-mode)
 
                 ;; TWiki
                 ("\\.tmpl$"                              . html-helper-mode)
                 ("TWiki\\.cfg$"                          . cperl-mode)
                 )
               auto-mode-alist))
-
-(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
 
 ;;}}}
 ;;{{{ Major modes
@@ -601,6 +574,8 @@ that name."
 (add-hook 'cperl-mode-hook 'as-cperl-setup)
 (add-hook 'cperl-mode-hook 'turn-on-auto-fill)
 (defun cp () "Abbreviation for `cperl-mode'." (interactive) (cperl-mode))
+
+(add-to-list 'auto-mode-alist '("\\.\\(pod\\|t\\)\\'" . cperl-mode))
 
 ;;}}}
 ;;{{{ Text
@@ -633,6 +608,7 @@ that name."
 ;;}}}
 ;;{{{ Ruby
 
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
 (autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
 
 ;;}}}
@@ -674,6 +650,8 @@ that name."
 ;;(add-hook 'sawfish-mode-hook
 ;;          (function (lambda () (turn-on-font-lock))))
 ;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
+(add-to-list 'auto-mode-alist
+             '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
 
 ;;}}}
 ;;{{{ DTD
@@ -687,6 +665,14 @@ that name."
 ;; Turn on font lock when in DTD mode
 (add-hook 'dtd-mode-hooks 'turn-on-font-lock)
 
+;; auto-mode-alist:
+;;       ("\\.dtd$"                               . dtd-mode)
+;;       ("\\.dcl$"                               . dtd-mode)
+;;       ("\\.dec$"                               . dtd-mode)
+;;       ("\\.ele$"                               . dtd-mode)
+;;       ("\\.ent$"                               . dtd-mode)
+;;       ("\\.mod$"                               . dtd-mode)
+
 ;;}}}
 ;;{{{ nxml
 
@@ -697,12 +683,20 @@ that name."
 (autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
 (add-hook 'nxml-mode-hook
           (lambda () (local-set-key [(control meta q)] 'mhj-format-xml)))
+(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xhtml\\)$" . nxml-mode))
 
 ;;}}}
 ;;{{{ psgml (SGML and XML)
 
 (autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+
+(setq auto-mode-alist
+      (append '(
+                ("\\.sgml$"                              . sgml-mode)
+                ("\\.dtd$"                               . sgml-mode)
+                )
+              auto-mode-alist))
 
 (setq-default sgml-indent-data t)
 
@@ -796,6 +790,7 @@ that name."
 (defvar cssm-indent-function 'cssm-c-style-indenter
   "Which function to use when deciding which column to indent to. To get
 C-style indentation, use cssm-c-style-indenter.")
+(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 
 ;;}}}
 ;;{{{ MMM mode
@@ -823,6 +818,15 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;                    (setq truncate-lines t)
                       )))
 (defvar tempo-interactive t)
+
+(setq auto-mode-alist
+      (append '(
+                ("\\.prehtml\\'"                         . html-mode)
+                ("\\.php3\\'"                            . html-mode)
+                ("\\.\\(mason\\|m[cd]\\)\\'"             . html-mode)
+                ("\\(auto\\|d\\)handler\\'"              . html-mode)
+                )
+              auto-mode-alist))
 
 ;; htmltidy support
 (autoload 'tidy-buffer "htmltidy" "Run Tidy HTML parser on current buffer" t)
@@ -882,11 +886,13 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ SDF
 
+(add-to-list 'auto-mode-alist '("\\.sdf\\'" . sdf-mode))
 (autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
 
 ;;}}}
 ;;{{{ lilypond
 
+(add-to-list 'auto-mode-alist '(".ly\\'" . lilypond-mode))
 (autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
@@ -918,34 +924,41 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ outline
 
 (eval-after-load "outline" '(require 'foldout))
-(add-hook 'outline-mode-hook
-          (lambda ()
-            ;; Quick navigation
-            (auto-fill-mode 1)
-            (local-set-key [(shift left)] 'foldout-exit-fold)
-            (local-set-key [(shift right)] 'foldout-zoom-subtree)
-            ))
-(add-hook 'outline-minor-mode-hook
-          (lambda ()
-            ;; Quick navigation
-            (auto-fill-mode 1)
-            (local-set-key [(shift left)] 'foldout-exit-fold)
-            (local-set-key [(shift right)] 'foldout-zoom-subtree)
-            ))
+(mapc (function
+       (lambda (x)
+         (add-hook x
+                   (lambda ()
+                     ;; Quick navigation
+                     (auto-fill-mode 1)
+                     (local-set-key [(shift left)] 'foldout-exit-fold)
+                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
+                     (local-set-key [(control shift left)] 'foldout-exit-fold)
+                     (local-set-key [(control shift right)] 'foldout-zoom-subtree)
+                     ))))
+      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
+
+;;}}}
+;;{{{ rpm-spec-mode
+
+(add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
+(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
 
 ;;}}}
 ;;{{{ gtypist-mode
 
+(add-to-list 'auto-mode-alist '("\\.typ\\'" . gtypist-mode))
 (autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
 
 ;;}}}
 ;;{{{ python-mode
 
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (autoload 'python-mode "python-mode" "python-mode" t)
 
 ;;}}}
 ;;{{{ ecmascript-mode
 
+(add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
 (autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
 
 ;;}}}
@@ -994,8 +1007,11 @@ C-style indentation, use cssm-c-style-indenter.")
       (delete-file filename))))
 
 ;;}}}
-
 ;;{{{ org-mode
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
 
 (autoload 'org-mode "org" "Org mode" t)
 (autoload 'org-diary "org" "Diary entries from Org mode")
