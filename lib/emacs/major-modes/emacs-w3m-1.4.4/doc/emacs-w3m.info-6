@@ -1,0 +1,408 @@
+This is emacs-w3m.info, produced by makeinfo version 4.0b from
+emacs-w3m.texi.
+
+INFO-DIR-SECTION GNU Emacs Lisp
+START-INFO-DIR-ENTRY
+* Emacs-w3m: (emacs-w3m).  An Emacs interface to w3m
+END-INFO-DIR-ENTRY
+
+   This file documents emacs-w3m, an Emacs interface to w3m.
+
+   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005 TSUCHIYA Masatoshi
+
+   This edition is for emacs-w3m version 1.4.4.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU General Public License, Version 2 or any
+later version published by the Free Software Foundation.
+
+   This document is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+along with this document; if not, you can either send email to this
+document's maintainer or write to: The Free Software Foundation, Inc.;
+59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
+
+
+File: emacs-w3m.info,  Node: Concept Index,  Next: Key Index,  Up: Index
+
+Concept Index
+=============
+
+* Menu:
+
+* about://antenna/:                      Using Antenna.
+* Adding a bookmark:                     Adding Bookmarks.
+* Adding autoload settings:              Minimal Settings.
+* Adding new search engines:             Adding New Search Engines.
+* Antenna:                               Using Antenna.
+* APEL package:                          Other Requirements.
+* Arrived URLs:                          Tracing History.
+* article expiry:                        Nnshimbun.
+* auto-expire:                           Nnshimbun.
+* BITMAP-MULE package:                   Other Requirements.
+* Bookmarks:                             Managing Bookmarks.
+* Browsing history:                      Tracing History.
+* Consulting bookmarks:                  Consulting Bookmarks.
+* Creating new buffers:                  Creating and killing buffers.
+* Customizing user options:              Customizable Variables.
+* Displaying images:                     Inline Images.
+* Downloading files:                     Downloading.
+* Editing bookmarks:                     Editing Bookmarks.
+* expiry-wait:                           Nnshimbun.
+* Firewall:                              Minimal Settings.
+* FLIM package:                          Other Requirements.
+* Functions details:                     Emacs-w3m Functions.
+* General variables:                     General Variables.
+* Getting started:                       Getting Started.
+* Gifsicle program:                      Other Requirements.
+* group parameters:                      Nnshimbun.
+* Grouping URLs:                         Grouping URLs.
+* Hooks:                                 Hooks.
+* ImageMagick package:                   Other Requirements.
+* Installing emacs-w3m:                  Installing Emacs-w3m.
+* Installing on non-UNIX-like systems:   Non-UNIX-like systems.
+* Introduction:                          Introduction.
+* Killing buffers:                       Creating and killing buffers.
+* Moving in a page:                      Moving in a page.
+* New custom:                            Other Requirements.
+* nnshimbun:                             Nnshimbun.
+* Other variables:                       Other Variables.
+* Possible Emacs versions:               Required Emacs Version.
+* Proxy gateways:                        Minimal Settings.
+* Proxy servers:                         Minimal Settings.
+* Quick Searching:                       Quick Searching.
+* Reading HTML mails in Gnus:            Gnus.
+* regexp-opt.el:                         Other Requirements.
+* Reporting bugs:                        Mailing List.
+* Saving images:                         Inline Images.
+* Search engines:                        Using Search Engines.
+* Searching:                             The Search Interface.
+* Shimbun library:                       Shimbun Library.
+* shimbun.el:                            Shimbun Basics.
+* Showing the tree structure of local directories: Showing Directory Tree.
+* Special URLs:                          Quick Searching.
+* Starting up:                           Getting Started.
+* Startup file:                          Minimal Settings.
+* Subscribing to the emacs-w3m mailing list: Mailing List.
+* Switching buffers using the buffer list: Selecting buffers.
+* Switching buffers using the minibuffer: Selecting buffers.
+* The Antenna interface:                 Daily web tracking.
+* Tips:                                  Tips.
+* Tracking changes in web pages:         Using Antenna.
+* Using emacs-w3m as a batch command:    Launching and Jumping.
+* Variables related to cookies:          Cookie Variables.
+* Variables related to forms:            Form Variables.
+* Variables related to images:           Image Variables.
+* Viewing images:                        Inline Images.
+* w3m:                                   You Need w3m.
+* Web Newspaper:                         Nnshimbun.
+* Zooming images:                        Inline Images.
+
+
+File: emacs-w3m.info,  Node: Key Index,  Next: Variable Index,  Prev: Concept Index,  Up: Index
+
+Key Index
+=========
+
+* Menu:
+
+* +:                                     Setting up Antenna.
+* ,:                                     Moving in a page.
+* .:                                     Moving in a page.
+* <:                                     Moving in a page.
+* =:                                     HTML File Information.
+* >:                                     Moving in a page.
+* [:                                     Moving in a page.
+* \:                                     HTML File Information.
+* ]:                                     Moving in a page.
+* ^:                                     Moving over pages.
+* A:                                     Daily web tracking.
+* a:                                     Adding Bookmarks.
+* B:                                     Moving over pages.
+* c:                                     Launching and Jumping.
+* C-c C-@:                               Tracing History.
+* C-c C-a:                               Selecting buffers.
+* C-c C-n:                               Moving across buffers.
+* C-c C-p:                               Moving across buffers.
+* C-c C-s:                               Selecting buffers.
+* C-c C-t:                               Creating and killing buffers.
+* C-c C-v:                               Tracing History.
+* C-c C-w:                               Creating and killing buffers.
+* C-c M-w:                               Creating and killing buffers.
+* C-u a:                                 Adding Bookmarks.
+* C-u s:                                 Tracing History.
+* D:                                     Showing Directory Tree.
+* d:                                     Downloading.
+* DEL:                                   Moving in a page.
+* e:                                     HTML File Information.
+* E:                                     HTML File Information.
+* G:                                     Launching and Jumping.
+* g:                                     Launching and Jumping.
+* H:                                     Moving over pages.
+* I:                                     Inline Images.
+* M:                                     HTML File Information.
+* M-<TAB>:                               Moving in a page.
+* M-[:                                   Inline Images.
+* M-]:                                   Inline Images.
+* M-a:                                   Adding Bookmarks.
+* M-i:                                   Inline Images.
+* M-l:                                   Moving in a page.
+* mouse-2:                               Browsing with Mouse Operations.
+* N:                                     Moving over pages.
+* Q:                                     Going Back to Daily Hacking and/or Daily Writing.
+* q:                                     Going Back to Daily Hacking and/or Daily Writing.
+* R:                                     Launching and Jumping.
+* RET:                                   Launching and Jumping.
+* S:                                     The Search Interface.
+* s:                                     Tracing History.
+* S-<TAB>:                               Moving in a page.
+* S-mouse-2:                             Browsing with Mouse Operations.
+* SPC:                                   Moving in a page.
+* T:                                     Inline Images.
+* TAB:                                   Moving in a page.
+* u:                                     Launching and Jumping.
+* v:                                     Consulting Bookmarks.
+* {:                                     Moving in a page.
+* }:                                     Moving in a page.
+
+
+File: emacs-w3m.info,  Node: Variable Index,  Next: Function Index,  Prev: Key Index,  Up: Index
+
+Variable Index
+==============
+
+* Menu:
+
+* gnus-keep-backlog:                     Nnshimbun.
+* mm-inline-text-html-with-images:       Gnus.
+* mm-inline-text-html-with-w3m-keymap:   Gnus.
+* mm-text-html-renderer:                 Gnus.
+* nnmail-expiry-wait:                    Nnshimbun.
+* nnmail-expiry-wait-function:           Nnshimbun.
+* nnshimbun-directory:                   Nnshimbun.
+* nnshimbun-encapsulate-images:          Nnshimbun.
+* nnshimbun-group-parameters-alist:      Nnshimbun.
+* nnshimbun-index-range:                 Nnshimbun.
+* nnshimbun-keep-backlog:                Nnshimbun.
+* nnshimbun-keep-unparsable-dated-articles: Nnshimbun.
+* nnshimbun-pre-fetch-article:           Nnshimbun.
+* w3m-accept-languages:                  General Variables.
+* w3m-add-referer:                       General Variables.
+* w3m-add-user-agent:                    General Variables.
+* w3m-after-cursor-move-hook:            Hooks.
+* w3m-antenna-sites:                     Setting up Antenna.
+* w3m-arrived-file:                      General Variables.
+* w3m-async-exec:                        Other Variables.
+* w3m-auto-show:                         General Variables.
+* w3m-broken-proxy-cache:                Other Variables.
+* w3m-charset-coding-system-alist:       General Variables.
+* w3m-coding-system:                     General Variables.
+* w3m-coding-system-priority-list:       General Variables.
+* w3m-command:                           General Variables.
+* w3m-command-arguments:                 Minimal Settings.
+* w3m-command-arguments-alist:           General Variables.
+* w3m-command-environment:               General Variables.
+* w3m-content-type-alist:                General Variables.
+* w3m-cookie-accept-bad-cookies:         Cookie Variables.
+* w3m-cookie-accept-domains:             Cookie Variables.
+* w3m-cookie-file:                       Cookie Variables.
+* w3m-cookie-reject-domains:             Cookie Variables.
+* w3m-correct-charset-alist:             General Variables.
+* w3m-db-history-display-size:           General Variables.
+* w3m-decoder-alist:                     General Variables.
+* w3m-default-coding-system:             Quick Searching.
+* w3m-default-content-type:              General Variables.
+* w3m-default-display-inline-images:     Image Variables.
+* w3m-default-save-directory:            General Variables.
+* w3m-delete-buffer-hook:                Hooks.
+* w3m-delete-duplicated-empty-lines:     General Variables.
+* w3m-dirlist-cgi-program:               General Variables.
+* w3m-display-hook:                      Hooks.
+* w3m-edit-function:                     General Variables.
+* w3m-edit-function-alist:               General Variables.
+* w3m-encoding-type-alist:               General Variables.
+* w3m-favicon-cache-expire-wait:         Image Variables.
+* w3m-favicon-cache-file:                Image Variables.
+* w3m-favicon-size:                      Image Variables.
+* w3m-favicon-type:                      Image Variables.
+* w3m-favicon-use-cache-file:            Image Variables.
+* w3m-file-coding-system:                General Variables.
+* w3m-file-name-coding-system:           General Variables.
+* w3m-fill-column:                       General Variables.
+* w3m-follow-redirection:                General Variables.
+* w3m-fontify-after-hook:                Hooks.
+* w3m-fontify-before-hook:               Hooks.
+* w3m-form-input-map-buffer-lines:       Form Variables.
+* w3m-form-input-map-mode-hook:          Hooks.
+* w3m-form-input-map-set-hook:           Hooks.
+* w3m-form-input-select-buffer-lines:    Form Variables.
+* w3m-form-input-select-mode-hook:       Hooks.
+* w3m-form-input-select-set-hook:        Hooks.
+* w3m-form-input-textarea-buffer-lines:  Form Variables.
+* w3m-form-input-textarea-mode-hook:     Hooks.
+* w3m-form-input-textarea-set-hook:      Hooks.
+* w3m-form-mouse-face:                   Form Variables.
+* w3m-form-textarea-directory:           Form Variables.
+* w3m-form-treat-textarea-size:          Form Variables.
+* w3m-form-use-fancy-faces:              Form Variables.
+* w3m-form-use-textarea-backup:          Form Variables.
+* w3m-history-minimize-in-new-session:   Other Variables.
+* w3m-history-reuse-history-elements:    Other Variables.
+* w3m-home-page:                         Launching and Jumping.
+* w3m-horizontal-scroll-columns:         Moving in a page.
+* w3m-horizontal-scroll-division:        General Variables.
+* w3m-horizontal-shift-columns:          Moving in a page.
+* w3m-icon-directory:                    Image Variables.
+* w3m-imagick-convert-program:           Image Variables.
+* w3m-imitate-widget-button:             General Variables.
+* w3m-init-file <1>:                     Customizable Variables.
+* w3m-init-file:                         Minimal Settings.
+* w3m-input-coding-system:               General Variables.
+* w3m-keep-arrived-urls:                 General Variables.
+* w3m-keep-cache-size:                   General Variables.
+* w3m-key-binding:                       General Variables.
+* w3m-language:                          General Variables.
+* w3m-local-directory-view-method:       General Variables.
+* w3m-local-find-file-function:          General Variables.
+* w3m-local-find-file-regexps:           General Variables.
+* w3m-mailto-url-function:               General Variables.
+* w3m-mailto-url-popup-function-alist:   General Variables.
+* w3m-make-new-session:                  General Variables.
+* w3m-mbconv-command:                    General Variables.
+* w3m-minor-mode:                        Gnus.
+* w3m-minor-mode-command-alist:          Gnus.
+* w3m-minor-mode-hook:                   Hooks.
+* w3m-mode-hook:                         Hooks.
+* w3m-no-proxy-domains:                  Minimal Settings.
+* w3m-output-coding-system:              General Variables.
+* w3m-pixels-per-character:              Image Variables.
+* w3m-pixels-per-line:                   Image Variables.
+* w3m-pop-up-frames:                     General Variables.
+* w3m-pop-up-windows:                    General Variables.
+* w3m-popup-frame-parameters:            General Variables.
+* w3m-prefer-cache:                      General Variables.
+* w3m-process-connection-type:           Other Variables.
+* w3m-process-modeline-format:           Other Variables.
+* w3m-profile-directory:                 General Variables.
+* w3m-quick-start <1>:                   Moving over pages.
+* w3m-quick-start:                       Launching and Jumping.
+* w3m-redirect-with-get:                 General Variables.
+* w3m-relationship-estimate-rules:       General Variables.
+* w3m-resize-image-scale:                Image Variables.
+* w3m-resize-images:                     Image Variables.
+* w3m-search-default-engine:             The Search Interface.
+* w3m-search-engine-alist:               Quick Searching.
+* w3m-select-buffer-hook:                Hooks.
+* w3m-select-buffer-horizontal-window:   General Variables.
+* w3m-select-buffer-window-ratio:        General Variables.
+* w3m-show-decoded-url:                  General Variables.
+* w3m-show-error-information:            General Variables.
+* w3m-show-graphic-icons-in-header-line: Image Variables.
+* w3m-show-graphic-icons-in-mode-line:   Image Variables.
+* w3m-space-before-favicon:              General Variables.
+* w3m-space-before-modeline-icon:        General Variables.
+* w3m-terminal-coding-system:            General Variables.
+* w3m-toggle-inline-images-permanently:  Image Variables.
+* w3m-touch-command:                     General Variables.
+* w3m-track-mouse:                       General Variables.
+* w3m-treat-image-size:                  Image Variables.
+* w3m-uri-replace-alist:                 Quick Searching.
+* w3m-url-local-directory-alist:         General Variables.
+* w3m-use-ange-ftp:                      General Variables.
+* w3m-use-cookies:                       Cookie Variables.
+* w3m-use-cygdrive:                      General Variables.
+* w3m-use-favicon:                       Image Variables.
+* w3m-use-filter:                        General Variables.
+* w3m-use-form:                          General Variables.
+* w3m-use-header-line:                   General Variables.
+* w3m-use-mule-ucs:                      General Variables.
+* w3m-use-refresh:                       General Variables.
+* w3m-use-symbol:                        General Variables.
+* w3m-use-tab:                           Using Tabs.
+* w3m-use-tab-menubar:                   General Variables.
+* w3m-use-toolbar:                       General Variables.
+* w3m-user-agent:                        General Variables.
+* w3m-view-this-url-new-session-in-background: General Variables.
+* w3m-xmas-show-current-title-in-buffer-tab: Other Variables.
+
+
+File: emacs-w3m.info,  Node: Function Index,  Prev: Variable Index,  Up: Index
+
+Function Index
+==============
+
+* Menu:
+
+* gnus-group-make-shimbun-group:         Nnshimbun.
+* octet-find-file:                       Octet.
+* w3m:                                   Launching and Jumping.
+* w3m-antenna:                           Daily web tracking.
+* w3m-antenna-add-current-url:           Setting up Antenna.
+* w3m-bookmark-add-current-url:          Adding Bookmarks.
+* w3m-bookmark-add-this-url:             Adding Bookmarks.
+* w3m-bookmark-edit:                     Editing Bookmarks.
+* w3m-bookmark-kill-entry:               Editing Bookmarks.
+* w3m-bookmark-undo:                     Editing Bookmarks.
+* w3m-bookmark-view:                     Consulting Bookmarks.
+* w3m-browse-url:                        Launching and Jumping.
+* w3m-close-window:                      Going Back to Daily Hacking and/or Daily Writing.
+* w3m-copy-buffer:                       Creating and killing buffers.
+* w3m-delete-buffer:                     Creating and killing buffers.
+* w3m-delete-other-buffers:              Creating and killing buffers.
+* w3m-download-this-url:                 Downloading.
+* w3m-dtree:                             Showing Directory Tree.
+* w3m-edit-current-url:                  HTML File Information.
+* w3m-edit-this-url:                     HTML File Information.
+* w3m-find-file:                         Launching and Jumping.
+* w3m-gohome:                            Moving over pages.
+* w3m-goto-url:                          Launching and Jumping.
+* w3m-goto-url-new-session:              Launching and Jumping.
+* w3m-history:                           Tracing History.
+* w3m-history-restore-position:          Tracing History.
+* w3m-history-store-position:            Tracing History.
+* w3m-horizontal-recenter:               Moving in a page.
+* w3m-mouse-view-this-url:               Browsing with Mouse Operations.
+* w3m-mouse-view-this-url-new-session:   Browsing with Mouse Operations.
+* w3m-next-anchor:                       Moving in a page.
+* w3m-next-buffer:                       Moving across buffers.
+* w3m-next-form:                         Moving in a page.
+* w3m-next-image:                        Moving in a page.
+* w3m-pattern-uri-replace:               General Variables.
+* w3m-previous-anchor:                   Moving in a page.
+* w3m-previous-buffer:                   Moving across buffers.
+* w3m-previous-form:                     Moving in a page.
+* w3m-previous-image:                    Moving in a page.
+* w3m-print-current-url:                 Launching and Jumping.
+* w3m-print-this-url:                    Launching and Jumping.
+* w3m-quit:                              Going Back to Daily Hacking and/or Daily Writing.
+* w3m-reload-this-page:                  Launching and Jumping.
+* w3m-save-image:                        Inline Images.
+* w3m-scroll-down-or-previous-url <1>:   Moving over pages.
+* w3m-scroll-down-or-previous-url:       Moving in a page.
+* w3m-scroll-left:                       Moving in a page.
+* w3m-scroll-right:                      Moving in a page.
+* w3m-scroll-up-or-next-url <1>:         Moving over pages.
+* w3m-scroll-up-or-next-url:             Moving in a page.
+* w3m-search:                            The Search Interface.
+* w3m-search-uri-replace:                General Variables.
+* w3m-select-buffer:                     Selecting buffers.
+* w3m-shift-left:                        Moving in a page.
+* w3m-shift-right:                       Moving in a page.
+* w3m-switch-buffer:                     Selecting buffers.
+* w3m-toggle-inline-images:              Inline Images.
+* w3m-view-header:                       HTML File Information.
+* w3m-view-image:                        Inline Images.
+* w3m-view-next-page:                    Moving over pages.
+* w3m-view-parent-page:                  Moving over pages.
+* w3m-view-previous-page:                Moving over pages.
+* w3m-view-source:                       HTML File Information.
+* w3m-view-this-url:                     Launching and Jumping.
+* w3m-view-url-with-external-browser:    HTML File Information.
+* w3m-zoom-in-image:                     Inline Images.
+* w3m-zoom-out-image:                    Inline Images.
+
+
