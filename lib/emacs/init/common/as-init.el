@@ -604,6 +604,9 @@ that name."
 
 ;; Expand all tabs to spaces
 (add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+(defun itm () "Shortcut to indented-text-mode."
+  (interactive)
+  (indented-text-mode))
 
 ;;}}}
 ;;{{{ Ruby
