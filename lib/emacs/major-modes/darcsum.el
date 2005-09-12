@@ -1,12 +1,14 @@
 ;;; darcsum.el --- a pcl-cvs like interface for managing darcs patches
 
 ;; Copyright (C) 2004  John Wiegley
+;; Copyright (C) 2005  Christian Neukirchen
 
 ;; Author: John Wiegley <johnw@gnu.org>
-;; Maintainer: John Wiegley <johnw@gnu.org>
+;; Maintainer: Of this fork: Christian Neukirchen <chneukirchen@gmail.com>
 ;; Keywords: completion convenience tools vc
-;; Version: 1.00
+;; Version: 1.10-chris
 ;; location: http://www.newartisans.com/johnw/emacs.html
+;;           http://chneukirchen.org/repos/darcsum
 
 ;; This file is not yet part of GNU Emacs.
 
@@ -57,6 +59,8 @@
 ;;   via darcsum
 
 ;;; Code:
+
+(require 'ansi-color)			; For blue char cleaning
 
 (defgroup darcsum nil
   "Special support for the Darcs versioning system."
@@ -126,7 +130,7 @@
     (when (keymapp keymap)
       (setq props (list* 'keymap keymap props)))
     (setq props (list* 'mouse-face 'highlight props)))
-  (add-text-properties 0 (length str) (list* 'font-lock-face face props) str)
+  (add-text-properties 0 (length str) (list* 'face face props) str)
   str)
 
 ;;; Code to work with changesets
@@ -322,7 +326,7 @@
   "Return the patch in the current buffer as a Lisp changeset."
   (forward-line)
   (let ((limit (* 10 (count-lines (point-min) (point-max))))
-	data entries ignore-next-hunk)
+	data entries)
     (while (and (not (or (eobp) (looking-at "^}")))
 		(> limit 0))
       (setq limit (1- limit))
@@ -333,61 +337,57 @@
 	(forward-line))
        ((looking-at "^move\\s-+\\(.+?\\)$")
 	(forward-line))
-       ((looking-at "^binary\\s-+\\(.+?\\)$")
-	(forward-line))
-       ((looking-at "^\\(addfile\\|rmfile\\|hunk\\)\\s-+\\(.+?\\)\\(\\s-+\\([0-9]+\\)\\)?$")
+       ((looking-at "^\\(old\\|new\\)hex$")
+	(forward-line)
+	(while (looking-at "^\\*")
+	  (forward-line)))
+       ((looking-at "^\\(addfile\\|binary\\|rmfile\\|hunk\\)\\s-+\\(.+?\\)\\(\\s-+\\([0-9]+\\)\\)?$")
 	(let* ((kind (match-string 1))
 	       (file (match-string 2))
 	       (dir (directory-file-name (file-name-directory file)))
 	       (base (file-name-nondirectory file))
 	       (start-line (match-string 4))
-	       (ignore-hunk (and ignore-next-hunk
-				 (string= kind "hunk")))
 	       lines)
-	  (if ignore-next-hunk
-	      (setq ignore-next-hunk nil))
 	  (forward-line)
 	  (when start-line
-	    (while (looking-at "^\\([+-].*\\)")
-	      (unless ignore-hunk
-		(setq lines (cons (match-string 1) lines)))
+	    (while (looking-at "^\\([+ -].*\\)")
+	      (setq lines (cons (match-string 1) lines))
 	      (forward-line)))
-	  (unless ignore-hunk
-	    (cond
-	     ((string= kind "addfile")
-	      (let ((add-dir dir)
-		    (add-file base))
-		(if (or (eq pending t)
-			(and pending
-			     (darcsum-find-changeset
-			      pending
-			      (function
-			       (lambda (pdir pfile pchange)
-				 (and (string= add-dir pdir)
-				      (string= add-file pfile)))))))
-		    (setq entries (list 'addfile))
-		  (setq entries (list 'newfile))))
-	      (setq ignore-next-hunk t))
-	     ((string= kind "rmfile")
-	      (setq entries (list 'rmfile)
-		    ignore-next-hunk t))
-	     (t
-	      (assert (string= kind "hunk"))
-	      (setq entries (cons (if visible
-				      (string-to-int start-line)
-				    (- (string-to-int start-line)))
-				  (nreverse lines)))))
-	    (let ((entry (assoc dir data)))
-	      (if (null entry)
-		  (setq data
-			(cons (cons dir (list (cons base
-						    (list entries)))) data))
-		(if entry
-		    (let ((item (assoc base entry)))
-		      (if item
-			  (nconc item (list entries))
-			(nconc entry
-			       (list (cons base (list entries))))))))))))))
+	  (cond
+	   ((string= kind "addfile")
+	    (let ((add-dir dir)
+		  (add-file base))
+	      (if (or (eq pending t)
+		      (and pending
+			   (darcsum-find-changeset
+			    pending
+			    (function
+			     (lambda (pdir pfile pchange)
+			       (and (string= add-dir pdir)
+				    (string= add-file pfile)))))))
+		  (setq entries (list 'addfile))
+		(setq entries (list 'newfile)))))
+	   ((string= kind "rmfile")
+	    (setq entries (list 'rmfile)))
+	   ((string= kind "binary")
+	    (setq entries (list 'binary)))
+	   (t
+	    (assert (string= kind "hunk"))
+	    (setq entries (cons (if visible
+				    (string-to-int start-line)
+				  (- (string-to-int start-line)))
+				(nreverse lines)))))
+	  (let ((entry (assoc dir data)))
+	    (if (null entry)
+		(setq data
+		      (cons (cons dir (list (cons base
+						  (list entries)))) data))
+	      (if entry
+		  (let ((item (assoc base entry)))
+		    (if item
+			(nconc item (list entries))
+		      (nconc entry
+			     (list (cons base (list entries)))))))))))))
     (assert (> limit 0))
     (nreverse data)))
 
@@ -410,7 +410,7 @@
   ;;  (goto-char (point-max)))
   (insert "Working dir: " default-directory "\n\n\n")
   (unless data
-    (insert "there are no changes to review.\n"))
+    (insert "There are no changes to review.\n"))
   (let (dir file change line)
     (dolist (dir data)
       (insert
@@ -422,13 +422,14 @@
 	'darcsum-line-type 'dir
 	'darcsum-dir (car dir)))
       (dolist (file (cdr dir))
-	(let* ((first-change (darcsum-change-item (cadr file)))
+	(let* ((all-changes (mapcar (function darcsum-change-item) (cdr file)))
 	       (all-marked (listp (car (cadr file))))
 	       (status
 		(cond
-		 ((eq first-change 'newfile) "New")
-		 ((eq first-change 'addfile) "Added")
-		 ((eq first-change 'rmfile) "Removed")
+		 ((memq 'newfile all-changes) "New")
+		 ((memq 'addfile all-changes) "Added")
+		 ((memq 'rmfile all-changes) "Removed")
+		 ((memq 'binary all-changes) "Modified binary")
 		 (t "Modified"))))
 	  (when (string= status "Modified")
 	    (setq all-marked t)
@@ -468,7 +469,10 @@
 					 'darcsum-file (car file)
 					 'darcsum-change change))))))))
   (insert "
---------------------- End ---------------------\n"))
+--------------------- End ---------------------\n")
+  (save-excursion
+    (widen)
+    (ansi-color-apply-on-region (point-min) (point-max))))
 
 ;;; Code to determine the current changeset in darcsum-mode
 
@@ -590,7 +594,7 @@ non-nil, in which case return all visible changes."
 	(message "No changes sent.")
 	(kill-buffer (current-buffer)))
 
-       ((looking-at "\n*Do you really want to do this\\? ")
+       ((looking-at "\n*Do you really want to .+\\? ")
 	(process-send-string proc "y\n")
 	(delete-region (point-min) (point-max)))
        ((looking-at "\n*Finished reverting.")
@@ -601,7 +605,19 @@ non-nil, in which case return all visible changes."
 	(message "No changes reverted.")
 	(kill-buffer (current-buffer)))
 
-       ((looking-at "\n*\\(addfile\\|rmfile\\|hunk\\)\\s-+\\(.+?\\)\\(\\s-+\\([0-9]+\\)\\)?$")
+       ((looking-at "\n*Darcs needs to know what name")
+	(let* ((default-mail (concat user-full-name " <" user-mail-address ">"))
+	       (enable-recursive-minibuffers t)
+	       (mail-address (read-string
+			      (format "What is your email address? (default %s) "
+				      default-mail)
+			      nil nil default-mail)))
+	  (process-send-string proc mail-address)
+	  (process-send-string proc "\n"))
+	(re-search-forward "What is your email address\\?.*")
+	(delete-region (point-min) (point)))
+
+       ((looking-at "\n*\\(addfile\\|adddir\\|binary\\|rmfile\\|hunk\\)\\s-+\\(.+?\\)\\(\\s-+\\([0-9]+\\)\\)?$")
 	(let* ((kind (match-string 1))
 	       (file (match-string 2))
 	       (dir (directory-file-name
@@ -617,7 +633,7 @@ non-nil, in which case return all visible changes."
 	  (while (looking-at "^\\([+-].*\\)")
 	    (forward-line))
 	  (when (looking-at
-		 "^Shall I \\(record\\|send\\|revert\\) this patch\\?.+\\] ")
+		 "^Shall I \\(record\\|send\\|revert\\) this patch\\?.+[]:] ")
 	    (let ((end (match-end 0)))
 	      (process-send-string proc (if record "y\n" "n\n"))
 	      (delete-region (point-min) end)))))
@@ -626,7 +642,7 @@ non-nil, in which case return all visible changes."
 	(goto-char (match-end 0))
 	(forward-line)
 	(when (looking-at
-	       "^Shall I \\(record\\|send\\|revert\\) this patch\\?.+\\] ")
+	       "^Shall I \\(record\\|send\\|revert\\) this patch\\?.+[]:] ")
 	  (let ((end (match-end 0)))
 	    (process-send-string proc "n\n")
 	    (delete-region (point-min) end))))))))
@@ -644,8 +660,9 @@ non-nil, in which case return all visible changes."
     (kill-buffer (current-buffer))
     (jump-to-register darcsum-register)
     (message "Recording changes...")
-    (let ((proc (start-process "darcs" buf
-			       darcsum-program "record" "--logfile" tempfile)))
+    (let* ((process-environment (cons "TERM=emacs" process-environment))
+	   (proc (start-process "darcs" buf
+				darcsum-program "record" "--logfile" tempfile)))
       (set-process-filter proc 'darcsum-process-filter))
     (with-current-buffer buf
       (set (make-variable-buffer-local 'darcsum-logfile) tempfile)
@@ -656,14 +673,24 @@ non-nil, in which case return all visible changes."
   (interactive)
   (window-configuration-to-register darcsum-register)
   (let ((parent-buf (current-buffer))
-	(buf (get-buffer-create "*darcs comment*"))
-	(changeset (darcsum-selected-changeset t)))
+	(changeset (darcsum-selected-changeset t))
+	(record-now
+	 (and (get-buffer "*darcs comment*")
+	      (y-or-n-p
+	       "Found a *darcs comment* buffer.  Use it as record message? ")))
+	buf)
+    (message "%S" record-now)
+    (if record-now
+	(setq buf (get-buffer "*darcs comment*"))
+      (setq buf (get-buffer-create "*darcs comment*")))
     (switch-to-buffer-other-window buf)
     (darcsum-comment-mode)
     (set (make-variable-buffer-local 'darcsum-changeset-to-record) changeset)
     (set (make-variable-buffer-local 'darcsum-parent-buffer) parent-buf)
-    (message
-"Title of change on first line, long comment after.  C-c C-c to record.")))
+    (if record-now
+	(darcsum-really-record)
+      (message
+"Title of change on first line, long comment after.  C-c C-c to record."))))
 
 (defun darcsum-send (recipient)
   (interactive "sSend changes to: ")
@@ -671,8 +698,9 @@ non-nil, in which case return all visible changes."
 	(changeset (darcsum-selected-changeset t))
 	(buf (generate-new-buffer " *darcs send*")))
     (message "Sending changes...")
-    (let ((proc (start-process "darcs" buf
-			       darcsum-program "send")))
+    (let* ((process-environment (cons "TERM=emacs" process-environment))
+	   (proc (start-process "darcs" buf
+				darcsum-program "send")))
       (set-process-filter proc 'darcsum-process-filter))
     (with-current-buffer buf
       (set (make-variable-buffer-local 'darcsum-changeset-to-record) changeset)
@@ -686,8 +714,9 @@ non-nil, in which case return all visible changes."
 	  (changeset (darcsum-selected-changeset t))
 	  (buf (generate-new-buffer " *darcs revert*")))
       (message "Reverting changes...")
-      (let ((proc (start-process "darcs" buf
-				 darcsum-program "revert")))
+      (let* ((process-environment (cons "TERM=emacs" process-environment))
+	     (proc (start-process "darcs" buf
+				  darcsum-program "revert")))
 	(set-process-filter proc 'darcsum-process-filter))
       (with-current-buffer buf
 	(set (make-variable-buffer-local 'darcsum-changeset-to-record) changeset)
@@ -705,7 +734,6 @@ non-nil, in which case return all visible changes."
   (interactive)
   (kill-all-local-variables)
   (indented-text-mode)
-  (buffer-disable-undo)
   (setq truncate-lines t)
   (use-local-map darcsum-comment-mode-map)
   (setq major-mode 'darcsum-comment-mode
@@ -792,6 +820,16 @@ non-nil, in which case return all visible changes."
 	    (setq change-line (car change-line)))
 	(goto-line (abs change-line)))))))
 
+(defun darcsum-toggle-context ()
+  (interactive)
+  (setq darcsum-show-context (not darcsum-show-context))
+  (let ((dir default-directory)
+	(darcsum-default-expanded t))
+    (message "Re-running darcsum-whatsnew")
+    (let ((changes (darcsum-whatsnew dir nil t darcsum-show-context)))
+      (setq darcsum-data changes))
+    (darcsum-refresh)))
+
 (defun darcsum-toggle-mark ()
   (interactive)
   (let ((changeset (darcsum-changeset-at-point t)))
@@ -806,22 +844,28 @@ non-nil, in which case return all visible changes."
 (defun darcsum-toggle ()
   (interactive)
   (let* ((changeset (darcsum-changeset-at-point t))
-	 (any-visible
-	  (darcsum-applicable-p
-	   changeset (function
-		      (lambda (d f change)
-			(let ((item (darcsum-change-item change)))
-			  (and (numberp item) (> item 0))))))))
-    (darcsum-apply-to-changeset
-     changeset (function
-		(lambda (dir file change)
-		  (let ((item (darcsum-change-item change)))
-		    (if (numberp item)
-			(if any-visible
-			    (setcar change (- (abs item)))
-			  (if (listp (car change))
-			      (setcar change (list (abs item)))
-			    (setcar change (abs item))))))))))
+	 (add-or-remove (darcsum-applicable-p
+			 changeset (function
+				    (lambda (d f change)
+				      (or (eq (darcsum-change-item change) 'addfile)
+					  (eq (darcsum-change-item change) 'rmfile)))))))
+    (unless add-or-remove
+      (let ((any-visible
+	     (darcsum-applicable-p
+	      changeset (function
+			 (lambda (d f change)
+			   (let ((item (darcsum-change-item change)))
+			     (and (numberp item) (> item 0))))))))
+	(darcsum-apply-to-changeset
+	 changeset (function
+		    (lambda (dir file change)
+		      (let ((item (darcsum-change-item change)))
+			(if (numberp item)
+			    (if any-visible
+				(setcar change (- (abs item)))
+			      (if (listp (car change))
+				  (setcar change (list (abs item)))
+				(setcar change (abs item))))))))))))
   (darcsum-refresh))
 
 (defun darcsum-refresh ()
@@ -994,7 +1038,7 @@ non-nil, in which case return all visible changes."
 	(look-for-adds (or arg darcsum-look-for-adds))
 	(darcsum-default-expanded t))
     (message "Re-running darcsum-whatsnew")
-    (let ((changes (darcsum-whatsnew dir look-for-adds t)))
+    (let ((changes (darcsum-whatsnew dir look-for-adds t darcsum-show-context)))
       (setq darcsum-data
 	    (darcsum-merge-changeset darcsum-data changes)))
     (darcsum-refresh)))
@@ -1003,9 +1047,97 @@ non-nil, in which case return all visible changes."
   (interactive)
   (kill-buffer (current-buffer)))
 
+
+(defun darcsum-add-comment ()
+  "Similar to `add-change-log-entry'.
+
+Inserts the entry in the darcs comment file instead of the ChangeLog."
+  ;; This is mostly copied from add-log.el and Xtla.  Perhaps it would
+  ;; be better to split add-change-log-entry into several functions
+  ;; and then use them, but that wouldn't work with older versions of
+  ;; Emacs.
+  (interactive)
+  (require 'add-log)
+  (let* ((defun (add-log-current-defun))
+         (buf-file-name (if (and (boundp 'add-log-buffer-file-name-function)
+                                 add-log-buffer-file-name-function)
+                            (funcall add-log-buffer-file-name-function)
+                          buffer-file-name))
+         (buffer-file (if buf-file-name (expand-file-name buf-file-name)))
+;         (file-name (tla-make-log))
+         ;; Set ENTRY to the file name to use in the new entry.
+         (entry (add-log-file-name buffer-file default-directory))
+         beg
+         bound
+         narrowing)
+    (switch-to-buffer-other-window (get-buffer-create "*darcs comment*"))
+    
+    (goto-char (point-min))
+    (forward-line 1)			; skip header
+    ;; Now insert the new line for this entry.
+    (cond ((re-search-forward "^\\s *\\*\\s *$" bound t)
+           ;; Put this file name into the existing empty entry.
+           (if entry
+               (insert entry)))
+          ((let (case-fold-search)
+             (re-search-forward
+              (concat (regexp-quote (concat "* " entry))
+                      ;; Don't accept `foo.bar' when
+                      ;; looking for `foo':
+                      "\\(\\s \\|[(),:]\\)")
+              bound t))
+           ;; Add to the existing entry for the same file.
+           (re-search-forward "^\\s *$\\|^\\s \\*\\|\\'")
+           (goto-char (match-beginning 0))
+           ;; Delete excess empty lines; make just 2.
+           (while (and (not (eobp)) (looking-at "^\\s *$"))
+             (delete-region (point) (line-beginning-position 2)))
+           (insert-char ?\n 2)
+           (forward-line -2)
+           (indent-relative-maybe))
+          (t
+           ;; Make a new entry.
+	   (goto-char (point-max))
+	   (re-search-backward "^." nil t)
+	   (end-of-line)
+	   (insert "\n* ")
+	   (if entry (insert entry))))
+    ;; Now insert the function name, if we have one.
+    ;; Point is at the entry for this file,
+    ;; either at the end of the line or at the first blank line.
+    (if defun
+        (progn
+          ;; Make it easy to get rid of the function name.
+          (undo-boundary)
+          (unless (save-excursion
+                    (beginning-of-line 1)
+                    (looking-at "\\s *$"))
+            (insert ?\ ))
+          ;; See if the prev function name has a message yet or not
+          ;; If not, merge the two entries.
+          (let ((pos (point-marker)))
+            (if (and (skip-syntax-backward " ")
+                     (skip-chars-backward "):")
+                     (looking-at "):")
+                     (progn (delete-region (+ 1 (point)) (+ 2 (point))) t)
+                     (> fill-column (+ (current-column) (length defun) 3)))
+                (progn (delete-region (point) pos)
+                       (insert ", "))
+              (goto-char pos)
+              (insert "("))
+            (set-marker pos nil))
+          (insert defun "): "))
+      ;; No function name, so put in a colon unless we have just a star.
+      (unless (save-excursion
+                (beginning-of-line 1)
+                (looking-at "\\s *\\(\\*\\s *\\)?$"))
+        (insert ": ")))))
+
 (defvar darcsum-mode-abbrev-table nil
   "Abbrev table used while in darcsum-mode mode.")
 (define-abbrev-table 'darcsum-mode-abbrev-table ())
+
+(global-set-key "\C-xD" 'darcsum-add-comment)
 
 (defvar darcsum-mode-map nil)
 (if darcsum-mode-map
@@ -1027,6 +1159,7 @@ non-nil, in which case return all visible changes."
   (define-key darcsum-mode-map "c" 'darcsum-record)
   (define-key darcsum-mode-map "R" 'darcsum-record)
   (define-key darcsum-mode-map "U" 'darcsum-revert)
+  (define-key darcsum-mode-map "u" 'darcsum-toggle-context)
   (define-key darcsum-mode-map "d" 'darcsum-delete)
   (define-key darcsum-mode-map "r" 'darcsum-remove)
   (define-key darcsum-mode-map "M" 'darcsum-move)
@@ -1035,7 +1168,7 @@ non-nil, in which case return all visible changes."
   (define-key darcsum-mode-map "B" 'darcsum-add-to-boring)
   (define-key darcsum-mode-map "q" 'darcsum-quit))
 
-(define-derived-mode darcsum-mode text-mode "Darcs"
+(define-derived-mode darcsum-mode fundamental-mode "Darcs"
   "Darcs summary mode is for previewing changes to become part of a patch.
 \\{darcsum-mode-map}"
   (font-lock-mode -1)
@@ -1048,6 +1181,7 @@ non-nil, in which case return all visible changes."
     (darcsum-mode)
     (set (make-variable-buffer-local 'darcsum-data) data)
     (set (make-variable-buffer-local 'darcsum-look-for-adds) look-for-adds)
+    (set (make-variable-buffer-local 'darcsum-show-context) nil)
     (darcsum-refresh)
     (goto-char (point-min))
     (forward-line 3)
@@ -1055,21 +1189,29 @@ non-nil, in which case return all visible changes."
     (switch-to-buffer (current-buffer))))
 
 ;;;###autoload
-(defun darcsum-whatsnew (directory &optional arg no-display)
+(defun darcsum-whatsnew (directory &optional arg no-display show-context)
   (interactive "DDirectory: \nP")
   (with-temp-buffer
     (cd directory)
     (unless (file-directory-p (expand-file-name "_darcs" directory))
       (error "Directory '%s' is not under darcs version control"
 	     directory))
-    (let ((result
-	   (if (null arg)
-	       (call-process darcsum-program nil t nil
-			     "whatsnew" "--no-summary")
-	     (call-process darcsum-program nil t nil
-			   "whatsnew" "--no-summary" "--look-for-adds"))))
+    (let* ((process-environment (cons "TERM=emacs" process-environment))
+	   (unified (if (null show-context)
+			""
+		      "--unified"))
+	   (result
+	    (if (null arg)
+	        (progn
+		  (call-process darcsum-program nil t nil
+				"whatsnew" "--no-summary" unified))
+	      (call-process darcsum-program nil t nil
+			    "whatsnew" "--no-summary" "--look-for-adds" unified))))
       (if (/= result 0)
-	  (error "Error running darcsum whatsnew")
+	  (if (= result 1)
+	      (progn (message "No changes!")
+		     nil)
+	    (error "Error running darcsum whatsnew"))
 	(let ((changes (darcsum-read-changeset darcsum-default-expanded)))
 	  (if (and changes (not no-display))
 	      (darcsum-display changes arg))
@@ -1146,4 +1288,5 @@ non-nil, in which case return all visible changes."
        (define-key gnus-summary-mime-map "V" 'gnus-article-view-darcs-patch)
        (define-key gnus-summary-article-map "V" 'gnus-summary-view-darcs-patch))))
 
+(provide 'darcsum)
 ;;; darcsum.el ends here
