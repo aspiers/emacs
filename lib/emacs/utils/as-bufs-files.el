@@ -81,6 +81,31 @@ the filename to an absolute one with all symlinks resolved."
     (message (format "Deleted %s" fn))))
 
 ;;}}}
+;;{{{ as-rename-current-buffer-file
+
+(defun as-rename-current-buffer-file (new-file-name)
+  "Renames the file in the current buffer, and renames the buffer accordingly.
+
+Wraps around `rename-file'."
+  (interactive
+   (let ((cur-buf-fn
+          (or (buffer-file-name)
+                (error "Current buffer does not have a filename"))))
+     (list ;; interactive expects a list matching the defun arglist
+      (read-string
+       (format "Rename %s to: " cur-buf-fn)
+       cur-buf-fn))))
+
+  ;; dired-rename-file will rename both the file and the buffer,
+  ;; handling buffer name uniquification for us.
+;;   (rename-file buffer-file-name new-file-name)
+;;   (rename-buffer new-file-name t)
+
+  ;; The nil below means "not ok if already exists" and gets passed to
+  ;; rename-file.
+  (dired-rename-file (buffer-file-name) new-file-name nil))
+
+;;}}}
 
 ;;{{{ bury-and-close-buffer
 
