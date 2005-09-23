@@ -92,9 +92,23 @@ Wraps around `rename-file'."
           (or (buffer-file-name)
                 (error "Current buffer does not have a filename"))))
      (list ;; interactive expects a list matching the defun arglist
-      (read-string
-       (format "Rename %s to: " cur-buf-fn)
-       cur-buf-fn))))
+      (expand-file-name
+       (read-file-name
+        (format "Rename %s to: " cur-buf-fn)  ;; prompt
+
+        ;; Directory to complete in.  We use a nasty trick here and
+        ;; include the whole original filename - seems not to matter
+        ;; that it's not a directory.
+        cur-buf-fn
+
+        ;; Default filename
+        cur-buf-fn
+        
+        ;; Do not require input to be an existing file
+        nil
+        
+        ;; No initial input needed because of above trick
+        nil)))))
 
   ;; dired-rename-file will rename both the file and the buffer,
   ;; handling buffer name uniquification for us.
