@@ -1,0 +1,2039 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!--This manual is for remember-el, version 1.0
+
+Copyright C 2001 John Wiegley
+Parts Copyright C 2004 Sacha Chua
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+
+-->
+<!-- Created on August, 20 2005 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>remember-el: remember-el</title>
+
+<meta name="description" content="remember-el: remember-el">
+<meta name="keywords" content="remember-el: remember-el">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Top"></a>
+<a name="SEC_Top"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="settitle">remember-el</h1>
+
+<p>This manual is for remember-el, version 1.0
+</p>
+<p>Copyright &copy; 2001 John Wiegley<br>
+Parts Copyright &copy; 2004 Sacha Chua
+</p>
+<blockquote><p>Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.  A copy of the license is included in the section entitled &quot;GNU
+Free Documentation License&quot;.
+</p></blockquote>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC1">1. Preface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     About the documentation
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC2">2. Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                What is RememberMode?
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC3">3. Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                How to get the stable and development versions
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC6">4. Implementation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC7">5. Quick Start</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC8">6. Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC13">7. remember-experimental.el</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC14">8. Function Reference</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">9. Getting Help and Reporting Bugs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">A. GNU GENERAL PUBLIC LICENSE</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC19">B. GNU Free Documentation License</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC21">Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ --- The Detailed Node Listing ---
+
+Installation
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="#SEC4">3.1 Installing the stable version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Low-risk
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">3.2 Installing the development version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Many features
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Backends
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="#SEC9">6.1 Saving to a Text File</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">6.2 Saving to a Mailbox</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">6.3 Saving to a Bibliography</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC12">6.4 Saving to a Planner Page</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+</pre></th></tr></table>
+
+<hr size="1">
+<a name="Preface"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Preface </h1>
+
+<p>This document describes remember-el, which was written by John Wiegley
+and is now maintained by Sacha Chua. This document is available in
+both the stable and development versions, and should describe the
+features available in the particular version it is included in.
+</p>
+<p>This document is a work in progress, and your contribution will be
+greatly appreciated. Please e-mail comments and suggestions to the
+documentation maintainer, Sacha Chua <a href="mailto:sacha@free.net.ph">sacha@free.net.ph</a> .
+</p>
+<hr size="6">
+<a name="Introduction"></a>
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 2. Introduction </h1>
+
+<p>Todo lists, schedules, phone databases... everything we use databases
+for is really just a way to extend the power of our memory, to be able
+to remember what our conscious mind may not currently have access to.
+</p>
+<p>There are many different databases out there--and good ones--
+which this mode is not trying to replace.  Rather, it's how that
+data gets there that's the question.  Most of the time, we just
+want to say &quot;Remember so-and-so's phone number, or that I have to
+buy dinner for the cats tonight.&quot;  That's the FACT.  How it's
+stored is really the computer's problem.  But at this point in
+time, it's most definitely also the user's problem, and sometimes
+so laboriously so that people just let data slip, rather than
+expend the effort to record it.
+</p>
+<p>&quot;Remember&quot; is a mode for remembering data.  It uses whatever
+back-end is appropriate to record and correlate the data, but its main
+intention is to allow you to express as <em>little</em> structure as
+possible up front.  If you later want to express more powerful
+relationships between your data, or state assumptions that were at
+first too implicit to be recognized, you can &quot;study&quot; the data later
+and rearrange it.  But the initial &quot;just remember this&quot; impulse
+should be as close to simply throwing the data at Emacs as possible.
+</p>
+<p>Have you ever noticed that having a laptop to write on doesn't
+<em>actually</em> increase the amount of quality material that you turn
+out, in the long run?  Perhaps it's because the time we save
+electronically in one way, we're losing electronically in another; the
+tool should never dominate one's focus.  As the mystic Faridu'd-Din
+`Attar wrote: &quot;Be occupied as little as possible with things of the
+outer world but much with things of the inner world; then right action
+will overcome inaction.&quot;
+</p>
+<p>Please send your comments and ideas to the maintainers (see section <a href="#SEC15">Getting Help and Reporting Bugs</a>).  If Emacs could become a more intelligent
+data store, where brainstorming would focus on the <em>ideas</em>
+involved--rather than the structuring and format of those ideas, or
+having to stop your current flow of work in order to record them--it
+would map much more closely to how the mind (well, at least mine)
+works, and hence would eliminate that very manual-ness which computers
+from the very beginning have been championed as being able to reduce.
+</p>
+<hr size="6">
+<a name="Installation"></a>
+<a name="SEC3"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC2" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC4" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. Installation </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC4">3.1 Installing the stable version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Low-risk
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">3.2 Installing the development version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Many features
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Stable-Version"></a>
+<a name="SEC4"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC3" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Installing the stable version </h2>
+
+<p>Choose the stable branch if you want to minimize risk.  Features are
+added to the stable branch after meeting these conditions:
+</p>
+<ul>
+<li> Confirmed working by at least one other user
+</li><li> Documented in the source code, changelog, and info manual
+</li></ul>
+
+<p>Errors are corrected in the development branch first.  Once fixes are
+confirmed, they are applied to the stable branch.  User-visible
+changes will be clearly marked with &quot;NOTE:&quot; in the changelog for the
+branch.  Major changes will also be announced on the
+<a href="mailto:emacs-wiki-discuss@nongnu.org">emacs-wiki-discuss@nongnu.org</a> mailing list. see section <a href="#SEC15">Getting Help and Reporting Bugs</a>.
+</p>
+<p>You will need at least <tt>`remember/remember.el'</tt> to use remember-el.  
+</p>
+<a name="IDX1"></a>
+
+<p>Debian users can get remember-el via apt-get. It is not yet in the
+main archive. You can get it from the maintainer's site by adding the
+following line to <tt>`/etc/apt/sources.list'</tt>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">deb http://sacha.free.net.ph/notebook/emacs/planner/ ./
+</pre></td></tr></table>
+<p>Use <kbd>apt-get update</kbd> to update the package lists and <kbd>apt-get
+install remember-el</kbd> to install the package.
+</p>
+<p>You can also install the source distribution.
+</p>
+<ol>
+<li> Download and unpack <a href="http://sacha.free.net.ph/notebook/emacs/sacha-stable.tar.gz">http://sacha.free.net.ph/notebook/emacs/sacha-stable.tar.gz</a> .
+</li><li> Edit your <tt>`~/.emacs'</tt>.
+
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(add-to-list 'load-path &quot;/path/to/remember&quot;)
+(require 'remember)
+</pre></td></tr></table>
+</li></ol>
+
+<p>You can browse the files or download the archive at the following locations:
+</p>
+<ul class="toc">
+<li> Individual files: <a href="http://sacha.free.net.ph/notebook/emacs/stable">http://sacha.free.net.ph/notebook/emacs/stable</a>
+</li><li> Archive: <a href="http://sacha.free.net.ph/notebook/emacs/sacha-stable.tar.gz">http://sacha.free.net.ph/notebook/emacs/sacha-stable.tar.gz</a>
+</li><li> Browse arch repository: <a href="http://plannerarch.mbobo.org">http://plannerarch.mbobo.org</a> (Updated at 16:00 GMT, Host: Florian Lanthaler)
+</li></ul>
+
+<hr size="6">
+<a name="Development-Version"></a>
+<a name="SEC5"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC4" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Installing the development version </h2>
+
+<p>Choose the development branch if you want to use new Planner features.
+</p>
+<a name="IDX2"></a>
+<p>The Arch revision control system allows you to retrieve previous
+versions and select specific features and bugfixes.  
+</p>
+<p>Downloading the modules for the first time:
+</p>
+<ol>
+<li> Install arch. Debian: <kbd>apt-get install tla</kbd> Other distros: see <a href="http://regexps.srparish.net/www/">http://regexps.srparish.net/www/</a> .
+</li><li> Register the archive and download the modules.
+
+<table><tr><td>&nbsp;</td><td><pre class="example"># Register the archive
+tla register-archive sacha@free.net.ph--main http://sacha.free.net.ph/notebook/arch
+
+# Download emacs-wiki module into the remember/ subdirectory
+tla get sacha@free.net.ph--main/remember--dev--1.0 remember
+</pre></td></tr></table>
+</li><li> Open your <tt>`~/.emacs'</tt> and add the <tt>`remember/'</tt> directory to your load path.
+
+<table><tr><td>&nbsp;</td><td><pre class="example">(add-to-list 'load-path &quot;/path/to/remember&quot;)
+</pre></td></tr></table>
+</li></ol>
+
+<p>To list upstream changes not in local copy:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Change to the source directory you are interested in. Example:
+cd remember/
+
+# Display the summary of changes
+tla missing --summary
+</pre></td></tr></table>
+<p>To update to the latest version:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">cd remember
+tla replay
+</pre></td></tr></table>
+<p>You can browse the files or download the archive at the following locations:
+</p>
+<ul class="toc">
+<li> Individual files: <a href="http://sacha.free.net.ph/notebook/emacs/dev">http://sacha.free.net.ph/notebook/emacs/dev</a>
+</li><li> Archive: <a href="http://sacha.free.net.ph/notebook/emacs/sacha-dev.tar.gz">http://sacha.free.net.ph/notebook/emacs/sacha-dev.tar.gz</a>
+</li><li> Browse arch repository: <a href="http://plannerarch.mbobo.org">http://plannerarch.mbobo.org</a> (Updated at 16:00 GMT, Host: Florian Lanthaler)
+</li></ul>
+
+<hr size="6">
+<a name="Implementation"></a>
+<a name="SEC6"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC5" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. Implementation </h1>
+
+<p>Hyperbole, as a data presentation tool, always struck me as being very
+powerful, but it seemed to require a lot of &quot;front-end&quot; work before
+that data was really available.  The problem with BBDB, or keeping up
+a Bibl-mode file, is that you have to use different functions to
+record the data, and it always takes time to stop what you're doing,
+format the data in the manner expected by that particular data
+interface, and then resume your work.
+</p>
+<p>With &quot;remember&quot;, you just hit <kbd>M-x remember</kbd> (you'd probably
+want to bind this to an easily accessible keystroke, like <kbd>C-x
+M-r</kbd>), slam in your text however you like, and then hit <kbd>C-c C-c</kbd>.
+It will file the data away for later retrieval, and possibly indexing.
+</p>
+<p>Indexing is to data what &quot;studying&quot; is in the real world.  What you
+do when you study (or lucubrate, for some of us) is to realize certain
+relationships implicit in the data, so that you can make use of those
+relationships.  Expressing that a certain quote you remembered was a
+religious quote, and that you want the ability to pull up all quotes
+of a religious nature, is what studying does.  This is a more labor
+intensive task than the original remembering of the data, and it's
+typical in real life to set aside a special period of time for doing
+this work.
+</p>
+<p>&quot;Remember&quot; works in the same way.  When you enter data, either by
+typing it into a buffer, or using the contents of the selected region,
+it will store that data--unindexed, uninterpreted--in a data pool.
+It will also try to remember as much context information as possible
+(any text properties that were set, where you copied it from, when,
+how, etc).  Later, you can walk through your accumulated set of data
+(both organized, and unorganized) and easily begin moving things
+around, and making annotations that will express the full meaning of
+that data, as far as you know it.
+</p>
+<p>Obviously this latter stage is more user-interface intensive, and it
+would be nice if &quot;remember&quot; could do it as elegantly as possible,
+rather than requiring a billion keystrokes to reorganize your
+hierarchy.  Well, as the future arrives, hopefully experience and user
+feedback will help to make this as intuitive a tool as possible.
+</p>
+<hr size="6">
+<a name="Quick-Start"></a>
+<a name="SEC7"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC6" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. Quick Start </h1>
+
+<ul class="toc">
+<li>
+Load <tt>`remember.el'</tt>.
+
+</li><li>
+Type <kbd>M-x remember</kbd>. The <samp>`*Remember*'</samp> buffer should be
+displayed.
+
+</li><li>
+Type in what you want to remember. The first line will be treated as
+the headline, and the rest of the buffer will contain the body of the
+note.
+
+</li><li>
+Type <kbd>C-c C-c</kbd> (<code>remember-buffer</code>) to save the note and close
+the <samp>`*Remember*'</samp> buffer.
+</li></ul>
+
+<p>By default, <code>remember-buffer</code> saves the note in <tt>`~/.notes'</tt>.
+You can edit it now to see the remembered and timestamped note. You
+can edit this file however you want. New entries will always be added
+to the end.
+</p>
+<p>To remember a region of text, use the universal prefix. <kbd>C-u M-x
+remember</kbd> displays a <samp>`*Remember*'</samp> buffer with the region as the
+initial contents.
+</p>
+<p>As a simple beginning, you can start by using the Text File backend,
+keeping your <tt>`~/.notes'</tt> file in outline-mode format, with a final
+entry called <samp>`* Raw data'</samp>. Remembered data will be added to the
+end of the file. Every so often, you can move the data that gets
+appended there into other files, or reorganize your document.
+</p>
+<p>You can also store remembered data in other backends.
+(see section <a href="#SEC8">Backends</a>)
+</p>
+<p>Here is one way to map the remember functions in your <tt>`.emacs'</tt> to
+very accessible keystrokes facilities using the mode:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(autoload 'remember ``remember'' nil t)
+(autoload 'remember-region ``remember'' nil t)
+
+(define-key global-map [f8] 'remember)
+(define-key global-map [f9] 'remember-region)
+</pre></td></tr></table>
+<hr size="6">
+<a name="Backends"></a>
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. Backends </h1>
+
+<p>You can save remembered notes to a variety of backends.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC9">6.1 Saving to a Text File</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">6.2 Saving to a Mailbox</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">6.3 Saving to a Bibliography</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC12">6.4 Saving to a Planner Page</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Text-File"></a>
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.1 Saving to a Text File </h2>
+
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(setq remember-handler-functions '(remember-append-to-file))
+</pre></td></tr></table>
+<dl>
+<dt><u>User Option:</u> <b>remember-data-file</b>
+<a name="IDX3"></a>
+</dt>
+</dl>
+
+<dl>
+<dt><u>User Option:</u> <b>remember-leader-text</b>
+<a name="IDX4"></a>
+</dt>
+</dl>
+
+<hr size="6">
+<a name="Mailbox"></a>
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.2 Saving to a Mailbox </h2>
+
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(setq remember-handler-functions '(remember-store-in-mailbox))
+</pre></td></tr></table>
+<dl>
+<dt><u>User Option:</u> <b>remember-mailbox</b>
+<a name="IDX5"></a>
+</dt>
+<dd><p>Name of mailbox to save messages to.
+</p></dd></dl>
+
+<p>If you want to use BBDB to associate remembered snippets with entries
+in your contact database, use the following code snippet:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(require 'remember-bbdb)
+(setq remember-handler-functions '(remember-bbdb-store-in-mailbox))
+</pre></td></tr></table>
+<hr size="6">
+<a name="Bibliography"></a>
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.3 Saving to a Bibliography </h2>
+
+<p>Bibl-mode is a major mode for maintaining bibliography files. You can
+get bibl-mode from:
+<a href="http://ftp.azc.uam.mx/mirrors/gnu/emacs-lisp/bosullivan-packages/bibl-mode/">http://ftp.azc.uam.mx/mirrors/gnu/emacs-lisp/bosullivan-packages/bibl-mode/</a>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(require 'remember-bibl)
+</pre></td></tr></table>
+<dl>
+<dt><u>Function:</u> <b>remember-url</b>
+<a name="IDX6"></a>
+</dt>
+<dd><p>Remember a URL in <code>bibl-mode</code> that is being visited with w3.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>remember-location</b>
+<a name="IDX7"></a>
+</dt>
+<dd><p>Remember a bookmark location in `bibl-mode'.
+</p></dd></dl>
+
+<p>You can use this in addition to your normal remember backend.
+</p>
+<hr size="6">
+<a name="Planner-Page"></a>
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 6.4 Saving to a Planner Page </h2>
+
+<p>If you are using PlannerMode, depending on your configuration, notes
+made using remember-el may actually be saved to a project and/or day
+plan page.
+</p>
+<p><tt>`remember-planner.el'</tt> makes the notes you save with remember have
+more context information associated with them, in the way that
+PlannerMode tasks do.
+</p>
+<p>To use remember-planner, place this in your <tt>`.emacs'</tt>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(require 'remember-planner)
+(setq remember-handler-functions '(remember-planner-append))
+</pre></td></tr></table>
+<p>To take advantage of PlannerMode's annotation functions, add the
+following code as well:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(setq remember-annotation-functions planner-annotation-functions)
+</pre></td></tr></table>
+<p>Then, type <kbd>M-x remember</kbd> to remember new text, <kbd>M-x
+remember-region</kbd> to remember the current region, or <kbd>C-u M-x
+remember</kbd> to remember the current region but have an opportunity to
+edit it before it is saved.
+</p>
+<dl>
+<dt><u>User Option:</u> <b>remember-planner-xref-p</b>
+<a name="IDX8"></a>
+</dt>
+<dd><p>Non-nil means cross-reference new entries with plan pages. Plan pages
+are useful for gathering related information. If you don't want a note
+associated with a plan page, you can press RET to accept the default
+(just today's page) or specify nil at the prompt.
+</p></dd></dl>
+
+<dl>
+<dt><u>User Option:</u> <b>remember-planner-copy-on-xref-flag</b>
+<a name="IDX9"></a>
+</dt>
+<dd><p>Non-nil means copy note text instead of moving it to the plan page. If
+nil, move the note body to the plan page, leaving a cross-reference
+link on the day page. This results in shorter day pages but may be
+harder for people to read.
+</p></dd></dl>
+
+<dl>
+<dt><u>User Option:</u> <b>remember-planner-timestamp-format</b>
+<a name="IDX10"></a>
+</dt>
+<dd><p>Format of timestamp for remember entries.
+</p></dd></dl>
+
+<p><tt>`remember-planner.el'</tt> does not define any interactive functions
+or keybindings.
+</p>
+<hr size="6">
+<a name="Using-remember_002dexperimental_002eel"></a>
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 7. remember-experimental.el </h1>
+
+<p><tt>`remember-experimental.el'</tt> contains experimental functions
+related to remember-el. Try them out at your own risk. 
+</p>
+<p><tt>`remember-experimental.el'</tt> does not define any interactive
+functions, or keybindings.
+</p>
+<hr size="6">
+<a name="Function-Reference"></a>
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 8. Function Reference </h1>
+
+<p><tt>`remember.el'</tt> defines the following interactive functions:
+</p>
+<dl>
+<dt><u>Function:</u> <b>remember</b><i> initial</i>
+<a name="IDX11"></a>
+</dt>
+<dd><p>Remember an arbitrary piece of data. With a prefix, it will use the
+region as <var>initial</var>.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>remember-region</b><i> beg end</i>
+<a name="IDX12"></a>
+</dt>
+<dd><p>If called from within the remember buffer, <var>beg</var> and <var>end</var> are
+ignored, and the entire buffer will be remembered.  If called from any
+other buffer, that region, plus any context information specific to
+that region, will be remembered.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>remember-clipboard</b>
+<a name="IDX13"></a>
+</dt>
+<dd><p>Remember the contents of the current clipboard.  This is most useful
+for remembering things from Netscape or other X Windows applications.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>remember-buffer</b>
+<a name="IDX14"></a>
+</dt>
+<dd><p>Remember the contents of the current buffer.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>remember-mode</b>
+<a name="IDX15"></a>
+</dt>
+<dd><p>This enters the major mode for output from <code>remember</code>.  This
+buffer is used to collect data that you want remember.  Just hit
+<kbd>C-c C-c</kbd> when you're done entering, and it will go ahead and file
+the data for latter retrieval, and possible indexing.
+</p></dd></dl>
+
+<p><tt>`remember.el'</tt> defines the following keybindings by default:
+</p>
+<p><kbd>C-x C-s</kbd> in remember-el is bound to <code>remember-buffer</code>.
+<kbd>C-c C-c</kbd> in remember-el is also bound to
+<code>remember-buffer</code>.
+</p>
+<hr size="6">
+<a name="Getting-Help-and-Reporting-Bugs"></a>
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 9. Getting Help and Reporting Bugs </h1>
+
+<p>After you have read this guide, if you still have questions about
+EmacsWikiMode, or if you have bugs to report, there are several places
+you can go. 
+</p>
+<p>You can join the mailing list at
+<a href="mailto:emacs-wiki-discuss@nongnu.org">emacs-wiki-discuss@nongnu.org</a> using the subscription form at
+<a href="http://mail.nongnu.org/mailman/listinfo/ emacs-wiki-discuss">http://mail.nongnu.org/mailman/listinfo/ emacs-wiki-discuss</a>. This mailing list is also available via Gmane
+(<a href="http://gmane.org/">http://gmane.org/</a>). The group is called
+<samp>`gmane.emacs.wiki.general'</samp>.
+</p>
+<p><a href="http://www.emacswiki.org/cgi-bin/wiki/EmacsWikiMode">http://www.emacswiki.org/cgi-bin/wiki/EmacsWikiMode</a> is the
+emacs-wiki.org page.
+</p>
+<p>You can visit the IRC Freenode channel <samp>`#emacs'</samp>. Many of the
+contributors are frequently around and willing to answer your
+questions.
+</p>
+<p>You can also contact the maintainer of EmacsWikiMode, Sacha Chua, at
+<a href="mailto:sacha@free.net.ph">sacha@free.net.ph</a>.
+</p>
+<p>For issues relating to this documentation, please contact John
+Sullivan at <a href="mailto:johnsu01@yahoo.com">johnsu01@yahoo.com</a>.
+</p>
+<hr size="6">
+<a name="GNU-General-Public-License"></a>
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> A. GNU GENERAL PUBLIC LICENSE </h1>
+<p align="center"> Version 2, June 1991
+</p><a name="IDX16"></a>
+<a name="IDX17"></a>
+
+
+<table><tr><td>&nbsp;</td><td><pre class="display">Copyright &copy; 1989, 1991 Free Software Foundation, Inc.
+59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="appendixsec"> A.1 Preamble </h2>
+
+<p>  The licenses for most software are designed to take away your
+freedom to share and change it.  By contrast, the GNU General Public
+License is intended to guarantee your freedom to share and change free
+software--to make sure the software is free for all its users.  This
+General Public License applies to most of the Free Software
+Foundation's software and to any other program whose authors commit to
+using it.  (Some other Free Software Foundation software is covered by
+the GNU Library General Public License instead.)  You can apply it to
+your programs, too.
+</p>
+<p>  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+this service if you wish), that you receive source code or can get it
+if you want it, that you can change the software or use pieces of it
+in new free programs; and that you know you can do these things.
+</p>
+<p>  To protect your rights, we need to make restrictions that forbid
+anyone to deny you these rights or to ask you to surrender the rights.
+These restrictions translate to certain responsibilities for you if you
+distribute copies of the software, or if you modify it.
+</p>
+<p>  For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must give the recipients all the rights that
+you have.  You must make sure that they, too, receive or can get the
+source code.  And you must show them these terms so they know their
+rights.
+</p>
+<p>  We protect your rights with two steps: (1) copyright the software, and
+(2) offer you this license which gives you legal permission to copy,
+distribute and/or modify the software.
+</p>
+<p>  Also, for each author's protection and ours, we want to make certain
+that everyone understands that there is no warranty for this free
+software.  If the software is modified by someone else and passed on, we
+want its recipients to know that what they have is not the original, so
+that any problems introduced by others will not reflect on the original
+authors' reputations.
+</p>
+<p>  Finally, any free program is threatened constantly by software
+patents.  We wish to avoid the danger that redistributors of a free
+program will individually obtain patent licenses, in effect making the
+program proprietary.  To prevent this, we have made it clear that any
+patent must be licensed for everyone's free use or not licensed at all.
+</p>
+<p>  The precise terms and conditions for copying, distribution and
+modification follow.
+</p>
+
+<ol>
+<li>
+This License applies to any program or other work which contains
+a notice placed by the copyright holder saying it may be distributed
+under the terms of this General Public License.  The &quot;Program&quot;, below,
+refers to any such program or work, and a &quot;work based on the Program&quot;
+means either the Program or any derivative work under copyright law:
+that is to say, a work containing the Program or a portion of it,
+either verbatim or with modifications and/or translated into another
+language.  (Hereinafter, translation is included without limitation in
+the term &quot;modification&quot;.)  Each licensee is addressed as &quot;you&quot;.
+
+<p>Activities other than copying, distribution and modification are not
+covered by this License; they are outside its scope.  The act of
+running the Program is not restricted, and the output from the Program
+is covered only if its contents constitute a work based on the
+Program (independent of having been made by running the Program).
+Whether that is true depends on what the Program does.
+</p>
+</li><li>
+You may copy and distribute verbatim copies of the Program's
+source code as you receive it, in any medium, provided that you
+conspicuously and appropriately publish on each copy an appropriate
+copyright notice and disclaimer of warranty; keep intact all the
+notices that refer to this License and to the absence of any warranty;
+and give any other recipients of the Program a copy of this License
+along with the Program.
+
+<p>You may charge a fee for the physical act of transferring a copy, and
+you may at your option offer warranty protection in exchange for a fee.
+</p>
+</li><li>
+You may modify your copy or copies of the Program or any portion
+of it, thus forming a work based on the Program, and copy and
+distribute such modifications or work under the terms of Section 1
+above, provided that you also meet all of these conditions:
+
+<ol>
+<li>
+You must cause the modified files to carry prominent notices
+stating that you changed the files and the date of any change.
+
+</li><li>
+You must cause any work that you distribute or publish, that in
+whole or in part contains or is derived from the Program or any
+part thereof, to be licensed as a whole at no charge to all third
+parties under the terms of this License.
+
+</li><li>
+If the modified program normally reads commands interactively
+when run, you must cause it, when started running for such
+interactive use in the most ordinary way, to print or display an
+announcement including an appropriate copyright notice and a
+notice that there is no warranty (or else, saying that you provide
+a warranty) and that users may redistribute the program under
+these conditions, and telling the user how to view a copy of this
+License.  (Exception: if the Program itself is interactive but
+does not normally print such an announcement, your work based on
+the Program is not required to print an announcement.)
+</li></ol>
+
+<p>These requirements apply to the modified work as a whole.  If
+identifiable sections of that work are not derived from the Program,
+and can be reasonably considered independent and separate works in
+themselves, then this License, and its terms, do not apply to those
+sections when you distribute them as separate works.  But when you
+distribute the same sections as part of a whole which is a work based
+on the Program, the distribution of the whole must be on the terms of
+this License, whose permissions for other licensees extend to the
+entire whole, and thus to each and every part regardless of who wrote it.
+</p>
+<p>Thus, it is not the intent of this section to claim rights or contest
+your rights to work written entirely by you; rather, the intent is to
+exercise the right to control the distribution of derivative or
+collective works based on the Program.
+</p>
+<p>In addition, mere aggregation of another work not based on the Program
+with the Program (or with a work based on the Program) on a volume of
+a storage or distribution medium does not bring the other work under
+the scope of this License.
+</p>
+</li><li>
+You may copy and distribute the Program (or a work based on it,
+under Section 2) in object code or executable form under the terms of
+Sections 1 and 2 above provided that you also do one of the following:
+
+<ol>
+<li>
+Accompany it with the complete corresponding machine-readable
+source code, which must be distributed under the terms of Sections
+1 and 2 above on a medium customarily used for software interchange; or,
+
+</li><li>
+Accompany it with a written offer, valid for at least three
+years, to give any third party, for a charge no more than your
+cost of physically performing source distribution, a complete
+machine-readable copy of the corresponding source code, to be
+distributed under the terms of Sections 1 and 2 above on a medium
+customarily used for software interchange; or,
+
+</li><li>
+Accompany it with the information you received as to the offer
+to distribute corresponding source code.  (This alternative is
+allowed only for noncommercial distribution and only if you
+received the program in object code or executable form with such
+an offer, in accord with Subsection b above.)
+</li></ol>
+
+<p>The source code for a work means the preferred form of the work for
+making modifications to it.  For an executable work, complete source
+code means all the source code for all modules it contains, plus any
+associated interface definition files, plus the scripts used to
+control compilation and installation of the executable.  However, as a
+special exception, the source code distributed need not include
+anything that is normally distributed (in either source or binary
+form) with the major components (compiler, kernel, and so on) of the
+operating system on which the executable runs, unless that component
+itself accompanies the executable.
+</p>
+<p>If distribution of executable or object code is made by offering
+access to copy from a designated place, then offering equivalent
+access to copy the source code from the same place counts as
+distribution of the source code, even though third parties are not
+compelled to copy the source along with the object code.
+</p>
+</li><li>
+You may not copy, modify, sublicense, or distribute the Program
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense or distribute the Program is
+void, and will automatically terminate your rights under this License.
+However, parties who have received copies, or rights, from you under
+this License will not have their licenses terminated so long as such
+parties remain in full compliance.
+
+</li><li>
+You are not required to accept this License, since you have not
+signed it.  However, nothing else grants you permission to modify or
+distribute the Program or its derivative works.  These actions are
+prohibited by law if you do not accept this License.  Therefore, by
+modifying or distributing the Program (or any work based on the
+Program), you indicate your acceptance of this License to do so, and
+all its terms and conditions for copying, distributing or modifying
+the Program or works based on it.
+
+</li><li>
+Each time you redistribute the Program (or any work based on the
+Program), the recipient automatically receives a license from the
+original licensor to copy, distribute or modify the Program subject to
+these terms and conditions.  You may not impose any further
+restrictions on the recipients' exercise of the rights granted herein.
+You are not responsible for enforcing compliance by third parties to
+this License.
+
+</li><li>
+If, as a consequence of a court judgment or allegation of patent
+infringement or for any other reason (not limited to patent issues),
+conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot
+distribute so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you
+may not distribute the Program at all.  For example, if a patent
+license would not permit royalty-free redistribution of the Program by
+all those who receive copies directly or indirectly through you, then
+the only way you could satisfy both it and this License would be to
+refrain entirely from distribution of the Program.
+
+<p>If any portion of this section is held invalid or unenforceable under
+any particular circumstance, the balance of the section is intended to
+apply and the section as a whole is intended to apply in other
+circumstances.
+</p>
+<p>It is not the purpose of this section to induce you to infringe any
+patents or other property right claims or to contest validity of any
+such claims; this section has the sole purpose of protecting the
+integrity of the free software distribution system, which is
+implemented by public license practices.  Many people have made
+generous contributions to the wide range of software distributed
+through that system in reliance on consistent application of that
+system; it is up to the author/donor to decide if he or she is willing
+to distribute software through any other system and a licensee cannot
+impose that choice.
+</p>
+<p>This section is intended to make thoroughly clear what is believed to
+be a consequence of the rest of this License.
+</p>
+</li><li>
+If the distribution and/or use of the Program is restricted in
+certain countries either by patents or by copyrighted interfaces, the
+original copyright holder who places the Program under this License
+may add an explicit geographical distribution limitation excluding
+those countries, so that distribution is permitted only in or among
+countries not thus excluded.  In such case, this License incorporates
+the limitation as if written in the body of this License.
+
+</li><li>
+The Free Software Foundation may publish revised and/or new versions
+of the General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
+
+<p>Each version is given a distinguishing version number.  If the Program
+specifies a version number of this License which applies to it and &quot;any
+later version&quot;, you have the option of following the terms and conditions
+either of that version or of any later version published by the Free
+Software Foundation.  If the Program does not specify a version number of
+this License, you may choose any version ever published by the Free Software
+Foundation.
+</p>
+</li><li>
+If you wish to incorporate parts of the Program into other free
+programs whose distribution conditions are different, write to the author
+to ask for permission.  For software which is copyrighted by the Free
+Software Foundation, write to the Free Software Foundation; we sometimes
+make exceptions for this.  Our decision will be guided by the two goals
+of preserving the free status of all derivatives of our free software and
+of promoting the sharing and reuse of software generally.
+
+
+</li><li>
+BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE PROGRAM &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
+TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
+PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
+REPAIR OR CORRECTION.
+
+</li><li>
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
+INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
+OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
+TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
+YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
+PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+</li></ol>
+
+
+
+<hr size="6">
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="appendixsec"> A.2 Appendix: How to Apply These Terms to Your New Programs </h2>
+
+<p>  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
+</p>
+<p>  To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+convey the exclusion of warranty; and each file should have at least
+the &quot;copyright&quot; line and a pointer to where the full notice is found.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample"><var>one line to give the program's name and a brief idea of what it does.</var>
+Copyright (C) <var>yyyy</var>  <var>name of author</var>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+</pre></td></tr></table>
+<p>Also add information on how to contact you by electronic and paper mail.
+</p>
+<p>If the program is interactive, make it output a short notice like this
+when it starts in an interactive mode:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">Gnomovision version 69, Copyright (C) 19<var>yy</var> <var>name of author</var>
+Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+This is free software, and you are welcome to redistribute it
+under certain conditions; type `show c' for details.
+</pre></td></tr></table>
+<p>The hypothetical commands <samp>`show w'</samp> and <samp>`show c'</samp> should show
+the appropriate parts of the General Public License.  Of course, the
+commands you use may be called something other than <samp>`show w'</samp> and
+<samp>`show c'</samp>; they could even be mouse-clicks or menu items--whatever
+suits your program.
+</p>
+<p>You should also get your employer (if you work as a programmer) or your
+school, if any, to sign a &quot;copyright disclaimer&quot; for the program, if
+necessary.  Here is a sample; alter the names:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Yoyodyne, Inc., hereby disclaims all copyright interest in the program
+`Gnomovision' (which makes passes at compilers) written by James Hacker.
+
+<var>signature of Ty Coon</var>, 1 April 1989
+Ty Coon, President of Vice
+</pre></td></tr></table>
+<p>This General Public License does not permit incorporating your program into
+proprietary programs.  If your program is a subroutine library, you may
+consider it more useful to permit linking proprietary applications with the
+library.  If this is what you want to do, use the GNU Library General
+Public License instead of this License.
+</p>
+<hr size="6">
+<a name="GNU-Free-Documentation-License"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> B. GNU Free Documentation License </h1>
+<p align="center"> Version 1.2, November 2002
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display">Copyright &copy; 2000,2001,2002 Free Software Foundation, Inc.
+59 Temple Place, Suite 330, Boston, MA  02111-1307, USA
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+</pre></td></tr></table>
+<ol>
+<li>
+PREAMBLE
+
+<p>The purpose of this License is to make a manual, textbook, or other
+functional and useful document <em>free</em> in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+</p>
+<p>This License is a kind of &quot;copyleft&quot;, which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+</p>
+<p>We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+</p>
+</li><li>
+APPLICABILITY AND DEFINITIONS
+
+<p>This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The &quot;Document&quot;, below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as &quot;you&quot;.  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+</p>
+<p>A &quot;Modified Version&quot; of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+</p>
+<p>A &quot;Secondary Section&quot; is a named appendix or a front-matter section
+of the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document's overall
+subject (or to related matters) and contains nothing that could fall
+directly within that overall subject.  (Thus, if the Document is in
+part a textbook of mathematics, a Secondary Section may not explain
+any mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+</p>
+<p>The &quot;Invariant Sections&quot; are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+</p>
+<p>The &quot;Cover Texts&quot; are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+</p>
+<p>A &quot;Transparent&quot; copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not &quot;Transparent&quot; is called &quot;Opaque&quot;.
+</p>
+<p>Examples of suitable formats for Transparent copies include plain
+<small>ASCII</small> without markup, Texinfo input format, LaTeX input
+format, <acronym>SGML</acronym> or <acronym>XML</acronym> using a publicly available
+<acronym>DTD</acronym>, and standard-conforming simple <acronym>HTML</acronym>,
+PostScript or <acronym>PDF</acronym> designed for human modification.  Examples
+of transparent image formats include <acronym>PNG</acronym>, <acronym>XCF</acronym> and
+<acronym>JPG</acronym>.  Opaque formats include proprietary formats that can be
+read and edited only by proprietary word processors, <acronym>SGML</acronym> or
+<acronym>XML</acronym> for which the <acronym>DTD</acronym> and/or processing tools are
+not generally available, and the machine-generated <acronym>HTML</acronym>,
+PostScript or <acronym>PDF</acronym> produced by some word processors for
+output purposes only.
+</p>
+<p>The &quot;Title Page&quot; means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, &quot;Title Page&quot; means
+the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+</p>
+<p>A section &quot;Entitled XYZ&quot; means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as &quot;Acknowledgements&quot;,
+&quot;Dedications&quot;, &quot;Endorsements&quot;, or &quot;History&quot;.)  To &quot;Preserve the Title&quot;
+of such a section when you modify the Document means that it remains a
+section &quot;Entitled XYZ&quot; according to this definition.
+</p>
+<p>The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+</p>
+</li><li>
+VERBATIM COPYING
+
+<p>You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no other
+conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section 3.
+</p>
+<p>You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+</p>
+</li><li>
+COPYING IN QUANTITY
+
+<p>If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+</p>
+<p>If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+</p>
+<p>If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+</p>
+<p>It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to give
+them a chance to provide you with an updated version of the Document.
+</p>
+</li><li>
+MODIFICATIONS
+
+<p>You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+</p>
+<ol>
+<li>
+Use in the Title Page (and on the covers, if any) a title distinct
+from that of the Document, and from those of previous versions
+(which should, if there were any, be listed in the History section
+of the Document).  You may use the same title as a previous version
+if the original publisher of that version gives permission.
+
+</li><li>
+List on the Title Page, as authors, one or more persons or entities
+responsible for authorship of the modifications in the Modified
+Version, together with at least five of the principal authors of the
+Document (all of its principal authors, if it has fewer than five),
+unless they release you from this requirement.
+
+</li><li>
+State on the Title page the name of the publisher of the
+Modified Version, as the publisher.
+
+</li><li>
+Preserve all the copyright notices of the Document.
+
+</li><li>
+Add an appropriate copyright notice for your modifications
+adjacent to the other copyright notices.
+
+</li><li>
+Include, immediately after the copyright notices, a license notice
+giving the public permission to use the Modified Version under the
+terms of this License, in the form shown in the Addendum below.
+
+</li><li>
+Preserve in that license notice the full lists of Invariant Sections
+and required Cover Texts given in the Document's license notice.
+
+</li><li>
+Include an unaltered copy of this License.
+
+</li><li>
+Preserve the section Entitled &quot;History&quot;, Preserve its Title, and add
+to it an item stating at least the title, year, new authors, and
+publisher of the Modified Version as given on the Title Page.  If
+there is no section Entitled &quot;History&quot; in the Document, create one
+stating the title, year, authors, and publisher of the Document as
+given on its Title Page, then add an item describing the Modified
+Version as stated in the previous sentence.
+
+</li><li>
+Preserve the network location, if any, given in the Document for
+public access to a Transparent copy of the Document, and likewise
+the network locations given in the Document for previous versions
+it was based on.  These may be placed in the &quot;History&quot; section.
+You may omit a network location for a work that was published at
+least four years before the Document itself, or if the original
+publisher of the version it refers to gives permission.
+
+</li><li>
+For any section Entitled &quot;Acknowledgements&quot; or &quot;Dedications&quot;, Preserve
+the Title of the section, and preserve in the section all the
+substance and tone of each of the contributor acknowledgements and/or
+dedications given therein.
+
+</li><li>
+Preserve all the Invariant Sections of the Document,
+unaltered in their text and in their titles.  Section numbers
+or the equivalent are not considered part of the section titles.
+
+</li><li>
+Delete any section Entitled &quot;Endorsements&quot;.  Such a section
+may not be included in the Modified Version.
+
+</li><li>
+Do not retitle any existing section to be Entitled &quot;Endorsements&quot; or
+to conflict in title with any Invariant Section.
+
+</li><li>
+Preserve any Warranty Disclaimers.
+</li></ol>
+
+<p>If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version's license notice.
+These titles must be distinct from any other section titles.
+</p>
+<p>You may add a section Entitled &quot;Endorsements&quot;, provided it contains
+nothing but endorsements of your Modified Version by various
+parties--for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+</p>
+<p>You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+</p>
+<p>The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+</p>
+</li><li>
+COMBINING DOCUMENTS
+
+<p>You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+</p>
+<p>The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+</p>
+<p>In the combination, you must combine any sections Entitled &quot;History&quot;
+in the various original documents, forming one section Entitled
+&quot;History&quot;; likewise combine any sections Entitled &quot;Acknowledgements&quot;,
+and any sections Entitled &quot;Dedications&quot;.  You must delete all
+sections Entitled &quot;Endorsements.&quot;
+</p>
+</li><li>
+COLLECTIONS OF DOCUMENTS
+
+<p>You may make a collection consisting of the Document and other documents
+released under this License, and replace the individual copies of this
+License in the various documents with a single copy that is included in
+the collection, provided that you follow the rules of this License for
+verbatim copying of each of the documents in all other respects.
+</p>
+<p>You may extract a single document from such a collection, and distribute
+it individually under this License, provided you insert a copy of this
+License into the extracted document, and follow this License in all
+other respects regarding verbatim copying of that document.
+</p>
+</li><li>
+AGGREGATION WITH INDEPENDENT WORKS
+
+<p>A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an &quot;aggregate&quot; if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation's users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+</p>
+<p>If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document's Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+</p>
+</li><li>
+TRANSLATION
+
+<p>Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section 4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+</p>
+<p>If a section in the Document is Entitled &quot;Acknowledgements&quot;,
+&quot;Dedications&quot;, or &quot;History&quot;, the requirement (section 4) to Preserve
+its Title (section 1) will typically require changing the actual
+title.
+</p>
+</li><li>
+TERMINATION
+
+<p>You may not copy, modify, sublicense, or distribute the Document except
+as expressly provided for under this License.  Any other attempt to
+copy, modify, sublicense or distribute the Document is void, and will
+automatically terminate your rights under this License.  However,
+parties who have received copies, or rights, from you under this
+License will not have their licenses terminated so long as such
+parties remain in full compliance.
+</p>
+</li><li>
+FUTURE REVISIONS OF THIS LICENSE
+
+<p>The Free Software Foundation may publish new, revised versions
+of the GNU Free Documentation License from time to time.  Such new
+versions will be similar in spirit to the present version, but may
+differ in detail to address new problems or concerns.  See
+<a href="http://www.gnu.org/copyleft/">http://www.gnu.org/copyleft/</a>.
+</p>
+<p>Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License &quot;or any later version&quot; applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.
+</p></li></ol>
+
+
+<hr size="6">
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> C. ADDENDUM: How to use this License for your documents </h1>
+
+<p>To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and
+license notices just after the title page:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">  Copyright (C)  <var>year</var>  <var>your name</var>.
+  Permission is granted to copy, distribute and/or modify this document
+  under the terms of the GNU Free Documentation License, Version 1.2
+  or any later version published by the Free Software Foundation;
+  with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+  Texts.  A copy of the license is included in the section entitled ``GNU
+  Free Documentation License''.
+</pre></td></tr></table>
+<p>If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the &quot;with...Texts.&quot; line with this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">    with the Invariant Sections being <var>list their titles</var>, with
+    the Front-Cover Texts being <var>list</var>, and with the Back-Cover Texts
+    being <var>list</var>.
+</pre></td></tr></table>
+<p>If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+</p>
+<p>If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License,
+to permit their use in free software.
+</p>
+<hr size="6">
+<a name="Concept-Index"></a>
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[ &gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="unnumbered"> Index </h1>
+
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="#SEC21_0" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="#SEC21_1" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="#SEC21_2" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#SEC21_3" class="summary-letter"><b>F</b></a>
+ &nbsp; 
+<a href="#SEC21_4" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#SEC21_5" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#SEC21_6" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="#SEC21_7" class="summary-letter"><b>O</b></a>
+ &nbsp; 
+<a href="#SEC21_8" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="#SEC21_9" class="summary-letter"><b>S</b></a>
+ &nbsp; 
+<a href="#SEC21_10" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+</td></tr></table>
+<table border="0" class="index-cp">
+<tr><td></td><th align="left">Index Entry</th><th align="left"> Section</th></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_0">A</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX2">arch revision control system, downloading</a></td><td valign="top"><a href="#SEC5">3.2 Installing the development version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_1">B</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC15">bugs, reporting</a></td><td valign="top"><a href="#SEC15">9. Getting Help and Reporting Bugs</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_2">D</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX1">Debian package for remember-el</a></td><td valign="top"><a href="#SEC4">3.1 Installing the stable version</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC5">development version</a></td><td valign="top"><a href="#SEC5">3.2 Installing the development version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_3">F</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC19">FDL</a></td><td valign="top"><a href="#SEC19">B. GNU Free Documentation License</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_4">G</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC19">GNU Free Documentation License</a></td><td valign="top"><a href="#SEC19">B. GNU Free Documentation License</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX17">GNU General Public License</a></td><td valign="top"><a href="#SEC16">A. GNU GENERAL PUBLIC LICENSE</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX16">GPL</a></td><td valign="top"><a href="#SEC16">A. GNU GENERAL PUBLIC LICENSE</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_5">H</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC15">help, getting</a></td><td valign="top"><a href="#SEC15">9. Getting Help and Reporting Bugs</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_6">M</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC10">mailbox, saving to a</a></td><td valign="top"><a href="#SEC10">6.2 Saving to a Mailbox</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_7">O</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC9">outline</a></td><td valign="top"><a href="#SEC9">6.1 Saving to a Text File</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_8">R</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX11"><code>remember</code></a></td><td valign="top"><a href="#SEC14">8. Function Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX14"><code>remember-buffer</code></a></td><td valign="top"><a href="#SEC14">8. Function Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX13"><code>remember-clipboard</code></a></td><td valign="top"><a href="#SEC14">8. Function Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC12">remember-el, using with PlannerMode</a></td><td valign="top"><a href="#SEC12">6.4 Saving to a Planner Page</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC13"><tt>`remember-experimental.el'</tt>, using</a></td><td valign="top"><a href="#SEC13">7. remember-experimental.el</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX7"><code>remember-location</code></a></td><td valign="top"><a href="#SEC11">6.3 Saving to a Bibliography</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX15"><code>remember-mode</code></a></td><td valign="top"><a href="#SEC14">8. Function Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC12"><tt>`remember-planner.el'</tt>, using</a></td><td valign="top"><a href="#SEC12">6.4 Saving to a Planner Page</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX12"><code>remember-region</code></a></td><td valign="top"><a href="#SEC14">8. Function Reference</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX6"><code>remember-url</code></a></td><td valign="top"><a href="#SEC11">6.3 Saving to a Bibliography</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_9">S</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC4">stable version</a></td><td valign="top"><a href="#SEC4">3.1 Installing the stable version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC21_10">T</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC9">text file</a></td><td valign="top"><a href="#SEC9">6.1 Saving to a Text File</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="#SEC21_0" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="#SEC21_1" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="#SEC21_2" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#SEC21_3" class="summary-letter"><b>F</b></a>
+ &nbsp; 
+<a href="#SEC21_4" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#SEC21_5" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#SEC21_6" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="#SEC21_7" class="summary-letter"><b>O</b></a>
+ &nbsp; 
+<a href="#SEC21_8" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="#SEC21_9" class="summary-letter"><b>S</b></a>
+ &nbsp; 
+<a href="#SEC21_10" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+</td></tr></table>
+
+<hr size="6">
+<a name="SEC_Contents"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>Table of Contents</h1>
+<div class="contents">
+
+<ul class="toc">
+  <li><a name="TOC1" href="#SEC1">1. Preface</a></li>
+  <li><a name="TOC2" href="#SEC2">2. Introduction</a></li>
+  <li><a name="TOC3" href="#SEC3">3. Installation</a>
+  <ul class="toc">
+    <li><a name="TOC4" href="#SEC4">3.1 Installing the stable version</a></li>
+    <li><a name="TOC5" href="#SEC5">3.2 Installing the development version</a></li>
+  </ul></li>
+  <li><a name="TOC6" href="#SEC6">4. Implementation</a></li>
+  <li><a name="TOC7" href="#SEC7">5. Quick Start</a></li>
+  <li><a name="TOC8" href="#SEC8">6. Backends</a>
+  <ul class="toc">
+    <li><a name="TOC9" href="#SEC9">6.1 Saving to a Text File</a></li>
+    <li><a name="TOC10" href="#SEC10">6.2 Saving to a Mailbox</a></li>
+    <li><a name="TOC11" href="#SEC11">6.3 Saving to a Bibliography</a></li>
+    <li><a name="TOC12" href="#SEC12">6.4 Saving to a Planner Page</a></li>
+  </ul></li>
+  <li><a name="TOC13" href="#SEC13">7. remember-experimental.el</a></li>
+  <li><a name="TOC14" href="#SEC14">8. Function Reference</a></li>
+  <li><a name="TOC15" href="#SEC15">9. Getting Help and Reporting Bugs</a></li>
+  <li><a name="TOC16" href="#SEC16">A. GNU GENERAL PUBLIC LICENSE</a>
+  <ul class="toc">
+    <li><a name="TOC17" href="#SEC17">A.1 Preamble</a></li>
+    <li><a name="TOC18" href="#SEC18">A.2 Appendix: How to Apply These Terms to Your New Programs</a></li>
+  </ul></li>
+  <li><a name="TOC19" href="#SEC19">B. GNU Free Documentation License</a></li>
+  <li><a name="TOC20" href="#SEC20">C. ADDENDUM: How to use this License for your documents</a></li>
+  <li><a name="TOC21" href="#SEC21">Index</a></li>
+</ul>
+</div>
+<hr size="1">
+<a name="SEC_About"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>About This Document</h1>
+<p>
+  This document was generated by <em>Sacha Chua</em> on <em>August, 20 2005</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt; ] </td>
+    <td align="center">Back</td>
+    <td>previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt; ] </td>
+    <td align="center">Forward</td>
+    <td>next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt;&lt; ] </td>
+    <td align="center">FastBack</td>
+    <td>beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td align="center"> [ Up ] </td>
+    <td align="center">Up</td>
+    <td>up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt;&gt; ] </td>
+    <td align="center">FastForward</td>
+    <td>next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td align="center"> [Top] </td>
+    <td align="center">Top</td>
+    <td>cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Contents] </td>
+    <td align="center">Contents</td>
+    <td>table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Index] </td>
+    <td align="center">Index</td>
+    <td>index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [ ? ] </td>
+    <td align="center">About</td>
+    <td>about (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong> Example </strong> assumes that the current position is at <strong> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated by <em>Sacha Chua</em> on <em>August, 20 2005</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

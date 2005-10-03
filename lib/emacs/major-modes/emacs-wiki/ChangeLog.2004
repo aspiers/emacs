@@ -1,0 +1,2482 @@
+
+2004-12-29 06:30:21 GMT	Michael Olson <mwolson@member.fsf.org>	patch-84
+
+    Summary:
+      Release emacs-wiki version 2.66
+    Revision:
+      emacs-wiki--main--1.0--patch-84
+
+    2004-12-29  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Release version 2.66.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-id.el emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-pgg.el
+     emacs-wiki-project.el emacs-wiki-publish.el
+     emacs-wiki-regexps.el emacs-wiki-table.el
+     emacs-wiki-transition.el emacs-wiki.el emacs-wiki.texi
+
+
+2004-12-27 21:16:02 GMT	Michael Olson <mwolson@member.fsf.org>	patch-83
+
+    Summary:
+      Do not use a weird character in `emacs-wiki-style-sheet'
+    Revision:
+      emacs-wiki--main--1.0--patch-83
+
+    2004-12-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-style-sheet): Change
+        ".menuitem a:hover:before" element to not use a weird character.
+        Thanks to TANAKA Atushi for the report.
+    
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-27 21:11:50 GMT	Michael Olson <mwolson@member.fsf.org>	patch-82
+
+    Summary:
+      Add missing forward slash to end of img tag
+    Revision:
+      emacs-wiki--main--1.0--patch-82
+
+    2004-12-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-markup-link): Add trailing
+        forward slash to end of img tag to aid XHTML 1.1 compatibility.
+        Thanks to 赵雷 for the report.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-27 06:40:27 GMT	Michael Olson <mwolson@member.fsf.org>	patch-81
+
+    Summary:
+      Remove unnecessary `skip-chars-backward' definition
+    Revision:
+      emacs-wiki--main--1.0--patch-81
+
+    2004-12-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Remove definition for `skip-chars-backward' since
+        it exists in both Emacs 21 and XEmacs.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-26 01:14:11 GMT	Michael Olson <mwolson@member.fsf.org>	patch-80
+
+    Summary:
+      Make XEmacs not complain about treating char as int
+    Revision:
+      emacs-wiki--main--1.0--patch-80
+
+    2004-12-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-escape-html-string): Make sure
+        we use `char-to-int' if it exists.  This prevents XEmacs from
+        complaining about trying to treat a char as an int.  At this
+        point, publishing seems to be completely fixed in XEmacs,
+        including the elusive <lisp> tag interpretation problem.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-25 22:43:33 GMT	Michael Olson <mwolson@member.fsf.org>	patch-79
+
+    Summary:
+      Note that the tla-changelog-mode trick did not work
+    Revision:
+      emacs-wiki--main--1.0--patch-79
+
+        * ChangeLog: My attempt to make this file open in tla-changelog-mode
+          failed because the file gets overwritten unconditionally on
+          commit.  Oh well.
+
+    modified files:
+     ChangeLog
+
+
+2004-12-25 22:40:54 GMT	Michael Olson <mwolson@member.fsf.org>	patch-78
+
+    Summary:
+      Enter tla-changelog-mode when viewing ChangeLog in Emacs
+    Revision:
+      emacs-wiki--main--1.0--patch-78
+
+        * ChangeLog: Edit the tag so that Emacs should enter tla-changelog-mode
+          upon displaying the file.
+
+    modified files:
+     ChangeLog
+
+
+2004-12-25 06:49:44 GMT	Michael Olson <mwolson@member.fsf.org>	patch-77
+
+    Summary:
+      Adapt to lack of extended character classes in some (X)Emacsen
+    Revision:
+      emacs-wiki--main--1.0--patch-77
+
+    2004-12-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-regexps.el: New source file that has all regexp
+        options and some related functions.  All regexp customization
+        options have been moved here as long as they are not tied to a
+        particular subproject.
+        (emacs-wiki-extreg-usable-p): New function that tries to determine
+        whether extended character classes are available for an (X)Emacs
+        session.  It is used by the other customizable options in this
+        file to help pick reasonable defaults.
+    
+        * emacs-wiki.el: Replace extended character classes with their
+        emacs-wiki-regexp counterparts.
+    
+        * emacs-wiki-colors.el: Ditto.
+    
+        * emacs-wiki-httpd.el: Ditto.
+    
+        * emacs-wiki-menu.el: Ditto.
+    
+        * emacs-wiki-publish.el: Ditto.
+    
+        * emacs-wiki-table.el: Ditto.
+
+    new files:
+     .arch-ids/emacs-wiki-regexps.el.id emacs-wiki-regexps.el
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-menu.el emacs-wiki-publish.el emacs-wiki-table.el
+     emacs-wiki.el
+
+
+2004-12-24 22:54:57 GMT	Michael Olson <mwolson@member.fsf.org>	patch-76
+
+    Summary:
+      Japanese input using japanese-egg patch from Sacha
+    Revision:
+      emacs-wiki--main--1.0--patch-76
+
+    2004-12-24  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-colors.el (emacs-wiki-unhighlight-region): Apply
+        patch from Sacha that aids Japanese input using japanese-egg.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el
+
+
+2004-12-21 22:42:17 GMT	Michael Olson <mwolson@member.fsf.org>	patch-75
+
+    Summary:
+      Add description of C-c C-e to Keystroke Summary
+    Revision:
+      emacs-wiki--main--1.0--patch-75
+
+    2004-12-21  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.texi (Keystroke Summary): Add description of C-c C-e
+        `emacs-wiki-edit-link-at-point' as suggested by Yu Li.
+
+    modified files:
+     ChangeLog emacs-wiki.texi
+
+
+2004-12-21 07:30:00 GMT	Michael Olson <mwolson@member.fsf.org>	patch-74
+
+    Summary:
+      Misplaced parenthesis in `emacs-wiki-walk-directories'
+    Revision:
+      emacs-wiki--main--1.0--patch-74
+
+    2004-12-21  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-walk-directories): Fix misplaced
+        parenthesis.  This may fix errors experienced while setting
+        `emacs-wiki-recurse-directories' to t.  Thanks to Wei-Hao Lin for
+        the notice and the patch.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-20 17:50:17 GMT	Michael Olson <mwolson@member.fsf.org>	patch-73
+
+    Summary:
+      Fix unbalanced parens
+    Revision:
+      emacs-wiki--main--1.0--patch-73
+
+    2004-12-20  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (skip-chars-backward): Fix unbalanced parens.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-20 05:04:10 GMT	Michael Olson <mwolson@member.fsf.org>	patch-72
+
+    Summary:
+      Link markup patch from Sacha
+    Revision:
+      emacs-wiki--main--1.0--patch-72
+
+    2004-12-20  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-markup-link): Apply patch from
+        Sacha that only marks up a link if we have some text.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-20 03:10:52 GMT	Michael Olson <mwolson@member.fsf.org>	patch-71
+
+    Summary:
+      Undo the gross mistakes that composed the previous patch
+    Revision:
+      emacs-wiki--main--1.0--patch-71
+
+    2004-12-19  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (looking-back): Since this function is not used by
+        anything other than the `emacs-wiki-skip-chars-backward' routine
+        that I just added, it has been removed.
+        (emacs-wiki-skip-chars-default-limit): This was based on a
+        misunderstanding of what was causing the speed issues.  It will be
+        of no use whatsoever, so it has also been removed.  Yay for public
+        ChangeLog entries :^( .
+        (skip-chars-backward): Renamed from
+        `emacs-wiki-skip-chars-backward' and only defined if another
+        definition does not already exist.  Remove t-as-second-parameter
+        functionality, since it was a misguided non-standard feature.
+        Instead of using a loop, try to be clever and invert the regexp,
+        then do a normal search and bump the position up one if
+        successful.  New strings are created by doing this, so it might
+        not be much of a savings.  Oh well.  Even maintainers get to
+        indulge in folly once in a while ;^) .  The only reason to keep
+        this function is if it does not exist in Emacs 21.  I am away from
+        the net right now, so I cannot tell is this is the case.
+        (emacs-wiki-skip-chars-forward): Since this replacement for the
+        `skip-chars-forward' function does not fix the XEmacs character
+        class problem, remove it.
+        (emacs-wiki-current-word, emacs-wiki-link-at-point): 
+        s/emacs-wiki-skip-chars-backward/skip-chars-backward/g .
+    
+        * emacs-wiki-publish.el (emacs-wiki-insert-anchor):
+        s/emacs-wiki-skip-chars-forward/skip-chars-forward/g .
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-12-19 06:52:37 GMT	Michael Olson <mwolson@member.fsf.org>	patch-70
+
+    Summary:
+      Speed tweaks, fix problem with following interwiki links
+    Revision:
+      emacs-wiki--main--1.0--patch-70
+
+    2004-12-19  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-skip-chars-default-limit): New
+        customizable variable that specifies the maximum number of
+        positions to travel when skipping characters.  This could
+        potentially help speed up the `emacs-wiki-link-at-point' function,
+        which will in turn make typing with font-lock enabled more
+        pleasant.
+        (emacs-wiki-skip-chars-backward): If LIMIT is given as t, assume
+        that we want it to be `emacs-wiki-skip-chars-default-limit'.
+        (emacs-wiki-skip-chars-forward): Ditto.
+        (emacs-wiki-link-at-point): Eliminate second call to
+        `emacs-wiki-skip-chars-backward' to speed things up potentially.
+        Add the '#' character to the list of things to skip.  This should
+        make interwiki links be colored correctly after the '#' character
+        and allow RET to follow the link.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-18 05:17:51 GMT	Michael Olson <mwolson@member.fsf.org>	patch-69
+
+    Summary:
+      Reorder left bracket in regexps so XEmacs does not complain
+    Revision:
+      emacs-wiki--main--1.0--patch-69
+
+    2004-12-18  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-current-word): Move order of left
+        bracket in regexp so that XEmacs does not complain.
+        (emacs-wiki-link-at-point): Ditto.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-17 02:35:22 GMT	Michael Olson <mwolson@member.fsf.org>	patch-68
+
+    Summary:
+      Spaces allowed in 1st part of extended links, skip-chars fix
+    Revision:
+      emacs-wiki--main--1.0--patch-68
+
+    2004-12-16  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-extended-link-regexp): Spaces are now
+        allowed in the first part of extended links.  This means that you
+        can now write "[[My Page Name]]" and the link will be considered
+        valid.  Thanks to Earl Kent, Carl Worth, and Raymond Zeitler for
+        their advice and persistence :^) .
+        (looking-back): Define this if it isn't defined already (i.e. in
+        Emacs 21).  Taken from Emacs CVS sources.  This is needed for my
+        custom implementation of `skip-chars-backward' to work.
+        (emacs-wiki-skip-chars-backward): New function that acts as a
+        replacement for `skip-chars-backward'.  It is necessary since the
+        Emacs 21 implementation of `skip-chars-backward' does not
+        recognize character classes.
+        (emacs-wiki-skip-chars-forward): Ditto, but for
+        `skip-chars-forward'.
+        (emacs-wiki-current-word): Use `emacs-wiki-skip-chars-backward'
+        instead of `skip-chars-backward'.
+        (emacs-wiki-link-at-point): Ditto.
+    
+        * emacs-wiki-publish.el (emacs-wiki-insert-anchor): Use
+        `emacs-wiki-skip-chars-forward' instead of `skip-chars-forward'.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-12-14 04:03:47 GMT	Michael Olson <mwolson@member.fsf.org>	patch-67
+
+    Summary:
+      Fix XEmacs warning on editing #title
+    Revision:
+      emacs-wiki--main--1.0--patch-67
+
+    2004-12-13  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-colors.el (emacs-wiki-highlight-markup): Match #title
+        plus a space on the end so that calls to
+        `emacs-wiki-highlight-title' don't try to fontify characters that
+        are out of range.  XEmacs throws a warning when this happens.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el
+
+
+2004-12-13 19:23:30 GMT	Michael Olson <mwolson@member.fsf.org>	patch-66
+
+    Summary:
+      Patch to resolve symbolic links on decision to activate emacs-wiki-mode
+    Revision:
+      emacs-wiki--main--1.0--patch-66
+
+    2004-12-13  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Add Pascal Quesseveur to contributors section.
+        (emacs-wiki-directories-member): Wrap `file-truename' around calls
+        to `expand-file-name' so that symbolic links may be resolved
+        properly.  Thanks to Pascal Quesseveur for the patch.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-13 18:17:32 GMT	Michael Olson <mwolson@member.fsf.org>	patch-65
+
+    Summary:
+      Get rid of warning at publish time when not using emacs-wiki-menu
+    Revision:
+      emacs-wiki--main--1.0--patch-65
+
+    2004-12-13  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-publishing-header): Don't show
+        any annoying warnings during publish time if emacs-wiki-menu is
+        not initialized.  I can't believe I didn't fix this completely
+        before ... darn it!  The comment before that code should be a bit
+        more helpful now.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-11 22:36:53 GMT	Michael Olson <mwolson@member.fsf.org>	patch-64
+
+    Summary:
+      Debian bug #249424: escaping parens in docstrings
+    Revision:
+      emacs-wiki--main--1.0--patch-64
+
+    2004-12-11  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-publishing-transforms): Fix
+        Debian bug #249424 by escaping all parens in this documentation
+        string that are in the first column.  Thanks to Matt Hodges for
+        the report.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-10 07:07:59 GMT	Michael Olson <mwolson@member.fsf.org>	patch-63
+
+    Summary:
+      XHTML 1.1 compliance in verse and ChangeLog markup
+    Revision:
+      emacs-wiki--main--1.0--patch-63
+
+    2004-12-10  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-markup-verse): Don't put a br
+        tag after every line.  Otherwise we would not be XHTML 1.1
+        compliant.
+        (emacs-wiki-markup-changelog-section): Do not end with a br tag,
+        for the same reason.
+    
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el
+
+
+2004-12-10 00:51:36 GMT	Michael Olson <mwolson@member.fsf.org>	patch-62
+
+    Summary:
+      Release emacs-wiki 2.65, fix default of publishing header
+    Revision:
+      emacs-wiki--main--1.0--patch-62
+
+    2004-12-09  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Release emacs-wiki 2.65.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publishing-header): Fix scope
+        of commenting so that the title still published by default.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-id.el emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-pgg.el
+     emacs-wiki-project.el emacs-wiki-publish.el
+     emacs-wiki-table.el emacs-wiki-transition.el emacs-wiki.el
+     emacs-wiki.texi
+
+
+2004-12-09 22:51:16 GMT	Michael Olson <mwolson@member.fsf.org>	patch-61
+
+    Summary:
+      Fix emacs-wiki-coding-map for Emacs 21.3.x, underline markup
+    Revision:
+      emacs-wiki--main--1.0--patch-61
+
+    2004-12-09  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.64.6".  I think
+        I'll stop incrementing this every time.  It's getting too
+        annoying.
+    
+        * emacs-wiki-publish.el (emacs-wiki-coding-map): Add code to
+        handle 'mule-utf-8, which occurs in Emacs 21.3.x.  Thanks to
+        Pascal Quesseveur for the tip.
+        (emacs-wiki-markup-word): Fix HTML-ism in markup for underline.
+        Using underlines will no longer make your documents noncompliant
+        with the XHTML 1.1 standard.
+    
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-12-05 23:47:40 GMT	Michael Olson <mwolson@member.fsf.org>	patch-60
+
+    Summary:
+      Deal with Wiki names in links and nonexistent Wiki pages properly
+    Revision:
+      emacs-wiki--main--1.0--patch-60
+
+    2004-12-05  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version 2.64.5.
+        (emacs-wiki-wiki-visible-name): Do not mess with Wiki names that
+        are part of something else.  Only deal with them if the entire
+        string is a Wiki name.
+        (emacs-wiki-wiki-link-target): Don't bomb on unrecognized Wiki
+        page names.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-12-05 21:44:15 GMT	Michael Olson <mwolson@member.fsf.org>	patch-59
+
+    Summary:
+      Hack interwiki link visiting and publishing extensively
+    Revision:
+      emacs-wiki--main--1.0--patch-59
+
+    2004-12-05  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version 2.64.4.
+        (emacs-wiki-wiki-visible-name): Split some functionality into
+        `emacs-wiki-wiki-visible-name-1' since it was becoming too hard to
+        indent.  The routine should not put any non wiki link cruft
+        through the various supporting routines anymore, since there is no
+        reason to do so.  If the name does not have a "#" in it, the
+        routine should be able to determine whether you are referring to
+        an interwiki link (or project name) or a page in the current
+        project.  NOTE: You should be able to correctly publish links like
+        TheEmacsWiki without having to have a "#" after it.
+        (emacs-wiki-wiki-visible-name-1): New function split from
+        `emacs-wiki-wiki-visible-name'.  Given BASE and TAG, spit out what
+        the visible name of the link should be.  If
+        `emacs-wiki-project-remove-last-word' is non-nil and BASE is a
+        local project, strip the last word from BASE when returning the
+        visible name.
+        (emacs-wiki-wiki-link-target): Move string-match outside of `if'
+        statement since its results are used by code outside that level.
+        In addition, we are now able to fetch the link target of something
+        that consists of a project name only.  This fixes the problem with
+        hitting RET on the name of a wiki project and getting "error:
+        stringp nil".
+        (emacs-wiki-grep): Fix arguments to `compilation-start' so that
+        this function actually seems to work properly now in CVS Emacs.
+    
+        * emacs-wiki-menu.el (emacs-wiki-menu-make-from-projects): If
+        `emacs-wiki-project-remove-last-word' is non-nil, remove the last
+        word from the project name.
+    
+        * emacs-wiki-project.el (emacs-wiki-project-interwiki-link): Use
+        `emacs-wiki-extended-link-regexp' instead of making a new one.
+        Fix another silly change of mine a few versions back that caused
+        breakage with using this function to publish something that
+        consisted of a project name only.
+    
+        * emacs-wiki-publish.el (emacs-wiki-project-remove-last-word): New
+        customizable option that allows the last word of a project name to
+        be removed during publish time for display purposes.  For example,
+        I use names like WebWiki and PlannerWiki for projects, and
+        interwiki links to pages in them will look like Web:PageInWebWiki
+        and Planner:PageInPlannerWiki.  The default is to not strip off
+        the last word.
+        (emacs-wiki-publishing-header): Marc Tommasi was right, the menu
+        should come before the title.  NOTE: By default, menus will be
+        published before titles.
+
+    modified files:
+     ChangeLog emacs-wiki-menu.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-12-05 03:45:13 GMT	Michael Olson <mwolson@member.fsf.org>	patch-58
+
+    Summary:
+      Overhaul documentation and code indentation
+    Revision:
+      emacs-wiki--main--1.0--patch-58
+
+    2004-12-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version 2.64.3.
+    
+        * emacs-wiki.el, emacs-wiki-colors.el, emacs-wiki-id.el,
+        emacs-wiki-journal.el, emacs-wiki-macros.el, emacs-wiki-mathml.el,
+        emacs-wiki-menu.el, emacs-wiki-pgg.el, emacs-wiki-project.el,
+        emacs-wiki-publish.el: Overhaul documentation, source code layout,
+        and comments.  Most code lines should now be wrapped at 70
+        columns, which was annoying me before.  The inevitable question
+        arises: Do I have better uses for my time?  Yes ;^).
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-id.el
+     emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-pgg.el
+     emacs-wiki-project.el emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-12-04 20:43:14 GMT	Michael Olson <mwolson@member.fsf.org>	patch-57
+
+    Summary:
+      Realize that default page != home page
+    Revision:
+      emacs-wiki--main--1.0--patch-57
+
+    2004-12-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Update #related tag example in header.
+        (emacs-wiki-version): Version 2.64.2.
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-update-wiki-project):
+        Write to `emacs-wiki-home-page' instead of
+        `emacs-wiki-default-page'.  I realized that
+        `emacs-wiki-default-page' is the default page you reach when doing
+        `emacs-wiki-find-file', but `emacs-wiki-home-page' is the default
+        page that the user will reach when browsing your site/project.
+    
+        * emacs-wiki-project.el (emacs-wiki-default-project): Moved here
+        from emacs-wiki.el.  Make default value CamelCase'd.
+        (emacs-wiki-home-project): New customizable option that indicates
+        which one of your projects is to be considered the "home",
+        e.g. the first project that people who browse your site will
+        encounter.
+        (emacs-wiki-show-project-name-p): Make part of emacs-wiki-project
+        customization group.
+        (emacs-wiki-project-interwiki-link): Revert silly change in name
+        of second argument that happened a few versions ago.  Add initial
+        documentation.
+        (emacs-wiki-project-homepage): Moved here from emacs-wiki-menu.el
+        since it seems to be generally useful.  Change documentation
+        properly.
+
+    modified files:
+     ChangeLog emacs-wiki-journal.el emacs-wiki-menu.el
+     emacs-wiki-project.el emacs-wiki.el
+
+
+2004-12-04 13:48:32 GMT	Michael Olson <mwolson@member.fsf.org>	patch-56
+
+    Summary:
+      Fix problem with publishing when changing projects
+    Revision:
+      emacs-wiki--main--1.0--patch-56
+
+    2004-12-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version 2.64.1.
+        (emacs-wiki-mode): Revert so-called "fix" a few versions back that
+        tried to prevent `emacs-wiki-mode' from activating if the user
+        specifies a different mode locally.  It not only did not work, but
+        caused the problem that TL was experiencing <sigh/>.  Publishing
+        should activate properly now when you switch to another project.
+    
+        * emacs-wiki-project.el (emacs-wiki-change-project): Clarify
+        documentation.
+
+    modified files:
+     ChangeLog emacs-wiki-project.el emacs-wiki.el
+
+
+2004-12-02 04:25:06 GMT	Michael Olson <mwolson@member.fsf.org>	patch-55
+
+    Summary:
+      Version 2.64 released, disable spurious publishing messages
+    Revision:
+      emacs-wiki--main--1.0--patch-55
+
+    2004-12-01  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-*.el, emacs-wiki.texi: Change version to 2.64.
+    
+        * emacs-wiki.el (emacs-wiki-refresh-file-alist): Comment out
+        `message' line so that the *Messages* buffer is not flooded every
+        time a project is published.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-id.el emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-pgg.el
+     emacs-wiki-project.el emacs-wiki-publish.el
+     emacs-wiki-table.el emacs-wiki-transition.el emacs-wiki.el
+     emacs-wiki.texi
+
+
+2004-12-01 01:49:15 GMT	Michael Olson <mwolson@member.fsf.org>	patch-54
+
+    Summary:
+      Disable flyspell-mode while publishing
+    Revision:
+      emacs-wiki--main--1.0--patch-54
+
+    2004-11-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.9".
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish): Disable
+        flyspell-mode while we are publishing since it cannot possibly be
+        needed at publish time.  This should speed up the process without
+        losing functionality.
+
+    modified files:
+     ChangeLog emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-11-30 23:48:23 GMT	Michael Olson <mwolson@member.fsf.org>	patch-53
+
+    Summary:
+      Fix hard whitespace bug as reported by Pascal Quesseveur
+    Revision:
+      emacs-wiki--main--1.0--patch-53
+
+    2004-11-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.8".  Release
+        happens tomorrow!
+        (emacs-wiki-extended-link-regexp)
+        (emacs-wiki-set-sym-and-url-regexp, emacs-wiki-current-word):
+        Replace use of " \t\n(\r)" with "[:space:]" and " \t" with
+        "[:blank:]".  This should fix the problem reported by Pascal
+        Quesseveur concerning processing of emphasized text.
+    
+        * emacs-wiki-colors.el (emacs-wiki-tag-regexp)
+        (emacs-wiki-highlight-markup): Ditto.
+    
+        * emacs-wiki-httpd.el (emacs-wiki-http-changewiki): Ditto.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publishing-markup)
+        (emacs-wiki-changelog-markup, emacs-wiki-markup-footnote)
+        (emacs-wiki-markup-list-or-paragraph, emacs-wiki-markup-table)
+        (emacs-wiki-custom-tags, emacs-wiki-insert-anchor): Ditto.
+    
+        * emacs-wiki-table.el (emacs-wiki-table-markup-fancy-table)
+        (emacs-wiki-publishing-markup): Ditto.
+    
+        * emacs-wiki-id.el (emacs-wiki-id-regexp): Move documentation to
+        the next line (no effect on execution).
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-id.el emacs-wiki-publish.el emacs-wiki-table.el
+     emacs-wiki.el
+
+
+2004-11-30 22:00:53 GMT	Michael Olson <mwolson@member.fsf.org>	patch-52
+
+    Summary:
+      Provide transition functions to repair extended links
+    Revision:
+      emacs-wiki--main--1.0--patch-52
+
+    2004-11-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.7".
+    
+        * emacs-wiki-colors.el: Add Commentary, Startup, Usage, and
+        Contributors to the header.
+    
+        * emacs-wiki-project.el: Ditto.
+    
+        * emacs-wiki-publish.el: Ditto.
+    
+        * emacs-wiki-transition.el: New file that helps users to replace
+        "%20" with a space in the description part of their extended
+        links.  Most likely, you will want to do
+        M-: (emacs-wiki-tr-extended-link-spaces-one-project
+        "<name_of_your_planner_project>" RET.
+
+    new files:
+     .arch-ids/emacs-wiki-transition.el.id emacs-wiki-transition.el
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-menu.el
+     emacs-wiki-project.el emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-11-30 16:00:22 GMT	Michael Olson <mwolson@member.fsf.org>	patch-51
+
+    Summary:
+      Attempt to fix problem with nested projects
+    Revision:
+      emacs-wiki--main--1.0--patch-51
+
+    2004-11-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-add): Move icon link
+        to come after title (heading) and before category name on the
+        output for a new entry.
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.6".
+        (emacs-wiki-recurse-directories): New configurable option that
+        determines whether or not directories are recursed into.  Defaults
+        to nil, which means "do not recurse".  This should fix problems
+        with setups that have nested projects.
+        (emacs-wiki-walk-directories): Wrap check for value of
+        `emacs-wiki-recurse-directories' around the contents of this
+        function.
+    
+
+    modified files:
+     ChangeLog emacs-wiki-journal.el emacs-wiki.el
+
+
+2004-11-28 15:00:52 GMT	Michael Olson <mwolson@member.fsf.org>	patch-50
+
+    Summary:
+      New encryption capability, further documentation
+    Revision:
+      emacs-wiki--main--1.0--patch-50
+
+    2004-11-28  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-menu.el: Add Contributors section.  There have not
+        yet been any contributions to this other than by me and Marc, but
+        a section should exist nonetheless.
+    
+        * emacs-wiki-pgg.el: New file that allows for parts of projects,
+        like sections of text, to be encrypted and kept private.  Thanks
+        to Anirudh Sasikumar for the contribution!
+    
+        * emacs-wiki.texi (Top): Add comments to entries.  Added new
+        entries based on new sections.
+        (Releases): Remove more cruft.  Clarify what we mean by "stable"
+        version of Debian.
+        (Wiki Concepts): Move parts about pcomplete and ChangeLog into the
+        newly-made "Convenience Features" node.  Add note that emacs-wiki
+        is not really a collaborative sort of Wiki like many people are
+        used to.
+        (Convenience Features): New node that documents features that I
+        have not had time to properly document :^) .  I added blurbs about
+        emacs-wiki-menu.el and emacs-wiki-macros.el .
+        (Encryption): New node contributed by Anirudh Sasikumar that
+        documents the use of emacs-wiki-pgg.el .
+        (Contributors): Add note about my contributions and Anirudh
+        Sasikumar as well.
+
+    new files:
+     .arch-ids/emacs-wiki-pgg.el.id emacs-wiki-pgg.el
+
+    modified files:
+     ChangeLog emacs-wiki-menu.el emacs-wiki.texi
+
+
+2004-11-28 03:48:42 GMT	Michael Olson <mwolson@member.fsf.org>	patch-49
+
+    Summary:
+      Update texinfo documentation, esp multiple proj, locations
+    Revision:
+      emacs-wiki--main--1.0--patch-49
+
+    2004-11-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.texi (Multiple Projects): New node that describes how
+        to set up multiple project support in emacs-wiki.
+        (Installation): Change web links for where to obtain emacs-wiki.
+        Change use of "Stable Version" to "Releases" and "Development
+        Version" to "Development".  Adapt section to fit my style of
+        development.
+        (Wiki Concepts): Changed name from "emacs-wiki.el" since that
+        causes problems with the @ref directive.  Change section on
+        pcomplete so that it mentions that you can find pcomplete.el in
+        the "contrib" folder.  Add term "camel case" to describe the
+        combination of upper and lower case used in Wiki names.
+        (Lisp Tricks): Add semicolons to comment line.
+        (Contributors): Change "Parts Copyright" to "Copyright" for me now
+        that I have actually made some significant contributions to this
+        file.
+    
+        * contrib/pcomplete.el: New file that is included in the "contrib"
+        directory so that users do not have to search the net in order to
+        obtain a copy.  It is John Wiegley's pcontrib program, as included
+        with CVS Emacs.
+
+    new files:
+     contrib/.arch-ids/pcomplete.el.id contrib/pcomplete.el
+
+    modified files:
+     ChangeLog emacs-wiki.texi
+
+
+2004-11-27 20:31:01 GMT	Michael Olson <mwolson@member.fsf.org>	patch-48
+
+    Summary:
+      Fix problem when changing to proj with nonexistent default page
+    Revision:
+      emacs-wiki--main--1.0--patch-48
+
+    2004-11-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.5".
+    
+        * emacs-wiki-project.el (emacs-wiki-change-project): Change use of
+        `emacs-wiki-visit-link' to `emacs-wiki-find-file' as suggested by
+        Sun Yijiang.  This fixes the problem when trying to switch to a
+        project whose `emacs-wiki-default-page' does not exist.
+
+    modified files:
+     ChangeLog emacs-wiki-project.el emacs-wiki.el
+
+
+2004-11-25 08:45:48 GMT	Michael Olson <mwolson@member.fsf.org>	patch-47
+
+    Summary:
+      Correct problems during byte-compilation
+    Revision:
+      emacs-wiki--main--1.0--patch-47
+
+    2004-11-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-grep): Use `compilation-start' if it
+        exists, otherwise fall back to `compile-internal'.
+        (emacs-wiki-version): Version "2.63.4".
+    
+        * emacs-wiki-colors.el (emacs-wiki-highlight-link): Actually use
+        `text' variable that we temporarily define.
+        (emacs-wiki-inline-image): Split long code lines.
+    
+        * emacs-wiki-id.el (emacs-wiki-id-keymap): Move nearer to top of
+        file so that XEmacs does not complain while byte-compiling.
+        (emacs-wiki-id-markup): Use `let*' instead of `let' since we are
+        using a variable as part of another variable's initialization.
+        (emacs-wiki-id-edit-id-at-point): Change
+        `run-hooks-with-args-until-success' to
+        `run-hook-with-args-until-success'.
+    
+        * emacs-wiki-journal.el
+        (emacs-wiki-journal-prompt-for-category-wiki): Remove unused
+        variable `directory'.
+        (emacs-wiki-journal-publish-index): Change reference to
+        non-existing function `emacs-wiki-journal-gen-index' to
+        `emacs-wiki-generate-index'.  Remove extra arguments to
+        `emacs-wiki-publish-index'.  I am not completely sure these
+        changes are correct, but they make sense.
+    
+        * emacs-wiki-menu.el (emacs-wiki-menu-make-from-file): Put
+        `save-match-data' around block of code that uses `match-string'.
+        Use "(goto-char (point-min))" instead of "(beginning-of-buffer)".
+    
+        * emacs-wiki-project.el (emacs-wiki-project-interwiki-link): Fix
+        "unbound variable: tag" error when byte-compiling.  I introduced
+        the problem when modifying the function a while ago.  Thanks to
+        Frederik Fouvry for the heads up.
+    
+        * emacs-wiki-publish.el (emacs-wiki-replace-markup): Remove unused
+        variable `start'.
+        (emacs-wiki-make-temp-file): New function that is aliased to
+        `make-temp-file', if it exists.  Otherwise, use the recommended
+        method from the XEmacs manual to make a temporary file.  I have no
+        idea whether or not this is the secure way to do it.  But it's
+        better than throwing an error, at least.
+        (emacs-wiki-command-tag): Make use of `emacs-wiki-make-temp-file'.
+        (emacs-wiki-bookmarks-tag): Remove unused variable `this-buffer'.
+    
+        * contrib: New directory containing source code that is needed for
+        some features of emacs-wiki to function properly.
+    
+        * contrib/cgi.el: Needed for HTTP serving.
+    
+        * contrib/httpd.el: Ditto.  I notice that muse-httpd.el (as
+        bundled with Muse) seems to not rely on "httpdserve", a python
+        script that is mentioned in the header of emacs-wiki-httpd.el .  I
+        could not even find this script on johnw's website, so I suspect
+        it has been deprecated.  Since we will be transitioning over to
+        Muse anyway, and I do not know of anyone who uses this feature, I
+        won't worry about fixing the reference.
+    
+        * contrib/table.el: Needed by emacs-wiki-table.el .
+
+    new files:
+     contrib/.arch-ids/=id contrib/.arch-ids/cgi.el.id
+     contrib/.arch-ids/httpd.el.id contrib/.arch-ids/table.el.id
+     contrib/cgi.el contrib/httpd.el contrib/table.el
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-id.el
+     emacs-wiki-journal.el emacs-wiki-menu.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki.el
+
+    new directories:
+     contrib contrib/.arch-ids
+
+
+2004-11-24 19:20:01 GMT	Michael Olson <mwolson@member.fsf.org>	patch-46
+
+    Summary:
+      `emacs-wiki-journal-category-alist' fix, formatting changes
+    Revision:
+      emacs-wiki--main--1.0--patch-46
+
+    2004-11-24  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.3".
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-category-alist): This
+        function was a casualty from the cons function madness.  Put the
+        extra `car' around the usage of `emacs-wiki-file-alist'.  Thanks
+        to Yamagata Yoriyuki for the heads up and patch.
+        (emacs-wiki-journal-add-category-entry): Recognize lists that have
+        one space in front of them.  Functionality note: Lists will be
+        inserted with one space in front so as to be compatible with Muse
+        in the future.
+        (emacs-wiki-journal-add): Insert anchor first so that when users
+        browse to it, the whole entry will be shown on their screen.
+        Remove unnecessary space-wasting newlines.  When we do not have a
+        category icon, do not insert an extra newline.
+
+    modified files:
+     ChangeLog emacs-wiki-journal.el emacs-wiki.el
+
+
+2004-11-24 07:00:52 GMT	Michael Olson <mwolson@member.fsf.org>	patch-45
+
+    Summary:
+      Make `emacs-wiki-rename-link-at-point' work properly
+    Revision:
+      emacs-wiki--main--1.0--patch-45
+
+    2004-11-24  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version "2.63.2".  patch-44
+        was version "2.63.1".
+        (emacs-wiki-current-word): Swap placement of `save-excursion' and
+        `save-restriction' as Emacs manual recommends.
+        (emacs-wiki-rename-link): Completely redo function so that it
+        replaces all instances of the old name with the new one throughout
+        the current buffer.
+        (emacs-wiki-rename-link-at-point): Add to documentation.  Pass
+        `emacs-wiki-rename-link' the base filename (sans directory) of
+        both the old link and new link.
+
+    modified files:
+     ChangeLog emacs-wiki.el
+
+
+2004-11-24 05:28:29 GMT	Michael Olson <mwolson@member.fsf.org>	patch-44
+
+    Summary:
+      Fix space escaping, esp for `emacs-wiki-edit-link-at-point'
+    Revision:
+      emacs-wiki--main--1.0--patch-44
+
+    2004-11-24  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-colors.el: Correct my email address after forgetting
+        the "DOT" text.
+    
+        * emacs-wiki-id.el: Ditto.
+    
+        * emacs-wiki-project.el: Ditto.
+    
+        * emacs-wiki-publish.el: Ditto.
+    
+        * emacs-wiki.el: Ditto.
+        (emacs-wiki-edit-link-at-point): Decrement second arg to
+        `match-string-no-properties' as suggested by Sacha long ago.  "1"
+        refers to the link destination, "2" refers to the link
+        description.
+        (emacs-wiki-link-escape): Make documentation more clear.  This
+        function will assume that we are dealing with a link description
+        if FURTHER is t, a link destination otherwise.  Only escape spaces
+        if a link destination, since spaces are perfectly valid in link
+        text.  This should fully fix the behavior of
+        `emacs-wiki-edit-link-at-point' without causing problems
+        elsewhere.
+        (emacs-wiki-link-unescape): Ditto.
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-id.el
+     emacs-wiki-project.el emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-11-16 23:59:47 GMT	Michael Olson <mwolson@member.fsf.org>	patch-43
+
+    Summary:
+      Undo changes to `emacs-wiki-server-prefix' default value
+    Revision:
+      emacs-wiki--main--1.0--patch-43
+
+        * emacs-wiki.el: Re-add trailing forward-slash to examples.
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-server-prefix): Re-add
+          trailing forward-slash to the default value.
+
+    modified files:
+     ChangeLog emacs-wiki-journal.el emacs-wiki.el
+
+
+2004-11-16 23:23:21 GMT	Michael Olson <mwolson@member.fsf.org>	patch-42
+
+    Summary:
+      Increment version to 2.63
+    Revision:
+      emacs-wiki--main--1.0--patch-42
+
+
+    modified files:
+     ChangeLog emacs-wiki-colors.el emacs-wiki-httpd.el
+     emacs-wiki-id.el emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki-table.el emacs-wiki.el
+     emacs-wiki.texi
+
+
+2004-11-15 07:14:17 GMT	Michael Olson <mwolson@member.fsf.org>	patch-41
+
+    Summary:
+      Revert change to `emacs-wiki-file-alist'
+    Revision:
+      emacs-wiki--main--1.0--patch-41
+
+    2004-11-15  Michael Olson  <mwolson@gnu.org>
+    
+        * ChangeLog: New autogenerated file that contains the output from
+        "tla changes --diffs".
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-category-alist):
+        Remove outside `car' due to reverting of `emacs-wiki-file-alist'
+        structure.
+        (emacs-wiki-journal-update-anchors): Ditto.
+        (emacs-wiki-journal-update-wiki-project): Do not use list for
+        `emacs-wiki-journal-directory' inclusion.
+    
+        * emacs-wiki-menu.el (emacs-wiki-menu-make-from-list): Remove
+        outside `car' due to reverting of `emacs-wiki-file-alist'
+        structure.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish): Remove outside `car'
+        due to reverting of `emacs-wiki-file-alist' structure.
+        (emacs-wiki-published-file): Ditto.
+    
+        * emacs-wiki.el (emacs-wiki-page-file): Remove outside `car' due
+        to reverting of `emacs-wiki-file-alist' structure.
+        (emacs-wiki-find-file): Ditto.
+        (emacs-wiki-file-alist-with-titles): Ditto.
+        (emacs-wiki-refresh-file-alist): Revert `emacs-wiki-file-alist'
+        structure to use cons cell instead of list for innermost elements.
+
+    new files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+    modified files:
+     emacs-wiki-journal.el emacs-wiki-menu.el emacs-wiki-publish.el
+     emacs-wiki.el
+
+
+2004-11-08 23:40:49 GMT	Michael Olson <mwolson@member.fsf.org>	patch-40
+
+    Summary:
+      Get rid of trailing forward-slash in a few examples
+    Revision:
+      emacs-wiki--main--1.0--patch-40
+
+    2004-11-08  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Strip trailing forward-slash from example uses of
+        `emacs-wiki-server-prefix' in the header.
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-server-prefix): Strip
+        trailing forward-slash from default value.
+
+    modified files:
+     emacs-wiki-journal.el emacs-wiki.el
+
+
+2004-11-08 23:23:55 GMT	Michael Olson <mwolson@member.fsf.org>	patch-39
+
+    Summary:
+      Redo docstring for `emacs-wiki-publish.el'
+    Revision:
+      emacs-wiki--main--1.0--patch-39
+
+    2004-11-08  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-coding-default): Replace
+        docstring with something that makes a little more sense.
+
+    modified files:
+     emacs-wiki-publish.el
+
+
+2004-11-08 23:04:27 GMT	Michael Olson <mwolson@member.fsf.org>	patch-38
+
+    Summary:
+      "(caddr ...)" -> "(car (cddr ...))" in emacs-wiki-menu.el
+    Revision:
+      emacs-wiki--main--1.0--patch-38
+
+    2004-11-08  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-menu.el (emacs-wiki-menu-make-from-list): Use
+        "(car (cddr ...))" instead of "(caddr ...)" since `caddr' requires
+        'cl.
+
+    modified files:
+     emacs-wiki-menu.el emacs-wiki.el
+
+
+2004-11-06 20:08:42 GMT	Michael Olson <mwolson@member.fsf.org>	patch-37
+
+    Summary:
+      Fix careless syntax error in last commit
+    Revision:
+      emacs-wiki--main--1.0--patch-37
+
+    2004-11-06  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-version): Version is 2.62.0 .
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish): Fix careless error.
+
+    modified files:
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-11-06 19:41:46 GMT	Michael Olson <mwolson@member.fsf.org>	patch-36
+
+    Summary:
+      "(cadar ...)" -> "(car (cdar ...))", release 2.62
+    Revision:
+      emacs-wiki--main--1.0--patch-36
+
+    2004-11-06  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish): Change use of
+        "(cadar ...)" to "(car (cdar ...))" since the `cadar' function
+        doesn't exist in some versions of Emacs.
+    
+        * emacs-wiki-colors.el, emacs-wiki-httpd.el, emacs-wiki-id.el,
+        emacs-wiki-journal.el, emacs-wiki-macros.el, emacs-wiki-mathml.el,
+        emacs-wiki-menu.el, emacs-wiki-project.el, emacs-wiki-publish.el,
+        emacs-wiki-table.el, emacs-wiki.el, emacs-wiki.texi: Update
+        version number to 2.62 .
+
+    modified files:
+     emacs-wiki-colors.el emacs-wiki-httpd.el emacs-wiki-id.el
+     emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki-table.el emacs-wiki.el
+     emacs-wiki.texi
+
+
+2004-10-31 02:17:03 GMT	Michael Olson <mwolson@member.fsf.org>	patch-35
+
+    Summary:
+      Increment version string to 2.61.4
+    Revision:
+      emacs-wiki--main--1.0--patch-35
+
+    One of these times I'll remember to do this during a commit :^) .
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-31 02:15:38 GMT	Michael Olson <mwolson@member.fsf.org>	patch-34
+
+    Summary:
+      Fix some emacs-wiki-journal breakages from file-alist change
+    Revision:
+      emacs-wiki--main--1.0--patch-34
+
+    2004-10-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-category-regexp): Make
+        the regexp match only categories that fit the CamelCase
+        guidelines.
+        (emacs-wiki-journal-category-alist): Change use of "while" to
+        "mapc".
+        (emacs-wiki-journal-update-wiki-project): Re-add forgotten period.
+        (emacs-wiki-journal-update-anchors): Change use of `cdr' to
+        `cadr'.
+
+    modified files:
+     emacs-wiki-journal.el
+
+
+2004-10-30 20:34:12 GMT	Michael Olson <mwolson@member.fsf.org>	patch-33
+
+    Summary:
+      Update emacs-wiki-journal for new file-alist structure
+    Revision:
+      emacs-wiki--main--1.0--patch-33
+
+    2004-10-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-update-wiki-project):
+        Make `emacs-wiki-directories' be recorded as a list.
+
+    modified files:
+     emacs-wiki-journal.el
+
+
+2004-10-30 19:56:12 GMT	Michael Olson <mwolson@member.fsf.org>	patch-32
+
+    Summary:
+      Increment version number to 2.61.3
+    Revision:
+      emacs-wiki--main--1.0--patch-32
+
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-30 19:55:02 GMT	Michael Olson <mwolson@member.fsf.org>	patch-31
+
+    Summary:
+      Fix `emacs-wiki-refresh-file-alist', revert `emacs-wiki-link-url'
+    Revision:
+      emacs-wiki--main--1.0--patch-31
+
+    2004-10-30  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-refresh-file-alist): Rewrite part that
+        sets `last-mod' to get rid of "while" loop.  No C-isms allowed :^)
+        .  Changed "((page_name . page_location))" to "((page_name
+        page_location))" since the `cons' function only allows the second
+        argument to be a list, not a string.  At least, this is the case
+        in Emacs from CVS.
+        (emacs-wiki-find-file): Change `cdr' to `cadr' due to adjustment
+        of the file-alist structure.
+        (emacs-wiki-file-alist-with-titles): Ditto.
+        (emacs-wiki-page-file): Ditto.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish): Change `cdar' to
+        `cadar' due to adjustment of the file-alist structure.
+        (emacs-wiki-published-file): Change `cdr' to `cadr' due to
+        adjustment of the file-alist structure.
+        (emacs-wiki-link-url): Revert to version before patch-28, since
+        the newer patch did not include extensions of Wiki
+        files (i.e. ".html") when publishing.
+
+    modified files:
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-10-30 02:38:39 GMT	Michael Olson <mwolson@member.fsf.org>	patch-30
+
+    Summary:
+      Code housekeeping, no functionality changes
+    Revision:
+      emacs-wiki--main--1.0--patch-30
+
+    2004-10-29  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-refresh-file-alist): Move `let' block
+        outside of `setcar' statement for clarity.
+        (emacs-wiki-follow-name-at-point): Use
+        `match-string-no-properties' instead of `match-string'.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publish):  Moved block of code
+        outside of `if' statement.
+
+    modified files:
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-10-27 04:33:44 GMT	Michael Olson <mwolson@member.fsf.org>	patch-29
+
+    Summary:
+      Move more publishing-related functions to emacs-wiki-publish.el
+    Revision:
+      emacs-wiki--main--1.0--patch-29
+
+    2004-10-26  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-rename-link-at-point): Use
+        `match-string-no-properties' instead of manually clearing
+        properties.  Should not change any existing functionality.
+    
+        * emacs-wiki-publish.el (emacs-wiki-serving-p)
+        (emacs-wiki-transform-name, emacs-wiki-published-name)
+        (emacs-wiki-published-file, emacs-wiki-publishing-transforms):
+        Moved from emacs-wiki.el so that it's easier for me to see what
+        still needs to be implemented in muse-wiki.el, the file which will
+        allow emacs-wiki users to retain wiki-related functionality.
+    
+        * emacs-wiki-project.el (emacs-wiki-project-interwiki-link):
+        Change indentation of source code.  No change in functionality.
+        Hmm, looks like we have the word of the day, folks.
+
+    modified files:
+     emacs-wiki-project.el emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-10-25 23:39:00 GMT	Michael Olson <mwolson@member.fsf.org>	patch-28
+
+    Summary:
+      Fix embedded wiki link problem (thanks to Sacha)
+    Revision:
+      emacs-wiki--main--1.0--patch-28
+
+    2004-10-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-link-url): Apply patch from
+        Sacha that fixes a problem with links to nested wikis.
+
+    modified files:
+     emacs-wiki-publish.el
+
+
+2004-10-25 18:03:20 GMT	Michael Olson <mwolson@member.fsf.org>	patch-27
+
+    Summary:
+      Make `emacs-wiki-use-mode-flags' default to nil
+    Revision:
+      emacs-wiki--main--1.0--patch-27
+
+    2004-10-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-publish.el (emacs-wiki-use-mode-flags): Default to
+        nil in both windoze and GNU/Linux as suggested by Sacha.
+
+    modified files:
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-10-24 21:04:01 GMT	Michael Olson <mwolson@member.fsf.org>	patch-26
+
+    Summary:
+      `emacs-wiki-full-path-ignore-regexp', version numbering scheme
+    Revision:
+      emacs-wiki--main--1.0--patch-26
+
+    2004-10-24  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Update contributors section to document Yohanes's
+        contribution.  Since this changes more than 8-10 lines, I also
+        added a Parts copyright notice.
+        (emacs-wiki-version): I think I'll increment the third tuple of
+        the version on each commit, and increment the second on each
+        release.  Hence, this version will be committed as "2.61.1".  I'll
+        only update the header information on releases, so it won't show
+        the third tuple.
+        
+    2004-10-24  Yohanes Santoso  <ysantoso@dessyku.is-a-geek.org>
+    
+        * emacs-wiki.el (emacs-wiki-full-path-ignore-regexp): New
+        customizable variable that is used to exclude version control
+        directories (like {arch} and CVS) from publishing.
+        (emacs-wiki-refresh-file-alist): Add handling of
+        `emacs-wiki-with-full-path-ignore-regexp'.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-17 20:56:18 GMT	Michael Olson <mwolson@member.fsf.org>	patch-25
+
+    Summary:
+      Change version to 2.61 to correspond with Debian package
+    Revision:
+      emacs-wiki--main--1.0--patch-25
+
+    2004-10-17  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-colors.el: Change version to 2.61 to be consistent
+        with version of Debian package.  <sigh/> Hopefully this will be
+        last jump backwards in version numbering.
+    
+        * emacs-wiki-httpd.el: Ditto.
+    
+        * emacs-wiki-id.el: Ditto.
+    
+        * emacs-wiki-journal.el: Ditto.
+    
+        * emacs-wiki-macros.el: Ditto.
+    
+        * emacs-wiki-mathml.el: Ditto.
+    
+        * emacs-wiki-menu.el: Ditto.
+    
+        * emacs-wiki-project.el: Ditto.
+    
+        * emacs-wiki-publish.el: Ditto.
+    
+        * emacs-wiki-table.el: Ditto.
+    
+        * emacs-wiki.el: Ditto.  Bring `emacs-wiki-version' up-to-date.
+    
+        * emacs-wiki.text: Ditto.
+    
+
+    modified files:
+     emacs-wiki-colors.el emacs-wiki-httpd.el emacs-wiki-id.el
+     emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-menu.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki-table.el emacs-wiki.el
+     emacs-wiki.texi
+
+
+2004-10-15 21:40:19 GMT	Michael Olson <mwolson@member.fsf.org>	patch-24
+
+    Summary:
+      Attempt to behave better when local variables change mode
+    Revision:
+      emacs-wiki--main--1.0--patch-24
+
+    2004-10-15  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-mode): Only run the rest of the
+        function if we are still in emacs-wiki-mode after checking local
+        variables.  Move project-switching code after local variable
+        checking code.  Re-indent code.  There is still a problem with the
+        buffer being colorized even though the mode has been changed
+        through local variables.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-15 03:33:38 GMT	Michael Olson <mwolson@member.fsf.org>	patch-23
+
+    Summary:
+      Add examples directory and example stylesheet
+    Revision:
+      emacs-wiki--main--1.0--patch-23
+
+    2004-10-14  Michael Olson  <mwolson@gnu.org>
+    
+        * examples/default.css: New file that contains a fairly thorough
+        example CSS stylesheet file, as requested by Tim O'Callaghan.
+
+    new files:
+     examples/.arch-ids/=id examples/.arch-ids/default.css.id
+     examples/default.css
+
+    new directories:
+     examples examples/.arch-ids
+
+
+2004-10-15 01:39:23 GMT	Michael Olson <mwolson@member.fsf.org>	patch-22
+
+    Summary:
+      Attempt to fix problem with resolving paths like "~user"
+    Revision:
+      emacs-wiki--main--1.0--patch-22
+
+    2004-10-14  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-published-name): Fix problem with
+        "~user" not being expanded correctly.  Add some comments.  Remove
+        spurious progn line.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-14 19:45:22 GMT	Michael Olson <mwolson@member.fsf.org>	patch-21
+
+    Summary:
+      Add another contributor, tweak copyright notices
+    Revision:
+      emacs-wiki--main--1.0--patch-21
+
+    2004-10-14  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Change Parts copyright notices for previous
+        maintainers to full copyright notices.  Add Michal Maruska to
+        contributors section.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-10-05 04:19:13 GMT	Michael Olson <mwolson@member.fsf.org>	patch-20
+
+    Summary:
+      Try again to fix width of footnote entries
+    Revision:
+      emacs-wiki--main--1.0--patch-20
+
+    2004-10-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-mathml.el (emacs-wiki-publishing-footer): Replace use
+        of col tags with "style=..." since I've exhausted all other
+        options.
+    
+        * emacs-wiki-publish.el (emacs-wiki-publishing-footer): Remove
+        spaces between end of string and "/>" characters in col tags to
+        make them look a bit better.
+
+    modified files:
+     emacs-wiki-mathml.el emacs-wiki-publish.el
+
+
+2004-10-04 19:11:42 GMT	Michael Olson <mwolson@member.fsf.org>	patch-19
+
+    Summary:
+      War on tabs, fix invisible footnote bug
+    Revision:
+      emacs-wiki--main--1.0--patch-19
+
+    2004-10-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-blosxom.el: Replace tabs with whitespace.
+    
+        * emacs-wiki-colors.el: Ditto.
+    
+        * emacs-wiki-journal.el: Ditto.
+    
+        * emacs-wiki-macros.el: Ditto.
+    
+        * emacs-wiki-project.el: Ditto.
+    
+        * emacs-wiki-publish.el: Ditto.
+    
+        * emacs-wiki.el: Ditto.
+    
+        * emacs-wiki-mathml.el: Ditto.
+        (emacs-wiki-publishing-footer): Move col tag underneath tr tag
+        since apparently that is how the XHTML 1.1 + MathML standard wants
+        it.  Regular XHTML 1.1 chokes when I try to do something similar.
+
+    modified files:
+     emacs-wiki-blosxom.el emacs-wiki-colors.el
+     emacs-wiki-journal.el emacs-wiki-macros.el
+     emacs-wiki-mathml.el emacs-wiki-project.el
+     emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-10-04 18:23:40 GMT	Michael Olson <mwolson@member.fsf.org>	patch-18
+
+    Summary:
+      Validation fixes for emacs-wiki-mathml.el
+    Revision:
+      emacs-wiki--main--1.0--patch-18
+
+    2004-10-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-mathml.el: Change file permissions to 644.
+        (emacs-wiki-publishing-header): Remove xmlns:math line because it
+        makes documents not validate properly.
+        (emacs-wiki-publishing-footer): Use col tag instead of putting
+        width attribute on td tags.  This makes documents validate
+        properly.
+
+    modified files:
+     emacs-wiki-mathml.el
+
+
+2004-10-04 16:00:55 GMT	Michael Olson <mwolson@member.fsf.org>	patch-17
+
+    Summary:
+      Fix validation problem in `emacs-wiki-make-menu-from-list'
+    Revision:
+      emacs-wiki--main--1.0--patch-17
+
+    2004-10-04  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-menu.el (emacs-wiki-menu-make-from-list): Make
+        "onMouseOut" and "onMouseOver" lowercase so that it validates
+        correctly as XHTML 1.1 .  Thanks to Marc Tommasi for pointing this
+        out.
+
+    modified files:
+     emacs-wiki-menu.el
+
+
+2004-10-02 06:32:24 GMT	Michael Olson <mwolson@member.fsf.org>	patch-16
+
+    Summary:
+      Documentation tweaks
+    Revision:
+      emacs-wiki--main--1.0--patch-16
+
+    2004-10-02  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.texi: Move copyright list to the newly-made
+        Contributors section.  Remove some references to the
+        stable/development model that Sacha used to have, since I do not
+        do development the same way.  Change instances of
+        <mwolson@member.fsf.org> to <mwolson@gnu.org> .  Added link to my
+        official webpage for emacs-wiki.  Add John Sullivan to the
+        contributors section since he did most of the initial work for the
+        document.
+
+    modified files:
+     emacs-wiki.texi
+
+
+2004-09-27 15:58:15 GMT	Michael Olson <mwolson@member.fsf.org>	patch-15
+
+    Summary:
+      XEmacs fix: work around lack of `derived-mode-p'
+    Revision:
+      emacs-wiki--main--1.0--patch-15
+
+    2004-09-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: (emacs-wiki-derived-mode-p): New function.  When
+        `derived-mode-p' is defined already, make an alias to that
+        definition.  Otherwise, use a definition copied from Emacs 21.
+        Thanks to Sacha for the fix.
+        (emacs-wiki-directories-member): Indentation cleanups, not
+        user-visible.
+        (emacs-wiki-index): Use `emacs-wiki-derived-mode-p'
+        instead of `derived-mode-p'.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-09-27 05:51:49 GMT	Michael Olson <mwolson@member.fsf.org>	patch-14
+
+    Summary:
+      Change Li Daobing's email address as requested
+    Revision:
+      emacs-wiki--main--1.0--patch-14
+
+    2004-09-27  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-mathml.el: Change Li Daobing's email address
+        to (lidaobing AT gmail DOT com) as requested.
+
+    modified files:
+     emacs-wiki-mathml.el
+
+
+2004-09-27 04:04:22 GMT	Michael Olson <mwolson@member.fsf.org>	patch-13
+
+    Summary:
+      Add very preliminary MathML support
+    Revision:
+      emacs-wiki--main--1.0--patch-13
+
+    2004-09-26  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-mathml.el: New file that implements macro expansion
+        in emacs-wiki.  See the beginning of that file for installation
+        instructions.  No usage instructions have been made yet, since I
+        don't know how to use it.  The Copyright notice was changed since
+        I don't know for sure if Li has gone through the FSF copyright
+        assignment process.  Changed name from emacs-wiki-math.el to
+        emacs-wiki-mathml.el .
+    
+    2004-09-22  Li Daobing  <lidaobing@gmail.com>
+    
+        * emacs-wiki-math.el: Support `\int', `\sum', ...  and not support
+        IE again.
+    
+    2004-09-21  Li Daobing  <lidaobing@gmail.com>
+    
+        * emacs-wiki-math.el: Support IE, fix bugs.
+    
+    Patches applied:
+    
+     * sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-73
+       Add Li Daobing's emacs-wikimath.el
+    
+     * sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-74
+       Bugfix: emacs-wiki-math.el: Do not set user-customizable variables
+    
+
+    new files:
+     .arch-ids/emacs-wiki-mathml.el.id emacs-wiki-mathml.el
+
+    new patches:
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-73
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-74
+
+
+2004-09-27 01:18:29 GMT	Michael Olson <mwolson@member.fsf.org>	patch-12
+
+    Summary:
+      Macro expansion, menu documentation, menu from file bugfix
+    Revision:
+      emacs-wiki--main--1.0--patch-12
+
+    2004-09-26  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el: Load emacs-wiki-macros.el automatically.
+    
+        * emacs-wiki-macros.el: New file that implements macro expansion
+        in emacs-wiki.  See the beginning of that file for usage
+        instructions.
+    
+        * emacs-wiki-menu.el: Fix description of file.  Add some barely
+        sufficient documentation to the header so that people can have an
+        easier time understanding what this actually does.  Thanks to
+        Sacha for the "document as you go" advice.
+        (emacs-wiki-menu-factory): Docstring cleanup.  Added description
+        for `emacs-wiki-menu-make-from-list'.
+        (emacs-wiki-menu-make-from-file): Use `save-excursion' here since
+        we are opening up another buffer.  Thanks to Marc Tommasi for
+        insisting that this was necessary.
+    
+        * emacs-wiki-publish.el (emacs-wiki-style-sheet): Add a comment to
+        indicate which entries are needed in order to get
+        emacs-wiki-menu.el working properly.  Clarify a comment.  Minor
+        whitespace change.
+        (emacs-wiki-publishing-markup): Add entry to expand macros
+        properly.
+
+    new files:
+     .arch-ids/emacs-wiki-macros.el.id emacs-wiki-macros.el
+
+    modified files:
+     emacs-wiki-menu.el emacs-wiki-publish.el emacs-wiki.el
+
+
+2004-09-26 18:35:46 GMT	Michael Olson <mwolson@member.fsf.org>	patch-11
+
+    Summary:
+      Make emacs-wiki not need Planner installed to work properly
+    Revision:
+      emacs-wiki--main--1.0--patch-11
+
+    2004-09-26  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-edit-link-at-point): Replace instance
+        of `planner-make-link' with `emacs-wiki-make-link'.  Thanks to
+        Matt Hodges for noticing and Sacha Chua for the patch.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-09-25 23:05:48 GMT	Michael Olson <mwolson@member.fsf.org>	patch-10
+
+    Summary:
+      Fix problem with `font-lock-multiline' is undefined in XEmacs
+    Revision:
+      emacs-wiki--main--1.0--patch-10
+
+    2004-09-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-colors.el: Add definitions for `font-lock-mode' and
+        `font-lock-multiline' in order to be kinder to XEmacs users.
+        Taken from muse-colors.el .
+
+    modified files:
+     emacs-wiki-colors.el
+
+
+2004-09-25 08:56:03 GMT	Michael Olson <mwolson@member.fsf.org>	patch-9
+
+    Summary:
+      Patch from John Sullivan to fix URI's with spaces in them
+    Revision:
+      emacs-wiki--main--1.0--patch-9
+
+    2004-09-25  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki.el (emacs-wiki-link-escape): Apply patch from John
+        Sullivan to fix problem with coloring a URI that has spaces in it.
+        (emacs-wiki-link-unescape): Ditto.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-09-25 02:10:38 GMT	Michael Olson <mwolson@member.fsf.org>	patch-8
+
+    Summary:
+      Header changes, menu generation, journal entry fixup,
+  splitting of emacs-wiki.el
+    Revision:
+      emacs-wiki--main--1.0--patch-8
+
+    2004-09-24  Jose A Ortega Ruiz  <jao@gnu.org>
+    
+        * emacs-wiki-journal.el (emacs-wiki-journal-category-time-format):
+        New variable for category entries timestamp format.
+        (emacs-wiki-journal-title): Properly allow 'nil' in customization
+        buffers.
+        (emacs-wiki-journal-add-category-entry): Fixed bug that added new
+        category entries at the second (instead of first) position if no
+        header present.
+    
+    2004-09-23  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-blosxom.el: Tweaked headers.  Copyright notices were
+        added for those who sent in contributed 8 or more lines of code,
+        as per my understanding of the GNU tradition.  Those who
+        contributed patches (who are not also present or previous
+        maintainers) are noted in the Contributors section.  I recently
+        received a GNU account, so I will use that address in the headers.
+    
+        * emacs-wiki-httpd.el: Ditto.
+    
+        * emacs-wiki-id.el: Ditto.
+    
+        * emacs-wiki-journal.el: Ditto.
+    
+        * emacs-wiki-table.el: Ditto.
+    
+        * emacs-wiki.el: Ditto.  Web site addresses were updated.  I
+        downgraded the version string to 2.9.0 so that it does not
+        conflict with the Muse version string.
+    
+        * emacs-wiki.texi: Downgraded version number to 2.9.0.
+    
+    2004-09-22  Michael Olson  <mwolson@gnu.org>
+    
+        * emacs-wiki-menu.el: New file that implements the generation of
+        menus for wiki pages.  Marc Tommasi did most of the work and sent
+        in quite a few patches.
+    
+        * emacs-wiki-publish.el: New file containing all of the stuff that
+        was formerly in the "Emacs Wiki Publishing" section of
+        emacs-wiki.el
+    
+        * emacs-wiki-project.el: New file containing all of the stuff that
+        was formerly in the "Support for multile Emacs Wiki projects"
+        section of emacs-wiki.el.
+    
+        * emacs-wiki-colors.el: New file containing all of the stuff that
+        was formerly in the "Emacs Wiki Highlighting" section of
+        emacs-wiki.el.
+    
+        * emacs-wiki.el: Moved the following variables into
+        emacs-wiki-colors.el: emacs-wiki-highlight,
+        emacs-wiki-keymap-property, emacs-wiki-highlight-buffer-hook,
+        emacs-wiki-before-highlight-buffer-hook, emacs-wiki-inline-images,
+        emacs-wiki-image-regexp, emacs-wiki-file-regexp,
+        emacs-wiki-tag-regexp, emacs-wiki-inline-relative-to,
+        emacs-wiki-markup-tags, emacs-wiki-dangerous-tags,
+        emacs-wiki-highlight-regexp, emacs-wiki-highlight-vector,
+        emacs-wiki-configure-highlighting.  Moved the following faces into
+        emacs-wiki-colors.el: emacs-wiki-link-face,
+        emacs-wiki-bad-link-face.  Moved the following functions into
+        emacs-wiki-colors.el: emacs-wiki-make-faces,
+        emacs-wiki-highlight-ok-context-p, emacs-wiki-multiline-maybe,
+        emacs-wiki-highlight-emphasized, emacs-wiki-highlight-underlined,
+        emacs-wiki-highlight-verbatim, emacs-wiki-highlight-markup,
+        emacs-wiki-use-font-lock, emacs-wiki-mode-flyspell-verify,
+        emacs-wiki-eval-lisp, emacs-wiki-highlight-buffer,
+        emacs-wiki-highlight-region, emacs-wiki-unhighlight-region,
+        emacs-wiki-link-properties, emacs-wiki-link-face,
+        emacs-wiki-highlight-link, emacs-wiki-inline-image.  Moved the
+        following variables into emacs-wiki-project.el:
+        emacs-wiki-project, emacs-wiki-current-project,
+        emacs-wiki-predicate, emacs-wiki-major-mode,
+        emacs-wiki-project-server-prefix, emacs-wiki-show-project-name-p,
+        emacs-wiki-update-project-hook.  Moved the following functions
+        into emacs-wiki-project.el: emacs-wiki-update-project-interwikis,
+        emacs-wiki-projects, with-emacs-wiki-project,
+        emacs-wiki-change-project, emacs-wiki-relative-link-maybe,
+        emacs-wiki-project-interwiki-link.
+    
+    Patches applied:
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--base-0
+       tag of sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-63
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-11
+       Resync with Michael's archive
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-13
+       Wiki-journal's category entries bug fix.
+
+    new files:
+     .arch-ids/emacs-wiki-colors.el.id
+     .arch-ids/emacs-wiki-menu.el.id
+     .arch-ids/emacs-wiki-project.el.id
+     .arch-ids/emacs-wiki-publish.el.id emacs-wiki-colors.el
+     emacs-wiki-menu.el emacs-wiki-project.el emacs-wiki-publish.el
+
+    modified files:
+     emacs-wiki-blosxom.el emacs-wiki-httpd.el emacs-wiki-id.el
+     emacs-wiki-journal.el emacs-wiki-table.el emacs-wiki.el
+     emacs-wiki.texi
+
+    new patches:
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--base-0
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-11
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-13
+
+
+2004-09-23 23:57:28 GMT	Michael Olson <mwolson@member.fsf.org>	patch-7
+
+    Summary:
+      Cancelled emacs-wiki--main--patch-6 which was an accidental commit
+    Revision:
+      emacs-wiki--main--1.0--patch-7
+
+
+    modified files:
+     emacs-wiki-httpd.el emacs-wiki-id.el emacs-wiki-journal.el
+     emacs-wiki.el
+
+
+2004-09-23 23:48:09 GMT	Michael Olson <mwolson@member.fsf.org>	patch-6
+
+    Summary:
+      
+    Revision:
+      emacs-wiki--main--1.0--patch-6
+
+
+    modified files:
+     emacs-wiki-httpd.el emacs-wiki-id.el emacs-wiki-journal.el
+     emacs-wiki.el
+
+
+2004-09-21 08:29:19 GMT	Michael Olson <mwolson@member.fsf.org>	patch-5
+
+    Summary:
+      Change maintainer and version information, fix selection of
+  default page in `emacs-wiki-project-interwiki-link'.
+    Revision:
+      emacs-wiki--main--1.0--patch-5
+
+    2004-09-21  Michael Olson  <mwolson@member.fsf.org>
+    
+            * emacs-wiki-httpd.el: Change maintainer to reflect my current
+            website and email.  The version was not being correctly
+            updated since the code transitioned from using CVS to Arch, so
+            I found the latest version that Damien Elmes had and bumped
+            the major version up by 1, resulting in this being version
+            3.0.0 .
+    
+            * emacs-wiki-id.el: Ditto.
+    
+            * emacs-wiki-journal.el: Ditto.  Credit Jose A. Ortega Ruiz
+            for his journal-splitting contribution.
+    
+            * emacs-wiki-table.el: Ditto.
+    
+            * emacs-wiki.el: Ditto.  Add section on multiple project
+            support.  Credit past maintainers.  Remove irrelevant part of
+            header dealing with code layout.  Remove comment found near end
+            of file that seems to have been an example usage of
+            `emacs-wiki-projects'.
+            (emacs-wiki): Change `behaviour' to `behavior' in docstring.
+            (emacs-wiki-highlight): Ditto.
+            (emacs-wiki-publish): Ditto.
+            (emacs-wiki-project-interwiki-link): If we are given a nil second
+            argument, use the value of `emacs-wiki-default-page' instead.  The
+            usage of `emacs-wiki-home-page' seems to have been incorrect here.
+            Instead of trying to detect a nil tag multiple times, do so once.
+    
+            * emacs-wiki.texi: Trim unneeded whitespace.  Change text so
+            that it points to me as current maintainer.  Add brief history
+            entry saying that I became maintainer.  Replace instances of
+            version string with "3.0.0".
+
+    modified files:
+     emacs-wiki-httpd.el emacs-wiki-id.el emacs-wiki-journal.el
+     emacs-wiki-table.el emacs-wiki.el emacs-wiki.texi
+     test/emacs-wiki-test.el
+
+
+2004-09-19 06:50:59 GMT	Michael Olson <mwolson@member.fsf.org>	patch-4
+
+    Summary:
+      Fix scenario where the old project name still existed in
+  project list after being changed.
+    Revision:
+      emacs-wiki--main--1.0--patch-4
+
+    2004-09-19  Michael Olson  <mwolson@member.fsf.org>
+    
+    	* emacs-wiki-journal.el (emacs-wiki-journal-project-default-name):
+    	New variable that indicates what the default value of
+    	`emacs-wiki-journal-project' will be set to.
+    	(emacs-wiki-journal-project): Use
+    	`emacs-wiki-journal-project-default-name' for default value
+    	instead of a string.
+        	(emacs-wiki-update-wiki-project): Add comments and remove any
+    	items from `emacs-wiki-projects' that are associated with the
+    	default name found in `emacs-wiki-journal-project-default-name'.
+
+    modified files:
+     emacs-wiki-journal.el
+
+
+2004-09-17 02:35:16 GMT	Michael Olson <mwolson@member.fsf.org>	patch-3
+
+    Summary:
+      Fix bug in time formatting, from jao's repository
+    Revision:
+      emacs-wiki--main--1.0--patch-3
+
+    Patches applied:
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-6
+       Bugfix from Michael Olson: interwiki links
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-7
+       Resync with Sacha's tree.
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-8
+       Minor bug fix
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-9
+       fig bug in time formatting
+    
+     * jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-10
+       star-merge with Michael's archive.
+
+    modified files:
+     emacs-wiki-journal.el
+
+    new patches:
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-6
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-7
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-8
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-9
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-10
+
+
+2004-09-16 23:42:02 GMT	Michael Olson <mwolson@member.fsf.org>	patch-2
+
+    Summary:
+      Apply patch from Aleix Conchillo Flaque to fix mangling of section titles that have brackets in them.
+    Revision:
+      emacs-wiki--main--1.0--patch-2
+
+    2004-09-16  Michael Olson  <mwolson@member.fsf.org>
+    
+    	* emacs-wiki.el (emacs-wiki-contents-tag): Tidy up the source code
+    	indentation a bit.
+    
+    2004-09-16  Aleix Conchillo Flaque <aleix@member.fsf.org>
+    
+    	* emacs-wiki.el (emacs-wiki-contents-tag): Fix bug where brackets
+    	in a section title were displayed improperly.
+
+    modified files:
+     emacs-wiki.el
+
+
+2004-09-09 18:38:46 GMT	Michael Olson <mwolson@member.fsf.org>	patch-1
+
+    Summary:
+      Make emacs-wiki-journal.el play nicer with other projects in
+  a multi-project environment
+    Revision:
+      emacs-wiki--main--1.0--patch-1
+
+    	* emacs-wiki-journal.el (emacs-wiki-journal-project): Made into a
+    	customizable variable that specifies the interwiki name of the
+    	project.  Removed old definition.
+    	(emacs-wiki-journal-publishing-directory): Change default value
+    	from `emacs-wiki-publishing-directory' since the name should be
+    	more distinct.
+    	(emacs-wiki-journal-server-prefix): New customizable variable that
+    	specifies the relative location of the publishing directory of
+    	this project with respect to the publishing directories of other
+    	Emacs Wiki projects.
+    	(emacs-wiki-journal-update-wiki-project): Add
+    	`emacs-wiki-journal-server-prefix' to the list of project-specific
+    	variables.
+
+    modified files:
+     emacs-wiki-journal.el
+
+
+2004-09-09 18:03:00 GMT	Michael Olson <mwolson@member.fsf.org>	base-0
+
+    Summary:
+      tag of sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-72
+    Revision:
+      emacs-wiki--main--1.0--base-0
+
+    (automatically generated log message)
+
+    new patches:
+     arch@repose.cx--03/emacs-wiki--dev--1.0--base-0
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-1
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-2
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-3
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-4
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-5
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-6
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-7
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-8
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-9
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-10
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-11
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-12
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-13
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-14
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-15
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-16
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-17
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-18
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-19
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-20
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-21
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-22
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-23
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-24
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-25
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-26
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-27
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-28
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-29
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-30
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-31
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-32
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-33
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-34
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-35
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-36
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-37
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-38
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-39
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-40
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-41
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-42
+     arch@repose.cx--03/emacs-wiki--dev--1.0--patch-43
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--base-0
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-1
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-2
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-3
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-4
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-5
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-6
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-7
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-8
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-9
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-10
+     davidsmith@acm.org--2004/emacs-wiki--dds--1.0--patch-11
+     davidsmith@acm.org--2004/emacs-wiki--planner-read-date--1.0--base-0
+     davidsmith@acm.org--2004/emacs-wiki--planner-read-date--1.0--patch-1
+     dne@mayonnaise.net--2004/emacs-wiki--planner--0--base-0
+     dne@mayonnaise.net--2004/emacs-wiki--planner--0--patch-1
+     dne@mayonnaise.net--2004/emacs-wiki--planner--0--patch-2
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-1
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-2
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-3
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-4
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-5
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-6
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-8
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-9
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-10
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-11
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-13
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-14
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-15
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-16
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-18
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-19
+     gary@gnu.org--2004/emacs-wiki--gary--1.0--patch-20
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-1
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-2
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-3
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-4
+     jao@gnu.org--2004/emacs-wiki--jao--1.0--patch-5
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--base-0
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-1
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-2
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-3
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-4
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-5
+     mark@dishevelled.net--2003-mst/emacs-wiki--beta--1.0--patch-6
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--base-0
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-1
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-2
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-3
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-4
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-5
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-6
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-7
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-8
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-9
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-10
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-11
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-12
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-13
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-14
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-15
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-16
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-17
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-18
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-19
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-20
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-21
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-22
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-23
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-24
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-25
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-26
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-27
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-28
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-29
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-30
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-31
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-32
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-33
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-34
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-35
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-36
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-37
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-38
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-39
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-40
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-41
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-42
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-43
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-44
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-45
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-46
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-47
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-48
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-49
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-50
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-51
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-52
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-53
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-54
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-55
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-56
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-57
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-58
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-59
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-60
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-61
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-62
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-63
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-64
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-65
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-66
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-67
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-68
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-69
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-70
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-71
+     sacha@free.net.ph--main/emacs-wiki--dev--1.0--patch-72
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--base-0
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-1
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-2
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-3
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-4
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-5
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-6
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-7
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-8
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-9
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-10
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-11
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-12
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-13
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-14
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-15
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-16
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-17
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-18
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-19
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-20
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-21
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-22
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-23
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-24
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-25
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-26
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-27
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-28
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-29
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-30
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-31
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-32
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-33
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-34
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-35
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-36
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-37
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-38
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-39
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-40
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-41
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-42
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-43
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-44
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-45
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-46
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-47
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-48
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-49
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-50
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-51
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-52
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-53
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-54
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-55
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-56
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-57
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-58
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-59
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-60
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-61
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-62
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-63
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-64
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-65
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-66
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-67
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-68
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-69
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-70
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-71
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-72
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-73
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-74
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-75
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-76
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-77
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-78
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-79
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-80
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-81
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-82
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-83
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-84
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-85
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-86
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-87
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-88
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-89
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-90
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-91
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-92
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-93
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-94
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-95
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-96
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-97
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-98
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-99
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-100
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-101
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-102
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-103
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-104
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-105
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-106
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-107
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-108
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-109
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-110
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-111
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-112
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-113
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-114
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-115
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-116
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-117
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-118
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-119
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-120
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-121
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-122
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-123
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-124
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-125
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-126
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-127
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-128
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-129
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-130
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-131
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-132
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-133
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-134
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-135
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-136
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-137
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-138
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-139
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-140
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-141
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-142
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-143
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-144
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-145
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-146
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-147
+     sacha@free.net.ph--main/emacs-wiki--sacha--1.0--patch-148
+     sacha@free.net.ph--main/emacs-wiki--stable--1.0--base-0
+     sacha@free.net.ph--main/emacs-wiki--stable--1.0--patch-1

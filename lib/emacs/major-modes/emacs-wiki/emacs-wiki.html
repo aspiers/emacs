@@ -1,0 +1,2477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!--This manual is for emacs-wiki version 2.70.
+
+For a list of the copyright holders, 
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU General Public License.
+
+-->
+<!-- Created on August, 20 2005 by texi2html 1.76 -->
+<!--
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people <dev@texi2html.cvshome.org>
+Send bugs and suggestions to <users@texi2html.cvshome.org>
+
+-->
+<head>
+<title>emacs-wiki: emacs-wiki</title>
+
+<meta name="description" content="emacs-wiki: emacs-wiki">
+<meta name="keywords" content="emacs-wiki: emacs-wiki">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.76">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Top"></a>
+<a name="SEC_Top"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="settitle">emacs-wiki</h1>
+
+<p>This manual is for emacs-wiki version 2.70.
+</p>
+<p>For a list of the copyright holders, <a href="#SEC26">Contributors</a>
+</p>
+<blockquote><p>Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU General Public License.
+</p></blockquote>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC1">1. Preface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     About the documentation
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC2">2. Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                What is emacs-wiki?
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC3">3. Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                How to get the stable and development versions
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC6">4. Wiki Concepts</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               About Wiki
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC7">5. Getting Started</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC8">6. Keystroke Summary</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC9">7. Markup Rules</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Wiki markup used
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC17">8. Interactive Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC18">9. Convenience Features</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        Miscellaneous features
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC19">10. Fancy Tables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Table support via emacs-wiki-table.el
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC20">11. Multiple Projects</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           Multiple project or interwiki support
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC21">12. Encryption</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Keeping some parts private
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC25">13. Getting Help and Reporting Bugs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC26">14. Contributors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Contributors to this documentation
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC27">A. GNU GENERAL PUBLIC LICENSE</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC30">Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+ --- The Detailed Node Listing ---
+
+Installation
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="#SEC4">3.1 Installing a release</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Released versions of emacs-wiki
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">3.2 Installing the development version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Latest unreleased changes
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Markup Rules
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="#SEC10">7.1 Basic WikiMarkups</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC11">7.2 Changing Title or Stylesheet</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC12">7.3 Lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC13">7.4 Images</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC14">7.5 Lisp Tricks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">7.6 Non-existent Links</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">7.7 Special Markups</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+Encryption
+
+</pre></th></tr><tr><td align="left" valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    Personalize PGG encrypt/decrypt functions
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">12.2 gpg Tag</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Interactively encrypt/decrypt text
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC24">12.3 gpge Tag</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Automatically encrypt text on publish
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+</pre></th></tr></table>
+
+<hr size="1">
+<a name="Preface"></a>
+<a name="SEC1"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[ &lt;&lt; ]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 1. Preface </h1>
+
+<p>This document describes emacs-wiki, which was written by John Wiegley
+and is now maintained by Michael Olson.
+</p>
+<p>This document is a work in progress, and your contribution will be
+greatly appreciated. Please email comments and suggestions to the
+maintainer, Michael Olson <a href="mailto:mwolson@gnu.org">mwolson@gnu.org</a> .
+</p>
+<hr size="6">
+<a name="Introduction"></a>
+<a name="SEC2"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC1" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC1" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 2. Introduction </h1>
+
+<p>emacs-wiki enables you to create and use hyperlinks and simple
+formatting in plain text files, and to optionally publish your pages
+as HTML.
+</p>
+<ul class="toc">
+<li> 2004
+
+<p>Damien Elmes handed EmacsWikiMode to Mark Triggs for a short period of
+time.  Mark Triggs deferred to Sacha Chua as official maintainer of
+PlannerMode.  Sacha Chua volunteered to maintain RememberMode.
+Michael Olson became the maintainer of EmacsWikiMode later that year.
+</p>
+</li><li> 2003
+
+<p>Sacha Chua volunteered to maintain PlannerMode.  Damien Elmes
+volunteered to maintain EmacsWikiMode.
+</p>
+</li><li> 2001
+
+<p>John Wiegley wrote EmacsWikiMode and PlannerMode.
+</p></li></ul>
+
+<hr size="6">
+<a name="Installation"></a>
+<a name="SEC3"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC2" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC4" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC2" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 3. Installation </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC4">3.1 Installing a release</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Released versions of emacs-wiki
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC5">3.2 Installing the development version</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Latest unreleased changes
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Releases"></a>
+<a name="SEC4"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC3" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC5" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.1 Installing a release </h2>
+
+<p>Choose to install a release if you want to minimize risk.
+</p>
+<p>Errors are corrected in development first.  Once fixes are confirmed, a
+new release will be made.  User-visible changes will be announced on the
+<a href="mailto:emacs-wiki-discuss@nongnu.org">emacs-wiki-discuss@nongnu.org</a> mailing list.  see section <a href="#SEC25">Getting Help and Reporting Bugs</a>.
+</p>
+<a name="IDX1"></a>
+
+<p>Debian users can get emacs-wiki via apt-get.  The version of
+emacs-wiki in the Debian stable archive is not recommended, since it
+is so old.  <tt>`emacs-wiki'</tt> is available in the Sarge and Sid
+distributions: <kbd>apt-get install emacs-wiki</kbd> .
+</p>
+<a name="IDX2"></a>
+
+<p>You can also install the source distribution.
+</p>
+<ol>
+<li> Download and unpack the latest version from <a href="http://www.mwolson.org/static/dist/emacs-wiki/">http://www.mwolson.org/static/dist/emacs-wiki/</a> .
+</li><li> Edit your <tt>`~/.emacs'</tt>.
+
+<table><tr><td>&nbsp;</td><td><pre class="example">;; Add the directories to your load path
+(add-to-list 'load-path &quot;/path/to/emacs-wiki&quot;)
+;; Load emacs-wiki
+(require 'emacs-wiki)
+</pre></td></tr></table>
+</li></ol>
+
+<p>You can download the archive at the following locations:
+</p>
+<ul class="toc">
+<li> Current and past releases: <a href="http://www.mwolson.org/static/dist/emacs-wiki/">http://www.mwolson.org/static/dist/emacs-wiki/</a>
+</li><li> Debian installation: <kbd>apt-get install emacs-wiki</kbd>
+</li></ul>
+
+<hr size="6">
+<a name="Development"></a>
+<a name="SEC5"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC4" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 3.2 Installing the development version </h2>
+
+<p>Choose the development version if you want to live on the bleeding
+edge of emacs-wiki development or try out new features before release.
+</p>
+<a name="IDX3"></a>
+<p>The Arch revision control system allows you to retrieve previous
+versions and select specific features and bug fixes.
+</p>
+<p>Downloading the modules for the first time:
+</p>
+<ol>
+<li> Install arch. Debian: <kbd>apt-get install tla</kbd> .  Other distros: see <a href="http://regexps.srparish.net/www/">http://regexps.srparish.net/www/</a> .
+</li><li> Register the archive and download the modules.
+
+<table><tr><td>&nbsp;</td><td><pre class="example"># Register the archive
+tla register-archive http://www.mwolson.org/archives/2005
+
+# Download emacs-wiki module into the emacs-wiki/ subdirectory
+tla get mwolson@gnu.org--2005/emacs-wiki--main--1.0 emacs-wiki
+</pre></td></tr></table>
+</li><li> Open your <tt>`~/.emacs'</tt> and add the <tt>`emacs-wiki/'</tt> directory to your load path.
+
+<table><tr><td>&nbsp;</td><td><pre class="example">(add-to-list 'load-path &quot;/path/to/emacs-wiki&quot;)
+</pre></td></tr></table>
+</li></ol>
+
+<p>To list upstream changes not in local copy:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"># Change to the source directory you are interested in. Example:
+cd emacs-wiki/
+
+# Display the summary of changes
+tla missing --summary
+</pre></td></tr></table>
+<a name="IDX4"></a>
+
+<p>To update to the latest version:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">cd emacs-wiki
+tla replay
+</pre></td></tr></table>
+<p>You can also obtain the archive at the following locations on the web:
+</p>
+<ul class="toc">
+<li> Browse arch repository: <a href="http://www.mwolson.org/archives/">http://www.mwolson.org/archives/</a>
+</li><li> Latest development snapshot: <a href="http://www.mwolson.org/static/dist/emacs-wiki-latest.tar.gz">http://www.mwolson.org/static/dist/emacs-wiki-latest.tar.gz</a>
+</li></ul>
+
+<p>The latest development snapshot will be kept up to date since it is
+updated at the same time as the Arch repository.
+</p>
+<hr size="6">
+<a name="Wiki-Concepts"></a>
+<a name="SEC6"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC5" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC3" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 4. Wiki Concepts </h1>
+
+<p>Wiki is a concept, more than a thing.  It is a way of creating
+document pages using plain text markup and simplified hyperlinking.
+</p>
+<p>By typing a name in MixedCase (also known as CamelCase), a hyperlink
+is automatically created to the document <tt>`MixedCase'</tt>.  Pressing
+return on that name will create the file if it doesn't exist, or visit
+it if it does.
+</p>
+<p>The markup used by Emacs-Wiki is intended to be very friendly to
+people familiar with Emacs.  Type <kbd>C-h v
+emacs-wiki-publishing-markup</kbd> after this mode is loaded for more
+information on how to get started.
+</p>
+<p>Wiki's are often associated with sites that allow collaborative
+editing of a website.  emacs-wiki is not meant to produce this sort of
+site, although you can use Emacs to serve web pages.  See
+<tt>`emacs-wiki-httpd.el'</tt> for more information.  Note that this
+feature is not well-tested.
+</p>
+<hr size="6">
+<a name="Getting-Started"></a>
+<a name="SEC7"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC6" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC6" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 5. Getting Started </h1>
+
+<p>To begin using Emacs-Wiki, put this in your <tt>`.emacs'</tt> file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(load ``emacs-wiki'')
+</pre></td></tr></table>
+<p>Now you can type <kbd>M-x emacs-wiki-find-file</kbd>, give it a WikiName
+(or just hit return) and start typing!
+</p>
+<p>You should also type <kbd>M-x customize-group</kbd>, and give the name
+<samp>`emacs-wiki'</samp>.  Change it to suit your preferences.  Each of the
+options has its own documentation.
+</p>
+<hr size="6">
+<a name="Keystroke-Summary"></a>
+<a name="SEC8"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC7" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC7" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 6. Keystroke Summary </h1>
+
+<p>Here is a summary of keystrokes available in every Wiki buffer:
+</p>
+<dl compact="compact">
+<dt> <kbd>C-c C-a</kbd></dt>
+<dd><p>Jump to an index of all the Wiki pages.
+</p>
+</dd>
+<dt> <kbd>C-c C-b</kbd></dt>
+<dd><p>Show all pages that reference this page.
+</p>
+</dd>
+<dt> <kbd>C-c C-s</kbd></dt>
+<dd><p>Search for a word in your Wiki pages.
+</p>
+</dd>
+<dt> <kbd>C-c C-f</kbd></dt>
+<dd><p>Jump to another Wiki page. Prompt for the name.
+</p>
+</dd>
+<dt> <kbd>C-c C-l</kbd></dt>
+<dd><p>Highlight/refresh the current buffer.
+</p>
+</dd>
+<dt> <kbd>C-c C-p</kbd></dt>
+<dd><p>Publish any Wiki pages that have changed as HTML.
+</p>
+</dd>
+<dt> <kbd>C-c C-r</kbd></dt>
+<dd><p>Rename Wiki link at point.
+</p>
+</dd>
+<dt> <kbd>C-c C-t</kbd></dt>
+<dd><p>Publish the current Wiki page.
+</p>
+</dd>
+<dt> <kbd>C-c C-e</kbd></dt>
+<dd><p>Edit link at point.
+</p>
+</dd>
+<dt> <kbd>C-c C-v</kbd></dt>
+<dd><p>Change Wiki project.
+</p>
+</dd>
+<dt> <kbd>C-c C-D</kbd></dt>
+<dd><p>Delete Wiki link at point. This binding will only work on X.
+</p>
+</dd>
+<dt> <kbd>C-c =</kbd></dt>
+<dd><p>Diff this page against the last backup version.
+</p>
+</dd>
+<dt> <kbd>C-c TAB</kbd></dt>
+<dd><p>Insert a tag interactively.
+</p>
+</dd>
+<dt> <kbd>TAB</kbd></dt>
+<dd><p>Move to the next Wiki reference.
+</p>
+</dd>
+<dt> <kbd>S-TAB</kbd></dt>
+<dd><p>Move to the previous Wiki reference.
+</p>
+</dd>
+</dl>
+
+<hr size="6">
+<a name="Markup-Rules"></a>
+<a name="SEC9"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC8" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC10" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC8" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 7. Markup Rules </h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC11">7.2 Changing Title or Stylesheet</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC10">7.1 Basic WikiMarkups</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC12">7.3 Lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC13">7.4 Images</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC14">7.5 Lisp Tricks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC15">7.6 Non-existent Links</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC16">7.7 Special Markups</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Basic-WikiMarkups"></a>
+<a name="SEC10"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC9" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC11" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.1 Basic WikiMarkups </h2>
+
+<p>Here is a description of the default markup rules:
+</p>
+<p><em>Headings</em>
+</p>
+<pre class="verbatim">      * First level
+      ** Second level
+      *** Third level
+</pre>
+<p>Note that the first level is actually indicated using H2, so that
+it doesn't appear at the same level as the page heading (which
+conceptually titles the section of that Wiki page).
+</p>
+<p><em>Horizontal rules</em>
+</p>
+<pre class="verbatim">      ----
+</pre>
+<p><em>Emphasis</em>
+</p>
+<pre class="verbatim">      *emphasis*
+      **strong emphasis**
+      ***very strong emphasis***
+      _underlined text_
+      =verbatim=
+</pre>
+<pre class="verbatim">      &lt;verbatim&gt;This tag should be used for larger blocks of text&lt;/verbatim&gt;.
+</pre>
+<p><em>Footnotes</em>
+</p>
+<p>A reference[1], which is just a number in square brackets,
+constitutes a footnote reference.
+</p>
+<pre class="verbatim">      Footnotes:
+
+      [1]  Footnotes are defined by the same number in brackets
+           occurring at the beginning of a line.  Use footnote-mode's C-c
+           ! a command, to very easily insert footnotes while typing.  Use
+           C-x C-x to return to the point of insertion.
+</pre>
+<p><em>Paragraphs</em>
+</p>
+<p>One or more blank lines separates paragraphs.
+</p>
+<p><em>Centered paragraphs and quotations</em>
+</p>
+<p>A line that begins with six or more columns of whitespace (made up
+of tabs or spaces) indicates a centered paragraph.  I assume this
+because it's expected you will use M-s to center the line, which
+usually adds a lot of whitespace before it.
+</p>
+<p>If a line begins with some whitespace, but less than six columns, it
+indicates a quoted paragraph.
+</p>
+<p><em>Poetic verse</em>
+</p>
+<p>Poetry requires that whitespace be preserved, without resorting to
+the monospace typical of &lt;pre&gt;.  For this, the following special
+markup exists, which is reminiscent of e-mail quotations:
+</p>
+<pre class="verbatim">       &gt; A line of Emacs verse;
+       &gt; forgive its being so terse.
+</pre>
+<p>You can also use the &lt;verse&gt; tag, if you prefer:
+</p>
+<pre class="verbatim">       &lt;verse&gt;
+       A line of Emacs verse;
+       forgive its being so terse.
+       &lt;/verse&gt;
+</pre>
+<p><em>Literal paragraphs</em>
+</p>
+<p>Use the HTML tags &lt;pre&gt;&lt;/pre&gt; to insert a paragraph and preserve
+whitespace.  If you're inserting a block of code, you will almost
+always want to use &lt;verbatim&gt;&lt;/verbatim&gt; *within* the &lt;pre&gt; tags.
+The shorcut for doing this is to use the &lt;example&gt; tag:
+</p>
+<pre class="verbatim">       &lt;example&gt;
+       Some literal text or code here.
+       &lt;/example&gt;
+</pre>
+<p><em>Tables</em>
+</p>
+<p>There are two forms of table markup supported.  If Takaaki Ota's
+table.el package is available, then simply create your tables using
+his package, and they will be rendered into the appropriate HTML.
+You need to (require 'emacs-wiki-table) for this functionality.
+</p>
+<p>If table.el is not available, then only very simple table markup is
+supported.  The attributes of the table are kept in
+`emacs-wiki-table-attributes'.  The syntax is:
+</p>
+<pre class="verbatim">       Double bars || Separate header fields
+       Single bars | Separate body fields
+       Here are more | body fields
+       Triple bars ||| Separate footer fields
+</pre>
+<p>Other paragraph markup applies to both styles, meaning that if six
+or more columns of whitespace precedes the first line of the table,
+it will be centered, and if any whitespace at all precedes first
+line, it will occur in a blockquote.
+</p>
+<p><em>Anchors and tagged links</em>
+</p>
+<p>#example If you begin a line with &quot;#anchor&quot; - where anchor
+can be any word that doesn't contain whitespace - it defines an
+anchor at that point into the document.  This anchor text is not
+displayed.
+</p>
+<p>You can reference an anchored point in another page (or even in the
+current page) using WikiName#anchor.  The #anchor will never be
+displayed in HTML, whether at the point of definition or reference,
+but it will cause browsers to jump to that point in the document.
+</p>
+<p><em>Redirecting to another page or URL</em>
+</p>
+<p>Sometimes you may wish to redirect someone to another page.  To do
+this, put:
+</p>
+<pre class="verbatim">       &lt;redirect url=\&quot;http://somewhereelse.com\&quot;/&gt;
+</pre>
+<p>at the top of the page.  If the &lt;redirect&gt; tag specifies content,
+this will be used as the redirection message, rather than the
+default.
+</p>
+<p>The numbers of seconds to delay is defined by
+`emacs-wiki-redirect-delay', which defaults to 2 seconds.  The page
+shown will also contain a link to click on, for browsing which do
+not support automatic refreshing.
+</p>
+<p><em>URLs</em>
+</p>
+<p>A regular URL is given as a link.  If it's an image URL, it will
+be inlined using an IMG tag.
+</p>
+<p><em>Special handling of WikiNames</em>
+</p>
+<p>If you need to add a plural at the end of a WikiName, separate it
+with four single quotes (WikiName&quot;&quot;s) or make it an explicit
+link ([[WikiName]]s).
+</p>
+<p>To prevent a link name (of any type) from being treated as such,
+surround it with =equals= (to display it in monotype), or prefix it
+with the tag &lt;nop&gt; to escape it from WikiName markup.
+</p>
+<p><em>Special Wiki links</em>
+</p>
+<p>Besides the normal WikiName type links, emacs-wiki also supports
+extended links:
+</p>
+<pre class="verbatim">       [[link text][optional link description]]
+</pre>
+<p>An extended link is always a link, no matter how it looks.  This
+means you can use any file in your `emacs-wiki-directories' as a
+Wiki file.  If you provide an optional description, that's what will
+be shown instead of the link text.  This is very useful for
+providing textual description of URLs.
+</p>
+<p>See the documentation to emacs-wiki-image-regexp for how to inline
+files and images.
+</p>
+<p><em>InterWiki names</em>
+</p>
+<p>There are times when you will want to constantly reference pages on
+another website.  Rather than repeating the URL ad nauseum, you can
+define an InterWiki name.  This is a set of WikiNames to URL
+correlations, that support textual substitution using #anchor names
+(which are appended to the URL).  For example, MeatballWiki is
+defined in the variable `emacs-wiki-interwiki-names'.  It means you
+can reference the page \&quot;MeatBall\&quot; on MeatballWiki using this
+syntax:
+</p>
+<pre class="verbatim">       MeatballWiki#MeatBall
+</pre>
+<p>In the resulting HTML, the link is simply shown as
+</p>
+<pre class="verbatim">       MeatballWiki:MeatBall
+</pre>
+<hr size="6">
+<a name="Changing-Title-or-Stylesheet"></a>
+<a name="SEC11"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC10" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC12" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.2 Changing Title or Stylesheet </h2>
+
+<p>For convenience, if you want to change the visible title or the
+stylesheet used by a certain Wiki page during HTML publishing,
+just put:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#title Hello there
+#style hello.css
+</pre></td></tr></table>
+<p>at the top of the page.
+</p>
+<hr size="6">
+<a name="Lists"></a>
+<a name="SEC12"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC11" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC13" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.3 Lists </h2>
+
+<p>Whitespace is required after bullets and numbers thot are part of a
+list.
+</p>
+<p>Here is an example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">- This
+- Is
+- A
+- List
+
+1. This
+2. too
+
+But this is not,
+--even if it starts with dashes
+0.1] or numbers, as in the original test case.
+</pre></td></tr></table>
+<p><strong>Sub-lists?</strong>
+</p>
+<p>There is no inherent support for sub-lists, since the author couldn't
+think of a simple way to do it.  But if you really need them, here's a
+trick you can use:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"> - Hello
+   &lt;ul&gt;
+   &lt;li&gt;There
+   &lt;li&gt;My friend
+   &lt;/ul&gt;
+</pre></td></tr></table>
+<hr size="6">
+<a name="Images"></a>
+<a name="SEC13"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC12" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC14" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.4 Images </h2>
+
+<p>You can include links of the form <samp>`[[some/link][some/image]]'</samp>. If
+you want to include <var>alt</var> text, use <samp>`[[some/link][some/image
+alt text]]'</samp>.
+</p>
+<p>You may need to have <code>auto-image-file-mode</code> set to <samp>`t'</samp> for
+this to work.
+</p>
+<hr size="6">
+<a name="Lisp-Tricks"></a>
+<a name="SEC14"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC13" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC15" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.5 Lisp Tricks </h2>
+
+<p><code>&lt;lisp&gt;&lt;/lisp&gt;</code> tags can be used, not only to evaluate forms for
+insertion at that point, but to influence the publishing process in
+many ways.  Here's another way to change a page's stylesheet:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">&lt;lisp&gt;
+(ignore
+  ;; use special.css for this Wiki page
+  (set (make-variable-buffer-local 'emacs-wiki-style-sheet)
+       &quot;&lt;link rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot; href=\&quot;special.css\&quot; /&gt;&quot;))
+&lt;/lisp&gt;
+</pre></td></tr></table>
+<p>The <code>ignore</code> is needed so nothing is inserted where the
+<code>&lt;lisp&gt;</code> tag occurred.  Also, there should be no blank lines
+before or after the tag (to avoid empty paragraphs from being
+created).  The best place to put this would be at the very top or
+bottom of the page.
+</p>
+<hr size="6">
+<a name="Non_002dexistent-Links"></a>
+<a name="SEC15"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC14" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC16" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.6 Non-existent Links </h2>
+
+<p>By default, non-existent links are converted into mailto: links in
+published HTML. This allows website visitors to e-mail
+<code>emacs-wiki-maintainer</code> for missing information. If you want
+non-existent links to be rendered as plain text, set
+<code>emacs-wiki-markup-nonexistent-link</code> to nil.
+</p>
+<p>In HTML served directly from Emacs using httpd and
+emacs-wiki-httpd.el, non-existent links are always editable links.
+</p>
+<hr size="6">
+<a name="Special-Markups"></a>
+<a name="SEC16"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC15" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 7.7 Special Markups </h2>
+
+<p>For specially marking up Wiki text, XML-style tags are the best way to
+add custom markup to Emacs Wiki, which expects a closing tag and/or an
+optional set of attributes. This is easily accomplished by customizing
+this list of markup tags defined in <code>emacs-wiki-markup-tags</code>.
+</p>
+<p>Here is a summary of the default tags. This also includes the dangerous
+tags listed in <code>emacs-wiki-dangerous-tags</code>, which may not be used
+by outsiders.
+</p>
+<p>Please refer to document of <code>emacs-wiki-markup-tags</code> and
+<code>emacs-wiki-dangerous-tags</code> for detail infomation and customization
+instructions.
+</p>
+<p><em>verbatim</em>
+</p>
+<p>Protects against highlighting and wiki interpretation, and escapes any
+characters which have special meaning to the publishing format. For
+HTML, this means characters like '&lt;' are escaped as HTML entities.
+</p>
+<p><em>example</em>
+</p>
+<p>Like verbatim, but typesets in HTML using the &lt;pre&gt; tag, with
+class=example, so whitespace formatting is preserved.
+</p>
+<p><em>nowiki</em>
+</p>
+<p>Inhibits wiki markup, but does not do any escaping to the underlying
+publishing medium. Useful for embedding HTML, PHP, etc.
+</p>
+<p><em>verse</em>
+</p>
+<p>Typesets like a normal paragraph, but without word-wrapping. That is,
+whitespace is preserved.
+</p>
+<p><em>redirect</em>
+</p>
+<p>Using the &quot;url&quot; attribute, you can specify that a page should redirect
+to another page. The remaining contents of the page will not be
+published. The optional &quot;delay&quot; attribute specifies how long to wait
+before redirecting.
+</p>
+<p><em>nop</em>
+</p>
+<p>When placed before a WikiLink, it will prevent that WikiLink from being
+treated as such. Good for names like DocBook.
+</p>
+<p><em>contents</em>
+</p>
+<p>Produces a compact table of contents for any section heading at the same
+level or lower than the next section header encountered. Optional
+&quot;depth&quot; attribute specifies how deep the table of contents should go.
+</p>
+<p><em>lisp</em>
+</p>
+<p>Evaluate the region as a Lisp form, and displays the result. When
+highlighting, the `display' text property is used, preserving the
+underlying text. Turn off font-lock mode if you wish to edit it.
+</p>
+<p><em>command</em>
+</p>
+<p>Pass the region to a command interpretor and insert the result, guarding
+it from any further expansion. Optional &quot;file&quot; attribute specifies the
+shell or interpretor to use. If none is given, and
+<code>emacs-wiki-command-tag-file</code> has not been configured, Eshell is
+used.
+</p>
+<p><em>python, perl</em>
+</p>
+<p>Pass the region to the Python or Perl language interpretor, and insert
+the result.
+</p>
+<p><em>c-source</em>
+</p>
+<p>Markup the region as C or C++ source code, using the c2html program, if
+available. Optional boolean attribute &quot;numbered&quot; will cause source lines
+to be numbered.
+</p>
+<p>Note: If c2html is not available, the region will be converted to HTML
+friendly text (i.e., &lt;&gt; turns into &amp;lt;&amp;gt;), and placed in a &lt;pre&gt;
+block. In this case, line numbering is not available.
+</p>
+<p><em>bookmarks</em>
+</p>
+<p>Insert bookmarks at the location of the tag from the given bookmarks
+file. Required attribute &quot;file&quot; specifies which file to read from, and
+the optional attribute &quot;type&quot; may be one of: adr (for Opera), lynx,
+msie, ns, xbel or xmlproc. The default type is &quot;xbel&quot;. The optional
+attribute &quot;folder&quot; may be used to specify which folder (and its
+children) should be inserted.
+</p>
+<hr size="6">
+<a name="Interactive-Functions"></a>
+<a name="SEC17"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC16" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC9" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 8. Interactive Functions </h1>
+
+<p><tt>`emacs-wiki.el'</tt> defines the following interactive functions:
+</p>
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-edit-link-at-point</b>
+<a name="IDX5"></a>
+</dt>
+<dd><p>Edit the current link. Do not rename the Wiki page originally referred to.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-find-file</b><i> wiki command directory</i>
+<a name="IDX6"></a>
+</dt>
+<dd><p>Open the Emacs Wiki page <var>wiki</var> by name.
+If <var>command</var> is non-nil, it is the function used to visit the file.
+If <var>directory</var> is non-nil, it is the directory in which the Wiki page
+will be created if it does not already exist.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-next-reference</b>
+<a name="IDX7"></a>
+</dt>
+<dd><p>Move forward to next Wiki link or URL, cycling if necessary.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-previous-reference</b>
+<a name="IDX8"></a>
+</dt>
+<dd><p>Move backward to the next Wiki link or URL, cycling if necessary.
+This function is not entirely accurate, but it's close enough.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-refresh-buffers</b><i> &amp;rest args</i>
+<a name="IDX9"></a>
+</dt>
+<dd><p>Rebuild file alist and refresh current project.
+Call after creating a page.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-follow-name-at-point</b><i> other-window</i>
+<a name="IDX10"></a>
+</dt>
+<dd><p>Visit the link at point, or insert a newline if none.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-follow-name-at-point-other-window</b>
+<a name="IDX11"></a>
+</dt>
+<dd><p>Visit the link at point in other window.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-follow-name-at-mouse</b><i> event other-window</i>
+<a name="IDX12"></a>
+</dt>
+<dd><p>Visit the link at point, or yank text if none.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-follow-name-at-mouse-other-window</b><i> event</i>
+<a name="IDX13"></a>
+</dt>
+<dd><p>Visit the link at point.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-rename-link-at-point</b>
+<a name="IDX14"></a>
+</dt>
+<dd><p>Rename the link under point, and the location it points to. This does not
+work with URLs, and will preserve a description in an extended link.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-delete-link-at-point</b>
+<a name="IDX15"></a>
+</dt>
+<dd><p>Delete the link under point, and the location it points to. This does not
+work with URLs.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-search</b><i> text</i>
+<a name="IDX16"></a>
+</dt>
+<dd><p>Search for the given <var>text</var> string in the Wiki directories.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-backlink</b>
+<a name="IDX17"></a>
+</dt>
+<dd><p>Grep for the current page name in all the Wiki directories.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-index</b>
+<a name="IDX18"></a>
+</dt>
+<dd><p>Display an index of all known Wiki pages.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-highlight-buffer</b>
+<a name="IDX19"></a>
+</dt>
+<dd><p>Re-highlight the entire Wiki buffer.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-visit-published-file</b><i> arg</i>
+<a name="IDX20"></a>
+</dt>
+<dd><p>Visit the current Wiki page's published result.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-dired-publish</b>
+<a name="IDX21"></a>
+</dt>
+<dd><p>Publish all marked files in a dired buffer.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-publish-index</b>
+<a name="IDX22"></a>
+</dt>
+<dd><p>Publish an index of the Wiki pages.
+This function can be added to <code>emacs-wiki-after-wiki-publish-hook</code>.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-publish</b><i> arg</i>
+<a name="IDX23"></a>
+</dt>
+<dd><p>Publish all Wikis that need publishing.
+If the published Wiki already exists, it is only overwritten if the
+Wiki is newer than the published copy.  When given the optional
+argument <var>arg</var>, all Wikis are rewritten, no matter how recent they are.
+The index file is rewritten no matter what.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-publish-this-page</b>
+<a name="IDX24"></a>
+</dt>
+<dd><p>Force publication of the current page.
+</p></dd></dl>
+
+<dl>
+<dt><u>Function:</u> <b>emacs-wiki-change-project</b><i> project</i>
+<a name="IDX25"></a>
+</dt>
+<dd><p>Change Wiki projects.
+</p>
+<p>When called interactively, load the welcome page of the selected
+project in a new buffer. If no project is selected, the default
+project as specified in <code>emacs-wiki-default-project</code> will be used.
+</p>
+<p>Note that the project will only be changed if the welcome page
+exists for the target project. This may be changed in the future
+to find a nonexistent file, though if this happens it is not
+clear which of Wiki directory should be used in the case of there
+being multiple directories.
+</p>
+<p>When called from a Lisp program, update the current buffer's
+project to <var>project</var>.
+</p></dd></dl>
+
+<hr size="6">
+<a name="Convenience-Features"></a>
+<a name="SEC18"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC17" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC17" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 9. Convenience Features </h1>
+
+<p>The following are several miscellaneous features that might make your
+emacs-wiki experience more enjoyable.
+</p>
+<p><strong>Using pcomplete</strong>
+</p>
+<p>If you have pcomplete loaded, you can type <kbd>M-TAB</kbd> to complete
+Wiki names.  Hitting <kbd>M-TAB</kbd> two or more times in succession will
+cycle through all of the possibilities.  You can find
+<tt>`pcomplete.el'</tt> in the <tt>`contrib'</tt> directory that comes with
+the emacs-wiki tarball.
+</p>
+<p><strong>ChangeLog</strong>
+</p>
+<p>If you use a ChangeLog (<kbd>C-x 4 a</kbd>) within one of your Wiki
+directories, it will be used for notifying visitors to your Wiki of
+recent changes.
+</p>
+<p><strong>Macros</strong>
+</p>
+<p>Macros can be defined for text that you use often.  Consult
+<tt>`emacs-wiki-macros.el'</tt> for information on using this feature.
+</p>
+<p><strong>Menu</strong>
+</p>
+<p>This feature allows you to make custom and auto-generated navigation
+menus.  Please consult the top of the <tt>`emacs-wiki-menu.el'</tt> for
+reasonably complete documentation.
+</p>
+<hr size="6">
+<a name="Tables"></a>
+<a name="SEC19"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC18" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC18" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 10. Fancy Tables </h1>
+
+<p>To get fancy table markup, add:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(require 'emacs-wiki-table)
+</pre></td></tr></table>
+<p>to your <tt>`.emacs'</tt>. In your wiki source files, you can now
+make tables that look like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ +------------------------------------------------------------------+
+ |                    A table header                                |
+ +-------------------------------+----------------------------------+
+ |           Column 1            |           Column 2               |
+ +-------------------------------+----------------------------------+
+ |Some text here                 |More text here, even wrapping to  |
+ |                               |the next line                     |
+ +-------------------------------+----------------------------------+
+ |Some text here                 |More text here, even wrapping to  |
+ |                               |the next line                     |
+ +-------------------------------+----------------------------------+
+
+</pre></td></tr></table>
+<p>See <tt>`table.el'</tt> for more information.
+</p>
+<p><tt>`emacs-wiki-table.el'</tt> does not add any interactive functions or
+keybindings.
+</p>
+<hr size="6">
+<a name="Multiple-Projects"></a>
+<a name="SEC20"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC19" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC19" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 11. Multiple Projects </h1>
+
+<p>Emacs-wiki has a way of supporting multiple Wiki projects.  This
+allows you to make links from one project to another, which are often
+called <em>interwiki links</em>.  This can be convenient if you wish to
+split your website according to the kind of content, for example.
+</p>
+<p>For now, it is considered good practice to have your multiple projects
+under a common directory, and not to nest your projects.
+</p>
+<p>You will need something like the following in your <tt>`.emacs'</tt> file
+in order to set up multiple project support.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="lisp">(setq emacs-wiki-projects
+      `((&quot;WebWiki&quot; .
+         ((emacs-wiki-directories . (&quot;~/proj/wiki/webpage&quot;))
+          (emacs-wiki-project-server-prefix . &quot;../wiki/&quot;)
+          (emacs-wiki-publishing-directory
+           . &quot;~/personal-site/site/wiki&quot;)))
+        (&quot;ProjectsWiki&quot; .
+         ((emacs-wiki-directories . (&quot;~/proj/wiki/projects&quot;))
+          (emacs-wiki-project-server-prefix . &quot;../projects/&quot;)
+          (emacs-wiki-publishing-directory
+           . &quot;~/personal-site/site/projects&quot;)))))
+</pre></td></tr></table>
+<p>The first phrase on the second line of code is the name of the
+project.  In this example, there are two projects, WebWiki and
+ProjectsWiki.  It would be best for these names to be in <a href="#SEC6">mixed case</a>.
+</p>
+<p>The <em>emacs-wiki-directories</em> line indicates which source
+directories correspond with the particular project.  This must be a
+list.
+</p>
+<p><em>emacs-wiki-project-server-prefix</em> is the text that will be put at
+the beginning of each interwiki link at publish time.  For example,
+<samp>`WebWiki#MyPage'</samp> would be rendered <samp>`../wiki/MyPage.html'</samp> in
+its published (HTML) form.  It is also acceptable to give an absolute
+location here, like <samp>`/projects'</samp>, with the root directory
+corresponding to your root web publishing directory.
+</p>
+<p><em>emacs-wiki-publishing-directory</em> is the directory where the HTML
+content will be placed upon publishing the project.  You should make
+sure that the content of <code>emacs-wiki-project-server-prefix</code> is
+such that a link from a file in one project to a file in another
+project is feasible.
+</p>
+<p>Other variables can also be defined in this block if you wish to
+customize a particular project further.
+</p>
+<hr size="6">
+<a name="Encryption"></a>
+<a name="SEC21"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC20" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC22" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC20" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 12. Encryption </h1>
+
+<p>To get PGG<a name="DOCF1" href="#FOOT1">(1)</a>  support within Emacs
+Wiki, add
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(require 'emacs-wiki-pgg)
+</pre></td></tr></table>
+<p>to your <tt>`.emacs'</tt>. In your wiki source files, you can now
+have sections of text that is automatically encrypted when published
+or sections that can be decrypted/encrypted interactively.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    Personalize PGG encrypt/decrypt functions
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC23">12.2 gpg Tag</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Interactively encrypt/decrypt text
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SEC24">12.3 gpge Tag</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Automatically encrypt text on publish
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Interface-to-PGG"></a>
+<a name="SEC22"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC21" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC23" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.1 Interface to PGG </h2>
+
+<p>Make sure to set <var>pgg-gpg-user-id</var> to your user id. Eg:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(setq pgg-gpg-user-id &quot;Your user id&quot;)
+</pre></td></tr></table>
+<p>There are two interfaces to PGG. This can be controlled via setting
+the variable <var>emacs-wiki-pgg-interface</var> to the correct function:
+</p>
+<dl>
+<dt><u>Variable:</u> <b>emacs-wiki-pgg-interface</b>
+<a name="IDX26"></a>
+</dt>
+<dd><dl compact="compact">
+<dt> 'pgg-encrypt-show</dt>
+<dd><p><code>pgg-encrypt-region</code><a name="DOCF2" href="#FOOT2">(2)</a> is
+called interactively after setting point and mark. Recipients are read
+from the minibuffer.
+</p>
+</dd>
+<dt> 'pgg-encrypt-sign-self</dt>
+<dd><p>This is a personalized version of <code>pgg-encrypt-region</code> that is
+intended when the recipient is self. Message is signed if
+<var>emacs-wiki-pgg-sign</var> is non-nil. You are welcome to change
+<code>pgg-encrypt-sign-self</code> in <tt>`emacs-wiki-pgg.el'</tt> to suit your
+needs.
+</p>
+</dd>
+</dl>
+
+</dd></dl>
+
+<dl>
+<dt><u>Variable:</u> <b>emacs-wiki-pgg-sign</b>
+<a name="IDX27"></a>
+</dt>
+<dd><p>Set to non-nil if you want the message to be
+signed when the interface is <code>pgg-encrypt-sign-self</code>.
+</p>
+</dd></dl>
+
+<hr size="6">
+<a name="gpg-Tag"></a>
+<a name="SEC23"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC22" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC24" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.2 gpg Tag </h2>
+
+<p>Enclose text that you want to encrypt/decrypt interactively in
+Emacs Wiki mode within these tags. Whitespace is preserved during
+publish via the &lt;pre&gt; tag.
+</p>
+<dl compact="compact">
+<dt> <kbd>M-x emacs-wiki-encrypt-gpg</kbd></dt>
+<dd><p>Finds each gpg tag and encrypts the text between them using the chosen
+PGG interface see section <a href="#SEC22">Interface to PGG</a>. The resultant encrypted text is
+immediately visible in the buffer.
+</p>
+</dd>
+<dt> <kbd>M-x emacs-wiki-decrypt-gpg</kbd></dt>
+<dd><p>Finds each gpg tag and decrypts the text between them. The resultant
+decrypted text is immediately visible in the buffer.
+</p>
+</dd>
+<dt> <kbd>C-u M-x emacs-wiki-encrypt-gpg</kbd></dt>
+<dd><p>Encrypts the entire buffer using the chosen PGG interface. The
+resultant encrypted text is immediately visible in the buffer. The
+resultant wiki file is unsuitable for publishing. Use this with care.
+</p>
+</dd>
+<dt> <kbd>C-u M-x emacs-wiki-decrypt-gpg</kbd></dt>
+<dd><p>Decrypts the entire buffer. The resultant decrypted text is
+immediately visible.
+</p>
+</dd>
+<dt> <kbd>C-c C-S-e</kbd></dt>
+<dd><p>Calls <code>emacs-wiki-encrypt-gpg</code>.
+</p>
+</dd>
+<dt> <kbd>C-c C-S-d</kbd></dt>
+<dd><p>Calls <code>emacs-wiki-decrypt-gpg</code>.
+</p>
+</dd>
+</dl>
+
+<p>Example: Consider the following wiki markup
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;gpg&gt;Test data&lt;/gpg&gt;
+</pre></td></tr></table>
+<p>Press C-c C-S-e to get:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;gpg&gt;-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.2.4 (GNU/Linux)
+
+[Imagine encrypted text]
+
+-----END PGP MESSAGE-----
+&lt;/gpg&gt;
+</pre></td></tr></table>
+<p>Now press C-c C-S-d to get:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;gpg&gt;Test data&lt;/gpg&gt;
+</pre></td></tr></table>
+<hr size="6">
+<a name="gpge-Tag"></a>
+<a name="SEC24"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC23" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section"> 12.3 gpge Tag </h2>
+
+<p>Enclose unencrypted text within these tags and only its encrypted
+version will be published to the html file. This is useful when you
+need to maintain an unencrypted cleartext version in your local wiki
+source and publish it's encrypted counterpart to your web site.
+</p>
+<p>Example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;gpge&gt;Test data&lt;/gpge&gt;
+</pre></td></tr></table>
+<p>Resultant html file section:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;pre class=&quot;example&quot;&gt;-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.2.4 (GNU/Linux)
+
+[Imagine encrypted text]
+
+-----END PGP MESSAGE-----
+&lt;/pre&gt;
+</pre></td></tr></table>
+<hr size="6">
+<a name="Getting-Help-and-Reporting-Bugs"></a>
+<a name="SEC25"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC24" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC21" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 13. Getting Help and Reporting Bugs </h1>
+
+<p>After you have read this guide, if you still have questions about
+EmacsWikiMode, or if you have bugs to report, there are several places
+you can go.
+</p>
+<p><a href="http://www.mwolson.org/projects/EmacsWiki.html">http://www.mwolson.org/projects/EmacsWiki.html</a> is the page that
+Michael Olson made for emacs-wiki.  For the duration of his
+maintainership, it may be considered the official emacs-wiki website.
+</p>
+<p>You can join the mailing list at
+<a href="mailto:emacs-wiki-discuss@nongnu.org">emacs-wiki-discuss@nongnu.org</a> using the subscription form at
+<a href="http://mail.nongnu.org/mailman/listinfo/ emacs-wiki-discuss">http://mail.nongnu.org/mailman/listinfo/ emacs-wiki-discuss</a>. This mailing list is also available via Gmane
+(<a href="http://gmane.org/">http://gmane.org/</a>). The group is called
+<samp>`gmane.emacs.wiki.general'</samp>.
+</p>
+<p><a href="http://www.emacswiki.org/cgi-bin/wiki/EmacsWikiMode">http://www.emacswiki.org/cgi-bin/wiki/EmacsWikiMode</a> is the
+emacswiki.org page, and anyone may add tips and hints to it.
+</p>
+<p>You can visit the IRC Freenode channel <samp>`#emacs'</samp>. Many of the
+contributors are frequently around and willing to answer your
+questions.
+</p>
+<p>You can also contact the maintainer of EmacsWikiMode, Michael Olson,
+at <a href="mailto:mwolson@gnu.org">mwolson@gnu.org</a>.
+</p>
+<hr size="6">
+<a name="Contributors"></a>
+<a name="SEC26"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC25" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC25" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter"> 14. Contributors </h1>
+
+<table><tr><td>&nbsp;</td><td><pre class="example">Copyright &copy; 2001, 2002, 2003, 2004 John Wiegley
+Copyright &copy; 2004 John Sullivan
+Copyright &copy; 2004 Damien Elmes
+Copyright &copy; 2004 Sacha Chua
+Copyright &copy; 2004, 2005 Michael Olson
+Copyright &copy; 2004 Anirudh Sasikumar
+Copyright &copy; 2005 Yu Li
+</pre></td></tr></table>
+<p>The first draft of this document was made by John Sullivan, and he did
+a majority of the work on it.  Parts of this document were taken from
+the emacs-wiki.el source code, so a copyright notice for John Wiegley
+was added.
+</p>
+<p>While Sacha Chua maintained emacs-wiki, she worked quite a bit on this
+document and split off the Planner and Remember sections.
+</p>
+<p>Michael Olson added several sections, like the one on <a href="#SEC20">Multiple Projects</a>.  He also reworked some sections in various ways.
+</p>
+<p>Anirudh Sasikumar contributed documentation for the <a href="#SEC21">Encryption</a>
+node.  Many thanks to him for implementing this useful feature and
+documenting it!
+</p>
+<hr size="6">
+<a name="GNU-General-Public-License"></a>
+<a name="SEC27"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC26" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC28" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC26" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="appendix"> A. GNU GENERAL PUBLIC LICENSE </h1>
+<p align="center"> Version 2, June 1991
+</p><a name="IDX28"></a>
+<a name="IDX29"></a>
+
+
+<table><tr><td>&nbsp;</td><td><pre class="display">Copyright &copy; 1989, 1991 Free Software Foundation, Inc.
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+</pre></td></tr></table>
+<hr size="6">
+<a name="SEC28"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC27" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC29" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="appendixsec"> A.1 Preamble </h2>
+
+<p>  The licenses for most software are designed to take away your
+freedom to share and change it.  By contrast, the GNU General Public
+License is intended to guarantee your freedom to share and change free
+software--to make sure the software is free for all its users.  This
+General Public License applies to most of the Free Software
+Foundation's software and to any other program whose authors commit to
+using it.  (Some other Free Software Foundation software is covered by
+the GNU Library General Public License instead.)  You can apply it to
+your programs, too.
+</p>
+<p>  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+this service if you wish), that you receive source code or can get it
+if you want it, that you can change the software or use pieces of it
+in new free programs; and that you know you can do these things.
+</p>
+<p>  To protect your rights, we need to make restrictions that forbid
+anyone to deny you these rights or to ask you to surrender the rights.
+These restrictions translate to certain responsibilities for you if you
+distribute copies of the software, or if you modify it.
+</p>
+<p>  For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must give the recipients all the rights that
+you have.  You must make sure that they, too, receive or can get the
+source code.  And you must show them these terms so they know their
+rights.
+</p>
+<p>  We protect your rights with two steps: (1) copyright the software, and
+(2) offer you this license which gives you legal permission to copy,
+distribute and/or modify the software.
+</p>
+<p>  Also, for each author's protection and ours, we want to make certain
+that everyone understands that there is no warranty for this free
+software.  If the software is modified by someone else and passed on, we
+want its recipients to know that what they have is not the original, so
+that any problems introduced by others will not reflect on the original
+authors' reputations.
+</p>
+<p>  Finally, any free program is threatened constantly by software
+patents.  We wish to avoid the danger that redistributors of a free
+program will individually obtain patent licenses, in effect making the
+program proprietary.  To prevent this, we have made it clear that any
+patent must be licensed for everyone's free use or not licensed at all.
+</p>
+<p>  The precise terms and conditions for copying, distribution and
+modification follow.
+</p>
+
+<ol>
+<li>
+This License applies to any program or other work which contains
+a notice placed by the copyright holder saying it may be distributed
+under the terms of this General Public License.  The &quot;Program&quot;, below,
+refers to any such program or work, and a &quot;work based on the Program&quot;
+means either the Program or any derivative work under copyright law:
+that is to say, a work containing the Program or a portion of it,
+either verbatim or with modifications and/or translated into another
+language.  (Hereinafter, translation is included without limitation in
+the term &quot;modification&quot;.)  Each licensee is addressed as &quot;you&quot;.
+
+<p>Activities other than copying, distribution and modification are not
+covered by this License; they are outside its scope.  The act of
+running the Program is not restricted, and the output from the Program
+is covered only if its contents constitute a work based on the
+Program (independent of having been made by running the Program).
+Whether that is true depends on what the Program does.
+</p>
+</li><li>
+You may copy and distribute verbatim copies of the Program's
+source code as you receive it, in any medium, provided that you
+conspicuously and appropriately publish on each copy an appropriate
+copyright notice and disclaimer of warranty; keep intact all the
+notices that refer to this License and to the absence of any warranty;
+and give any other recipients of the Program a copy of this License
+along with the Program.
+
+<p>You may charge a fee for the physical act of transferring a copy, and
+you may at your option offer warranty protection in exchange for a fee.
+</p>
+</li><li>
+You may modify your copy or copies of the Program or any portion
+of it, thus forming a work based on the Program, and copy and
+distribute such modifications or work under the terms of Section 1
+above, provided that you also meet all of these conditions:
+
+<ol>
+<li>
+You must cause the modified files to carry prominent notices
+stating that you changed the files and the date of any change.
+
+</li><li>
+You must cause any work that you distribute or publish, that in
+whole or in part contains or is derived from the Program or any
+part thereof, to be licensed as a whole at no charge to all third
+parties under the terms of this License.
+
+</li><li>
+If the modified program normally reads commands interactively
+when run, you must cause it, when started running for such
+interactive use in the most ordinary way, to print or display an
+announcement including an appropriate copyright notice and a
+notice that there is no warranty (or else, saying that you provide
+a warranty) and that users may redistribute the program under
+these conditions, and telling the user how to view a copy of this
+License.  (Exception: if the Program itself is interactive but
+does not normally print such an announcement, your work based on
+the Program is not required to print an announcement.)
+</li></ol>
+
+<p>These requirements apply to the modified work as a whole.  If
+identifiable sections of that work are not derived from the Program,
+and can be reasonably considered independent and separate works in
+themselves, then this License, and its terms, do not apply to those
+sections when you distribute them as separate works.  But when you
+distribute the same sections as part of a whole which is a work based
+on the Program, the distribution of the whole must be on the terms of
+this License, whose permissions for other licensees extend to the
+entire whole, and thus to each and every part regardless of who wrote it.
+</p>
+<p>Thus, it is not the intent of this section to claim rights or contest
+your rights to work written entirely by you; rather, the intent is to
+exercise the right to control the distribution of derivative or
+collective works based on the Program.
+</p>
+<p>In addition, mere aggregation of another work not based on the Program
+with the Program (or with a work based on the Program) on a volume of
+a storage or distribution medium does not bring the other work under
+the scope of this License.
+</p>
+</li><li>
+You may copy and distribute the Program (or a work based on it,
+under Section 2) in object code or executable form under the terms of
+Sections 1 and 2 above provided that you also do one of the following:
+
+<ol>
+<li>
+Accompany it with the complete corresponding machine-readable
+source code, which must be distributed under the terms of Sections
+1 and 2 above on a medium customarily used for software interchange; or,
+
+</li><li>
+Accompany it with a written offer, valid for at least three
+years, to give any third party, for a charge no more than your
+cost of physically performing source distribution, a complete
+machine-readable copy of the corresponding source code, to be
+distributed under the terms of Sections 1 and 2 above on a medium
+customarily used for software interchange; or,
+
+</li><li>
+Accompany it with the information you received as to the offer
+to distribute corresponding source code.  (This alternative is
+allowed only for noncommercial distribution and only if you
+received the program in object code or executable form with such
+an offer, in accord with Subsection b above.)
+</li></ol>
+
+<p>The source code for a work means the preferred form of the work for
+making modifications to it.  For an executable work, complete source
+code means all the source code for all modules it contains, plus any
+associated interface definition files, plus the scripts used to
+control compilation and installation of the executable.  However, as a
+special exception, the source code distributed need not include
+anything that is normally distributed (in either source or binary
+form) with the major components (compiler, kernel, and so on) of the
+operating system on which the executable runs, unless that component
+itself accompanies the executable.
+</p>
+<p>If distribution of executable or object code is made by offering
+access to copy from a designated place, then offering equivalent
+access to copy the source code from the same place counts as
+distribution of the source code, even though third parties are not
+compelled to copy the source along with the object code.
+</p>
+</li><li>
+You may not copy, modify, sublicense, or distribute the Program
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense or distribute the Program is
+void, and will automatically terminate your rights under this License.
+However, parties who have received copies, or rights, from you under
+this License will not have their licenses terminated so long as such
+parties remain in full compliance.
+
+</li><li>
+You are not required to accept this License, since you have not
+signed it.  However, nothing else grants you permission to modify or
+distribute the Program or its derivative works.  These actions are
+prohibited by law if you do not accept this License.  Therefore, by
+modifying or distributing the Program (or any work based on the
+Program), you indicate your acceptance of this License to do so, and
+all its terms and conditions for copying, distributing or modifying
+the Program or works based on it.
+
+</li><li>
+Each time you redistribute the Program (or any work based on the
+Program), the recipient automatically receives a license from the
+original licensor to copy, distribute or modify the Program subject to
+these terms and conditions.  You may not impose any further
+restrictions on the recipients' exercise of the rights granted herein.
+You are not responsible for enforcing compliance by third parties to
+this License.
+
+</li><li>
+If, as a consequence of a court judgment or allegation of patent
+infringement or for any other reason (not limited to patent issues),
+conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot
+distribute so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you
+may not distribute the Program at all.  For example, if a patent
+license would not permit royalty-free redistribution of the Program by
+all those who receive copies directly or indirectly through you, then
+the only way you could satisfy both it and this License would be to
+refrain entirely from distribution of the Program.
+
+<p>If any portion of this section is held invalid or unenforceable under
+any particular circumstance, the balance of the section is intended to
+apply and the section as a whole is intended to apply in other
+circumstances.
+</p>
+<p>It is not the purpose of this section to induce you to infringe any
+patents or other property right claims or to contest validity of any
+such claims; this section has the sole purpose of protecting the
+integrity of the free software distribution system, which is
+implemented by public license practices.  Many people have made
+generous contributions to the wide range of software distributed
+through that system in reliance on consistent application of that
+system; it is up to the author/donor to decide if he or she is willing
+to distribute software through any other system and a licensee cannot
+impose that choice.
+</p>
+<p>This section is intended to make thoroughly clear what is believed to
+be a consequence of the rest of this License.
+</p>
+</li><li>
+If the distribution and/or use of the Program is restricted in
+certain countries either by patents or by copyrighted interfaces, the
+original copyright holder who places the Program under this License
+may add an explicit geographical distribution limitation excluding
+those countries, so that distribution is permitted only in or among
+countries not thus excluded.  In such case, this License incorporates
+the limitation as if written in the body of this License.
+
+</li><li>
+The Free Software Foundation may publish revised and/or new versions
+of the General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
+
+<p>Each version is given a distinguishing version number.  If the Program
+specifies a version number of this License which applies to it and &quot;any
+later version&quot;, you have the option of following the terms and conditions
+either of that version or of any later version published by the Free
+Software Foundation.  If the Program does not specify a version number of
+this License, you may choose any version ever published by the Free Software
+Foundation.
+</p>
+</li><li>
+If you wish to incorporate parts of the Program into other free
+programs whose distribution conditions are different, write to the author
+to ask for permission.  For software which is copyrighted by the Free
+Software Foundation, write to the Free Software Foundation; we sometimes
+make exceptions for this.  Our decision will be guided by the two goals
+of preserving the free status of all derivatives of our free software and
+of promoting the sharing and reuse of software generally.
+
+
+</li><li>
+BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
+OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
+PROVIDE THE PROGRAM &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
+TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
+PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
+REPAIR OR CORRECTION.
+
+</li><li>
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
+INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
+OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
+TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
+YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
+PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+</li></ol>
+
+
+
+<hr size="6">
+<a name="SEC29"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC28" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="appendixsec"> A.2 Appendix: How to Apply These Terms to Your New Programs </h2>
+
+<p>  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
+</p>
+<p>  To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+convey the exclusion of warranty; and each file should have at least
+the &quot;copyright&quot; line and a pointer to where the full notice is found.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample"><var>one line to give the program's name and a brief idea of what it does.</var>
+Copyright (C) <var>yyyy</var>  <var>name of author</var>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+</pre></td></tr></table>
+<p>Also add information on how to contact you by electronic and paper mail.
+</p>
+<p>If the program is interactive, make it output a short notice like this
+when it starts in an interactive mode:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="smallexample">Gnomovision version 69, Copyright (C) 19<var>yy</var> <var>name of author</var>
+Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+This is free software, and you are welcome to redistribute it
+under certain conditions; type `show c' for details.
+</pre></td></tr></table>
+<p>The hypothetical commands <samp>`show w'</samp> and <samp>`show c'</samp> should show
+the appropriate parts of the General Public License.  Of course, the
+commands you use may be called something other than <samp>`show w'</samp> and
+<samp>`show c'</samp>; they could even be mouse-clicks or menu items--whatever
+suits your program.
+</p>
+<p>You should also get your employer (if you work as a programmer) or your
+school, if any, to sign a &quot;copyright disclaimer&quot; for the program, if
+necessary.  Here is a sample; alter the names:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Yoyodyne, Inc., hereby disclaims all copyright interest in the program
+`Gnomovision' (which makes passes at compilers) written by James Hacker.
+
+<var>signature of Ty Coon</var>, 1 April 1989
+Ty Coon, President of Vice
+</pre></td></tr></table>
+<p>This General Public License does not permit incorporating your program into
+proprietary programs.  If your program is a subroutine library, you may
+consider it more useful to permit linking proprietary applications with the
+library.  If this is what you want to do, use the GNU Library General
+Public License instead of this License.
+</p>
+<hr size="6">
+<a name="Concept-Index"></a>
+<a name="SEC30"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC29" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[ &gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC27" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[ &gt;&gt; ]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="unnumbered"> Index </h1>
+
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="#SEC30_0" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="#SEC30_1" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="#SEC30_2" class="summary-letter"><b>C</b></a>
+ &nbsp; 
+<a href="#SEC30_3" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#SEC30_4" class="summary-letter"><b>E</b></a>
+ &nbsp; 
+<a href="#SEC30_5" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#SEC30_6" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#SEC30_7" class="summary-letter"><b>I</b></a>
+ &nbsp; 
+<a href="#SEC30_8" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="#SEC30_9" class="summary-letter"><b>P</b></a>
+ &nbsp; 
+<a href="#SEC30_10" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="#SEC30_11" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+<a href="#SEC30_12" class="summary-letter"><b>U</b></a>
+ &nbsp; 
+<a href="#SEC30_13" class="summary-letter"><b>W</b></a>
+ &nbsp; 
+</td></tr></table>
+<table border="0" class="index-cp">
+<tr><td></td><th align="left">Index Entry</th><th align="left"> Section</th></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_0">A</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX3">arch revision control system, downloading</a></td><td valign="top"><a href="#SEC5">3.2 Installing the development version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_1">B</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC25">bugs, reporting</a></td><td valign="top"><a href="#SEC25">13. Getting Help and Reporting Bugs</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_2">C</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC6">camel case</a></td><td valign="top"><a href="#SEC6">4. Wiki Concepts</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC18">ChangeLog</a></td><td valign="top"><a href="#SEC18">9. Convenience Features</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC26">contributors</a></td><td valign="top"><a href="#SEC26">14. Contributors</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_3">D</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX1">Debian package for emacs-wiki</a></td><td valign="top"><a href="#SEC4">3.1 Installing a release</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC5">development</a></td><td valign="top"><a href="#SEC5">3.2 Installing the development version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_4">E</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX17"><code>emacs-wiki-backlink</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX25"><code>emacs-wiki-change-project</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX15"><code>emacs-wiki-delete-link-at-point</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX21"><code>emacs-wiki-dired-publish</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX5"><code>emacs-wiki-edit-link-at-point</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX6"><code>emacs-wiki-find-file</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX12"><code>emacs-wiki-follow-name-at-mouse</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX13"><code>emacs-wiki-follow-name-at-mouse-other-window</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX10"><code>emacs-wiki-follow-name-at-point</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX11"><code>emacs-wiki-follow-name-at-point-other-window</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX19"><code>emacs-wiki-highlight-buffer</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX18"><code>emacs-wiki-index</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX7"><code>emacs-wiki-next-reference</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC22">emacs-wiki-pgg-interface</a></td><td valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC22">emacs-wiki-pgg-interface-sign</a></td><td valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC21"><tt>`emacs-wiki-pgg.el'</tt>, using</a></td><td valign="top"><a href="#SEC21">12. Encryption</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX8"><code>emacs-wiki-previous-reference</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC20"><tt>`emacs-wiki-project.el'</tt>, using</a></td><td valign="top"><a href="#SEC20">11. Multiple Projects</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX23"><code>emacs-wiki-publish</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX22"><code>emacs-wiki-publish-index</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX24"><code>emacs-wiki-publish-this-page</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX9"><code>emacs-wiki-refresh-buffers</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX14"><code>emacs-wiki-rename-link-at-point</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX16"><code>emacs-wiki-search</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC19"><tt>`emacs-wiki-table.el'</tt>, using</a></td><td valign="top"><a href="#SEC19">10. Fancy Tables</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX20"><code>emacs-wiki-visit-published-file</code></a></td><td valign="top"><a href="#SEC17">8. Interactive Functions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC6"><tt>`emacs-wiki.el'</tt>, using</a></td><td valign="top"><a href="#SEC6">4. Wiki Concepts</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC21">encryption</a></td><td valign="top"><a href="#SEC21">12. Encryption</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_5">G</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX29">GNU General Public License</a></td><td valign="top"><a href="#SEC27">A. GNU GENERAL PUBLIC LICENSE</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC23">gpg tag</a></td><td valign="top"><a href="#SEC23">12.2 gpg Tag</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC24">gpge tag</a></td><td valign="top"><a href="#SEC24">12.3 gpge Tag</a></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX28">GPL</a></td><td valign="top"><a href="#SEC27">A. GNU GENERAL PUBLIC LICENSE</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_6">H</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC25">help, getting</a></td><td valign="top"><a href="#SEC25">13. Getting Help and Reporting Bugs</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_7">I</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC20">interwiki links</a></td><td valign="top"><a href="#SEC20">11. Multiple Projects</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_8">M</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC19">markup, fancy tables</a></td><td valign="top"><a href="#SEC19">10. Fancy Tables</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC6">mixed case</a></td><td valign="top"><a href="#SEC6">4. Wiki Concepts</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC20">multiple projects</a></td><td valign="top"><a href="#SEC20">11. Multiple Projects</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_9">P</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC18">pcomplete</a></td><td valign="top"><a href="#SEC18">9. Convenience Features</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC21">PGG, integrating with emacs-wiki</a></td><td valign="top"><a href="#SEC21">12. Encryption</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC22">pgg-encrypt-self-sign</a></td><td valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC22">pgg-encrypt-show</a></td><td valign="top"><a href="#SEC22">12.1 Interface to PGG</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_10">R</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX2">releases, from source</a></td><td valign="top"><a href="#SEC4">3.1 Installing a release</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_11">T</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC19">tables</a></td><td valign="top"><a href="#SEC19">10. Fancy Tables</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_12">U</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#IDX4">updating emacs-wiki with arch</a></td><td valign="top"><a href="#SEC5">3.2 Installing the development version</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+<tr><th><a name="SEC30_13">W</a></th><td></td><td></td></tr>
+<tr><td></td><td valign="top"><a href="#SEC6">wiki concepts</a></td><td valign="top"><a href="#SEC6">4. Wiki Concepts</a></td></tr>
+<tr><td colspan="3"> <hr></td></tr>
+</table>
+<table><tr><th valign="top">Jump to: &nbsp; </th><td><a href="#SEC30_0" class="summary-letter"><b>A</b></a>
+ &nbsp; 
+<a href="#SEC30_1" class="summary-letter"><b>B</b></a>
+ &nbsp; 
+<a href="#SEC30_2" class="summary-letter"><b>C</b></a>
+ &nbsp; 
+<a href="#SEC30_3" class="summary-letter"><b>D</b></a>
+ &nbsp; 
+<a href="#SEC30_4" class="summary-letter"><b>E</b></a>
+ &nbsp; 
+<a href="#SEC30_5" class="summary-letter"><b>G</b></a>
+ &nbsp; 
+<a href="#SEC30_6" class="summary-letter"><b>H</b></a>
+ &nbsp; 
+<a href="#SEC30_7" class="summary-letter"><b>I</b></a>
+ &nbsp; 
+<a href="#SEC30_8" class="summary-letter"><b>M</b></a>
+ &nbsp; 
+<a href="#SEC30_9" class="summary-letter"><b>P</b></a>
+ &nbsp; 
+<a href="#SEC30_10" class="summary-letter"><b>R</b></a>
+ &nbsp; 
+<a href="#SEC30_11" class="summary-letter"><b>T</b></a>
+ &nbsp; 
+<a href="#SEC30_12" class="summary-letter"><b>U</b></a>
+ &nbsp; 
+<a href="#SEC30_13" class="summary-letter"><b>W</b></a>
+ &nbsp; 
+</td></tr></table>
+
+<hr size="6">
+<a name="SEC_Foot"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>Footnotes</h1>
+<h3><a name="FOOT1" href="#DOCF1">(1)</a></h3>
+<p>See <a href="pgg.html#Overview">(pgg)Overview</a>.
+</p><h3><a name="FOOT2" href="#DOCF2">(2)</a></h3>
+<p>A function defined by PGG
+</p><hr size="1">
+<a name="SEC_Contents"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>Table of Contents</h1>
+<div class="contents">
+
+<ul class="toc">
+  <li><a name="TOC1" href="#SEC1">1. Preface</a></li>
+  <li><a name="TOC2" href="#SEC2">2. Introduction</a></li>
+  <li><a name="TOC3" href="#SEC3">3. Installation</a>
+  <ul class="toc">
+    <li><a name="TOC4" href="#SEC4">3.1 Installing a release</a></li>
+    <li><a name="TOC5" href="#SEC5">3.2 Installing the development version</a></li>
+  </ul></li>
+  <li><a name="TOC6" href="#SEC6">4. Wiki Concepts</a></li>
+  <li><a name="TOC7" href="#SEC7">5. Getting Started</a></li>
+  <li><a name="TOC8" href="#SEC8">6. Keystroke Summary</a></li>
+  <li><a name="TOC9" href="#SEC9">7. Markup Rules</a>
+  <ul class="toc">
+    <li><a name="TOC10" href="#SEC10">7.1 Basic WikiMarkups</a></li>
+    <li><a name="TOC11" href="#SEC11">7.2 Changing Title or Stylesheet</a></li>
+    <li><a name="TOC12" href="#SEC12">7.3 Lists</a></li>
+    <li><a name="TOC13" href="#SEC13">7.4 Images</a></li>
+    <li><a name="TOC14" href="#SEC14">7.5 Lisp Tricks</a></li>
+    <li><a name="TOC15" href="#SEC15">7.6 Non-existent Links</a></li>
+    <li><a name="TOC16" href="#SEC16">7.7 Special Markups</a></li>
+  </ul></li>
+  <li><a name="TOC17" href="#SEC17">8. Interactive Functions</a></li>
+  <li><a name="TOC18" href="#SEC18">9. Convenience Features</a></li>
+  <li><a name="TOC19" href="#SEC19">10. Fancy Tables</a></li>
+  <li><a name="TOC20" href="#SEC20">11. Multiple Projects</a></li>
+  <li><a name="TOC21" href="#SEC21">12. Encryption</a>
+  <ul class="toc">
+    <li><a name="TOC22" href="#SEC22">12.1 Interface to PGG</a></li>
+    <li><a name="TOC23" href="#SEC23">12.2 gpg Tag</a></li>
+    <li><a name="TOC24" href="#SEC24">12.3 gpge Tag</a></li>
+  </ul></li>
+  <li><a name="TOC25" href="#SEC25">13. Getting Help and Reporting Bugs</a></li>
+  <li><a name="TOC26" href="#SEC26">14. Contributors</a></li>
+  <li><a name="TOC27" href="#SEC27">A. GNU GENERAL PUBLIC LICENSE</a>
+  <ul class="toc">
+    <li><a name="TOC28" href="#SEC28">A.1 Preamble</a></li>
+    <li><a name="TOC29" href="#SEC29">A.2 Appendix: How to Apply These Terms to Your New Programs</a></li>
+  </ul></li>
+  <li><a name="TOC30" href="#SEC30">Index</a></li>
+</ul>
+</div>
+<hr size="1">
+<a name="SEC_About"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SEC_Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC30" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1>About This Document</h1>
+<p>
+  This document was generated by <em>Sacha Chua</em> on <em>August, 20 2005</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+</p>
+<p>
+  The buttons in the navigation panels have the following meaning:
+</p>
+<table border="1">
+  <tr>
+    <th> Button </th>
+    <th> Name </th>
+    <th> Go to </th>
+    <th> From 1.2.3 go to</th>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt; ] </td>
+    <td align="center">Back</td>
+    <td>previous section in reading order</td>
+    <td>1.2.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt; ] </td>
+    <td align="center">Forward</td>
+    <td>next section in reading order</td>
+    <td>1.2.4</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &lt;&lt; ] </td>
+    <td align="center">FastBack</td>
+    <td>beginning of this chapter or previous chapter</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td align="center"> [ Up ] </td>
+    <td align="center">Up</td>
+    <td>up section</td>
+    <td>1.2</td>
+  </tr>
+  <tr>
+    <td align="center"> [ &gt;&gt; ] </td>
+    <td align="center">FastForward</td>
+    <td>next chapter</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td align="center"> [Top] </td>
+    <td align="center">Top</td>
+    <td>cover (top) of document</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Contents] </td>
+    <td align="center">Contents</td>
+    <td>table of contents</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [Index] </td>
+    <td align="center">Index</td>
+    <td>index</td>
+    <td> &nbsp; </td>
+  </tr>
+  <tr>
+    <td align="center"> [ ? ] </td>
+    <td align="center">About</td>
+    <td>about (help)</td>
+    <td> &nbsp; </td>
+  </tr>
+</table>
+
+<p>
+  where the <strong> Example </strong> assumes that the current position is at <strong> Subsubsection One-Two-Three </strong> of a document of the following structure:
+</p>
+
+<ul>
+  <li> 1. Section One
+    <ul>
+      <li>1.1 Subsection One-One
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.2 Subsection One-Two
+        <ul>
+          <li>1.2.1 Subsubsection One-Two-One</li>
+          <li>1.2.2 Subsubsection One-Two-Two</li>
+          <li>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp;
+            <strong>&lt;== Current Position </strong></li>
+          <li>1.2.4 Subsubsection One-Two-Four</li>
+        </ul>
+      </li>
+      <li>1.3 Subsection One-Three
+        <ul>
+          <li>...</li>
+        </ul>
+      </li>
+      <li>1.4 Subsection One-Four</li>
+    </ul>
+  </li>
+</ul>
+
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated by <em>Sacha Chua</em> on <em>August, 20 2005</em> using <a href="http://texi2html.cvshome.org/"><em>texi2html 1.76</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

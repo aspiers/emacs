@@ -1,0 +1,240 @@
+/* Example emacs-wiki stylesheet */
+
+/* Footnote */
+
+.navfoot hr {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.navfoot table {
+  border-spacing: 0;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.navfoot td {
+  border-spacing: 0;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Menu */
+
+.menu {
+  background-color: #F5F5F5;    /* white smoke */
+  color: white;
+  border-top: 3px solid #BEBEBE;    /* gray */
+  border-bottom: 3px solid #BEBEBE; /* gray */
+  border-left: 5px solid #D3D3D3;   /* light gray */
+  border-right: 2px solid #D3D3D3;  /* light gray */
+  content: "Menu";
+  display: inline-table;
+  float: right;
+  padding: .5em;
+}
+
+.menuitem {
+  margin: .2em;
+  padding-top: 4px;
+  text-align: left;
+}
+
+.menuitem a:link, .menuitem a:visited {
+  color: #006400;               /* dark green */
+  text-decoration: none;
+}
+
+.menuitem a:hover {
+  background-color: #D3D3D3;    /* light gray */
+}
+
+/* .menuitem a:hover:before { content:"» "} */
+
+.menu:before {
+  border: 1pt solid;
+  color: #708090;               /* slate gray */
+  content: "Menu" ;
+  display: block;
+  text-align: center;
+}
+
+#tooltipbox {
+  float: right;
+  visibility: hidden;
+}
+
+#tooltip {
+  color: #D3D3D3;               /* light gray */
+}
+
+/* Planner */
+
+.taskA { color: red }
+
+.taskB { color: green }
+
+.taskC { color: navy }
+
+.taskX {
+  color: #696969;               /* dim gray */
+  text-decoration: line-through;
+}
+
+/* Source tag */
+
+/* see `emacs-wiki-srctag.el' */
+
+.comment {
+  /* font-lock-comment-face */
+  color: #DEBC83;
+}
+.doc {
+  /* font-lock-doc-face */
+  color: #F0A4A4;
+}
+.constant {
+  /* font-lock-constant-face */
+  color: #D8ACDD;
+}
+.function-name {
+  /* font-lock-function-name-face */
+  color: #96CEF8;
+}
+.keyword {
+  /* font-lock-keyword-face */
+  color: #78f5e6;
+}
+.preprocessor {
+  /* font-lock-preprocessor-face */
+  color: #96CEF8;
+}
+.string {
+  /* font-lock-string-face */
+  color: #F0A4A4;
+}
+.type {
+  /* font-lock-type-face */
+  color: #9BEEB8;
+}
+.variable-name {
+  /* font-lock-variable-name-face */
+  color: #B5CF76;
+}
+
+/* Main */
+
+a.nonexistent {
+  background-color: white;
+  color: red;
+  font-weight: bold;
+}
+
+a.nonexistent:visited {
+  background-color: white;
+  color: red;
+}
+
+a {
+  color: #0000CD;               /* blue */
+}
+
+a:visited {
+  color: #556B2F;               /* dark olive green */
+}
+
+body {
+  background-color: #DCDCDC;    /* gainsboro */
+  color: black;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 1%;
+}
+
+dl.contents {
+  margin-top: 0;
+}
+
+dt.contents {
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: bold;
+  padding: 3px;
+}
+
+em {
+  font-style: italic;
+}
+
+h1 {
+  background-color: #F5DEB3;    /* wheat */
+  color: #2F4F4F;               /* dark slate gray */
+  border-bottom: 3px solid #2F4F4F;
+  margin-bottom: 10px;
+  padding: 4px;
+}
+
+h2 {
+  border-bottom: solid 2px #708090; /* slate gray */
+  /* I need to cut off the right side a little early */
+  border-right: solid 2px #DCDCDC; /* gainsboro */;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  border-bottom: solid 1px #708090; /* slate gray */
+  border-right: solid 2px #DCDCDC; /* gainsboro */;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-right: 6px;
+}
+
+h4 {
+  border-bottom: dashed 1px #BEBEBE;    /* light gray */
+  border-right: solid 2px #DCDCDC; /* gainsboro */;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-right: 6px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+pre.example {
+  margin-left: 5%;
+  margin-bottom: 2.5em;
+}
+
+pre.source {
+  /* Used by emacs-wiki-srctag.el */
+}
+
+pre.verse {
+  font-family: inherit;
+  line-height: 2em;
+  margin-left: 5%;
+}
+
+pre {
+  font-family: monospace;
+  margin-left: 5%;
+  white-space: pre;
+}
+
+span.footdate {
+  color: red;
+}
+
+strong {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: disc;
+}
