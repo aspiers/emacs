@@ -191,9 +191,9 @@ Can be optionally given a numeric prefix which
   (and current-prefix-arg (setq as-cperl-unique-warning-counter start))
   (beginning-of-line)
   (open-line 1)
-  (insert "warn ")
-  (insert (format "%d" as-cperl-unique-warning-counter))
-  (insert ";")
+  ;; Don't append \n to warn string so that we can clearly see
+  ;; which file the warning's coming from.
+  (insert (format "warn \"%2d\";" as-cperl-unique-warning-counter))
   (forward-line 2)
   (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
 
