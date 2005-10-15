@@ -102,6 +102,6 @@ nxml:
 	cd major-modes/nxml-mode-20041004 && $(MAKE)
 
 emacs-wiki:
-	cd major-modes/emacs-wiki
-	perl -pi 's/(EMACS\s*=\s*).*/$1$(EMACS)/' Makefile.defs
+	cd major-modes/emacs-wiki && \
+	perl -pi -e 's/(EMACS\s*=\s*).*/$$1$(EMACS)/' Makefile.defs && \
 	$(MAKE)
