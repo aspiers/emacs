@@ -125,6 +125,9 @@ that name."
 (autoload 'as-destroy-buffer-delete-file 
                                  "as-bufs-files" "Destroy buffer & file"    t)
 (autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffer"           t)
+(autoload 'as-rename-current-buffer-file
+                                 "as-bufs-files" "Renames the file in the current buffer"
+                                                                            t)
 (autoload 'bury-and-close-buffer "as-bufs-files" "Bury and close buffers"   t)
 (autoload 'mhj-set-q-to-close    "as-bufs-files" "Bind q to bury and close" t)
 
