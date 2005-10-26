@@ -104,4 +104,4 @@ nxml:
 emacs-wiki:
 	cd major-modes/emacs-wiki && \
 	perl -pi -e 's/(EMACS\s*=\s*).*/$$1$(EMACS)/' Makefile.defs && \
-	$(MAKE)
+	echo FIXME: $(MAKE)
