@@ -44,8 +44,12 @@ ELs = $(shell find $(srcdirs) -name \*.el 				\
 
 # Do a separate search for elcs since we want to include ones which were
 # built from vendor Makefiles.
-#ELCs = $(addsuffix c,$(ELs))
-ELCs = $(shell find $(srcdirs) -name \*.elc)
+#ELCs = $(shell find $(srcdirs) -name \*.elc)
+
+# Ah, but that doesn't pick up .elc files which haven't been created yet,
+# so it won't work if we're starting from scratch.  Back to plan A for now:
+ELCs = $(addsuffix c,$(ELs))
+
 
 ifndef EMACS
   EMACS=emacs
