@@ -14,6 +14,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/planner		\
             $(EMACSLIB)/major-modes/emacs-wiki	        \
             $(EMACSLIB)/major-modes/remember  	        \
+            $(EMACSLIB)/major-modes/pgg  	        \
             $(EMACSLIB)/major-modes			\
             $(EMACSLIB)/utils/tree-widget-2.0
 gnuinstall_dir=$(EMACSLIB)/GNU_Emacs
@@ -49,7 +50,6 @@ ELs = $(shell find $(srcdirs) -name \*.el 				\
 # Ah, but that doesn't pick up .elc files which haven't been created yet,
 # so it won't work if we're starting from scratch.  Back to plan A for now:
 ELCs = $(addsuffix c,$(ELs))
-
 
 ifndef EMACS
   EMACS=emacs
@@ -108,4 +108,4 @@ nxml:
 emacs-wiki:
 	cd major-modes/emacs-wiki && \
 	perl -pi -e 's/(EMACS\s*=\s*).*/$$1$(EMACS)/' Makefile.defs && \
-	echo FIXME: $(MAKE)
+	echo $(MAKE)

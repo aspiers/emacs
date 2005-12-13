@@ -3,7 +3,7 @@ EMACS    = emacs
 SITEFLAG = --no-site-file
 
 # Xemacs users will probably want the following settings.
-#EMACS    = xemacs
+#EMACS    = emacs
 #SITEFLAG = -no-site-file
 
 # Installation options
