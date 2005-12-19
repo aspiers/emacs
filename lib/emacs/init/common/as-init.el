@@ -973,7 +973,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ w3m-mode
 
-(require 'w3m-load)
+(require 'w3m-load "w3m-load" t)
 
 (add-hook 'dired-mode-hook
           (lambda ()
