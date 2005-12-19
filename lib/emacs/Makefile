@@ -1,7 +1,15 @@
 # TODO: rewrite in Perl.  Gah.
 
-srcdirs=init/common major-modes minor-modes utils fun
-EMACSLIB=$(HOME)/lib/emacs
+srcdirs = init/common major-modes minor-modes utils fun
+
+# These ones have their own Makefiles
+THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m
+THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
+                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4)
+
+EMACSLIB = $(HOME)/lib/emacs
+
+# Add these loadpaths during compilation only.
 loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/mmm 		\
             $(EMACSLIB)/major-modes/tdtd 		\
@@ -17,39 +25,46 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/pgg  	        \
             $(EMACSLIB)/major-modes			\
             $(EMACSLIB)/utils/tree-widget-2.0
-gnuinstall_dir=$(EMACSLIB)/GNU_Emacs
-xinstall_dir=$(EMACSLIB)/XEmacs
 
-ELs = $(shell find $(srcdirs) -name \*.el 				\
-			    ! -name psgml\* 				\
-			    ! -name monkey\* 				\
-			    ! -name tdtd\* 				\
-			    ! -name sdf.el 				\
-			    ! -name planner-bbdb.el 			\
-			    ! -name planner-erc.el 			\
-			    ! -name planner-gnats.el 			\
-			    ! -name planner-ical.el 			\
-			    ! -name planner-ledger.el 			\
-			    ! -name planner-psvn.el 			\
-			    ! -name planner-vm.el 			\
-			    ! -name planner-wl.el 			\
-			    ! -name planner-cyclic-test.el 		\
-			    ! -name remember-bbdb.el 			\
-			    ! -name remember-bibl.el 			\
-			    ! -name remember-blosxom.el 		\
-			    ! -name remember-emacs-wiki-journal.el 	\
-			    ! -path '*/emacs-w3m-*/*'			\
-			    ! -path '*/attic/*'			\
-			    ! -path '*/shimbun/*'			\
-     )
+gnuinstall_dir = $(EMACSLIB)/GNU_Emacs
+xinstall_dir = $(EMACSLIB)/XEmacs
+
+# Horrible horrible horrible.  Prune 3rd party packages from imminent find(1).
+prune = $(shell echo $(THIRD_PARTY_PKG_DIRS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
+
+ELs_TO_COMPILE = $(shell 				\
+	find $(srcdirs)					\
+		-name \*.el 				\
+	      $(prune)					\
+	      ! -name monkey\* 				\
+	      ! -name tdtd\* 				\
+	      ! -name sdf.el 				\
+	      ! -name planner-bbdb.el 			\
+	      ! -name planner-erc.el 			\
+	      ! -name planner-gnats.el 			\
+	      ! -name planner-ical.el 			\
+	      ! -name planner-ledger.el 		\
+	      ! -name planner-psvn.el 			\
+	      ! -name planner-vm.el 			\
+	      ! -name planner-wl.el 			\
+	      ! -name planner-cyclic-test.el 		\
+	      ! -name remember-bbdb.el 			\
+	      ! -name remember-bibl.el 			\
+	      ! -name remember-blosxom.el 		\
+	      ! -name remember-emacs-wiki-journal.el 	\
+	      ! -path '*/attic/*'			\
+	      ! -path '*/shimbun/*'			\
+)
+
+# These are the .elcs we want to build ourselves
+ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 
 # Do a separate search for elcs since we want to include ones which were
 # built from vendor Makefiles.
-#ELCs = $(shell find $(srcdirs) -name \*.elc)
-
-# Ah, but that doesn't pick up .elc files which haven't been created yet,
-# so it won't work if we're starting from scratch.  Back to plan A for now:
-ELCs = $(addsuffix c,$(ELs))
+THIRD_PARTY_ELCs = $(shell \
+	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
+	  ! -path 'major-modes/emacs-w3m-1.4.4/*' \
+)
 
 ifndef EMACS
   EMACS=emacs
@@ -78,13 +93,22 @@ COMPILER+= -batch -f batch-byte-compile
 
 all: install
 
-list:
-	@for el in $(ELs); do echo $$el; done
+list-loadpaths:
+	@echo "$(loadpaths)"
 
-install: nxml emacs-wiki $(ELCs) psgml uninstall
+list-prune:
+	@echo "$(prune)"
+
+list-els-to-compile:
+	@for el in $(ELs_TO_COMPILE); do echo $$el; done
+
+list-third-party-elcs:
+	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
+
+install: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) uninstall
 	@echo "Installing all .elcs in $(install_dir)"
 	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
-	@for elc in $(ELCs) major-modes/psgml/*.elc; do \
+	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
 	  cp $$elc $(install_dir); \
 	done
 
@@ -95,6 +119,7 @@ install: nxml emacs-wiki $(ELCs) psgml uninstall
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 clean: uninstall
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
+	rm major-modes/nxml-mode-20041004/stamp-byte-compile
 
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
@@ -102,10 +127,25 @@ uninstall:
 psgml:
 	cd major-modes/psgml && $(MAKE)
 
-nxml:
-	cd major-modes/nxml-mode-20041004 && $(MAKE)
+nxml-mode-20041004:
+	cd major-modes/nxml-mode-20041004 && \
+	$(MAKE) && \
+	cp rng-auto.el $(install_dir)
 
-emacs-wiki:
+emacs-wiki: pgg
 	cd major-modes/emacs-wiki && \
-	perl -pi -e 's/(EMACS\s*=\s*).*/$$1$(EMACS)/' Makefile.defs && \
-	echo $(MAKE)
+	perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
+                     s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
+		Makefile.defs && \
+	make
+
+emacs-w3m: emacs-w3m-1.4.4
+
+emacs-w3m-1.4.4:
+	cd major-modes/emacs-w3m-1.4.4 && \
+	./configure --prefix=$(HOME)/local   && \
+	make				     && \
+	make install			     && \
+	cp w3m-load.el $(install_dir)
+
+pgg: major-modes/pgg/pgg.elc
