@@ -682,7 +682,7 @@ that name."
 ;;}}}
 ;;{{{ nxml
 
-(add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
+;; (add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
 (load "rng-auto")
 (autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
 (defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
@@ -973,6 +973,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ w3m-mode
 
+;; Pull in autoloads
 (require 'w3m-load "w3m-load" t)
 
 (add-hook 'dired-mode-hook
