@@ -1,4 +1,5 @@
 (add-to-list 'load-path "contrib")
+(add-to-list 'load-path "../pgg")
 (add-to-list 'load-path ".")
 
 (defun emacs-wiki-elint-files ()
