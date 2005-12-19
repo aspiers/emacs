@@ -1,596 +1,41 @@
-This is emacs-w3m.info, produced by makeinfo version 4.0b from
-emacs-w3m.texi.
+Info file: emacs-w3m.info,    -*-Text-*-
+produced by `texinfo-format-buffer'
+from file `emacs-w3m.texi'
+using `texinfmt.el' version 2.38 of 3 July 1998.
+
 
 INFO-DIR-SECTION GNU Emacs Lisp
 START-INFO-DIR-ENTRY
 * Emacs-w3m: (emacs-w3m).  An Emacs interface to w3m
 END-INFO-DIR-ENTRY
 
-   This file documents emacs-w3m, an Emacs interface to w3m.
 
-   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005 TSUCHIYA Masatoshi
+This file documents emacs-w3m, an Emacs interface to w3m.
 
-   This edition is for emacs-w3m version 1.4.4.
+Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005
+TSUCHIYA Masatoshi
 
-   Permission is granted to copy, distribute and/or modify this document
+This edition is for emacs-w3m version 1.4.4.
+
+Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU General Public License, Version 2 or any
 later version published by the Free Software Foundation.
 
-   This document is distributed in the hope that it will be useful, but
+This document is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
+You should have received a copy of the GNU General Public License
 along with this document; if not, you can either send email to this
 document's maintainer or write to: The Free Software Foundation, Inc.;
 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
 
-
-File: emacs-w3m.info,  Node: General Variables,  Next: Image Variables,  Up: Customizable Variables
 
-General variables
-=================
 
-`w3m-accept-languages'
-     List of acceptable languages in descending order of priority.  The
-     default value is set according to the `accept_language' entry of
-     the `w3m' configuration file (normally `~/.w3m/config').
-
-`w3m-add-referer'
-     Rule of sending referers.  There are five choices as the valid
-     values of this option.
-
-       1. `nil': this means that emacs-w3m never send referers.
-
-       2. `t': this means that emacs-w3m always send referers.
-
-       3. `lambda': this means that emacs-w3m send referers only when
-          both the current page and the target page are provided by the
-          same server.
-
-       4. a cons cell keeping two regular expressions: this means that
-          emacs-w3m send referers when the url of the current page
-          matches the first regular expression and does not match the
-          second regular expression.  `Nil' for the regexp matches any
-          url.
-
-       5. a function: emacs-w3m send referers when this function which
-          has two arguments, URL and REFERER, returns non-nil.
-
-     If you're nervous about leaking private WEB browsing history
-     information, set this option to `nil' or `lambda'.  If your
-     computer belongs to a secret network, you may set a pair of
-     regular expressions to inhibit sending referers which will
-     disclose your private information, as follows:
-
-          (setq w3m-add-referer
-                '("\\`http:\"
-                  . "\\`http://\\([^./]+\\.\\)*example\\.net/"))
-
-`w3m-add-user-agent'
-     Non-`nil' means add the User-Agent field to the request header.
-     The value of `w3m-user-agent' is used for the field body.
-
-`w3m-arrived-file'
-     Name of the file to keep the arrived URLs database.
-
-`w3m-auto-show'
-     Non-`nil' means provide the ability to horizontally scroll the
-     window.  Automatic horizontal scrolling happens when the point
-     gets away from both ends of the window, but nothing occurs if
-     `truncate-lines' is set to `nil'.
-
-     This feature works with specific emacs-w3m code; usual
-     `auto-hscroll-mode', `automatic-hscrolling', `auto-show-mode' or
-     `hscroll-mode' will all be invalidated in emacs-w3m buffers.
-
-`w3m-charset-coding-system-alist'
-     Alist of MIME charsets and coding systems.  Both charsets and
-     coding systems must be symbols.
-
-`w3m-coding-system'
-     Default coding system used to communicate with the `w3m' command.
-
-`w3m-coding-system-priority-list'
-     Coding systems in order of priority used for emacs-w3m sessions.
-
-`w3m-command'
-     Name of the executable file of the `w3m' command.  You normally
-     don't have to specify the value, since emacs-w3m looks for the
-     existing commands `w3m', `w3mmee' and `w3m-m17n' (in this order)
-     in the `exec-path' directories in order if it is `nil' in the
-     beginning.
-
-     If you want to use the other `w3m' command, specify the value of
-     this variable explicitly in the .emacs file or customize the value
-     and save it.  In this case, you need to restart Emacs and
-     emacs-w3m: there is currently no way to apply the changing of the
-     `w3m' command to all the emacs-w3m programs safely after loading
-     the `w3m.elc' module.
-
-`w3m-command-arguments'
-     List of the default arguments passed to the `w3m' command.  See
-     also `w3m-command-arguments-alist'.
-
-`w3m-command-arguments-alist'
-     Alist of regexps matching urls and additional arguments passed to
-     `w3m'.  A typical usage of this variable is to specify whether to
-     use a proxy server for particular hosts.  The first match made
-     will be used.  Here is an example of how to set this variable:
-
-          (setq w3m-command-arguments-alist
-                '(;; Don't use the proxy server to visit local web pages.
-                  ("^http://\\([^/]*\\.\\)*your-company\\.com\\(/\\|$\\)"
-                   "-no-proxy")
-                  ;; Use the proxy server to visit any foreign urls.
-                  (""
-                   "-o" "http_proxy=http://proxy.your-company.com:8080/")))
-
-     Here the first element matches any url where the scheme is `http'
-     and the hostname is either `your-company.com' or a name ending with
-     `.your-company.com'; the proxy server is not used for those hosts.
-     If you are a regexp novice, you can use the `w3m-no-proxy-domains'
-     variable instead.
-
-`w3m-command-environment'
-     Alist of environment variables for subprocesses to inherit.
-
-`w3m-content-type-alist'
-     Alist of file suffixes and content types.
-
-`w3m-correct-charset-alist'
-     Alist of MIME charsets; strange ones and standard ones.
-
-`w3m-db-history-display-size'
-     Maximum number of arrived URLs which are displayed per page.
-
-`w3m-decoder-alist'
-     Alist of encoding types, decoder commands, and arguments.
-
-`w3m-default-coding-system'
-     Default coding system used to encode url strings and post-data.
-
-`w3m-default-content-type'
-     Default value assumed as the content type of local files.
-
-`w3m-default-save-directory'
-     Default directory where downloaded files will be saved to.
-
-`w3m-delete-duplicated-empty-lines'
-     Non-`nil' means display two or more continuous empty lines into
-     single.
-
-`w3m-dirlist-cgi-program'
-     Name of the CGI program to list a local directory.  If it is
-     `nil', the dirlist.cgi module of the `w3m' command will be used.
-
-`w3m-edit-function'
-     Function used for editing local files.  It is used when the
-     `w3m-edit-current-url' command or the `w3m-edit-this-url' command
-     is invoked.
-
-`w3m-edit-function-alist'
-     Alist of functions used for editing pages.  This option is refered
-     to decide which function shouled be used to edit a specified page,
-     when either `w3m-edit-current-url' or `w3m-edit-this-url' is
-     invoked.  When no suitable function is found from this alist,
-     `w3m-edit-function' is used.
-
-`w3m-encoding-type-alist'
-     Alist of file suffixes and content encoding types.
-
-`w3m-file-coding-system'
-     Coding system used when writing configuration files.  This value
-     will be referred to by the `w3m-save-list' function.
-
-`w3m-file-name-coding-system'
-     Coding system used to convert pathnames when emacs-w3m accesses
-     files.
-
-`w3m-fill-column'
-     Integer used as the value for `fill-column' in emacs-w3m buffers.
-     If it is positive, pages will be displayed within the columns of
-     that number.  If it is zero or negative, the number of columns
-     which subtracted that number from the window width is applied to
-     the maximum width of pages.  Note that XEmacs does not always obey
-     this setting.
-
-`w3m-follow-redirection'
-     Maximum number of redirections which emacs-w3m honors and follows.
-     If `nil', redirections are followed by the `w3m' command.  Don't
-     set it to `nil' if you allow to use cookies (i.e., you have set
-     `w3m-use-cookies' to non-`nil') since cookies may be shared among
-     many redirected pages.
-
-`w3m-home-page'
-     This variable specifies the url string to open when emacs-w3m
-     starts.  Don't say HP, it's the abbreviated name of a certain
-     company. ;-)
-
-`w3m-horizontal-scroll-columns'
-     Number of steps in columns used when scrolling a window
-     horizontally.
-
-`w3m-horizontal-scroll-division'
-     Integer used by the program making the point certainly visible.
-     The cursor definitely does not go missing even when it has been
-     driven out of the window while wandering around anchors and forms
-     in an emacs-w3m buffer.
-
-     Suppose that the value of this variable is N.  When the point is
-     outside the left of the window, emacs-w3m scrolls the window so
-     that the point may be displayed on the position within 1/N of the
-     width of the window from the left.  Similarly, when the point is
-     outside the right of the window, emacs-w3m scrolls the window so
-     that the point may be displayed on the position of 1/N of the
-     width of the window from the right.
-
-     This feature doesn't work if `w3m-auto-show' is `nil'.  The value
-     must be a larger integer than 1.
-
-`w3m-horizontal-shift-columns'
-     Number of steps in columns used when shifting a window
-     horizontally.  The term `shifting' means a fine level scrolling.
-
-`w3m-imitate-widget-button'
-     If non-`nil', imitate the widget buttons on link (anchor) buttons.
-     It is useful for moving about in a Gnus article buffer using `TAB'
-     key.  It can also be any Lisp form that should return a boolean
-     value.
-
-`w3m-init-file'
-     Your emacs-w3m startup file name.  If a file with the `.el' or
-     `.elc' suffixes exists, it will be read instead.
-
-     Note: This file is used as the startup configuration _NOT_ for the
-     `w3m' command but for emacs-w3m.  In order to modify configurations
-     for the `w3m' command, edit the file named `~/.w3m/config'
-     normally.
-
-`w3m-input-coding-system'
-     Coding system used when writing to `w3m' processes.  It overrides
-     `coding-system-for-write' if it is not `binary'.  Otherwise, the
-     value of the `w3m-current-coding-system' variable is used instead.
-
-`w3m-keep-arrived-urls'
-     Maximum number of URLs which the arrived URLs database keeps.
-
-`w3m-keep-cache-size'
-     Maximum number of pages to be cached in emacs-w3m.
-
-`w3m-key-binding'
-     Type of key binding set used in emacs-w3m sessions.  The valid
-     values include `info' which provides Info-like keys, and `nil'
-     which provides Lynx-like keys.
-
-`w3m-language'
-     Your preferred language used in emacs-w3m sessions.
-
-`w3m-local-directory-view-method'
-     Symbol of the method to view a local directory tree.  The valid
-     values include `w3m-cgi' using the CGI program specified by the
-     `w3m-dirlist-cgi-program' variable (which see), and `w3m-dtree'
-     using the w3m-dtree Lisp module.
-
-`w3m-local-find-file-function'
-     Function used to open local files.  If a url of the `file:' scheme
-     in which you entered agrees with the rule of the
-     `w3m-local-find-file-regexps' variable (which see), it is used to
-     open the file.
-
-     Function should take one argument, the string naming the local
-     file.  It can also be any Lisp form returning a function.  Set
-     this to `nil' if you want to always use emacs-w3m to see local
-     files.
-
-`w3m-local-find-file-regexps'
-     `Cons' of two regexps matching and not matching with local file
-     names.  If a url of the `file:' scheme in which you entered matches
-     the first form and does not match the latter form, it will be
-     opened by the function specified by the
-     `w3m-local-find-file-function' variable.  `Nil' for the regexp
-     matches any file names.
-
-     For instance, the value `(nil . "\\.html?\\'")' allows
-     `file:///some/where/w3m.el', not `file:///any/where/index.html',
-     to open by the function specified by
-     `w3m-local-find-file-function'.  The latter will be opened as a
-     normal web page.
-
-     It is effective only when the `w3m-local-find-file-function'
-     variable is set properly.
-
-`w3m-mailto-url-function'
-     Function used to handle the `mailto' urls.  Function is called with
-     one argument, just a url.  If it is `nil', a function specified by
-     the `mail-user-agent' variable will be used for composing mail
-     messages.
-
-`w3m-mailto-url-popup-function-alist'
-     Alist of `(MAJOR-MODE . FUNCTION)' pairs used to pop a mail buffer
-     up.  If a user clicks on a `mailto' url and a mail buffer is
-     composed by `mail-user-agent' with the `MAJOR-MODE', `FUNCTION'
-     will be called with a mail buffer as an argument.  Note that the
-     variables `special-display-buffer-names',
-     `special-display-regexps', `same-window-buffer-names' and
-     `same-window-regexps' will be bound to `nil' while popping to a
-     buffer up.
-
-`w3m-make-new-session'
-     Non-`nil' means making new emacs-w3m buffers when visiting new
-     pages.  If it is non-`nil' and there are already emacs-w3m buffers,
-     the `w3m' command makes a new emacs-w3m buffer if a user specifies
-     a url string in the minibuffer, and the `w3m-safe-view-this-url'
-     command also makes a new buffer if a user invokes it in a buffer
-     not being running the `w3m-mode'.  The default value is `nil'.
-
-`w3m-mbconv-command'
-     Name of the `mbconv' command provided by the `libmoe' package.
-     The `libmoe' package is used when you use the `w3mmee' command
-     instead of the `w3m' command.  See also `w3m-command'.
-
-`w3m-no-proxy-domains'
-     List of domain names for which emacs-w3m will not use a proxy
-     server.  Each element should be exactly a domain name which means
-     the latter common part of the host names, not a regexp.
-
-`w3m-output-coding-system'
-     Coding system used when reading from `w3m' processes.
-
-`w3m-pop-up-frames'
-     Non-`nil' means pop to a new frame up for an emacs-w3m session.
-     This variable is similar to `pop-up-frames' and does override
-     `w3m-pop-up-windows'.  If `w3m-use-tab' is non-`nil' or there is
-     the buffers selection window (for the `w3m-select-buffer'
-     feature), this variable is ignored when creating the second or more
-     emacs-w3m session.
-
-`w3m-pop-up-windows'
-     Non-`nil' means split the windows when a new emacs-w3m session is
-     created.  This variable is similar to `pop-up-windows' and quite
-     overridden by `w3m-pop-up-frames' as if `pop-up-frames'
-     influences.  Furthermore, if `w3m-use-tab' is non-`nil' or there
-     is the buffers selection window (for the `w3m-select-buffer'
-     feature), this variable is ignored when creating the second or more
-     emacs-w3m session.
-
-`w3m-popup-frame-parameters'
-     Alist of frame parameters used when creating a new emacs-w3m
-     frame.  It allows not only the alist form but also XEmacs' plist
-     form.
-
-`w3m-prefer-cache'
-     Non-nil means that cached contents are used without checking
-     headers.
-
-`w3m-profile-directory'
-     Directory where emacs-w3m config files are loaded from or saved to.
-
-`w3m-quick-start'
-     Non-`nil' means let emacs-w3m start quickly w/o requiring
-     confirmation.  When you invoke the `w3m' command, it attempts to
-     visit the page of a string like url around the cursor or the value
-     of `w3m-home-page'.  You won't be asked for the confirmation then
-     if this value is non-`nil'.  Otherwise, you will be prompted for
-     that url with the editing form.
-
-`w3m-redirect-with-get'
-     If non-`nil', use the GET method after redirection.  It controls
-     how emacs-w3m works when a server responds the code 301 or 302.
-     Here is an extract from RFC2616:
-
-     Note: RFC 1945 and RFC 2068 specify that the client is not allowed
-     to change the method on the redirected request.  However, most
-     existing user agent implementations treat 302 as if it were a 303
-     response, performing a GET on the Location field-value regardless
-     of the original request method.
-
-`w3m-relationship-estimate-rules'
-     Rules to estimate relationships between a retrieved page and
-     others.
-
-`w3m-select-buffer-horizontal-window'
-     Non-`nil' means split windows horizontally to open the selection
-     window.
-
-`w3m-select-buffer-window-ratio'
-     The percentage of the selection window to the whole frame.  The
-     car is used when splitting windows horizontally and the cdr is for
-     splitting windows vertically.
-
-`w3m-show-decoded-url'
-     Non-nil means show decoded URIs in the echo area, the balloon, etc.
-     This variable can take one of the following five kinds of forms:
-
-       1. t
-
-          Decode URIs using the encoding assumed by the default
-          presumption rule based on the priority list including the
-          encoding used to decode the current page and the value of
-          `w3m-coding-system-priority-list'.
-
-       2. Coding system
-
-          Decode URIs using this value.
-
-       3. List of coding systems
-
-          Decode URIs using the encoding assumed based on this list.
-
-       4. Alist of predicates and forms described below:
-
-          Each element looks like the `(PREDICATE . ENCODING)' form.
-          `PREDICATE' should be a regexp, a function or a Lisp form, and
-          `ENCODING' should be one of the forms described here
-          excluding this form.  If `PREDICATE' is a regexp, it will be
-          tested whether it matches to the current url.  If it is a
-          function, it will be called with no argument.  If it is a
-          Lisp form, it will be simply evaluated.  Elements are tested
-          in turn until the result of the test of the predicate is true
-          and the encoding which is associated to the predicate is used
-          for decoding URIs.
-
-       5. nil
-
-          Don't decode URIs.
-
-`w3m-show-error-information'
-     Non-`nil' means show an error information as a web page.  Page is
-     made when the foreign server doesn't respond to a request to
-     retrieve data.
-
-`w3m-space-before-favicon'
-     String of space char(s) to be put in front of favicon in the
-     mode-line.  It may be better to use two or more spaces if you are
-     using oblique or italic font in the modeline.
-
-`w3m-space-before-modeline-icon'
-     String of space character(s) to be put in front of the modeline
-     icon.  It may be better to use one or more spaces if you are using
-     oblique or italic font in the modeline.
-
-`w3m-terminal-coding-system'
-     Default coding system used when writing to `w3m' processes.  It is
-     just a default value to set process' coding system initially.
-     (This variable name is analogically derived from the behavior of
-     the `w3m' command which accepts data from Emacs just like reads
-     from the terminal.)
-
-`w3m-touch-command'
-     Name of the executable file of the touch command.  Note that the
-     command is required to be able to modify file's timestamp with the
-     `-t' option.
-
-`w3m-track-mouse'
-     Whether to track the mouse and message the url under the mouse.
-     This feature does not work under Emacs or XEmacs versions prior to
-     21.  See also `show-help-function' if you are using Emacs 21 or
-     later.
-
-     A tip for XEmacs users:
-
-     You can also use the `balloon-help' feature by the `M-x
-     balloon-help-mode' command with arg 1.  If the window manager
-     decorates the balloon-help frame, and that is not to your taste,
-     you may strip it off with the following directives:
-
-          For ol[v]wm use this in .Xdefaults:
-             olvwm.NoDecor: balloon-help
-               or
-             olwm.MinimalDecor: balloon-help
-          
-          For fvwm version 1 use this in your .fvwmrc:
-             NoTitle balloon-help
-          or
-             Style "balloon-help" NoTitle, NoHandles, BorderWidth 0
-          
-          For twm use this in your .twmrc:
-             NoTitle { "balloon-help" }
-
-     See the `balloon-help.el' file for more information.
-
-`w3m-uri-replace-alist'
-     Alist of regexps matching URIs, and some types of replacements.
-     It can be used universally to replace URI strings in the local
-     rule to the valid forms in the Internet.
-
-     Each element looks like the `(REGEXP FUNCTION OPTIONS...)' form.
-     `FUNCTION' takes one or more arguments, a uri and `OPTIONS'.  You
-     can use the grouping constructs `\\(...\\)' in `REGEXP', and they
-     can be referred by the `\N' forms in a replacement (which is one
-     of `OPTIONS').
-
-     Here are some predefined functions which can be used for those
-     ways:
-
-    `w3m-pattern-uri-replace'
-          Replace a URI using PATTERN (which is just an `OPTION').  It
-          is allowed that PATTERN contains the `\N' forms in the same
-          manner of `replace-match'.
-
-    `w3m-search-uri-replace'
-          Generate valid URLs to query words on some specified search
-          engines.  For example, the element
-
-               ("\\`gg:" w3m-search-uri-replace "google")
-
-          makes it possible to replace the URI `gg:emacs' to a query
-          for the word `emacs' on the Google search engine.
-
-`w3m-url-local-directory-alist'
-     Alist of URLs and local directories.  If directory names of a
-     given URL and the car of an element are the same, emacs-w3m
-     assumes that the file exists in the local directory where the cdr
-     of an element points to.  The default value will be set to a value
-     of the `yahtml-path-url-alist' variable which exchanged the car
-     and the cdr in each element if it is available.
-
-`w3m-use-ange-ftp'
-     Non-`nil' means that `ange-ftp' or `efs' is used to access FTP
-     servers.
-
-`w3m-use-cygdrive'
-     If non-`nil', use the `/cygdrive/' rule when performing
-     `expand-file-name'.
-
-`w3m-use-filter'
-     Non-`nil' means use filter programs to convert web contents.  See
-     also `w3m-filter-rules'.
-
-`w3m-use-form'
-     Non-`nil' means make it possible to use form extensions.
-     _(EXPERIMENTAL)_
-
-`w3m-use-header-line'
-     Non-`nil' means display the header line.
-
-`w3m-use-mule-ucs'
-     Non-`nil' means use the multi-script support with Mule-UCS.
-
-`w3m-use-refresh'
-     Non-`nil' means honor the REFRESH attribute in META tags.
-     Emacs-w3m arbitrarily takes you to a url specified by that
-     attribute.  Note that they may be malicious traps.
-
-`w3m-use-symbol'
-     Non-`nil' means replace symbols that the `<_SYMBOL>' tags lead
-     into.  It is meaningful only when the `w3m-m17n' command is used
-     and (X)Emacs handles unicode charsets.
-
-`w3m-use-tab'
-     Non-`nil' means make emacs-w3m a tab browser.  It makes it possible
-     to show all emacs-w3m buffers in a single window with the tabs
-     line, and you can choose one by clicking a mouse on it.
-     Unfortunately, users of Emacs 20 and less cannot enjoy this
-     feature.  See also `w3m-use-tab-menubar'.
-
-`w3m-use-tab-menubar'
-     Non-`nil' means use the TAB pull-down menu in the menubar.  It
-     makes it possible to show all emacs-w3m buffers in a single
-     window, and you can choose one by clicking a mouse on it.  This
-     feature requires that Emacs has been built to be able to display
-     multilingual text in the menubar if you often visit web sites
-     written in non-ascii text.  See also `w3m-use-tab'.
-
-`w3m-use-toolbar'
-     Non-`nil' activates toolbar of `w3m'.
-
-`w3m-user-agent'
-     String used for the User-Agent field.  See also
-     `w3m-add-user-agent'.
-
-`w3m-view-this-url-new-session-in-background'
-     Run `w3m-view-this-url' without switching to the newly created
-     buffer.  It is useful if you enabled the tabs line or the buffers
-     selection window for the `w3m-select-buffer' feature.  Note that it
-     is meaningful only when specifying a prefix argument to the
-     `w3m-view-this-url' command or using the
-     `w3m-view-this-url-new-session' command in order to create a new
-     emacs-w3m session.
 
 
-File: emacs-w3m.info,  Node: Image Variables,  Next: Form Variables,  Prev: General Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Image Variables, Next: Form Variables, Prev: General Variables, Up: Customizable Variables
 
 Variables related to images
 ===========================
@@ -630,10 +75,10 @@ Variables related to images
      Non-`nil' means let the `w3m' command mind the ratio of the size
      of images and text.  The default value is `t'.
 
-     If it is non-`nil', the `w3m' command will make a `halfdump' which
-     reserves rectangle spaces in which images will be put, and also
-     `alt' texts will be truncated or padded with spaces so that their
-     display width will be the same as the width of images.
+     If it is non-`nil', the `w3m' command will make a `halfdump'
+     which reserves rectangle spaces in which images will be put, and
+     also `alt' texts will be truncated or padded with spaces so that
+     their display width will be the same as the width of images.
 
      See also `w3m-pixels-per-character' and `w3m-pixels-per-line'.
      Those values will be passed to the `w3m' command in order to
@@ -650,9 +95,9 @@ Variables related to images
 `w3m-pixels-per-line'
      Integer used for the `-ppl' argument of the `w3m' command.  If
      `nil', the height of the default face is used.  It is valid only
-     when `w3m-treat-image-size' is non-`nil'.  Note that a small value
-     may not induce a good result.  The default value is `64'.  If you
-     want to use emacs-w3m in a character terminal and make
+     when `w3m-treat-image-size' is non-`nil'.  Note that a small
+     value may not induce a good result.  The default value is `64'.
+     If you want to use emacs-w3m in a character terminal and make
      `w3m-treat-image-size' effective, you need to set this variable
      properly.
 
@@ -663,10 +108,10 @@ Variables related to images
      If non-`nil', resize images to the specified width and height.
 
 `w3m-show-graphic-icons-in-header-line'
-     Non-`nil' means show graphic status indicators in the header-line.
-     If it is `nil', also the favicon won't be shown in the header-line
-     even if `w3m-use-favicon' is non-`nil'.  This variable is
-     currently meaningless under XEmacs.
+     Non-`nil' means show graphic status indicators in the
+     header-line.  If it is `nil', also the favicon won't be shown in
+     the header-line even if `w3m-use-favicon' is non-`nil'.  This
+     variable is currently meaningless under XEmacs.
 
 `w3m-show-graphic-icons-in-mode-line'
      Non-`nil' means show graphic status indicators in the mode-line.
@@ -674,22 +119,23 @@ Variables related to images
      even if `w3m-use-favicon' is non-`nil'.
 
 `w3m-toggle-inline-images-permanently'
-     Non-`nil' means let the visibility of images continue permanently.
-     The visibility of images is initialized according to
-     `w3m-default-display-inline-images' at the first time, and except
-     that it may be toggled by the `w3m-toggle-inline-images' command,
-     it does not change hereafter, if it is non-`nil'.  Otherwise,
-     whether images are visible is initialized according to
+     Non-`nil' means let the visibility of images continue
+     permanently.  The visibility of images is initialized according
+     to `w3m-default-display-inline-images' at the first time, and
+     except that it may be toggled by the `w3m-toggle-inline-images'
+     command, it does not change hereafter, if it is non-`nil'.
+     Otherwise, whether images are visible is initialized according to
      `w3m-default-display-inline-images' whenever you visit a new page
      or reload the current page in an emacs-w3m buffer.
 
 `w3m-use-favicon'
-     Non-`nil' means show favicon images if they are available.  It will
-     be set to `nil' automatically if ImageMagick's `convert' program
-     does not support the ico format.
+     Non-`nil' means show favicon images if they are available.  It
+     will be set to `nil' automatically if ImageMagick's `convert'
+     program does not support the ico format.
+
 
 
-File: emacs-w3m.info,  Node: Form Variables,  Next: Cookie Variables,  Prev: Image Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Form Variables, Next: Cookie Variables, Prev: Image Variables, Up: Customizable Variables
 
 Variables related to forms
 ==========================
@@ -715,10 +161,12 @@ Variables related to forms
 `w3m-form-use-textarea-backup'
      Non-`nil' means save and restore backup text saved when you last
      edited this textarea.  Files to save text are stored in the
-     directory specified by the `w3m-form-textarea-directory' variable.
+     directory specified by the `w3m-form-textarea-directory'
+     variable.
+
 
 
-File: emacs-w3m.info,  Node: Cookie Variables,  Next: Bookmark Variables,  Prev: Form Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Cookie Variables, Next: Bookmark Variables, Prev: Form Variables, Up: Customizable Variables
 
 Variables related to cookies
 ============================
@@ -737,58 +185,76 @@ Variables related to cookies
      A list of untrusted domain name string.
 
 `w3m-use-cookies'
-     Non-`nil' means enable emacs-w3m to use cookies.  _(EXPERIMENTAL)_
+     Non-`nil' means enable emacs-w3m to use cookies.
+     *(EXPERIMENTAL)*
+
 
 
-File: emacs-w3m.info,  Node: Bookmark Variables,  Next: Search Variables,  Prev: Cookie Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Bookmark Variables, Next: Search Variables, Prev: Cookie Variables, Up: Customizable Variables
 
 Variables related to bookmarks
 ==============================
 
+
+
 
-File: emacs-w3m.info,  Node: Search Variables,  Next: Weather Variables,  Prev: Bookmark Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Search Variables, Next: Weather Variables, Prev: Bookmark Variables, Up: Customizable Variables
 
 Variables related to searching the web
 ======================================
 
+
+
 
-File: emacs-w3m.info,  Node: Weather Variables,  Next: Dtree Variables,  Prev: Search Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Weather Variables, Next: Dtree Variables, Prev: Search Variables, Up: Customizable Variables
 
 Variables related to weather information
 ========================================
 
+
+
 
-File: emacs-w3m.info,  Node: Dtree Variables,  Next: Antenna Variables,  Prev: Weather Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Dtree Variables, Next: Antenna Variables, Prev: Weather Variables, Up: Customizable Variables
 
 Variables related to the dtree feature
 ======================================
 
+
+
 
-File: emacs-w3m.info,  Node: Antenna Variables,  Next: Perldoc Variables,  Prev: Dtree Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Antenna Variables, Next: Perldoc Variables, Prev: Dtree Variables, Up: Customizable Variables
 
 Variables related to antenna
 ============================
 
+
+
 
-File: emacs-w3m.info,  Node: Perldoc Variables,  Next: Namazu Variables,  Prev: Antenna Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Perldoc Variables, Next: Namazu Variables, Prev: Antenna Variables, Up: Customizable Variables
 
 Variables related to perldoc
 ============================
 
+
+
 
-File: emacs-w3m.info,  Node: Namazu Variables,  Next: Octet Variables,  Prev: Perldoc Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Namazu Variables, Next: Octet Variables, Prev: Perldoc Variables, Up: Customizable Variables
 
 Variables related to namazu
 ===========================
 
+
+
 
-File: emacs-w3m.info,  Node: Octet Variables,  Next: Hooks,  Prev: Namazu Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Octet Variables, Next: Hooks, Prev: Namazu Variables, Up: Customizable Variables
 
 Variables related to the octet feature
 ======================================
 
+
+
 
-File: emacs-w3m.info,  Node: Hooks,  Next: Other Variables,  Prev: Octet Variables,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Hooks, Next: Other Variables, Prev: Octet Variables, Up: Customizable Variables
 
 Hooks
 =====
@@ -811,8 +277,8 @@ Hooks
      evaluated by the `w3m-fontify' function.
 
 `w3m-fontify-before-hook'
-     Hook run when starting to fontify emacs-w3m buffers.  This hook is
-     evaluated by the `w3m-fontify' function.
+     Hook run when starting to fontify emacs-w3m buffers.  This hook
+     is evaluated by the `w3m-fontify' function.
 
 `w3m-form-input-map-mode-hook'
      A hook called after w3m-form-input-map-mode.
@@ -842,8 +308,9 @@ Hooks
 `w3m-select-buffer-hook'
      Hook run when a different emacs-w3m buffer is selected.
 
+
 
-File: emacs-w3m.info,  Node: Other Variables,  Prev: Hooks,  Up: Customizable Variables
+File: emacs-w3m.info, Node: Other Variables, Prev: Hooks, Up: Customizable Variables
 
 Other variables
 ===============
@@ -854,18 +321,18 @@ Other variables
 
 `w3m-broken-proxy-cache'
      Set it to `t' if the proxy server seems not to work properly in
-     caching.  Note that this may be the double-edged sword; setting it
-     to `t' will likely be harmful if the proxy server sends bad
-     requests (e.g., not including the Host header, see RFC2616 section
-     14.23) to foreign servers when the `w3m' command specifies the
-     `no-cache' directive.  Also note that it may not be effective if
-     you are using old `w3m' command.
+     caching.  Note that this may be the double-edged sword; setting
+     it to `t' will likely be harmful if the proxy server sends bad
+     requests (e.g., not including the Host header, see RFC2616
+     section 14.23) to foreign servers when the `w3m' command
+     specifies the `no-cache' directive.  Also note that it may not be
+     effective if you are using old `w3m' command.
 
 `w3m-history-minimize-in-new-session'
      Non-`nil' means minimize copied history so that there's only
-     current page.  This variable is effective when creating of the new
-     session by copying (i.e., `w3m-copy-buffer').  The default value is
-     `nil'.
+     current page.  This variable is effective when creating of the
+     new session by copying (i.e., `w3m-copy-buffer').  The default
+     value is `nil'.
 
 `w3m-history-reuse-history-elements'
      Non-`nil' means reuse the history element when re-visiting the
@@ -898,26 +365,28 @@ Other variables
      server.
 
 `w3m-xmas-show-current-title-in-buffer-tab'
-     If non-`nil', show the title strings in the buffers tab.  It has no
-     effect if your XEmacs does not support the gutter items.
+     If non-`nil', show the title strings in the buffers tab.  It has
+     no effect if your XEmacs does not support the gutter items.
+
 
 
-File: emacs-w3m.info,  Node: Hooking into MUAs,  Next: Frequently Asked Questions,  Prev: Customizable Variables,  Up: Top
+File: emacs-w3m.info, Node: Hooking into MUAs, Next: Frequently Asked Questions, Prev: Customizable Variables, Up: Top
 
 Hooking emacs-w3m into mail/newsreaders
 ***************************************
 
-   This section introduces three Message User Agents (MUAs).  All those
-MUAs can display HTML mails properly using emacs-w3m.  You'll find here
-HowTo's and some notes about setting up and using emacs-w3m with each
-of these MUAs.
+This section introduces three Message User Agents (MUAs).  All those
+MUAs can display HTML mails properly using emacs-w3m.  You'll find
+here HowTo's and some notes about setting up and using emacs-w3m with
+each of these MUAs.
 
-   Quick note about the conventions we use: what does `message' mean?
-When a Gnus user says `message', it often means a draft of a message to
-be sent as mail or news.  However, it is the term used by Mew or
-Wanderlust users for received mail.  They use `draft' for the draft of
-a message to be sent.  On the other hand, a received message is called
-an `article' by Gnus users.
+Quick note about the conventions we use: what does `message'
+mean?
+ When a Gnus user says `message', it often means a draft of
+a message to be sent as mail or news.  However, it is the term used by
+Mew or Wanderlust users for received mail.  They use `draft' for
+the draft of a message to be sent.  On the other hand, a received
+message is called an `article' by Gnus users.
 
 * Menu:
 
@@ -926,25 +395,26 @@ an `article' by Gnus users.
 * SEMI MUAs::                   Reading HTML mails in SEMI MUAs
 * VM::                          VM (vieW maiL) is not Wanderlust
 
+
 
-File: emacs-w3m.info,  Node: Gnus,  Next: Mew,  Up: Hooking into MUAs
+File: emacs-w3m.info, Node: Gnus, Next: Mew, Prev: Hooking into MUAs, Up: Hooking into MUAs
 
 Reading HTML mails in Gnus
 ==========================
 
-   Did you know that Gnus, the Emacs newsreader, supports emacs-w3m?
+Did you know that Gnus, the Emacs newsreader, supports emacs-w3m?
 
-   Actually, the version of Gnus bundled with Emacs does not support
+Actually, the version of Gnus bundled with Emacs does not support
 emacs-w3m (yet).  You'd better use the latest version of Gnus.  It is
 available at:
 
-   `ftp://ftp.gnus.org/pub/gnus/gnus.tar.gz'
+`ftp://ftp.gnus.org/pub/gnus/gnus.tar.gz'
 
-   Note: if emacs-w3m *is* supported in the Gnus version that comes
-with your Emacs distribution, it means either that this documentation is
+Note: if emacs-w3m *is* supported in the Gnus version that comes with
+your Emacs distribution, it means either that this documentation is
 out-of-date (please report this bug as described in *Note Mailing
-List::), or that you're using a very old version of emacs-w3m (in which
-case you should update it to a newer version).
+List::), or that you're using a very old version of emacs-w3m (in
+which case you should update it to a newer version).
 
    * What can you do with emacs-w3m?
 
@@ -954,17 +424,17 @@ case you should update it to a newer version).
      converter.  You don't need to perform any additional operation.
      It will simply be displayed.
 
-     On HTML parts of an article buffer, the `w3m-minor-mode' is turned
-     on and you can use the same main keys as the keys of emacs-w3m, for
-     instance, <RET> is for visiting a page which a link in the current
-     position points to.  Those keys are defined in the
+     On HTML parts of an article buffer, the `w3m-minor-mode' is
+     turned on and you can use the same main keys as the keys of
+     emacs-w3m, for instance, RET is for visiting a page which a link
+     in the current position points to.  Those keys are defined in the
      `w3m-minor-mode-command-alist' variable.  Keep in mind that some
      commands are replaced by others similar to them, for security
      reasons (see below).
 
    * What do you have to do?
 
-     Read the Gnus manual (*note Display Customization:
+     Read the Gnus manual (*Note Display Customization:
      (emacs-mime)Display Customization.).  The easiest way is to put
      the following line in your `~/.gnus.el' file:
 
@@ -975,8 +445,8 @@ case you should update it to a newer version).
 
           (setq mm-inline-text-html-with-images t)
 
-     If you don't need to use emacs-w3m keys in article buffers, add the
-     following line too:
+     If you don't need to use emacs-w3m keys in article buffers, add
+     the following line too:
 
           (setq mm-inline-text-html-with-w3m-keymap nil)
 
@@ -1006,9 +476,10 @@ case you should update it to a newer version).
 
    * Giveaway
 
-     Even when you are in the summary buffer, you can toggle displaying
-     of images in the article buffer.  It is effective only when those
-     images are displayed by emacs-w3m, though.  Here's an example:
+     Even when you are in the summary buffer, you can toggle
+     displaying of images in the article buffer.  It is effective only
+     when those images are displayed by emacs-w3m, though.  Here's an
+     example:
 
           (defun gnus-summary-w3m-safe-toggle-inline-images (&optional arg)
             "Toggle displaying of all images in the article buffer.
@@ -1017,30 +488,31 @@ case you should update it to a newer version).
             (save-excursion
               (set-buffer gnus-article-buffer)
               (w3m-safe-toggle-inline-images arg)))
-          
+
           (eval-after-load "gnus-sum"
             '(define-key gnus-summary-mode-map
                "\C-i" 'gnus-summary-w3m-safe-toggle-inline-images))
 
 See also *Note Nnshimbun::.
 
+
 
-File: emacs-w3m.info,  Node: Mew,  Next: SEMI MUAs,  Prev: Gnus,  Up: Hooking into MUAs
+File: emacs-w3m.info, Node: Mew, Next: SEMI MUAs, Prev: Gnus, Up: Hooking into MUAs
 
 Reading HTML mails in Mew
 =========================
 
-   By using emacs-w3m with Mew, you can see HTML mails as it intended
-to be displayed.  To do so, put the following line in the `~/.mew.el'
+By using emacs-w3m with Mew, you can see HTML mails as it intended to
+be displayed.  To do so, put the following line in the `~/.mew.el'
 file:
 
      (require 'mew-w3m)
 
-With just this, an HTML mail will be displayed in the message window as
-if it were a plain text.  You can still use the `C-c C-e' command
+With just this, an HTML mail will be displayed in the message window
+as if it were a plain text.  You can still use the `C-c C-e' command
 (`mew-summary-execute-external') there.
 
-   It is also quite common these days to see mails containing the same
+It is also quite common these days to see mails containing the same
 information twice, they use the `multipart/alternative' format which
 consists of both a `text/plain' part and a `text/html' part (what a
 waste of bandwidth it is).  Mew displays only the `text/plain' part of
@@ -1056,17 +528,19 @@ There are some customizable variables related to Mew:
 `mew-use-w3m-minor-mode'
      If non-`nil', the `w3m-minor-mode' is turned on in the message
      buffer where a text/html part is displayed, and you can use the
-     same main keys as the keys of emacs-w3m, for instance, <RET> is for
+     same main keys as the keys of emacs-w3m, for instance, RET is for
      visiting a page which a link in the current position points to.
      Those keys are defined in the `w3m-minor-mode-command-alist'
      variable.  Keep in mind that some commands are replaced by others
-     similar to them, for security reasons.  The default value is `nil'.
+     similar to them, for security reasons.  The default value is
+     `nil'.
 
 `mew-w3m-auto-insert-image'
-     If non-`nil', you can see images inline in the message buffer when
-     you read a multipart/related message.  Note that mew-w3m only
-     allows images contained in the message body with a `cid:' URL to be
-     displayed (as we consider them safe).  The default value is `nil'.
+     If non-`nil', you can see images inline in the message buffer
+     when you read a multipart/related message.  Note that mew-w3m
+     only allows images contained in the message body with a `cid:'
+     URL to be displayed (as we consider them safe).  The default
+     value is `nil'.
 
      To activate this feaeture, add following in your `~/.mew.el'.
 
@@ -1082,59 +556,60 @@ There are some customizable variables related to Mew:
 
 See also *Note Mew Shimbun::.
 
+
 
-File: emacs-w3m.info,  Node: SEMI MUAs,  Next: VM,  Prev: Mew,  Up: Hooking into MUAs
+File: emacs-w3m.info, Node: SEMI MUAs, Next: VM, Prev: Mew, Up: Hooking into MUAs
 
 Reading HTML mails in SEMI MUAs
 ===============================
 
-   You can display HTML mails as human-readable, using emacs-w3m and
-SEMI MUAs, for example, Wanderlust, T-gnus, etc.  Since those MUAs
-depend on SEMI (and also FLIM) for MIME functions, we generically call
-them SEMI MUAs.  Although SEMI uses Emacs/W3 for rendering HTML mails
-by default, it can easily be altered to emacs-w3m and it will make your
+You can display HTML mails as human-readable, using emacs-w3m and SEMI
+MUAs, for example, Wanderlust, T-gnus, etc.  Since those MUAs depend
+on SEMI (and also FLIM) for MIME functions, we generically call them
+SEMI MUAs.  Although SEMI uses Emacs/W3 for rendering HTML mails by
+default, it can easily be altered to emacs-w3m and it will make your
 cyber life still more comfortable.
 
 You simply need to put the following line in `~/.emacs' file:
 
      (require 'mime-w3m)
 
-   The `mime-w3m' and `mime-w3' modules are functionally alike, as you
+The `mime-w3m' and `mime-w3' modules are functionally alike, as you
 might have guessed (see how the names sound alike?).  The latter is
 included in the SEMI package.
 
-   On HTML parts of an article buffer, the `w3m-minor-mode' is turned
-on and you can use the same main keys as the keys of emacs-w3m, for
-instance, <RET> is for visiting a page which a link in the current
+On HTML parts of an article buffer, the `w3m-minor-mode' is turned on
+and you can use the same main keys as the keys of emacs-w3m, for
+instance, RET is for visiting a page which a link in the current
 position points to.  Those keys are defined in the
 `w3m-minor-mode-command-alist' variable.  Keep in mind that some
 commands are replaced by others similar to them, for security reasons.
 
-   There are some customizable variables related to the `mime-w3m'
+There are some customizable variables related to the `mime-w3m'
 module:
 
 `mime-w3m-display-inline-images'
-     If it is non-`nil', images will be displayed inline in HTML mails.
-     If it is the symbol `default' (which is the default) at the first
-     time, the value of this variable will be replaced with the value
-     of the `w3m-default-display-inline-images' variable.  You probably
-     don't need to change this.
+     If it is non-`nil', images will be displayed inline in HTML
+     mails.  If it is the symbol `default' (which is the default) at
+     the first time, the value of this variable will be replaced with
+     the value of the `w3m-default-display-inline-images' variable.
+     You probably don't need to change this.
 
 `mime-w3m-safe-url-regexp'
-     Regexp matching URLs which are considered to be safe.  The default
-     value is `"\\`cid:"' which means we consider that images included
-     in a mail with the `cid:' URLs are safe.  See also *Note Gnus::
-     about rogue attacks.
+     Regexp matching URLs which are considered to be safe.  The
+     default value is `"\\`cid:"' which means we consider that images
+     included in a mail with the `cid:' URLs are safe.  See also *Note
+     Gnus:: about rogue attacks.
 
 `mime-w3m-setup-hook'
-     A hook run just after setting up the cooperation of the `mime-w3m'
-     module and SEMI.  The default value is `nil'.
+     A hook run just after setting up the cooperation of the
+     `mime-w3m' module and SEMI.  The default value is `nil'.
 
-   By the way, even when you are in the summary buffer, you can toggle
-displaying of images in the article buffer (which is what is called the
-message buffer in the Wanderlust community).  It is effective only when
-those images are displayed by emacs-w3m, though.  Here're examples for
-T-gnus, Nana-gnus and Wanderlust:
+By the way, even when you are in the summary buffer, you can toggle
+displaying of images in the article buffer (which is what is called
+the message buffer in the Wanderlust community).  It is effective only
+when those images are displayed by emacs-w3m, though.  Here're
+examples for T-gnus, Nana-gnus and Wanderlust:
 
      ;; T-gnus or Nana-gnus:
      (defun gnus-summary-w3m-safe-toggle-inline-images (&optional arg)
@@ -1144,11 +619,11 @@ T-gnus, Nana-gnus and Wanderlust:
        (save-excursion
          (set-buffer gnus-article-buffer)
          (w3m-safe-toggle-inline-images arg)))
-     
+
      (eval-after-load "gnus-sum"
        '(define-key gnus-summary-mode-map
           "\C-i" 'gnus-summary-w3m-safe-toggle-inline-images))
-     
+
      ;; Wanderlust:
      (defun wl-summary-w3m-safe-toggle-inline-images (&optional arg)
        "Toggle displaying of all images in the message buffer.
@@ -1157,32 +632,34 @@ T-gnus, Nana-gnus and Wanderlust:
        (save-excursion
          (set-buffer wl-message-buffer)
          (w3m-safe-toggle-inline-images arg)))
-     
+
      (eval-after-load "wl-summary"
        '(define-key wl-summary-mode-map
           "\M-i" 'wl-summary-w3m-safe-toggle-inline-images))
 
 See also *Note Nnshimbun:: if you are using T-gnus or Nana-gnus.
 
+
 
-File: emacs-w3m.info,  Node: VM,  Prev: SEMI MUAs,  Up: Hooking into MUAs
+File: emacs-w3m.info, Node: VM, Prev: SEMI MUAs, Up: Hooking into MUAs
 
 VM (vieW maiL) is not Wanderlust
 ================================
 
-   Emacs-w3m is not supporting VM positively.  It is simply because
-there is no VM user in the emacs-w3m team.  However, don't be
-pessimistic.  There is the `vm-w3m.el' module in the attic directory of
-the emacs-w3m distribution.  You are a lucky person if it is helpful to
+Emacs-w3m is not supporting VM positively.  It is simply because there
+is no VM user in the emacs-w3m team.  However, don't be pessimistic.
+There is the `vm-w3m.el' module in the attic directory of the
+emacs-w3m distribution.  You are a lucky person if it is helpful to
 you.  Try it anyhow.  You can find how to use it in the file itself.
 
-   If you want to toggle displaying of images in the presentation buffer
+If you want to toggle displaying of images in the presentation buffer
 when you are in any VM buffer, use the following:
 
      (define-key vm-mode-map "T" 'vm-w3m-safe-toggle-inline-images)
 
+
 
-File: emacs-w3m.info,  Node: Frequently Asked Questions,  Next: Known Problems,  Prev: Hooking into MUAs,  Up: Top
+File: emacs-w3m.info, Node: Frequently Asked Questions, Next: Known Problems, Prev: Hooking into MUAs, Up: Top
 
 There isn't always an answer
 ****************************
@@ -1193,8 +670,9 @@ There isn't always an answer
 * Trouble FAQ::                 Troubleshooting
 * Shimbun FAQ::                 Questions of Shimbun Library
 
+
 
-File: emacs-w3m.info,  Node: General FAQ,  Next: Trouble FAQ,  Up: Frequently Asked Questions
+File: emacs-w3m.info, Node: General FAQ, Next: Trouble FAQ, Prev: Frequently Asked Questions, Up: Frequently Asked Questions
 
 General Questions
 =================
@@ -1209,23 +687,14 @@ General Questions
      The following Emacsen have been checked for emacs-w3m support:
 
         * Mule 2.3 (based on Emacs 19.34)
-
         * Emacs 19.34
-
         * Emacs 20
-
         * Emacs 21
-
         * Emacs 22
-
         * XEmacs 21.1 with Mule
-
         * XEmacs 21.2 with Mule (beta37 or greater)
-
         * XEmacs 21.4 with/without Mule
-
         * XEmacs 21.5 with/without Mule
-
         * Meadow
 
      Note that you're required to use APEL if you'd like to run
@@ -1234,20 +703,20 @@ General Questions
 
      Emacs-w3m works on Emacs 19.34 or XEmacs without the Mule feature
      except for several commands, such as the command to look weather
-     forecasts in Japan.  They strongly depends on the Mule feature, so
-     that they must not work on Emacs 19.34 or XEmacs without Mule.
+     forecasts in Japan.  They strongly depends on the Mule feature,
+     so that they must not work on Emacs 19.34 or XEmacs without Mule.
 
    * Q. Which w3m versions are supported?
 
-     The following w3m versions have been checked for emacs-w3m support:
+     The following w3m versions have been checked for emacs-w3m
+     support:
 
         * w3m-0.3 and later
-
         * w3mmee-p24-18 + moe-1.5.4
 
           Note that w3mmee mentioned as the example is configured with
-          the `lang=many' option (it can be done by entering 3, when the
-          `configure' script prompts you, "Which language do you
+          the `lang=many' option (it can be done by entering 3, when
+          the `configure' script prompts you, "Which language do you
           prefer?").  It also requires the `libmoe' package.
 
    * Q. I've already installed APEL in the XEmacs SUMO package, is it
@@ -1268,3 +737,753 @@ General Questions
      It is necessary to run `autoconf' first, to generate `configure'
      script.
 
+
+
+File: emacs-w3m.info, Node: Trouble FAQ, Next: Shimbun FAQ, Prev: General FAQ, Up: Frequently Asked Questions
+
+Troubleshooting
+===============
+
+   * Q. Why can't I enter a password on pages which require
+     authentication?
+
+     Make sure the `w3m-async-exec' variable is set to a value other
+     than `nil'.
+
+   * Q. Why can't I enter a password for a proxy server which requires
+     authentication?
+
+     Make sure the `w3m-async-exec' variable is set to a value other
+     than `nil'.
+
+   * Q. Why can't I follow links?
+
+     Emacs-w3m requires a version of w3m which recognizes the
+     `-header' option.  Check what version of w3m you use.
+
+   * Q. Why do garbage characters appear?
+
+     It could be caused by the following reasons:
+
+       1. Bad HTML file
+
+          If the character set specified by the `<meta>' tag differs
+          from the actual contents in an HTML file, it will not be
+          displayed correctly.  Use the command `M-x
+          w3m-redisplay-with-charset' or `C c' to set the correct
+          character set and to force redisplay of the page.
+
+       2. Limitation of the character sets
+
+          A page written by a character set other than
+          ISO-2022-JP(jis), EUC-JP, or SHIFT_JIS may not be displayed
+          correctly.  Try one of the following ways:
+
+            a. Any characters defined in Unicode will be displayed
+               correctly if you install the Mule-UCS package (*Note
+               Other Requirements::).  You need to make sure that the
+               value of the `w3m-use-mule-ucs' variable is set to a
+               value other than `nil' after installing the Mule-UCS
+               package.  In addition, if you want to make Emacs (and
+               also emacs-w3m) handle the character sets EUC-JISX0213
+               and ISO-2022-JP-3, you have to install the `jisx0213'
+               module which is contained in the Mule-UCS package
+               (though it doesn't work under XEmacs unfortunately).
+
+            b. Install w3mmee or w3m-m17n, and set the `w3m-command'
+               variable to the appropriate value.  And emacs-w3m will
+               use the multi-lingual features provided by one of those
+               programs.  However, a page written by a coding system
+               which Emacs doesn't support may not be displayed
+               correctly. So please install Mule-UCS package if
+               necessary.
+
+       3. Emacsen incompatibility
+
+          Under XEmacs 21.1, pages written by the SHIFT_JIS character
+          set may not be displaied correctly.  There is also a problem
+          in XEmacs 21.2 prior to the beta 36 version.  You should
+          upgrade your XEmacs if you use such one.
+
+          You should notice that XEmacs versions 21.1 and 21.2 have
+          already been retired officially.
+
+       4. Don't use `standard-display-european'
+
+          It is generally harmful since it often makes Latin
+          characters get displayed incorrectly.  For instance, the
+          apostrophe character (`'') which was encoded as `&#8217'
+          will be displayed as the character `u' with a grave accent
+          as if it had been encoded as `&#249'.  If the line something
+          like the following is in your `~/.emacs' file or site files
+          which Emacs loads when starting up, we strongly recommend
+          you to remove it.
+
+               (standard-display-european 1)
+
+          There the argument might be `t', not `1'.
+
+   * Q. Why can't images be shown?
+
+     It could be caused by the following reasons:
+
+     There is a bug in the earlier versions of the `libungif' library.
+     You have to install `libungif-4.1.0b1' and later.
+
+     You must install the `gifsicle' program if you want to run
+     emacs-w3m under XEmacs.  *Note Other Requirements::.
+
+     Emacs-w3m doesn't support the old versions of w3m.  Check what
+     version of w3m you use.
+
+   * Q. Why can't I browse pages which require cookies?
+
+     (This is still an experimental feature.)
+
+     Make sure the `w3m-use-cookies' variable is set to a value other
+     than `nil'.
+
+   * Q. Why can't I fill in the form?
+
+     (This is still an experimental feature.)
+
+     Make sure the `w3m-use-form' variable is set to a value other
+     than `nil'.
+
+   * Q. Why can't I submit a form?
+
+     (This is still an experimental feature.)
+
+     Make sure the `w3m-use-form' variable is set to a value other
+     than `nil'.  You also need to use a version of w3m which
+     recognizes the `-post' option in order to use this function.
+     Check what version of w3m you use.
+
+   * Q. Why are frames not rendered?
+
+     Install w3mmee and put the following line in your `~/.emacs'
+     file:
+
+          (setq w3m-command "w3mmee")
+
+   * Q. Why are favicon images not displayed in the Emacs 21 tab bar?
+
+     Install the `convert' program which is included in ImageMagick.
+     It is available from: `http://www.imagemagick.org/'
+
+   * Q. Why does Emacs 21 get locked when a favicon image is going to
+     be displayed?
+   * Q. My computer accesses the disk drive violently and says
+     `process convert exited abnormally with code 10'.  What's the
+     story?
+
+     Do you use an old version of ImageMagick?  As far as we know, it
+     happens when you use the `convert' program bundled with
+     ImageMagick 5.2.1.  It has been confirmed that the `convert'
+     program bundled with ImageMagick 5.4.0-5 (and later) works fine.
+
+     If you don't want to use ImageMagick, or if you can't use its
+     most recent version, add the following line in your
+     `~/.emacs-w3m' file:
+
+          (setq w3m-use-favicon nil)
+
+   * Q. Why does not emacs-w3m work with w3mmee?
+
+     If you are using w3mmee configured with the option `lang=en' or
+     `lang=ja', reconfigure w3mmee with the option `lang=many' (it can
+     be done by entering 3, when the `configure' script prompts you,
+     "Which language do you prefer?"), and rebuild w3mmee.
+
+   * Q. Why I cannot visit web pages using emacs-w3m?  There is no
+     problem when visiting local html files or using w3m barefoot,
+     though.
+
+     What is called the asynch patch (1) (*Note Trouble
+     FAQ-Footnotes::) is applied to the w3m command which some Linux
+     distribution (e.g. Gentoo Linux) contains.  It is useful when
+     using w3m barefoot, however it might make emacs-w3m hang.  If it
+     is suspected, we recommend you reinstall the w3m command from the
+     original source.
+
+
+File: emacs-w3m.info  Node: Trouble FAQ-Footnotes, Up: Trouble FAQ
+
+(1) w3m on cygwin (http://www.page.sannet.ne.jp/knabe/w3m/w3m.html)
+
+
+
+File: emacs-w3m.info, Node: Shimbun FAQ, Prev: Trouble FAQ, Up: Frequently Asked Questions
+
+Questions of Shimbun Library
+============================
+
+   * Q. Why are the `shimbun' modules not installed?
+
+     Note that the `shimbun' modules (files under the `shimbun/'
+     directory) won't be installed if the FLIM package has not been
+     installed in your system.
+
+     The `configure' script determines automatically whether the FLIM
+     package is installed or not.  If the FLIM package is installed in
+     a non-standard directory, the determination fails.  In this case,
+     you can use the `--with-addpath' configure option to explicitly
+     set the directory name where the FLIM package has been installed.
+     Here's an example:
+
+          % ./configure --with-addpath=$HOME/share/emacs/site-lisp/flim
+
+
+
+File: emacs-w3m.info, Node: Known Problems, Next: Shimbun Library, Prev: Frequently Asked Questions, Up: Top
+
+You can surely solve it
+***********************
+
+
+
+
+File: emacs-w3m.info, Node: Shimbun Library, Next: Tips, Prev: Known Problems, Up: Top
+
+A tool for reading a newspaper
+******************************
+
+More and more newspapers, mailing list archives, bulletin boards, and
+individual diaries (such as hyper nikki system, weblogs and blogs) are
+published on the web.  `Shimbun' library enables you to read those
+contents with your favorite mail/news reader.  Actually, `Shimbun'
+library provides functions to convert those contents into articles
+like common e-mails.
+
+     `Shimbun' is pronounced "she-n-boon" (but actually vowels
+     shouldn't be prolonged), it means "newspaper" in Japanese.
+
+`Shimbun' library currently supports Asahi Shimbun, Yomiuri On-line,
+many maling list archives such as Emacs Devel, XEmacs Beta, Gnus, Mew,
+and Wanderlust, the Japanese Prime Minister Koizumi's mail magazine,
+Slashdot Japan, and a lot of others.  For more detail, see *Note
+Shimbun Sites::.
+
+By the way, you have to pay attention to copyright when using
+`Shimbun' library.  Copyrights of articles generated with `Shimbun'
+library are reserved by copyright holders of those original contents.
+Therefore, you are obliged not to violate rights of copyright holders,
+when you enjoy generated articles.  It means that you can enjoy
+generated articles on "fair use" that is described in the copyright
+law.
+
+We, emacs-w3m development team, give no warranty to you, if `Shimbun'
+library causes a damage to you, or if you face a lawsuit about
+violation of copyrights.
+
+`Shimbun' library is a collection of many modules, but each of them
+serves no useful purpose alone.  This section explains three typical
+`Shimbun' applications (two of which are included in the `Shimbun'
+library) and how to make `Shimbun' modules by yourself (you need to be
+able to write Emacs Lisp programs).
+
+* Menu:
+
+* Nnshimbun::                   Turning Gnus into a web browser!
+* Mew Shimbun::                 Reading web newspapers with Mew
+* Shimbun with Wanderlust::     Reading web newspapers with Wanderlust
+* Shimbun Sites::               Sites supported by Shimbun
+* Shimbun Basics::              How to make a new shimbun module
+
+Note that you need to have installed the FLIM package (and Gnus if
+you'd like to use `nnshimbun') before building and installing
+emacs-w3m.  The FLIM package requires the APEL package.  You might
+also want to see *Note Other Requirements::.
+
+
+
+File: emacs-w3m.info, Node: Nnshimbun, Next: Mew Shimbun, Prev: Shimbun Library, Up: Shimbun Library
+
+Turning Gnus into a web browser!
+================================
+
+`Nnshimbun' is a Gnus back end, but it is distributed with emacs-w3m,
+not Gnus, exceptionally.  `Nnshimbun' allows you to turn Gnus into an
+exceptionally useful web browser.  You can skim through the articles
+on a newspaper's web server without having to see all the
+advertisement.  You can read articles in mailing list archives as if
+you were subscribed to the list.  You can also read submissions in
+bulletin boards, etc...  Note that if you want to followup, you still
+need to use emacs-w3m as Gnus can't post via the web with `nnshimbun'.
+
+See also *Note Gnus:: for rendering HTML messages with emacs-w3m if
+you use Gnus, see *Note SEMI MUAs:: for T-gnus or Nana-gnus instead.
+
+The easiest way to get started with `nnshimbun' is to use something
+like the following in the Group buffer:
+
+`M-x gnus-group-make-shimbun-group RET asahi RET national RET'
+
+Replace `asahi' and `national' with the keyword corresponding to the
+server you'd like to connect to and the group you're interested in
+respectively.  You can complete both of those names by using TAB or
+SPC.
+
+You can also bind that to a key if there's enough room in the
+`gnus-group-mode-map' map, you can add something like the following in
+your `~/.gnus.el' file (T-gnus users, you don't need to bother to add
+it, since there's already the similar thing in T-gnus):
+
+     (eval-after-load "gnus-group"
+       '(define-key gnus-group-mode-map "Gn"
+          'gnus-group-make-shimbun-group))
+
+Then, you can use `G n' instead of `M-x
+gnus-group-make-shimbun-group'.
+
+*Could someone book this keystroke at the Gnus Tower?*
+
+
+`Nnshimbun' simply fetches HTML contents from the web server and
+displays them as an article, but it will never save articles in the
+local file system, except if you use persistent articles (*Note
+Persistent Articles: (gnus)Persistent Articles.).  `Nnshimbun' uses
+NOV files for each `nnshimbun' group, and its back end is almost the
+same as `nnml'.
+
+The following `nnshimbun' variables can be customized:
+
+`nnshimbun-keep-backlog'
+     This variable overrides the `gnus-keep-backlog' variable (*Note
+     Article Backlog: (gnus)Article Backlog.) in `nnshimbun' groups.
+     If you set `nnshimbun-keep-backlog' to a number N, `nnshimbun'
+     will store at most N old articles in a buffer for later
+     re-fetching.  If this variable is non-`nil' and is not a number,
+     `nnshimbun' will store *all* read articles (this is not a good
+     idea).  The default value is 300.
+
+     Note that smaller values may spoil the `prefetch-articles'
+     feature (see below), since `nnshimbun' uses the backlog to keep
+     the prefetched articles.
+
+`nnshimbun-directory'
+     Directory where `nnshimbun' saves NOV files.  The default value
+     is `~/News/shimbun/'.
+
+You can use the specially made group parameter for `nnshimbun' in
+addition to the standard group parameters provided by Gnus (1) (*Note
+Nnshimbun-Footnotes::).  Several parameters for `nnshimbun' are
+collected into the single group parameter `nnshimbun-group-parameters'
+which is a property list (the values can be different for every
+group).  Here's an example:
+
+     '(index-range all prefetch-articles off encapsulate-images on
+                   expiry-wait 6)
+
+Below is the documentation for those group parameters and related
+variables.
+
+`prefetch-articles'
+     In a group where this group parameter is set to something else
+     than `off' or `nil', `nnshimbun' not only checks for new
+     articles, but also downloads them.  Though it will slow checking
+     of new articles down, you won't be kept waiting when reading
+     articles.  In the group where this group parameter is not set or
+     its value is `nil', the value of the
+     `nnshimbun-pre-fetch-article' variable (`off' by default) is used
+     instead.
+
+`encapsulate-images'
+     In a group where this group parameter is set to something else
+     than `off' or `nil', `nnshimbun' will put image data embedded in
+     the original contents into an article as `multipart/related'
+     parts of the MIME format.  In the group where this group
+     parameter is not set or its value is `nil', the value of the
+     `nnshimbun-encapsulate-images' variable is used instead.  The
+     default value for the `nnshimbun-encapsulate-images' variable is
+     the value of the `shimbun-encapsulate-images' variable which is
+     provided in the `shimbun' library (the default value is probably
+     `t').
+
+`index-range'
+     You can specify the range of articles to be fetched from the web
+     server using the `index-range' group parameter.  To specify the
+     range, use the following values:
+
+     `nil'
+     `all'
+          all pages
+
+     `last'
+          only the latest page
+
+     `integer N'
+          the latest N pages
+
+     `Nnshimbun' checks whether there are new articles by parsing the
+     index page of the server.  It is possible that there are two or
+     more index pages on the server.  For instance, in the case of the
+     mailing list servers, index pages are generally classified
+     according to the date on which the article was posted.  It would
+     take a considerable amount of time to check all those huge index
+     pages especially if you are connecting via a slow line.
+
+     If it is possible, `nnshimbun' won't check index pages which have
+     already been checked at the last connection.  If you want to save
+     even more time, use `last'.  It makes `nnshimbun' refer to only
+     the latest index page for checking new articles.
+
+     In the group where the `index-range' group parameter is not set
+     or its value is `nil', the value of the `nnshimbun-index-range'
+     variable (`nil' by default) is used.
+
+`nnshimbun-group-parameters-alist'
+     This is an Emacs Lisp variable, an alist of regexp of group names
+     and `nnshimbun' group parameters.  The default value is `nil'.
+     Each element may have the form `(REGEXP KEYWORD VALUE KEYWORD
+     VALUE...)', for example:
+
+          '("^nnshimbun\\+asahi:" index-range all prefetch-articles off
+            encapsulate-images on expiry-wait 6)
+
+     Since you can use this variable to specify the same `nnshimbun'
+     group parameters for two or more groups which have similar names
+     (i.e., those groups are likely to have similar characteristics
+     each other), it is useful that it can be used instead of
+     specifying the `nnshimbun' group parameters to several groups
+     respectively.  If the group parameter has already been set in a
+     group, that takes precedence over this variable.
+
+You can instruct `nnshimbun' to expire articles (2) (*Note
+Nnshimbun-Footnotes::).  Keep in mind that when an article is expired,
+it is not deleted from the remote server, it's still available there.
+What is deleted is the line in your own NOV file for `nnshimbun' (3)
+(*Note Nnshimbun-Footnotes::) corresponding to the article to be
+expired.  Then the article won't appear in the Summary buffer, forever
+and ever.
+
+If you don't expire articles in `nnshimbun' groups, the NOV files will
+continue to grow fat indefinitely and you may see very old articles in
+the Summary buffer as if they were existing (in fact, they might have
+expired three years ago on the remote server!).  Even if you try to
+read such an article, nothing will appear in the article buffer.  On
+the other hand, most mailing list servers generally offer all the past
+articles.  You may not feel like expiring articles in such groups in
+order to look back with nostalgia to the good old days and to be able
+to read, eyes filled with tears, articles which you thought long gone.
+
+You can mark `nnshimbun' articles as expirable and specify the expiry
+period in each `nnshimbun' group as well as the other mail back ends.
+However, there are a little differences between `nnshimbun' and the
+other mail back ends:
+
+   * First of all, the expiry period is determined with the following
+     priorities.  Note that the default value might be different from
+     group to group.
+
+       1. The value of the `expiry-wait' group parameter in a group.
+
+       2. The value produced by evaluating the
+          `nnmail-expiry-wait-function' variable for a group.
+
+       3. The default value provided by the `shimbun' module
+          corresponding to a group.
+
+       4. The value of the `nnmail-expiry-wait' variable.
+
+   * Second of all, the argument to be passed to the function
+     specified by the `nnmail-expiry-wait-function' variable will
+     contain the names of the back end and the server like
+     "nnshimbun+asahi:national", while only the group name will be
+     given in the case of the other mail back ends.  Here's an
+     example:
+
+          (setq nnmail-expiry-wait-function
+                (lambda (group)
+                  (cond ((string-equal group "ding") 7)
+                        ((string-equal group "nnshimbun+ding:ding") 'never))))
+
+     This means that there are two groups for the same ding mailing
+     list; one is subscribed as a list member, the other is for
+     reading from the mailing list archive at the Gnus Towers.  Ahem,
+     isn't it clever?  The local mail files in the "ding" group will
+     be expired in seven days and your local disk space will be saved,
+     but you can read even the articles of the last century in the
+     second group (if it is really needed, though).
+
+   * Third of all, and this is written down so that you can remember
+     it when you're filled with doubt: even when all articles from a
+     `nnshimbun' group should be expired, the most recent one will be
+     kept.  This is not to satisfy your indecisive heart, it's because
+     the next time you fetch new articles for this group, `nnshimbun'
+     will know where to begin and not fetch all the articles all over
+     again.
+
+The group parameters and the variables related to expiring `nnshimbun'
+articles are:
+
+`expiry-wait'
+     Don't be confused, please.  The `expiry-wait' group parameter is
+     provided as one of the elements of `nnshimbun-group-parameters',
+     the specially made group parameter for `nnshimbun'.  It has the
+     same name and the same meaning as the standard group parameter.
+     You may use whichever you like.  If nnshimbun's one is set to
+     non-`nil' value, it takes precedence over the standard one.  It
+     is provided in order to concentrate things related to `nnshimbun'
+     at one place of the "Gnus Customize" buffer (which will appear by
+     typing `G c' in the group buffer) and to realize managing
+     collectively by the `nnshimbun-group-parameters-alist' variable
+     (4) (*Note Nnshimbun-Footnotes::).  The values which can be used
+     are a number of expiry period, `never' or `immediate' as well as
+     the standard group parameter.
+
+`nnshimbun-keep-unparsable-dated-articles'
+     If this variable is non-`nil', the articles of which the time of
+     creation (or the time of arrival) is unknown will never be
+     expired, since their age is unknown.  The default is `t'.  If you
+     set this variable to `nil', the articles of which the time is
+     unknown will also be expired unconditionally when the time to
+     expire has come.  Well, it might prove useful for a general
+     cleaning at the end of a year.
+
+
+File: emacs-w3m.info  Node: Nnshimbun-Footnotes, Up: Nnshimbun
+
+(1) The easiest way to specify group parameters is to type `G c'
+in the group buffer after moving the point to the group you'd like to
+customize (*Note Group Parameters: (gnus)Group Parameters.).
+
+(2) There are mainly two ways to expire articles automatically in the
+`nnshimbun' groups.  One is to add a group name regular
+expression (it should begin with "^nnshimbun\\+") to the
+`gnus-auto-expirable-newsgroups' variable and to put the expiry
+period for each group into the `nnmail-expiry-wait-function'
+variable.  Another is to set the `auto-expire' group parameter to
+`t' and to set the expiry period with the `expiry-wait'
+group parameter in every `nnshimbun' group which you want to
+expire automatically.  See *Note (gnus)Expiring Mail:: for more
+information.  In the group to which the `expiry-wait' group
+parameter is not specified, a default expiry period will be applied.
+
+(3) The NOV file for `nnshimbun' is named something
+like "~/News/shimbun/asahi/national/.overview".
+
+(4) We've already prepared the answer to the question that why
+`auto-expire' etc. aren't included in the nnshimbun's
+special group parameter?  The answer is, `expiry-wait' is
+handled by the `nnshimbun' back end, but `auto-expire'
+is handled by the Gnus core.  Therefore, it is contrary to the
+design policy of Gnus to extend the Gnus core functions so that
+it may work for one particular back end (i.e. reading a value
+from the nnshimbun's special group parameter).
+
+
+
+File: emacs-w3m.info, Node: Mew Shimbun, Next: Shimbun with Wanderlust, Prev: Nnshimbun, Up: Shimbun Library
+
+Reading web newspapers with Mew
+===============================
+
+Mew Shimbun is an Emacs Lisp program meant to be used with `shimbun'
+and Mew (version 2.1 and later).  The `mew-shimbun' module will be
+installed together with emacs-w3m if Mew, APEL, and FLIM are also
+installed.
+
+We recommend you also see *Note Mew::.
+
+  1. Setting things up
+
+     Put the following lines in the last of the `~/.mew.el' file:
+
+     ;;; Loading mew-shimbun, defining keys.  ;; (setq
+     mew-shimbun-use-unseen t) ;;; (1) (*Note Mew Shimbun-Footnotes::)
+     (require 'mew-shimbun) (define-key mew-summary-mode-map "G"
+     (make-sparse-keymap)) (define-key mew-summary-mode-map "Gg"
+     'mew-shimbun-goto-folder) (define-key mew-summary-mode-map "GG"
+     'mew-shimbun-goto-unseen-folder) (define-key mew-summary-mode-map
+     "Gi" 'mew-shimbun-retrieve) (define-key mew-summary-mode-map "GI"
+     'mew-shimbun-retrieve-all) (define-key mew-summary-mode-map "Gr"
+     'mew-shimbun-re-retrieve) (define-key mew-summary-mode-map "GR"
+     'mew-shimbun-re-retrieve-all) (define-key mew-summary-mode-map
+     "Ge" 'mew-shimbun-expire) (define-key mew-summary-mode-map "GE"
+     'mew-shimbun-expire-all)
+
+     ;; Specifying `shimbun' servers and groups to be read with Mew in the
+     ;; `mew-shimbun-folder-groups' variable.  Each element has the form
+     ;; `("folder" ("server.group" . range) ...)'.  You can use `all',
+     ;; `last', and a number for the `range' item.
+
+     (setq mew-shimbun-folder-groups
+           '(;; Fetching `yomiuri.shakai', `yomiuri.sports', etc.
+             ;; into the `+shimbun/yomiuri' folder collectively.
+             ("yomiuri"
+              ("yomiuri.shakai" . 2)
+              ("yomiuri.sports". 2)
+              ("yomiuri.kokusai". 2))
+             ;; Fetching `security-memo.memo'
+             ;; into `+shimbun/security-memo'.
+             ("security-memo"
+              ("security-memo.memo" . 2))
+             ("slashdot-jp"
+              ("slashdot-jp.story" . last))
+             ;; You can read several groups in one folder (`+shimbun/emacs')
+             ;; as follows even if each group comes from a different server.
+             ("emacs"
+              ("airw.wl" . last)
+              ("emacs-w3m.emacs-w3m" . last))
+             ;; Fetching diaries into `+shimbun/hns/arisawa' and
+             ;; `+shimbun/hns/miyoshi' respectively.
+             ("hns/arisawa"
+              ("hns.arisawa" . last))
+             ("hns/miyoshi"
+              ("hns.miyoshi" . last))))
+
+     You did the fundamental setups.  For the other user definable
+     variables, use `M-x customize-group' for the `mew-shimbun' group
+     or see the source code.
+
+  2. Reading `shimbun' messages
+
+       a. Getting started
+
+          Type `G I' (`mew-shimbun-retrieve-all') first, after setting
+          things up as mentioned above.  The `shimbun' folders
+          specified by the `mew-shimbun-folder-groups' variable will
+          be created under the `+shimbun' parent folder.  Typing `G I'
+          is also useful when you have added new groups.  You can
+          change the name of the parent folder (`+shimbun' by default)
+          by customizing the `mew-shimbun-folder' variable.
+
+       b. Moving into a `shimbun' folder
+
+          You can move to any folder (including `shimbun') by typing
+          `g' (`mew-summary-goto-folder'), but `G g'
+          (`mew-shimbun-goto-folder') is restricted to moving to only
+          the `shimbun' folder.  In addition, folders which have new
+          messages (in other words, folders which have not been
+          scanned) will be displayed when using a prefix argument with
+          `G g' (i.e. `C-u G g').  A prefix argument similarly affects
+          `G G' as well.
+
+       c. Fetching messages in each folder
+
+          You can fetch new messages for the current folder
+          exclusively by typing `G i' (`mew-shimbun-retrieve') in a
+          `shimbun' folder.
+
+       d. Fetching updated messages
+
+          If you perform the `G r' command (`mew-shimbun-re-retrieve')
+          when a particular message is being displayed, the message
+          will be updated if it is possible, and new messages will be
+          fetched.  With a prefix argument (i.e. `C-u G r'), it will
+          attempt to update messages which are marked with the mark
+          specified by the `mew-shimbun-mark-re-retrieve' variable
+          (`@' by default).  It would be useful for CNET, etc.
+
+          The `G R' command (`mew-shimbun-re-retrieve-all') checks the
+          freshness of all messages and re-fetches the updated
+          messages.  If a prefix argument is given (i.e. `C-u G R'),
+          the messages within the region will be processed.  It is
+          probably worthwhile if the site is running the hyper nikki
+          system (`nikki' means "diary" in Japanese).
+
+  3. Managing unseen messages
+
+     If you have the following setting in the `~/.mew.el' file,
+
+          (setq mew-shimbun-use-unseen t)
+
+     newly fetched messages will be marked with the mark specified by
+     the `mew-shimbun-mark-unseen' variable (`*' by default), and it
+     will disappear automatically after reading the message.
+
+     Normally, the unseen marks will not be saved in the `.mew-cache'
+     file if scanning is not performed after adding or deleting marks
+     in the Mew summary mode, but if you add the following line to the
+     `~/.mew.el' file,
+
+          (setq mew-shimbun-use-unseen-cache-save t)
+
+     the unseen marks will be saved in the `.mew-cache' file
+     automatically for the `shimbun' groups when exiting Mew or
+     killing a folder (using `C-c C-q').  However, it is not securely
+     saved (2) (*Note Mew Shimbun-Footnotes::).  To do this securely,
+     you had better have the habit of performing the `scan update'
+     command after reading the folder.
+
+     If you don't like the `*' mark for unseen messages, customize the
+     `mew-shimbun-mark-unseen' variable (see above).  By specifying
+     the mark by `C-u N', you will be able to lead a better life with
+     taking care of unseen messages.
+
+  4. Expiring messages
+
+     You can expire messages if you set the `mew-shimbun-expires'
+     variable beforehand.  For example:
+
+          (setq mew-shimbun-expires
+                '(("yomiuri" . 7)
+                  ("asahi" . 1)
+                  ("slashdot-jp" . 7)
+                  ("emacs" . 7)))
+
+     If you set this variable as shown above, you can specify the
+     expiry period; 7 days for `+shimbun/yomiuri', 1 day for
+     `+shimbun/asahi'.  Messages in the `shimbun' folder where the
+     expiry period is not specified will never be expired.  You can
+     use the `G e' command (`mew-shimbun-expire') to expire the
+     expirable messages in the current folder.  The `G E' command
+     (`mew-shimbun-expire-all') is for expiring the expirable messages
+     in all the `shimbun' folders.  Note that once the messages have
+     been expired, you cannot recover them.
+
+  5. How to mark messages with `$' as unseen
+
+     Put the following lines in the `~/.mew.el' file in order to
+     define the `$' mark and use `$' for the mark of unseen.  See
+     `http://www.mew.org/ml/mew-dist-2.0/msg01251.html' if you would
+     like to replace the `$' mark with another.
+
+     ;;----------------------------------------------------------------------
+     ;;; Code for using `$' as the unseen mark.
+     (setq mew-mark-unseen ?$)
+     (setq mew-shimbun-mark-unseen mew-mark-unseen)
+     (setq mew-mark-show-list (cons mew-mark-unseen mew-mark-show-list))
+     (setq mew-mark-afterstep-spec
+           (cons (cons mew-mark-unseen '(1 0 1 0 0 0 0))
+                 mew-mark-afterstep-spec))
+     (setq mew-mark-spec
+           (cons (list mew-mark-unseen "unseen" 0 nil nil nil nil nil)
+                 mew-mark-spec))
+     (setq mew-highlight-mark-keywords
+           (cons
+            (cons mew-mark-unseen 'mew-face-mark-unseen)
+            mew-highlight-mark-keywords))
+     (defface mew-face-mark-unseen
+       '((((class color) (type tty))
+          (:foreground "green"))
+         (((class color) (background light))
+          (:foreground "deep pink" :bold t :italic t))
+         (((class color) (background dark))
+          (:foreground "thistle"))
+         (t (:bold t)))
+       "*Face to highlight the unseen mark"
+       :group 'mew-highlight)
+     (defun mew-summary-unseen (&optional count)
+       "Put the unseen mark(default is '$') in COUNT times."
+       (interactive "P")
+       (mew-mark-put-mark-loop (function mew-summary-unseen-one) count nil))
+     (defun mew-summary-unseen-one (&optional no-msg)
+       "Put the unseen mark(default is '$') on this message."
+       (mew-mark-put-mark mew-mark-unseen no-msg))
+     (defun mew-summary-mark-unseen ()
+       "Change the '*' mark into the '$' mark."
+       (interactive)
+       (mew-summary-exchange-mark mew-mark-review mew-mark-unseen))
+     (defun mew-thread-mark-unseen ()
+       "Put the '$' mark on all messages of the current sub-thread."
+       (interactive)
+       (mew-thread-mark mew-mark-unseen))
+
+     (define-key mew-summary-mode-map "$"  'mew-summary-unseen)
+     (define-key mew-summary-mode-map "m$" 'mew-summary-mark-unseen)
+     (define-key mew-summary-mode-map "t$" 'mew-thread-mark-unseen)
+     ;;----------------------------------------------------------------------
+
+

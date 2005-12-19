@@ -3,7 +3,7 @@
 INSTALL      = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_INFO = install-info
-prefix       = /home/aspiers/local/linux
+prefix       = /home/aspiers/local
 infodir      = ${prefix}/info
 srcdir       = .
 subdir       = doc
@@ -13,11 +13,11 @@ ADDITIONAL_LOAD_PATH = NONE
 SHELL        = /bin/sh
 
 
-MAKEINFO     = makeinfo
-TEXI2DVI     = texi2dvi
+MAKEINFO     = no
+TEXI2DVI     = false
 PTEX         = false
 JBIBTEX      = false
-EMACS        = /home/aspiers/local/linux/bin/emacs
+EMACS        = /usr/bin/emacs
 VANILLA_FLAG = -q -no-site-file
 FLAGS        = $(VANILLA_FLAG) -batch -l ./w3mhack.el $(ADDITIONAL_LOAD_PATH)
 EMACSINFO    = cd $(top_srcdir) && $(EMACS) $(FLAGS) -f w3mhack-makeinfo

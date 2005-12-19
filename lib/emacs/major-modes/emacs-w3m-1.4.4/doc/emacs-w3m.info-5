@@ -1,1109 +1,102 @@
-This is emacs-w3m.info, produced by makeinfo version 4.0b from
-emacs-w3m.texi.
+Info file: emacs-w3m.info,    -*-Text-*-
+produced by `texinfo-format-buffer'
+from file `emacs-w3m.texi'
+using `texinfmt.el' version 2.38 of 3 July 1998.
+
 
 INFO-DIR-SECTION GNU Emacs Lisp
 START-INFO-DIR-ENTRY
 * Emacs-w3m: (emacs-w3m).  An Emacs interface to w3m
 END-INFO-DIR-ENTRY
 
-   This file documents emacs-w3m, an Emacs interface to w3m.
 
-   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005 TSUCHIYA Masatoshi
+This file documents emacs-w3m, an Emacs interface to w3m.
 
-   This edition is for emacs-w3m version 1.4.4.
+Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005
+TSUCHIYA Masatoshi
 
-   Permission is granted to copy, distribute and/or modify this document
+This edition is for emacs-w3m version 1.4.4.
+
+Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU General Public License, Version 2 or any
 later version published by the Free Software Foundation.
 
-   This document is distributed in the hope that it will be useful, but
+This document is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
+You should have received a copy of the GNU General Public License
 along with this document; if not, you can either send email to this
 document's maintainer or write to: The Free Software Foundation, Inc.;
 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
 
-
-File: emacs-w3m.info,  Node: Mailing Lists Supported by Shimbun,  Next: Sport Sites Supported by Shimbun,  Prev: News Sites Supported by Shimbun,  Up: Shimbun Sites
 
-Mailing Lists Supported by Shimbun
-----------------------------------
 
-   These are mailing list archives supported by `shimbun' library.
-
-Semi-gnus Mailing List in Japan (http://lists.airs.net/semi-gnus/archive/)
-     airs.semi-gnus-ja
-
-Wanderlust Mailing List (http://lists.airs.net/)
-     airs.wl airs.wl-en
-
-Big Brother DataBase Mailing List (http://www.rc.tutrp.tut.ac.jp/bbdb-ml/)
-     bbdb-ml.bbdb-ml
-
-GNOME Mailing List (http://mail.gnome.org/archives/)
-     gnome.balsa-list gnome.calendar-list gnome.cvs-commits-list
-     gnome.foundation-announce gnome.foundation-list gnome.fplan-list
-     gnome.gconf-list gnome.gdome gnome.gnome-1.4-list
-     gnome.gnome-announce-list gnome.gnome-components-list
-     gnome.gnome-db-list gnome.gnome-de gnome.gnome-debugger-list
-     gnome.gnome-devel-list gnome.gnome-doc-list gnome.gnome-gui-list
-     gnome.gnome-hackers gnome.gnome-hackers-readonly
-     gnome.gnome-hackers-test gnome.gnome-i18n gnome.gnome-i18n-tools
-     gnome.gnome-kde-list gnome.gnome-list gnome.gnome-office-list
-     gnome.gnome-pilot-list gnome.gnome-sound-list
-     gnome.gnome-themes-list gnome.gnome-ui-hackers
-     gnome.gnome-web-list gnome.gnome-webmaster-list
-     gnome.gnome-workshop-list gnome.gnomecc-list gnome.gnumeric-list
-     gnome.gtk-app-devel-list gnome.gtk-devel-list gnome.gtk-doc-list
-     gnome.gtk-i18n-list gnome.gtk-list gnome.gtk-perl-list
-     gnome.guppi-list gnome.libart gnome.libart-hackers gnome.orbit-list
-     gnome.vote gnome.wm-spec-list gnome.xml gnome.xslt
-
-Java Conference Mailing List (http://www.java-conf.gr.jp/archives/)
-     javaconf.servlet-ml javaconf.business-ml
-     javaconf.duke-in-the-box-ml javaconf.jfriends-ml javaconf.JGT-ml
-     javaconf.jini-ml javaconf.ejb-ml javaconf.cm-ml javaconf.horb-ml
-     javaconf.talk-ml
-
-LinuxCE JP Mailing List (http://www.peanuts.gr.jp/~kei/ml-archive/)
-     linuxce-jp.users
-
-Mule Mailing List (http://www.m17n.org/)
-     m17n.mule-ja m17n.mule
-
-Meadow Mailing List (http://www.ysnb.net/meadow/)
-     meadow.meadow-develop meadow.meadow-users-jp
-
-Mew Mailing List (http://www.mew.org/ml/)
-     mew.mew-dist mew.mew-win32 mew.mew-int
-
-MagicPoint Mailing List (http://www.mew.org/ml/)
-     mew.mgp-users mew.mgp-users-jp
-
-www.namazu.org Mailing Lists (http://www.namazu.org/cgi-bin/mailman/listinfo)
-     namazu.kakasi-commits namazu.kakasi-dev namazu.migemo
-     namazu.namazu-users-en namazu.namazu-users-ja
-     namazu.namazu-devel-ja namazu.namazu-devel-en
-     namazu.namazu-win32-users-ja namazu.sary
-
-emacs-w3m Mailing List (http://emacs-w3m.namazu.org/ml/)
-     emacs-w3m.emacs-w3m
-
-NetBSD JP Mailing List (http://www.jp.netbsd.org/ja/JP/ml/)
-     netbsd.announce-ja netbsd.junk-ja netbsd.tech-misc-ja
-     netbsd.tech-pkg-ja netbsd.port-arm32-ja netbsd.port-hpcmips-ja
-     netbsd.port-mac68k-ja netbsd.port-mips-ja netbsd.port-powerpc-ja
-     netbsd.hpcmips-changes-ja netbsd.members-ja netbsd.admin-ja
-     netbsd.www-changes-ja
-
-Ruby Mailing List (http://blade.nagaokaut.ac.jp/)
-     ruby.comp.lang.ruby ruby.fj.comp.lang.ruby ruby.ruby-dev
-     ruby.ruby-ext ruby.ruby-list ruby.ruby-math ruby.ruby-talk
-
-Toshiba Linux Users JP Mailing List (http://linux.toshiba-dme.co.jp/ML/tlinux-users-j/)
-     toshiba.linux-users-j
-
-w3m-dev Mailing List (http://mi.med.tohoku.ac.jp/~satodai/w3m-dev/)
-     w3m-dev.w3m-dev w3m-dev.w3m-dev-en
-
-digiko Mailing List (http://yar-3.net/digiko/)
-     digiko.digiko
-
-XEmacs Mailing List (http://list-archive.xemacs.org/)
-     xemacs.xemacs-announce xemacs.xemacs-beta-ja xemacs.xemacs-beta
-     xemacs.xemacs-build-reports xemacs.xemacs-cvs xemacs.xemacs-design
-     xemacs.xemacs-mule xemacs.xemacs-nt xemacs.xemacs-patches
-     xemacs.xemacs-users-ja xemacs.xemacs
-
-Security MEMO Mailing List (http://memo.st.ryukoku.ac.jp/archive/)
-     security-memo.memo security-memo.free-memo
-     security-memo.social-memo
-
-     Please note that userid and passowrd are required for
-     `security-memo.*' so you have to write;
-
-          machine memo.st.ryukoku.ac.jp
-          realm input username/password = archives/archives
-          login archives
-          passwd archives
-          
-          machine memo.st.ryukoku.ac.jp
-          realm input user: archives / password: archives
-          login archives
-          passwd archives
-
-     in `~/.w3m/passwd' and remove group and others access permissions
-     from the file.
-
-Debian JP Mailing List (http://lists.debian.or.jp/)
-     debian-jp.debian-announce debian-jp.debian-devel
-     debian-jp.debian-www debian-jp.debian-users debian-jp.debian-policy
-     debian-jp.jp-qa
-
-Debian Mailing List (http://lists.debian.org)
-     debian.debian-announce debian.debian-commercial
-     debian.debian-firewall debian.debian-french debian.debian-isp
-     debian.debian-italian debian.debian-kde debian.debian-laptop
-     debian.debian-news debian.debian-news-german
-     debian.debian-news-portuguese debian.debian-security-announce
-     debian.debian-testing debian.debian-user debian.debian-user-catalan
-     debian.debian-user-french debian.debian-user-polish
-     debian.debian-user-portuguese debian.debian-user-spanish
-     debian.debian-user-swedish debian.debian-admintool
-     debian.debian-apache debian.debian-autobuild debian.debian-beowulf
-     debian.debian-boot debian.debian-cd debian.debian-ctte
-     debian.debian-debbugs debian.debian-devel
-     debian.debian-devel-announce debian.debian-devel-french
-     debian.debian-devel-games debian.debian-devel-spanish
-     debian.debian-doc debian.debian-dpkg debian.debian-emacsen
-     debian.debian-events-eu debian.debian-events-na debian.debian-faq
-     debian.debian-gcc debian.debian-glibc debian.debian-gtk-gnome
-     debian.debian-hams debian.debian-ipv6 debian.debian-java
-     debian.debian-jr debian.debian-med debian.debian-mentors
-     debian.debian-newmaint debian.debian-newmaint-admin
-     debian.debian-ocaml-maint debian.debian-openoffice
-     debian.debian-perl debian.debian-pilot debian.debian-policy
-     debian.debian-pool debian.debian-python debian.debian-qa
-     debian.debian-qa-private debian.debian-release
-     debian.debian-security debian.debian-snapshots
-     debian.debian-tetex-maint debian.debian-toolchain
-     debian.debian-vote debian.debian-wnpp debian.debian-www
-     debian.debian-x debian.deity debian.debian-chinese
-     debian.debian-chinese-big5 debian.debian-chinese-gb
-     debian.debian-esperanto debian.debian-i18n debian.debian-japanese
-     debian.debian-l10n-catalan debian.debian-l10n-dutch
-     debian.debian-l10n-english debian.debian-l10n-french
-     debian.debian-l10n-italian debian.debian-l10n-portuguese
-     debian.debian-l10n-spanish debian.debian-laespiral
-     debian.debian-russian debian.debian-simplified-chinese
-     debian.debian-68k debian.debian-alpha debian.debian-arm
-     debian.debian-bsd debian.debian-hppa debian.debian-hurd
-     debian.debian-ia64 debian.debian-mips debian.debian-parisc
-     debian.debian-powerpc debian.debian-s390 debian.debian-sparc
-     debian.debian-superh debian.debian-ultralinux debian.debian-win32
-     debian.debian-all-changes debian.debian-alpha-changes
-     debian.debian-arm-changes debian.debian-books
-     debian.debian-cd-vendors debian.debian-changes
-     debian.debian-consultants debian.debian-curiosa
-     debian.debian-devel-all-changes debian.debian-devel-alpha-changes
-     debian.debian-devel-arm-changes debian.debian-devel-changes
-     debian.debian-devel-hurd-i386-changes
-     debian.debian-devel-i386-changes debian.debian-devel-m68k-changes
-     debian.debian-devel-powerpc-changes
-     debian.debian-devel-sparc-changes debian.debian-hurd-i386-changes
-     debian.debian-i386-changes debian.debian-legal
-     debian.debian-m68k-changes debian.debian-mirrors
-     debian.debian-powerpc-changes debian.debian-project
-     debian.debian-publicity debian.debian-sgml
-     debian.debian-sparc-changes debian.lcs-eng debian.lsb-confcall
-     debian.lsb-discuss debian.lsb-impl debian.lsb-spec debian.lsb-test
-     debian.spi-announce debian.spi-general debian.vgui-discuss
-
-KDE Mailing List in Japan (http://www.kde.gr.jp/ml/)
-     kde.Kuser kde.Kdeveloper
-
-Geocrawler (http://www.geocrawler.com/)
-     All archives of Geocrawler are supported by `shimbun' library.  You
-     can use the command `M-x shimbun-geocrawler-add-group RET', to add
-     your favorite archive to the variable
-     `shimbun-geocrawler-group-alist'.
-
-Mailing list ARChives (http://marc.theaimsgroup.com/)
-     Mailing list ARChives (MARC) are supported by `shimbun' library.
-     Add a group name of your favorite archive and its URL to the
-     variable `shimbun-marc-aims-group-alist', and you can browse it.
-
-RedHat Mailing List (http://sources.redhat.com/ml/)
-     redhat.automake redhat.bug-automake redhat.automake-prs
-     redhat.automake-cvs redhat.binutils redhat.binutils-cvs
-     redhat.c++-embedded redhat.crossgcc redhat.cgen redhat.cgen-prs
-     redhat.cgen-cvs redhat.cygwin redhat.cygwin-xfree
-     redhat.cygwin-announce redhat.cygwin-xfree-announce
-     redhat.cygwin-apps redhat.cygwin-patches redhat.cygwin-developers
-     redhat.cygwin-cvs redhat.cygwin-apps-cvs
-     redhat.docbook-tools-discuss redhat.docbook-tools-announce
-     redhat.docbook-tools-cvs redhat.docbook redhat.dssslist
-     redhat.sgml-tools redhat.docbook-apps redhat.ecos-announce
-     redhat.ecos-devel redhat.ecos-discuss redhat.ecos-maintainers
-     redhat.ecos-patches redhat.elix redhat.elix-announce redhat.gdb
-     redhat.gdb-announce redhat.gdb-testers redhat.gdb-testresults
-     redhat.gdb-patches redhat.gdb-cvs redhat.bug-gdb redhat.gdb-prs
-     redhat.libc-alpha redhat.libc-hacker redhat.bug-glibc
-     redhat.glibc-cvs redhat.glibc-linux redhat.bug-gnats
-     redhat.gnats-devel redhat.gnats-announce redhat.gnats-cvs
-     redhat.gsl-discuss redhat.gsl-announce redhat.gsl-cvs redhat.guile
-     redhat.guile-emacs redhat.guile-prs redhat.guile-gtk
-     redhat.bug-guile redhat.guile-cvs redhat.guile-emacs-cvs
-     redhat.insight redhat.insight-announce redhat.insight-prs
-     redhat.installshell redhat.inti redhat.kawa redhat.libffi-discuss
-     redhat.libffi-announce redhat.libstdc++ redhat.libstdc++-cvs
-     redhat.libstdc++-prs redhat.mauve-discuss redhat.mauve-announce
-     redhat.newlib redhat.pthreads-win32 redhat.rhdb
-     redhat.rhdb-announce redhat.rhug-rhats redhat.rpm2html-cvs
-     redhat.rpm2html-prs redhat.rpm2html redhat.sid redhat.sid-announce
-     redhat.sid-cvs redhat.sourcenav redhat.sourcenav-announce
-     redhat.sourcenav-prs redhat.win32-x11 redhat.xconq7
-     redhat.xconq-announce redhat.xconq-cvs
-
-MacOSX JP Mailing List (http://www.tech-arts.co.jp/macosx/)
-     macosx-jp.macosx-jp macosx-jp.macosx-dev-jp macosx-jp.macosx-ws-jp
-     macosx-jp.webobjects-jp
-
-SourceForge JP (http://sourceforge.jp)
-     All archives served by SourceForge JP are supported by `shimbun'
-     library.  Add a group name of your favorite archive to the variable
-     `shimbun-sourceforge-jp-mailing-lists', and you can browse it.
-
-Elips Mailing List (http://heimat.jp/~nakaji/elips/)
-     elips.elips
-
-Squeak-ja Mailing List (http://lists.squeakfoundation.org/pipermail/squeak-ja/)
-     squeak-ja.main
-
-Smalltalkers' Salon Mailing List (http://www.sra.co.jp/smalltalk/SML/archives/)
-     sml.main
-
-Squeak-dev Mailing List (http://lists.squeakfoundation.org/pipermail/squeak-dev/)
-     squeak-dev.main
-
-Plucker Mailing List (http://www.mail-archive.com/plucker-*@rubberchicken.org/maillist.html)
-     plucker.announce plucker.list plucker.dev
-
-pilot-link Mailing List (http://www.pilot-link.org/pipermail/)
-     pilot-link.announce pilot-link.devel pilot-link.general
-     pilot-link.unix-ng
-
-Coldsync Mailing List (http://www.thedotin.net/maillists/coldsync-hackers/maillist.html)
-     coldsync.main
-
-J-Pilot Mailing List (http://www.jpilot.org/pipermail/jpilot/)
-     jpilot.main
-
-pilot-mailsync Mailing List (http://lists.gnu-designs.com/pipermail/pilot-mailsync/)
-     pilot-mailsync.main
-
-Mozilla Users Mailing List in Japan (http://www.mozilla.gr.jp/ml/logs/moz-users/)
-     mozilla-jp.users
-
-     Please note that userid and passowrd are required for
-     `mozilla-jp.users' so you have to write;
-
-          machine www.mozilla.gr.jp
-          realm Please Enter mozilla mozilla
-          login mozilla
-          passwd mozilla
-
-     in `~/.w3m/passwd' and remove group and others access permissions
-     from the file.
-
-tDiary Developers Mailing List in Japan (http://www.tdiary.org/)
-     tdiary-ml.devel tdiary-ml.theme
-
-Tigris.org:Open Source Software Engineering (http://www.tigris.org/)
-     All archives served by Tigris.org are supported by `shimbun'
-     library.  Add a group name of your favorite archive to the variable
-     `shimbun-tigris-group-alist', and you can browse it.  Group name
-     is tigris.<project>.<mailinglist>.
 
 
-File: emacs-w3m.info,  Node: Sport Sites Supported by Shimbun,  Next: Misc Sites Supported by Shimbun,  Prev: Mailing Lists Supported by Shimbun,  Up: Shimbun Sites
-
-Sport Sites Supported by Shimbun
---------------------------------
-
-   These are sport sites supported by `shimbun' library.
-
-makanai (http://www.makanai.com/)
-     makanai.f1news
-
-F1 FAN (http://www.ksky.ne.jp/~tahara/f1/)
-     f1fan.news
-
-@nifty:motorsports (http://forum.nifty.com/fmotor/)
-     msports-nifty.F1 msports-nifty.IRL msports-nifty.WRC
-     msports-nifty.Europe msports-nifty.USA
-
-Yahoo!SPORTS (http://sports.yahoo.co.jp/)
-     yahoo-sports.F1 yahoo-sports.baseball yahoo-sports.keiba
-     yahoo-sports.NBA yahoo-sports.NFL yahoo-sports.rugby
-
-   @nifty:motorsports requires the Mule-UCS package (*note Other
-Requirements::) for Emacs-21.4 or any previous versions.
-
-
-File: emacs-w3m.info,  Node: Misc Sites Supported by Shimbun,  Prev: Sport Sites Supported by Shimbun,  Up: Shimbun Sites
-
-Misc Sites Supported by Shimbun
--------------------------------
-
-   These are misc sites supported by `shimbun' library.  WEB BBS and
-serial publications are included.
-
-Tea Cup Bulletin Boards (http://www.tcup.com/)
-     You can subscribe to various bulletin boards provided by Tea Cup
-     Communication.  By default, there are three pre-configured boards
-     listed below:
-
-    tcup.yutopia
-          Yutopia BBS (http://www61.tcup.com/6116/yutopia.html)
-
-    tcup.meadow
-          Meadow BBS (http://www66.tcup.com/6629/yutopia.html)
-
-    tcup.skk
-          SKK BBS (http://www67.tcup.com/6718/yutopia.html)
-
-     To add new boards to the list, look up the names and the urls and
-     modify the `shimbun-tcup-group-alist' variable.  The following
-     form is an example to add two boards, `foo' and `bar', to the list:
-
-          (eval-after-load "sb-tcup"
-            '(setq shimbun-tcup-group-alist
-                   (append
-                    '(("foo" "http://MMMM.teacup.com/foo/bbs2")
-                      ("bar" "http://NNNN.teacup.com/bar/bbs2"))
-                    shimbun-tcup-group-alist)))
-
-2ch
-     This is an example to browse Meadow BBS and emacs-w3m BBS on 2ch.
-          (setq shimbun-2ch-group-alist
-                '(("Meadow" .
-                   "http://pc.2ch.net/test/read.cgi/software/1005469775")
-                  ("emacs-w3m" .
-                   "http://pc.2ch.net/test/read.cgi/unix/1013710106")))
-
-Bulletin Board Systems using CGI_Board (http://www.math.tohoku.ac.jp/~kuroki/support/)
-     Set your favorite browse bulletin board systems using CGI_Board to
-     `shimbun-cgi-board-group-alist', and you can browse them.
-
-HNS
-     This is an example to use `sb-hns'.
-          (setq shimbun-hns-group-alist
-                '(("arisawa"                           ;; Group Name
-                   "http://www.nijino.com/ari/diary/"  ;; URL
-                   "ari@mbf.sphere.ne.jp")             ;; E-Mail Address
-                  ("miyoshi"
-                   "http://www.be.wakwak.com/cgi-bin/sbox/~miyoshi/hns/"
-                   "miyoshi@meadowy.org")))
-
-tDiary
-     This is an example to use `sb-tdiary'.
-          (setq shimbun-tdiary-group-alist
-                '(("henahena"                          ;; Group Name
-                   "http://www.fan.gr.jp/~ring/d/")    ;; URL
-                  ("yoichi"
-                   "http://yoichi.geiin.org/d/")))
-
-chalow
-     This is an example to use `sb-chalow'.
-          (setq shimbun-chalow-group-alist
-                '(("yto"                               ;; Group Name
-                   "http://nais.to/~yto/clog/"         ;; URL
-                   "yto@nais.to")                      ;; E-mail Address
-                  ))
-
-Diaries at Rakuten Plaza (http://plaza.rakuten.co.jp/)
-     This is an example to use `sb-rakuten'.
-          (setq shimbun-rakuten-group-alist
-                '(("rakuten-id" . "email-address")))
-
-EmacsWiKi (http://www.emacswiki.org/)
-     emacswiki.changes emacswiki.diff
-
-Wiki contents
-     This is an example to use `sb-wiki'.  `sb-wiki' support PukiWiki
-     and Hiki.  If you don't know which regexps to set to 4th and 5th
-     elements of an inner list, just set `nil' and you'll just see all
-     contents of a page.
-          (setq shimbun-wiki-group-alist
-                '(("pukiwiki" ;; Group Name
-                   "http://pukiwiki.org/index.php?cmd=rss10" ;; URL
-                   "webmaster@pukiwiki.org" ;; E-Mail Address
-                   nil ;; X-Face
-                   "\n<h3 id=\"" ;; regexp to represent contents start
-                   "</address>") ;; regexp to represent contents end
-                  ("hiki"
-                   "http://www.namaraii.com/hiki/?c=rss"
-                   "webmaster@fdiary.net"
-                   nil
-                   "<div class=\"section\">"
-                   "<div class=\"sidebar\">")
-                  ("apollo"
-                   "http://wiki.fdiary.net/apollo/?c=rss"
-                   "moriq@moriq.com"
-                   nil
-                   "<div class=\"section\">"
-                   "<div class=\"sidebar\">")
-                  ))
-
-Yahoo! AUCTIONS (http://auctions.yahoo.co.jp/)
-     This is an example to use `sb-yahoo-auctions'.
-          (setq shimbun-yahoo-auctions-group-alist
-                '(("mp3player" . "http://list3.auctions.yahoo.co.jp/jp/show/catleaf_rss?category=2084039708&alocale=0jp")
-                  ("iPod" . "http://search3.auctions.yahoo.co.jp/search_rss?p=iPod&auccat=2084039708&alocale=0jp&acc=jp")))
-
-VineLinux Errata (http://www.vinelinux.org)
-     vinelinux.errata.3x.i386 vinelinux.errata.3x.ppc
-     vinelinux.errata.3x.alpha vinelinux.errata.2x.i386
-     vinelinux.errata.2x.ppc vinelinux.errata.2x.sparc
-     vinelinux.errata.2x.alpha vinelinux.errata.1x
-
-Koizumu Cabinet Mail Magazine (http://www.kantei.go.jp/jp/)
-     kantei.m-magazine-en kantei.m-magazine-ja
-
-     `kantei.m-magazine' is also available for the backward
-     compatibility.
-
-Patent Office in Japan (http://www.jpo.go.jp/)
-     jpo.news jpo.revision jpo.lawguide jpo.details
-
-IBM developerWorks (http://www-6.ibm.com/jp/developerworks/) (in Japanese)
-     ibm-dev.autonomic ibm-dev.java ibm-dev.linux ibm-dev.opensource
-     ibm-dev.webservices ibm-dev.xml
-
-Muchy's Palmware Review! (http://muchy.com/)
-     muchy.review
-
-Pocketgames (http://www.pocketgames.jp/)
-     pocketgames.news
-
-Wincefan (http://www.wince.ne.jp/)
-     wincefan.news
-
-PalmFan (http://www.palmfan.com/)
-     palmfan.news
-
-Report of Electrical Stores Street (http://homepage1.nifty.com/akiba/plat.html) (in Japanese)
-     dennou.report
-
-PCWEB COLUMN Square (http://pcweb.mycom.co.jp/column/)
-     pcweb-column.asia pcweb-column.benri pcweb-column.bytes
-     pcweb-column.game pcweb-column.hitech pcweb-column.itshihonron
-     pcweb-column.osx pcweb-column.rikei pcweb-column.scramble
-     pcweb-column.sopinion pcweb-column.svalley pcweb-column.toolexp
-     pcweb-column.winxp pcweb-column.yetanother
-
-Notes Exhibition (http://tsuruo.dominohosting.biz/members/tsuruo/)
-     lotusex.news lotusex.library lotusex.operation lotusex.primer
-     lotusex.tips lotusex.practical lotusex.qanda lotusex.lounge
-     lotusex.bbs
-
-@IT forum (http://www.atmarkit.co.jp)
-     atmarkit.news atmarkit.fwin2k atmarkit.fdotnet atmarkit.fsys
-     atmarkit.fxml atmarkit.fdb atmarkit.flinux atmarkit.fnetwork
-     atmarkit.fjava atmarkit.fsecurity atmarkit.farc atmarkit.fbiz
-     atmarkit.fwcr atmarkit.jibun
-
-TeX Q&A Bulletin Board (http://www.matsusaka-u.ac.jp/~okumura/texfaq/qa/)
-     texfaq.qanda
-
-X51.org (http://x51.org/)
-     x51.art x51.auction x51.blow x51.cabal x51.crime x51.disaster
-     x51.edge x51.homme x51.info x51.life x51.love x51.media
-     x51.medical x51.military x51.northkorea x51.oparts x51.phallic
-     x51.psychics x51.religion x51.science x51.top x51.ufo x51.uma
-     x51.xfiles
-
-eXperts Connection (eXConn) (http://www.exconn.net/)
-     exconn.news
-
-MSDN (http://msdn.microsoft.com/)
-     msdn.all msdn.netframework msdn.architecture msdn.asp.net msdn.data
-     msdn.longhorn msdn.mobility msdn.subscriptions msdn.msdntv
-     msdn.office msdn.security msdn.sql msdn.theshow msdn.vbasic
-     msdn.vcsharp msdn.visualc msdn.vfoxpro msdn.vjsharp msdn.vstudio
-     msdn.vs2005 msdn.webservices msdn.embedded msdn.xml msdn.japan.msdn
-     msdn.japan.msdn-us
-
-Haiku OS (http://haiku-os.org/)
-     haiku-os.news haiku-os.forums haiku-os.newsletters
-
-Foundation for a Free Information Infrastructure (http://www.ffii.org/)
-     ffii.en.software-patents ffii.en.software-patents.ffii
-     ffii.en.information-infrastructure ffii.en.project
-     ffii.de.software-patente ffii.de.software-patente.ffii
-     ffii.de.informations-infrastruktur ffii.fr.brevets-logiciels
-     ffii.fr.brevets-logiciels.ffii ffii.nl.softwarepatenten
-     ffii.nl.softwarepatenten.ffii
-
-
-File: emacs-w3m.info,  Node: Shimbun Basics,  Prev: Shimbun Sites,  Up: Shimbun Library
-
-How to make a new shimbun module
-================================
-
-   `Shimbun' is a library set of emacs-w3m that enables you to read
-certain web contents using Gnus, Wanderlust, or Mew as if they were
-email messages.  Here we will explain how to make a new `shimbun'
-module.
-
-* Menu:
-
-* Overview::
-* Getting web page and header information::
-* Displaying an article::
-* Inheriting shimbun module::
-* Coding convention of Shimbun::
-
-
-File: emacs-w3m.info,  Node: Overview,  Next: Getting web page and header information,  Up: Shimbun Basics
-
-Overview
---------
-
-   When you make a new `shimbun' module `foobar' for reading contents
-of `http://www.foobar.net', what you have to do first is to put the
-following S expressions in the first part of the `sb-foobar.el' file:
-
-     (require 'shimbun)
-     (luna-define-class shimbun-foobar (shimbun) ())
-
-We will explain what they are below, so you can understand they are just
-incantations now.  You have to use the same suffix `foobar' in the file
-name (`sb-foobar.el') and the class name (`shimbun-foobar') as the
-second argument for the `luna-define-class' macro.
-
-   Major jobs of the `shimbun-foobar' module can be classified broadly
-into the following four categories (note that you may rephrase "folder"
-with "group" if you are a Gnus user):
-
-  1. Getting a page source from `http://www.foobar.net' in order to
-     gather articles' subjects etc. when a MUA opens the `foobar'
-     folder.
-
-  2. Gathering subjects and other necessary informations from the page
-     source in order to make headlines of articles and returning them
-     as the structured list called `headers'.
-
-  3. Getting a page source for an article from the web site, for
-     example, `http://www.foobar.net/053003.html', when MUA requires to
-     display an article in the `foobar' folder, and
-
-  4. Removing cruft, e.g. advertisements, from the page source and
-     formatting a raw article.
-
-`shimbun-headers' of `shimbun.el' does the first job,
-`shimbun-get-headers' does the second, `shimbun-article' does the third
-and `shimbun-make-contents' does the last.
-
-   The `shimbun-headers' method does the first job, the
-`shimbun-get-headers' method does the second, the `shimbun-article'
-method does the third and the `shimbun-make-contents' method does the
-last thing.  The default methods for those categories are defined in
-the `shimbun.el' module.
-
-   Open the `shimbun.el' file.  You may see unfamiliar definitions like
-`luna-define-generic' or `luna-define-method' there.  Hm, they look
-like `defun', don't you?  You may also see there's just a doc-string in
-the former definition and the same symbol is declared again in the
-later form.  And further, there are some symbols only declared by the
-`luna-define-generic' form, not by the `luna-define-method' form.  What
-on earth are we seeing?  Isn't the program not written in the
-Emacs-Lisp language?
-
-   The truth is that the `shimbun' modules use the `luna.el' module
-provided by FLIM which enables you to write object oriented programs in
-the Emacs-Lisp language.
-
-   There are method programs defined rigidly for the specific purposes
-in the `shimbun.el' module.  The `shimbun-headers' method gets a page
-source from a certain URL, the `shimbun-get-headers' method gathers
-subjects and other informations, etc... (see above).  They do routine
-works, so they cannot take proper method to meet various web contents
-in the world.  Eh?  Oh, you shouldn't believe in a heresy!
-
-   The `shimbun.el' module only provides the default method functions.
-Remember the `defadvice' feature.  There are three ways to modify the
-behavior of a function: `:before', `:around' and `:after'.  Similarly,
-each default `shimbun' method function can be modified for a certain
-purpose (note that the `:around' method-qualifier can be omitted).  And
-it should be written specially that the modification will be effective
-only when the specified `shimbun' module is selected.
-
-   Now as you may have understood that the `luna-define-generic' form
-provides only a husk in a sense, the `luna-define-method' form defines
-an actual function which can be different for each `shimbun' module,
-and the `luna-define-class' form declares the `shimbun' class in the
-first part of the `sb-foobar.el' module.
-
-
-File: emacs-w3m.info,  Node: Getting web page and header information,  Next: Displaying an article,  Prev: Overview,  Up: Shimbun Basics
-
-Getting web page and header information
----------------------------------------
-
-   Let's identify a target web page URL to gather subjects and other
-informations first.  If a web site uses a frame, a target is only one
-of the web pages.  Second, lets create a body of the
-`shimbun-index-url' method function using the `luna-define-method' form
-in your `sb-foobar.el' file.  And make the user customizable variable
-`shimbun-foobar-groups', which we will explain later(1).
-
-     (defvar shimbun-foobar-url "http://www.foobar.net")
-     
-     (luna-define-method shimbun-index-url ((shimbun shimbun-foobar))
-       shimbun-foobar-url)
-     
-     (defvar shimbun-foobar-groups '("news"))
-
-   After you create a body of the `shimbun-index-url' method, the
-`shimbun-headers' method can get a web page source since the
-`shimbun.el' module already has the default `shimbun-headers' method.
-After the `shimbun-headers' method gets a web page source, it calls the
-`shimbun-get-headers' method to gather headers information.  As the
-`shimbun.el' module does not have the `shimbun-get-headers' method, you
-have to create it in your `sb-foobar.el' file.
-
-   Now look carefully in the page source and create the
-`shimbun-get-headers' method in your `sb-foobar.el' file.
-
-   Create a regular expression that can gather headers information.
-Minimally necessary information are subject, date, author, URL and
-`message-id' of an article.  They are used in MUA as Subject, Date,
-From, Xref and Message-ID.
-
-   If you want to make an article from a line in a web page source,
-like:
-
-     <a href="053003.html">some talks on May 30(posted by Mikio &lt;foo@bar.net&gt;)</a>
-
-use the following regexp:
-
-     "<a href=\"\\(\\([0-9][0-9][0-9][0-9]\\)[0-9][0-9]\\.html\\)\">\\([^<(]+\\)(posted by \\([^<]+\\))<\/a>"
-
-You can get a value for Xref by `(match-string 1)'.  You can get a
-value for Date by modifying a value of `(match-string 2)'.  Subject by
-`(match-string 3)' and From from `(match-string 4)'.  You can modify
-them further for showing additional information in MUA.  See the
-`sb-muchy.el' file which makes its original subject form from a web
-page source.
-
-   If URL of an article is a relative path like above, use
-`shimbun-expand-url' to expand it before putting information to header.
-If each article doesn't have a each unique URLs (i.e. URL of headers
-and URL of articles are just same), you have to ask Emacs to remember
-body of an article when gathering headers information, For more detail
-see the files `sb-palmfan.el', `sb-dennou.el' and `sb-tcup.el'.
-
-   Sometimes you cannot identify Date information when gathering headers
-information only from a web page source.  If so, leave it, just set a
-null string, `""' to its value.  If you can identify Date only when you
-see contents of an article, you can set it at that time by using
-`shimbun-make-contents' method.  And you may use a fixed From for a web
-site (e.x. "webmaster@foobar.net").
-
-   Be careful when you build a message-id.  Make sure it has uniqueness
-otherwise you may not be able to read some articles in the
-`shimbun'(2).  Assure uniqueness by building message-id using date
-information, a domain of the page and/or a part of URL of the page.
-And use `@' but `:' as a part of message-id in order to display inline
-images.  See RFC2387 and RFC822 for more detail.
-
-   Put these information to header using function
-`shimbun-create-header' of the `shimbun.el' module.
-
-   A bare bone of `shimbun-get-headers' in your `sb-foobar.el' file is
-as follows:
-
-     (luna-define-method shimbun-get-headers ((shimbun shimbun-foobar)
-                                              &optional range)
-       (let ((regexp "....")
-             subject from date id url headers)
-         ...
-         (catch 'stop
-           (while (re-search-forward regexp nil t nil)
-             ...
-             (when (shimbun-search-id shimbun id)
-               (throw 'stop nil))
-             (push (shimbun-create-header
-                    0 subject from date id "" 0 0 url)
-                   headers)))
-         headers))
-
-Note that you can access `shimbun-foobar' instance via temporary
-variable `shimbun' in the method.
-
-   Now we will explain a user variable `shimbun-foobar-groups'.
-
-   Assume that you have two groups of articles in
-`http://www.foobar.net' and there are two different web pages for such
-groups in where `shimbun' module gathers header information.  For
-examples, there are what's new information of the web site in
-`http://www.foobar.net/whatsnew/index.hmtl', and there are archive
-lists of email messages posted to ML in
-`http://www.foobar.net/ml/index.html'.  In such case you may want to
-access the group by `shimbun' folders `foobar.whatsnew' and
-`foobar.ml'.  If so, put the following S expressions to the
-`sb-foobar.el' file.
-
-     (defvar shimbun-foobar-url "http://www.foobar.net")
-     
-     (defvar shimbun-foobar-group-path-alist
-       '(("whatsnew" . "/whatsnew/index.html")
-         ("ml" . "/ml/index.html")))
-     
-     (defvar shimbun-foobar-groups
-       (mapcar 'car shimbun-foobar-group-path-alist))
-     
-     (luna-define-method shimbun-index-url ((shimbun shimbun-foobar))
-       (concat shimbun-foobar-url
-               (cdr (assoc (shimbun-current-group-internal shimbun)
-                           shimbun-foobar-group-path-alist))))
-
-You can get the current group by using
-`shimbun-current-group-internal'.  You can use it in
-`shimbun-get-headers' method (or others) in order to change its
-behavior in accordance with the current group.
-
-   Each `shimbun' module needs at least one group.  There is not a
-special rule for naming a group, but if you don't find out a good name,
-use `news' or `main'.
-
-   ---------- Footnotes ----------
-
-   (1) At least one group is necessary for each `shimbun' module even
-if you don't want it.
-
-   (2) And more, you may not be able to read actual email messages from
-someone when message-ids conflict!
-
-
-File: emacs-w3m.info,  Node: Displaying an article,  Next: Inheriting shimbun module,  Prev: Getting web page and header information,  Up: Shimbun Basics
-
-Displaying an article
----------------------
-
-   `shimbun-article' method defined in the `shimbun.el' module gets URL
-from Xref information of header, get a web page source from the URL,
-and call `shimbun-make-contents' in working buffer of the source.
-Major job of `shimbun-make-contents' is to process such HTML.  Imagine
-that a working buffer has a web page source of an article.
-`shimbun-make-contents' defined in the `shimbun.el' module insert (i)
-header information to top of the buffer, (ii) `<html>', `<body>' and
-etc. right after the information, and (iii) `</body>' and `</html>' to
-end of the buffer.  MUA displays an article as a HTML mail.
-
-   If you don't want to process an article, you don't have to define
-`shimbun-make-contents' in the `sb-foobar.el' module.
-
-   If you want to remove some part of a web page source of an article at
-its top and its end, set regexp to `shimbun-foobar-content-start' that
-matches content start and `shimbun-foobar-content-end' that matches
-content end.
-
-     (defvar shimbun-foobar-content-start "^<body>$")
-     (defvar shimbun-foobar-content-end "^<\/body>$")
-
-`shimbun-clear-contents', which is called by `shimbun-make-contents'
-defined in the `shimbun.el' module, will remove HTML source from
-`point-min' to `shimbun-foobar-content-start' and from
-`shimbun-foobar-content-end' to `point-max' using the regexps.  Note
-that it will not remove any HTML source when either of the regexp
-searches fails.
-
-   If you want to remove more unnecessary parts (e.x. advertisements)
-diligently, define `shimbun-clear-contents' in your new `sb-foobar.el'
-file as follows:
-
-     (luna-define-method shimbun-clear-contents :around ((shimbun shimbun-foobar)
-                                                         header)
-       ;; cleaning up
-       (while (re-search-forward "..." nil t nil)
-         (delete-region (match-beginning 0) (match-end 0)))
-       (luna-call-next-method))
-
-For more details see `shimbun-make-contents' in the `sb-ibm-dev.el'
-file.
-
-   I said in the subsection of *Note Getting web page and header
-information:: that if each article doesn't have a each unique URLs you
-have to ask Emacs to remember body of an article when gathering headers
-information,  In such case you don't have to get a web page from URL of
-Xref in `shimbun-article' method.  Just get texts from Emacs memories
-and put them with pretty printing.  For more detail see definitions of
-`shimbun-article' method of `sb-palmfan.el', `sb-dennou.el' or
-`sb-tcup.el'.
-
-
-File: emacs-w3m.info,  Node: Inheriting shimbun module,  Next: Coding convention of Shimbun,  Prev: Displaying an article,  Up: Shimbun Basics
-
-Inheriting shimbun module
--------------------------
-
-   There are some famous mailing list manager (or archiver).
-
-   * Mailman
-
-     The GNU Mailing List Manager, formerly called as `pipermail'.  See
-     `http://www.gnu.org/software/mailman/index.html' for detail.
-
-   * MHonArc
-
-     See `http://www.oac.uci.edu/indiv/ehood/mhonarc.html' for detail.
-
-   * fml
-
-     fml mailing list server/manager.  See
-     `http://www.fml.org/software/fml/' for detail.
-
-   * mailarc
-
-     See `http://cvs.namazu.org/mailarc/' for detail.
-
-   If you find out one of such mailing list managers' names in a web
-page source when you analyze it in the step of *Note Getting web page
-and header information::, you are very lucky(1).  The modules
-`sb-mailman.el', `sb-mhonarc.el', `sb-fml.el' and `sb-mailarc.el' have
-the `shimbun-get-headers' method, etc, already, when you write small
-code that is not defined in such `shimbun' modules, your new
-`sb-foobar.el' module works!
-
-   If you use the `sb-mailman.el' module, write the following S
-expressions to the top of the `sb-foobar.el' file:
-
-     (require 'shimbun)
-     (require 'sb-mailman)
-     (luna-define-class shimbun-foobar (shimbun-mailman) ())
-
-Those above mean that `shimbun' module `shimbun-foobar' inherits
-shimbun-mailman class(2) and methods defined in the `sb-mailman.el'
-module will be used in `shimbun-foobar' by default.  You can overwrite
-some of parent methods, if necessary.
-
-   See the `sb-pilot-mailsync.el' file as a sample that uses the
-`sb-mailman.el' module.  You can feel how easy to create a new
-`shimbun' module by using such parent modules.
-
-   Note that there are some localized version of such mailing list
-manager, for examples, some of them show Date information in Japanese.
-The modules `sb-mailman.el', `sb-mhonarc.el', `sb-fml.el' and
-`sb-mailarc.el' assumes that mailing list managers are not localized.
-
-   If you want to read via `shimbun' a web site that uses localized
-mailing list manager, you may have to overwrite some methods in the
-parent module.
-
-   ---------- Footnotes ----------
-
-   (1) Such mailing list managers often show their own name in an
-archive list page
-
-   (2) i.e. shimbun-mailman class is a parent class.
-
-
-File: emacs-w3m.info,  Node: Coding convention of Shimbun,  Prev: Inheriting shimbun module,  Up: Shimbun Basics
-
-Coding convention of Shimbun
-----------------------------
-
-   * You can use all functions defined in emacs-w3m in `shimbun.el'.
-
-   * You can use no functions defined in emacs-w3m in `sb-*.el'.  If you
-     want to use emacs-w3m functions in `sb-*.el', you must add their
-     stubs to `shimbun.el'.
-
-   * You must avoid file names that have already used in SpeedBar.
-     Here is a list of file names used in `speedbar-0.14beta4'.
-
-     sb-ant.el     sb-html.el    sb-info.el    sb-texinfo.el
-     sb-gud.el     sb-image.el   sb-rmail.el   sb-w3.el
-
-   * You should select file names which remind their refering WEB
-     servers' URIs.  It is allowed to remove coutry parts (Ex.
-     jp,de,uk,etc), organization parts (Ex. edu,com,org,net,etc) and
-     redundant parts (Ex. www) if removing does not increase vagueness.
-
-   * You should select group names in USENET style.  It means that small
-     characters are preferred in group names, and that period(.)  is
-     preferred as an delimiter to show hierarchical structure in groups.
-
-
-File: emacs-w3m.info,  Node: Tips,  Next: Mailing List,  Prev: Shimbun Library,  Up: Top
-
-Some knick-knacks using emacs-w3m
-*********************************
-
-   Here are some handy tips to use emacs-w3m with other Emacs
-facilities.
-
-   * browse-url
-
-     You can use emacs-w3m with the `browse-url' feature.  For instance,
-     put the following lines in your `~/.emacs' file:
-
-          (setq browse-url-browser-function 'w3m-browse-url)
-          (global-set-key "\C-xm" 'browse-url-at-point)
-
-     Emacs-w3m will now be invoked when you type the `C-x m' key on a
-     string which looks like a URL in any Emacs buffer.  In addition,
-     you can use emacs-w3m to preview an HTML file that you are just
-     editing by typing the `C-c C-v' key (note that you need to use
-     Emacs and the `html-mode' major mode to edit the HTML file).
-
-     If you'd like to use another web browser than emacs-w3m when using
-     the `C-x m' key when you are in an emacs-w3m buffer (who wants to
-     do so?), add the following advice to `~/.emacs' file:
-
-          (defadvice browse-url-at-point
-            (around change-browse-url-browser-function activate)
-            "Use Netscape only when it is invoked in an emacs-w3m buffer."
-            (let ((browse-url-browser-function
-                   (if (eq major-mode 'w3m-mode)
-                       'browse-url-netscape
-                     'w3m-browse-url)))
-              ad-do-it))
-
-   * dired
-
-     You can use emacs-w3m to browse an HTML file in a `dired' buffer by
-     typing the `C-x m' key.  Use the following settings in your
-     `~/.emacs' file:
-
-          (eval-after-load "dired"
-            '(define-key dired-mode-map "\C-xm" 'dired-w3m-find-file))
-          
-          (defun dired-w3m-find-file ()
-            (interactive)
-            (require 'w3m)
-            (let ((file (dired-get-filename)))
-              (if (y-or-n-p (format "Use emacs-w3m to browse %s? "
-                                    (file-name-nondirectory file)))
-                  (w3m-find-file file))))
-
-   * hnf-mode
-
-     You can see the newest diary using emacs-w3m and the hyper nikki
-     system.  Put the following lines in your `~/.emacs' file and type
-     the `C-c C-b' key in an `hnf-mode' buffer:
-
-          (defun w3m-hnf-browse-url-w3m (url &optional new-window)
-            (interactive (browse-url-interactive-arg "URL: "))
-            (save-selected-window
-              (pop-to-buffer (get-buffer-create "*w3m*"))
-              (w3m-browse-url url new-window)))
-          (setq hnf-browse-url-browser-function #'w3m-hnf-browse-url-w3m)
-
-   * Gnus
-
-     You've mistaken the entrance if you are a Gnus user and this
-     section is the first page you read in this Info.  See *Note
-     Hooking into MUAs:: first.
-
-     By default, Gnus will not apply the treatment variables, for
-     instance `gnus-treat-strip-banner', to `text/html' parts.  To have
-     them applied to `text/html' parts automatically, there are two
-     ways to do that:
-
-          ;; Apply all the treatments to text/html parts.
-          (eval-after-load "gnus-art"
-            '(add-to-list 'gnus-article-treat-types "text/html"))
-
-          ;; Apply a certain treatment to text/html parts.
-          (setq gnus-treat-strip-banner '(or t (typep "text/html")))
-
-     Also *Note Customizing Articles: (gnus)Customizing Articles, for
-     details.
-
-     In addition, the experimental code below is used to display
-     `multipart/related' pictures.  The place might be something wrong.
-
-          (eval-after-load "gnus-art"
-            '(or (assoc "multipart/related" gnus-mime-multipart-functions)
-                 (setq gnus-mime-multipart-functions
-                       (cons
-                        (cons
-                         "multipart/related"
-                         (byte-compile
-                          (lambda (handle)
-                            (gnus-mime-display-mixed (cdr handle)))))
-                        gnus-mime-multipart-functions))))
-
-   * yahtml-mode
-
-     You can use emacs-w3m to preview an HTML file that just you are
-     editing with the `yahtml-mode'.  Here is an example:
-
-          (defadvice yahtml-browse-html
-            (around w3m-yahtml-browse-html activate compile)
-            (w3m-goto-url (ad-get-arg 0) t))
-
-   * jisx0213
-
-     You can use JIS X 0213 character set in Emacs using the `jis0213'
-     module which is bundled in the Mule-UCS package.  Although the
-     `decode-char' function in Emacs 21 and later is overridden by
-     `mucs' (`jis0213' loads `mucs') and it stops working properly for
-     the `ucs' coded character set, it has been reported that also to
-     load the `unicode' module seems to solve the problem.  The reason
-     has not been made clear yet.  Here is an example for the
-     `~/.emacs' file:
-
-          (require 'unicode)
-          (require 'un-define)
-          (require 'jisx0213)
-
-
-File: emacs-w3m.info,  Node: Mailing List,  Next: Emacs-w3m Functions,  Prev: Tips,  Up: Top
+File: emacs-w3m.info, Node: Mailing List, Next: Emacs-w3m Functions, Prev: Tips, Up: Top
 
 Mailing list and submitting bug reports
 ***************************************
 
-   We have set up a mailing list to discuss all things emacs-w3m.  You
+We have set up a mailing list to discuss all things emacs-w3m.  You
 can post without subscribing.  If you find a bug, have a feature
-request, or have written some code, don't hesitate to post to the list.
-And if you're just a user and like the program, please tell us too!
+request, or have written some code, don't hesitate to post to the
+list.  And if you're just a user and like the program, please tell us
+too!
 
-   The address is:
+The address is:
 
      Emacs-w3m Mailing List <emacs-w3m@namazu.org>
 
-   You can also send a bug report using the `report-emacs-w3m-bug'
+You can also send a bug report using the `report-emacs-w3m-bug'
 command (or the `C-c C-b' key) if you have set the `mail-user-agent'
 variable that will work properly.
 
-   English and Japanese can be used when posting to this list, since
-many of its members are Japanese.  Articles posted to the list are
-opened to the public and you can read them on the web (at
+English and Japanese can be used when posting to this list, since many
+of its members are Japanese.  Articles posted to the list are opened
+to the public and you can read them on the web (at
 `http://emacs-w3m.namazu.org/ml/'), or in NetNews (group
 `gmane.emacs.w3m' on the server `news.gmane.org').
 
-   If you want to receive articles by mail, send a mail containing
+If you want to receive articles by mail, send a mail containing
 
      subscribe Your Name
 
-   (please write your name, not your email address) in its body to
+(please write your name, not your email address) in its body to
 `emacs-w3m-ctl@namazu.org', then you can subscribe to the list.  To
 unsubscribe from it, send a mail containing just
 
      # bye
 
-   in its body to `emacs-w3m-ctl@namazu.org'.
+in its body to `emacs-w3m-ctl@namazu.org'.
+
 
 
-File: emacs-w3m.info,  Node: Emacs-w3m Functions,  Next: External Packages,  Prev: Mailing List,  Up: Top
+File: emacs-w3m.info, Node: Emacs-w3m Functions, Next: External Packages, Prev: Mailing List, Up: Top
 
 Details of some emacs-w3m functions
 ***********************************
 
+
+
 
-File: emacs-w3m.info,  Node: External Packages,  Next: Authors,  Prev: Emacs-w3m Functions,  Up: Top
+File: emacs-w3m.info, Node: External Packages, Next: Authors, Prev: Emacs-w3m Functions, Up: Top
 
 Companion packages you might need
 *********************************
 
-   Even though emacs-w3m provides a wealth of features, you may want to
+Even though emacs-w3m provides a wealth of features, you may want to
 check out the following external packages for even more usability:
 
    * w3m-session.el
 
      The w3m-session.el package provides persistent emacs-w3m browsing
-     sessions.  When quitting emacs-w3m you can save the current session
-     (that is, the set of open tabs and the URLs they're visiting).
-     Upon restarting emacs-w3m you'll have the possibility of
-     recovering the saved session.
+     sessions.  When quitting emacs-w3m you can save the current
+     session (that is, the set of open tabs and the URLs they're
+     visiting).  Upon restarting emacs-w3m you'll have the possibility
+     of recovering the saved session.
 
      Download w3m-session.el from
      `http://www.emacswiki.org/elisp/wthreem-session.el'.
@@ -1111,38 +104,33 @@ check out the following external packages for even more usability:
    * w3m-type-ahead.el
 
      The w3m-type-ahead.el package provides "type ahead" searching,
-     similar to the feature by the same name from Mozilla browsers.  It
-     allows you to find anchors using an interface similar to isearch,
-     but results are limited to anchors in the buffer.
+     similar to the feature by the same name from Mozilla browsers.
+     It allows you to find anchors using an interface similar to
+     isearch, but results are limited to anchors in the buffer.
 
      Download w3m-type-ahead.el from
      `http://alioth.debian.org/project/showfiles.php?group_id=30594'.
 
 
+
 
-File: emacs-w3m.info,  Node: Authors,  Next: Index,  Prev: External Packages,  Up: Top
+File: emacs-w3m.info, Node: Authors, Next: Index, Prev: External Packages, Up: Top
 
 People who wrote this manual
 ****************************
 
    * Romain Francoise
-
    * NAKAJIMA Mikio
-
    * Yoichi NAKAYAMA
-
    * Ryoko NARITOKU(Translation only)
-
    * Hideyuki SHIRAI
-
    * TSUCHIYA Masatoshi
-
    * Katsumi Yamaoka
-
    * Masatake YAMATO
 
+
 
-File: emacs-w3m.info,  Node: Index,  Prev: Authors,  Up: Top
+File: emacs-w3m.info, Node: Index, Prev: Authors, Up: Top
 
 Index
 *****
@@ -1154,3 +142,394 @@ Index
 * Variable Index::              Variable Index
 * Function Index::              Function Index
 
+
+
+File: emacs-w3m.info, Node: Concept Index, Next: Key Index, Prev: Index, Up: Index
+
+Concept Index
+=============
+
+* Menu:
+
+* about://antenna/:             Using Antenna.          4.
+* Adding a bookmark:            Adding Bookmarks.       4.
+* Adding autoload settings:     Minimal Settings.       12.
+* Adding new search engines:    Adding New Search Engines.  4.
+* Antenna:                      Using Antenna.          4.
+* APEL package:                 Other Requirements.     4.
+* Arrived URLs:                 Tracing History.        4.
+* article expiry:               Nnshimbun.              152.
+* auto-expire:                  Nnshimbun.              152.
+* BITMAP-MULE package:          Other Requirements.     4.
+* Bookmarks:                    Managing Bookmarks.     4.
+* Browsing history:             Tracing History.        4.
+* Consulting bookmarks:         Consulting Bookmarks.   4.
+* Creating new buffers:         Creating and killing buffers.  4.
+* Customizing user options:     Customizable Variables.  4.
+* Displaying images:            Inline Images.          4.
+* Downloading files:            Downloading.            20.
+* Editing bookmarks:            Editing Bookmarks.      4.
+* expiry-wait:                  Nnshimbun.              152.
+* expiry-wait:                  Nnshimbun.              222.
+* Firewall:                     Minimal Settings.       33.
+* FLIM package:                 Other Requirements.     4.
+* Functions details:            Emacs-w3m Functions.    4.
+* General variables:            General Variables.      4.
+* Getting started:              Getting Started.        4.
+* Gifsicle program:             Other Requirements.     4.
+* Grouping URLs:                Grouping URLs.          4.
+* group parameters:             Nnshimbun.              68.
+* Hooks:                        Hooks.                  4.
+* ImageMagick package:          Other Requirements.     4.
+* Installing emacs-w3m:         Installing Emacs-w3m.   4.
+* Installing on non-UNIX-like systems: Non-UNIX-like systems.  4.
+* Introduction:                 Introduction.           4.
+* Killing buffers:              Creating and killing buffers.  4.
+* Moving in a page:             Moving in a page.       4.
+* New custom:                   Other Requirements.     4.
+* nnshimbun:                    Nnshimbun.              4.
+* Other variables:              Other Variables.        4.
+* Possible Emacs versions:      Required Emacs Version.  4.
+* Proxy gateways:               Minimal Settings.       33.
+* Proxy servers:                Minimal Settings.       33.
+* Quick Searching:              Quick Searching.        4.
+* Reading HTML mails in Gnus:   Gnus.                   4.
+* regexp-opt.el:                Other Requirements.     4.
+* Reporting bugs:               Mailing List.           4.
+* Saving images:                Inline Images.          38.
+* Search engines:               Using Search Engines.   4.
+* Searching:                    The Search Interface.   4.
+* `shimbun.el':                 Shimbun Basics.         4.
+* Shimbun library:              Shimbun Library.        4.
+* Showing the tree structure of local directories: Showing Directory Tree.  4.
+* Special URLs:                 Quick Searching.        4.
+* Starting up:                  Getting Started.        4.
+* Startup file:                 Minimal Settings.       24.
+* Subscribing to the emacs-w3m mailing list: Mailing List.  4.
+* Switching buffers using the buffer list: Selecting buffers.  48.
+* Switching buffers using the minibuffer: Selecting buffers.  42.
+* The Antenna interface:        Daily web tracking.     4.
+* Tips:                         Tips.                   4.
+* Tracking changes in web pages: Using Antenna.         4.
+* Using emacs-w3m as a batch command: Launching and Jumping.  18.
+* Variables related to cookies: Cookie Variables.       4.
+* Variables related to forms:   Form Variables.         4.
+* Variables related to images:  Image Variables.        4.
+* Viewing images:               Inline Images.          33.
+* w3m:                          You Need w3m.           4.
+* Web Newspaper:                Nnshimbun.              4.
+* Zooming images:               Inline Images.          42.
+
+
+
+File: emacs-w3m.info, Node: Key Index, Next: Variable Index, Prev: Concept Index, Up: Index
+
+Key Index
+=========
+
+* Menu:
+
+* a:                            Adding Bookmarks.       4.
+* A:                            Daily web tracking.     35.
+* B:                            Moving over pages.      16.
+* C-c C-a:                      Selecting buffers.      42.
+* C-c C-n:                      Moving across buffers.  30.
+* C-c C-p:                      Moving across buffers.  23.
+* C-c C-s:                      Selecting buffers.      48.
+* C-c C-t:                      Creating and killing buffers.  17.
+* C-c C-@:                      Tracing History.        49.
+* C-c C-v:                      Tracing History.        53.
+* C-c C-w:                      Creating and killing buffers.  23.
+* C-c M-w:                      Creating and killing buffers.  27.
+* c:                            Launching and Jumping.  93.
+* C-u a:                        Adding Bookmarks.       4.
+* C-u s:                        Tracing History.        86.
+* d:                            Downloading.            20.
+* DEL:                          Moving in a page.       25.
+* D:                            Showing Directory Tree.  49.
+* E:                            HTML File Information.  38.
+* e:                            HTML File Information.  43.
+* g:                            Launching and Jumping.  77.
+* G:                            Launching and Jumping.  84.
+* H:                            Moving over pages.      30.
+* \:                            HTML File Information.  27.
+* =:                            HTML File Information.  32.
+* I:                            Inline Images.          33.
+* M-a:                          Adding Bookmarks.       4.
+* M:                            HTML File Information.  48.
+* M-i:                          Inline Images.          38.
+* M-[:                          Inline Images.          44.
+* M-]:                          Inline Images.          48.
+* M-l:                          Moving in a page.       55.
+* mouse-2:                      Browsing with Mouse Operations.  18.
+* >:                            Moving in a page.       31.
+* <:                            Moving in a page.       37.
+* .:                            Moving in a page.       43.
+* ,:                            Moving in a page.       49.
+* ]:                            Moving in a page.       79.
+* [:                            Moving in a page.       84.
+* }:                            Moving in a page.       90.
+* {:                            Moving in a page.       95.
+* ^:                            Moving over pages.      37.
+* M-TAB:                        Moving in a page.       73.
+* N:                            Moving over pages.      22.
+* q:                            Going Back to Daily Hacking and/or Daily Writing.  19.
+* Q:                            Going Back to Daily Hacking and/or Daily Writing.  24.
+* RET:                          Launching and Jumping.  54.
+* RET:                          Launching and Jumping.  67.
+* R:                            Launching and Jumping.  103.
+* +:                            Setting up Antenna.     12.
+* S-mouse-2:                    Browsing with Mouse Operations.  23.
+* SPC:                          Moving in a page.       19.
+* S-TAB:                        Moving in a page.       73.
+* S:                            The Search Interface.   29.
+* s:                            Tracing History.        45.
+* s:                            Tracing History.        84.
+* TAB:                          Moving in a page.       66.
+* T:                            Inline Images.          28.
+* u:                            Launching and Jumping.  98.
+* v:                            Consulting Bookmarks.   4.
+
+
+
+File: emacs-w3m.info, Node: Variable Index, Next: Function Index, Prev: Key Index, Up: Index
+
+Variable Index
+==============
+
+* Menu:
+
+* gnus-keep-backlog:            Nnshimbun.              53.
+* mm-inline-text-html-with-images: Gnus.                4.
+* mm-inline-text-html-with-w3m-keymap: Gnus.            4.
+* mm-text-html-renderer:        Gnus.                   4.
+* nnmail-expiry-wait-function:  Nnshimbun.              152.
+* nnmail-expiry-wait:           Nnshimbun.              152.
+* nnshimbun-directory:          Nnshimbun.              67.
+* nnshimbun-encapsulate-images: Nnshimbun.              94.
+* nnshimbun-group-parameters-alist: Nnshimbun.          140.
+* nnshimbun-index-range:        Nnshimbun.              107.
+* nnshimbun-keep-backlog:       Nnshimbun.              53.
+* nnshimbun-keep-unparsable-dated-articles: Nnshimbun.  238.
+* nnshimbun-pre-fetch-article:  Nnshimbun.              83.
+* w3m-accept-languages:         General Variables.      7.
+* w3m-add-referer:              General Variables.      13.
+* w3m-add-user-agent:           General Variables.      46.
+* w3m-after-cursor-move-hook:   Hooks.                  7.
+* w3m-antenna-sites:            Setting up Antenna.     4.
+* w3m-arrived-file:             General Variables.      51.
+* w3m-async-exec:               Other Variables.        7.
+* w3m-auto-show:                General Variables.      55.
+* w3m-broken-proxy-cache:       Other Variables.        12.
+* w3m-charset-coding-system-alist: General Variables.   66.
+* w3m-coding-system:            General Variables.      71.
+* w3m-coding-system-priority-list: General Variables.   75.
+* w3m-command-arguments-alist:  General Variables.      99.
+* w3m-command-arguments:        Minimal Settings.       33.
+* w3m-command-environment:      General Variables.      120.
+* w3m-command:                  General Variables.      79.
+* w3m-content-type-alist:       General Variables.      124.
+* w3m-cookie-accept-bad-cookies: Cookie Variables.      7.
+* w3m-cookie-accept-domains:    Cookie Variables.       12.
+* w3m-cookie-file:              Cookie Variables.       16.
+* w3m-cookie-reject-domains:    Cookie Variables.       20.
+* w3m-correct-charset-alist:    General Variables.      128.
+* w3m-db-history-display-size:  General Variables.      132.
+* w3m-decoder-alist:            General Variables.      136.
+* w3m-default-coding-system:    Quick Searching.        4.
+* w3m-default-content-type:     General Variables.      144.
+* w3m-default-display-inline-images: Image Variables.   7.
+* w3m-default-save-directory:   General Variables.      148.
+* w3m-delete-buffer-hook:       Hooks.                  13.
+* w3m-delete-duplicated-empty-lines: General Variables.  152.
+* w3m-dirlist-cgi-program:      General Variables.      157.
+* w3m-display-hook:             Hooks.                  17.
+* w3m-edit-function-alist:      General Variables.      168.
+* w3m-edit-function:            General Variables.      162.
+* w3m-encoding-type-alist:      General Variables.      176.
+* w3m-favicon-cache-expire-wait: Image Variables.       14.
+* w3m-favicon-cache-file:       Image Variables.        19.
+* w3m-favicon-size:             Image Variables.        25.
+* w3m-favicon-type:             Image Variables.        30.
+* w3m-favicon-use-cache-file:   Image Variables.        34.
+* w3m-file-coding-system:       General Variables.      180.
+* w3m-file-name-coding-system:  General Variables.      185.
+* w3m-fill-column:              General Variables.      190.
+* w3m-follow-redirection:       General Variables.      199.
+* w3m-fontify-after-hook:       Hooks.                  23.
+* w3m-fontify-before-hook:      Hooks.                  28.
+* w3m-form-input-map-buffer-lines: Form Variables.      7.
+* w3m-form-input-map-mode-hook: Hooks.                  33.
+* w3m-form-input-map-set-hook:  Hooks.                  37.
+* w3m-form-input-select-buffer-lines: Form Variables.   11.
+* w3m-form-input-select-mode-hook: Hooks.               41.
+* w3m-form-input-select-set-hook: Hooks.                45.
+* w3m-form-input-textarea-buffer-lines: Form Variables.  15.
+* w3m-form-input-textarea-mode-hook: Hooks.             49.
+* w3m-form-input-textarea-set-hook: Hooks.              53.
+* w3m-form-mouse-face:          Form Variables.         19.
+* w3m-form-textarea-directory:  Form Variables.         31.
+* w3m-form-treat-textarea-size: Form Variables.         23.
+* w3m-form-use-fancy-faces:     Form Variables.         27.
+* w3m-form-use-textarea-backup: Form Variables.         31.
+* w3m-history-minimize-in-new-session: Other Variables.  22.
+* w3m-history-reuse-history-elements: Other Variables.  29.
+* w3m-home-page:                Launching and Jumping.  18.
+* w3m-horizontal-scroll-columns: Moving in a page.      31.
+* w3m-horizontal-scroll-columns: Moving in a page.      37.
+* w3m-horizontal-scroll-division: General Variables.    218.
+* w3m-horizontal-shift-columns: Moving in a page.       43.
+* w3m-horizontal-shift-columns: Moving in a page.       49.
+* w3m-icon-directory:           Image Variables.        38.
+* w3m-imagick-convert-program:  Image Variables.        42.
+* w3m-imitate-widget-button:    General Variables.      241.
+* w3m-init-file:                Customizable Variables.  4.
+* w3m-init-file:                Minimal Settings.       24.
+* w3m-input-coding-system:      General Variables.      258.
+* w3m-keep-arrived-urls:        General Variables.      265.
+* w3m-keep-cache-size:          General Variables.      269.
+* w3m-key-binding:              General Variables.      273.
+* w3m-language:                 General Variables.      279.
+* w3m-local-directory-view-method: General Variables.   283.
+* w3m-local-find-file-function: General Variables.      290.
+* w3m-local-find-file-regexps:  General Variables.      302.
+* w3m-mailto-url-function:      General Variables.      320.
+* w3m-mailto-url-popup-function-alist: General Variables.  327.
+* w3m-make-new-session:         General Variables.      338.
+* w3m-mbconv-command:           General Variables.      348.
+* w3m-minor-mode-command-alist: Gnus.                   4.
+* w3m-minor-mode:               Gnus.                   4.
+* w3m-minor-mode-hook:          Hooks.                  57.
+* w3m-mode-hook:                Hooks.                  61.
+* w3m-no-proxy-domains:         Minimal Settings.       33.
+* w3m-output-coding-system:     General Variables.      360.
+* w3m-pixels-per-character:     Image Variables.        60.
+* w3m-pixels-per-line:          Image Variables.        69.
+* w3m-popup-frame-parameters:   General Variables.      383.
+* w3m-pop-up-frames:            General Variables.      364.
+* w3m-pop-up-windows:           General Variables.      373.
+* w3m-prefer-cache:             General Variables.      389.
+* w3m-process-connection-type:  Other Variables.        51.
+* w3m-process-modeline-format:  Other Variables.        56.
+* w3m-profile-directory:        General Variables.      394.
+* w3m-quick-start:              Launching and Jumping.  18.
+* w3m-quick-start:              Moving over pages.      30.
+* w3m-redirect-with-get:        General Variables.      408.
+* w3m-relationship-estimate-rules: General Variables.   420.
+* w3m-resize-image-scale:       Image Variables.        79.
+* w3m-resize-images:            Image Variables.        83.
+* w3m-search-default-engine:    The Search Interface.   29.
+* w3m-search-engine-alist:      Quick Searching.        4.
+* w3m-select-buffer-hook:       Hooks.                  66.
+* w3m-select-buffer-horizontal-window: General Variables.  425.
+* w3m-select-buffer-window-ratio: General Variables.    430.
+* w3m-show-decoded-url:         General Variables.      436.
+* w3m-show-error-information:   General Variables.      474.
+* w3m-show-graphic-icons-in-header-line: Image Variables.  87.
+* w3m-show-graphic-icons-in-mode-line: Image Variables.  94.
+* w3m-space-before-favicon:     General Variables.      480.
+* w3m-space-before-modeline-icon: General Variables.    486.
+* w3m-terminal-coding-system:   General Variables.      492.
+* w3m-toggle-inline-images-permanently: Image Variables.  100.
+* w3m-touch-command:            General Variables.      500.
+* w3m-track-mouse:              General Variables.      506.
+* w3m-treat-image-size:         Image Variables.        46.
+* w3m-uri-replace-alist:        Quick Searching.        4.
+* w3m-url-local-directory-alist: General Variables.     564.
+* w3m-use-ange-ftp:             General Variables.      573.
+* w3m-use-cookies:              Cookie Variables.       24.
+* w3m-use-cygdrive:             General Variables.      578.
+* w3m-use-favicon:              Image Variables.        111.
+* w3m-use-filter:               General Variables.      583.
+* w3m-use-form:                 General Variables.      588.
+* w3m-use-header-line:          General Variables.      593.
+* w3m-use-mule-ucs:             General Variables.      597.
+* w3m-user-agent:               General Variables.      634.
+* w3m-use-refresh:              General Variables.      601.
+* w3m-use-symbol:               General Variables.      607.
+* w3m-use-tab-menubar:          General Variables.      621.
+* w3m-use-tab:                  Using Tabs.             47.
+* w3m-use-toolbar:              General Variables.      630.
+* w3m-view-this-url-new-session-in-background: General Variables.  639.
+* w3m-xmas-show-current-title-in-buffer-tab: Other Variables.  62.
+
+
+
+File: emacs-w3m.info, Node: Function Index, Prev: Variable Index, Up: Index
+
+Function Index
+==============
+
+* Menu:
+
+* gnus-group-make-shimbun-group: Nnshimbun.             17.
+* octet-find-file:              Octet.                  4.
+* w3m-antenna-add-current-url:  Setting up Antenna.     12.
+* w3m-antenna:                  Daily web tracking.     35.
+* w3m-bookmark-add-current-url: Adding Bookmarks.       4.
+* w3m-bookmark-add-this-url:    Adding Bookmarks.       4.
+* w3m-bookmark-edit:            Editing Bookmarks.      20.
+* w3m-bookmark-kill-entry:      Editing Bookmarks.      16.
+* w3m-bookmark-undo:            Editing Bookmarks.      24.
+* w3m-bookmark-view:            Consulting Bookmarks.   4.
+* w3m-browse-url:               Launching and Jumping.  39.
+* w3m-close-window:             Going Back to Daily Hacking and/or Daily Writing.  19.
+* w3m-copy-buffer:              Creating and killing buffers.  17.
+* w3m-delete-buffer:            Creating and killing buffers.  23.
+* w3m-delete-other-buffers:     Creating and killing buffers.  27.
+* w3m-download-this-url:        Downloading.            20.
+* w3m-dtree:                    Showing Directory Tree.  49.
+* w3m-edit-current-url:         HTML File Information.  38.
+* w3m-edit-this-url:            HTML File Information.  43.
+* w3m-find-file:                Launching and Jumping.  34.
+* w3m-gohome:                   Moving over pages.      30.
+* w3m-goto-url:                 Launching and Jumping.  77.
+* w3m-goto-url-new-session:     Launching and Jumping.  84.
+* w3m-history-restore-position: Tracing History.        53.
+* w3m-history-store-position:   Tracing History.        49.
+* w3m-history:                  Tracing History.        45.
+* w3m-history:                  Tracing History.        86.
+* w3m-horizontal-recenter:      Moving in a page.       55.
+* w3m:                          Launching and Jumping.  18.
+* w3m-mouse-view-this-url:      Browsing with Mouse Operations.  18.
+* w3m-mouse-view-this-url-new-session: Browsing with Mouse Operations.  23.
+* w3m-next-anchor:              Moving in a page.       66.
+* w3m-next-buffer:              Moving across buffers.  30.
+* w3m-next-form:                Moving in a page.       79.
+* w3m-next-image:               Moving in a page.       90.
+* w3m-pattern-uri-replace:      General Variables.      550.
+* w3m-previous-anchor:          Moving in a page.       73.
+* w3m-previous-buffer:          Moving across buffers.  23.
+* w3m-previous-form:            Moving in a page.       84.
+* w3m-previous-image:           Moving in a page.       95.
+* w3m-print-current-url:        Launching and Jumping.  93.
+* w3m-print-this-url:           Launching and Jumping.  98.
+* w3m-quit:                     Going Back to Daily Hacking and/or Daily Writing.  24.
+* w3m-reload-this-page:         Launching and Jumping.  103.
+* w3m-save-image:               Inline Images.          38.
+* w3m-scroll-down-or-previous-url: Moving in a page.    25.
+* w3m-scroll-down-or-previous-url: Moving over pages.   102.
+* w3m-scroll-left:              Moving in a page.       31.
+* w3m-scroll-right:             Moving in a page.       37.
+* w3m-scroll-up-or-next-url:    Moving in a page.       19.
+* w3m-scroll-up-or-next-url:    Moving over pages.      52.
+* w3m-search:                   The Search Interface.   29.
+* w3m-search-uri-replace:       General Variables.      556.
+* w3m-select-buffer:            Selecting buffers.      48.
+* w3m-shift-left:               Moving in a page.       43.
+* w3m-shift-right:              Moving in a page.       49.
+* w3m-switch-buffer:            Selecting buffers.      42.
+* w3m-toggle-inline-images:     Inline Images.          28.
+* w3m-view-header:              HTML File Information.  32.
+* w3m-view-image:               Inline Images.          33.
+* w3m-view-next-page:           Moving over pages.      22.
+* w3m-view-parent-page:         Moving over pages.      37.
+* w3m-view-previous-page:       Moving over pages.      16.
+* w3m-view-source:              HTML File Information.  27.
+* w3m-view-this-url:            Launching and Jumping.  54.
+* w3m-view-this-url:            Launching and Jumping.  67.
+* w3m-view-url-with-external-browser: HTML File Information.  48.
+* w3m-zoom-in-image:            Inline Images.          48.
+* w3m-zoom-out-image:           Inline Images.          44.
+
+

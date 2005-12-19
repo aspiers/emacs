@@ -1,18 +1,18 @@
 INSTALL      = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
-prefix       = /home/aspiers/local/linux
+prefix       = /home/aspiers/local
 datadir      = ${prefix}/share
 infodir      = ${prefix}/info
 lispdir      = $(prefix)/share/emacs/site-lisp/w3m
 srcdir       = .
 PACKAGEDIR   = NONE
-ICONDIR      = $(prefix)/share/emacs/21.2/etc/images/w3m
+ICONDIR      = /usr/share/emacs/21.3/etc/images/w3m
 ADDITIONAL_LOAD_PATH = NONE
 
 SHELL        = /bin/sh
 
 
-EMACS   = /home/aspiers/local/linux/bin/emacs
+EMACS   = /usr/bin/emacs
 VANILLA_FLAG = -q -no-site-file
 FLAGS   = $(VANILLA_FLAG) -batch -l $(srcdir)/w3mhack.el $(ADDITIONAL_LOAD_PATH)
 
