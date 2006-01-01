@@ -196,10 +196,22 @@ then \\[bn-strip-parentheses] will result in
 
 With a prefix argument ARG, try to repeat the process ARG times.
 Stop as soon as point is not at a parenthesis character.  With
-just C-u as a prefix argument, repeat as many times as possible."
+just C-u as a prefix argument, repeat as many times as possible.
+
+Adam added an extra DWIM feature - if the opening parenthesis is
+immediately preceded by a letter, will also insert a space where the
+parenthesis has just been removed."
   (interactive "*P")
   (let ((many-as-possible-p (and (not (null arg)) (listp arg)))
         (n (prefix-numeric-value arg))
+        (open-remover (lambda ()
+                        (delete-char 1)
+                        ;; here's the DWIM bit
+                        (when
+                            (save-excursion
+                              (forward-char -1)
+                              (looking-at "[a-zA-Z]"))
+                          (insert " "))))
         on-open-p
         on-close-p)
     (while (and (progn
@@ -212,12 +224,12 @@ just C-u as a prefix argument, repeat as many times as possible."
         (save-excursion
           (forward-sexp)
           (delete-char -1))
-        (delete-char 1))
+        (funcall open-remover))
       (when on-close-p
         (save-excursion
           (forward-char 1)
           (forward-sexp -1)
-          (delete-char 1))
+          (funcall open-remover))
         (delete-char 1))
       (setq n (- n 1)))))
 
