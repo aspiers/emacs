@@ -37,15 +37,16 @@
 ;;
 ;; (mwheel-install)
 
-;; 2000-07-28  Adam Spiers  <adam@spiers.net>
+;;  2006-01-12 Adam Spiers  <emacs-mwheel@adamspiers.org>
 ;;
-;;         * enhanced to support scrolling with Control depressed
+;;     * (originally 2000-07-28) Enhanced to support scrolling with
+;;       Control depressed; defaults to page up/down.  As yet untested
+;;       with XEmacs.
+;;       
 
 ;;; Code:
 
 (require 'custom)
-
-(defconst mwheel-running-xemacs (string-match "XEmacs" (emacs-version)))
 
 ;; Setter function for mouse-button user-options.  Switch Mouse Wheel
 ;; mode off and on again so that the old button is unbound and
