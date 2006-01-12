@@ -1,0 +1,6 @@
+#compdef emk
+
+cd $zdotdir/lib/emacs
+_make "$@"
+cd - >&/dev/null
+
