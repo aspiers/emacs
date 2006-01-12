@@ -5,7 +5,8 @@ srcdirs = init/common major-modes minor-modes utils fun
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
-                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla xtla-main)
+                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla)
+IGNORE_DIRS = major-modes/xtla-main
 
 # Phony targets are bad except for top-level rules because if a rule A
 # has a phony prerequisite B, that phony rule B will always get
@@ -37,7 +38,7 @@ gnuinstall_dir = $(EMACSLIB)/GNU_Emacs
 xinstall_dir = $(EMACSLIB)/XEmacs
 
 # Horrible horrible horrible.  Prune 3rd party packages from imminent find(1).
-prune = $(shell echo $(THIRD_PARTY_PKG_DIRS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
+prune = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_DIRS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
 
 ELs_TO_COMPILE = $(shell 				\
 	find $(srcdirs)					\
@@ -168,6 +169,5 @@ uninstall:
 	) && \
 	touch $@
 
-pgg: .pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
 	@touch $@
