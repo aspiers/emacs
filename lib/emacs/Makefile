@@ -4,8 +4,10 @@ srcdirs = init/common major-modes minor-modes utils fun
 
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m
+THIRD_PARTY_TARGETS = $(addprefix .,$(THIRD_PARTY_PKGS))
+THIRD_PARTY_TARGETS := $(addsuffix -made,$(THIRD_PARTY_TARGETS))
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
-                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4)
+                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla xtla-main)
 
 EMACSLIB = $(HOME)/lib/emacs
 
@@ -89,7 +91,7 @@ endif
 
 COMPILER+= -batch -f batch-byte-compile
 
-.PHONY: all install
+.PHONY: all install clean uninstall
 
 all: install
 
@@ -105,12 +107,15 @@ list-els-to-compile:
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
-install: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) uninstall
+install: .installed
+
+.installed: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile #uninstall
 	@echo "Installing all .elcs in $(install_dir)"
 	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
 	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
 	  cp $$elc $(install_dir); \
 	done
+	@touch $@
 
 %.elc: %.el
 	@echo Compiling $< with $(EMACS) ...
@@ -124,28 +129,40 @@ clean: uninstall
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
 
-psgml:
-	cd major-modes/psgml && $(MAKE)
+.psgml-made:
+	( cd major-modes/psgml && $(MAKE) ) && \
+	touch $@
 
-nxml-mode-20041004:
-	cd major-modes/nxml-mode-20041004 && \
-	$(MAKE) && \
-	cp rng-auto.el $(install_dir)
+.nxml-mode-20041004-made:
+	( \
+	  cd major-modes/nxml-mode-20041004 && \
+	  $(MAKE) && \
+	  cp rng-auto.el $(install_dir) \
+	) && \
+	touch $@
 
-emacs-wiki: pgg
-	cd major-modes/emacs-wiki && \
-	perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
-                     s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
-		Makefile.defs && \
-	make
+.emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el)
+	( \
+	  cd major-modes/emacs-wiki && \
+	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
+                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
+	  	Makefile.defs && \
+	  make && \
+	  make doc && \
+	  make install \
+	) && \
+	touch $@
 
-emacs-w3m: emacs-w3m-1.4.4
+.emacs-w3m-made:
+	( \
+	  cd major-modes/emacs-w3m-1.4.4     && \
+	  ./configure --prefix=$(HOME)/local && \
+	  make				     && \
+	  make install			     && \
+	  cp w3m-load.el $(install_dir) \
+	) && \
+	touch $@
 
-emacs-w3m-1.4.4:
-	cd major-modes/emacs-w3m-1.4.4 && \
-	./configure --prefix=$(HOME)/local   && \
-	make				     && \
-	make install			     && \
-	cp w3m-load.el $(install_dir)
-
-pgg: major-modes/pgg/pgg.elc
+pgg: .pgg-made
+.pgg-made: major-modes/pgg/pgg.elc
+	@touch $@
