@@ -4,10 +4,15 @@ srcdirs = init/common major-modes minor-modes utils fun
 
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m
-THIRD_PARTY_TARGETS = $(addprefix .,$(THIRD_PARTY_PKGS))
-THIRD_PARTY_TARGETS := $(addsuffix -made,$(THIRD_PARTY_TARGETS))
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
                    nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla xtla-main)
+
+# Phony targets are bad except for top-level rules because if a rule A
+# has a phony prerequisite B, that phony rule B will always get
+# executed, even if B's prerequisites don't need to be, hence the
+# parent rule will too.
+THIRD_PARTY_TARGETS = $(addprefix .,$(THIRD_PARTY_PKGS))
+THIRD_PARTY_TARGETS := $(addsuffix -made,$(THIRD_PARTY_TARGETS))
 
 EMACSLIB = $(HOME)/lib/emacs
 
