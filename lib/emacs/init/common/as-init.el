@@ -471,12 +471,6 @@ that name."
 
 (defvar as-emacs-dir)
 
-(defvar nxml-sub-dir "major-modes/nxml-mode-20041004"
-  "Path of nxml-mode subdirectory relative to Adam's emacs library root")
-
-(defvar xtla-sub-dir "major-modes/xtla"
-  "Path of xtla mode subdirectory relative to Adam's emacs library root")
-
 (custom-set-variables
  '(find-function-source-path
    (append load-path
@@ -486,9 +480,9 @@ that name."
                "major-modes/monkey-2"
                "major-modes/mmm" 
                "major-modes/tdtd" 
-               "major-modes/pcl-cvs" 
-               nxml-sub-dir
-               xtla-sub-dir
+               "major-modes/pcl-cvs"
+               "major-modes/nxml-mode-20041004"
+               "major-modes/xtla/lisp"
                "major-modes" 
                "minor-modes" 
                "utils" 
@@ -681,8 +675,6 @@ that name."
 
 ;;}}}
 ;;{{{ nxml
-
-;; (add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
 
 ;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
 (load "rng-auto")
@@ -957,15 +949,14 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ xtla
 
-;; Build xtla with:
+;; Used to build xtla with:
 ;;
 ;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
 ;; make
 ;; make install
 ;; emk
 
-;; not necessary
-;;(add-to-list 'load-path (concat as-emacs-dir "/" xtla-sub-dir))
+;; now integrated into lib/emacs/Makefile
 
 (load-library "xtla-load")
 
