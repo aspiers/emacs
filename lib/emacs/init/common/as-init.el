@@ -683,7 +683,11 @@ that name."
 ;;{{{ nxml
 
 ;; (add-to-list 'load-path (concat as-emacs-dir "/" nxml-sub-dir))
+
+;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
 (load "rng-auto")
+;;(when (string-match "/\"" (prin1-to-string load-path)) (error 'fucked))
+
 (autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
 (defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
 (autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
@@ -963,7 +967,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; not necessary
 ;;(add-to-list 'load-path (concat as-emacs-dir "/" xtla-sub-dir))
 
-(require 'xtla-autoloads)
+(load-library "xtla-load")
 
 ;;}}}
 ;;{{{ etask-mode
@@ -1023,6 +1027,12 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'org-store-link "org" "Store a link to the current location" t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+
+;;}}}
+;;{{{ emacs-wiki-mode
+
+(autoload 'emacs-wiki-mode "emacs-wiki")
+(defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
 
 ;;}}}
 
