@@ -3,7 +3,9 @@
 srcdirs = init/common major-modes minor-modes utils fun
 
 # These ones have their own Makefiles
-THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m
+THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m xtla
+
+# Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
                    nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla)
 IGNORE_DIRS = major-modes/xtla-main
@@ -177,3 +179,17 @@ uninstall:
 
 .pgg-made: major-modes/pgg/pgg.elc
 	@touch $@
+
+.xtla-made: $(wildcard major-modes/xtla/*.el) major-modes/xtla/configure
+	( \
+	  cd major-modes/xtla && \
+	  ./configure \
+	    --prefix=$(HOME)/local \
+	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 && \
+	  make && \
+	  make install-pkg \
+	) && \
+	touch $@
+
+major-modes/xtla/configure: major-modes/xtla/configure.ac
+	cd major-modes/xtla && autoconf
