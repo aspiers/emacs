@@ -40,8 +40,9 @@ xinstall_dir = $(EMACSLIB)/XEmacs
 # Horrible horrible horrible.  Prune 3rd party packages from imminent find(1).
 prune = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_DIRS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
 
-ELs_TO_COMPILE = $(shell 				\
+ELs_TO_COMPILE_cmd =   				        \
 	find $(srcdirs)					\
+	        -follow					\
 		-name \*.el 				\
 	      $(prune)					\
 	      ! -name monkey\* 				\
@@ -61,8 +62,8 @@ ELs_TO_COMPILE = $(shell 				\
 	      ! -name remember-blosxom.el 		\
 	      ! -name remember-emacs-wiki-journal.el 	\
 	      ! -path '*/attic/*'			\
-	      ! -path '*/shimbun/*'			\
-)
+	      ! -path '*/shimbun/*'
+ELs_TO_COMPILE = $(shell $(ELs_TO_COMPILE_cmd)) 
 
 # These are the .elcs we want to build ourselves
 ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
@@ -97,9 +98,9 @@ endif
 
 COMPILER+= -batch -f batch-byte-compile
 
-.PHONY: all install clean uninstall
+.PHONY: all elcs install clean uninstall
 
-all: install
+all: elcs install
 
 list-loadpaths:
 	@echo "$(loadpaths)"
@@ -107,15 +108,20 @@ list-loadpaths:
 list-prune:
 	@echo "$(prune)"
 
+list-els-to-compile-cmd:
+	@echo "$(ELs_TO_COMPILE_cmd)"
+
 list-els-to-compile:
 	@for el in $(ELs_TO_COMPILE); do echo $$el; done
 
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
+elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile
+
 install: .installed
 
-.installed: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile #uninstall
+.installed: Makefile #uninstall
 	@echo "Installing all .elcs in $(install_dir)"
 	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
 	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
