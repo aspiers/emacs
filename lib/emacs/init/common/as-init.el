@@ -606,6 +606,18 @@ that name."
   (indented-text-mode))
 
 ;;}}}
+;;{{{ ReStructuredText mode
+
+(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
+(autoload 'rst-mode "rst")
+(autoload 'rst-text-mode-bindings "rst")
+(add-hook 'text-mode-hook 'rst-text-mode-bindings)
+
+;; Update the TOC automatically everytime you adjust a section title::
+(add-hook 'rst-adjust-hook 'rst-toc-insert-update)
+
+;;}}}
+
 ;;{{{ Ruby
 
 (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
@@ -971,6 +983,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; Pull in autoloads
 (require 'w3m-load "w3m-load" t)
 
+(eval-when-compile (require 'dired))
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
@@ -1188,7 +1201,9 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ recentf
 
-(and window-system (load "recentf" 'noerror))
+(and window-system
+     (load "recentf" 'noerror) 
+     (recentf-mode t))
 
 ;;}}}
 ;;{{{ no toolbar
