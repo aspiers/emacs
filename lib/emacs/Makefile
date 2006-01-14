@@ -119,11 +119,12 @@ list-els-to-compile:
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
-elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile
+.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile
+	@touch $@
 
 install: .installed
 
-.installed: Makefile #uninstall
+.installed: Makefile .elcs #uninstall
 	@echo "Installing all .elcs in $(install_dir)"
 	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
 	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
