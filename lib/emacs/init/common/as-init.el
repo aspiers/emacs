@@ -1094,7 +1094,7 @@ C-style indentation, use cssm-c-style-indenter.")
     ))
 
 (setq as-find-file-matching-regexp-alist
-      (append '(("\*\.rdb$" . (lambda () (fold-set-marks "! {{{ " "! }}} "))))
+      (append '(("\*\.rdb$" . (lambda () (folding-set-marks "! {{{ " "! }}} "))))
               as-find-file-matching-regexp-alist))
 
 ;;}}}
@@ -1103,7 +1103,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'folding-mode "folding" "folding mode")
 (autoload 'folding-mode-find-file "folding" "folding mode")
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
-(autoload 'fold-set-marks "folding" "folding mode")
+(autoload 'folding-set-marks "folding" "folding mode")
 
 (cond ((as-quick-startup)
        (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
