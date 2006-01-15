@@ -1035,6 +1035,12 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
 
 ;;}}}
+;;{{{ crm114-mode
+
+(autoload 'crm114-mode "crm114-mode" "crm114-mode" t)
+(add-to-list 'auto-mode-alist '("\\.crm$" . crm114-mode))
+
+;;}}}
 ;;{{{ emacs-wiki-mode
 
 (autoload 'emacs-wiki-mode "emacs-wiki")
