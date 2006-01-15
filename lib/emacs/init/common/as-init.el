@@ -227,6 +227,8 @@ that name."
 (global-set-key [(control meta return)] 'repeat-complex-command)
 (autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
 (global-set-key [(control meta \()] 'bn-strip-parentheses)
+(global-set-key [(shift meta f)] 'as-forward-next-word)
+(global-set-key [(shift meta b)] 'as-backward-before-word)
 
 ;;}}}
 ;;{{{ TAB and family

@@ -2,6 +2,23 @@
 
 ;; Should be autoloaded by as-init.el
 
+;;{{{ Word motion
+
+(defun as-forward-next-word (&optional prefix)
+  "As `forward-word', but lands at the start of a word not the end."
+  (interactive "p")
+  (forward-word prefix)
+  (forward-word 1)
+  (forward-word -1))
+
+(defun as-backward-before-word (&optional prefix)
+  "As `backward-word', but lands at the start of a word not the end."
+  (interactive "p")
+  (forward-word (- prefix))
+  (forward-word -1)
+  (forward-word 1))
+
+;;}}}
 ;;{{{ as-duplicate-line
 
 (defun as-duplicate-line (&optional count) 
