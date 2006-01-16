@@ -122,11 +122,13 @@ list-third-party-elcs:
 .elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile
 	@touch $@
 
+$(install_dir):
+	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
+
 install: .installed
 
-.installed: Makefile .elcs #uninstall
+.installed: Makefile .elcs $(install_dir) #uninstall
 	@echo "Installing all .elcs in $(install_dir)"
-	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
 	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
 	  cp $$elc $(install_dir); \
 	done
@@ -148,7 +150,7 @@ uninstall:
 	( cd major-modes/psgml && $(MAKE) ) && \
 	touch $@
 
-.nxml-mode-20041004-made:
+.nxml-mode-20041004-made: $(install_dir)
 	( \
 	  cd major-modes/nxml-mode-20041004 && \
 	  $(MAKE) && \
