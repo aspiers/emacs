@@ -301,7 +301,7 @@ Goes backward if ARG is negative; error if CHAR not found."
 
 ;;}}}
 
-;;{{{ Ben's secondary selection hacks (not active yet)
+;;{{{ Ben's secondary selection hacks
 
 (defun bn-make-region-into-secondary (start end)
   "Turn the region into the secondary selection.
@@ -353,9 +353,5 @@ the region is active, then deactivate it.  If not, then do
          (deactivate-mark))
         (t
          (keyboard-quit))))
-
-(define-key global-map [(control hyper ?\ )] 'bn-make-region-into-secondary)
-(define-key global-map [(control hyper t)] 'bn-exchange-region-and-secondary)
-(define-key global-map [(control g)] 'bn-keyboard-quit)
 
 ;;}}}

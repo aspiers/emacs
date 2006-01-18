@@ -145,6 +145,13 @@ that name."
 (autoload 'vim-yy                 "as-editing" "Simulate vim's yy command"  t)
 ;; bn-end-of-line-but-one autoloaded elsewhere
 
+(autoload 'bn-make-region-into-secondary
+                                  "as-editing" "Secondary region handling"  t)
+(autoload 'bn-exchange-region-and-secondary
+                                  "as-editing" "Secondary region handling"  t)
+(autoload 'bn-keyboard-quit
+                                  "as-editing" "Secondary region handling"  t)
+
 ;;}}}
 ;;{{{ Appearance
 
@@ -229,6 +236,11 @@ that name."
 (global-set-key [(control meta \()] 'bn-strip-parentheses)
 (global-set-key [(shift meta f)] 'as-forward-next-word)
 (global-set-key [(shift meta b)] 'as-backward-before-word)
+
+
+(global-set-key [(control meta ?\ )] 'bn-make-region-into-secondary)
+(global-set-key [(control meta T)] 'bn-exchange-region-and-secondary)
+(global-set-key [(control g)] 'bn-keyboard-quit)
 
 ;;}}}
 ;;{{{ TAB and family
