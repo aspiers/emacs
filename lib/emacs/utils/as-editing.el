@@ -354,8 +354,8 @@ the region is active, then deactivate it.  If not, then do
         (t
          (keyboard-quit))))
 
-;; (define-key global-map [(hyper ?\ )] 'bn-make-region-into-secondary)
-;; (define-key global-map [(hyper t)] 'bn-exchange-region-and-secondary)
-;; (define-key global-map [(control g)] 'bn-keyboard-quit)
+(define-key global-map [(control hyper ?\ )] 'bn-make-region-into-secondary)
+(define-key global-map [(control hyper t)] 'bn-exchange-region-and-secondary)
+(define-key global-map [(control g)] 'bn-keyboard-quit)
 
 ;;}}}
