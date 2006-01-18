@@ -9,36 +9,47 @@
 ;; (current-time-string)
 ;; (shell-command-to-string "date")
 
-(defun as-insert-date ()
-  "Inserts the current date into the current buffer at the point."
-  (interactive)
-  (insert (format-time-string "%a %b %e %Y")))
+(defun as-insert-date (&optional prefix)
+  "Inserts the current date into the current buffer at the point.
+Defaults to ISO 8601 format suitable for chronological/lexical
+sorting, but reverts to more human-readable version if a prefix
+argument is given."
+  (interactive "*P")
+  (insert (format-time-string (if prefix "%a %b %e %Y" "%F %a"))))
 
 (defun as-insert-time ()
   "Inserts the current time into the current buffer at the point."
   (interactive)
   (insert (format-time-string "%H:%M:%S %Z")))
 
-(defun as-insert-date-and-time ()
+(defun as-insert-date-and-time (&optional prefix)
   "Inserts the current date and time into the current buffer at the
-point."
-  (interactive)
-  (insert (format-time-string "%a %b %e %H:%M:%S %Z %Y")))
+point.  Defaults to ISO 8601 date format suitable for
+chronological/lexical sorting, but reverts to more human-readable
+version if a prefix argument is given."
+  (interactive "*P")
+  (as-insert-date prefix)
+  (insert " ")
+  (as-insert-time))
 
-(defun as-insert-log-timestamp ()
+(defun as-insert-log-timestamp (&optional prefix)
   "Inserts the current date, time and username into the current buffer
-at the point."
-  (interactive)
-  (as-insert-date-and-time)
-  (insert " Adam Spiers <>")
+at the point.  Defaults to ISO 8601 date format suitable for
+chronological/lexical sorting, but reverts to more human-readable
+version if a prefix argument is given."
+  (interactive "*P")
+  (as-insert-date-and-time prefix)
+  (insert "  Adam Spiers <>")
   (backward-char 1))
 
-(defun as-insert-log-datestamp ()
+(defun as-insert-log-datestamp (&optional prefix)
   "Inserts the current date and username into the current buffer at
-the point."
-  (interactive)
-  (insert (format-time-string "%a %b %e %Y")
-          " Adam Spiers <>")
+the point.  Defaults to ISO 8601 date format suitable for
+chronological/lexical sorting, but reverts to more human-readable
+version if a prefix argument is given."
+  (interactive "*P")
+  (as-insert-date prefix)
+  (insert "  Adam Spiers <>")
   (backward-char 1))
 
 ;;}}}
