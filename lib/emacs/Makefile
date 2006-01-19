@@ -31,6 +31,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
             $(EMACSLIB)/major-modes/planner		\
             $(EMACSLIB)/major-modes/emacs-wiki	        \
+            $(EMACSLIB)/major-modes/muse	        \
             $(EMACSLIB)/major-modes/remember  	        \
             $(EMACSLIB)/major-modes/pgg  	        \
             $(EMACSLIB)/major-modes			\
