@@ -195,8 +195,8 @@ uninstall:
 .pgg-made: major-modes/pgg/pgg.elc
 	@touch $@
 
-.xtla-configured: major-modes/xtla/configure
-	( 								\
+.xtla-configured: major-modes/xtla/configure Makefile
+	-( 								\
 	  cd major-modes/xtla && 					\
 	  ./configure 							\
 	    --prefix=$(HOME)/local 					\
@@ -205,7 +205,7 @@ uninstall:
 	) && 								\
 	touch $@
 
-.xtla-made: $(wildcard major-modes/xtla/*.el) $(wildcard major-modes/xtla/*/*.el) .xtla-configured
+.xtla-made: $(wildcard major-modes/xtla/*.el) $(wildcard major-modes/xtla/*/*.el) .xtla-configured Makefile
 	( 				\
 	  cd major-modes/xtla && 	\
 	  make && 			\
@@ -214,4 +214,5 @@ uninstall:
 	touch $@
 
 major-modes/xtla/configure: major-modes/xtla/configure.ac
-	cd major-modes/xtla && autoconf
+	-cd major-modes/xtla && autoconf
+
