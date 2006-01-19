@@ -1,3 +1,6 @@
 #!/bin/sh
 
+cd
+[ -e .as-init.el ] || ln -s lib/emacs/init/common/as-init.el .as-init.el
+
 emk
