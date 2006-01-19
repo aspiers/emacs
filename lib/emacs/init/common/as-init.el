@@ -1059,6 +1059,17 @@ C-style indentation, use cssm-c-style-indenter.")
 (defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
 
 ;;}}}
+;;{{{ muse-mode
+
+(defun muse-mode ()
+  "Pseudo-autoloader which does (require 'muse-mode)."
+  (require 'muse-mode)
+  (muse-mode))
+
+(defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
+(add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Minor modes
