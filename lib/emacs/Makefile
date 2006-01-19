@@ -158,7 +158,7 @@ uninstall:
 	) && \
 	touch $@
 
-.emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el)
+.emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el) major-modes/emacs-wiki/Makefile.defs
 	( \
 	  cd major-modes/emacs-wiki && \
 	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
@@ -170,7 +170,7 @@ uninstall:
 	) && \
 	touch $@
 
-.muse-made: $(wildcard major-modes/muse/*.el)
+.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
 	( \
 	  cd major-modes/muse && \
 	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
