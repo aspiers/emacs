@@ -954,7 +954,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ psvn
 
 (autoload 'svn-status "psvn" "svn-status" t)
-(global-set-key [(control c)(shift e)] 'svn-status)
+(global-set-key "\C-cE" 'svn-status)
 ;; (require 'psvn)
 
 ;;}}}
