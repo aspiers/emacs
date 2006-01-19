@@ -205,7 +205,7 @@ uninstall:
 	) && 								\
 	touch $@
 
-.xtla-made: $(wildcard major-modes/xtla/*) $(wildcard major-modes/xtla/*/*) .xtla-configured
+.xtla-made: $(wildcard major-modes/xtla/*.el) $(wildcard major-modes/xtla/*/*.el) .xtla-configured
 	( 				\
 	  cd major-modes/xtla && 	\
 	  make && 			\
