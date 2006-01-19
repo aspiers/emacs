@@ -1,0 +1,69 @@
+#! /bin/sh -e
+# /usr/lib/emacsen-common/packages/install/xtla
+
+# Written by Jim Van Zandt <jrv@vanzandt.mv.com>, borrowing heavily
+# from the install scripts for gettext by Santiago Vila
+# <sanvila@ctv.es> and octave by Dirk Eddelbuettel <edd@debian.org>.
+
+FLAVOR=$1
+PACKAGE=xtla
+
+if [ ${FLAVOR} = emacs ]; then exit 0; fi
+if [ ${FLAVOR} = emacs20 ]; then
+    echo "Ignoring flavor ${FLAVOR}"
+    exit 0
+fi
+
+echo install/${PACKAGE}: Handling install for emacsen flavor ${FLAVOR}
+
+#FLAVORTEST=`echo $FLAVOR | cut -c-6`
+#if [ ${FLAVORTEST} = xemacs ] ; then
+#    SITEFLAG="-no-site-file"
+#else
+#    SITEFLAG="--no-site-file"
+#fi
+FLAGS="${SITEFLAG} -q -batch -l path.el -f batch-byte-compile"
+
+ELDIR=/usr/share/emacs/site-lisp/${PACKAGE}
+ELCDIR=/usr/share/${FLAVOR}/site-lisp/${PACKAGE}
+
+# Install-info-altdir does not actually exist.
+# Maybe somebody will write it.
+if test -x /usr/sbin/install-info-altdir; then
+    echo install/${PACKAGE}: install Info links for ${FLAVOR}
+    install-info-altdir --quiet --section "" "" --dirname=${FLAVOR} /usr/info/${PACKAGE}.info.gz
+fi
+
+install -m 755 -d ${ELCDIR}
+cd ${ELDIR}
+FILES=`echo *.el`
+cp ${FILES} ${ELCDIR}
+if echo "${FLAVOR}" | grep "^xemacs"; then
+    echo "XEmacs flavor: Installing ewoc.el in ${ELCDIR}/contrib"
+    install -m 755 -d ${ELCDIR}/contrib
+    cp contrib/ewoc.el ${ELCDIR}/contrib
+    cd ${ELCDIR}/contrib
+    cat << EOF > path.el
+(setq byte-compile-warnings nil)
+EOF
+    ${FLAVOR} ${FLAGS} ewoc.el
+    rm -f ewoc.el
+    FILES=`echo "${FILES}" | sed 's/xtla-emacs.el//'`
+else
+    FILES=`echo "${FILES}" | sed 's/xtla-xemacs.el//'`
+fi
+cd ${ELCDIR}
+
+cat << EOF > path.el
+(setq load-path (cons "." (append load-path (list "./contrib"))) byte-compile-warnings nil)
+EOF
+
+FILES=`echo "${FILES}" | sed 's/xtla-browse.el//'`
+
+${FLAVOR} ${FLAGS} ${FILES}
+rm -f *.el path.el
+cp ${ELDIR}/xtla-browse.el ${ELCDIR}
+
+exit 0
+
+# arch-tag: fadc42cc-a335-4e34-8556-dc85dcc1f8a0

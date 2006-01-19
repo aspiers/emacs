@@ -1,0 +1,26 @@
+; -*- mode: emacs-lisp -*-
+;;
+;; Load Xtla easily ...
+;;
+;; Manually, you can run
+;;
+;;   M-x load-file RET /path/to/xtla-load.el RET
+;;
+;; (usefull when you want to load Xtla after starting "emacs -q"!), or
+;; add
+;;
+;;   (load-file "/path/to/this/file/in/builddir/xtla-load.el")
+;;
+;; to your ~/.emacs.el
+
+(add-to-list 'load-path "@abs_top_builddir@/lisp")
+(add-to-list 'load-path "@abs_top_builddir@/lisp/contrib")
+(add-to-list 'Info-default-directory-list "@abs_top_builddir@/info")
+
+(if (featurep 'xtla)
+    (tla-reload)
+  (if (featurep 'xemacs)
+      (require 'xtla-autoloads "@abs_top_builddir@/lisp/auto-autoloads.elc")
+    (require 'xtla-autoloads)))
+
+; arch-tag: 635c71bf-f5ea-4fcb-8873-dc2834a18a48

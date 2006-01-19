@@ -1,0 +1,253 @@
+@SET_MAKE@
+
+##############################################################################
+# location of required programms
+prefix = @prefix@
+RM   = @RM@
+XARGS = @XARGS@
+ETAGS = @ETAGS@
+TLA = @TLA@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_DATA = @INSTALL_DATA@
+
+
+ifeq (@EMACS_FLAVOR@,emacs)
+EMACS_PROG = @EMACS_PROG@ -no-site-file -no-init-file
+else
+EMACS_PROG = @EMACS_PROG@ -no-autoloads
+endif
+
+EMACS_FLAVOR = @EMACS_FLAVOR@
+EMACS_VERSION = @EMACS_VERSION@
+
+# Other settings
+
+OTHERDIRS = @OTHERDIRS@
+
+SYMLINKS = @SYMLINKS@
+LINKPATH = @LINKPATH@
+
+SRCS_COMMON = xtla.el xtla-core.el xtla-defs.el xtla-tips.el xtla-tests.el \
+        xtla-baz.el xtla-autoconf.el xtla-lisp.el xtla-bconfig.el xtla-gnus.el
+XSRCS_COMMON = xtla-version.el xtla-site.el
+
+ifeq (@EMACS_FLAVOR@,emacs)
+SRCS =  $(SRCS_COMMON) xtla-emacs.el
+XSRCS =  $(XSRCS_COMMON) xtla-autoloads.el
+PACKAGEDIR = @lispdir@
+else
+SRCS = $(SRCS_COMMON)   xtla-xemacs.el  contrib/ewoc.el
+XSRCS = $(XSRCS_COMMON) auto-autoloads.el custom-load.el
+PACKAGEDIR = @lispdir@
+EXTRA_OPTS = -l xtla-build
+endif
+
+AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"xtla\")
+AUTOLOAD_FILE = (setq generated-autoload-file \"./auto-autoloads.el\")
+BYTECOMP = -l bytecomp -f batch-byte-compile
+ifeq (@HAS_TREE_WIDGET@,yes)
+SRCS += xtla-browse.el
+endif
+
+INSTALL_FILES = $(SRCS:.el=.elc) $(XSRCS) $(XSRCS:.el=.elc)
+
+##############################################################################
+ifeq (@EMACS_FLAVOR@,emacs)
+all: Makefile $(INSTALL_FILES)
+else
+all: Makefile $(INSTALL_FILES)
+endif
+
+Makefile: @srcdir@/Makefile.in ../config.status
+	cd ..; ./config.status
+
+clean:
+	-$(RM) -f *.elc ./contrib/*.elc \
+		xtla-autoloads.el auto-autoloads.el custom-load.el
+
+distclean:
+#	$(TLA) inventory -B -j | $(XARGS) $(RM)
+#	$(TLA) inventory -B -p | $(XARGS) $(RM)
+
+TAGS: $(SRCS)
+	@if test "x$(ETAGS)" = "x" ; then                 \
+           echo "Sorry, no \`etags' program available." ; \
+         else                                             \
+           $(ETAGS) */*.el                              ; \
+         fi
+
+##############################################################################
+install-pkg: uninstall-pkg all
+	@if test "x$(SYMLINKS)" = "xno" ; then                 \
+	  mkdir -p -m 0755 $(PACKAGEDIR);                      \
+	  for i in $(SRCS:%=@srcdir@/%) $(INSTALL_FILES) ; do  \
+	    echo "Installing $$i in $(PACKAGEDIR)" ;           \
+	    $(INSTALL_DATA) $$i $(PACKAGEDIR) ;                \
+	  done ;                                               \
+	else                                                   \
+	  if test "x$(LINKPATH)" = "x" ; then                  \
+	    $(LN_S) `pwd` $(PACKAGEDIR) ;                      \
+	  else                                                 \
+	    $(LN_S) $(LINKPATH)/lisp $(PACKAGEDIR) ;           \
+	  fi ;                                                 \
+	fi
+	@echo XTLA ELISP files successfully installed\!
+
+install-el:
+	mkdir -p -m 0755 $(PACKAGEDIR)
+	for i in $(SRCS:%=@srcdir@/%) $(XSRCS) \
+	    @srcdir@/xtla-xemacs.el @srcdir@/xtla-browse.el ; do \
+	  echo "Installing $$i in $(PACKAGEDIR)" ;             \
+	  $(INSTALL_DATA) $$i $(PACKAGEDIR) ;                  \
+	done;
+
+install-ewoc:
+	mkdir -p -m 0755 $(PACKAGEDIR)/contrib
+	$(INSTALL_DATA) @srcdir@/contrib/ewoc.el $(PACKAGEDIR)/contrib
+
+uninstall-pkg:
+	@for i in $(SRCS) $(INSTALL_FILES) ; do                \
+	  $(RM) -f $(PACKAGEDIR)/$$i ;                         \
+	done ;
+
+##############################################################################
+PUSHPATH = -eval \
+	"(progn \
+           (push (file-truename \"@abs_srcdir@\") load-path) \
+           (push (file-truename \"@abs_srcdir@/contrib\") load-path) \
+	   (let ((paths (split-string \"$(OTHERDIRS)\" \" \"))) \
+	     (while paths \
+	       (push (car paths) load-path) \
+	       (setq paths (cdr paths)))))"
+
+
+# .el files are compiled in an empty, temporary directory. the
+# directory where the .elc files are generated doesn't appear in the
+# 'load-path, and the byte-compiler has to use the source files when
+# one file requires the other. This is a way to make sure the
+# byte-compiler use up-to-date files (an old .elc file with different
+# macro definition in the build directory will be harmless)
+#
+# Furthermore, emacs generates the .elc file in the same directory as
+# the source file, and copying the .el file in the build directory is
+# hard to do correctly because some generated files (xtla-version.el,
+# xtla-autoloads.el, ...) are already in this directory.
+contrib/%.elc: @srcdir@/contrib/%.el
+	mkdir -p contrib
+	@echo Compiling $< for ${EMACS_FLAVOR}
+	@tmpdir=elc.$$$$; mkdir $$tmpdir; cp $< $$tmpdir; cd $$tmpdir ; \
+	($(EMACS_PROG) -batch -q $(PUSHPATH) $(EXTRA_OPTS) $(BYTECOMP) $$(basename $*.el) && \
+	mkdir -p ../$$(dirname $*) && \
+	echo mv $$(basename $@) ../$@ && mv $$(basename $@) ../$@); \
+	cd ../ ; $(RM) -rf $$tmpdir
+
+# See comment for previous rule
+%.elc:
+	@echo "Compiling ${firstword $^} for ${EMACS_FLAVOR}"
+	@tmpdir=elc.$$$$; mkdir $$tmpdir; cp  ${firstword $^} $$tmpdir; cd $$tmpdir ; \
+	($(EMACS_PROG) -batch -q $(PUSHPATH) $(EXTRA_OPTS) $(BYTECOMP) $(@:%.elc=%.el) && \
+	mkdir -p ../$$(dirname $*) && \
+	echo mv $$(basename $@) ../$@ && mv $$(basename $@) ../$@) ; \
+	cd ../ ; $(RM) -rf $$tmpdir
+
+##############################################################################
+# Dependencies
+# First dependancy _must_ be the source.
+xtla-defs.elc:   @srcdir@/xtla-defs.el @builddir@/xtla-site.elc
+xtla-core.elc:   @srcdir@/xtla-core.el @builddir@/xtla-defs.elc @builddir@/xtla-autoconf.elc \
+                                       @builddir@/xtla-lisp.elc
+xtla.elc:        @srcdir@/xtla.el      @builddir@/xtla-defs.elc @builddir@/xtla-core.elc \
+                                       @builddir@/xtla-version.elc @builddir@/xtla-lisp.elc
+xtla-tips.elc:   @srcdir@/xtla-tips.el   @builddir@/xtla.elc
+xtla-bconfig.elc:   @srcdir@/xtla-bconfig.el   @builddir@/xtla.elc
+xtla-browse.elc: @srcdir@/xtla-browse.el @builddir@/xtla.elc
+xtla-tests.elc:  @srcdir@/xtla-tests.el  @builddir@/xtla.elc
+xtla-xemacs.elc: @srcdir@/xtla-xemacs.el @builddir@/xtla-defs.elc
+xtla-emacs.elc:  @srcdir@/xtla-emacs.el
+xtla-baz.elc:    @srcdir@/xtla-baz.el    @builddir@/xtla.elc
+xtla-autoconf.elc: @srcdir@/xtla-autoconf.el
+xtla-lisp.elc:     @srcdir@/xtla-lisp.el
+xtla-gnus.elc:     @srcdir@/xtla-gnus.el @builddir@/xtla-core.elc
+
+xtla-version.elc:   @builddir@/xtla-version.el
+xtla-site.elc:      @builddir@/xtla-site.el
+auto-autoloads.elc: @builddir@/auto-autoloads.el
+xtla-autoloads.elc: @builddir@/xtla-autoloads.el
+custom-load.elc:    @builddir@/custom-load.el
+
+##############################################################################
+xtla-autoloads.el: $(SRCS:%=@srcdir@/%)
+	-$(RM) -f $@
+	echo "" >> $@
+	(build_dir=`pwd`;								\
+	 cd @srcdir@;									\
+	 $(EMACS_PROG) -batch -q -l autoload						\
+		--eval '(setq generated-autoload-file "'"@abs_builddir@/$@"'")'	      	\
+		--eval "(if (featurep 'xemacs) (delete-file generated-autoload-file))"	\
+		--eval '(setq make-backup-files nil)'					\
+		--eval "$(AUTOLOAD_PACKAGE_NAME)" \
+		-f batch-update-autoloads `pwd`)
+	echo "(custom-add-load 'xtla 'xtla-defs)" >> $@
+	echo "(custom-add-load 'xtla 'xtla-core)" >> $@
+	echo "(custom-add-load 'xtla 'xtla)" >> $@
+	echo "(custom-add-load 'tla-merge 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-hooks 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-bookmarks 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-internal 'xtla-defs)" >> $@
+	echo "(custom-add-load 'xtla-internal 'xtla-core)" >> $@
+	echo "(custom-add-load 'tla-state 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-bindings 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-revisions 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-faces 'xtla-browse)" >> $@
+	echo "(custom-add-load 'tla-faces 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-file-actions 'xtla-defs)" >> $@
+	echo "(custom-add-load 'tla-tips 'xtla-defs)" >> $@
+	echo "(provide 'xtla-autoloads)" >> $@
+
+auto-autoloads.el: $(SRCS:%=@srcdir@/%)
+	$(EMACS_PROG) -batch \
+		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
+		-eval "$(AUTOLOAD_FILE)" \
+		-l autoload -f batch-update-autoloads $^
+
+
+##############################################################################
+custom-load.el: $(SRCS:%=@srcdir@/%)
+	$(EMACS_PROG) -batch -q -l cus-dep -f Custom-make-dependencies .
+
+##############################################################################
+ARCH_DIR_EXISTS=${shell if [ -r '@top_srcdir@/{arch}' ]; then printf "%s" yes; else printf "%s" no; fi }
+
+ifeq ($(ARCH_DIR_EXISTS),yes)
+xtla-version.el: @top_srcdir@/{arch} $(SRCS:%=@srcdir@/%)
+	$(RM) -f $@
+	echo ';; do not edit -- automatically generated file' > $@
+	echo ';; do not delete -- needed for bug reports' >> $@
+	printf "%s" '(defconst tla-version "' >> $@
+	if [ "x$(RELEASE_ID)" != "x" ]; then \
+		printf "%s (%s)" $(RELEASE_ID) \
+		`$(TLA) logs -f -d @top_srcdir@ | tail -1` >> $@; \
+	else \
+		printf "%s" `$(TLA) logs -f -d @top_srcdir@ | tail -1` >> $@; \
+	fi
+	echo '")' >> $@
+	echo "(provide 'xtla-version)" >> $@
+	chmod -w $@
+else
+xtla-version.el: $(SRCS:%=@srcdir@/%)
+	$(RM) -f $@
+	echo ';; do not edit -- automatically generated file' > $@
+	echo ';; do not delete -- needed for bug reports' >> $@
+	@echo "*** Warning: Unknown XTLA arch release"
+	printf "%s" '(defconst tla-version "' >> $@
+	if [ "x$(RELEASE_ID)" != "x" ]; then \
+		printf "%s" "$(RELEASE_ID)" >> $@; \
+	else \
+		printf "%s" "Unknown version" >> $@; \
+	fi
+	echo '")' >> $@
+	echo "(provide 'xtla-version)" >> $@
+	chmod -w $@
+endif

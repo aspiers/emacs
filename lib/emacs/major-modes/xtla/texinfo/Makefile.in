@@ -1,0 +1,131 @@
+@SET_MAKE@
+
+##############################################################################
+# location of required programms
+RM   = @RM@
+XARGS = @XARGS@
+ETAGS = @ETAGS@
+TLA = @TLA@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_DATA = @INSTALL_DATA@
+MAKEINFO = @MAKEINFO@
+TEXI2DVI = @TEXI2DVI@
+
+EMACS_PROG = @EMACS_PROG@ -no-site-file -no-init-file
+EMACS_FLAVOR = @EMACS_FLAVOR@
+EMACS_VERSION = @EMACS_VERSION@
+
+# Other settings
+SYMLINKS = @SYMLINKS@
+LINKPATH = @LINKPATH@
+
+prefix = @prefix@
+info_dir = @info_dir@
+
+##############################################################################
+all: info xtla.dvi  xtla.html xtla.pdf
+
+dvi: xtla.dvi
+
+pdf: xtla.pdf
+
+html: xtla.html
+
+Makefile: @srcdir@/Makefile.in ../config.status
+	cd ..; ./config.status
+
+install: install-pkg
+
+install-pkg: uninstall-pkg info
+	@mkdir -p -m 0755 $(info_dir);                                 \
+	if test "x$(SYMLINKS)" = "xno" ; then                          \
+          for i in `ls xtla.info* ` ; do                               \
+	    echo "Installing $$i in $(info_dir)" ;                     \
+            $(INSTALL_DATA) $$i $(info_dir) ;                          \
+          done ;                                                       \
+        else                                                           \
+          if test "x$(LINKPATH)" = "x" ; then                          \
+            for i in `ls xtla.info* ` ; do                             \
+              echo "Linking $$i in $(info_dir)" ;                      \
+              $(LN_S) `pwd`/$$i $(info_dir)/$$i ;                      \
+            done ;                                                     \
+          else                                                         \
+            for i in `ls xtla.info* ` ; do                             \
+              echo "Linking $(LINKPATH)/texinfo/$$i in $(info_dir)" ;  \
+              $(LN_S) $(LINKPATH)/texinfo/$$i $(info_dir)/$$i ;        \
+            done ;                                                     \
+          fi ;                                                         \
+        fi
+	@echo XTLA INFO files successfully installed\!
+
+uninstall-pkg:
+	-$(RM) -f $(info_dir)/xtla.info*
+
+info: xtla.info
+
+xtla.info: @srcdir@/xtla.texinfo @builddir@/xtla-version.texinfo
+	@if test "x$(MAKEINFO)" = "x" ; then                 \
+           $(EMACSINFO) @srcdir@/xtla.texinfo -o $@ ;        \
+         else                                                \
+           $(MAKEINFO) @srcdir@/xtla.texinfo -o $@ ;         \
+         fi
+
+xtla.html: @srcdir@/xtla.texinfo @builddir@/xtla-version.texinfo
+	@if test "x$(MAKEINFO)" = "x" ; then                 \
+           $(EMACSINFO) @srcdir@/xtla.texinfo ;              \
+         else                                                \
+           $(MAKEINFO) --html --no-split @srcdir@/xtla.texinfo ;  \
+         fi
+
+xtla.dvi: @srcdir@/xtla.texinfo @builddir@/xtla-version.texinfo
+	@if test "x$(TEXI2DVI)" = "x" ; then                 \
+           echo "Sorry, no \`texi2dvi' program available." ; \
+         else                                                \
+           $(TEXI2DVI) @srcdir@/xtla.texinfo -o $@ ;         \
+         fi
+
+xtla.pdf: @srcdir@/xtla.texinfo @builddir@/xtla-version.texinfo
+	@if test "x$(TEXI2DVI)" = "x" ; then                 \
+           echo "Sorry, no \`texi2dvi' program available." ; \
+         else                                                \
+           $(TEXI2DVI) -p @srcdir@/xtla.texinfo -o $@;       \
+         fi
+
+clean:
+	-$(RM) -f *.aux *.cp *.cps *.dvi *.pdf *.fn *.fns *.ky *.log *.pg \
+	  *.toc *.tp *.vr *.vrs *.html *.info xtla-version.texinfo
+
+distclean: clean
+	-$(RM) -f xtla.info*
+
+
+.PHONY: pdf dvi html info clean distclean install-pkg uninstall-pkg all
+
+ARCH_DIR_EXISTS=${shell if [ -r '@top_srcdir@/{arch}' ]; then printf "%s" yes; else printf "%s" no; fi }
+
+ifeq ($(ARCH_DIR_EXISTS),yes)
+xtla-version.texinfo: @top_srcdir@/{arch}
+	$(RM) -f $@
+	printf "%s" "@verbatim " >> $@
+	if [ "x$(RELEASE_ID)" != "x" ]; then \
+		printf "%s (%s)" $(RELEASE_ID) \
+		`$(TLA) logs -f -d "@top_srcdir@" | tail -1` >> $@; \
+	else \
+		$(TLA) logs -f -d "@top_srcdir@" | tail -1 >> $@; \
+	fi
+	@echo >> $@
+	@echo "@end verbatim" >> $@
+	chmod -w $@
+else
+xtla-version.texinfo:
+	$(RM) -f $@
+	@echo "*** Warning: Unknown XTLA arch release"
+	if [ "x$(RELEASE_ID)" != "x" ]; then \
+		printf "%s" "$(RELEASE_ID)" >> $@; \
+	else \
+		printf "%s" "Unknown version" >> $@; \
+	fi
+	chmod -w $@
+endif
