@@ -951,6 +951,14 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
 
 ;;}}}
+;;{{{ psvn
+
+(autoload 'svn-status "psvn" "svn-status" t)
+(global-set-key [(control c)(shift e)] 'svn-status)
+;; (require 'psvn)
+
+;;}}}
+
 ;;{{{ gnus
 
 (defvar gnus-face-1 'gnus-cite-face-1)
