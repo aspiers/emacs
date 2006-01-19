@@ -130,8 +130,8 @@ install: .installed
 
 .installed: Makefile .elcs $(install_dir) #uninstall
 	@echo "Installing all .elcs in $(install_dir)"
-	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do \
-	  cp $$elc $(install_dir); \
+	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
+	  cp $$elc $(install_dir); 				\
 	done
 	@touch $@
 
@@ -152,58 +152,65 @@ uninstall:
 	touch $@
 
 .nxml-mode-20041004-made: $(install_dir)
-	( \
-	  cd major-modes/nxml-mode-20041004 && \
-	  $(MAKE) && \
-	  cp rng-auto.el $(install_dir) \
-	) && \
+	( 					\
+	  cd major-modes/nxml-mode-20041004 && 	\
+	  $(MAKE) && 				\
+	  cp rng-auto.el $(install_dir) 	\
+	) && 					\
 	touch $@
 
 .emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el) major-modes/emacs-wiki/Makefile.defs
-	( \
-	  cd major-modes/emacs-wiki && \
-	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
-                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
-	  	Makefile.defs && \
-	  make && \
-	  make doc && \
-	  make install \
-	) && \
+	( 								\
+	  cd major-modes/emacs-wiki && 					\
+	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
+                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
+	  	Makefile.defs && 					\
+	  make && 							\
+	  make doc && 							\
+	  make install 							\
+	) && 								\
 	touch $@
 
 .muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
-	( \
-	  cd major-modes/muse && \
-	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
-                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
-	  	Makefile.defs && \
-	  make lisp && \
-	  make install-bin \
-	) && \
+	( 								\
+	  cd major-modes/muse && 					\
+	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
+                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
+	  	Makefile.defs && 					\
+	  make lisp && 							\
+	  make install-bin 						\
+	) && 								\
 	touch $@
 
 .emacs-w3m-made:
-	( \
+	( 					\
 	  cd major-modes/emacs-w3m-1.4.4     && \
 	  ./configure --prefix=$(HOME)/local && \
 	  make				     && \
 	  make install			     && \
-	  cp w3m-load.el $(install_dir) \
-	) && \
+	  cp w3m-load.el $(install_dir) 	\
+	) && 					\
 	touch $@
 
 .pgg-made: major-modes/pgg/pgg.elc
 	@touch $@
 
-.xtla-made: $(wildcard major-modes/xtla/*.el) major-modes/xtla/configure
-	( \
-	  cd major-modes/xtla && \
-	  ./configure \
-	    --prefix=$(HOME)/local \
-	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 && \
-	  make && \
-	  make install-pkg \
-	) && \
+.xtla-configured: major-modes/xtla/configure
+	( 								\
+	  cd major-modes/xtla && 					\
+	  ./configure 							\
+	    --prefix=$(HOME)/local 					\
+	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
+	    --with-arch=baz 						\
+	) && 								\
+	touch $@
+
+.xtla-made: $(wildcard major-modes/xtla/*) $(wildcard major-modes/xtla/*/*) .xtla-configured
+	( 				\
+	  cd major-modes/xtla && 	\
+	  make && 			\
+	  make install-pkg 		\
+	) && 				\
 	touch $@
 
 major-modes/xtla/configure: major-modes/xtla/configure.ac
