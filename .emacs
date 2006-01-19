@@ -45,6 +45,14 @@
 
 (add-to-list 'load-path as-version-lib-dir)
 
+(let ((dir (format "%s/local/share/emacs/site-lisp" edotdir))
+      (orig-dir default-directory))
+  (when (file-accessible-directory-p dir)
+      (add-to-list 'load-path dir)
+      (cd dir)
+      (normal-top-level-add-subdirs-to-load-path)
+      (cd orig-dir)))
+
 (cond 
  (running-xemacs
   ;; XEmacs automatically saved settings go here:
