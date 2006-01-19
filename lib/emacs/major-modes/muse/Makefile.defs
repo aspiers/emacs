@@ -3,17 +3,23 @@ EMACS    = emacs
 SITEFLAG = --no-site-file
 
 # Xemacs users will probably want the following settings.
-#EMACS    = emacs
+#EMACS    = xemacs
 #SITEFLAG = -no-site-file
 
 # Installation options
 # PREFIX is only used here.
 PREFIX   = /home/aspiers/local
-ELISPDIR = $(PREFIX)/share/emacs/site-lisp/emacs-wiki
+ELISPDIR = $(PREFIX)/share/emacs/site-lisp/muse
 INFODIR  = $(PREFIX)/info
 
 # Command to use to install the Info dir entry
 INSTALLINFO = install-info --info-dir=$(INFODIR)
 
+# If you're using Debian, uncomment the following line and comment out
+#the above line.
+#INSTALLINFO = install-info --section "Emacs" "emacs" --info-dir=$(INFODIR)
+
 # Useful only for the maintainer
-VERSION  = 2.70
+VERSION    = 3.02.6
+LASTUPLOAD = 3.02.5-1
+BUILDOPTS  =

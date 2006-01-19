@@ -1,0 +1,489 @@
+\input texinfo  @c -*-texinfo-*-
+
+@setfilename QuickStart.info
+@settitle The Emacs Muse
+
+@documentencoding iso-8859-1
+
+@iftex
+@finalout
+@end iftex
+
+@titlepage
+@title The Emacs Muse
+@author John Wiegley
+@end titlepage
+
+@contents
+
+@node Top, About this document, (dir), (dir)
+@top Overview
+@c Page published by Emacs Muse begins here
+
+Emacs Muse is an authoring and publishing environment for Emacs.  It
+simplifies the process of writings documents and publishing them to
+various output formats.
+
+Muse consists of two main parts: an enhanced text-mode for authoring
+documents and navigating within Muse projects, and a set of publishing
+styles for generating different kinds of output.
+
+
+
+@menu
+* About this document::		
+* Getting Started::		
+* Creating a Muse project::	
+* Markup rules::		
+* Publishing styles::		
+@end menu
+
+@node About this document, Getting Started, Top, Top
+@chapter About this document
+
+This document provides an example of Muse markup and also functions as
+a quickstart for Muse.
+
+To see what it looks like when published, type @samp{make examples}.  You
+will then get an Info document, an HTML document, and a PDF document
+(provided you have an implementation of LaTeX installed with the
+necessary fonts).
+
+
+@node Getting Started, Creating a Muse project, About this document, Top
+@chapter Getting Started
+
+To use Muse, add the directory containing its files to your
+@samp{load-path} variable, in your @samp{.emacs} file.  Then, load in the
+authoring mode, and the styles you wish to publish to.  For example:
+
+@example
+(add-to-list 'load-path "<path to Muse>")
+
+(require 'muse-mode)     ; load authoring mode
+
+(require 'muse-html)     ; load publishing styles I use
+(require 'muse-latex)
+(require 'muse-texinfo)
+(require 'muse-docbook)
+@end example
+
+Once loaded, the command @samp{M-x muse-publish-this-file} will publish an
+input document to any available style.  If you enable @samp{muse-mode}
+within a buffer, by typing @samp{M-x muse-mode}, this command will be bound
+to @samp{C-c C-t}.
+
+
+@node Creating a Muse project, Markup rules, Getting Started, Top
+@chapter Creating a Muse project
+
+Often you will want to publish all the files within a directory to a
+particular set of output styles automatically.  To support, Muse
+allows for the creations of ``projects''.  Here is a sample project, to
+be defined in your @samp{.emacs} file:
+
+@example
+(require 'muse-project)
+
+(setq muse-project-alist
+      '(("website"                      ; my various writings
+         ("~/Pages" :default "index")
+         (:base "html" :path "~/public_html")
+         (:base "pdf" :path "~/public_html/pdf"))))
+@end example
+
+The above defines a project named ``website'', whose files are located
+in the directory @samp{~/Pages}.  The default page to visit is @samp{index}.
+When this project is published, each page will be output as HTML to
+the directory @samp{~/public_html}, and as PDF to the directory
+@samp{~/public_html/pdf}.  Within any project page, you may create a link
+to other pages using the syntax @samp{[[pagename]]}.
+
+
+@node Markup rules, Publishing styles, Creating a Muse project, Top
+@chapter Markup rules
+
+A Muse document uses special, contextual markup rules to determine how
+to format the output result.  For example, if a paragraph is indented,
+Muse assumes it should be quoted.
+
+There are not too many markup rules, and all of them strive to be as
+simple as possible so that you can focus on document creation, rather
+than formatting.
+
+@menu
+* Paragraphs::			
+* Centered paragraphs and quotations::	
+* Headings::			
+* Horizontal rules::		
+* Emphasizing text::		
+* Adding footnotes::		
+* Verse::			
+* Literal paragraphs::		
+* Lists::			
+* Tables::			
+* Anchors and tagged links::	
+* URLs and E-mail addresses::	
+* Links::			
+* Embedded lisp::		
+@end menu
+
+@node Paragraphs, Centered paragraphs and quotations, Markup rules, Markup rules
+@section Paragraphs
+
+Separate paragraphs in Muse must be separate by a blank line.
+
+For example, the input text used for this section is:
+
+@example
+Separate paragraphs in Muse must be separate by a blank line.
+
+For example, the input text used for this section is:
+@end example
+
+
+@node Centered paragraphs and quotations, Headings, Paragraphs, Markup rules
+@section Centered paragraphs and quotations
+
+A line that begins with six or more columns of whitespace (either tabs
+or spaces) indicates a centered paragraph.
+
+@quotation
+This is centered
+@end quotation
+
+@quotation
+But if a line begins with whitespace, though less than six columns,
+it indicates a quoted paragraph.
+@end quotation
+
+
+@node Headings, Horizontal rules, Centered paragraphs and quotations, Markup rules
+@section Headings
+
+A heading becomes a chapter or section in printed output---depending
+on the style.  To indicate a heading, start a new paragraph with one
+to three asterices, followed by a space and the heading title.  Then
+begin another paragraph to enter the text for that section.
+
+@example
+* First level
+
+** Second level
+
+*** Third level
+@end example
+
+
+@node Horizontal rules, Emphasizing text, Headings, Markup rules
+@section Horizontal rules
+
+Four or more dashes indicate a horizontal rule.  Be sure to put blank
+lines around it, or it will be considered part of the proceeding or
+following paragraph!
+
+@sp 1
+
+The separator above was produced by typing:
+
+@example
+----
+@end example
+
+
+@node Emphasizing text, Adding footnotes, Horizontal rules, Markup rules
+@section Emphasizing text
+
+To emphasize text, surround it with certain specially recognized
+characters:
+
+@example
+*emphasis*
+**strong emphasis**
+***very strong emphasis***
+_underlined_
+=verbatim and monospace=
+@end example
+
+The above list renders as:
+
+@display
+@emph{emphasis}
+@strong{strong emphasis}
+@strong{@emph{very strong emphasis}}
+_underlined_
+@samp{verbatim and monospace}
+
+@end display
+
+
+@node Adding footnotes, Verse, Emphasizing text, Markup rules
+@section Adding footnotes
+
+A footnote reference is simply a number in square
+brackets[1].@footnote{This is a footnote.} To define the footnote, place
+this definition at the bottom of your file.  @samp{footnote-mode} can be
+used to greatly facilitate the creation of these kinds of footnotes.
+
+@example
+ Footnotes:
+ [1]  Footnotes are defined by the same number in brackets
+      occurring at the beginning of a line.  Use footnote-mode's
+      C-c ! a command, to very easily insert footnotes while
+      typing.  Use C-x C-x to return to the point of insertion.
+@end example
+
+
+@node Verse, Literal paragraphs, Adding footnotes, Markup rules
+@section Verse
+
+Poetry requires that whitespace be preserved, but without resorting to
+monospace.  To indicate this, use the following markup, reminiscent of
+e-mail quotations:
+
+@example
+> A line of Emacs verse;
+>   forgive its being so terse.
+@end example
+
+The above is rendered as:
+
+@display
+A line of Emacs verse;
+@ @ forgive its being so terse.
+
+@end display
+
+You can also use the @samp{<verse>} tag, if you prefer:
+
+@example
+<verse>
+A line of Emacs verse;
+  forgive its being so terse.
+</verse>
+@end example
+
+
+@node Literal paragraphs, Lists, Verse, Markup rules
+@section Literal paragraphs
+
+The @samp{<example>} tag is used for examples, where
+whitespace should be preserved, the text rendered in monospace, and
+any characters special to the output style escaped.
+
+There is also the @samp{<literal>} tag, which causes a
+marked block to be entirely left alone.  This can be used for
+inserting a hand-coded HTML blocks into HTML output, for example.
+
+
+@node Lists, Tables, Literal paragraphs, Markup rules
+@section Lists
+
+Lists are given using special characters at the beginning of a line.
+Whitespace must occur before bullets or numbered items, to distinguish
+from the possibility of those characters occurring in a real sentence.
+
+The supported kinds of lists are:
+
+@example
+  - bullet item one
+  - bullet item two
+
+  1. Enumerated item one
+  2. Enumerated item two
+
+Term1 :: A definition one
+
+Term2 :: A definition two
+@end example
+
+These are rendered as a bullet list:
+
+@itemize @bullet
+@item
+bullet item one
+@item
+bullet item two
+@end itemize
+
+An enumerated list:
+
+@enumerate
+@item
+Enum item one
+@item
+Enum item two
+@end enumerate
+
+And a definition list:
+
+@table @strong
+@item Term1
+@quotation
+This is a first definition
+And it has two lines;
+no, make that three.
+@end table
+@end quotation
+
+@table @strong
+@item Term2
+@quotation
+This is a second definition
+@end table
+@end quotation
+
+
+@node Tables, Anchors and tagged links, Lists, Markup rules
+@section Tables
+
+Only very simple tables are supported.  The syntax is:
+
+@example
+  Double bars  || Separate header fields
+
+  Single bars   | Separate body fields
+  Here are more | body fields
+
+  Triple bars ||| Separate footer fields
+@end example
+
+The above is rendered as:
+
+@multitable @columnfractions 0.5 0.5
+@item Double bars @tab Separate header fields
+@end multitable
+
+@multitable @columnfractions 0.5 0.5
+@item Single bars @tab Separate body fields
+@item Here are more @tab body fields
+@end multitable
+
+@multitable @columnfractions 0.5 0.5
+@item Triple bars @tab Separate footer fields
+@end multitable
+
+
+
+
+@node Anchors and tagged links, URLs and E-mail addresses, Tables, Markup rules
+@section Anchors and tagged links
+
+@anchor{example} If you begin a line with ``#anchor''---where ``anchor'' can be
+any word that doesn't contain whitespace---it defines an anchor at
+that point into the document.  This point can be referenced using
+``page#anchor'' as the target in a Muse link (see below).
+
+Click @ref{example, here} to go back to the previous paragraph.
+
+
+@node URLs and E-mail addresses, Links, Anchors and tagged links, Markup rules
+@section URLs and E-mail addresses
+
+A URL or e-mail address encountered in the input text is published as
+a hyperlink if the output style supports it.  If it is an image URL,
+it will be inlined if possible.  For example, the latest Muse source
+can be downloaded at @uref{http://download.gna.org/muse-el, http://download.gna.org/muse-el} and mail may be
+sent to @email{mwolson@@gnu.org}.
+
+
+@node Links, Embedded lisp, URLs and E-mail addresses, Markup rules
+@section Links
+
+A hyperlink can reference a URL, or another page within a Muse
+project.  In addition, descriptive text can be specified, which should
+be displayed rather than the link text in output styles that supports
+link descriptions.  The syntax is:
+
+@example
+[[link target][link description]]
+[[link target without description]]
+@end example
+
+Thus, Muse can be downloaded @uref{http://download.gna.org/muse-el/, here}, or at
+@uref{http://download.gna.org/muse-el/, http://download.gna.org/muse-el/}.
+
+
+@node Embedded lisp,  , Links, Markup rules
+@section Embedded lisp
+
+Arbitrary kinds of markup can be achieved using the
+@samp{<lisp>} tag, which is the only Muse tag supported
+in a style's header and footer text.  With the
+@samp{<lisp>} tag, you may generated whatever output
+text you wish.  The inserted output will get marked up, if the
+@samp{<lisp>} tag appears within the main text of the
+document.
+
+@example
+<lisp>(concat "This form gets " "inserted")</lisp>
+@end example
+
+The above renders as: This form gets inserted.
+
+
+
+@node Publishing styles,  , Markup rules, Top
+@chapter Publishing styles
+
+One of the principle features of Muse is the ability to publish a
+simple input text to a variety of different output styles.  Muse also
+makes it easy to create new styles, or derive from an existing style.
+
+@menu
+* Deriving from an existing style::  
+* Overriding an existing style::  
+* Creating a new style::	
+@end menu
+
+@node Deriving from an existing style, Overriding an existing style, Publishing styles, Publishing styles
+@section Deriving from an existing style
+
+To create a new style from an existing one, use @samp{muse-derive-style}:
+
+@example
+(muse-derive-style DERIVED-NAME BASE-NAME STYLE-PARAMETERS)
+@end example
+
+The derived name is a string defining the new style, such as
+``my-html''.  The base name must identify an existing style, such as
+``html''---if you have loaded @samp{muse-html}.  The style parameters are
+the same as those used to create a style, except that they override
+whatever definitions exist in the base style.  However, some
+definitions only partially override.  Those which support partial
+overriding are:
+
+@itemize @bullet
+@item
+@samp{:functions}---If a markup function is not found in the derived
+style's function list, the base style's function list will be
+queried.
+
+@item
+@samp{:strings}
+
+@item
+@samp{:before}
+
+@item
+@samp{:before-end}
+
+@item
+@samp{:after}
+@end itemize
+
+
+@node Overriding an existing style, Creating a new style, Deriving from an existing style, Publishing styles
+@section Overriding an existing style
+
+Write me.
+
+
+@node Creating a new style,  , Overriding an existing style, Publishing styles
+@section Creating a new style
+
+Write me.
+
+
+@c Page published by Emacs Muse ends here
+@bye

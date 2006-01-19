@@ -3,11 +3,11 @@
 srcdirs = init/common major-modes minor-modes utils fun
 
 # These ones have their own Makefiles
-THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m xtla
+THIRD_PARTY_PKGS = nxml-mode-20041004 emacs-wiki psgml emacs-w3m muse xtla
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, \
-                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 xtla)
+                   nxml-mode-20041004 emacs-wiki psgml emacs-w3m-1.4.4 muse xtla)
 IGNORE_DIRS = major-modes/xtla-main
 
 # Phony targets are bad except for top-level rules because if a rule A
@@ -167,6 +167,17 @@ uninstall:
 	  make && \
 	  make doc && \
 	  make install \
+	) && \
+	touch $@
+
+.muse-made: $(wildcard major-modes/muse/*.el)
+	( \
+	  cd major-modes/muse && \
+	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; \
+                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' \
+	  	Makefile.defs && \
+	  make lisp && \
+	  make install-bin \
 	) && \
 	touch $@
 
