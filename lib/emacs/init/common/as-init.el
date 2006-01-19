@@ -20,6 +20,8 @@
 
 ;;{{{ Functions
 
+(message "as-init: functions...")
+
 ;;{{{ Buffers/files
 
 ;;{{{ Obsolete functions, may come in handy another time
@@ -176,8 +178,12 @@ that name."
 
 ;;}}}
 
+(message "as-init: functions...done")
+
 ;;}}}
 ;;{{{ Key bindings
+
+(message "as-init: key bindings...done")
 
 ;; Ben uses (define-key global-map ...)
 ;; instead of (global-set-key ...)
@@ -238,7 +244,7 @@ that name."
 (global-set-key [(shift meta b)] 'as-backward-before-word)
 
 
-(global-set-key [(control meta ?\ )] 'bn-make-region-into-secondary)
+(global-set-key [(control meta ??)] 'bn-make-region-into-secondary)
 (global-set-key [(control meta T)] 'bn-exchange-region-and-secondary)
 (global-set-key [(control g)] 'bn-keyboard-quit)
 
@@ -458,6 +464,8 @@ that name."
 
 ;;}}}
 
+(message "as-init: key bindings...done")
+
 ;;}}}
 ;;{{{ Point movement
 
@@ -540,6 +548,8 @@ that name."
 
 ;;}}}
 ;;{{{ Mode-related settings
+
+(message "as-init: mode settings...")
 
 ;;{{{ Startup mode selection
 
@@ -1063,6 +1073,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (defun muse-mode ()
   "Pseudo-autoloader which does (require 'muse-mode)."
+  (interactive)
   (require 'muse-mode)
   (muse-mode))
 
@@ -1272,6 +1283,8 @@ C-style indentation, use cssm-c-style-indenter.")
               as-find-file-matching-regexp-alist))
 
 ;;}}}
+
+(message "as-init: mode settings...done")
 
 ;;}}}
 
