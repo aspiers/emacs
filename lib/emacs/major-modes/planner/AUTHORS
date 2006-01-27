@@ -1,0 +1,257 @@
+Planner
+=======
+
+This is a listing of those who have made contributions of code or
+documentation to Planner.
+
+John Wiegley: Original author
+              (assigned past and future changes for Emacs)
+
+Michael Olson: Current maintainer
+               (assigned past and future changes for Emacs)
+
+Sacha Chua: Previous maintainer from 2004-01-01 to 2005-10
+            Contributor: (changes too numerous to list)
+            Author of:
+             - planner-accomplishments.el
+             - planner-cyclic.el
+             - planner-deadline.el
+             - planner-erc.el
+             - planner-experimental.el
+             - planner-id.el
+             - planner-lisp.el
+             - planner-multi.el
+             - planner-notes-index.el
+             - planner-rmail.el
+             - planner-rss.el
+             - planner-tasks-overview.el
+             - planner-vm.el
+            (assigned past and future changes)
+
+Keith Amidon: Contributor:
+               - planner-trunk.el (15+ lines changed)
+
+Dirk Bernhardt: Contributor:
+                 - planner.el (15+ lines changed)
+
+Trent Buck: Contributor:
+             - planner-timeclock-summary-proj.el (15+ lines changed)
+             - planner.el (11 lines changed)
+
+Fran Burstall: Contributor:
+                - planner-vm.el (1 line changed)
+
+James Clarke: Author of planner-bibtex.el
+
+Jeremy Cowgar: Author of planner-gnats.el,
+               Contributor:
+                - planner-wl.el (6 lines changed)
+
+Mario Domgörgen: Contributor:
+                  - planner-gnus.el (15+ lines changed)
+
+Jürgen Doser: Contributor:
+               - planner-vm.el (15+ lines changed)
+              (assigned past and future changes)
+
+drkm <darkman_spam@yahoo.fr>: Contributor:
+               - planner-calendar.el (4 lines changed)
+
+Seth Falcon: Contributor:
+              - planner-appt.el
+              - planner-multi.el (1 line changed)
+              - planner-psvn.el (12 lines changed)
+              - planner-report.el (7 lines changed)
+
+Gerd Flaig: Contributor:
+             - planner-lisp.el (1 line changed)
+
+Frederik Fouvry: Author of planner-unix-mail.el
+                 Contributor:
+                  - planner-rmail.el (15+ lines changed)
+                  - planner.el (14 lines changed)
+                 (disclaimed changes for Emacs)
+
+Romain Francoise: Contributor:
+                   - planner.el (4 lines changed)
+                  (assigned changed for Emacs)
+
+Christophe Garion: Author of planner-mhe.el
+
+Thomas Gehrlein: Author of planner-diary.el
+
+Marco Gidde: Contributor:
+              - planner-multi.el (6 lines changed)
+              - planner.el (9 lines changed)
+
+Will Glozer: Author of planner-ledger.el
+
+Henrik S. Hansen: Contributor:
+                   - planner-appt.el
+
+Travis B. Hartwell: Contributor
+                     - planner-diary.el
+                     - planner-ledger.el
+                    (assigned past and future changes)
+
+Magnus Henoch: Contributor:
+                - planner-gnus.el (4 lines changed)
+
+Yann Hodique: Contributor:
+               - planner-bbdb.el (6 lines changed)
+               - planner-export-diary.el (1 line changed)
+               - planner-gnus.el (4 lines changed)
+               - planner-id.el (1 line changed)
+               - planner-log-edit.el (15+ lines changed)
+               - planner-mhe.el (3 lines changed)
+               - planner-multi.el (7 lines changed)
+               - planner-notes-index.el (1 line changed)
+               - planner-psvn.el (4 lines changed)
+               - planner-report.el (1 line changed)
+               - planner-tasks-overview.el (2 lines changed)
+               - planner-timeclock.el (4 lines changed)
+               - planner-unix-mail.el (4 lines changed)
+               - planner-xtla.el (15+ lines changed)
+               - planner.el (15+ lines changed)
+              (assigned past and future changes for Muse)
+
+Xin Wei Hu: Contributor:
+             - planner-export-diary.el
+
+JM Ibanez: Contributor:
+            - planner-calendar.el (small patch)
+
+Maciej Kalisak: Contributor:
+                 - planner.el (15+ lines changed)
+
+Sven Kloppenburg: Contributor:
+                   - planner-gnus.el (5 lines changed)
+                   - planner.el (1 line changed)
+
+Jody Klymak: Contributor,
+              - planner-bibtex.el
+              - planner-diary.el (documentation)
+
+Andrew J. Korty: Contributor:
+                  - planner-bbdb.el
+                  - planner-tasks-overview.el (1 line changed)
+                  - planner.el (1 line changed)
+                 Author of:
+                  - planner-authz.el
+                  - planner-report.el
+
+Peter K. Lee: Author of planner-publish.el,
+              Contributor:
+               - planner-accomplishments.el (2 lines changed)
+               - planner-timeclock-summary.el (15+ lines changed)
+               - planner-timeclock.el (15+ lines changed)
+               - planner.el (15+ lines changed)
+
+Angus Lees: Contributor:
+             - planner-wl.el (15+ lines changed)
+             - planner.el (15+ lines changed)
+
+Wei-Hao Lin: Contributor:
+              - planner-bibtex.el (1 line changed)
+
+Dryice Dong Liu: Contributor:
+                  - planner-deadline.el
+                  - planner-log-edit.el (12 lines changed)
+                  - planner-el.texi (15+ lines changed)
+                  - planner.el (15+ lines changed)
+                 Author of:
+                  - planner-bookmark.el
+                  - planner-rank.el
+                  - planner-timeclock-summary.el
+                  - planner-trunk.el
+
+Chris McMahan: Contributor:
+                - planner-publish.el (15+ lines changed)
+
+Daniel Neri: Contributor:
+              - planner-gnus.el (~10 lines changed)
+              - planner.el (~5 lines changed)
+
+Greg Novak: Contributor:
+             - planner-vm.el (1 line changed)
+
+Jim Ottaway: Author of planner-appt.el, Contributor:
+              - planner-bibtex.el
+              - planner-el.texi
+              - planner-id.el
+              - planner-lisp.el
+              - planner-multi.el
+              - planner-publish.el
+              - planner.el
+             (assignment pending)
+
+Chris Parsons: Author of planner-ical.el,
+               Contributor:
+                - planner-timeclock-summary.el (15+ lines changed)
+                - planner.el (15+ lines changed)
+
+Mario Peter: Contributor:
+              - planner.el (1 line changed)
+
+Pascal Quesseveur: Author of planner-timeclock-summary-proj.el
+
+Stefan Reichör: Author of:
+                 - planner-psvn.el
+                 - planner-xtla.el
+                Contributor:
+                 - planner-gnus.el (6 lines changed)
+                 - planner.el (15+ lines changed)
+                (assigned past and future changes)
+
+Dale P. Smith: Contributor:
+                - planner-gnus.el (2 lines changed)
+                - planner-publish.el (15+ lines changed)
+                - planner.el (2 lines changed)
+               (disclaimed changes for Emacs and Muse)
+
+David D. Smith: Contributor:
+                 - planner-publish.el
+                 - planner-rss.el (15+ lines changed)
+                 - planner.el (15+ lines changed)
+
+John Sullivan: Author of planner-el.texi,
+               Contributor:
+                - planner-w3m.el
+               (assigned past and future changes)
+
+Yvonne Thomson: Author of planner-wl.el,
+                Contributor:
+                 - planner.el (15+ lines changed)
+
+Hoan Ton-That: Contributor:
+                - planner.el (~10 lines changed)
+
+Win Treese: Contributor:
+             - planner.el (4 lines changed)
+
+Mark Triggs: Contributor
+             (assigned past and future changes for Emacs)
+
+Gary V. Vaughan: Author of planner-calendar.el
+                 (assigned past and future changes for Emacs)
+
+Sergey Vlasov: Contributor:
+                - planner-appt.el (1 line changed)
+                - planner-cyclic.el
+                - planner-multi.el (14 lines changed)
+                - planner-trunk.el (12 lines changed)
+                - planner.el (15+ lines changed)
+
+Rainer Volz: Author:
+              - planner-rdf.el
+              - planner-rdf.owl
+
+Simon Winwood: Author of planner-log-edit.el
+
+
+Contributed software
+====================
+
+This is a listing of authors of software in the `contrib' directory.
+
+John Wiegley: schedule.el, timeclock.el

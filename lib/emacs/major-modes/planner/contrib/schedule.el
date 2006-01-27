@@ -6,7 +6,7 @@
 ;; Created: 20 Jan 1999
 ;; Version: 2.0
 ;; Keywords: calendar
-;; X-URL: http://www.gci-net.com/users/j/johnw/emacs.html
+;; X-URL: http://www.newartisans.com/johnw/Emacs/schedule.el
 
 ;; The program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published

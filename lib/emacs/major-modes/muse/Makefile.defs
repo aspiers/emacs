@@ -8,7 +8,7 @@ SITEFLAG = --no-site-file
 
 # Installation options
 # PREFIX is only used here.
-PREFIX   = /home/aspiers/local
+PREFIX   = /home/adam/local
 ELISPDIR = $(PREFIX)/share/emacs/site-lisp/muse
 INFODIR  = $(PREFIX)/info
 
@@ -20,6 +20,6 @@ INSTALLINFO = install-info --info-dir=$(INFODIR)
 #INSTALLINFO = install-info --section "Emacs" "emacs" --info-dir=$(INFODIR)
 
 # Useful only for the maintainer
-VERSION    = 3.02.6
-LASTUPLOAD = 3.02.5-1
+VERSION    = 3.02.6a
+LASTUPLOAD = 3.02.6-1
 BUILDOPTS  =

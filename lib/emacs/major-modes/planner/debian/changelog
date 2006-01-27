@@ -1,0 +1,1016 @@
+planner-el (3.40-2) unstable; urgency=low
+
+  * debian/emacsen-install: Make sure that symlink for planner-autoloads
+    is made.
+
+ -- Michael W. Olson (GNU address) <mwolson@gnu.org>  Fri, 20 Jan 2006 15:57:48 -0500
+
+planner-el (3.40-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright: Update the Upstream Authors and Copyright sections.
+  * debian/conffile: Removed, since it causes a "duplicate conffile" error.
+  * debian/control: Update for Muse requirement, dropping emacs-wiki.
+  * debian/emacsen-install (FILES): Filter out autoloads file.
+  * debian/emacsen-startup: Add shared planner-el directory to path.  Load
+    autoloads file.
+  * debian/rules:
+    + Set DH_COMPAT to 4.
+    + (clean): Call $(MAKE) realclean instead of $(MAKE) clean.
+    + Build autoloads.
+    + Install extra files.
+  * NEWS: Note that Planner is now based on Muse rather than emacs-wiki.
+  * README.Debian: Update.
+
+ -- Michael W. Olson (GNU address) <mwolson@gnu.org>  Thu, 19 Jan 2006 11:12:25 -0500
+
+planner-el (3.30-1) unstable; urgency=low
+
+  * sponsored by OHASHI Akira <bg66@debian.org>
+  * New upstream release planner--stable--3.30 (stable/116, dev/401).
+  * dev/387: Bugfix: planner-gnus-browse-url: Load group even if registry is not used.
+    (Closes: #311595)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu,  2 Jun 2005 18:40:36 +0800
+
+planner-el (3.29-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-116 synchronizes with dev/380.
+  * debian/rules: Add planner-psvn.el.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 20 Apr 2005 15:41:30 +0800
+
+planner-el (3.28-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-115 synchronizes with dev/364.
+  * New: planner-appt creates appointment reminders from task descriptions and other text.
+  * New: planner-trunk helps organize tasks on day and plan pages.
+    Thanks to camalot, dryice, keith.
+  * New: Sane completing read for XEmacs planner-multi.
+  * New option: planner-publish-dates-first-p controls index.
+  * Bugfix: Escape planner-multi spaces in annotation names by using emacs-wiki.
+  * Bugfix: timeclock-summary publishing problem.
+  * Bugfix: planner-mhe bugfix for using mh-path and utility functions.
+  * Bugfix: Better Emacs 21 and XEmacs compatibility
+  * Bugfix: planner-multi and planner-id bugfixes for compatibility with each other.
+  * Bugfix: planner-replan-task: Preserve initial task location as much as possible.
+  * Docfix: Document planner-rank.
+  * Docfix: planner-el.texi reorganization along concepts
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon,  4 Apr 2005 01:46:49 +0800
+
+planner-el (3.27-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-112 contains numerous
+    bugfixes and `planner-rank.el' by Dryice Liu..
+  * You can now specify dates like +3tue to mean the third Tuesday from now.
+    See `planner-expand-name' for more details.
+  * Documentation relicensed from GFDL to GNU General Public License.
+  * Calendar popups are now optional. See `planner-use-calendar-flag'.
+  * Jim Ottaway contributed many fixes to planner-id and planner-multi.
+  
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 18 Feb 2005 01:06:13 +0900
+
+planner-el (3.26-3) unstable; urgency=low
+
+  * Add more detail to README.Debian. Thanks to sf for the suggestion
+    and sample text.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  2 Feb 2005 17:23:16 +0900
+
+planner-el (3.26-2) unstable; urgency=low
+
+  * Remove remember autoloads from emacsen-startup because remember is no
+    longer packaged here. You can get it from the unofficial repository at
+    deb http://sacha.free.net.ph/notebook/emacs/planner/ ./ 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 28 Jan 2005 15:24:50 +0900
+
+planner-el (3.26-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-111.
+  * NEW: planner-multi.el: support for multiple plan pages for tasks and notes.
+  * NEW: planner-xtla.el: support for Tom Lord's Arch version control system
+  * NEW: planner-replan-note command
+  * NEW: planner-bookmark-add-note-title-flag user option
+  * NEW: planner-use-plan-pages user option
+  * NEW: planner-create-task-from-buffer-hook
+  * NOTE: PlannerMode.info renamed to planner-el.info
+  * Bugfix: planner-timeclock-summary-day-range-entry and nil plan pages.
+  * Bugfix: planner-bibtex-browse-url and labels with :.
+  * Bugfix: planner-markup-note and obsolete emacs-wiki-bare-anchor-prefix
+  * planner-deadline-change now adds deadlines to tasks.
+  * planner-mhe now uses message IDs.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 28 Jan 2005 14:03:45 +0900
+
+planner-el (3.25-1) unstable; urgency=low
+
+  * New upstream release: important bugfix. Restore planner-make-link.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri,  7 Jan 2005 22:40:03 +0900
+
+planner-el (3.24-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-109.
+  * dev/223: New planner-sort-tasks-key-function variable allows you to customize sort order of tasks.
+  * dev/224: Preliminary deadline support.
+  * dev/226: planner-report update.
+  * dev/232: Fix CVS-ism.
+  * dev/234: New: planner-timeclock-summary-show-range-filter
+  * dev/237: New default task priority: B
+  * dev/238: New: planner-bookmark
+  * dev/239: List date pages in their own section in the index.
+  * dev/248: New: planner-timeclock-summary-proj
+  * dev/254: New option: planner-dates-relative-to-today-flag
+  * dev/260: Set planner-use-task-numbers to nil by default.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri,  7 Jan 2005 13:02:34 +0900
+
+planner-el (3.23-1) unstable; urgency=low
+
+  * Remove dependency on emacsen-common. (Closes: #282949)
+  * New upstream release planner--stable--1.0--patch-108.
+  * New: planner-report.el
+  * New: planner-rdf.el
+  * New: planner-timeclock-summary.el
+  * New: planner-log-edit.el
+  * New: planner-auto.el
+  * New: planner-bibtex.el
+  * New: planner-create-note-from-task
+  * New: planner-tasks-overview-show-summary
+  * New: planner-annotation-as-kill
+  * New: planner-task-open
+  * New: planner-diary-create-section-flag variable
+  * New: <notes> tag.
+  * Bugfix: emacs-wiki-unhighlight-region should remove overlays.
+  * Bugfix: planner-extract-tasks should use planner project.
+  * Bugfix: planner-raise-task should work on the last task.
+  * Bugfix: planner-gnus should pick up the right annotations from newsgroups.
+  * Improvement: planner-gnus: use process marks.   
+    
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  4 Dec 2004 15:37:01 +0900
+
+planner-el (3.22-2) unstable; urgency=low
+
+  * Add texi2html to build dependencies. Thanks to Ohashi Akira for
+    pointing out the bug.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon,  8 Nov 2004 21:47:37 +0900
+
+planner-el (3.22-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-100.
+  * mwolson/7: Temporary fix for recursive problem when saving.
+  * mwolson/11: Add copyright notices and note contributions.
+  * mwolson/13: Attempt to fix problem where mode is not changed properly.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 27 Oct 2004 00:02:10 +0900
+
+planner-el (3.21-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-99.
+    (dev/183): plan: Honor planner-tasks-file-behavior.
+    (dev/184): planner-id-update-automatically now defaults to t.
+    (Closes: #275456)
+    
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  9 Oct 2004 15:24:51 +0900
+
+planner-el (3.20-2) unstable; urgency=low
+
+  * Install planner-cyclic.el and schedule.el . Thanks to
+    Dale Smith for pointing this out. (Closes: #275331)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri,  8 Oct 2004 00:18:54 +0900
+
+planner-el (3.20-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-97.
+  * (stable/97): NOTE: New option planner-tasks-file-behavior
+  * (stable/96): planner-diary: font-locking code works again
+  * (mwolson/2): Make project name customizable, fix spurious newlines in
+    notes.
+  * (mwolson/3): Replace . with \\. in some regexps to be more correct.
+  * (mwolson/4): Fix scenario where the old project name still existed in
+    project list after being changed.
+  * (dev/163): Merge patch for planner-create-note whitespacing.
+  * (dev/168): Docfix: Mention _emacs for Microsoft Windows
+  * (dev/170): XEmacs bugfix: Use planner-derived-mode-p.
+  * (dev/171): Fix tasks that are not true wiki names.
+  * (dev/172): planner-gnus-browse-url: Revert to old, safe way.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  2 Oct 2004 21:45:41 +0900
+
+planner-el (3.19-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-94.
+  * Latest planner-diary.el.
+  * New: planner-mhe.el.
+  * New: planner-unix-mail.el.
+  * New: planner-use-task-numbers.
+  * New: planner-sort-undated-tasks-equivalent.
+  * New: Task sorting is separate from renumbering.
+  * planner-raise-task automatically reorders linked priorities.
+  * New: planner-raise/lower-task-category.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 30 Aug 2004 01:02:04 +0900
+
+planner-el (3.18-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-93.
+  * patch-93: Bugfix: planner-read-date: Remove use of kbd.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 23 Jul 2004 09:58:28 +0800
+
+planner-el (3.17-2) unstable; urgency=low
+
+  * Update emacs-wiki dependency to 2.56
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 14 Jul 2004 09:41:24 +0800
+
+planner-el (3.17-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-92.
+  * patch-92: Add planner-ledger.el.
+  * patch-91: Docfix: remember-planner-append-hook.
+  * patch-90: Menu tweaks: planner notes submenu, new keybindings.
+  * patch-89: Document different ways to plan (bare-bones).
+  * patch-88: Bugfix: Change defvars to defcustoms.
+  * patch-87: Make note/task renumbering optional.
+  * patch-86: planner-gnus: Add check for from, copy article buffer.
+  * patch-85: Bugfix: Make sure user-mail-address is not the blank string.
+  * patch-84: New option: planner-use-day-pages allows you to turn off dates
+    for tasks and notes.
+  * patch-83: New: planner-note-headline-face.
+  * patch-82: planner-gnus: Use gnus-article-buffer if available.
+  * patch-81: planner.el task creation bugfixes: annotations, plan pages.
+  * patch-80: Make planner-mode-hook customizable.
+  * patch-79: Gnus bugfixes.
+  * patch-78: Update planner-authz.el to ajk's 1.20.
+  * patch-77: Move planner-accomplishments and planner-tasks-overview
+    documentation to "Using PlannerMode".
+  * patch-76: Merge tweaked patch from ajk changing use of planner-name-regexp
+    to planner-date-regexp in planner-authz.el.
+  * patch-75: Add planner-rss size/item limits.
+  * patch-74: planner.texi update from johnsu01.
+  * patch-73: NEW: planner-authz.el.
+  * patch-72: planner-read-date: take optional arg `prompt'.
+  * patch-71: Update planner.texi from johnsu01.
+  * patch-70: Remove duplicate defcustom for planner-template-fuzz-factor.
+  * patch-69: Docfix: Change mention of rmail to vm in planner-vm.el.
+  * patch-68: Tweak: Move planner-rss options to planner-rss group.
+  * patch-67: NOTE: Prefix argument now means associate task with current
+    plan/date page, if any.
+  * patch-66: NOTE: planner-create-task prompts for plan page unless prefix
+    argument is supplied.
+  * patch-65: Important bugfix: Add condition-case just in case calendar is
+    not displayed.
+  * patch-64: NOTE: planner-create-task-from-buffer in a calendar buffer will
+    use the currently-selected date for the task.
+  * patch-63: planner-id.el: Promote planner-id-update-automatically to a
+    user-customizable variable.
+  * patch-62: Bugfix: planner-tasks-overview.el keymap.
+  * patch-61: New feature: planner-tasks-overview.
+  * patch-60: planner-calendar.el updates from Gary, and inclusion in doc.
+  * patch-59: planner.texi: Document planner-accomplishments.el.
+  * patch-58: planner-accomplishments.el: Display per-status totals.
+  * patch-57: Feature: planner-accomplishments.el.
+  * patch-56: Docfix: planner task keybindings.
+  * patch-55: Bugfix: typo, boolean should be a symbol.
+  * patch-54: Bugfix: Do not insert file contents literally, as this screws
+    up encoding.
+  * patch-53: planner-export-diary: Simplify code, do not use
+    insert-contents-literally.
+  * patch-52: Rearrange user customizations, promote some defvars to defcustoms.
+  * patch-51: planner-export-diary: Bugfix: Use planner-export-diary-file.
+  * patch-50: Bugfix: Strip spaces for better recognition of planner-cyclic tasks.
+  * patch-49: NOTE: planner-id-add-task-id-flag.
+  * patch-48: Alias planner-encode-url to emacs-wiki-escape-url.
+  * patch-47: planner-highlight-tasks: Better XEmacs compatibility.
+  * patch-46: NOTE: Changed behavior of planner-carry-tasks-forward, now default
+    for FORCE-DAYS (with minor tweaks).
+  * patch-45: planner-id: Make automatic updating optional (default: off).
+  * patch-44: Merge Gary Vaughan's calendar code (planner-calendar.el).
+  * patch-43: Bugfix: Sort diary entries.
+  * patch-42: planner-bbdb: Add mailto: URLs to e-mail addresses.
+  * patch-41: New: planner-annotation-from-file-relative,
+    planner-annotation-strip-directory.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 14 Jul 2004 09:26:10 +0800
+
+planner-el (3.16-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-40.
+  * patch-40: Use new emacs-wiki-url-protocols-code from
+    emacs-wiki--stable--1.0--patch-13. (emacs-wiki-2.49-1)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 15 Jun 2004 11:35:14 +0800
+
+planner-el (3.15-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-39.
+  * patch-39: Bugfix: planner-diary should use fancy-diary-display, pass
+    correct arguments in planner-diary-entries-here.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun,  6 Jun 2004 23:20:57 +0800
+
+planner-el (3.14-2) unstable; urgency=low
+
+  * Follow debian-emacs-policy re: debian-pkg-add-load-path-item.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  5 Jun 2004 02:50:49 +0800
+
+planner-el (3.14-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-38.
+  * patch-38: Bugfix: Make control-shift bindings work under XEmacs.
+  * patch-37: Docfix: planner-lisp-browse-url (change BBDB to LISP).
+  * patch-36: NOTE: planner-rss: Accept functions for conditions.
+    Phase out planner-rss-filename. Bugfix: Set reasonable defaults.
+  
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu,  3 Jun 2004 22:50:20 +0800
+
+planner-el (3.13-3) unstable; urgency=low
+
+  * Remove remember.el note from package description. (Closes: #250759)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 25 May 2004 13:53:13 +0800
+
+planner-el (3.13-2) unstable; urgency=low
+
+  * Add texinfo to the build-depends. (Closes: #249121)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 15 May 2004 21:26:00 +0800
+
+planner-el (3.13-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-35. Many bugfixes.
+  * Add documentation (info PlannerMode)
+  * Remove remember modules. You can get the remember files from
+    http://sacha.free.net.ph/notebook/emacs/stable/remember/ .
+  * patch-35: Bugfix: Allow multiple digits in +days or -days
+    specification
+  * patch-34: Bugfix: Misplaced paren in planner-create-task-from-info
+  * patch-33: NOTE: Allow nil for date or plan page name,
+    planner-create-{high,medium,low}-priority-task for convenience.
+  * patch-32: Assorted bugfixes
+  * patch-31: Bugfix: planner-bbdb slashes optional, planner.el publishing
+    (move tags first), NOTE: planner-copy-or-move-task accepts nil
+  * patch-30: Minor: Rewrite planner-tasks-equal-p for clarity
+  * patch-29: Bugfix: Allow any status in planner-find-task
+  * patch-28: Bugfix: Properly update task
+  * patch-27: NOTE: Change pending task status to 'P'
+  * patch-26: Bugfix: restriction in planner-copy-or-move-task, duplicated
+    functions. NOTE: planner-jump-to-linked-note
+  * patch-25: NOTE: planner-add-task-at-end-flag
+  * patch-24: planner-task-cancelled
+  * patch-23: Bugfix: Switch indices into correct mode
+  * patch-22: Create planner-directory if necessary.
+  * patch-21: Force refontification after planner-id-add-task-id-to-all
+  * patch-20: NOTE: Context-sensitive keybindings for planner-move-up,
+    planner-move-down, planner-jump-to-link. Bugfix: save-excursion.
+  * patch-19: NOTE: planner-timeclock: Use planner-task-in-progress to
+    clock in and planner-task-done to clock out. Bugfix: Deal with
+    multiple open projects.
+  * patch-18: New: Add prefix arg FORCE to planner-id-update-tasks-on-page
+  * patch-17: Bugfix: planner-replan-task and tasks without plan pages
+  * patch-16: Add planner.texi from johnsu01
+  * patch-15: planner-save-buffers automatically saves buffers after M-x
+    plan
+  * patch-14: NOTE: Rmail feature: arbitrary mailboxes, bugfix: missing
+    messages
+  * patch-13: Bugfix: planner-gnus and cached articles, planner-list-daily
+    files. NOTE: limit for planner-search-notes, new
+    planner-search-notes-with-body
+  * patch-12: Bugfix: Set list-diary-entries-hook for
+    planner-cyclic-get-cyclic-tasks
+  * patch-11: Add error-checking to planner-cyclic
+  * patch-10: Add note about where to get timeclock.el
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 10 May 2004 15:35:48 +0800
+
+planner-el (3.12-1) unstable; urgency=low
+
+  * New upstream release planner--stable--1.0--patch-9.
+  * Version control repository changed structure: planner now packaged
+    from -stable branch.
+  * patch-9: Bugfix: Save position and restriction for
+    planner-update-note. Confirmed by Volker Dormeyer.
+  * patch-8: NOTE: Date is now optional for tasks. If you enter a non-date
+    value when creating a task, no date will be associated with the task.
+    Confirmed by Alan Schussman.
+  * patch-7: Bugfix: Do not use string>.
+  * patch-6: NOTE: Remove planner-notes.el from distribution.
+  * patch-5: Bugfix: Change invalid regular expression in planner-id.el.
+  * patch-4: Bugfix: planner-history-list, docfix for planner-create-task-from-buffer.
+    NOTE: By default, planner-create-task-from-buffer now prompts for a plan page.
+    If you want a task without a plan page, use the prefix argument.
+  * patch-3: NOTE: Split schedule export functions into planner-export-diary.el.
+  * patch-2: NOTE: Updated planner-diary.el from Thomas Gehrlein.
+  * patch-1: NOTE: Remove unrelated files like remember.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 11 Apr 2004 13:50:47 +0800
+
+planner-el (3.11-3) unstable; urgency=low
+
+  * Correct autoloads for remember functions. Thanks to delysid for
+    pointing this out. (Closes: #239632)
+
+ -- Sandra Jean Chua <sacha@sacha.ateneo.edu>  Wed, 24 Mar 2004 18:12:09 +0800
+
+planner-el (3.11-2) unstable; urgency=low
+
+  * Depend on emacs-wiki >= 2.45.
+  * Documentation fix in remember-planner.el.
+
+ -- Sandra Jean Chua <sacha@sacha.ateneo.edu>  Wed, 24 Mar 2004 11:56:34 +0800
+
+planner-el (3.11-1) unstable; urgency=low
+
+  * New upstream release patch-136.
+  * patch-101: Replace `replace-regexp-in-string' with `emacs-wiki-replace-regexp-in-string' in emacs-wiki.
+  * patch-102: Bugfix.
+  * patch-104: Add planner-lisp.el for interactive Emacs Lisp functions.
+  * patch-105: Better XHTML 1.0 Strict compliance for anchors that are only numbers. Requires republish..
+  * patch-106: Replace a link with intangible text only if it contains escaped characters.
+  * patch-107: Split off fancy table handling.
+  * patch-108: Add doc note about setq, not just defvaralias.
+  * patch-109: planner-annotation-from-info.
+  * patch-110: Remove shortcut for inserting header, footer. Require 'warnings..
+  * patch-111: emacs20, xemacs compatibility: warnings are optional, replace-regexp-in-string changed.
+  * patch-112: Bugfix: Use replace-regexp-in-string for GNU Emacs..
+  * patch-113: Make INVALID LISP CODE a comment.
+  * patch-114: Fix planner-cyclic bug by not anchoring regex at start of string in planner-task-info-from-string.
+  * patch-115: Make non-reactive tasks easier to schedule; swap sense of C-u on planner-create-task-from-buffer.
+  * patch-116: Better test.
+  * patch-117: Emacs21 non-CVS bugfix wrt task highlighting, fixed by moving tasks, notes highlighting to before emacs-wiki.
+  * patch-118: Restore planner-annotation-from-planner-note.
+  * patch-119: Documentation fix for planner-notes-index: Attribute is limit, not recent..
+  * patch-120: Emacs-wiki layer.
+  * patch-121: Work with absolute paths in links.
+  * patch-122: Bugfix: nop will no longer match tags that are not 5 characters long.
+  * patch-123: Make <nop> work again.
+  * patch-124: Remove duplicate tasks from day pages when M-x planner-remove-duplicates is invoked on a plan page.
+  * patch-125: planner-read-name.
+  * patch-126: Documentation note about escaping with <nop>.
+  * patch-127: Remove mailto: from visible name.
+  * patch-128: Add PLANNER-README.
+  * patch-129: Add FORCE-DAYS optional argument to plan..
+  * patch-130: Save restriction for planner-update-note.
+  * patch-131: planner-raise-task works over blocks of tasks.
+  * patch-132: Create cyclic tasks only for present/future; add "C" as status marker for cancelled tasks.
+  * patch-133: Do not move cancelled tasks.
+  * patch-134: Recognize links preceded by an underscore.
+  * patch-135: Correct documentation note for planner-gnus.el.
+  * patch-136: Bugfix: <nop> publishing.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 24 Mar 2004 10:05:06 +0800
+
+planner-el (3.10-1) unstable; urgency=low
+
+  * New upstream release patch-100.
+  * patch-100: Fix infinite loop in planner-bbdb.el
+  * patch-98: Docfix in planner.el - remove mention of planner-calendar.el.
+  * patch-97: Improve annotation matching.
+  * patch-94: planner-cyclic: Cyclic task support.
+  * patch-93: Return remember.el to old behavior re remember-region, remember-buffer.
+  * patch-91: Do not change windows when navigating day pages with yesterday/tomorrow.
+  * patch-90: Major user change in remember-planner: M-x remember instead.
+  * patch-88: Understand dates of the form +1 or -1.
+  * patch-87: Work with parens in the task description.
+  * patch-86: Minor bugfix. Do not error if tasks are at end of buffer.
+  * patch-85: Further planner-renumber-tasks optimization.
+  * patch-84: Optimize sort, assuming sort is stable.
+  * patch-81: Emacs20 compatibility.
+  * patch-80: Deal with lines that do not have nicks, like the ERC prompt.
+  * patch-79: planner-erc provides annotation functions for ERC buffers.
+  * patch-78: Remove 'cl dependency of emacs-wiki.el. Add planner-search-notes-next/previous-match.
+  * patch-77: New function: emacs-wiki-edit-link-at-point, bound to C-c C-e by default. Minor bugfixes.
+  * patch-76: Renamed p-i-c to planner-calendar-insinuate to be more consistent.
+  * patch-75: Removed timeclock.el
+  * patch-74: Better XEmacs compatibility, replaced loop with replace-in-string/replace-regexp-in-string.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 13 Mar 2004 14:29:25 +0800
+
+planner-el (3.9-1) unstable; urgency=low
+
+  * New upstream release patch-73.
+  * patch-73: Add planner-notes-index.el, fix emacs-wiki escape/unescape.
+  * patch-72: Bugfix in planner task creation, thanks to Nafai for pointing this out
+  * patch-71: Do not fold case when checking links.
+  * patch-70: Add planner-wl.el
+  * patch-69: With a prefix, planner-create-task-from-buffer prompts for a
+    plan page. Also, planner-rss has category note.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue,  9 Mar 2004 00:02:03 +0800
+
+planner-el (3.8-2) unstable; urgency=low
+
+  * Depend on newly-packaged emacs-wiki version 2.41 for emacs-wiki-make-link.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon,  8 Mar 2004 01:17:38 +0800
+
+planner-el (3.8-1) unstable; urgency=low
+
+  * New upstream release patch-68 adds major-mode check for rmail.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun,  7 Mar 2004 23:49:30 +0800
+
+planner-el (3.7-1) unstable; urgency=low
+
+  * New upstream release patch-67.
+  * patch-67: Use emacs-wiki-make-link instead of planner-make-link.
+  * patch-66: Include #title in wiki index, dependent on emacs-wiki-index-title-threshold.
+  * patch-65: Preliminary support for planner pages for BBDB records
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun,  7 Mar 2004 23:42:36 +0800
+
+planner-el (3.6-1) unstable; urgency=low
+
+  * New upstream release patch-64: correctly make links even when page does
+    not match emacs-wiki-name-regexp.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun,  7 Mar 2004 00:17:23 +0800
+
+planner-el (3.5-1) unstable; urgency=low
+
+  * New upstream release patch-63 makes emacs-wiki.el compile again. (very
+    strange typo...)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  6 Mar 2004 19:35:45 +0800
+
+planner-el (3.4-1) unstable; urgency=low
+
+  * New upstream release patch-62.
+  * patch-62: Add planner-vm.
+  * patch-61: Fix emacs-wiki-previous/next-reference and example tags.
+  * patch-60: Promote planner-default-task-priority to a customizable variable.
+  * patch-59: Make planner-renumber-tasks renumber chunks of tasks.
+  * patch-58: Put files in same directory as current file, even if default-directory
+    is different. Thanks to Jorgen Schafer.
+  * patch-57: Add planner-rmail.
+  * patch-56: Fix embarrassing typo in compatibility function
+    planner-link-unescape. (Yes, there was another one.)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat,  6 Mar 2004 17:00:17 +0800
+
+planner-el (3.3-1) unstable; urgency=low
+
+  * New upstream release patch-55 fixes embarrassing typo in compatibility
+    function planner-link-unescape.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue,  2 Mar 2004 12:17:15 +0800
+
+planner-el (3.2-1) unstable; urgency=low
+
+  * New upstream release patch-54 loads the correct library for grep-command.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon,  1 Mar 2004 13:04:23 +0800
+
+planner-el (3.1-1) unstable; urgency=low
+
+  * New upstream release patch-53
+  * patch-53: Misc. documentation fixes.
+  * patch-52: Added compatibility functions for older versions of
+    emacs-wiki.el. (Closes: #235357)
+  * Included upstream source files properly.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 29 Feb 2004 23:02:32 +0800
+
+planner-el (3.0-1) unstable; urgency=low
+
+  * New upstream release patch-51.
+  * patch-51,50: Better XEmacs compatibility.
+  * patch-49: Rearranged customization options, removed Gnus links.
+  * patch-48,46: Highlighting functions correctly named.
+  * patch-47: planner-bbdb-resolve-url.
+  * patch-45: planner-url is now a list of regular expressions.
+  * patch-44: MAJOR CHANGE: planner.el and remember.el are now lots of small modules.
+  * patch-43: emacs-wiki.el bugfix.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 27 Feb 2004 14:14:10 +0800
+
+planner-el (2.22-2) unstable; urgency=low
+
+  * Added emacsen to debian/control. 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 19 Feb 2004 20:00:12 +0800
+
+planner-el (2.22-1) unstable; urgency=low
+
+  * New upstream release patch-42.
+  * patch-42: Categorized feeds.
+  * patch-41: Fixed embarrassing typo in planner.el.
+  * patch-40: Minor elisp style improvement in emacs-wiki-id.el
+  * patch-39: Corrected regular expression for link matching.
+  * patch-38: Added info URLs.
+  * patch-37: emacs-wiki-id.el almost ready for release (not included in Debian package).
+  * patch-36: Fixed planner-name-regexp matching.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 19 Feb 2004 19:01:46 +0800
+
+planner-el (2.21-1) unstable; urgency=low
+
+  * New upstream release patch-35.
+  * Removed emacs20 from dependency entries. Thanks to Martin Michlmayr
+    for pointing this out. (Closes: #232780)
+  * patch-35,34,33: planner-rss.el is a new module that allows you to export
+    planner entries in RSS, an XML format for syndication.
+  * patch-32: Removed redundant code from planner-experimental.el
+  * patch-31: Merged remember-to-planner-plan-page-dwim and
+    remember-to-planner functions.
+  * patch-30: Fixed invalid regular expression syntax in planner.el
+  * patch-29: Minor documentation fix for local planner task references.
+  * patch-28: Bugfix: planner-seek-to-first inserts correct number of spaces.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 15 Feb 2004 21:59:09 +0800
+
+planner-el (2.20-1) unstable; urgency=low
+
+  * New upstream release patch-27.
+  * patch-27: Bugfixes in planner-seek-to-function that affected all
+    those with planner-seek-create-at-bottom.
+  * patch-26: Doc tweaks (allout exposure).
+  * patch-25: remember-annotation-functions should default to buffer-file-name.
+  * patch-24: Added major-mode check to emacs-wiki.
+  * patch-23: Minor bugfixes with replace-regexp-in-string and the message-id regexp.
+  * patch-22: Minor bugfixes with spacing.
+  * patch-21: Added URL escaping to emacs-wiki. You will need emacs-wiki.el from
+    http://sacha.free.net.ph/notebook/emacs/emacs-wiki/ for this one.
+  * patch-20: planner-default-task-priority.
+  * patch-19: Font-locking more correct.
+  * patch-18: Improved font-locking highlights tasks.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 11 Feb 2004 17:58:32 +0800
+
+planner-el (2.19-1) unstable; urgency=low
+
+  * New upstream release patch-17 adds fboundp check for remove-overlays,
+    which is not in older Emacs versions. (Strange.)
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 27 Jan 2004 09:17:44 +0800
+
+planner-el (2.18-1) unstable; urgency=low
+
+  * New upstream release - sacha@free.net.ph/emacs-wiki--sacha--1.0--patch-15 .
+	
+  * Added <tasks>, an emacs-wiki tag that is replaced by a task summary.
+	
+  * Added planner-list-tasks-with-status, a more general form of
+    planner-list-unfinished-tasks.
+
+  * Colored tasks according to category. Thanks to Ephrem for the suggestion.
+	
+  * Merged David Smith's patch to fix broken links during rescheduling
+    with planner-copy-or-move-task. (Closes: #229382)
+	
+  * Merged David Smith's patch to use specified mark in planner-mark-task.
+    (Closes: #229387)
+	
+  * Merged David Smith's patch to save window and cursor settings during
+    planner-read-date. (Closes: #229378)
+
+  * Merged Ephrem Christopher Walborn's patch to make planner.el output
+    more XHTML-compliant.
+	
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 25 Jan 2004 13:33:51 +0800
+
+planner-el (2.17-2) unstable; urgency=low
+
+  * Removed old changelog and added a note to README.Debian instead. 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 21 Jan 2004 09:55:10 +0800
+
+planner-el (2.17-1) unstable; urgency=low
+
+  * New upstream release includes most of the files in the
+    emacs-wiki modules directory. (Closes: #228617) 
+  * Merged in David Smith's patch for read-date. (Closes: #228762)
+  * Moved to the arch revision control system.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 21 Jan 2004 09:27:50 +0800
+
+planner-el (2.16-3) unstable; urgency=low
+
+  * Added some autoloads. 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 20 Jan 2004 16:38:53 +0800
+
+planner-el (2.16-2) unstable; urgency=low
+
+  * Fixed rules file to actually install remember.el 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 20 Jan 2004 12:53:28 +0800
+
+planner-el (2.16-1) unstable; urgency=low
+
+  * New upstream release improves annotations and task handling.
+  * Debian package now includes remember.el
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 22 Dec 2003 13:50:55 +0800
+
+planner-el (1.204-1) unstable; urgency=low
+
+  * New upstream release fixes minor bug in planner-get-diary-entries
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 23 Nov 2003 00:27:02 +0800
+
+planner-el (1.203-1) unstable; urgency=low
+
+  * New upstream release fixes a bug that causes thrashing of planner pages
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 22 Nov 2003 22:32:03 +0800
+
+planner-el (1.202-1) unstable; urgency=low
+
+  * New upstream release removes ability to create tasks from notes, but
+    improves note handling.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 22 Nov 2003 17:52:33 +0800
+
+planner-el (1.199-1) unstable; urgency=low
+
+  * New upstream release fixes bug with planner-create-task and t annotations.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 22 Nov 2003 02:33:26 +0800
+
+planner-el (1.198-1) unstable; urgency=low
+
+  * New upstream release supports new release of remember.el, adds
+    duplicate suppression for tasks, and allows reverse-chronological note
+    addition.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 22 Nov 2003 00:50:37 +0800
+
+planner-el (1.195-1) unstable; urgency=low
+
+  * New upstream release fixes bug with planner-task-dates-favor-future
+    not taking planner-expand-names-favor-future-p into account.
+    planner-task-dates-favor-future renamed to ...-p.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 20 Nov 2003 09:25:55 +0800
+
+planner-el (1.194-1) unstable; urgency=low
+
+  * New upstream release makes reading task dates smarter if you
+    turn on planner-task-dates-favor-future. Also, adds hooks
+    and functions needed for planner-id.el (see planner.el for the link).
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 19 Nov 2003 21:34:22 +0800
+
+planner-el (1.180-1) unstable; urgency=low
+
+  * New upstream release restores Emacs20 compatibility and improves
+    sorting. Please see upstream changelog for more details.
+  * Updated to follow Debian Policy 3.6.1; no changes except for version.	
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 23 Oct 2003 21:23:27 +0800
+
+planner-el (1.161-1) unstable; urgency=medium
+
+  * New upstream release fixes embarrassing BBDB URL bug
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sat, 13 Sep 2003 15:11:59 +0800
+
+planner-el (1.159-2) unstable; urgency=low
+
+  * Made extended description longer. (Closes: #209850) 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 10 Sep 2003 07:19:46 +0800
+
+planner-el (1.159-1) unstable; urgency=low
+
+  * New upstream release improves planner-create-task-from-buffer
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri,  5 Sep 2003 15:13:41 +0800
+
+planner-el (1.156-1) unstable; urgency=low
+
+  * New upstream release fixes BBDB URL bug
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue,  2 Sep 2003 10:50:40 +0800
+
+planner-el (1.153-1) unstable; urgency=low
+
+  * New upstream release changes the face of the notes
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 20 Aug 2003 09:40:26 +0800
+
+planner-el (1.152-1) unstable; urgency=low
+
+  * New upstream release improves task finding
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 20 Aug 2003 09:18:58 +0800
+
+planner-el (1.151-1) unstable; urgency=low
+
+  * New upstream release fixes some bugs in planner-copy-or-move-task
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 19 Aug 2003 16:02:26 +0800
+
+planner-el (1.149-2) unstable; urgency=low
+
+  * Passes lintian check; marked startup script as conffile. 
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 18 Aug 2003 10:26:56 +0800
+
+planner-el (1.149-1) unstable; urgency=low
+
+  * New upstream release fixes GNU Emacsism. Closes: #205020 #205154
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 14 Aug 2003 00:00:03 +0800
+
+planner-el (1.147-1) unstable; urgency=low
+
+  * New upstream release fixes GNU Emacsism.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 12 Aug 2003 17:26:40 +0800
+
+planner-el (1.146-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 31 Jul 2003 15:51:52 +0800
+
+planner-el (1.141-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 28 Jul 2003 22:10:17 +0800
+
+planner-el (1.135-1) unstable; urgency=low
+
+  * New upstream release fixes bug in plan
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 27 Jul 2003 18:28:46 +0800
+
+planner-el (1.132-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 21 Jul 2003 15:24:57 +0800
+
+planner-el (1.128-1) unstable; urgency=low
+
+  * New upstream release works with XEmacs again
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 18 Jul 2003 09:41:45 +0800
+
+planner-el (1.127-1) unstable; urgency=low
+
+  * New upstream release fixes planner annotation bug
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu, 17 Jul 2003 15:00:05 +0800
+
+planner-el (1.122-1) unstable; urgency=low
+
+  * New upstream release fixes regexp bug with emacs-wiki.el
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 14 Jul 2003 10:29:46 +0800
+
+planner-el (1.120-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 11 Jul 2003 07:23:18 +0800
+
+planner-el (1.119-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  9 Jul 2003 07:18:37 +0800
+
+planner-el (1.118-1) unstable; urgency=low
+
+  * New upstream release adds keybindings
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue,  8 Jul 2003 19:54:48 +0800
+
+planner-el (1.114-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Tue, 17 Jun 2003 07:12:56 +0800
+
+planner-el (1.112-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 16 Jun 2003 06:20:13 +0800
+
+planner-el (1.111-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Mon, 16 Jun 2003 05:57:04 +0800
+
+planner-el (1.108-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 16 May 2003 20:36:37 +0800
+
+planner-el (1.107-2) unstable; urgency=low
+
+  * Removed 51planner.el from conffiles
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 16 May 2003 13:52:16 +0800
+
+planner-el (1.107-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Fri, 16 May 2003 13:33:51 +0800
+
+planner-el (1.106-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 11 May 2003 10:55:08 +0800
+
+planner-el (1.105-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Sun, 11 May 2003 10:46:58 +0800
+
+planner-el (1.104-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Thu,  8 May 2003 17:26:58 +0800
+
+planner-el (1.102-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:47:11 +0800
+
+planner-el (1.101-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:46:37 +0800
+
+planner-el (1.100-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:44:28 +0800
+
+planner-el (1.98-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:42:50 +0800
+
+planner-el (1.96-1) unstable; urgency=low
+
+  * Upstream change in prefix variables.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:41:00 +0800
+
+planner-el (1.95-1) unstable; urgency=low
+
+  * Fixed bug caused by planner-renumber-tasks not returning nil.
+  
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  7 May 2003 12:39:20 +0800
+
+planner-el (1.94-1) unstable; urgency=low
+
+  * Upstream changes. Functions print messages only when called interactively.
+    planner-renumber-tasks does not move point. planner-raise-task and
+    planner-lower-task behavior changed.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 16 Apr 2003 13:17:54 +0800
+
+planner-el (1.91-1) unstable; urgency=low
+
+  * New upstream release removed diary integration and linked to
+    planner-diary.el.
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed,  16 Apr 2003 13:17:54 +0800
+
+planner-el (1.90-1) unstable; urgency=low
+
+  * New upstream maintainer Sandra Jean Chua (Sacha). Closes: #189227
+  * Many upstream changes. Closes: #142936
+  * New Debian maintainer Sandra Jean Chua (Sacha).
+
+ -- Sandra Jean Chua (Sacha) <sacha@free.net.ph>  Wed, 16 Apr 2003 13:17:54 +0800
+
+planner-el (1.18-2) unstable; urgency=low
+
+  * emacsen-install: Redirect the compilation log to
+  `CompilationLog.gz'.
+
+ -- OHASHI Akira <bg66@debian.org>  Wed, 16 Jan 2002 00:47:15 +0900
+
+planner-el (1.18-1) unstable; urgency=low
+
+  * Initial Release. (closes: #122529)
+
+ -- OHASHI Akira <bg66@debian.org>  Wed,  5 Dec 2001 20:33:04 +0900
+
+
+	

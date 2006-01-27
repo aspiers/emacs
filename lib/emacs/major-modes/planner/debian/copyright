@@ -1,0 +1,116 @@
+This package was first debianized by OHASHI Akira <bg66@debian.org> on
+Wed, 5 Dec 2001 20:33:04 +0900.  It is now being maintained by Michael
+Olson <mwolson@gnu.org> .
+
+It was downloaded from
+http://www.mwolson.org/static/dist/planner/planner-3.40.tar.gz
+
+Upstream Authors: John Wiegley <johnw@gnu.org>
+                  Keith Amidon <camalot@picnicpark.org>
+                  Dirk Bernhardt
+                  Trent Buck <trentbuck@gmail.com>
+                  Fran Burstall
+                  Sacha Chua <sacha@free.net.ph>
+                  James Clarke <james@jamesclarke.info>
+                  Mario Domgörgen <kanaldrache@gmx.de>
+                  Jürgen Doser
+                  drkm <darkman_spam@yahoo.fr>
+                  Seth Falcon <sethfalcon@gmail.com>
+                  Gerd Flaig <gefla@pond.sub.org>
+                  Frederik Fouvry <fouvry@coli.uni-saarland.de>
+                  Romain Francoise <rfrancoise@debian.org>
+                  Christophe Garion <garion@supaero.fr>
+                  Thomas Gehrlein <Thomas.Gehrlein@t-online.de>
+                  Marco Gidde <marco.gidde@tiscali.de>
+                  Will Glozer <will@glozer.net>
+                  Henrik S. Hansen <hsh@freecode.dk>
+                  Travis B. Hartwell <nafai@travishartwell.net>
+                  Magnus Henoch <mange@freemail.hu>
+                  Yann Hodique <yann.hodique@gmail.com>
+                  Xin Wei Hu <huxw@knight.6test.edu.cn>
+                  JM Ibanez
+                  Maciej Kalisak <mac@cs.toronto.edu>
+                  Sven Kloppenburg <kloppenburg@informatik.tu-darmstadt.de>
+                  Jody Klymak <jklymak@ucsd.edu>
+                  Andrew J. Korty <ajk@iu.edu>
+                  Peter K. Lee <saint@corenova.com>
+                  Angus Lees <gus@debian.org>
+                  Wei-Hao Lin
+                  Dryice Dong Liu <dryice@liu.com.cn>
+                  Chris McMahan <cmcmahan@one.net>
+                  Daniel Neri <dne@mayonnaise.net>
+                  Greg Novak
+                  Michael Olson <mwolson@gnu.org>
+                  Jim Ottaway <j.ottaway@lse.ac.uk>
+                  Chris Parsons <chris.p@rsons.org>
+                  Mario Peter
+                  Pascal Quesseveur <quesseveur@abaksystemes.fr>
+                  Stefan Reichör <stefan@xsteve.at>
+                  Dale P. Smith <dsmich@adelphia.net>
+                  David D. Smith <davidsmith@acm.org>
+                  John Sullivan <john@wjsullivan.net>
+                  Yvonne Thomson <yvonne@netbrains.com.au>
+                  Hoan Ton-That <hoan@ton-that.org>
+                  Win Treese
+                  Mark Triggs <mst@dishevelled.net>
+                  Gary V. Vaughan <gary@gnu.org>
+                  Sergey Vlasov <vsu@altlinux.ru>
+                  Rainer Volz
+                  Simon Winwood <sjw@cse.unsw.edu.au>
+
+Upstream Maintainer: Michael Olson <mwolson@gnu.org>
+
+Copyright:
+
+Copyright (C) 2001, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+Copyright (C) 2003, 2004 Thomas Gehrlein
+Copyright (C) 2003, 2004 Gary V. Vaughan
+Copyright (C) 2004 Dirk Bernhardt
+Copyright (C) 2004 James Clarke
+Copyright (C) 2004 Xin Wei Hu
+Copyright (C) 2004 Mario Domgörgen
+Copyright (C) 2004 Frederik Fouvry
+Copyright (C) 2004, 2005 Christophe Garion
+Copyright (C) 2004 Will Glozer
+Copyright (C) 2004 Maciej Kalisak
+Copyright (C) 2004 Jody Klymak
+Copyright (C) 2004, 2005, 2006 Andrew J. Korty
+Copyright (C) 2004, 2005 Angus Lees
+Copyright (C) 2004, 2005 Dryice Dong Liu
+Copyright (C) 2004 Daniel Neri
+Copyright (C) 2004, 2005 Chris Parsons
+Copyright (C) 2004, 2005 Dale P. Smith
+Copyright (C) 2004, 2005 David D. Smith
+Copyright (C) 2004 Yvonne Thomson
+Copyright (C) 2004 Pascal Quesseveur
+Copyright (C) 2004 Rainer Volz
+Copyright (C) 2004 Simon Winwood
+Copyright (C) 2005 Keith Amidon
+Copyright (C) 2005 Trent Buck
+Copyright (C) 2005 Jeremy Cowgar
+Copyright (C) 2005 Seth Falcon
+Copyright (C) 2005 Marco Gidde
+Copyright (C) 2005 Henrik S. Hansen
+Copyright (C) 2005 Yann Hodique
+Copyright (C) 2005 Peter K. Lee
+Copyright (C) 2005 Chris McMahan
+Copyright (C) 2005, 2006 Jim Ottaway
+Copyright (C) 2005 Sergey Vlasov
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA,
+   02110-1301, USA.
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in `/usr/share/common-licenses/GPL'.

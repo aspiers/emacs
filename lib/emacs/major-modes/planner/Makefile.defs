@@ -1,0 +1,24 @@
+# -*- Makefile -*-
+EMACS    = emacs
+SITEFLAG = --no-site-file
+
+# XEmacs users will probably want the following settings.
+#EMACS    = xemacs
+#SITEFLAG = -no-site-file
+
+# Installation options
+# PREFIX is only used here.
+PREFIX   = /usr/local
+ELISPDIR = $(PREFIX)/share/emacs/site-lisp/planner
+INFODIR  = $(PREFIX)/info
+
+# Command to use to install the Info dir entry
+INSTALLINFO = install-info --info-dir=$(INFODIR)
+
+# Useful only for the maintainer
+PROJECT    = planner
+DEBNAME    = planner-el
+VERSION    = 3.40
+MANUAL     = planner-el
+LASTUPLOAD = 3.40-1
+BUILDOPTS  =

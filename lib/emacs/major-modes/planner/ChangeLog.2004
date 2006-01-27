@@ -1,0 +1,6685 @@
+
+2004-12-27 05:27:14 GMT	Sacha Chua <sacha@free.net.ph>	patch-267
+
+    Summary:
+      Bugfix: planner-align-tasks CVSism
+    Revision:
+      planner--dev--1.0--patch-267
+
+    	* planner.el (planner-align-tasks): Ugly hack to get around the fact
+    	that ?\s is a CVSism. Thanks to Dryice Liu for reporting this
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 03:48:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-266
+
+    Summary:
+      Fix typo in planner-find-file
+    Revision:
+      planner--dev--1.0--patch-266
+
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 02:34:09 GMT	Sacha Chua <sacha@free.net.ph>	patch-265
+
+    Summary:
+      planner-sort-tasks: Sort unnumbered tasks as well
+    Revision:
+      planner--dev--1.0--patch-265
+
+    	* planner.el (planner-sort-tasks): Make sort tasks behave without
+    	task numbers.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 02:25:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-264
+
+    Summary:
+      planner-renumber-tasks-automatically should be nil by default
+    Revision:
+      planner--dev--1.0--patch-264
+
+    	* planner.el (planner-renumber-tasks-automatically): Set to nil by
+    	default now that we're encouraging not having task numbers...
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 02:22:09 GMT	Sacha Chua <sacha@free.net.ph>	patch-263
+
+    Summary:
+      planner-align-tasks: Behave even without task numbers
+    Revision:
+      planner--dev--1.0--patch-263
+
+    	* planner.el (planner-align-tasks): Make align task behave even
+    	without task numbers.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 01:54:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-262
+
+    Summary:
+      New option: planner-default-task-status
+    Revision:
+      planner--dev--1.0--patch-262
+
+    	* planner.el (planner-default-task-status): New option. Thanks to
+    	Dirk Bernhardt for patch.
+    	(planner-create-task-from-buffer): Add status argument.
+    	(planner-create-task): Add status argument.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 01:48:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-261
+
+    Summary:
+      Ugly bugfix for planner-find-file
+    Revision:
+      planner--dev--1.0--patch-261
+
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 01:19:27 GMT	Sacha Chua <sacha@free.net.ph>	patch-260
+
+    Summary:
+      Set planner-use-task-numbers to nil by default
+    Revision:
+      planner--dev--1.0--patch-260
+
+    	* planner.el (planner-use-task-numbers): Set to nil by default.
+    	Less visual clutter, less confusion.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-27 00:50:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-259
+
+    Summary:
+      planner-timeclock: Update entries when tasks are edited
+    Revision:
+      planner--dev--1.0--patch-259
+
+    	* planner-timeclock.el: Automatically update timelog entries when
+    	a task is edited.
+    	(planner-replan-task): Merge from my config.
+    	(planner-edit-task-description): Merge from my config.
+
+    modified files:
+     ChangeLog planner-timeclock.el
+
+
+2004-12-27 00:46:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-258
+
+    Summary:
+      Merge docfix from John Sullivan
+    Revision:
+      planner--dev--1.0--patch-258
+
+    	2004-12-22  John Sullivan  <john@wjsullivan.net>
+    	* planner.texi (Creating a Task): Removed redundant explanation of
+    	functions used to create tasks of different priorities. Added xref
+    	to Task Priorities section instead.
+    	(Task Priorities): Moved note about defining the default task
+    	priority to this section.
+    	(Planner Features): Moved Accomplishments, Task Overviews, Task
+    	IDs and Cyclic Tasks to the Task section of the manual. 
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-27 00:23:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-257
+
+    Summary:
+      Odd; where did that \* Tasks come from?
+    Revision:
+      planner--dev--1.0--patch-257
+
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-26 23:09:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-256
+
+    Summary:
+      Major bugfix: planner-find-file
+    Revision:
+      planner--dev--1.0--patch-256
+
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-26 11:29:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-255
+
+    Summary:
+      Minor: Make planner-find-file an alias of emacs-wiki-find-file
+    Revision:
+      planner--dev--1.0--patch-255
+
+    	* planner.el (planner-find-file): Revert to alias of
+    	emacs-wiki-find-file. Thanks to Wei-Hao Lin for pointing this out.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-25 01:46:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-254
+
+    Summary:
+      New: planner-dates-relative-to-today-flag
+    Revision:
+      planner--dev--1.0--patch-254
+
+    	* planner.el (planner-dates-relative-to-today-flag): New.
+            Thanks to John Sullivan for the suggestion.
+    	(planner-expand-name): Use planner-dates-relative-to-today.
+    	(planner-read-date): Keep track of base buffer and expand relative
+    	to that.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-24 15:27:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-253
+
+    Summary:
+      planner-multi.el: pass checkdoc
+    Revision:
+      planner--dev--1.0--patch-253
+
+
+    modified files:
+     ChangeLog planner-multi.el
+
+
+2004-12-24 15:23:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-252
+
+    Summary:
+      planner-multi.el: New
+    Revision:
+      planner--dev--1.0--patch-252
+
+    	* planner-multi.el: New support for notes on multiple pages.
+    	Thanks to Dryice Liu for the inspiration.
+            
+
+    new files:
+     .arch-ids/planner-multi.el.id planner-multi.el
+
+    modified files:
+     ChangeLog planner-timeclock.el planner.el
+
+
+2004-12-24 10:08:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-251
+
+    Summary:
+      planner-timeclock-summary: Allow functions as filters
+    Revision:
+      planner--dev--1.0--patch-251
+
+    	* planner-timeclock-summary.el: 
+    	(planner-timeclock-summary-day-range-entry): Allow functions as filters.
+    	(planner-timeclock-summary-make-summary-string-range,
+    	(planner-timeclock-summary-calculate-ratio-day,
+    	(planner-timeclock-summary-make-text-table-day,
+    	(planner-timeclock-summary-show-filter,
+    	(planner-timeclock-summary-show-range-filter,
+    	(planner-timeclock-summary-show-range): Docfix.
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el planner.texi
+
+
+2004-12-23 08:11:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-250
+
+    Summary:
+      Docfix: Correct Stefan ReichÃ¶r's e-mail address.
+    Revision:
+      planner--dev--1.0--patch-250
+
+    	* planner.el: Correct Stefan ReichÃ¶r's e-mail address.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-22 13:34:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-249
+
+    Summary:
+      planner-deadline: Don't update completed or cancelled tasks. New: planner-deadline-change
+    Revision:
+      planner--dev--1.0--patch-249
+
+    	* planner-deadline.el: Merge patch from Dryice Liu.
+    	(planner-deadline-regexp): Document regexp group format.
+    	(planner-deadline-update): Document regexp and default.
+    	Patch from Dryice: Don't update completed or cancelled tasks.
+    	(planner-deadline-change): New function for convenience.
+    
+    	* planner.texi (Deadlines): Document planner-deadline.el.
+
+    modified files:
+     ChangeLog planner-deadline.el planner.texi
+
+
+2004-12-21 13:24:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-248
+
+    Summary:
+      New: planner-timeclock-summary-proj.el
+    Revision:
+      planner--dev--1.0--patch-248
+
+    	* planner-timeclock-summary-proj.el: New from Pascal Quesseveur.
+    	Add copyright notice. Make it pass checkdoc and byte-compile.
+    
+    	* planner.texi (Timeclock): Add sample for
+    	planner-timeclock-summary. Document
+    	planner-timeclock-summary-proj.
+    	
+
+    new files:
+     .arch-ids/planner-timeclock-summary-proj.el.id
+     planner-timeclock-summary-proj.el
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-20 23:19:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-247
+
+    Summary:
+      Docfix from John Sullivan: Components
+    Revision:
+      planner--dev--1.0--patch-247
+
+    	* planner.texi (Components): Cleaned up redundancies and
+    	streamlined the explanation of what's in the archive.
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-20 14:22:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-246
+
+    Summary:
+      Docfix: Typo in sample configuration
+    Revision:
+      planner--dev--1.0--patch-246
+
+    	* planner.texi (Sacha Chua's Configuration): Minor typo.
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-20 10:19:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-245
+
+    Summary:
+      Docfix: Move thoughts to first part, update my config
+    Revision:
+      planner--dev--1.0--patch-245
+
+    	* planner.texi (Stable Version): Add note about arch.
+    	(Development Version): Update emacs-wiki instructions. Use
+    	mwolson's repository.
+    	(Advanced Installation): Add note about remember.
+    	(Thoughts): Move to first part of info file.
+    	(Why Use PlannerMode): Update.
+    	(Sample Configuration Files): Include example configuration.
+    	(Sacha Chua's Configuration): Comment and update.
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-20 09:07:22 GMT	Sacha Chua <sacha@free.net.ph>	patch-244
+
+    Summary:
+      Docfixes from John Sullivan
+    Revision:
+      planner--dev--1.0--patch-244
+
+    	Changelog from John Sullivan; thanks for the patch!
+    	* planner.texi (Preface): Added xref to Acknowledgements.
+    	(Components): Moved bit about the relationship with EmacsWikiMode
+    	to hear from the Introduction.
+    	(Introduction): Fleshed out and organized the writing a bit,
+    	trying to give a better idea of what to expect and how to proceed.
+    	(Stable Version): Reorganized install information to cut down on
+    	redunancies, improve flow, and make everything specific to stable
+    	version.
+    	(Development Version): Did the same for the development
+    	version. Moved extra arch information to the bottom of the
+    	section. Thinking about consolidating arch information in its own
+    	separate section. 
+    	(Acknowledgements): Moved maintainer timeline here, renamed the
+    	chapter to Maintainers and Contributors.
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-17 11:39:40 GMT	Sacha Chua <sacha@free.net.ph>	patch-243
+
+    Summary:
+      planner-timeclock-summary: Alias time-subtract if necessary
+    Revision:
+      planner--dev--1.0--patch-243
+
+        	* planner-timeclock-summary.el (time-date): Alias time-subtract.
+    
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el
+
+
+2004-12-17 11:12:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-242
+
+    Summary:
+      planner-timeclock-summary: Requite time-date
+    Revision:
+      planner--dev--1.0--patch-242
+
+    	* planner-timeclock-summary.el (time-date): Require time-date.
+    	Thanks to David Lord for pointing this out.
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el
+
+
+2004-12-17 11:08:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-241
+
+    Summary:
+      Minor fix: add space after author name on newsgroups
+    Revision:
+      planner--dev--1.0--patch-241
+
+    	* planner-gnus.el: Add space after author name on newsgroups.
+    	Thanks to Magnus Henoch for the patch.
+    	(planner-gnus-annotation-from-summary): Add space.
+    	(planner-gnus-annotation-from-message): Add space.
+
+    modified files:
+     ChangeLog planner-gnus.el
+
+
+2004-12-17 10:58:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-240
+
+    Summary:
+      planner-timeclock-summary: plan pages, filtering, checkdoc, byte-compile
+    Revision:
+      planner--dev--1.0--patch-240
+
+    	* planner-timeclock-summary.el: Extensive reordering and docfixing
+    	to satisfy checkdoc and byte-compile-file.
+    	(planner-timeclock-summary-day-range-entry): Rename from
+    	planner-timeclock-day-range-entry to fit namespace.
+    	(planner-timeclock-summary-one-day-alist): Rename from
+    	planner-timeclock-one-day-alist to fit namespace.
+    	(planner-timeclock-summary-one-day-entry-no-date): Rename from
+    	planner-timeclock-one-day-entry-no-date to fit namespace.
+    	(planner-timeclock-summary-one-day-entry): Rename from
+    	planner-timeclock-one-day-entry to fit namespace.
+    	(planner-timeclock-summary-day-range-alist): Rename from
+    	planner-timeclock-day-range-alist to fit namespace.
+    	(planner-timeclock-within-date-range): Exploit the string nature
+    	for dates.
+    
+    	* planner-timeclock-summary.el: Merge patch from Chris Parsons
+    	allowing filtering by regexp on the task string. Also support
+    	automatic updating of a Timeclock section in the plan page.
+    	(planner-timeclock-summary-include-sub-plan-pages-flag): New
+    	option. Note: renamed from
+    	planner-timeclock-summary-include-sub-plan-pages in original
+    	patch.
+    	(planner-timeclock-summary-update): Add support for plan pages.
+    	(planner-timeclock-summary-show-filter): New.
+    	(planner-timeclock-summary-show-range-filter): New.
+    	(planner-timeclock-summary-show-range): Add filter-regexp.
+    	(planner-timeclock-summary-calculate-ratio-day): Add
+    	filter-regexp.
+    	(planner-timeclock-summary-make-text-table-day): Add filter-regexp
+    	and hide-summary.
+    	(planner-timeclock-summary-make-summary-string-range): Add
+    	filter-regexp.
+    	(planner-timeclock-day-range-entry): Add filter-regexp.
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el
+
+
+2004-12-17 09:26:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-239
+
+    Summary:
+      Move index formatting code into planner.el
+    Revision:
+      planner--dev--1.0--patch-239
+
+    	* planner.el (planner-index): Moved from
+    	planner-experimental.el. Thanks to David Lord for the vote of
+    	confidence.
+    	(planner-generate-index): Moved from planner-experimental.el
+    	(emacs-wiki-generate-index): Advise this function so that
+    	planner pages get a planner-style index.
+    
+    	* planner-experimental.el: Remove index code.
+
+    modified files:
+     ChangeLog planner-experimental.el planner.el
+
+
+2004-12-17 09:10:31 GMT	Sacha Chua <sacha@free.net.ph>	patch-238
+
+    Summary:
+      New: planner-bookmark
+    Revision:
+      planner--dev--1.0--patch-238
+
+    	* planner-bookmark.el: New from Dryice Liu. Requires remember.
+              Creates a note buffer with a bookmark:// URL after you set a
+              bookmark.
+    
+    	* planner-auto.el: Add planner-bookmark.el
+    
+    	* planner.texi (planner-bookmark.el): Document planner-bookmark.el
+
+    new files:
+     .arch-ids/planner-bookmark.el.id planner-bookmark.el
+
+    modified files:
+     ChangeLog planner-auto.el planner.texi
+
+
+2004-12-17 04:23:24 GMT	Sacha Chua <sacha@free.net.ph>	patch-237
+
+    Summary:
+      planner-default-task-priority: New default "B"
+    Revision:
+      planner--dev--1.0--patch-237
+
+    	* planner.el (planner-default-task-priority): Change default to
+    	"B". "A" tasks are intimidating, and "B" is easier to adjust
+    	upward or downward.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-16 09:26:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-236
+
+    Summary:
+      Add copyright notices
+    Revision:
+      planner--dev--1.0--patch-236
+
+
+    modified files:
+     ChangeLog planner-diary.el planner-gnus.el planner-log-edit.el
+     planner-timeclock-summary.el planner.el
+
+
+2004-12-15 13:54:06 GMT	Sacha Chua <sacha@free.net.ph>	patch-235
+
+    Summary:
+      Bugfix: planner-timeclock-summary-make-summary-string-range
+    Revision:
+      planner--dev--1.0--patch-235
+
+    	* planner-timeclock-summary.el: Merge patch from Dryice Liu.
+    	(planner-timeclock-summary-make-summary-string-range): Should work
+    	as documented. String replace now case-sensitive.
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el
+
+
+2004-12-15 13:35:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-234
+
+    Summary:
+      New: planner-timeclock-summary-show-range
+    Revision:
+      planner--dev--1.0--patch-234
+
+    	* planner-timeclock-summary.el: Merge patch from Chris Parsons
+    	allowing date ranges when summarizing data. Many functions now
+    	have range arguments.
+    	(planner-timeclock-summary-show-range): New user function.
+
+    modified files:
+     ChangeLog planner-timeclock-summary.el
+
+
+2004-12-15 04:03:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-233
+
+    Summary:
+      planner-rss-add-note: Remove trailing tag from titles
+    Revision:
+      planner--dev--1.0--patch-233
+
+    	* planner-rss.el (planner-rss-add-note): Remove new emacs-wiki
+    	rule for paragraphs so that titles don't have trailing paragraph
+    	end tags. Thanks to jan for pointing it out.
+
+    modified files:
+     ChangeLog planner-rss.el
+
+
+2004-12-15 04:02:19 GMT	Sacha Chua <sacha@free.net.ph>	patch-232
+
+    Summary:
+      Bugfix: planner-mark-task Emacs CVS-ism
+    Revision:
+      planner--dev--1.0--patch-232
+
+    	* planner.el (planner-mark-task): Fix Emacs CVS-ism in
+            skip-chars-forward. Thanks to John Sullivan for pointing it
+            out.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-14 03:44:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-231
+
+    Summary:
+      planner-mark-task: Minimize buffer editing
+    Revision:
+      planner--dev--1.0--patch-231
+
+    	* planner.el (planner-mark-task): Minimize buffer editing and make
+    	save-excursion work.
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-13 23:56:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-230
+
+    Summary:
+      planner-log-edit-quote-filenames-flag: New
+    Revision:
+      planner--dev--1.0--patch-230
+
+    	* planner-log-edit.el: Merge and edit Dryice Liu's patch for
+    	quoting filenames.
+    	(planner-log-edit-quote-filenames-flag): New. Renamed from
+    	planner-log-edit-quote-filenames in original patch in
+    	order to pass checkdoc.
+    	(planner-log-edit-quote-file-maybe): Changed implementation and
+    	removed helper function.
+    	(planner-log-edit-add-note): Guard against nil.
+
+    modified files:
+     ChangeLog planner-log-edit.el
+
+
+2004-12-11 15:37:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-229
+
+    Summary:
+      Docfix: planner.texi
+    Revision:
+      planner--dev--1.0--patch-229
+
+    	* planner.texi: Thanks to mocker for proofreading.
+    	(Development Version): Add note about require.
+    	(Overview): Fix example code for keybinding.
+
+    modified files:
+     ChangeLog planner.texi
+
+
+2004-12-11 08:00:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-228
+
+    Summary:
+      planner-gnus-browse-url: use gnus-registry if loaded
+    Revision:
+      planner--dev--1.0--patch-228
+
+    	* planner-gnus.el (planner-gnus-browse-url): Merge Sven
+    	Kloppenburg's code to use the Gnus registry. Modify patch so that
+    	it works even if the registry fails.
+
+    modified files:
+     ChangeLog planner-gnus.el
+
+
+2004-12-11 07:58:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-227
+
+    Summary:
+      planner-notes-tag: Work with new emacs-wiki
+    Revision:
+      planner--dev--1.0--patch-227
+
+    	* planner.el (planner-notes-tag): Bugfix: Add page name so that
+    	this works with the new emacs-wiki which doesn't recognize links
+    	of the form [[#1][...]].
+
+    modified files:
+     ChangeLog planner.el
+
+
+2004-12-10 22:47:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-226
+
+    Summary:
+      planner-report update from ajk
+    Revision:
+      planner--dev--1.0--patch-226
+
+    	* planner-report.el: Merge update from ajk. From ajk: Fix bugs
+    	that caused some tasks and notes to be left out. Remove redundant
+    	code.
+    	(planner-report-remove-tasks-numbers): New customization option
+    	planner-report-remove-task-numbers enables removal of task
+    	priority numbers in status reports (they don't increment
+    	per-project and therefore don't mean much).
+    	(planner-report-replace-note-numbers): New customization option
+    	planner-report-replace-note-numbers enables replacement of note
+    	numbers (again, they don't mean much in a status report) with some
+    	string (defaults to "**").
+    	(planner-report-unfinished-offset): New customization option
+    	planner-report-unfinished-offset specifies the number of days from
+    	the current date of unfinished tasks to include in the status
+    	report. Before, all unfinished tasks were included.
+
+    modified files:
+     ChangeLog planner-report.el
+
+
+2004-12-09 14:48:17 GMT	Sacha Chua <sacha@free.net.ph>	patch-225
+
+    Summary:
+      planner-deadline.el: Remove hook
+    Revision:
+      planner--dev--1.0--patch-225
+
+    	* planner-deadline.el: Remove hook.
+
+    modified files:
+     ChangeLog planner-deadline.el
+
+
+2004-12-08 10:32:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-224
+
+    Summary:
+      planner-deadline: Preliminary implementation
+    Revision:
+      planner--dev--1.0--patch-224
+
+    	* planner-deadline.el: Preliminary implementation.
+            Rewrites tasks with deadline information.
+
+    new files:
+     .arch-ids/planner-deadline.el.id planner-deadline.el
+
+    modified files:
+     ChangeLog
+
+
+2004-12-06 13:12:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-223
+
+    Summary:
+      New: Make planner-sort-tasks-key-function pluggable
+    Revision:
+      planner--dev--1.0--patch-223
+
+    	* planner.el (planner-sort-tasks-key-function): New.
+            Thanks to Jody Klymak and John Sullivan for finally
+            prompting me to do this.
+    	(planner-on-date-page): New.
+    	(planner-sort-tasks-default-key): New.
+    	(planner-sort-tasks-basic): New.
+    	(planner-sort-tasks-by-date): New.
+    	(planner-sort-tasks-by-link): New.
+    	(planner-sort-tasks): Use new planner-sort-tasks-key-function.
+
+    modified files:
+     ChangeLog planner.el planner.texi
+
+
+2004-12-04 05:44:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-222
+
+    Summary:
+      planner-create-note: Make chronological notes neater
+    Revision:
+      planner--dev--1.0--patch-222
+
+    	* planner.el (planner-create-note): Add extra newline before
+    	created notes so that chronological notes look neat.
+
+    modified files:
+     ChangeLog planner-log-edit.el planner.el
+
+
+2004-12-03 09:18:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-221
+
+    Summary:
+      Add changelog to arch repository. Thanks to mwolson for tip.
+    Revision:
+      planner--dev--1.0--patch-221
+
+
+    new files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+
+2004-12-03 03:59:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-220
+
+    Summary:
+      planner-lower-task: Last-task bugfix
+    Revision:
+      planner--dev--1.0--patch-220
+
+    	* planner.el (planner-raise-task): Split planner-lower-task so
+    	that the code is clearer.
+    	(planner-lower-task): Redo functionality. Fix last-task bug
+    	reported by Jonathan Hankins.
+    
+    	* planner.texi (Changing Tasks): Document changes to
+    	planner-raise-task and planner-lower-task.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-12-02 13:53:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-219
+
+    Summary:
+      planner-extract-tasks bugfix: use planner project
+    Revision:
+      planner--dev--1.0--patch-219
+
+    	* planner.el (planner-extract-tasks): Bugfix: wrap in planner project.
+            This solves the problem with emacs-wiki-name-regexp not recognizing
+            dates. Other functions that use temporary buffers or calculate
+            planner data outside a planner buffer should do that also.
+
+    modified files:
+     planner.el
+
+
+2004-12-02 04:18:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-218
+
+    Summary:
+      planner-tasks-overview-show-summary: plan page overview
+    Revision:
+      planner--dev--1.0--patch-218
+
+    	* planner-tasks-overview.el (planner-tasks-overview-show-summary):
+    	New. Provides an overview of unfinished (scheduled/unscheduled)
+    	and completed tasks in (plan) pages.
+    	(planner-tasks-overview-get-summary): New.
+
+    modified files:
+     planner-tasks-overview.el
+
+
+2004-12-01 10:24:12 GMT	Sacha Chua <sacha@free.net.ph>	patch-217
+
+    Summary:
+      planner-timeclock, planner-task-in-progress: Always use plan
+    Revision:
+      planner--dev--1.0--patch-217
+
+    	* planner-timeclock.el (planner-task-in-progress): Minor tweak to
+    	always get the project plan if available.
+
+    modified files:
+     planner-timeclock.el
+
+
+2004-12-01 09:50:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-216
+
+    Summary:
+      planner-create-note-from-task: Follow original patch
+    Revision:
+      planner--dev--1.0--patch-216
+
+    	* planner.el (planner-create-note-from-task): Come to think of
+    	it, Chris' way of checking date-ness is better than mine.
+    	Silly maintainer alert! How embarrassing.
+
+    modified files:
+     planner.el
+
+
+2004-12-01 09:45:10 GMT	Sacha Chua <sacha@free.net.ph>	patch-215
+
+    Summary:
+      planner-create-note-from-task: C-u means put note on plan page
+    Revision:
+      planner--dev--1.0--patch-215
+
+    	* planner.el (planner-create-note-from-task): Merge Chris Parsons'
+    	tweak: prefix argument means put note on plan page.
+
+    modified files:
+     planner.el
+
+
+2004-11-30 07:56:41 GMT	Sacha Chua <sacha@free.net.ph>	patch-214
+
+    Summary:
+      planner-update-task: Allow more flexible planner-jump-to-linked-task
+    Revision:
+      planner--dev--1.0--patch-214
+
+    	* planner.el (planner-update-task): Move local page checking code
+    	in so that planner-jump-to-linked-task can easily be modified.
+
+    modified files:
+     planner.el
+
+
+2004-11-29 23:18:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-213
+
+    Summary:
+      Bugfix: planner-gnus-browse-url: Remove Emacs CVS-ism in split-string
+    Revision:
+      planner--dev--1.0--patch-213
+
+    	* planner-gnus.el (planner-gnus-browse-url): Remove Emacs
+    	CVS-ism (split-string with three arguments). Thanks to Dryice Liu
+    	for the bug report.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-11-27 07:27:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-212
+
+    Summary:
+      Clean up bytecompiling errors
+    Revision:
+      planner--dev--1.0--patch-212
+
+    	* planner-calendar.el (planner-calendar-date-to-filename): Move
+    	before first call.
+    
+    	* planner-timeclock-summary.el
+    	(planner-timeclock-summary-generate-report):
+    	Add let bindings for free variables project-name and task-name.
+    	(planner-timeclock-summary-make-table-day): Fix typo in defun.
+    
+    	* planner-gnus.el (planner-gnus-annotation-from-summary): Fix bug;
+    	free variable `from'.
+    
+
+    modified files:
+     planner-calendar.el planner-gnus.el
+     planner-timeclock-summary.el
+
+
+2004-11-27 07:04:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-211
+
+    Summary:
+      New: planner-task-open
+    Revision:
+      planner--dev--1.0--patch-211
+
+    	* planner.el: Implement Dirk Bernhardt's planner-task-open.
+    	(planner-task-open): New.
+    	(planner-menu): Add planner-task-open.
+    
+    	* planner.texi (Changing Tasks): Document planner-task-open.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-11-27 06:53:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-210
+
+    Summary:
+      New: planner-timeclock-summary.el
+    Revision:
+      planner--dev--1.0--patch-210
+
+    	* planner-timeclock-summary.el: New from Dryice Liu.
+    
+    	* planner.texi (Timeclock): Note about
+    	planner-timeclock-summary.el .
+
+    new files:
+     .arch-ids/planner-timeclock-summary.el.id
+     planner-timeclock-summary.el
+
+    modified files:
+     planner.texi
+
+
+2004-11-27 06:47:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-209
+
+    Summary:
+      New: planner-rdf.el from Rainer Volz
+    Revision:
+      planner--dev--1.0--patch-209
+
+    	* planner-rdf.el: New from Rainer Volz
+              (http://www.rainervolz.de/planner-rdf/).
+    
+            * planner-rdf.owl: New.
+            
+    	* planner.texi (RDF Publication): Copy and texinfo-ize
+              documentation.
+
+    new files:
+     .arch-ids/planner-rdf.el.id .arch-ids/planner-rdf.owl.id
+     planner-rdf.el planner-rdf.owl
+
+    modified files:
+     planner.texi
+
+
+2004-11-27 06:19:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-208
+
+    Summary:
+      New: planner-report.el
+    Revision:
+      planner--dev--1.0--patch-208
+
+    	* planner-report.el: New.
+
+    new files:
+     .arch-ids/planner-report.el.id planner-report.el
+
+
+2004-11-27 05:55:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-207
+
+    Summary:
+      New: planner-create-note-from-task
+    Revision:
+      planner--dev--1.0--patch-207
+
+    	* planner.el (planner-create-note-from-task): New.
+    
+    	* planner.texi (Notes): Document planner-create-note-from-task.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-11-27 05:52:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-206
+
+    Summary:
+      planner.texi: Minor typo fix in "Making Files Pretty"
+    Revision:
+      planner--dev--1.0--patch-206
+
+    	* planner.texi (Making Files Pretty): Fix typo reported by Carl
+    	Witty in Debian bug #282824.
+
+    modified files:
+     planner.texi
+
+
+2004-11-27 05:49:55 GMT	Sacha Chua <sacha@free.net.ph>	patch-205
+
+    Summary:
+      planner-diary.el: Typo fixes
+    Revision:
+      planner--dev--1.0--patch-205
+
+    	* planner-diary.el: Thanks to Dryice Liu for pointing out typos.
+    	(planner-diary-update-section): Fix typo.
+    	(planner-diary-insert-appts): Fix typo.
+    	(planner-diary-insert-public): Fix typo.
+    	(planner-diary-insert-private): Fix typo.
+    
+    	* planner-diary.el: Fix incorrect arguments passed to
+    	planner-filename-to-calendar-date so that file compiles cleanly.
+    	(planner-diary-appts-entries-here): Fix incorrect arguments.
+    	(planner-diary-cal-desk-entries-here): Fix incorrect arguments.
+    	(planner-diary-private-entries-here): Fix incorrect arguments.
+    	(planner-diary-public-entries-here): Fix incorrect arguments.
+
+    modified files:
+     planner-diary.el
+
+
+2004-11-25 03:37:09 GMT	Sacha Chua <sacha@free.net.ph>	patch-204
+
+    Summary:
+      planner.texi: Add pointer to online documentation
+    Revision:
+      planner--dev--1.0--patch-204
+
+    	* planner.texi (Development Version): Add note about
+    	documentation.
+    	(Stable Version): Add note about documentation.
+
+    modified files:
+     planner.texi
+
+
+2004-11-20 09:13:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-203
+
+    Summary:
+      Minor fix: Add planner-task-cancelled to menu
+    Revision:
+      planner--dev--1.0--patch-203
+
+    	* planner.el (planner-menu): Add planner-task-cancelled.
+            Thanks to Jody Klymak for pointing this out.
+
+    modified files:
+     planner.el
+
+
+2004-11-20 06:26:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-202
+
+    Summary:
+      Bugfix: planner-gnus annotations from newsgroups
+    Revision:
+      planner--dev--1.0--patch-202
+
+    	* planner-gnus.el: Thanks to Magnus Henoch for bugfix.
+    	(planner-gnus-annotation-from-summary): Consider newsgroups.
+    	(planner-gnus-annotation-from-message): Consider neswgroups.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-11-20 06:24:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-201
+
+    Summary:
+      Bugfix: emacs-wiki-unhighlight-region advice: zap overlays
+    Revision:
+      planner--dev--1.0--patch-201
+
+    	* planner.el (emacs-wiki-unhighlight-region): New advice: zap
+    	planner overlays so that unhighlight-region really works.
+
+    modified files:
+     planner.el
+
+
+2004-11-20 06:21:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-200
+
+    Summary:
+      planner-diary-create-section-flag
+    Revision:
+      planner--dev--1.0--patch-200
+
+    	* planner-diary.el (planner-diary-create-section-flag): New.
+    	(planner-diary-update-section): Honor
+    	planner-diary-create-section-flag.
+    
+    	* planner.texi (Diary): Document planner-diary-create-section-flag.
+
+    modified files:
+     planner-diary.el planner.texi
+
+
+2004-11-19 14:08:34 GMT	Sacha Chua <sacha@free.net.ph>	patch-199
+
+    Summary:
+      Docfix: Reorganized sample configuration
+    Revision:
+      planner--dev--1.0--patch-199
+
+
+    modified files:
+     planner.texi
+
+
+2004-11-14 14:00:55 GMT	Sacha Chua <sacha@free.net.ph>	patch-198
+
+    Summary:
+      planner-gnus: Check if To: exists before using it
+    Revision:
+      planner--dev--1.0--patch-198
+
+    	* planner-gnus.el: Thanks to Magnus Henoch for pointing out this
+    	bug.
+    	(planner-gnus-annotation-from-message): Make sure To: exists
+    	before using it.
+    	(planner-gnus-annotation-from-summary): Make sure To: exists
+    	before using it.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-11-08 13:52:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-197
+
+    Summary:
+      planner-markup-task: Make unfinished tasks behave
+    Revision:
+      planner--dev--1.0--patch-197
+
+    	* planner.el (planner-markup-task): Use ajk's fix for
+    	the unfinished tasks markup bug. This prevents task
+    	underlines from matching markup underlines.
+
+    modified files:
+     planner.el
+
+
+2004-11-06 03:21:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-196
+
+    Summary:
+      Change planner-menu labels for consistency
+    Revision:
+      planner--dev--1.0--patch-196
+
+    	* planner.el (planner-menu): Change task menu entry labels
+    	according to Frederik Fouvry's suggestions.
+
+    modified files:
+     planner.el
+
+
+2004-10-31 14:12:22 GMT	Sacha Chua <sacha@free.net.ph>	patch-195
+
+    Summary:
+      New: planner-bibtex, planner-annotation-as-kill
+    Revision:
+      planner--dev--1.0--patch-195
+
+    	* planner-bibtex.el: New. Thanks to James Clarke for the
+    	contribution.
+    
+    	* planner.el (planner-annotation-as-kill): New. Thanks to James
+    	Clarke for the idea.
+    
+    	* planner.texi (Overview): Add planner-annotation-as-kill.
+    	(planner-bibtex.el): New.
+
+    new files:
+     .arch-ids/planner-bibtex.el.id planner-bibtex.el
+
+    modified files:
+     planner-auto.el planner.el planner.texi
+
+
+2004-10-31 12:41:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-194
+
+    Summary:
+      New: planner-auto.el. Docfix: Overview
+    Revision:
+      planner--dev--1.0--patch-194
+
+    	* planner-auto.el: New.
+    
+           	* planner.texi (Basic Configuration): Add note about
+    	planner-update-wiki-project.
+    	(Overview): New. Thanks to JC Helary for asking for an overview.
+    
+
+    new files:
+     .arch-ids/planner-auto.el.id planner-auto.el
+
+    modified files:
+     planner.texi
+
+
+2004-10-31 05:37:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-193
+
+    Summary:
+      planner-accomplishments-insinuate: Try different file hooks.
+    Revision:
+      planner--dev--1.0--patch-193
+
+    	* planner-accomplishments.el (planner-accomplishments-insinuate):
+    	Try the different file hooks. Compatibility is hard.
+            Thanks to Christopher San Diego for the bug report.
+
+    modified files:
+     planner-accomplishments.el
+
+
+2004-10-31 05:35:35 GMT	Sacha Chua <sacha@free.net.ph>	patch-192
+
+    Summary:
+      planner-gnus-browse-url: Bugfix: Make sure articles are loaded
+    Revision:
+      planner--dev--1.0--patch-192
+
+    	* planner-gnus.el (planner-gnus-browse-url): Make sure the headers
+    	for all the mentioned articles have been loaded. This fixes the
+    	virtual article bug.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-10-24 12:53:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-190
+
+    Summary:
+      New: planner-log-edit.el
+    Revision:
+      planner--dev--1.0--patch-190
+
+    	* planner-log-edit.el: New. Modifications from original: some
+    	name changes to satisfy checkdoc, new
+    	planner-log-edit-notice-commit-function. Thanks to Simon Winwood
+            for new feature.
+    	
+    	* planner.texi (planner-log-edit.el): New.
+
+    new files:
+     .arch-ids/planner-log-edit.el.id planner-log-edit.el
+
+    modified files:
+     planner.texi
+
+
+2004-10-24 12:08:06 GMT	Sacha Chua <sacha@free.net.ph>	patch-189
+
+    Summary:
+      planner-create-task: Change "from" annotation to ":"
+    Revision:
+      planner--dev--1.0--patch-189
+
+    	* planner.el (planner-create-task): Change annotation string to :
+    	so that the grammar isn't weird. Thanks to Richi Plana for
+    	pointing this out.
+
+    modified files:
+     planner.el
+
+
+2004-10-23 08:39:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-188
+
+    Summary:
+      planner-gnus patch from kanaldrache: use process marks
+    Revision:
+      planner--dev--1.0--patch-188
+
+    	* planner-gnus.el: Merge patch from Mario Domgörgen.
+    	(planner-gnus-get-message-id): Allow the use of article numbers.
+    	(planner-gnus-annotation-from-summary): Allow process marks.
+    	(planner-gnus-browse-url): Allow process marks.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-10-17 03:15:26 GMT	Michael Olson <mwolson@member.fsf.org>	patch-13
+
+    Summary:
+      Attempt to fix problem where mode is not changed properly
+    Revision:
+      planner--mwolson--1.0--patch-13
+
+    2004-10-16  Michael Olson  <mwolson@gnu.org>
+    
+        * planner.el (planner-mode): Explicitly check local variables to
+        see if the user wants the current file to be in a different mode.
+        Should fix problem with local variables being ignored as per which
+        mode to use.
+
+    modified files:
+     planner.el
+
+
+2004-10-14 04:24:41 GMT	Michael Olson <mwolson@member.fsf.org>	patch-11
+
+    Summary:
+      Add copyright notices and note contributions
+    Revision:
+      planner--mwolson--1.0--patch-11
+
+    2004-10-13  Michael Olson  <mwolson@gnu.org>
+    
+        * planner-bbdb.el: Make contributors section.  Add Andrew J. Korty
+        to it.
+    
+        * planner-diary.el: Make contributors section.  Add Travis
+        B. Hartwell to it.  Space out years in copyright notice.  Make
+        spacing in header part of file more consistent.
+    
+        * planner-export-diary.el: Make contributors section.  Add Xin Wei
+        Hu to it.  Add copyright notice for Xin Wei Hu.
+    
+        * planner-ledger.el: Add email address for Will Glozer to
+        copyright notice.  Remove spurious semicolons.
+    
+        * planner-rmail.el: Remove spurious semicolons.  Make contributors
+        section.  Add Frederik Fouvry to it.
+    
+        * planner-tasks-overview.el: Reformat commentary section.  Make
+        contributors section.  Add Andrew J. Korty to it.  Add thanks
+        section because the URL in it mentions someone who also helped out
+        with this file in some way.
+    
+        * planner-vm.el: Add Parts copyright notice for Jürgen Doser.  Add
+        him also to the newly-made contributors section.
+    
+        * planner-wl.el: Add email address for Yvonne Thomson.  Add Parts
+        copyright notice for Angus Lees.  Add him to the newly-made
+        contributors section.  Remove "Largely rehacked" message since the
+        contributors section describes the contribution better.
+    
+        * planner.el: Change Parts copyright message for Sacha to a full
+        copyright notice since she is the maintainer.  Add Parts copyright
+        notices for David D. Smith, Yvonne Thomson, Michael Olson, and
+        Maciej Kalisak.  Add more detail to thanks section.  Add David
+        D. Smith, Daniel Neri, Mario Peter, Yvonne Thomson, Hoan Ton-That,
+        Michael Olson, Maciej Kalisak, Dale P. Smith, and Stefan Reichör
+        to the newly-made contributors section.
+        (planner-annotation-from-info): Move "Thanks to ..."  notice to
+        contributors section.
+    
+
+    modified files:
+     planner-bbdb.el planner-diary.el planner-export-diary.el
+     planner-ledger.el planner-rmail.el planner-tasks-overview.el
+     planner-vm.el planner-wl.el planner.el
+
+
+2004-10-13 13:07:07 GMT	Sacha Chua <sacha@free.net.ph>	patch-186
+
+    Summary:
+      planner-gnus, summary: Take process marks into account
+    Revision:
+      planner--dev--1.0--patch-186
+
+    	* planner-gnus.el (planner-gnus-annotation-from-summary): Take
+    	process marks into account. Thanks to Mario Domgörgen for the
+    	patch.
+
+
+2004-10-09 10:22:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-185
+
+    Summary:
+      NEW: planner-notes-tag <notes>
+    Revision:
+      planner--dev--1.0--patch-185
+
+    	* planner.el (planner-markup-tags): New tag: <notes>.
+            Finally allows me to have blog headlines.
+    	(planner-notes-get-headlines): Move from planner-notes-index.
+    	(planner-notes-tag): New tag.
+    	
+    	* planner-notes-index.el (planner-notes-index-get-headlines):
+    	Rename to planner-notes-index-headlines-on-page because
+    	planner-notes-get-headlines refers to the current page.
+    	(planner-notes-index-get-headlines-range): Fix grammar. Rename to
+    	planner-notes-index-headlines-in-range.
+    
+    	* planner.texi (Planner Tags): New.
+
+    modified files:
+     planner-notes-index.el planner.el planner.texi
+
+
+2004-10-09 04:13:24 GMT	Sacha Chua <sacha@free.net.ph>	patch-184
+
+    Summary:
+      planner-id-update-automatically should default to t
+    Revision:
+      planner--dev--1.0--patch-184
+
+    	* planner-id.el (planner-id-update-automatically): Make the
+    	default t as people expect it to Just Work. Docfix: Mention
+    	planner-edit-task-description. Thanks to Niklas Morberg
+            for pointing out that this is the reasonable default.
+    
+    	* planner.texi (Task IDs): Note: planner-id-update-automatically
+    	now defaults to t.
+
+    modified files:
+     planner-id.el planner.texi
+
+
+2004-10-06 09:22:43 GMT	Sacha Chua <sacha@free.net.ph>	patch-183
+
+    Summary:
+      plan: Force planner-tasks-file-behavior to 'save if nil, honor 'close
+    Revision:
+      planner--dev--1.0--patch-183
+
+    	* planner.el (plan): Force planner-tasks-file-behavior so that the
+    	file list can be updated. Fix buggy let binding of
+    	planner-tasks-file-behavior. Thanks to Yvonne for pointing this
+            out.
+
+    modified files:
+     planner.el
+
+
+2004-10-04 15:16:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-182
+
+    Summary:
+      Real bugfix for -maybe functions; other files were defining write-file-functions
+    Revision:
+      planner--dev--1.0--patch-182
+
+    	* planner-id.el (planner-id-setup): Use local-write-file-hooks if
+    	write-file-functions is not available. Thanks to pll for patiently
+    	helping me debug.
+    
+    	* planner-accomplishments.el (planner-accomplishments-insinuate):
+    	Use local-write-file-hooks if write-file-functions is not
+    	available. Thanks to pll for patiently helping me debug.
+
+    modified files:
+     planner-accomplishments.el planner-id.el
+
+
+2004-10-04 14:51:34 GMT	Sacha Chua <sacha@free.net.ph>	patch-181
+
+    Summary:
+      Bugfix: -maybe functions should not be defsubsts
+    Revision:
+      planner--dev--1.0--patch-181
+
+    	* planner.el (planner-sort-tasks-maybe),
+    	(planner-renumber-tasks-maybe),
+    	(planner-renumber-notes-maybe),
+    	(planner-align-tasks-maybe): XEmacs doesn't like
+    	defsubsts for hooks, I think.
+
+    modified files:
+     planner.el
+
+
+2004-10-04 14:10:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-180
+
+    Summary:
+      planner-find-file: Do not double-open pages
+    Revision:
+      planner--dev--1.0--patch-180
+
+    	* planner.el (planner-find-file): Prevent double-opening pages by
+    	checking if the current buffer is already the page we want to
+    	open.
+
+    modified files:
+     planner.el
+
+
+2004-10-02 04:59:21 GMT	Sacha Chua <sacha@free.net.ph>	patch-179
+
+    Summary:
+      Docfix for planner-tasks-file-behavior
+    Revision:
+      planner--dev--1.0--patch-179
+
+    	* planner.texi (Variables to Customize): Docfix for new default.
+
+    modified files:
+     planner.texi
+
+
+2004-10-02 04:58:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-178
+
+    Summary:
+      Change planner-tasks-file-behavior default to nil
+    Revision:
+      planner--dev--1.0--patch-178
+
+    	* planner.el (planner-tasks-file-behavior): Change default to nil.
+    	That way, we don't scare people with slow behavior.
+
+    modified files:
+     planner.el
+
+
+2004-10-01 09:46:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-177
+
+    Summary:
+      planner-save-buffers: Turn off more things in attempt to solve infloop
+    Revision:
+      planner--dev--1.0--patch-177
+
+    	* planner.el (planner-save-buffers): Turn off planner-id behavior,
+    	too. Save only modified buffers. Thanks to Stefan Reicho:r for the
+    	small patch.
+
+    modified files:
+     planner-tasks-overview.el planner.el
+
+
+2004-09-30 11:10:40 GMT	Sacha Chua <sacha@free.net.ph>	patch-176
+
+    Summary:
+      NOTE: Restore planner-diary-entries-here
+    Revision:
+      planner--dev--1.0--patch-176
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Restore lisp
+    	functionality. Prevent font-locking during
+    	planner-diary-entries-here, avoiding the infloop bug.
+
+    modified files:
+     planner-diary.el
+
+
+2004-09-30 03:47:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-175
+
+    Summary:
+      Bugfix: Remove planner-diary-font-locking code
+    Revision:
+      planner--dev--1.0--patch-175
+
+
+    modified files:
+     planner-diary.el
+
+
+2004-09-29 14:49:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-174
+
+    Summary:
+      NOTE: planner-diary.el: Remove font-locking method 
+    Revision:
+      planner--dev--1.0--patch-174
+
+    	* planner-diary.el: After much bug-hunting, I have decided to
+    	remove the fontlocking code from the module as it causes too many
+    	headaches. If you want it back in, please send me a working patch.
+    	=)
+    
+    	* planner.texi (Diary): Docfix: Remove mention of Lisp
+    	fontlocking feature.
+
+    modified files:
+     planner-diary.el
+
+
+2004-09-29 13:57:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-173
+
+    Summary:
+      planner-diary.el: Fall back to using buffer name if file name is not available
+    Revision:
+      planner--dev--1.0--patch-173
+
+    	* planner-diary.el (planner-diary-get-name): New. Pick up the
+    	filename if possible. Fall back to buffer name if not yet
+    	available. This works around a strange font-lock problem when
+    	the buffer filename is not yet available. Update many functions
+    	to use planner-diary-get-name. The lisp font-locking code
+            should work again.
+
+    modified files:
+     planner-diary.el
+
+
+2004-09-28 15:00:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-172
+
+    Summary:
+      planner-gnus-browse-url: Go back to the safer way of doing things
+    Revision:
+      planner--dev--1.0--patch-172
+
+    	* planner-gnus.el (planner-gnus-browse-url): Go back to the
+    	somewhat safer (but more tedious) way of doing things.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-09-28 03:52:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-171
+
+    Summary:
+      planner-task-info-from-string: fix tasks that are not true wiki names
+    Revision:
+      planner--dev--1.0--patch-171
+
+    	* planner.el (planner-task-info-from-string): Fix tasks that are
+    	not true wiki names. Thanks to Dale P. Smith for bug report and
+    	patch.
+
+    modified files:
+     planner.el
+
+
+2004-09-24 10:03:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-170
+
+    Summary:
+      Minor XEmacs bugfix: Use planner-derived-mode-p instead of derived-mode-p
+    Revision:
+      planner--dev--1.0--patch-170
+
+    	* planner.el (planner-create-task-from-buffer),
+    	(planner-create-task): Bugfix: Make XEmacs happy by using
+    	planner-derived-mode-p instead.
+    
+    	* planner-accomplishments.el (planner-accomplishments-show):
+    	Bugfix: Make XEmacs happy by using planner-derived-mode-p instead.
+
+    modified files:
+     planner-accomplishments.el planner.el
+
+
+2004-09-24 10:00:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-169
+
+    Summary:
+      planner-tasks-file-behavior tweaks: No more jumping cursor
+    Revision:
+      planner--dev--1.0--patch-169
+
+    	* planner.el: Okay, modifying tasks without leaving the extra
+    	buffers open should work better now. However, this functionality
+    	hits the hard disk a bit. If you find yourself bothered by it, you
+    	can set planner-tasks-file-behavior to nil so that no processing
+    	is done.
+    	(planner-mode): Use the -maybe versions of the automatic
+    	functions.
+    	(planner-save-buffers): New parameter SUPPRESS-FIXING turns off
+    	automatic planner munging. This prevents jumping cursors.
+    	(planner-sort-tasks-maybe): New.
+    	(planner-renumber-tasks-maybe): New.
+    	(planner-renumber-notes-maybe): New.
+    	(planner-align-tasks-maybe): New.
+    	(planner-replan-task): Suppress fixing.
+    	(planner-copy-or-move-task): Suppress fixing.
+    	(planner-update-task): Suppress fixing.
+    	(planner-delete-task): Honor planner-tasks-file-behavior.
+    	(planner-create-task-from-info): Honor
+    	planner-tasks-file-behavior.
+    	(planner-replan-task): Hide planner-tasks-file-behavior from inner
+    	function.
+
+    modified files:
+     planner.el
+
+
+2004-09-24 03:45:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-168
+
+    Summary:
+      Docfix: Mention _emacs for Microsoft Windows
+    Revision:
+      planner--dev--1.0--patch-168
+
+    	* planner.texi: Mention _emacs for Microsoft Windows.
+    	Thanks to Miguel Marcos for the suggestion.
+
+    modified files:
+     planner.texi
+
+
+2004-09-21 11:07:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-167
+
+    Summary:
+      Bugfix: planner-update-task: Actually follow planner-tasks-file-behavior
+    Revision:
+      planner--dev--1.0--patch-167
+
+
+    modified files:
+     planner.el
+
+
+2004-09-21 10:14:35 GMT	Sacha Chua <sacha@free.net.ph>	patch-165
+
+    Summary:
+      planner-replan-task: minor bugfix
+    Revision:
+      planner--dev--1.0--patch-165
+
+    	* planner.el (planner-replan-task): Correct small bug:
+    	buffer-list should be live-buffers variable. (That
+    	should teach me to make sure planner.el byte-compiles
+    	cleanly before checking it in...)
+
+    modified files:
+     planner.el
+
+
+2004-09-21 10:13:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-164
+
+    Summary:
+      NOTE: planner-tasks-file-behavior option. Closes opened files by default.
+    Revision:
+      planner--dev--1.0--patch-164
+
+    	* planner.el (planner-update-task),
+    	(planner-copy-or-move-task),
+    	(planner-copy-or-move-region),
+    	(plan): Obey planner-tasks-file-behavior
+    	(planner-tasks-file-behavior): New customizable option controls
+    	the behavior of task creation and updates. If set to
+    	'close (default), newly-opened files are saved and closed. See
+    	variable documentation for more details.
+    	(planner-save-buffers): Add BUFFER-LIST parameter
+    	to allow restoring to a particular buffer list.
+    
+    	* planner.texi (Variables to Customize): Document
+    	planner-tasks-file-behavior.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-09-19 06:36:59 GMT	Michael Olson <mwolson@member.fsf.org>	patch-5
+
+    Summary:
+      Fix scenario where the old project name still existed in project
+  list after being changed.
+    Revision:
+      planner--mwolson--1.0--patch-5
+
+    2004-09-19  Michael Olson  <mwolson@member.fsf.org>
+    
+    	* planner.el (planner-project-default-name): New variable that
+    	indicates what the default value of `planner-project' will be set
+    	to.
+    	(planner-project): Use `planner-project-default-name' for default
+    	value instead of a string.
+    	(planner-update-wiki-project): Add comments and remove any items
+    	from `emacs-wiki-projects' that are associated with the default
+    	name found in `planner-project-default-name'.
+
+    modified files:
+     planner.el
+
+
+2004-09-16 19:26:04 GMT	Michael Olson <mwolson@member.fsf.org>	patch-3
+
+    Summary:
+      Replace `.' with `\\.' in some regexps to be more correct
+    Revision:
+      planner--mwolson--1.0--patch-3
+
+    2004-09-16  Michael Olson  <mwolson@member.fsf.org>
+    
+    	* planner.el (planner-create-note): Change use of `.' in regexp to
+    	`\\.'.
+    	(planner-highlight-notes): Ditto.
+
+    modified files:
+     planner.el
+
+
+2004-09-16 10:53:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-163
+
+    Summary:
+      Merge patch for planner-create-note whitespacing
+    Revision:
+      planner--dev--1.0--patch-163
+
+    	* planner.el: Merge 2004-09-12 patch from Michael Olson
+            (mwolson AT member.fsf.org). His changelog follows.
+            (planner-project): Make this variable customizable so
+    	that people are not stuck with "WikiPlanner" as the project name.
+    	(planner-seek-task-creation-point): Use (bolp) instead of a
+    	much-longer method to determine whether the point is at the
+    	beginning of the line.
+    	(planner-create-note): Ditto.  Only insert newlines if we are not
+    	at the end of the buffer.
+     
+
+    modified files:
+     planner.el
+
+
+2004-09-16 10:10:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-162
+
+    Summary:
+      planner-diary: Separate multiple days with horizontal rules
+    Revision:
+      planner--dev--1.0--patch-162
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Feature:
+    	deal with multiple days properly. Replace ==== inserted by
+    	fancy-diary-display with ----, which will be replaced by a
+    	horizontal line. Thanks to Michael Olson for pointing this out.
+     
+
+    modified files:
+     planner-diary.el
+
+
+2004-09-16 03:13:07 GMT	Michael Olson <mwolson@member.fsf.org>	patch-2
+
+    Summary:
+      Make project name customizable, fix spurious newlines in notes
+    Revision:
+      planner--mwolson--1.0--patch-2
+
+    2004-09-12  Michael Olson  <mwolson@member.fsf.org>
+    
+    	* planner.el (planner-project): Make this variable customizable so
+    	that people are not stuck with "WikiPlanner" as the project name.
+    	(planner-seek-task-creation-point): Use (bolp) instead of a
+    	much-longer method to determine whether the point is at the
+    	beginning of the line.
+    	(planner-create-note): Ditto.  Only insert newlines if we are not
+    	at the end of the buffer.
+
+    modified files:
+     planner.el
+
+
+2004-08-28 06:48:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-161
+
+    Summary:
+      New: planner-unix-mail
+    Revision:
+      planner--dev--1.0--patch-161
+
+    	* planner-unix-mail.el: New from Frederik Fouvry.
+    	* planner.texi (Top): Document planner-unix-mail.
+
+    new files:
+     .arch-ids/planner-unix-mail.el.id planner-unix-mail.el
+
+    modified files:
+     planner.texi
+
+
+2004-08-16 08:24:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-160
+
+    Summary:
+      New: planner-use-task-numbers
+    Revision:
+      planner--dev--1.0--patch-160
+
+    	* planner.el (planner-use-task-numbers): New option.
+    	(planner-format-task): Obey planner-use-task-numbers.
+    	(planner-highlight-tasks): Allow unnumbered tasks.
+    	(planner-create-task): Bugfix: nil plan pages.
+    
+    	* planner.texi (Task Numbering): Document planner-use-task-numbers.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-08-16 07:32:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-159
+
+    Summary:
+      Move planner-diary options to separate customization group
+    Revision:
+      planner--dev--1.0--patch-159
+
+    	* planner-diary.el (planner-diary): New customization group.
+    	Move all planner-diary options under it.
+
+    modified files:
+     planner-diary.el
+
+
+2004-08-16 07:29:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-158
+
+    Summary:
+      Prefer local-write-file-hooks over write-file-hooks
+    Revision:
+      planner--dev--1.0--patch-158
+
+    	* planner-id.el (planner-id-setup): Prefer local-write-file-hooks
+            over write-file-hooks. Thanks to Frederik Fouvry for pointing this
+            out.
+
+    modified files:
+     planner-id.el
+
+
+2004-08-16 07:27:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-157
+
+    Summary:
+      New: planner-sort-undated-tasks-equivalent
+    Revision:
+      planner--dev--1.0--patch-157
+
+    	* planner.el (planner-sort-tasks): Merge Maciej Kalisiak's patch
+    	to sort dated tasks before undated ones. Control via
+    	planner-sort-undated-tasks-equivalent.
+    	(planner-sort-undated-tasks-equivalent): New.
+    
+    	* planner.texi (Making Files Pretty): Document
+    	planner-sort-undated-tasks-equivalent.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-08-15 13:10:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-156
+
+    Summary:
+      New: planner-mhe.el
+    Revision:
+      planner--dev--1.0--patch-156
+
+    	* planner-mhe.el: New. Contributed by Christophe Garion.
+    
+    	* planner.texi (MH-E): New.
+
+    new files:
+     .arch-ids/planner-mhe.el.id planner-mhe.el
+
+    modified files:
+     planner.texi
+
+
+2004-08-15 13:05:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-155
+
+    Summary:
+      Doc: Byte-compilation and info installation
+    Revision:
+      planner--dev--1.0--patch-155
+
+    	* planner.texi (Advanced Installation): Merge John Sullivan and
+    	Raymond Zeitler's instructions for byte-compilation and info
+    	installation.
+
+    modified files:
+     planner.texi
+
+
+2004-08-06 18:44:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-154
+
+    Summary:
+      Docfix: Dangling menus
+    Revision:
+      planner--dev--1.0--patch-154
+
+
+    modified files:
+     planner.texi
+
+
+2004-08-06 18:30:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-153
+
+    Summary:
+      planner.texi: major refactoring, split emacs-wiki and remember doc off
+    Revision:
+      planner--dev--1.0--patch-153
+
+    	* planner.texi: Major refactoring. Move emacs-wiki and remember
+    	documentation to their own info files. Rearrange sections.
+
+    modified files:
+     planner.texi
+
+
+2004-08-06 09:39:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-152
+
+    Summary:
+      Docfix for bug in patch-151: @end defopt
+    Revision:
+      planner--dev--1.0--patch-152
+
+    	* planner.texi (Making Files Pretty): Docfix.
+
+    modified files:
+     planner.texi
+
+
+2004-08-06 09:28:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-151
+
+    Summary:
+      Merge patch separating task sorting from renumbering
+    Revision:
+      planner--dev--1.0--patch-151
+
+    	* planner.el: Merge patch from Maciej Kalisiak separating sorting
+    	from renumbering.
+    	(planner-sort-tasks-automatically): New.
+    	(planner-renumber-tasks-automatically): Control only renumbering.
+    	(planner-mode): Add planner-sort-tasks-automatically hook.
+    	(planner-sort-tasks): Move sorting code from
+    	planner-renumber-tasks.
+    	(planner-renumber-tasks): Remove sorting code, leaving renumbering
+    	code.
+    	(planner-fix-tasks): New.
+    
+    	* planner.texi (Changing Tasks): Mention planner-fix-tasks.
+    	(Making Files Pretty): Fix typo. Document
+    	planner-renumber/sort/align-tasks-automatically.
+    	(List of Interactive Functions): Document
+    	planner-renumber/sort/align/fix-tasks.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-08-06 07:28:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-150
+
+    Summary:
+      Accept functions for planner-day/plan-page-template
+    Revision:
+      planner--dev--1.0--patch-150
+
+    	* planner.el (planner-day-page-template): Accept a function.
+    	(planner-plan-page-template): Accept a function.
+    	(planner-page-default-p): Add note about
+    	planner-day-page-template. Make sure it only checks string
+    	templates.
+    	(planner-prepare-file): Allow the use of functions.
+    
+    	* planner.texi (Customizing Your Day Pages): Update note about
+    	planner-day-page-template.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-08-06 06:41:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-149
+
+    Summary:
+      New: planner-edit-task-description
+    Revision:
+      planner--dev--1.0--patch-149
+
+    	* planner.el (planner-edit-task-description): New.
+    	Thanks to Daniel Martins for the feature suggestion.
+    
+    	* planner.texi (Changing Tasks): Add note about
+    	planner-edit-task-description.
+    	(List of Interactive Functions): Describe
+    	planner-edit-task-description.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-08-06 06:10:02 GMT	Sacha Chua <sacha@free.net.ph>	patch-148
+
+    Summary:
+      planner-raise-task: Automatically reorder priorities on the linked page
+    Revision:
+      planner--dev--1.0--patch-148
+
+    	* planner.el (planner-raise-task): Automatically reorder
+    	priorities on linked pages. Thanks to Hans Halvorson for the
+    	suggestion.
+
+    modified files:
+     planner.el
+
+
+2004-08-02 14:37:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-147
+
+    Summary:
+      Bugfix: planner-vm-browse-url: Properly open message
+    Revision:
+      planner--dev--1.0--patch-147
+
+    	* planner-vm.el (planner-vm-browse-url): Merge patch
+    	from JÃ¼rgen Doser.
+
+    modified files:
+     planner-vm.el
+
+
+2004-07-28 09:04:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-146
+
+    Summary:
+      Bugfix: Make task pages links when tasks are created
+    Revision:
+      planner--dev--1.0--patch-146
+
+    	* planner.el (planner-create-task): Bugfix: Make task pages links.
+
+    modified files:
+     planner.el
+
+
+2004-07-28 09:01:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-145
+
+    Summary:
+      New: planner-raise-task-category, planner-lower-task-category
+    Revision:
+      planner--dev--1.0--patch-145
+
+    	* planner.el (planner-menu): Change menu to use task categories
+    	instead.
+    
+    	* planner.texi (List of Interactive Functions): Document
+    	planner-raise-task-category, planner-lower-task-category.
+    
+    	* planner.el (planner-raise-task-category): New.
+    	(planner-lower-task-category): New.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-07-24 13:02:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-144
+
+    Summary:
+      Show planner-annotation-from-planner-note number
+    Revision:
+      planner--dev--1.0--patch-144
+
+    	* planner.el (planner-annotation-from-planner-note): Show the note
+    	number in the link so that people know it refers to a note. Thanks
+    	to Paul Lussier for the feature request.
+
+    modified files:
+     planner.el
+
+
+2004-07-24 12:57:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-143
+
+    Summary:
+      Bugfix: Understand tasks with parenthesized non-link text
+    Revision:
+      planner--dev--1.0--patch-143
+
+    	* planner.el: Be more understanding of tasks that include
+            parenthesized non-link text. Thanks to John Anderson for
+            pointing this out.
+            (planner-task-info-from-string): Make sure the link
+    	text is really a link before setting planner-task-link.
+    	(planner-format-task): Do not unconditionally make links.
+    
+    	* planner-id.el (planner-id-add-task-id): Check if there's a
+    	linked task.
+    	(planner-id-jump-to-linked-task): Use planner-find-file instead of
+    	emacs-wiki-find-file.
+
+    modified files:
+     planner-id.el planner.el
+
+
+2004-07-24 12:29:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-142
+
+    Summary:
+      Bugfix: Improve overlay handling
+    Revision:
+      planner--dev--1.0--patch-142
+
+    	* planner.el:
+    	Depends on emacs-wiki--dev--1.0--patch-53.
+    	(planner-zap-overlays): New.
+    	(planner-mode): Don't forget to zap overlays before highlighting
+    	tasks and notes.
+    	(planner-highlight-tasks): Honor END.
+    	(planner-highlight-region): Tag it with 'planner t.
+
+    modified files:
+     planner.el
+
+
+2004-07-23 01:55:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-141
+
+    Summary:
+      Bugfix: planner-read-date: Remove use of kbd
+    Revision:
+      planner--dev--1.0--patch-141
+
+    	* planner.el (planner-read-date): Remove use of kbd, as it doesn't
+    	seem to be available under XEmacs/FreeBSD with the current
+    	requires. Thanks to George Hartzell for the bug report.
+
+    modified files:
+     planner.el
+
+
+2004-07-15 06:57:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-140
+
+    Summary:
+      planner-seek-next-unfinished-task
+    Revision:
+      planner--dev--1.0--patch-140
+
+    	* planner.el (planner-seek-next-unfinished-task): New.
+    
+    	* planner.texi (Viewing Tasks): Add note about
+    	planner-seek-next-unfinished-task.
+    
+    
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-07-15 06:39:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-139
+
+    Summary:
+      Add note about hierarchical tasks to planner.texi
+    Revision:
+      planner--dev--1.0--patch-139
+
+    	* planner.texi (Hierarchical Tasks): New note.
+
+    modified files:
+     planner.texi
+
+
+2004-07-13 12:27:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-138
+
+    Summary:
+      Bugfix: Refresh file alist after saving buffers in plan
+    Revision:
+      planner--dev--1.0--patch-138
+
+    	* planner.el (plan): Refresh file alist after saving buffers.
+
+    modified files:
+     planner.el
+
+
+2004-07-13 08:38:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-137
+
+    Summary:
+      Add planner-ledger.el
+    Revision:
+      planner--dev--1.0--patch-137
+
+    	* planner-ledger.el: New from Will Glozer.  Modifications: Pass
+    	checkdoc.
+    	(planner-ledger-payment-task-regexp): Make regular expression more
+    	flexible (not just USD).
+    
+    	* planner.texi (Using planner-ledger.el): New.
+
+    new files:
+     .arch-ids/planner-ledger.el.id planner-ledger.el
+
+    modified files:
+     planner.texi
+
+
+2004-06-29 06:57:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-136
+
+    Summary:
+      Docfix: remember-planner-append-hook
+    Revision:
+      planner--dev--1.0--patch-136
+
+    	* planner-rss.el: Update note about remember-planner-append-hook.
+    	Thanks to Michael Olson for the patch.
+    
+    	* planner.texi (Using planner-rss.el): Update note about
+    	remember-planner-append-hook. Thanks to Michael Olson for the
+    	patch.
+
+    modified files:
+     planner-rss.el planner.texi
+
+
+2004-06-28 04:43:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-135
+
+    Summary:
+      Menu tweaks: planner notes submenu, new keybindings
+    Revision:
+      planner--dev--1.0--patch-135
+
+    	* planner.el: Merge patch from Michael Olson.
+    	(planner-install-extra-note-keybindings): Add a new function
+    	`planner-install-extra-note-keybindings', modeled after
+    	`planner-install-extra-task-keybindings', that makes all of the
+    	note-related entries in the Planner menu keyboard-accessible. The
+    	prefix for all of these keys is C-c C-o, since C-c C-n was already
+    	in use.
+    	(planner-menu): Add a submenu called "Notes" to the Planner menu.
+    	(planner-menu): Fix the "Info" menu entry so that it brings up the
+    	planner info manual instead of displaying a message. This item is
+    	now called "Info manual".
+    	(planner-menu): Change the Goto submenu so that the word "Goto" is
+    	removed from the beginning of each entry. It seems ambiguous to
+    	have it there.
+
+    modified files:
+     planner.el
+
+
+2004-06-26 09:00:00 GMT	Sacha Chua <sacha@free.net.ph>	patch-134
+
+    Summary:
+      Document different ways to plan (bare-bones)
+    Revision:
+      planner--dev--1.0--patch-134
+
+    	* planner.texi (Bare-Bones Planning): New.
+    	(Bare-Bones Planning with Plan Pages): New.
+    	(Tasks on Plan Pages with Some Day Pages): New.
+    	(Planning based on the Franklin-Covey Approach): Renamed.
+
+    modified files:
+     planner.texi
+
+
+2004-06-26 08:21:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-133
+
+    Summary:
+      Bugfix: Change defvars to defcustoms
+    Revision:
+      planner--dev--1.0--patch-133
+
+
+    modified files:
+     planner.el
+
+
+2004-06-26 08:05:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-132
+
+    Summary:
+      Make note/task renumbering optional
+    Revision:
+      planner--dev--1.0--patch-132
+
+    	* planner.el (planner-renumber-notes-automatically): New.
+    	(planner-renumber-tasks-automatically): New.
+    	(planner-align-tasks-automatically): New.
+    
+    	* planner.texi (Making Files Pretty): Document new options.
+    
+    	* planner.el (planner-mode): Do not automatically align and
+    	renumber tasks and notes.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-26 07:47:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-131
+
+    Summary:
+      planner-gnus: Add check for from, copy article buffer
+    Revision:
+      planner--dev--1.0--patch-131
+
+    	* planner-gnus.el (planner-gnus-annotation-from-summary): Add
+    	check for from.
+    	(planner-gnus-annotation-from-message): Copy the article buffer.
+    	Add check for from.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-06-26 07:43:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-130
+
+    Summary:
+      Bugfix: Make sure user-mail-address is not the blank string
+    Revision:
+      planner--dev--1.0--patch-130
+
+    	* planner.el (planner-ignored-from-addresses): Make sure
+    	user-mail-address is not the blank string.
+
+    modified files:
+     planner.el
+
+
+2004-06-26 07:34:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-129
+
+    Summary:
+      New option: planner-use-day-pages allows you to turn off dates for tasks and notes
+    Revision:
+      planner--dev--1.0--patch-129
+
+    	* planner.el (planner-use-day-pages): New option allows you to
+    	turn off the use of day pages for tasks and notes. If not using
+            day pages, WecomePage is the default page.
+    	(planner-name-regexp): If not using day pages, use blank regexp.
+    	(planner-mode-map): If not using day pages, do not bind day
+    	navigation.
+    	(planner-menu): If not using day pages, do not add day navigation
+    	to menus.
+    	(planner-read-date): Don't read anything if not using day pages.
+    	(planner-goto): Read plan page if date page not specified.
+    	(planner-goto-most-recent): Do not call plan automatically.
+    	(planner-today): Return WelcomePage if not using day pages.
+    	(planner-update-wiki-project): Do not add empty regexp.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-26 06:23:24 GMT	Sacha Chua <sacha@free.net.ph>	patch-128
+
+    Summary:
+      New: planner-note-headline-face
+    Revision:
+      planner--dev--1.0--patch-128
+
+    	* planner.el (planner-note-headline-face): Make customizable face.
+    	(planner-highlight-notes): Use headline face. Thanks to people
+            on #emacs for the feedback.
+
+    modified files:
+     planner.el
+
+
+2004-06-26 05:06:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-127
+
+    Summary:
+      planner-authz.el update from ajk
+    Revision:
+      planner--dev--1.0--patch-127
+
+    	* planner-authz.el: Merge update from ajk removing cl dependency.
+
+
+2004-06-25 16:10:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-126
+
+    Summary:
+      Remove stray paren
+    Revision:
+      planner--dev--1.0--patch-126
+
+    	* planner.el (planner-create-task-from-buffer): Remove stray
+    	paren. Embarrassing!
+
+    modified files:
+     planner.el
+
+
+2004-06-25 15:26:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-125
+
+    Summary:
+      planner-gnus: Use gnus-article-buffer if available
+    Revision:
+      planner--dev--1.0--patch-125
+
+    	* planner-gnus.el (planner-gnus-get-message-id): Save excursion
+    	and use current buffer.
+    	(planner-gnus-annotation-from-summary): Use planner-make-link.
+    	(planner-gnus-annotation-from-message): Test against
+    	gnus-article-mode and gnus-original-article-mode. Use the
+    	gnus-article-buffer if available.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-06-25 15:26:07 GMT	Sacha Chua <sacha@free.net.ph>	patch-124
+
+    Summary:
+      planner.el task creation bugfixes: annotations, plan pages
+    Revision:
+      planner--dev--1.0--patch-124
+
+    	* planner.el (planner-create-task): Bugfix: Tweak annotation rules
+    	so that annotation does not preempt plan page. Do not use plan
+    	page unless specified.
+    	(planner-create-task-from-buffer): Use planner- functions instead
+    	of emacs-wiki- functions. Bugfix: Do not use plan page unless
+    	specified.
+
+    modified files:
+     planner.el
+
+
+2004-06-25 14:29:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-123
+
+    Summary:
+      Make planner-mode-hook customizable
+    Revision:
+      planner--dev--1.0--patch-123
+
+    	* planner.el (planner-mode-hook): Make planner-mode-hook
+    	customizable. Thanks to bigmike160 for pointing this out.
+    
+    	* planner.texi (Variables to Customize): Add planner-mode-hook.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-25 13:44:32 GMT	Sacha Chua <sacha@free.net.ph>	patch-122
+
+    Summary:
+      Embarrassing bugfix: Remove stray )
+    Revision:
+      planner--dev--1.0--patch-122
+
+    	* planner-gnus.el (planner-gnus-annotation-from-message): Remove
+    	stray )
+
+    modified files:
+     planner-gnus.el
+
+
+2004-06-25 13:43:21 GMT	Sacha Chua <sacha@free.net.ph>	patch-121
+
+    Summary:
+      Important bugfix: planner-gnus.el and annotations from articles
+    Revision:
+      planner--dev--1.0--patch-121
+
+    	* planner-gnus.el (planner-gnus-get-message-id): Important bugfix:
+    	Revert to if.
+    	(planner-gnus-get-address): Important bugfix: Use original article
+    	buffer.
+    	(planner-gnus-annotation-from-message): Important bugfix: Use
+    	original article buffer.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-06-25 13:34:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-120
+
+    Summary:
+      planner-gnus: Add major-mode check to annotations from messages
+    Revision:
+      planner--dev--1.0--patch-120
+
+    	* planner-gnus.el (planner-gnus-get-address): Use the current
+    	buffer, whatever it is.
+    	(planner-gnus-get-message-id): Change if to when. (minor)
+    	(planner-gnus-annotation-from-message): Add major-mode check.
+    	Thanks to Rainer Volz for the bug report.
+
+    modified files:
+     planner-gnus.el
+
+
+2004-06-25 05:14:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-119
+
+    Summary:
+      Update planner-authz.el to ajk's 1.20
+    Revision:
+      planner--dev--1.0--patch-119
+
+    	* planner-authz.el: Update to ajk's 1.20.
+
+    modified files:
+     planner-authz.el
+
+
+2004-06-24 14:55:16 GMT	Sacha Chua <sacha@free.net.ph>	patch-118
+
+    Summary:
+      Move planner-accomplishments and planner-tasks-overview documentation to "Using PlannerMode"
+    Revision:
+      planner--dev--1.0--patch-118
+
+    	* planner.texi (Using planner-accomplishments.el): Move to "Using
+    	Planner" section. Add example.
+    	(Using planner-tasks-overview.el): Add a small example.
+
+    modified files:
+     planner.texi
+
+
+2004-06-24 04:55:09 GMT	Sacha Chua <sacha@free.net.ph>	patch-117
+
+    Summary:
+      planner-annotation-strip-directory: new customizable option
+    Revision:
+      planner--dev--1.0--patch-117
+
+    	* planner.el (planner-annotation-from-file): Use
+    	planner-annotation-strip-directory. Thanks to Hoan Ton-That for
+    	the idea and base patch.
+    	(planner-annotation-strip-directory): Make customizable.
+    	(planner-annotation-use-relative-file): Make customizable.
+    
+    	* planner.texi (Introducing Annotation Functions): Document
+    	planner-annotation-functions, planner-annotation-strip-directory,
+    	planner-annotation-use-relative-file.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-24 04:34:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-116
+
+    Summary:
+      Merge tweaked patch from ajk changing use of planner-name-regexp to planner-date-regexp in planner-authz.el
+    Revision:
+      planner--dev--1.0--patch-116
+
+    	* planner-authz.el: Merge tweaked patch from ajk changing use of
+    	planner-name-regexp to planner-date-regexp.
+    	(planner-authz-day-p): Use planner-date-regexp instead of
+    	planner-name-regexp. Accept an optional parameter PAGE.
+    	(planner-authz-default): Use planner-authz-day-p instead of
+    	duplicating the test.
+    	(planner-authz-users): Docfix: Use planner-date-regexp instead of
+    	planner-name-regexp.
+
+    modified files:
+     planner-authz.el
+
+
+2004-06-23 16:55:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-115
+
+    Summary:
+      Add planner-rss size/item limits
+    Revision:
+      planner--dev--1.0--patch-115
+
+    	* planner-rss.el (planner-rss-feed-limits): New
+            user option.
+    	(planner-rss-add-item): Use planner-rss-limit.
+    	(planner-rss-limit): New.
+    	(planner-rss-limit-size): New.
+    	(planner-rss-limit-items): New.
+    
+    	* planner.texi (Using planner-rss.el): Document planner-rss
+    	feed limit option.
+
+    modified files:
+     planner-rss.el planner.texi
+
+
+2004-06-23 06:50:40 GMT	Sacha Chua <sacha@free.net.ph>	patch-114
+
+    Summary:
+      planner.texi update from johnsu01
+    Revision:
+      planner--dev--1.0--patch-114
+
+    	* planner.texi: Merge update from johnsu01. Task description
+    	much clearer.
+
+    modified files:
+     planner.texi
+
+
+2004-06-22 13:29:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-113
+
+    Summary:
+      NEW: planner-authz.el
+    Revision:
+      planner--dev--1.0--patch-113
+
+    	* planner-authz.el: New module contributed by Andrew J. Korty.
+    	Modified to pass checkdoc.
+    
+    	* planner.texi (Using planner-authz.el): New.
+    	(Components): Add entry for planner-authz.el
+
+    new files:
+     .arch-ids/planner-authz.el.id planner-authz.el
+
+    modified files:
+     planner.texi
+
+
+2004-06-22 13:27:41 GMT	Sacha Chua <sacha@free.net.ph>	patch-112
+
+    Summary:
+      planner-read-date: take optional arg `prompt'
+    Revision:
+      planner--dev--1.0--patch-112
+
+    	* planner.el (planner-read-date): Add optional prompt argument.
+
+    modified files:
+     planner.el
+
+
+2004-06-20 10:53:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-111
+
+    Summary:
+      Update planner.texi from johnsu01
+    Revision:
+      planner--dev--1.0--patch-111
+
+
+    modified files:
+     planner.texi
+
+
+2004-06-19 16:25:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-110
+
+    Summary:
+      Remove duplicate defcustom for planner-template-fuzz-factor
+    Revision:
+      planner--dev--1.0--patch-110
+
+    	* planner.el (planner-template-fuzz-factor): Remove duplicate
+    	defcustom. Thanks to johnsu01 for pointing this out.
+
+    modified files:
+     planner.el
+
+
+2004-06-18 16:55:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-109
+
+    Summary:
+      planner-bbdb: Add mailto: URLs to e-mail addresses
+    Revision:
+      planner--dev--1.0--patch-109
+
+    	* planner-bbdb.el (planner-bbdb-resolve-url): Add the mailto:
+    	URL. Thanks to ajk for bug report and patch idea
+
+    modified files:
+     planner-bbdb.el
+
+
+2004-06-15 03:19:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-108
+
+    Summary:
+      Docfix: Change mention of rmail to vm in planner-vm.el
+    Revision:
+      planner--dev--1.0--patch-108
+
+    	* planner-vm.el: Docfix: Change mention of rmail to vm.
+
+    modified files:
+     planner-vm.el
+
+
+2004-06-15 03:17:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-107
+
+    Summary:
+      Tweak: Move planner-rss options to planner-rss group
+    Revision:
+      planner--dev--1.0--patch-107
+
+    	* planner-rss.el (planner-rss): New.
+    	(planner-rss-base-url): Move to planner-rss group.
+    	(planner-rss-category-feeds): Move to planner-rss group.
+
+    modified files:
+     planner-rss.el
+
+
+2004-06-12 13:55:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-106
+
+    Summary:
+      NOTE: Prefix argument now means associate task with current plan/date page, if any
+    Revision:
+      planner--dev--1.0--patch-106
+
+    	* planner.el (planner-create-task-from-buffer): NOTE: Change
+    	behavior of prefix argument. Prefix now means associate the task
+    	with the current planner page, if any.
+    	(planner-create-task): Follow usage of
+    	planner-create-task-from-buffer. Thanks to Yvonne Thomson for the
+            suggestions.
+    
+    	* planner.texi (List of Interactive Functions): Update
+    	descriptions of planner-create-task-from-buffer and
+    	planner-create-task.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-12 13:39:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-105
+
+    Summary:
+      NOTE: planner-create-task prompts for plan page unless prefix argument is supplied
+    Revision:
+      planner--dev--1.0--patch-105
+
+    	* planner.el (planner-create-task): Add prefix argument
+    	which controls whether or not to prompt for a plan page.
+            Thanks to Yvonne Thomson for the suggestion.
+    
+    	* planner.texi (List of Interactive Functions): Update
+    	documentation for planner-create-task to include prefix arg.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-06-11 15:43:31 GMT	Sacha Chua <sacha@free.net.ph>	patch-104
+
+    Summary:
+      Important bugfix: Add condition-case just in case calendar is not displayed
+    Revision:
+      planner--dev--1.0--patch-104
+
+    	* planner.el (planner-create-task-from-buffer): Bugfix: Add
+    	condition-case just in case calendar is not displayed.
+
+    modified files:
+     planner.el
+
+
+2004-06-11 14:16:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-103
+
+    Summary:
+      NOTE: planner-create-task-from-buffer in a calendar buffer will use the currently-selected date for the task
+    Revision:
+      planner--dev--1.0--patch-103
+
+    	* planner.el (planner-create-task-from-buffer): Default date to
+    	date currently selected in calendar. Do not prompt if creating
+    	task based on that date. Thanks to Yvonne Thomson for the idea.
+
+    modified files:
+     planner.el
+
+
+2004-06-11 14:02:17 GMT	Sacha Chua <sacha@free.net.ph>	patch-102
+
+    Summary:
+      planner-id.el: Promote planner-id-update-automatically to a user-customizable variable
+    Revision:
+      planner--dev--1.0--patch-102
+
+    	* planner-id.el (planner-id-update-automatically): Promote to
+    	defcustom. Thanks to Yvonne Thomson for the suggestion.
+    	(planner-id): New customize group.
+    	(planner-id-add-task-id-flag): Move to planner-id group.
+    	(planner-id-tracking-file): Move to planner-id group.
+    	(planner-id-face): Move to planner-id group.
+    
+    	* planner.texi (Using planner-id.el): Update defvars to defopts.
+
+    modified files:
+     planner-id.el planner.texi
+
+
+2004-06-08 12:37:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-101
+
+    Summary:
+      Bugfix: planner-tasks-overview.el keymap
+    Revision:
+      planner--dev--1.0--patch-101
+
+    	* planner-tasks-overview.el (planner-tasks-overview): Correct typo
+    	in keymap. Thanks to ajk for the bug report and patch.
+
+    modified files:
+     planner-tasks-overview.el
+
+
+2004-06-03 14:49:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-100
+
+    Summary:
+      Bugfix: Revert planner-task-cancelled keybinding
+    Revision:
+      planner--dev--1.0--patch-100
+
+    	* planner.el (planner-install-extra-task-keybindings): Bugfix:
+    	Revert planner-task-cancelled keybinding for extra task
+            keybindings.
+
+    modified files:
+     planner.el
+
+
+2004-06-03 14:44:10 GMT	Sacha Chua <sacha@free.net.ph>	patch-99
+
+    Summary:
+      Bugfix: Make C-S-x work under XEmacs
+    Revision:
+      planner--dev--1.0--patch-99
+
+    	* planner.el (planner-mode-map): Make it work for XEmacs.
+    	(planner-install-extra-task-keybindings): Make it work for
+    	XEmacs. Thanks to pll for pointing this out. Apparently, I
+            need to be careful about the shift modifier...
+
+    modified files:
+     planner.el
+
+
+2004-06-03 11:46:44 GMT	Sacha Chua <sacha@free.net.ph>	patch-98
+
+    Summary:
+      New feature: planner-tasks-overview
+    Revision:
+      planner--dev--1.0--patch-98
+
+    	* planner-tasks-overview.el: New.
+    
+    	* planner.texi: Document planner-tasks-overview.el.
+
+    new files:
+     .arch-ids/planner-tasks-overview.el.id
+     planner-tasks-overview.el
+
+    modified files:
+     planner.texi
+
+
+2004-06-02 08:01:16 GMT	Sacha Chua <sacha@free.net.ph>	patch-97
+
+    Summary:
+      planner-calendar.el updates from Gary, and inclusion in doc
+    Revision:
+      planner--dev--1.0--patch-97
+
+     * planner.texi: Add documentation for planner-calendar.el.
+
+    modified files:
+     planner.texi
+
+
+2004-06-01 22:11:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-96
+
+    Summary:
+      planner.texi: Document planner-accomplishments.el
+    Revision:
+      planner--dev--1.0--patch-96
+
+    	* planner.texi: Add documentation for planner-accomplishments.el.
+
+    modified files:
+     planner.texi
+
+
+2004-06-01 21:58:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-95
+
+    Summary:
+      planner-accomplishments.el: Display per-status totals
+    Revision:
+      planner--dev--1.0--patch-95
+
+    	* planner-accomplishments.el
+    	(planner-accomplishments-format-table): Display per-status totals.
+
+    modified files:
+     planner-accomplishments.el
+
+
+2004-06-01 21:51:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-94
+
+    Summary:
+      Feature: planner-accomplishments.el
+    Revision:
+      planner--dev--1.0--patch-94
+
+    	* planner-accomplishments.el: New.
+
+    new files:
+     .arch-ids/planner-accomplishments.el.id
+     planner-accomplishments.el
+
+
+2004-06-01 11:35:08 GMT	Gary V. Vaughan <gary@gnu.org>	patch-3
+
+    Summary:
+      new functions to enable today.html publishing
+    Revision:
+      planner--gary--1.0--patch-3
+
+    	* planner-calendar.el (planner-calendar-today): New function to
+    	find the newest day page.
+    	(planner-calendar-create-today-link): New function to actually
+    	create a today.html link to the newest published day page.
+    	(planner-calendar-today-page-name): Customizable default day page
+    	base name.
+
+    modified files:
+     planner-calendar.el
+
+
+2004-05-31 16:04:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-93
+
+    Summary:
+      Docfix: planner task keybindings
+    Revision:
+      planner--dev--1.0--patch-93
+
+    	* planner.el (planner-install-extra-context-keybindings): Add note
+    	about added keybindings. Thanks to forcer.
+    	(planner-install-extra-task-keybindings): Added note about
+    	function definition. Still haven't figured out how to manage
+    	keymaps gracefully.
+    	(planner-search-notes): Satisfy checkdoc.
+    
+    	* planner.texi (Navigation): Update documentation for
+    	planner-goto-yesterday. Thanks to forcer for pointing this out.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-05-26 14:30:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-92
+
+    Summary:
+      Bugfix: planner-diary-get-diary-entries should return "No entries"
+    Revision:
+      planner--dev--1.0--patch-92
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Return "No
+    	entries" if diary returns no entries. Returning an empty string
+            screws up lisp tags.
+
+    modified files:
+     planner-diary.el
+
+
+2004-05-26 06:53:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-91
+
+    Summary:
+      Bugfix: Pass correct arguments in planner-diary-entries-here
+    Revision:
+      planner--dev--1.0--patch-91
+
+    	* planner-diary.el (planner-diary-entries-here): Bugfix: Pass
+    	correct arguments to planner-diary-get-diary-entries. It should be
+    	DATE DAYS FILE, not DATE FILE DAYS. Thanks to Brett Presnell for
+            the bug report.
+
+    modified files:
+     planner-diary.el
+
+
+2004-05-25 07:22:35 GMT	Sacha Chua <sacha@free.net.ph>	patch-90
+
+    Summary:
+      Bugfix: typo, boolean should be a symbol
+    Revision:
+      planner--dev--1.0--patch-90
+
+    	* planner.el (planner-hide-task-status-when-highlighting):
+    	Bugfix: typo, 'boolean should be a symbol.
+
+    modified files:
+     planner.el
+
+
+2004-05-25 07:21:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-89
+
+    Summary:
+      Bugfix: Do not insert file contents literally, as this screws up encoding
+    Revision:
+      planner--dev--1.0--patch-89
+
+    	* planner.el (planner-extract-tasks): Do not insert file contents
+    	literally.
+    	(planner-search-notes-internal): Do not insert file contents
+    	literally.
+    	(planner-past-notes-tag): Do not insert file contents literally.
+
+    modified files:
+     planner.el
+
+
+2004-05-25 07:19:21 GMT	Sacha Chua <sacha@free.net.ph>	patch-88
+
+    Summary:
+      planner-export-diary: Simplify code, do not use insert-contents-literally
+    Revision:
+      planner--dev--1.0--patch-88
+
+    	* planner-export-diary.el (planner-export-diary-future): Use
+    	planner-export-diary.
+    	(planner-export-diary-get-schedule-entries): Do not insert
+    	contents literally.  Allow spaces at the start of appointment
+    	lines.  Construct the list using cons instead of append. Note:
+    	This function does not guarantee any particular order.  Thanks
+    	to Xin Wei Hu for bug report and patch for both changes.
+
+    modified files:
+     planner-export-diary.el
+
+
+2004-05-25 07:10:27 GMT	Sacha Chua <sacha@free.net.ph>	patch-87
+
+    Summary:
+      Rearrange user customizations, promote some defvars to defcustoms
+    Revision:
+      planner--dev--1.0--patch-87
+
+    	* planner.el (planner-tasks): New customize group.
+    	(planner-carry-tasks-forward): Move to planner-tasks group.
+    	(planner-marks-regexp): Move to planner-tasks group.
+    	(planner-default-task-priority): Move to planner-tasks group.
+    	(planner-add-task-at-end-flag): Move to planner-tasks group.
+    	Promote from defvar.
+    	(planner-emacs-wiki): New customize group.
+    	(planner-name-regexp): Move to planner-emacs-wiki group.
+    	(planner-custom-variables): Move to planner-emacs-wiki group.
+    	(planner-publishing-markup): Move to planner-emacs-wiki group.
+    	(planner-markup-tags): Move to planner-emacs-wiki group.
+    	(planner-fontlock): New customize group.
+    	(planner-completed-task-face): Move to planner-fontlock group.
+    	(planner-cancelled-task-face): Move to planner-fontlock group.
+    	(planner-delegated-task-face): Move to planner-fontlock group.
+    	(planner-in-progress-task-face): Move to planner-fontlock group.
+    	(planner-high-priority-task-face): Move to planner-fontlock group.
+    	(planner-medium-priority-task-face): Move to planner-fontlock
+    	group.
+    	(planner-low-priority-task-face): Move to planner-fontlock group.
+    	(planner-default-page): Promote to user option under
+    	planner-tasks.
+    	(planner-hide-task-status-when-highlighting): Promote to user
+    	option under planner-fontlock.
+    	(planner-create-task-hook): Promote to user option under
+    	planner-tasks.
+    	(planner-task-dates-favor-future-p): Promote to user option under
+    	planner-tasks.
+    	(planner-expand-name-favor-future-p): Promote to user option under
+    	planner.
+
+    modified files:
+     planner.el planner.texi
+
+
+2004-05-20 21:03:55 GMT	Gerd Flaig <gefla@pond.sub.org>	patch-1
+
+    Summary:
+      fixed docstring
+    Revision:
+      planner--dev--1.0--patch-1
+
+    The docstring for planner-lisp-browse-url was wring. Fixed it.
+
+    modified files:
+     planner-lisp.el
+
+
+2004-05-20 12:07:52 GMT	Gary V. Vaughan <gary@gnu.org>	patch-2
+
+    Summary:
+      render calendar day links correctly
+    Revision:
+      planner--gary--1.0--patch-2
+
+    	* planner-calendar.el (planner-calendar):  Correct an arithmetic
+    	error that made calender day page links point from the wrong cell.
+
+    modified files:
+     planner-calendar.el
+
+
+2004-05-20 07:32:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-85
+
+    Summary:
+      Bugfix: Set reasonable defaults for planner-rss.el
+    Revision:
+      planner--dev--1.0--patch-85
+
+    	* planner-rss.el (planner-rss-base-url): Default to "".
+    	(planner-rss-category-feeds): Default to nil.
+    	(planner-rss-file-name): Add note about file name.
+            Thanks to Jan Alonzo for pointing this out.
+
+    modified files:
+     planner-rss.el
+
+
+2004-05-19 03:40:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-84
+
+    Summary:
+      planner-export-diary: Bugfix: Use planner-export-diary-file
+    Revision:
+      planner--dev--1.0--patch-84
+
+    	* planner-export-diary.el (planner-export-diary): Use
+    	planner-export-diary-file.
+    	(planner-export-diary-future): Use planner-export-diary-file.
+
+    modified files:
+     planner-export-diary.el
+
+
+2004-05-14 06:17:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-83
+
+    Summary:
+      planner-rss.el: NOTE: accept functions for conditions and phase out planner-rss-filename, planner-rss-initial-contents
+    Revision:
+      planner--dev--1.0--patch-83
+
+    	* planner-rss.el (planner-rss-initial-contents): NOTE: Move
+    	default value into planner-rss-category-feeds. Demote from
+    	customizable user option to global variable.
+    	(planner-rss-file-name): NOTE: Move into
+    	planner-rss-category-feeds. Demote from customizable user option
+    	to global variable.
+    	(planner-rss-category-feeds): Add default entry for all blog
+    	items. Allow choice between regular expression and function.
+    	(planner-rss-initialize): Remove. Move code into
+    	planner-rss-add-item.
+    	(planner-rss-add-item): Initialize file if necessary.
+    	(planner-rss-add-note): New argument FEED allows you to specify
+    	feed. New code for allowing the first element of
+    	planner-rss-category-feeds elements to be a function. Ensure that
+    	blog entries are not duplicated.
+    
+    	* planner.texi (Using planner-rss.el): Add usage note for
+    	planner-rss-category-feeds.
+    
+
+    modified files:
+     planner-rss.el planner.texi
+
+
+2004-05-13 05:08:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-82
+
+    Summary:
+      Bugfix: Strip spaces for better recognition of planner-cyclic tasks
+    Revision:
+      planner--dev--1.0--patch-82
+
+    	* planner-cyclic.el (planner-cyclic-get-cyclic-tasks): Strip
+    	spaces and recognize only task-like entries. Thanks to johnsu01
+    	for pointing this bug out.
+
+    modified files:
+     planner-cyclic.el
+
+
+2004-05-11 03:50:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-81
+
+    Summary:
+      NOTE: planner-id-add-task-id-flag
+    Revision:
+      planner--dev--1.0--patch-81
+
+    	* planner.texi: Add category entry.
+    	(Components): Correct typo.
+    	(Using planner-id.el): Mention `planner-id-add-task-id-flag'
+    	and `planner-id-update-automatically'.
+    
+    	* planner-id.el (planner-create-task-hook): Use
+    	`planner-id-add-task-id-maybe'.
+    	(planner-id-add-task-id-maybe): New.
+
+    modified files:
+     planner-id.el planner.texi
+
+
+2004-05-11 03:44:40 GMT	Sacha Chua <sacha@free.net.ph>	patch-80
+
+    Summary:
+      Alias planner-encode-url to emacs-wiki-escape-url
+    Revision:
+      planner--dev--1.0--patch-80
+
+    	* planner.el (planner-encode-url): Alias of
+    	emacs-wiki-escape-url. Thanks to Frederik Fouvry for pointing this
+    	out.
+
+    modified files:
+     planner.el
+
+
+2004-05-10 07:22:38 GMT	Sacha Chua <sacha@free.net.ph>	patch-79
+
+    Summary:
+      planner.texi: Mention planner-create-task-{high,medium,low}-priority and planner-default-task-priority
+    Revision:
+      planner--dev--1.0--patch-79
+
+    	* planner.texi (Creating a Task): Mention
+    	planner-create-task-{high,medium,low}-priority and
+    	planner-default-task-priority.
+    
+            * planner.texi: Change @var to @code where appropriate.
+
+    modified files:
+     planner.texi
+
+
+2004-05-10 06:58:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-78
+
+    Summary:
+      planner.texi: planner-jump-to-linked-note
+    Revision:
+      planner--dev--1.0--patch-78
+
+    	* planner.texi (Working With Notes): planner-jump-to-linked-note.
+
+    modified files:
+     planner.texi
+
+
+2004-05-10 06:51:43 GMT	Sacha Chua <sacha@free.net.ph>	patch-77
+
+    Summary:
+      planner.texi: planner-add-task-at-end-flag
+    Revision:
+      planner--dev--1.0--patch-77
+
+    	* planner.texi (Variables to Customize):
+    	planner-add-task-at-end-flag .
+    	(List of Interactive Functions): Add note about
+    	planner-add-task-at-end-flag.
+
+    modified files:
+     planner.texi
+
+
+2004-05-10 06:43:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-76
+
+    Summary:
+      Update planner.texi for planner-task-cancelled keybindings
+    Revision:
+      planner--dev--1.0--patch-76
+
+    	* planner.texi (Ideas for Other Keybindings): Update extra
+    	task keybindings.
+    	(Changing Tasks): Change the notation for shifted keys.
+
+    modified files:
+     planner.texi
+
+
+2004-05-10 06:24:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-75
+
+    Summary:
+      planner-timeclock: Clock in with planner-task-in-progress
+    Revision:
+      planner--dev--1.0--patch-75
+
+    	* planner.texi (Using planner-timeclock.el): Add note about
+    	clocking in with `planner-task-in-progress' and clocking out with
+    	`timeclock-out' or `planner-task-done'.
+    
+    	* planner-timeclock.el (planner-timeclock-in): Change to an alias
+    	of `planner-task-in-progress'.
+    	(planner-task-in-progress): New. Clock in on the current task, or
+    	change to it if already clocked in.
+    	(planner-task-done): Clock out only if clocked in.
+
+    modified files:
+     planner-timeclock.el planner.texi
+
+
+2004-05-10 05:37:31 GMT	Sacha Chua <sacha@free.net.ph>	patch-74
+
+    Summary:
+      Add planner-save-buffers to planner.texi
+    Revision:
+      planner--dev--1.0--patch-74
+
+    	* planner.texi (List of Interactive Functions): Mention
+    	planner-save-buffers.
+
+    modified files:
+     planner.texi
+
+
+2004-05-05 05:21:20 GMT	John Sullivan <johnsu01@yahoo.com>	patch-5
+
+    Summary:
+      Documentation changes.
+    Revision:
+      planner-dev--john--1.0--patch-5
+
+    Small changes to remember-bbdb descriptions.
+    
+    Added defuns to planner.el list.
+    
+    Modified Working More With Tasks and Working More With Notes
+    
+    modified files:
+     planner.texi
+
+
+2004-05-04 17:23:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-73
+
+    Summary:
+      planner-highlight-tasks: Better XEmacs compatibility
+    Revision:
+      planner--dev--1.0--patch-73
+
+    	* planner.el (planner-highlight-region): Better XEmacs
+    	compatibility. Should mark up completed tasks properly now. Thanks
+    	to hynek for pointing it out.
+    	(planner-highlight-tasks): Better XEmacs compatibility.
+    
+
+    modified files:
+     planner.el
+
+
+2004-05-04 16:29:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-72
+
+    Summary:
+      planner.texi: Getting started section: tasks fleshed out
+    Revision:
+      planner--dev--1.0--patch-72
+
+    
+    	* planner.texi: Patch is very ugly, sorry. Must break documentation
+            changes down even smaller, but got carried away.
+            (Top): Sentence-case descriptions, some changes.
+    	(Preface): Remove apology.
+    	(Introduction): Move description here instead of Preface. Collapse
+    	history.
+    	(Getting Started): Major rewrite.
+    	(Thoughts): New. Move essays under here, near the end.
+            
+
+    modified files:
+     planner.texi
+
+
+2004-05-04 14:29:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-71
+
+    Summary:
+      NOTE: Changed behavior of planner-carry-tasks-forward, now default for FORCE-DAYS (with minor tweaks)
+    Revision:
+      planner--dev--1.0--patch-71
+
+    	* planner.el (planner-carry-tasks-forward): NOTE: Now behaves
+    	similar to the FORCE-DAYS parameter of `plan'. Defaults to
+    	scanning the past three days _AND_ carrying the tasks forward, as
+    	this makes more sense for new users. Always checks for new tasks.
+    	(plan): Follow new meaning of planner-carry-tasks-forward as the
+    	default.
+
+    modified files:
+     planner.el
+
+
+2004-05-04 13:27:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-70
+
+    Summary:
+      Bugfix: Actually pass filename to function specified in planner-annotation-use-relative-file
+    Revision:
+      planner--dev--1.0--patch-70
+
+    	* planner.el (planner-annotation-from-file): Actually pass file
+    	name, as promised.
+    
+
+    modified files:
+     planner.el
+
+
+2004-05-04 12:03:02 GMT	Sacha Chua <sacha@free.net.ph>	patch-69
+
+    Summary:
+      planner.texi: Revise installation instructions
+    Revision:
+      planner--dev--1.0--patch-69
+
+    	* planner.texi: Revise installation instructions.
+    
+
+    modified files:
+     planner.texi
+
+
+2004-05-04 09:29:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-68
+
+    Summary:
+      Use emacs-wiki-url-protocols code in emacs-wiki--dev--1.0--patch-26
+    Revision:
+      planner--dev--1.0--patch-68
+
+    	* planner.el (planner-custom-variables): No longer use
+    	emacs-wiki-browse-url-function.
+    	(planner-url-list, planner-url-regexp): NOTE: Use
+    	emacs-wiki-url-protocols instead.
+    	(planner-publishing-markup): Remove planner-markup-url.
+    	(planner-update-wiki-project): Remove planner-url-regexp.
+    	(planner-browse-url-*): Remove.
+    	(planner-add-protocol): New.
+    
+    	* planner-wl.el: Add wl to protocols.
+    	(planner-wl-annotation-from-wl, planner-wl-browse-url): Autoload.
+    	* planner-vm.el: Add vm to protocols.
+    	(planner-vm-annotation-from-mail, planner-vm-browse-url):
+    	Autoload.
+    
+    	* planner-rmail.el: Add rmail to protocols.
+    	(planner-rmail-annotation-from-mail, planner-rmail-browse-url):
+    	Autoload.
+    		
+    	* planner-lisp.el: Add lisp to protocols.
+    	(planner-lisp-browse-url): Autoload.
+    
+    	* planner-gnus.el: Add gnus to protocols.
+    	(planner-gnus-insinuate, planner-gnus-annotation,
+    	planner-gnus-browse-url): Autoload.
+    	* planner-erc.el: Add erc and irc to protocols.
+    	(planner-erc-annotation-from-erc, planner-erc-browse-url):
+    	Autoload.
+    
+    	* planner-bbdb.el: Add bbdb to protocols.
+    	(planner-bbdb-resolve-url, planner-bbdb-browse-url,
+    	planner-bbdb-annotation-from-bbdb): Autoload.
+    
+
+    modified files:
+     planner-bbdb.el planner-erc.el planner-gnus.el planner-lisp.el
+     planner-rmail.el planner-vm.el planner-wl.el planner.el
+
+
+2004-05-03 03:26:32 GMT	Sacha Chua <sacha@free.net.ph>	patch-67
+
+    Summary:
+      Bugfix: Misplaced paren in planner-create-task-from-info
+    Revision:
+      planner--dev--1.0--patch-67
+
+    	* planner.el (planner-create-task-from-info): Bugfix: Misplaced
+    	paren.
+    
+
+    modified files:
+     planner.el
+
+
+2004-05-03 02:03:19 GMT	Sacha Chua <sacha@free.net.ph>	patch-66
+
+    Summary:
+      Bugfix: planner-save-buffers problem with planner-id updates
+    Revision:
+      planner--dev--1.0--patch-66
+
+    	* planner.el (planner-save-buffers): Try to fix problem with M-x
+    	plan rollover to new day by iterating over the buffer list instead
+    	of using save-buffers. Bug reported by Win Treese.
+    
+
+    modified files:
+     planner.el
+
+
+2004-05-03 00:51:06 GMT	John Sullivan <johnsu01@yahoo.com>	patch-1
+
+    Summary:
+      Created branch to Sacha's planner-dev, revised planner.texi.
+    Revision:
+      planner-dev--john--1.0--patch-1
+
+    Added external refs for Emacs manual: Gnus, Calendar/Diary,
+    Holidays, Appointments, Time Intervals.
+    
+    Fixed Rmail references.
+    
+    Minor cosmetic and typo fixes along the way.
+    
+    Added information about manually creating tasks without dates and/or
+    project pages to "Working With Tasks".
+    
+    Added "Customizing Your Day Pages" section with @xref's to other
+    sections.
+    
+    Added info about images to "Using emacs-wiki.el".
+    
+    Added info about listing unfinished tasks to "Working With Tasks".
+    
+    Added section "Introducing Annotation Functions" based on an email to
+    emacs-wiki-discuss by Yvonne Thompson.
+    
+    Added info about the Gmane gateway for the mailing list, and the Orkut
+    community to the "Getting Help" section.
+    
+    modified files:
+     planner.texi
+
+
+2004-04-30 09:15:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-64
+
+    Summary:
+      Bugfix: Allow multiple digits in +days or -days specification
+    Revision:
+      planner--dev--1.0--patch-64
+
+    	* planner.el (planner-expand-name): Bugfix: Allow multiple digits
+    	in +days or -days specification.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-30 07:36:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-63
+
+    Summary:
+      planner-annotation-use-relative-file
+    Revision:
+      planner--dev--1.0--patch-63
+
+    	* planner.el (planner-annotation-use-relative-file): New.
+    	(planner-annotation-from-file): Change behavior depending on
+    	planner-annotation-use-relative-file.
+
+    modified files:
+     planner.el
+
+
+2004-04-29 07:16:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-62
+
+    Summary:
+      info update from johnsu01
+    Revision:
+      planner--dev--1.0--patch-62
+
+
+    modified files:
+     planner.texi
+
+
+2004-04-29 07:11:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-61
+
+    Summary:
+      New: planner-annotation-from-file-relative
+    Revision:
+      planner--dev--1.0--patch-61
+
+    	* planner.el (planner-annotation-from-file-relative): New.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-28 15:55:26 GMT	Gary V. Vaughan <gary@gnu.org>	patch-1
+
+    Summary:
+      render planner day page calendars with elisp
+    Revision:
+      planner--gary--1.0--patch-1
+
+    	* planner-calendar.el: New file.
+
+    new files:
+     .arch-ids/planner-calendar.el.id planner-calendar.el
+
+
+2004-04-28 05:01:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-60
+
+    Summary:
+      Get BBDB links to resolve properly again
+    Revision:
+      planner--dev--1.0--patch-60
+
+    	* planner-bbdb.el (planner-resolve-url-table): Add the right
+    	protocols.
+    
+
+    modified files:
+     planner-bbdb.el
+
+
+2004-04-27 16:06:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-59
+
+    Summary:
+      planner-id: Make automatic updating optional (default: off)
+    Revision:
+      planner--dev--1.0--patch-59
+
+    	* planner-id.el: Note about new variable.
+    	(planner-id-update-automatically): New option controls whether to
+    	update linked pages automatically or not.
+    	(planner-id-update-tasks-maybe): For convenience.
+    	(planner-id-setup): Name the hook function.
+    	(planner-mode-hook): Hook in.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-04-27 05:41:38 GMT	Sacha Chua <sacha@free.net.ph>	patch-58
+
+    Summary:
+      Add johnsu01's texinfo manual
+    Revision:
+      planner--dev--1.0--patch-58
+
+    	* planner.texi: First draft by John Sullivan.
+
+    new files:
+     .arch-ids/planner.texi.id planner.texi
+
+
+2004-04-27 02:50:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-57
+
+    Summary:
+      Fix planner diary entries for cal-desk
+    Revision:
+      planner--dev--1.0--patch-57
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Merge Travis
+    	B. Hartwell's patch fixing calendar desk entries. New argument
+    	use-cal-desk.
+    	(planner-diary-get-cal-desk-entries): Use the new argument of
+    	planner-diary-get-diary-entries.
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-04-26 05:13:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-56
+
+    Summary:
+      Allow nil to be entered as a date or plan page name
+    Revision:
+      planner--dev--1.0--patch-56
+
+    	* planner.el (planner-read-name): Make it easy to return nil.
+    	(planner-expand-name): Return nil if "nil" is entered.
+    	(planner-create-task-from-info): Work with nil plan pages or dates.
+    	(planner-goto-plan-page): Remove unnecessary macro calls.
+    	(planner-replan-task): Do the right thing if nil is specified.
+    	(planner-copy-or-move-task): Check if date is nil.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-26 03:08:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-55
+
+    Summary:
+      planner-create-{high,medium,low}-priority-task-from-buffer for convenience
+    Revision:
+      planner--dev--1.0--patch-55
+
+    	* planner.el (planner-create-high-priority-task-from-buffer): New.
+    	(planner-create-medium-priority-task-from-buffer): New.
+    	(planner-create-low-priority-task-from-buffer): New for your
+    	key-binding convenience.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-23 10:44:51 GMT	Gary V. Vaughan <gary@gnu.org>	patch-5
+
+    Summary:
+      render planner day page calendars with elisp
+    Revision:
+      emacs-wiki--gary--1.0--patch-5
+
+    	  * planner-calendar.el: New file.
+
+    new files:
+     .arch-ids/planner-calendar.el.id planner-calendar.el
+
+
+2004-04-22 02:17:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-53
+
+    Summary:
+      planner-wl: Merge bugfixes from Angus Lee
+    Revision:
+      planner--dev--1.0--patch-53
+
+    	* planner-wl.el: Merge bugfixes from Angus Lee.
+    
+
+    modified files:
+     planner-wl.el
+
+
+2004-04-22 01:53:14 GMT	Sacha Chua <sacha@free.net.ph>	patch-52
+
+    Summary:
+      Bugfix: planner-rmail-browse-url should jump to rmail messages outside excursion
+    Revision:
+      planner--dev--1.0--patch-52
+
+    	* planner-rmail.el (planner-rmail-browse-url): Bugfix: Move rmail
+    	jump to outside excursion. Return message number if found. Thanks
+    	to fouvry for help.
+    
+
+    modified files:
+     planner-rmail.el
+
+
+2004-04-21 17:12:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-51
+
+    Summary:
+      Bugfix: planner-experimental: planner-remove duplicates should remove dupes on date pages
+    Revision:
+      planner--dev--1.0--patch-51
+
+    	* planner-experimental.el (planner-remove-duplicates): Bugfix:
+    	Work properly with duplicated tasks on a date page.
+    
+    	* planner-id.el (planner-id-update-tasks-on-page): Docfix.
+    
+
+    modified files:
+     planner-experimental.el planner-id.el
+
+
+2004-04-21 15:05:24 GMT	Sacha Chua <sacha@free.net.ph>	patch-50
+
+    Summary:
+      Bugfix: planner-id.el and saving IDs
+    Revision:
+      planner--dev--1.0--patch-50
+
+    	* planner-id.el (planner-id-save): Simplify Lisp by using
+    	built-in-function. Also solve final newline problem with
+    	require-final-newline 'ask. Thanks to Win Treese for reporting
+    	bug.
+    
+
+    modified files:
+     planner-cyclic.el planner-id.el
+
+
+2004-04-21 14:45:07 GMT	Sacha Chua <sacha@free.net.ph>	patch-49
+
+    Summary:
+      planner-rmail: Improvement: Gracefully deal with missing messages
+    Revision:
+      planner--dev--1.0--patch-49
+
+    	* planner-rmail.el (planner-rmail-browse-url): Improvement:
+    	Gracefully deal with missing messages. Thanks to Frederik Fouvry
+    	for the patch.
+
+    modified files:
+     planner-rmail.el
+
+
+2004-04-21 14:32:42 GMT	Sacha Chua <sacha@free.net.ph>	patch-48
+
+    Summary:
+      Bugfix: Improve rmail handling of nonexistent messages
+    Revision:
+      planner--dev--1.0--patch-48
+
+    	* planner-rmail.el (planner-rmail-browse-url): Report the
+              error in the original context. Thanks to Frederik Fouvry for
+              idea/patch.
+    
+
+    modified files:
+     planner-rmail.el
+
+
+2004-04-21 13:54:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-47
+
+    Summary:
+      planner-gnus: Go directly to message; planner-rmail: elisp tweak
+    Revision:
+      planner--dev--1.0--patch-47
+
+    	* planner-gnus.el (planner-gnus-browse-url): NOTE: No longer
+    	prompt for number of messages. Try to go directly to the message
+    	instead.
+    
+    	* planner-rmail.el (planner-rmail-browse-url): Remove unnecessary
+    	`rmail-first-message'.
+    
+
+    modified files:
+     planner-gnus.el planner-rmail.el
+
+
+2004-04-20 17:24:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-46
+
+    Summary:
+      Feature: planner-search-notes-with-body
+    Revision:
+      planner--dev--1.0--patch-46
+
+    	* planner.el (planner-search-notes-internal): Can include body.
+    	(planner-search-notes-with-body): New.
+    	(planner-search-notes): Can include body.
+            Thanks to cpchan for the suggestion.
+
+    modified files:
+     planner.el
+
+
+2004-04-20 17:10:35 GMT	Sacha Chua <sacha@free.net.ph>	patch-45
+
+    Summary:
+      Set list-diary-entries-hook for planner-cyclic-get-cyclic-tasks
+    Revision:
+      planner--dev--1.0--patch-45
+
+    	* planner-cyclic.el (planner-cyclic-get-cyclic-tasks): Force
+    	`list-diary-entries-hook' to a canonical value. Thanks to cpchan
+    	for pointing this out.
+    
+
+    modified files:
+     planner-cyclic.el
+
+
+2004-04-20 13:05:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-44
+
+    Summary:
+      Bugfix: planner-cyclic error checking
+    Revision:
+      planner--dev--1.0--patch-44
+
+    	* planner-cyclic.el (planner-cyclic-create-task-maybe): Add check
+    	to make sure string looks like a task.
+    	(planner-cyclic-create-tasks-maybe): Make sure this page has a
+    	page name. Thanks to Charles Philip Chan for pointing both bugs out.
+    
+
+    modified files:
+     planner-cyclic.el
+
+
+2004-04-20 13:00:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-43
+
+    Summary:
+      Obey command passed to planner-find-file
+    Revision:
+      planner--dev--1.0--patch-43
+
+    	* planner.el (planner-find-file): Actually obey command.
+            Thanks to Charles Philip Chan for pointing this out.
+
+    modified files:
+     planner.el
+
+
+2004-04-20 11:40:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-42
+
+    Summary:
+      Bugfix: return t all the time in browse-url functions
+    Revision:
+      planner--dev--1.0--patch-42
+
+    	* planner-*.el (planner-*-browse-url): Bugfix: Return t all the
+    	time.
+    
+
+    modified files:
+     planner-bbdb.el planner-erc.el planner-lisp.el planner-vm.el
+     planner-w3m.el planner-wl.el planner.el
+
+
+2004-04-20 04:14:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-41
+
+    Summary:
+      Bugfix: planner-bbdb slashes optional, planner.el publishing (move tags first), planner-copy-or-move-task accepts nil
+    Revision:
+      planner--dev--1.0--patch-41
+
+    
+    	* planner.el (planner-publishing-markup): Bugfix: Process tags
+    	before the rest of the stuff because things in <example> need to
+    	be read-only.
+    
+    	* planner-bbdb.el: Make slashes optional.
+    
+    	* planner.el (planner-copy-or-move-task): Correctly work when
+    	"nil" is specified. Thanks to Ray Fix for bringing this to my
+    	attention.
+    
+
+    modified files:
+     planner-bbdb.el planner.el
+
+
+2004-04-17 15:36:17 GMT	Sacha Chua <sacha@free.net.ph>	patch-40
+
+    Summary:
+      Rewrite planner-tasks-equal-p for clarity
+    Revision:
+      planner--dev--1.0--patch-40
+
+    	* planner.el (planner-tasks-equal-p): Rewrite for clarity by
+    	using descriptive names. Thanks to Frederik for feedback.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-17 15:26:19 GMT	Sacha Chua <sacha@free.net.ph>	patch-39
+
+    Summary:
+      NOTE: Feature: limit for planner-search-notes (call with C-u)
+    Revision:
+      planner--dev--1.0--patch-39
+
+    	* planner.el (planner-list-daily-files,planner-get-day-pages): New
+    	option EXCLUDE-TEMP ignores unsaved buffers.
+    	(planner-search-notes-internal, planner-search-notes): Add LIMIT.
+    	NOTE: New feature: limit for planner-search-notes if called with
+    	universal prefix.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-17 14:53:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-38
+
+    Summary:
+      Bugfix: Preserve project and mode in index
+    Revision:
+      planner--dev--1.0--patch-38
+
+    	* planner-experimental.el (planner-index): AHA! Properly use
+    	emacs-wiki-project and highlight
+    	properly. (emacs-wiki-change-project) has no effect if we change
+    	to planner-mode, as changing mode zaps all the local
+    	variables. Thanks to ephrem for reporting the bug.
+    	(planner-generate-index): NOTE: Indexes dates in reverse order.
+    
+    	* planner-notes-index.el (planner-notes-index): Preserve project.
+    
+
+    modified files:
+     planner-experimental.el planner-notes-index.el
+
+
+2004-04-17 14:08:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-37
+
+    Summary:
+      Bugfix: Allow any status in planner-find-task
+    Revision:
+      planner--dev--1.0--patch-37
+
+    	* planner.el (planner-find-task): Bugfix: Allow any status. Thanks
+    	to Ephrem for pointing out the bug.
+    	(planner-publishing-markup): Add note about
+    	planner-marks-regexp.
+    	(planner-marks-regexp): Add note about planner-publishing-markup.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-16 03:57:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-36
+
+    Summary:
+      Bugfix: Sort diary entries
+    Revision:
+      planner--dev--1.0--patch-36
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Sort
+              diary entries.
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-04-16 02:57:00 GMT	Sacha Chua <sacha@free.net.ph>	patch-35
+
+    Summary:
+      Bugfix: planner-diary should use fancy-diary-display
+    Revision:
+      planner--dev--1.0--patch-35
+
+    	* planner-diary.el (planner-diary-get-diary-entries): Bugfix: Make
+    	sure fancy-diary-display is used. Do not squelch messages; this
+    	can lead to mysterious problems.
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-04-15 15:34:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-34
+
+    Summary:
+      Bugfix: planner-rss is extra-paranoid about missing information
+    Revision:
+      planner--dev--1.0--patch-34
+
+    	* planner-rss.el (planner-rss-add-note): Extra paranoia for stuff
+    	that is missing. Guarded against nil inserts.
+    
+
+    modified files:
+     planner-rss.el
+
+
+2004-04-15 14:09:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-33
+
+    Summary:
+      Important bugfix: Properly update task
+    Revision:
+      planner--dev--1.0--patch-33
+
+    	* planner.el (planner-copy-or-move-task): Important bugfix:
+    	Properly update task. Correct bug introduced in patch-28.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-15 13:20:14 GMT	Sacha Chua <sacha@free.net.ph>	patch-32
+
+    Summary:
+      Bugfix: planner-list-daily-files and other buffers, planner-gnus and URLs
+    Revision:
+      planner--dev--1.0--patch-32
+
+    	* planner-gnus.el (planner-gnus-browse-url): Make sure
+    	planner-gnus always handles gnus: URLs.
+    
+    	* planner.el (planner-list-daily-files): Make sure the page has a
+    	name.
+    
+
+    modified files:
+     planner-gnus.el planner.el
+
+
+2004-04-15 03:45:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-31
+
+    Summary:
+      Change pending task mark to "P"
+    Revision:
+      planner--dev--1.0--patch-31
+
+    	* planner.el (planner-publishing-markup): Accept P as task status.
+    	(planner-marks-regexp): Accept P as task status.
+    	(planner-renumber-tasks): Sort pending, then delegated, then
+    	completed, then cancelled tasks.
+    	(planner-markup-task): Mark up pending tasks.
+    	(planner-task-pending): Change pending task mark to P.
+            Thanks to Ephrem for the feature request.
+            
+            * planner.el (planner-list-unfinished-tasks): Consider
+            cancelled tasks finished.
+
+    modified files:
+     planner.el
+
+
+2004-04-15 03:38:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-30
+
+    Summary:
+      Bugfix: duplicate planner-task-cancelled, experimental planner-jump-to-linked-note
+    Revision:
+      planner--dev--1.0--patch-30
+
+    	* planner.el: Remove duplicate planner-task-cancelled.
+    	(planner-jump-to-linked-note): Promote from
+    	planner-experimental.el. Thanks to Martin Morgan for pointing
+    	these out.
+            (planner-file-alist): Move to emacs-wiki layer
+    	section.
+
+    modified files:
+     planner-experimental.el planner.el
+
+
+2004-04-14 17:23:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-29
+
+    Summary:
+      Bugfix: Save restriction in planner-copy-or-move-task
+    Revision:
+      planner--dev--1.0--patch-29
+
+    	* planner.el (planner-copy-or-move-task): Save restriction now
+    	that we do fancy things in planner-copy-or-move-region. This
+    	fixes the problem of interactively calling
+    	planner-copy-or-move-region with a marked region.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-14 17:11:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-28
+
+    Summary:
+      Feature: planner-add-task-at-end-flag
+    Revision:
+      planner--dev--1.0--patch-28
+
+    	* planner.el (planner-add-task-at-end-flag): New.
+    	(planner-create-task-from-info): Create at creation point,
+    	wherever that is.
+    	(planner-read-name, planner-file-alist, planner-page-file):
+    	Docfix. Satisfy checkdoc.
+    	(planner-seek-task-creation-point): New.
+    	(planner-copy-or-move-task): Create at creation point.
+    	(planner-update-task): Create at creation point.
+    	(planner-copy-or-move-region): Obey planner-add-task-at-end-flag.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-14 15:50:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-27
+
+    Summary:
+      Add error-checking to planner-cyclic
+    Revision:
+      planner--dev--1.0--patch-27
+
+    	* planner-cyclic.el (planner-cyclic-get-cyclic-tasks): Remove nil
+    	elements.
+    	(planner-cyclic-generate-task): Check if task is correctly parsed.
+    	(planner-cyclic-create-tasks-maybe): Check if task-string is
+    	non-nil.
+
+    modified files:
+     planner-cyclic.el
+
+
+2004-04-13 08:47:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-26
+
+    Summary:
+      Enhancement: planner-rmail scans backward
+    Revision:
+      planner--dev--1.0--patch-26
+
+    	* planner-rmail.el (planner-rmail-browse-url): Scan backward for
+    	efficiency. Also, return -1 if not found. Thanks to Frederik Fouvry
+            for the suggestion.
+
+    modified files:
+     planner-rmail.el
+
+
+2004-04-13 08:45:32 GMT	Sacha Chua <sacha@free.net.ph>	patch-25
+
+    Summary:
+      Bugfix: planner-gnus: work with cached articles
+    Revision:
+      planner--dev--1.0--patch-25
+
+    	* planner-gnus.el (planner-gnus-browse-url): Work with cached
+    	articles. Thanks to John Sullivan for pointing this out.
+    	(planner-gnus-annotation): New for convenience.
+    	(planner-annotation-functions): Use planner-gnus-annotation.
+    
+
+    modified files:
+     planner-gnus.el
+
+
+2004-04-11 08:17:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-24
+
+    Summary:
+      NOTE: New function planner-task-cancelled bound to C-c C-S-x by default
+    Revision:
+      planner--dev--1.0--patch-24
+
+    	* planner.el (planner-mode-map): Add keyboard shortcut for
+    	planner-task-cancelled.
+    	(planner-install-extra-task-keybindings): Add keyboard shortcut
+    	for planner-task-cancelled.
+    	(planner-task-cancelled): New.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-11 08:16:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-23
+
+    Summary:
+      Bugfix: Correctly switch notes indices into planner mode
+    Revision:
+      planner--dev--1.0--patch-23
+
+    	* planner-notes-index.el (planner-notes-index): Bugfix: correctly
+    	switch into planner mode.
+
+    modified files:
+     planner-notes-index.el
+
+
+2004-04-11 06:37:22 GMT	Sacha Chua <sacha@free.net.ph>	patch-22
+
+    Summary:
+      Enhancement: Always create planner-directory
+    Revision:
+      planner--dev--1.0--patch-22
+
+    	* planner.el (planner-find-file): Always create planner-directory.
+    	(planner-goto): Call planner-find-file.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-11 06:36:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-21
+
+    Summary:
+      Bugfix: Refontify after adding task IDs to all tasks
+    Revision:
+      planner--dev--1.0--patch-21
+
+    	* planner-id.el: Docfix: Add URL.
+    	(planner-id-add-task-id-to-all): Bugfix: Refontify after adding
+    	task IDs.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-04-07 11:24:38 GMT	Sacha Chua <sacha@free.net.ph>	patch-20
+
+    Summary:
+      Resolve windmove keybinding conflict
+    Revision:
+      planner--dev--1.0--patch-20
+
+    	* planner.el (planner-install-extra-context-keybindings): Move
+    	windmove-conflicting keybindings to this function. Thanks to TerryP
+            for pointing this out.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-07 10:53:00 GMT	Sacha Chua <sacha@free.net.ph>	patch-19
+
+    Summary:
+      Context-sensitive keyboard shortcuts (S-up, S-down, S-right)
+    Revision:
+      planner--dev--1.0--patch-19
+
+    	* planner.el (planner-mode-map): New keybindings: shift up (move
+    	up), shift down (move down), and shift right (follow link). NOTE:
+            They might be more convenient than the current defaults.
+    	(planner-jump-to-link): New.
+    	(planner-move-up): New.
+    	(planner-move-down): New.
+    	(planner-current-note-info): Save excursion.
+    	(planner-update-task): Save excursion.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-07 05:59:39 GMT	Sacha Chua <sacha@free.net.ph>	patch-18
+
+    Summary:
+      Save position and restriction for planner-update-note
+    Revision:
+      planner--dev--1.0--patch-18
+
+    	* planner-experimental.el (planner-update-note): Save position,
+    	restriction, and window excursion so that we don't freak pll out.
+    
+
+    modified files:
+     planner-experimental.el
+
+
+2004-04-05 16:08:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-17
+
+    Summary:
+      Make date optional for tasks.
+    Revision:
+      planner--dev--1.0--patch-17
+
+    	* planner.el (planner-create-task-from-info): Make date optional.
+    	(planner-create-task-from-buffer): Make date optional. Thanks to
+    	Alan Schussman and emacs-wiki-discuss for the suggestion. You can
+    	now specify a non-date as the date to make a task that is not
+    	associated with any date. Warning: Unscheduled tasks might be
+    	forgotten.
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-05 15:38:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-16
+
+    Summary:
+      planner-rmail: Return message number
+    Revision:
+      planner--dev--1.0--patch-16
+
+    	* planner-rmail.el (planner-rmail-browse-url): Return message
+    	number according to Frederik Fouvry's suggestion.
+    
+
+    modified files:
+     planner-rmail.el
+
+
+2004-04-05 04:57:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-15
+
+    Summary:
+      Preliminary support for clocking out when a task is finished
+    Revision:
+      planner--dev--1.0--patch-15
+
+    	* planner-timeclock.el: Preliminary support for clocking out when
+    	a task is finished. Thanks to dto for pointing this out.
+    
+
+    modified files:
+     planner-timeclock.el
+
+
+2004-04-05 04:45:26 GMT	Sacha Chua <sacha@free.net.ph>	patch-14
+
+    Summary:
+      Add prefix arg FORCE to planner-id-update-tasks-on-page
+    Revision:
+      planner--dev--1.0--patch-14
+
+    	* planner-id.el (planner-id-update-tasks-on-page): Add prefix
+    	argument to force all tasks to be updated, including completed and
+    	cancelled tasks.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-04-05 02:25:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-13
+
+    Summary:
+      Do not use string>
+    Revision:
+      planner--dev--1.0--patch-13
+
+    	* planner-experimental.el (planner-remove-duplicates): Do not
+    	use string>. (Why isn't that in subr? Pfft.) Thanks to Martin
+    	Stemplinger for pointing this out.
+    
+    	* planner-cyclic.el (planner-cyclic-create-tasks-maybe): Do not
+    	use string>. (Why isn't that in subr? Pfft.) Thanks to Martin
+    	Stemplinger for pointing this out.
+    
+
+    modified files:
+     planner-cyclic.el planner-experimental.el
+
+
+2004-04-04 10:29:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-12
+
+    Summary:
+      Condition-case keybindings, require easymenu
+    Revision:
+      planner--dev--1.0--patch-12
+
+    	* planner-schedule.el: Wrap a condition-case around key 
+    	definitions. Require easymenu.
+    
+    	* planner-timeclock.el: Wrap a condition-case around key
+            definitions. Require easymenu.
+    
+    	* planner.el: Require easymenu.
+    
+
+    modified files:
+     planner-schedule.el planner-timeclock.el planner.el
+
+
+2004-04-04 10:08:05 GMT	Sacha Chua <sacha@free.net.ph>	patch-11
+
+    Summary:
+      Add note about where to get timeclock.el
+    Revision:
+      planner--dev--1.0--patch-11
+
+    	* planner-timeclock.el: Add note about where to get timeclock.el
+    
+    
+    
+
+    modified files:
+     planner-timeclock.el
+
+
+2004-04-04 10:05:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-10
+
+    Summary:
+      Bugfix: planner-replan-task and tasks without plan pages
+    Revision:
+      planner--dev--1.0--patch-10
+
+    	* planner.el (planner-replan-task): Correctly work with tasks with
+    	no associated plan page. Thanks to pll for pointing this out.
+    
+    
+
+    modified files:
+     planner.el
+
+
+2004-04-04 09:57:12 GMT	Sacha Chua <sacha@free.net.ph>	patch-9
+
+    Summary:
+      Support arbitrary mailboxes for planner-rmail
+    Revision:
+      planner--dev--1.0--patch-9
+
+    	* planner-rmail.el (planner-rmail-annotation-from-mail): Allow
+    	arbitrary mailboxes.
+    	(planner-rmail-browse-url): Open arbitrary mailboxes, but retain
+    	backward compatibility. Thanks to Frederik Fouvry for pointing
+    	this out.
+    
+
+    modified files:
+     planner-rmail.el
+
+
+2004-03-31 15:10:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-8
+
+    Summary:
+      Bugfix: Merge Nafai's patch correcting planner-diary.el
+    Revision:
+      planner--dev--1.0--patch-8
+
+    	* planner-diary.el (planner-diary-insert-cal-desk): Merge Nafai's
+    	patch correcting a typo.
+    	(planner-diary-use-public-diary): Merge Nafai's patch correcting a
+    	typo.
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-03-30 05:47:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-7
+
+    Summary:
+      Remove planner-notes.el from distribution
+    Revision:
+      planner--dev--1.0--patch-7
+
+    	* planner-notes.el: Remove from distribution as Thomas Gehrlein
+    	requests. (He's not quite sure what he wants it to do.)
+
+    removed files:
+     .arch-ids/planner-notes.el.id planner-notes.el
+
+
+2004-03-30 05:40:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-6
+
+    Summary:
+      Bugfix: Invalid regular expression in planner-id.el
+    Revision:
+      planner--dev--1.0--patch-6
+
+    	* planner-id.el (planner-id-update-tasks-on-page): Change invalid
+    	regular expression. Thanks to pll for pointing this out.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-03-30 04:55:34 GMT	Sacha Chua <sacha@free.net.ph>	patch-5
+
+    Summary:
+      Docfix: planner-create-task-from-buffer. NOTE: default behavior asks for plan page after creating a task
+    Revision:
+      planner--dev--1.0--patch-5
+
+    	* planner.el (planner-create-task-from-buffer): Update
+    	documentation to reflect new behavior. NOTE: By default,
+    	planner-create-task-from-buffer now assumes that you
+    	want to associate the task with a plan page. This keeps in
+    	line with planner's original philosophy that most (if not all)
+    	of your tasks should be part of a plan.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-30 04:46:45 GMT	Sacha Chua <sacha@free.net.ph>	patch-4
+
+    Summary:
+      Bugfix: Add planner-history-list, reorganize reading functions into Convenience section
+    Revision:
+      planner--dev--1.0--patch-4
+
+    	* planner.el: Moved planner-read-name, planner-read-non-date-page,
+    	planner-default-page to Convenience section.
+    	(planner-history-list): Bugfix: New.
+
+    modified files:
+     planner.el
+
+
+2004-03-30 04:38:43 GMT	Sacha Chua <sacha@free.net.ph>	patch-3
+
+    Summary:
+      Split schedule export functions into planner-export-diary.el 
+    Revision:
+      planner--dev--1.0--patch-3
+
+    	* planner-export-diary.el, planner.el: Split off
+    	schedule-related functions from planner.el and placed them in
+    	planner-export-diary.el, renaming to avoid namespace conflicts
+    	with planner-diary.el. Add documentation in comments.
+
+    new files:
+     .arch-ids/planner-export-diary.el.id planner-export-diary.el
+
+    modified files:
+     planner.el
+
+
+2004-03-30 04:19:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-2
+
+    Summary:
+      Updated planner-diary.el from Thomas Gehrlein
+    Revision:
+      planner--stable--1.0--patch-2
+
+    	* planner-diary.el: Update from Thomas Gehrlein: version 1.0. Some
+    	patches for documentation. Passes checkdoc now.
+
+    modified files:
+     planner-diary.el
+
+
+2004-03-26 08:51:44 GMT	Sacha Chua <sacha@free.net.ph>	patch-1
+
+    Summary:
+      Update wiki project and save all buffers during plan
+    Revision:
+      planner--dev--1.0--patch-1
+
+    	* planner.el (plan): Paranoia: update wiki project in case you're
+    	forgotten to do so, and save all the buffers after planning.
+
+    modified files:
+     planner.el
+
+
+2004-03-25 08:21:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-148
+
+    Summary:
+      No need to escape URLs in planner-erc as emacs-wiki-markup-link handles that now
+    Revision:
+      emacs-wiki--sacha--1.0--patch-148
+
+    	* planner-erc.el (planner-erc-annotation-from-erc): No more need
+    	to escape URLs here, as emacs-wiki-escape-url does that
+    	automatically.
+    
+
+    modified files:
+     planner-erc.el
+
+
+2004-03-25 08:18:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-147
+
+    Summary:
+      Add planner-replan-task so that you can change the plan page of created tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-147
+
+    	* planner.el (planner-copy-or-move-task): Allow replanning.
+    	(planner-replan-task): New.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-25 06:03:12 GMT	Sacha Chua <sacha@free.net.ph>	patch-146
+
+    Summary:
+      Rename planner-insinuate-diary to planner-diary-insinuate
+    Revision:
+      emacs-wiki--sacha--1.0--patch-146
+
+    	* planner-diary.el (planner-diary-insinuate): Renamed
+    	from (planner-insinuate-diary).
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-03-25 04:34:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-144
+
+    Summary:
+      Updated planner-diary.el from Thomas Gehrlein (canonical version 0.6)
+    Revision:
+      emacs-wiki--sacha--1.0--patch-144
+
+    	* planner-diary.el: Thomas Gehrlein's 0.6 update: Support for
+    	cal-desk, excluding appointments.
+    
+
+    modified files:
+     planner-diary.el
+
+
+2004-03-25 01:47:09 GMT	Sacha Chua <sacha@free.net.ph>	patch-143
+
+    Summary:
+      Correct numbering for tasks with no dates
+    Revision:
+      emacs-wiki--sacha--1.0--patch-143
+
+    	* planner.el (planner-renumber-tasks): Correct renumbering for
+    	tasks with no dates.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-24 11:30:54 GMT	Sacha Chua <sacha@free.net.ph>	patch-142
+
+    Summary:
+      Preliminary support for irc:// URLs
+    Revision:
+      emacs-wiki--sacha--1.0--patch-142
+
+    	* planner.el (planner-encode-url): New.
+    
+    	* planner-erc.el (planner-erc-annotation-from-erc): Preliminary
+    	support for irc:// URLs as specified by
+    	http://ftp.ics.uci.edu/pub/ietf/uri/draft-mirashi-url-irc-01.txt
+    
+
+    modified files:
+     planner-erc.el planner.el
+
+
+2004-03-24 08:52:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-141
+
+    Summary:
+      Bugfix: planner-renumber-tasks should not error for incomplete tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-141
+
+    	* planner.el (planner-renumber-tasks): Do not error for incomplete
+    	tasks.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-24 07:04:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-140
+
+    Summary:
+      Actually add planner-diary.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-140
+
+
+    new files:
+     .arch-ids/remember-diary.el.id remember-diary.el
+
+
+2004-03-24 06:52:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-139
+
+    Summary:
+      Do not update cancelled/completed tasks. Minor optimizations for renumbering 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-139
+
+    	* planner.el (planner-renumber-tasks): Unlet
+    	planner-use-font-lock. Try to optimize handling for plan
+    	pages.
+            (planner-renumber-notes): Unlet planner-use-font-lock.
+    
+    	* planner-id.el (planner-id-update-tasks-on-page): Do not update cancelled or completed tasks.
+    
+
+    modified files:
+     planner-id.el planner.el
+
+
+2004-03-23 09:34:41 GMT	Sacha Chua <sacha@free.net.ph>	patch-135
+
+    Summary:
+      Correct documentation note for planner-gnus.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-135
+
+    	* planner-gnus.el: Correct documentation note about
+    	planner-gnus-insinuate. Thanks to johnsu01 for pointing this
+    	out.
+    
+
+    modified files:
+     planner-gnus.el
+
+
+2004-03-23 01:29:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-133
+
+    Summary:
+      Do not move cancelled tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-133
+
+    	* planner.el (planner-copy-or-move-task): Do not move cancelled
+    	tasks.
+    	(planner-copy-or-move-region): Do not move cancelled tasks.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-23 01:24:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-132
+
+    Summary:
+      Create cyclic tasks only for present/future; add "C" as status marker for cancelled tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-132
+
+    	* planner-cyclic.el (planner-cyclic-create-tasks-maybe): Only
+    	create tasks for present or future dates.
+    
+    	* planner.el (planner-publishing-markup): Add "C" as a status
+    	marker for cancelled tasks.
+    	(planner-marks-regexp): Add "C" as a status marker for cancelled
+    	tasks.
+    	(planner-renumber-tasks): Move cancelled tasks all the way to the
+    	bottom.
+    	(planner-cancelled-task-face): New.
+    	(planner-highlight-tasks): Highlight cancelled tasks.
+    
+    	* planner.el (planner-raise-task): planner-raise-task now works
+    	over blocks of tasks. You can raise a task to the previous block
+    	or lower it to the next one. Task blocks are delimited by non-task
+    	lines.
+    
+
+    modified files:
+     planner-cyclic.el planner.el
+
+
+2004-03-21 15:07:06 GMT	Sacha Chua <sacha@free.net.ph>	patch-131
+
+    Summary:
+      planner-raise-task works over blocks of tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-131
+
+    	* planner.el (planner-raise-task): planner-raise-task now works
+    	over blocks of tasks. You can raise a task to the previous block
+    	or lower it to the next one. Task blocks are delimited by non-task
+    	lines.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-19 06:56:16 GMT	Sacha Chua <sacha@free.net.ph>	patch-130
+
+    Summary:
+      Save restriction for planner-update-note
+    Revision:
+      emacs-wiki--sacha--1.0--patch-130
+
+    	* planner-experimental.el (planner-update-note): Save restriction.
+            Thanks to Jody Klymak for pointing this out.
+    
+
+    modified files:
+     planner-experimental.el
+
+
+2004-03-19 06:55:43 GMT	Sacha Chua <sacha@free.net.ph>	patch-129
+
+    Summary:
+      Add FORCE-DAYS optional argument to plan.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-129
+
+    	* planner.el (plan): Pay attention to FORCE-DAYS.
+    
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-18 13:07:31 GMT	Sacha Chua <sacha@free.net.ph>	patch-128
+
+    Summary:
+      Add PLANNER-README
+    Revision:
+      emacs-wiki--sacha--1.0--patch-128
+
+    	* PLANNER-README: Add to source control. I keep forgetting the
+    	file.
+    
+
+    new files:
+     .arch-ids/PLANNER-README.id PLANNER-README
+
+
+2004-03-18 09:26:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-125
+
+    Summary:
+      planner-read-name
+    Revision:
+      emacs-wiki--sacha--1.0--patch-125
+
+    	* planner.el (planner-read-name): New. Bugfix, thanks to johnsu01
+    	for pointing this out.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-18 09:18:01 GMT	Sacha Chua <sacha@free.net.ph>	patch-124
+
+    Summary:
+      Remove duplicate tasks from day pages when M-x planner-remove-duplicates is invoked on a plan page
+    Revision:
+      emacs-wiki--sacha--1.0--patch-124
+
+    	* planner-experimental.el (planner-remove-duplicates):
+    	Intelligently remove duplicates from day pages. You can invoke
+    	this from a plan page to zap most duplicate tasks.
+    
+    	* planner.el (planner-find-task): New optional argument POINT
+    	defines starting position.
+    
+
+    modified files:
+     planner-experimental.el planner.el
+
+
+2004-03-17 03:21:34 GMT	Sacha Chua <sacha@free.net.ph>	patch-119
+
+    Summary:
+      Documentation fix for planner-notes-index: Attribute is limit, not recent.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-119
+
+    	* planner-notes-index.el: Documentation fix; should be limit, not
+    	recent.
+    
+
+    modified files:
+     planner-notes-index.el
+
+
+2004-03-16 04:55:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-118
+
+    Summary:
+      Restore planner-annotation-from-planner-note
+    Revision:
+      emacs-wiki--sacha--1.0--patch-118
+
+    	* planner.el (planner-annotation-functions): Add
+    	planner-annotation-from-planner-note.
+    	(planner-annotation-from-planner-note): Remove redundant check.
+    
+    	* emacs-wiki.el (emacs-wiki-visit-link): Deal with bare tags.
+    
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-16 04:43:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-117
+
+    Summary:
+      Emacs21 non-CVS bugfix wrt task highlighting, fixed by moving tasks, notes highlighting to before emacs-wiki
+    Revision:
+      emacs-wiki--sacha--1.0--patch-117
+
+    	* emacs-wiki.el (emacs-wiki-before-highlight-buffer-hook): New.
+    	(emacs-wiki-highlight-region): Call
+    	emacs-wiki-before-highlight-buffer-hook.
+    
+    	* planner.el (planner-mode): Move tasks, notes highlighting to
+    	_before_ emacs-wiki highlighting. Kludge so that emacs21 non-CVS
+    	renders things properly.
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-16 03:47:05 GMT	Sacha Chua <sacha@free.net.ph>	patch-115
+
+    Summary:
+      Make non-reactive tasks easier to schedule; swap sense of C-u on planner-create-task-from-buffer
+    Revision:
+      emacs-wiki--sacha--1.0--patch-115
+
+    	* planner.el (planner-create-task-from-buffer): User-visible
+    	change: Swap sense of C-u. You now need to press C-u to associate
+    	a task only with a date page (punish reactive tasks!). By default,
+    	tasks are associated with the current plan page or the last plan
+    	page selected from the minibuffer.
+    	(planner-default-page): New.
+
+    modified files:
+     planner.el
+
+
+2004-03-16 02:49:55 GMT	Sacha Chua <sacha@free.net.ph>	patch-114
+
+    Summary:
+      Fix planner-cyclic bug by not anchoring regex at start of string in planner-task-info-from-string
+    Revision:
+      emacs-wiki--sacha--1.0--patch-114
+
+    	* planner.el (planner-task-info-from-string): Do not anchor
+    	regular expression at start of string so that planner-cyclic tasks
+    	are more flexible.
+
+    modified files:
+     planner.el
+
+
+2004-03-15 07:05:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-109
+
+    Summary:
+      planner-annotation-from-info
+    Revision:
+      emacs-wiki--sacha--1.0--patch-109
+
+    	* planner.el (planner-annotation-from-info): New. Thanks to Yvonne
+    	Thomson for contributing this.
+
+    modified files:
+     planner.el
+
+
+2004-03-14 16:08:37 GMT	Sacha Chua <sacha@free.net.ph>	patch-104
+
+    Summary:
+      Add planner-lisp.el for interactive Emacs Lisp functions
+    Revision:
+      emacs-wiki--sacha--1.0--patch-104
+
+    	* planner-lisp.el: New.
+    
+
+    new files:
+     .arch-ids/planner-lisp.el.id planner-lisp.el
+
+
+2004-03-14 14:51:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-103
+
+    Summary:
+      
+    Revision:
+      emacs-wiki--sacha--1.0--patch-103
+
+    	* planner.el (plan): Create `planner-directory' automatically if
+    	not yet there.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-14 14:40:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-102
+
+    Summary:
+      Bugfix
+    Revision:
+      emacs-wiki--sacha--1.0--patch-102
+
+    	* planner.el (planner-find-task): Bugfix: allow more than one
+    	digit for the priority. Oops!
+
+    modified files:
+     planner.el
+
+
+2004-03-13 06:22:40 GMT	Sacha Chua <sacha@free.net.ph>	patch-100
+
+    Summary:
+      Fix infinite loop in planner-bbdb.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-100
+
+    	* planner-bbdb.el (planner-bbdb-annotation-from-bbdb): Fix
+    	infinite loop. Thanks to johnsu01 for pointing this out.
+    
+
+    modified files:
+     planner-bbdb.el
+
+
+2004-03-12 17:24:13 GMT	Sacha Chua <sacha@free.net.ph>	patch-98
+
+    Summary:
+      Docfix in planner.el - remove mention of planner-calendar.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-98
+
+    	* planner.el: Remove mention of planner-calendar.el and add
+    	note about `planner-calendar-insinuate'. Thanks to kanaldrache
+    	for pointing this out.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-12 15:12:25 GMT	Sacha Chua <sacha@free.net.ph>	patch-97
+
+    Summary:
+      Improve annotation matching
+    Revision:
+      emacs-wiki--sacha--1.0--patch-97
+
+    	* planner.el (planner-create-task): Improve annotation matching.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-12 07:12:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-94
+
+    Summary:
+      planner-cyclic: Cyclic task support.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-94
+
+    	* planner-cyclic.el: New.
+    
+
+    new files:
+     .arch-ids/planner-cyclic.el.id planner-cyclic.el
+     test/.arch-ids/planner-cyclic-test.el.id
+     test/planner-cyclic-test.el
+
+    modified files:
+     planner.el test/planner-test.el
+
+
+2004-03-12 05:09:11 GMT	Sacha Chua <sacha@free.net.ph>	patch-91
+
+    Summary:
+      Do not change windows when navigating day pages with yesterday/tomorrow
+    Revision:
+      emacs-wiki--sacha--1.0--patch-91
+
+    	* planner.el (planner-goto-yesterday): Do not change windows.
+    	(planner-goto-tomorrow): Do not change windows.
+    	(planner-goto-previous-daily-page): Do not change windows.
+    	(planner-goto-next-daily-page): Do not change windows.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-12 03:42:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-88
+
+    Summary:
+      Understand dates of the form +1 or -1
+    Revision:
+      emacs-wiki--sacha--1.0--patch-88
+
+    	* planner.el (planner-expand-name): Understand dates of the form
+    	"+1" or "-1" as offsets from today. Thanks to k-man on #emacs for
+    	the suggestion.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-12 02:39:19 GMT	Sacha Chua <sacha@free.net.ph>	patch-87
+
+    Summary:
+      Work with parens in the task description
+    Revision:
+      emacs-wiki--sacha--1.0--patch-87
+
+    	* planner.el (planner-task-info-from-string): Work with parens in
+    	the task description. Test suite at test/planner-test.el .
+    	(planner-create-task): Improve annotation matching.
+    
+    	* test/planner-test.el: New.
+
+    new files:
+     test/.arch-ids/planner-test.el.id test/planner-test.el
+
+    modified files:
+     planner.el
+
+
+2004-03-11 14:13:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-86
+
+    Summary:
+      Minor bugfix. Do not error if tasks are at end of buffer.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-86
+
+    	* planner.el (planner-renumber-tasks): Do not error if tasks are
+    	at end of buffer.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-11 13:58:38 GMT	Sacha Chua <sacha@free.net.ph>	patch-85
+
+    Summary:
+      Further planner-renumber-tasks optimization
+    Revision:
+      emacs-wiki--sacha--1.0--patch-85
+
+    	* planner.el (planner-renumber-tasks): Further optimization. Don't
+    	use a regular expression to check for further tasks. Use character
+    	comparison instead. This should trim off another second or two.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-11 13:43:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-84
+
+    Summary:
+      Optimize sort, assuming sort is stable
+    Revision:
+      emacs-wiki--sacha--1.0--patch-84
+
+    	* planner.el (planner-renumber-tasks): Optimize sort. Assumes sort
+    	is stable, which it appears to be under CVS Emacs.
+
+    modified files:
+     planner.el
+
+
+2004-03-11 13:21:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-83
+
+    Summary:
+      Merged John Wiegley's emacs-wiki changes in. Small bugfixes. 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-83
+
+            * planner.el (planner-in-progress-task-face): Remove dupe. Thanks
+    	to Florian Lanthaler for pointing this out.
+    
+    	* emacs-wiki.el (emacs-wiki-page-date): Remove parameter, correct
+    	docstring.
+    	(emacs-wiki-numbered-tag): Use ID attribute instead of unclosed <a
+    	name=..>
+    
+    	* emacs-wiki.el: Merged John Wiegley's patch in preparation for
+    	flexible publishing.
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-11 08:44:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-82
+
+    Summary:
+      Bugfixes. Also, emacs-wiki no longer errors on publish--just warns
+    Revision:
+      emacs-wiki--sacha--1.0--patch-82
+
+    	* emacs-wiki.el (emacs-wiki-eval-lisp): Warn if error, but do not
+    	stop. Thanks to Mark Triggs for the patch.
+    
+    	* planner.el (planner-in-progress-task-face): No :slant in XEmacs;
+    	using :bold instead. Thanks to Mario Peter for the patch.
+    
+    	* planner.el (planner-create-task): Work with new
+    	emacs-wiki-make-link.
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-11 02:32:24 GMT	Sacha Chua <sacha@free.net.ph>	patch-81
+
+    Summary:
+      Emacs20 compatibility
+    Revision:
+      emacs-wiki--sacha--1.0--patch-81
+
+    	* remember.el (remember-clipboard): Use compatibility function.
+    
+    	* planner.el (planner-list-daily-files): Remove mapc call.
+    	(planner-tasks-tag): Remove mapc call.
+    	(planner-list-tasks-with-status): Remove mapc call.
+    	(planner-extract-tasks): Remove mapc call.
+    	(planner-search-notes-internal): add-to-list in emacs20 has only
+    	two parameters. Remove need for three parameters by reversing the
+    	list.
+    	(planner-extract-tasks): Remove mapc call.
+    
+    	* emacs-wiki.el (emacs-wiki-make-faces): Remove mapc call.
+    
+            Files now compile cleanly under Emacs21 and Emacs20 (except for
+            emacs-wiki, which still has lots of warnings.)
+
+    modified files:
+     emacs-wiki.el planner.el remember.el
+
+
+2004-03-10 05:03:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-80
+
+    Summary:
+      Deal with lines that do not have nicks, like the ERC prompt.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-80
+
+    	* planner-erc.el (planner-erc-annotation-from-erc): Deal with
+    	lines that do not have nicks.
+    
+
+    modified files:
+     planner-erc.el
+
+
+2004-03-10 04:58:14 GMT	Sacha Chua <sacha@free.net.ph>	patch-79
+
+    Summary:
+      planner-erc provides annotation functions for ERC buffers
+    Revision:
+      emacs-wiki--sacha--1.0--patch-79
+
+    	* planner-erc.el: New.
+            
+
+    new files:
+     .arch-ids/planner-erc.el.id planner-erc.el
+
+
+2004-03-10 03:06:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-78
+
+    Summary:
+      Remove 'cl dependency of emacs-wiki.el. Add planner-search-notes-next/previous-match.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-78
+
+    	* emacs-wiki.el (emacs-wiki-visit-link): Hardcode
+    	emacs-wiki-after-save-hook in so that we can avoid using gensym.
+    	(emacs-wiki-refresh-buffers): New function updates all project
+    	buffers.
+    	(add-once-hook): Deleted.
+    
+    	* planner.el (planner-search-notes-internal): Sort entries
+    	correctly even if reverse-chronologically arranged.
+    	(planner-search-notes-buffer): New. Save buffer so that we can go
+    	to the previous and next matches.
+    	(planner-search-notes): Save buffer in planner-search-notes-buffer
+    	so that we can go to the next and previous matches.
+    
+    	* planner-experimental.el (planner-search-notes-next-match): New.
+    	(planner-search-notes-previous-match): New.
+    
+    	* emacs-wiki.el (add-once-hook): Use make-symbol instead of
+    	gensym.
+    
+
+    modified files:
+     planner-experimental.el planner.el
+
+
+2004-03-09 08:58:18 GMT	Sacha Chua <sacha@free.net.ph>	patch-76
+
+    Summary:
+      Renamed p-i-c to planner-calendar-insinuate to be more consistent
+    Revision:
+      emacs-wiki--sacha--1.0--patch-76
+
+    	* planner.el (planner-calendar-insinuate): Renamed from
+    	planner-insinuate-calendar to be more consistent with other
+    	functions. Thanks to Yvonne Thomson for pointing this out.
+    
+    	* planner-diary.el: Clarified documentation. Adopted it for my own
+    	use, so if this breaks, I'll be one of those to complain loudly.
+
+    modified files:
+     planner-diary.el planner.el
+
+
+2004-03-08 16:01:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-73
+
+    Summary:
+      Added planner-notes-index.el, fixed emacs-wiki escape/unescape
+    Revision:
+      emacs-wiki--sacha--1.0--patch-73
+
+    	* planner-notes-index.el: New file. View a list of your notes
+    	using the interactive functions, or publish indexes using
+    	emacs-wiki tags. See comments for more details.
+    
+    	* emacs-wiki.el (emacs-wiki-link-escape): Finally fix this broken
+    	function. I must have been really lucky not to have run into
+    	problems with this before. Apologies to people bemused by this
+    	bug!
+    	(emacs-wiki-link-unescape): Same as emacs-wiki-link-escape.
+    	(emacs-wiki-highlight-link): Unescape link text when displayed.
+    	Tested with notes-index, which had lots of links with brackets.
+    	(emacs-wiki-wiki-visible-name): Unescape further in titles.
+    	(emacs-wiki-make-link): Escape # in titles.
+    
+    	The files I touched compile cleanly under Emacs CVS and XEmacs,
+    	with the exception of emacs-wiki.el. I still have to untangle it.
+    	Again, apologies for small, careless bugs. Would love to hear from
+    	anyone with more experience writing test suites for Emacs
+    	programs! Also, have to get the hang of testcover.el ... =)
+    
+         	* planner-rmail.el (rmail): Add missing require.
+    
+    	* planner.el (planner-create-task-from-info): Fix free variable.
+
+    new files:
+     .arch-ids/planner-notes-index.el.id planner-notes-index.el
+
+    modified files:
+     emacs-wiki.el planner-rmail.el planner.el
+
+
+2004-03-08 10:36:00 GMT	Sacha Chua <sacha@free.net.ph>	patch-72
+
+    Summary:
+      Bugfix in planner task creation, thanks to Nafai for pointing this out
+    Revision:
+      emacs-wiki--sacha--1.0--patch-72
+
+    	* planner.el (planner-format-task): Fix typo. Thanks to Nafai for
+    	pointing this out!
+    	(planner-create-task): Fix dangling from.
+    	(planner-create-task-from-info): Fix bug for creating with
+    	plan-page set to a date page.
+    	(planner-create-task-from-buffer): Fix bug for creating from a
+    	date page.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-08 06:48:22 GMT	Sacha Chua <sacha@free.net.ph>	patch-71
+
+    Summary:
+      Do not fold case when checking links.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-71
+
+    
+    	* planner.el (planner-format-task): Actually observe LINK.
+    
+    	* emacs-wiki.el (emacs-wiki-make-link): Do not fold case.
+    
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-08 06:11:59 GMT	Sacha Chua <sacha@free.net.ph>	patch-70
+
+    Summary:
+      Added planner-wl.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-70
+
+    	* planner-wl.el: New file. Thanks to Yvonne Thomson for
+    	contributing this to planner.
+    
+
+    new files:
+     .arch-ids/planner-wl.el.id planner-wl.el
+
+
+2004-03-08 05:51:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-69
+
+    Summary:
+      With a prefix, planner-create-task-from-buffer prompts for a plan page. Also, planner-rss has category note.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-69
+
+    	* planner.el (planner-create-task-from-info): Pay attention to
+    	plan and date.
+    	(planner-create-task-from-buffer): With a prefix, prompt for a
+    	plan page. If a plan page is specified and this is not equal to
+    	the current annotation, move annotation into the task
+    	description.
+    	(planner-read-non-date-page): New defun.
+    	(planner-create-task): Add plan-page.
+    
+    	* planner-rss.el (planner-rss-add-note): Add category link.
+
+    new files:
+     .arch-ids/schedule.el.id .arch-ids/timeclock.el.id schedule.el
+     timeclock.el
+
+    modified files:
+     emacs-wiki.el planner-rss.el planner.el
+
+
+2004-03-07 15:49:23 GMT	Sacha Chua <sacha@free.net.ph>	patch-68
+
+    Summary:
+      Add major-mode check for planner-rmail.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-68
+
+    	* planner-rmail.el (planner-rmail-annotation-from-mail): Add
+    	major-mode check.
+
+    modified files:
+     planner-rmail.el
+
+
+2004-03-07 14:21:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-66
+
+    Summary:
+      Michal Maruska's idea: include #title in the wiki index.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-66
+
+    	* emacs-wiki.el: Merged in ideas from Michal Maruska's patch for
+    	including #title in the wiki index. See
+            emacs-wiki-index-title-threshold for more details.
+    	(emacs-wiki-index-title-threshold): New variable.
+    	(emacs-wiki-get-title-fast): New defun.
+    	(emacs-wiki-file-alist-with-titles): New defun.
+    	(emacs-wiki-index-files-list): New convenience function.
+    	(emacs-wiki-index-file-title): New convenience function.
+    	(emacs-wiki-index-file-page): New convenience function.
+    	(emacs-wiki-generate-index): Observe
+    	emacs-wiki-index-title-threshold.
+    	(emacs-wiki-index): More verbose, now that it takes time to
+    	process.
+    	(emacs-wiki-publish-index): More verbose, now that it takes time
+    	to process.
+    
+    	* planner-experimental.el (planner-generate-index): Observe
+    	emacs-wiki-index-title-threshold.
+
+    modified files:
+     emacs-wiki.el planner-experimental.el
+
+
+2004-03-07 12:59:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-65
+
+    Summary:
+      Preliminary support for planner pages for BBDB records
+    Revision:
+      emacs-wiki--sacha--1.0--patch-65
+
+    	* planner-bbdb.el (planner-bbdb-plan-field): New.
+    	(planner-bbdb-annotation-from-bbdb): Preliminary support for
+    	planner pages for BBDB records.
+
+    modified files:
+     planner-bbdb.el
+
+
+2004-03-06 16:15:35 GMT	Sacha Chua <sacha@free.net.ph>	patch-64
+
+    Summary:
+      Correctly make links even when page does not match emacs-wiki-name-regexp
+    Revision:
+      emacs-wiki--sacha--1.0--patch-64
+
+    	* emacs-wiki.el (emacs-wiki-make-link): Correct regexp for forcing
+    	entire link to match emacs-wiki-name-regexp.
+    
+    	* planner.el (planner-make-link): Removed compatibility function;
+    	left this as a defalias.
+    	(planner-annotation-from-planner-note): Used emacs-wiki-make-link
+    	instead.
+    	(planner-format-task): Used emacs-wiki-make-link instead. Properly
+    	dealt with links that did not match the name regular expression.
+    	(planner-copy-or-move-task): Used emacs-wiki-make-link instead.
+    	(planner-update-task): Used emacs-wiki-make-link instead.
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-03-06 08:44:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-62
+
+    Summary:
+      Added planner-vm. Minor bugfixes in other modules.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-62
+
+    	* planner-vm.el: New file.
+
+    new files:
+     .arch-ids/planner-vm.el.id planner-vm.el
+
+    modified files:
+     emacs-wiki.el planner-rmail.el
+
+
+2004-03-06 05:17:12 GMT	Sacha Chua <sacha@free.net.ph>	patch-60
+
+    Summary:
+      Promote planner-default-task-priority to a customizable variable.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-60
+
+    	* planner.el (planner-default-task-priority): Promote to a
+    	customizable variable.
+
+    modified files:
+     planner.el
+
+
+2004-03-05 16:54:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-59
+
+    Summary:
+      planner-renumber-tasks renumbers chunks of tasks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-59
+
+    	* planner.el (planner-renumber-tasks): Renumber chunks of tasks,
+    	not only the first one. This lets you have a Completed Tasks
+    	section, although you still have to manually move tasks over to
+    	it. Maybe we can have a hook to control this, if other people find
+    	"Completed Tasks" interesting.
+
+    modified files:
+     planner.el
+
+
+2004-03-03 15:47:22 GMT	Sacha Chua <sacha@free.net.ph>	patch-57
+
+    Summary:
+      planner-rmail added, common mail functions moved into planner.el or planner-bbdb.el, redundant defun removed
+    Revision:
+      emacs-wiki--sacha--1.0--patch-57
+
+    	* planner.el (planner-get-name-from-address): New defun.
+    
+    	* planner-rmail.el: New file.
+    
+    	* planner-gnus.el (planner-gnus-get-name-from-address): Moved to
+    	planner-bbdb as there was nothing Gnus-specific about this
+    	function.
+    	(planner-gnus-annotation-from-summary): Use
+    	planner-ignored-from-addresses from planner instead of
+    	gnus-ignored-from-addresses. Use
+    	planner-get-name-from-address (defined in planner, redefined in
+    	planner-bbdb) instead of planner-gnus-get-name-from-address.
+    	(planner-gnus-annotation-from-message): Use
+    	planner-ignored-from-addresses from planner instead of
+    	gnus-ignored-from-addresses. Use
+    	planner-get-name-from-address (defined in planner, redefined in
+    	planner-bbdb) instead of planner-gnus-get-name-from-address.
+    
+    	* planner-bbdb.el (planner-bbdb-get-name-from-address): New defun.
+    	Alternative for planner-get-name-from-address.
+    	(planner-get-name-from-address): Set to
+    	planner-bbdb-get-name-from-address when planner-bbdb is loaded.
+    
+    	* planner.el (planner-annotation-functions): Removed
+    	planner-annotation-from-planner-note from default value until it
+    	is fully supported again.
+    	(planner-make-planner-link): Check if emacs-wiki-name-regexp
+    	completely matches wiki-link.
+    
+    	* planner.el: Rearranged compatibility functions
+    	(planner-ignored-from-addresses): New option.
+    	(planner-make-planner-link): Removed. planner-make-link is
+    	sufficient.
+    	(planner-copy-or-move-task): Use planner-make-link.
+    	(planner-update-task): Use planner-make-link.
+    
+    	* emacs-wiki.el (emacs-wiki-make-link): Check if
+    	emacs-wiki-name-regexp completely matches wiki-link.
+
+    new files:
+     .arch-ids/planner-rmail.el.id planner-rmail.el
+
+    modified files:
+     emacs-wiki.el planner-bbdb.el planner-gnus.el planner.el
+
+
+2004-03-02 04:14:04 GMT	Sacha Chua <sacha@free.net.ph>	patch-56
+
+    Summary:
+      Fixed embarrassing typo in compatibility function planner-link-unescape
+    Revision:
+      emacs-wiki--sacha--1.0--patch-56
+
+    	* planner.el (fboundp): Whoops, planner-link-unescape was typo'd
+    	to planner-link-escape. Thanks to Nascif Abousalh-Neto for the bug
+    	report!
+
+    modified files:
+     planner.el
+
+
+2004-03-01 06:17:51 GMT	Sacha Chua <sacha@free.net.ph>	patch-55
+
+    Summary:
+      Bugfix in planner-escape-link and planner-unescape-link. 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-55
+
+    	* planner.el (planner-escape-link): Whoops, forgot to return text.
+    	(planner-unescape-link): Whoops, forgot to return text.
+    
+
+    modified files:
+     planner.el
+
+
+2004-03-01 05:01:21 GMT	Sacha Chua <sacha@free.net.ph>	patch-54
+
+    Summary:
+      Load the correct library for grep-command.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-54
+
+    	* planner-id.el (require): Load the correct library for grep-command.
+    	This is 'compile for XEmacs and stable Emacs 21, but 'grep for
+    	Emacs 21 CVS.
+
+    modified files:
+     planner-id.el
+
+
+2004-02-29 15:00:03 GMT	Sacha Chua <sacha@free.net.ph>	patch-53
+
+    Summary:
+      Misc. documentation fixes
+    Revision:
+      emacs-wiki--sacha--1.0--patch-53
+
+       Whoops, wrong boilerplate text on many of the files. Misc.
+       whitespace fixes as well.
+
+    modified files:
+     planner-bbdb.el planner-diary.el planner-experimental.el
+     planner-gnus.el planner-id.el planner-notes.el planner-rss.el
+     planner-schedule.el planner-timeclock.el planner-w3m.el
+     planner.el remember-bbdb.el remember-bibl.el
+     remember-experimental.el remember-planner.el remember.el
+
+
+2004-02-29 14:44:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-52
+
+    Summary:
+      Added compatibility functions for older versions of emacs-wiki.el.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-52
+
+    	* planner.el (fboundp): Added compatibility functions
+    	planner-link-escape, planner-link-unescape, planner-make-link, and
+    	advice around emacs-wiki-wiki-link-target.
+    
+    	* planner-gnus.el (planner-gnus-annotation-from-summary): Used
+        compatibility functions.
+    	(planner-gnus-annotation-from-message): Used compatibility functions.
+
+    modified files:
+     planner-gnus.el planner.el
+
+
+2004-02-27 06:11:47 GMT	Sacha Chua <sacha@free.net.ph>	patch-51
+
+    Summary:
+      Better XEmacs compatibility
+    Revision:
+      emacs-wiki--sacha--1.0--patch-51
+
+         Not only do all the files now pass develock, but most of the
+         XEmacs compile errors are gone. WHEW!
+
+    modified files:
+     emacs-wiki.el planner-bbdb.el planner-diary.el
+     planner-experimental.el planner-gnus.el planner-id.el
+     planner-notes.el planner-rss.el planner-schedule.el
+     planner-timeclock.el planner-w3m.el planner.el
+     remember-experimental.el remember-planner.el remember.el
+
+
+2004-02-27 00:06:35 GMT	Daniel Neri <dne@mayonnaise.net>	patch-2
+
+    Summary:
+      fix a couple of typos
+    Revision:
+      emacs-wiki--planner--0--patch-2
+
+
+    modified files:
+     planner.el remember-planner.el
+
+
+2004-02-26 23:59:37 GMT	Daniel Neri <dne@mayonnaise.net>	patch-1
+
+    Summary:
+      sync commentary with reality
+    Revision:
+      emacs-wiki--planner--0--patch-1
+
+
+    modified files:
+     planner-gnus.el
+
+
+2004-02-26 12:02:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-49
+
+    Summary:
+      Rearranged customization options and removed Gnus links from published pages
+    Revision:
+      emacs-wiki--sacha--1.0--patch-49
+
+    	* planner.el: Rearranged customization entries for ease of use.
+    	(planner-mode-hook): Removed from customization entries as this is
+    	automatically defined by the creation of a major mode.
+    	(planner-markup-url): Do not strip other characters from the ID.
+    
+    	* planner-gnus.el (planner-gnus-resolve-url): Gnus IDs should not be displayed.
+    	(planner-resolve-url-table): Add planner-gnus-resolve-url here.
+
+    modified files:
+     planner-gnus.el planner.el
+
+
+2004-02-23 17:32:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-48
+
+    Summary:
+      Bugfix: planner-id.el should call planner-highlight-region
+    Revision:
+      emacs-wiki--sacha--1.0--patch-48
+
+    	* planner-id.el (planner-id-markup): Use planner-highlight-region
+    	instead of planner-markup-region.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-02-23 17:25:49 GMT	Sacha Chua <sacha@free.net.ph>	patch-47
+
+    Summary:
+      Bugfix: planner-bbdb-resolve-url
+    Revision:
+      emacs-wiki--sacha--1.0--patch-47
+
+    	* planner-bbdb.el (planner-resolve-url-table): Use planner-bbdb-resolve-url.
+    	(planner-bbdb-resolve-url): Renamed from planner-bbdb-markup-url.
+
+    modified files:
+     planner-bbdb.el
+
+
+2004-02-23 11:52:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-46
+
+    Summary:
+      Highlight functions should be named -highlight-, not -markup-. Tasks marked up specially. Minor bugfixes.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-46
+
+    	* planner.el (planner-resolve-url-google): Renamed from
+    	planner-markup-url-google.
+    	(planner-resolve-url-table): Renamed from planner-markup-url-table
+    	(planner-markup-url): Use planner-resolve-url-table
+    	(planner-mode): Highlight functions are now named -highlight-
+    	instead of -markup-.
+    	(planner-highlight-region): Renamed from planner-markup-region.
+    	(planner-highlight-tasks): Renamed from planner-markup-tasks. Use
+    	planner-highlight-region.
+    	(planner-highlight-notes): Renamed from planner-markup-notes.
+    	(planner-markup-url): Remove protocol - is not a parameter.
+    	(planner-publishing-markup): Mark up tasks specially.
+    	(planner-markup-task): New function.
+
+    modified files:
+     planner.el
+
+
+2004-02-23 10:36:38 GMT	Sacha Chua <sacha@free.net.ph>	patch-45
+
+    Summary:
+      Make planner-url a list of regular expressions
+    Revision:
+      emacs-wiki--sacha--1.0--patch-45
+
+    	* planner.el (planner-url-list): Now a list of regular expressions
+    	instead of strings.
+
+    modified files:
+     planner.el
+
+
+2004-02-22 16:41:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-44
+
+    Summary:
+      Major change: split planner.el and remember.el into modules
+    Revision:
+      emacs-wiki--sacha--1.0--patch-44
+
+    	* planner.el: Split off -bbdb, -gnus, -schedule, -timeclock and
+    	-w3m. Compiles cleanly under Emacs 21 CVS.
+    	(planner-url-list): New variable for better modularization.
+    	(planner-update-wiki-project): Automatically compose
+    	regular expression for emacs-wiki-url-regexp.
+    	(planner-markup-url-table): New variable.
+    	(planner-browse-url-functions): New variable.
+    
+    	* remember.el: Split off -bbdb, -bibl and -planner. Compiles
+    	cleanly under Emacs 21 CVS.
+
+    new files:
+     .arch-ids/planner-bbdb.el.id .arch-ids/planner-gnus.el.id
+     .arch-ids/planner-schedule.el.id
+     .arch-ids/planner-timeclock.el.id .arch-ids/planner-w3m.el.id
+     .arch-ids/remember-bbdb.el.id .arch-ids/remember-bibl.el.id
+     .arch-ids/remember-planner.el.id planner-bbdb.el
+     planner-gnus.el planner-schedule.el planner-timeclock.el
+     planner-w3m.el remember-bbdb.el remember-bibl.el
+     remember-planner.el
+
+    modified files:
+     planner-experimental.el planner-id.el planner-notes.el
+     planner.el remember-experimental.el remember.el
+
+
+2004-02-19 11:01:05 GMT	Sacha Chua <sacha@free.net.ph>	patch-42
+
+    Summary:
+      Added categorized feeds to planner-rss.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-42
+
+            * planner-rss.el (planner-rss-file-name): Changed documentation
+    	string.
+    	(planner-rss-category-feeds): New variable. Customize this to get
+    	categorized feeds.
+    	(planner-rss-add-note): Perform regular-expression matching on the
+    	original text and copy matched entries to category feeds.
+    
+    	* planner.el (planner-note-title): New defun.
+    	(planner-note-timestamp): New defun.
+    	(planner-note-body): New defun.
+    	(planner-narrow-to-note): Save excursion.
+
+    modified files:
+     planner-rss.el planner.el
+
+
+2004-02-18 03:31:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-41
+
+    Summary:
+      Embarrassing typo in planner.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-41
+
+    	* planner.el (planner-list-unfinished-tasks): Whoops! Added an n
+    	by mistake. Thanks to Frederik Fouvry for pointing this out.
+
+    modified files:
+     planner.el
+
+
+2004-02-17 04:23:28 GMT	Sacha Chua <sacha@free.net.ph>	patch-39
+
+    Summary:
+      Bugfix in planner-name-regexp
+    Revision:
+      emacs-wiki--sacha--1.0--patch-39
+
+    	* planner.el (planner-name-regexp): Corrected regular expression
+              so that emacs-wiki recognizes yyyy.mm.dd#link again.
+
+    modified files:
+     planner.el
+
+
+2004-02-17 03:09:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-38
+
+    Summary:
+      Added info URLs to planner.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-38
+
+    	* planner.el (planner-url-regexp): Added info handling.
+    	(planner-browse-url): Added info handling.
+    	Thanks to Frederik Fouvry for patch.
+    
+
+    modified files:
+     planner.el planner2diary.py
+
+
+2004-02-17 02:54:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-36
+
+    Summary:
+      Fixed emacs-wiki matching by removing grouping from planner-name-regexp.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-36
+
+    	* planner.el (planner-name-regexp): Removed grouping construct as
+    	this threw off emacs-wiki matching.
+
+    modified files:
+     planner.el
+
+
+2004-02-15 13:49:52 GMT	Sacha Chua <sacha@free.net.ph>	patch-35
+
+    Summary:
+      More planner-rss fixes to deal with read-only text.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-35
+
+    	* planner.el (planner-current-note-info): Removed text properties
+    	from body.
+    
+    	* planner-rss.el (planner-rss-add-note): Removed
+    	planner-note-info-from-string reference. Used
+    	planner-current-note-info from planner.el instead. Used
+    	planner-current-note-info to get the body. Properly removes
+    	overlays and text-properties from read-only text.
+
+    modified files:
+     planner-rss.el planner.el
+
+
+2004-02-15 06:32:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-34
+
+    Summary:
+      Prepared planner-rss.el for first release.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-34
+
+    	* planner-rss.el: Renamed from rss.el. Added commentary. Changed
+    	function prefix.
+    	(planner-rss-initial-contents): Merged other one-time variables
+    	into this. Moved to planner customize group.
+    	(planner-rss-base-url): Moved to planner customize group.
+    	(planner-rss-file-name): Moved to planner customize group.
+    	(planner-rss-initialize): Used planner-rss-initial-contents.
+
+    modified files:
+     planner-rss.el
+
+    renamed files:
+     .arch-ids/rss.el.id
+       ==> .arch-ids/planner-rss.el.id
+     rss.el
+       ==> planner-rss.el
+
+
+2004-02-14 15:09:36 GMT	Sacha Chua <sacha@free.net.ph>	patch-33
+
+    Summary:
+      Added rss.el 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-33
+
+       You need rss.el for the blogging to RSS stuff.
+    
+
+    new files:
+     .arch-ids/rss.el.id rss.el
+
+
+2004-02-14 14:44:10 GMT	Sacha Chua <sacha@free.net.ph>	patch-32
+
+    Summary:
+      Removed redundant code from planner-experimental.el
+    Revision:
+      emacs-wiki--sacha--1.0--patch-32
+
+    	* planner-experimental.el (planner-note-timestamp-regexp): Deleted.
+    	(planner-analyze-headline): Deleted.
+    	(planner-list-headlines): Deleted.
+    	(planner-search-notes): Moved into planner.el.
+    	(planner-search-notes-internal): Moved into planner.el.
+    
+    	* planner.el (planner-search-notes-internal): Moved from
+    	planner-experimental.el
+    	(planner-current-note-info): Moved actual timestamp regexp into
+    	code.
+
+    modified files:
+     planner-experimental.el planner.el
+
+
+2004-02-14 09:50:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-30
+
+    Summary:
+      Bugfix: planner-name-regexp had invalid regular expression syntax.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-30
+
+    	* planner.el (planner-name-regexp): Fix embarrassing regular
+    	expression bug.
+
+    modified files:
+     planner.el
+
+
+2004-02-13 03:42:46 GMT	Sacha Chua <sacha@free.net.ph>	patch-29
+
+    Summary:
+      Documentation fix for local planner task references
+    Revision:
+      emacs-wiki--sacha--1.0--patch-29
+
+    	* planner.el: Removed incorrect documentation note about local
+    	planner task references.
+    	(planner-name-regexp): Shorter regular expression.
+
+    modified files:
+     planner.el
+
+
+2004-02-11 14:58:53 GMT	Sacha Chua <sacha@free.net.ph>	patch-28
+
+    Summary:
+      Bugfix: planner-seek-to-first inserts correct number of spaces.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-28
+
+    	* planner.el (planner-seek-to-first): Function now attempts to
+    	insert the correct number of spaces. This may be slower, though,
+    	with all the regular-expression matching. It now correctly deals
+    	with sections at the bottom end of a file and sections placed
+    	right before sections (< 2 blank lines in between).
+     
+
+    modified files:
+     planner.el
+
+
+2004-02-11 09:48:30 GMT	Sacha Chua <sacha@free.net.ph>	patch-27
+
+    Summary:
+      Bugfixes in planner-seek-to-function that affected all those with planner-seek-create-at-bottom
+    Revision:
+      emacs-wiki--sacha--1.0--patch-27
+
+    	* planner.el (planner-seek-to-first): Try to seek to the section
+    	first. Call planner-seek-section-function only if it is not found.
+    	(planner-seek-create-at-top): Moved the seek to
+    	planner-seek-to-first. This function now only creates a new
+    	section.
+    	(planner-seek-create-at-bottom): Moved the seek to
+    	planner-seek-to-first. This function now only creates a new
+    	section.
+
+    modified files:
+     planner.el
+
+
+2004-02-09 03:10:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-26
+
+    Summary:
+      Doc tweaks
+    Revision:
+      emacs-wiki--sacha--1.0--patch-26
+
+    	* planner.el: Tweaked allout configuration so that commentary is
+    	always displayed.
+
+    modified files:
+     planner.el
+
+
+2004-02-09 02:44:50 GMT	Sacha Chua <sacha@free.net.ph>	patch-24
+
+    Summary:
+      Added major-mode check to emacs-wiki
+    Revision:
+      emacs-wiki--sacha--1.0--patch-24
+
+    	* planner.el (planner-annotation-from-wiki): Added derived-mode-p
+    	check for emacs-wiki-mode.
+    	(planner-annotation-from-planner): Added derived-mode-p check for
+    	planner-mode.
+    	(planner-annotation-from-planner-note): Added derived-mode-p check
+    	for planner-mode.
+
+    modified files:
+     planner.el
+
+
+2004-02-06 04:11:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-23
+
+    Summary:
+      Minor bugfixes with replace-regexp-in-string and the message-id regexp.
+    Revision:
+      emacs-wiki--sacha--1.0--patch-23
+
+    	* planner.el (planner-strip-whitespace): To be safe, use the
+    	replace-regexp-in-string defined in xemacs.
+    	(planner-gnus-get-message-id): To be safe, use the
+    	replace-regexp-in-string defined in xemacs.
+    	(planner-gnus-get-message-id): Fix embarrassing regexp error.
+
+    modified files:
+     planner.el
+
+
+2004-02-05 10:44:06 GMT	Sacha Chua <sacha@free.net.ph>	patch-22
+
+    Summary:
+      Minor bugfixes
+    Revision:
+      emacs-wiki--sacha--1.0--patch-22
+
+    	* planner.el (planner-task-format): Returned old behavior of
+    	justifying priority properly.
+    	(planner-markup-tasks): Deal with different kinds of spaces.
+    	(planner-gnus-get-message-id): More flexible matching.
+
+    modified files:
+     planner.el
+
+
+2004-02-01 05:37:06 GMT	Sacha Chua <sacha@free.net.ph>	patch-21
+
+    Summary:
+      Added URL escaping to emacs-wiki
+    Revision:
+      emacs-wiki--sacha--1.0--patch-21
+
+       emacs-wiki-wiki-link-target unescapes the wiki link.
+       planner-gnus-get-message-id deals with summary mode.
+       planner-annotation-from-gnus uses emacs-wiki-make-link.
+       planner-annotation-from-gnus-summary uses emacs-wiki-make-link.
+       
+       New functions:
+       emacs-wiki-link-escape
+       emacs-wiki-link-unescape
+       emacs-wiki-make-link
+    
+
+    modified files:
+     emacs-wiki.el planner.el
+
+
+2004-01-28 06:56:15 GMT	Sacha Chua <sacha@free.net.ph>	patch-20
+
+    Summary:
+      planner-default-task-priority
+    Revision:
+      emacs-wiki--sacha--1.0--patch-20
+
+    Ken Rachynski asked for a way to set the default task priority. Here
+    it is - planner-default-task-priority (new variable, controls
+    planner-create-task).
+
+    modified files:
+     planner.el
+
+
+2004-01-28 06:52:08 GMT	Sacha Chua <sacha@free.net.ph>	patch-19
+
+    Summary:
+      Font-locking more correct
+    Revision:
+      emacs-wiki--sacha--1.0--patch-19
+
+    Status font-locking now extends to beginning of line.
+
+    modified files:
+     planner.el
+
+
+2004-01-28 06:43:16 GMT	Sacha Chua <sacha@free.net.ph>	patch-18
+
+    Summary:
+      Improved font-locking
+    Revision:
+      emacs-wiki--sacha--1.0--patch-18
+
+    New variable: planner-hide-task-status-when-highlighting
+    
+    Martin Morgan suggested highlighting only a small part of the task, as
+    wide seas of red can be quite overwhelming. Tried it out and thought
+    it was a cool idea, so this version highlights only the
+    category/priority with the category color and now properly does the
+    completed/in-progress/delegated task highlighting. Martin sent a
+    patch, too, which made the status invisible, but I like seeing the
+    status so that I can change it by hand. New variable
+    planner-hide-task-status-when-highlighting controls this.
+
+    modified files:
+     planner.el
+
+
+2004-01-27 01:15:48 GMT	Sacha Chua <sacha@free.net.ph>	patch-17
+
+    Summary:
+      Added fboundp check for remove-overlays
+    Revision:
+      emacs-wiki--sacha--1.0--patch-17
+
+       Apparently, older Emacsen don't have the remove-overlays function.
+       Added fboundp check. Strange - if there's an overlay, how does one
+       propose to remove all of them anyway? Anyway, planner-markup-region
+       should do the right thing now.
+
+    modified files:
+     planner.el
+
+
+2004-01-25 05:31:00 GMT	Sacha Chua <sacha@free.net.ph>	patch-15
+
+    Summary:
+      planner-tasks-tag
+    Revision:
+      emacs-wiki--sacha--1.0--patch-15
+
+    <tasks> is a new emacs-wiki tag. When published to HTML, this is
+    replaced by a list of all the tasks. You can control the status by
+    specifying a regular expression to match. For example,
+    <tasks status="X"> will list all completed tasks, while
+    <tasks status="[^X]"> will list all incomplete tasks.
+    This is handled by the planner-task--tag function.
+    
+    <tasks> is part of the planner-markup-tags list. 
+    
+    planner-list-tasks-with-status now takes a regular expression for
+    STATUS.
+    
+    planner-list-unfinished-tasks uses the modified
+    planner-list-tasks-with-status.
+
+    modified files:
+     planner.el
+
+
+2004-01-25 04:23:14 GMT	Sacha Chua <sacha@free.net.ph>	patch-14
+
+    Summary:
+      planner-list-tasks-with-status
+    Revision:
+      emacs-wiki--sacha--1.0--patch-14
+
+    planner-list-tasks-with-status is a new function that generalizes
+    planner-list-unfinished-tasks. If you invoke it with a prefix
+    argument, the sense is inverted.
+    
+    planner-list-unfinished-tasks now calls planner-list-tasks-with-status.
+
+    modified files:
+     planner.el
+
+
+2004-01-25 04:03:17 GMT	Sacha Chua <sacha@free.net.ph>	patch-13
+
+    Summary:
+      Tasks are colored according to their category
+    Revision:
+      emacs-wiki--sacha--1.0--patch-13
+
+    Ephrem Christopher Walborn suggested making planner-markup-tasks color
+    A tasks red, B tasks blue, and C tasks green. This patch colors it
+    as suggested.
+    
+    New function planner-markup-region chooses between overlays and text
+    properties, using overlays whenever possible. Seems to work, and
+    allows me to easily combine different attributes.
+    
+    planner-id.el now uses the new planner-markup-region.
+    
+    Also, planner-id.el is now UNIX-encoded.
+
+    modified files:
+     planner-id.el planner.el
+
+
+2004-01-25 03:14:57 GMT	Sacha Chua <sacha@free.net.ph>	patch-12
+
+    Summary:
+      Merged David Smith's patch for planner-copy-or-move-task, planner-mark-task, and planner-read-date
+    Revision:
+      emacs-wiki--sacha--1.0--patch-12
+
+    planner-copy-or-move-task's invocation of planner-format-task had
+    left-over code from when planner inserted the string itself instead of
+    using planner-format-task. Not only that, the condition was incorrect.
+    I'd tried to use it to retain non-plan-page annotations, but that
+    should have been after the plan-page entry. Now that we're using
+    planner-format-task, I can just use a when form that'll evaluate to
+    nil. Strangely, however, M-x plan has been working without ill effects.
+    
+    planner-mark-task wasn't marking it with the specified task status.
+    Silly me.
+    
+    planner-read-date now does save-excursion and save-window-excursion.
+
+    modified files:
+     planner.el
+
+
+2004-01-24 19:47:53 GMT	David D. Smith <davidsmith@acm.org>	patch-11
+
+    Summary:
+      create proper links to planner pages
+    Revision:
+      emacs-wiki--dds--1.0--patch-11
+
+    Better implementation of what I tried to do in patch-8.
+
+    modified files:
+     planner.el
+
+
+2004-01-24 19:46:31 GMT	David D. Smith <davidsmith@acm.org>	patch-10
+
+    Summary:
+      revert patch-8: create proper links to planner pages
+    Revision:
+      emacs-wiki--dds--1.0--patch-10
+
+    This patch was not correct. Revert to old version for now.
+
+    modified files:
+     planner.el
+
+
+2004-01-24 16:01:04 GMT	David D. Smith <davidsmith@acm.org>	patch-9
+
+    Summary:
+      save-excursion in planner-read-date
+    Revision:
+      emacs-wiki--dds--1.0--patch-9
+
+    A save-excursion is necessary in planner-read-date because
+    save-window-excursion does not save the location of point in buffer;
+    it saves which window is active. The location of point in buffer is
+    necessary when planner-copy-or-move-task calls
+    planner-current-task-info; the symptom is that
+    planner-copy-or-move-task operates on the first task in the buffer,
+    not the task that point was on when the operation started.
+    
+
+    modified files:
+     planner.el
+
+
+2004-01-24 15:54:46 GMT	David D. Smith <davidsmith@acm.org>	patch-8
+
+    Summary:
+      create proper links to planner pages
+    Revision:
+      emacs-wiki--dds--1.0--patch-8
+
+    In planner-copy-or-move-task, when updating the new date page, the way
+    attempted to make a link to wherever the task in question was
+    previously linked to. This works ok for new tasks but is not the
+    proper behavior for *rescheduling* tasks. So, instead, just make a
+    link to the planner page that this task belongs to.
+    
+
+    modified files:
+     planner.el
+
+
+2004-01-24 15:44:15 GMT	David D. Smith <davidsmith@acm.org>	patch-7
+
+    Summary:
+      planner-mark-task set mark, not "X"
+    Revision:
+      emacs-wiki--dds--1.0--patch-7
+
+    
+    Oops, planer-mark-task was just setting all marks to "X", not to the
+    mark parameter that is passed into the function.
+
+    modified files:
+     planner.el
+
+
+2004-01-24 04:54:44 GMT	Sacha Chua <sacha@free.net.ph>	patch-11
+
+    Summary:
+      Made planner.el output XHTML-compliant 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-11
+
+    Applied Ephrem Christopher Walborn's patch to make planner.el's output more XHTML-compliant by using <a id="..."> instead of <a name="...">. 
+
+    modified files:
+     planner.el
+
+
+2004-01-23 08:45:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-10
+
+    Summary:
+      planner-list-unfinished-tasks lists all non-X 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-10
+
+    Instead of just listing the undone tasks (_), planner-list-unfinished-tasks lists all incomplete tasks (non-X status).
+    That way, in-progress and delegated tasks will be included in the list.
+    
+
+    modified files:
+     planner.el
+
+
+2004-01-22 09:10:21 GMT	Sacha Chua <sacha@free.net.ph>	patch-9
+
+    Summary:
+      task extraction
+    Revision:
+      emacs-wiki--sacha--1.0--patch-9
+
+    - New user function: M-x planner-list-unfinished-tasks displays all
+      the unfinished tasks.
+    
+    - New defun: planner-extract-tasks-with-status.
+    
+    - New defun: planner-extract-tasks.
+    
+    - Rearranged many of the functions.
+    
+    - Passes checkdoc again.
+
+    modified files:
+     planner.el
+
+
+2004-01-21 01:16:33 GMT	Sacha Chua <sacha@free.net.ph>	patch-8
+
+    Summary:
+      Save planner-read-date's map
+    Revision:
+      emacs-wiki--sacha--1.0--patch-8
+
+      Modified davidsmith's patch to restore the old map, whatever
+      it is. 
+
+    modified files:
+     planner.el
+
+
+2004-01-21 01:07:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-7
+
+    Summary:
+      Work with local-write-file-hooks 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-7
+
+    Older Emacsen don't have the functions I used before.
+    
+
+    modified files:
+     planner-id.el
+
+
+2004-01-20 08:47:20 GMT	Sacha Chua <sacha@free.net.ph>	patch-5
+
+    Summary:
+      
+    Revision:
+      emacs-wiki--sacha--1.0--patch-5
+
+    Moved note functions from planner-experimental.el to planner.el.
+    Fixed planner-mark-task bug in planner.el. Thanks to Brent Goodrick for bug report.
+    
+
+    modified files:
+     planner-experimental.el planner.el
+
+
+2004-01-20 01:00:15 GMT	David D. Smith <davidsmith@acm.org>	patch-2
+
+    Summary:
+      whitespace adjustment
+    Revision:
+      emacs-wiki--dds--1.0--patch-2
+
+    Use same indent settings as Sacha.
+
+    modified files:
+     planner.el
+
+
+2004-01-20 00:18:45 GMT	David D. Smith <davidsmith@acm.org>	patch-1
+
+    Summary:
+      unwind-protect for planner-read-date
+    Revision:
+      emacs-wiki--dds--1.0--patch-1
+
+    planner-read-date() changes the local key map, so use an
+    unwind-protect construct to clean up.
+    
+
+    modified files:
+     planner.el
+
+
+2004-01-11 13:02:56 GMT	Sacha Chua <sacha@free.net.ph>	patch-4
+
+    Summary:
+      
+    Revision:
+      emacs-wiki--sacha--1.0--patch-4
+
+    Made planner-create-task-from-buffer the default instead of
+    planner-create-task.
+    
+
+    modified files:
+     planner.el
+
+
+2004-01-09 01:26:58 GMT	Sacha Chua <sacha@free.net.ph>	patch-2
+
+    Summary:
+      
+    Revision:
+      emacs-wiki--sacha--1.0--patch-2
+
+    Added an interactive planner-index.
+    
+
+    modified files:
+     planner-experimental.el
+
+
+2004-01-01 06:32:29 GMT	Sacha Chua <sacha@free.net.ph>	patch-1
+
+    Summary:
+      Grand import 
+    Revision:
+      emacs-wiki--sacha--1.0--patch-1
+
+       Junked my old archive as couldn't figure out how to rename it neatly,
+       so we're back to the old patchlevels.
+
+    new files:
+     .arch-ids/planner-diary.el.id
+     .arch-ids/planner-experimental.el.id
+     .arch-ids/planner-id.el.id .arch-ids/planner-notes.el.id
+     .arch-ids/planner.el.id .arch-ids/planner2diary.py.id
+     .arch-ids/remember-experimental.el.id .arch-ids/remember.el.id
+     planner-diary.el planner-experimental.el planner-id.el
+     planner-notes.el planner.el planner2diary.py
+     remember-experimental.el remember.el
+
+    modified files:
+     emacs-wiki.el

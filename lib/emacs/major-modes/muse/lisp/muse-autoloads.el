@@ -3,7 +3,7 @@
 ;;; Code:
 
 ;;;### (autoloads (muse-latex-transform) "muse-convert" "muse-convert.el"
-;;;;;;  (17327 26137))
+;;;;;;  (17358 59291))
 ;;; Generated autoloads from muse-convert.el
 
 (autoload (quote muse-latex-transform) "muse-convert" nil t nil)
@@ -11,7 +11,7 @@
 ;;;***
 
 ;;;### (autoloads (muse-message-markup) "muse-message" "../experimental/muse-message.el"
-;;;;;;  (17194 28038))
+;;;;;;  (17358 59291))
 ;;; Generated autoloads from ../experimental/muse-message.el
 
 (autoload (quote muse-message-markup) "muse-message" "\
@@ -26,7 +26,7 @@ function to `message-send-hook'." t nil)
 ;;;### (autoloads (muse-insert-tag muse-index muse-what-changed muse-previous-reference
 ;;;;;;  muse-next-reference muse-follow-name-at-point-other-window
 ;;;;;;  muse-follow-name-at-point muse-browse-result muse-edit-link-at-point
-;;;;;;  muse-mode) "muse-mode" "muse-mode.el" (17351 9070))
+;;;;;;  muse-mode) "muse-mode" "muse-mode.el" (17358 59291))
 ;;; Generated autoloads from muse-mode.el
 
 (autoload (quote muse-mode) "muse-mode" "\
@@ -65,7 +65,7 @@ Insert a tag interactively with a blank line after it." t nil)
 ;;;***
 
 ;;;### (autoloads (muse-project-publish muse-project-find-file) "muse-project"
-;;;;;;  "muse-project.el" (17351 9070))
+;;;;;;  "muse-project.el" (17358 59291))
 ;;; Generated autoloads from muse-project.el
 
 (autoload (quote muse-project-find-file) "muse-project" "\
@@ -81,7 +81,7 @@ Publish the pages of PROJECT that need publishing." t nil)
 ;;;***
 
 ;;;### (autoloads (muse-browse-url) "muse-protocols" "muse-protocols.el"
-;;;;;;  (17327 26137))
+;;;;;;  (17358 59291))
 ;;; Generated autoloads from muse-protocols.el
 
 (autoload (quote muse-browse-url) "muse-protocols" "\
@@ -91,7 +91,7 @@ If OTHER-WINDOW is non-nil, open in a different window." t nil)
 ;;;***
 
 ;;;### (autoloads (muse-publish-this-file muse-publish-file) "muse-publish"
-;;;;;;  "muse-publish.el" (17352 12537))
+;;;;;;  "muse-publish.el" (17358 59291))
 ;;; Generated autoloads from muse-publish.el
 
 (autoload (quote muse-publish-file) "muse-publish" "\
@@ -106,7 +106,7 @@ Publish the page in the current file." t nil)
 ;;;***
 
 ;;;### (autoloads (muse-registry-initialize) "muse-registry" "muse-registry.el"
-;;;;;;  (17340 39366))
+;;;;;;  (17370 18776))
 ;;; Generated autoloads from muse-registry.el
 
 (autoload (quote muse-registry-initialize) "muse-registry" "\
@@ -117,7 +117,7 @@ If FROM-SCRATCH is non-nil, make the registry from scratch." t nil)
 ;;;***
 
 ;;;### (autoloads (muse-blosxom-new-entry) "muse-blosxom" "muse-blosxom.el"
-;;;;;;  (17314 62700))
+;;;;;;  (17358 59291))
 ;;; Generated autoloads from muse-blosxom.el
 
 (autoload (quote muse-blosxom-new-entry) "muse-blosxom" "\

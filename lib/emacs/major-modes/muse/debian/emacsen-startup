@@ -18,6 +18,4 @@
                                          (symbol-name flavor)
                                          "/site-lisp/muse-el")))
 
-(autoload 'muse-use-font-lock "muse-colors")
-(autoload 'muse-mode "muse-mode" nil t)
-(autoload 'muse-latex-transform "muse-convert" nil t)
+(load "muse-autoloads.el")

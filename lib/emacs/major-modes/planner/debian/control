@@ -1,0 +1,17 @@
+Source: planner-el
+Section: misc
+Priority: optional
+Maintainer: Michael W. Olson (GNU address) <mwolson@gnu.org>
+Build-Depends-Indep: debhelper (>> 4.0.0), texinfo, texi2html
+Standards-Version: 3.6.2
+
+Package: planner-el
+Architecture: all
+Depends: emacs21 | xemacs21 | emacsen, muse-el
+Suggests: remember-el
+Description: personal information manager for Emacs
+ This package extends Emacs Muse to act as a day planner.
+ It allows you to keep track of completed and pending tasks,
+ daily schedule, notes, and other information in a collection of
+ semi-structured plain text files. You can automatically publish
+ your planner pages as HTML.
