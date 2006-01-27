@@ -22,7 +22,7 @@
 
 m4_define([XTLA_PRE_INIT],
 [ m4_define([XTLA_VERSION],
-             m4_esyscmd([if which tla 2>&1 > /dev/null; then
+             m4_esyscmd([if which tla > /dev/null 2>&1; then
                             tla logs -f | tail -1 | cut -d / -f 2 | xargs printf '%s'
                          else
                             baz logs -f | tail -1 | cut -d / -f 2 | xargs printf '%s'
