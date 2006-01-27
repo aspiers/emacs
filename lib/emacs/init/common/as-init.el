@@ -1135,12 +1135,6 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;}}}
 
-;;{{{ pjb-manager
-
-(autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
-
-;;}}}
-
 ;;}}}
 ;;{{{ Minor modes
 
