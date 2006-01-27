@@ -59,7 +59,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/xtla/lisp           \
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
-            $(EMACSLIB)/major-modes/planner/lisp	\
+            $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/emacs-wiki	        \
             $(EMACSLIB)/major-modes/muse/lisp	        \
             $(EMACSLIB)/major-modes/remember  	        \
