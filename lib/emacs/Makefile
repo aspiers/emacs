@@ -1,6 +1,13 @@
-# TODO: rewrite in Perl.  Gah.
-
-srcdirs = init/common major-modes minor-modes utils fun
+el_search_paths = 			\
+	init/common 			\
+	$(wildcard major-modes/*.el) 	\
+	major-modes/mmm 		\
+	major-modes/org-3.15 		\
+	major-modes/pcl-cvs 		\
+	major-modes/remember 		\
+	minor-modes 			\
+	utils 				\
+	fun
 
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -24,8 +31,12 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	)
 
 # Pretend these don't exist at all.
-IGNORE_PATHS = major-modes/xtla-main major-modes/monkey-2
-IGNORE_FILES = major-modes/sdf.el
+IGNORE_PATHS = 				\
+	major-modes/xtla-main 		\
+	major-modes/planner--main--1.0 	\
+	major-modes/monkey-2
+IGNORE_FILES =		    \
+	major-modes/sdf.el
 
 # Phony targets are bad except for top-level rules because if a rule A
 # has a phony prerequisite B, that phony rule B will always get
@@ -65,10 +76,10 @@ xinstall_dir = $(EMACSLIB)/XEmacs
 
 # Horrible horrible horrible.  Prune 3rd party packages from imminent find(1).
 prune_dirs = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
-prune_files = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -name "$$1" |g')
+prune_files = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
 ELs_TO_COMPILE_cmd =   				        \
-	find $(srcdirs)					\
+	find $(el_search_paths)				\
 	        -follow					\
 		-name \*.el 				\
 	      $(prune_dirs)				\
@@ -160,10 +171,12 @@ clean: uninstall
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
 
+psgml: .psgml-made
 .psgml-made:
 	( cd major-modes/psgml && $(MAKE) ) && \
 	touch $@
 
+nxml: .nxml-mode-20041004-made
 .nxml-mode-20041004-made: $(install_dir)
 	( 					\
 	  cd major-modes/nxml-mode-20041004 && 	\
@@ -172,6 +185,7 @@ uninstall:
 	) && 					\
 	touch $@
 
+wiki: .emacs-wiki-made
 .emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el) major-modes/emacs-wiki/Makefile.defs
 	( 								\
 	  cd major-modes/emacs-wiki && 					\
@@ -184,7 +198,8 @@ uninstall:
 	) && 								\
 	touch $@
 
-.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
+muse: .muse-made
+.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs Makefile
 	( 								\
 	  cd major-modes/muse && 					\
 	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
@@ -195,6 +210,7 @@ uninstall:
 	) && 								\
 	touch $@
 
+planner: .planner-made
 .planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-made .xtla-made
 	( 								\
 	  cd major-modes/planner && 					\
@@ -206,6 +222,7 @@ uninstall:
 	) && 								\
 	touch $@
 
+w3m: .emacs-w3m-made
 .emacs-w3m-made:
 	( 					\
 	  cd major-modes/emacs-w3m-1.4.4     && \
@@ -216,6 +233,7 @@ uninstall:
 	) && 					\
 	touch $@
 
+pgg: pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
 	@touch $@
 
@@ -229,6 +247,7 @@ uninstall:
 	) && 								\
 	touch $@
 
+xtla: .xtla-made
 .xtla-made: $(wildcard major-modes/xtla/*.el) $(wildcard major-modes/xtla/*/*.el) .xtla-configured Makefile
 	-( 				\
 	  cd major-modes/xtla && 	\
