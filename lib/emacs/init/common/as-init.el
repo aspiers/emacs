@@ -590,6 +590,13 @@ that name."
 ;;}}}
 ;;{{{ Major modes
 
+;;{{{ Programming languages
+
+;;{{{ C
+
+(add-hook 'c-mode-hook 'as-font-lock-mode-if-window-system)
+
+;;}}}
 ;;{{{ CPerl/Perl
 
 ;; one of these two will work
@@ -606,49 +613,12 @@ that name."
 (add-to-list 'auto-mode-alist '("\\.\\(pod\\|t\\)\\'" . cperl-mode))
 
 ;;}}}
-;;{{{ Text
+;;{{{ python-mode
 
-;; Turn on auto-fill if composing e-mail or news.
-;;
-;; For some reason the local buffer-file-name isn't set at the
-;; stage when text-mode-hook gets run (possibly because it isn't
-;; the current buffer at that stage?), but fortunately the
-;; symbol filename is set to the loading file so we can use that
-;; instead.
-
-;; Silence compile errors (I know what I'm doing, honest)
-(or (boundp 'filename) (defvar filename "" "sod knows"))
-
-(add-hook 'text-mode-hook
-          (function (lambda ()
-                      (local-unset-key "\e\t")
-                      (and
-		       (boundp 'filename)
-		       (not (eq filename t))
-                       (string-match
-			"mutt-\\|\\.article\\|\\.letter"
-			filename)
-                       (turn-on-auto-fill)))))
-
-;; Expand all tabs to spaces
-(add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
-(defun itm () "Shortcut to indented-text-mode."
-  (interactive)
-  (indented-text-mode))
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(autoload 'python-mode "python-mode" "python-mode" t)
 
 ;;}}}
-;;{{{ ReStructuredText mode
-
-(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
-(autoload 'rst-mode "rst")
-(autoload 'rst-text-mode-bindings "rst")
-(add-hook 'text-mode-hook 'rst-text-mode-bindings)
-
-;; Update the TOC automatically everytime you adjust a section title::
-(add-hook 'rst-adjust-hook 'rst-toc-insert-update)
-
-;;}}}
-
 ;;{{{ Ruby
 
 (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
@@ -687,16 +657,16 @@ that name."
 ;;}}}
 
 ;;}}}
-;;{{{ sawfish
+;;{{{ ecmascript-mode
 
-(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
-;;(add-hook 'sawfish-mode-hook
-;;          (function (lambda () (turn-on-font-lock))))
-;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
-(add-to-list 'auto-mode-alist
-             '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
+(autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
 
 ;;}}}
+
+;;}}}
+;;{{{ Other technical languages
+
 ;;{{{ DTD
 
 (autoload 'dtd-mode "tdtd" "Major mode for SGML and XML DTDs." t)
@@ -715,20 +685,6 @@ that name."
 ;;       ("\\.ele$"                               . dtd-mode)
 ;;       ("\\.ent$"                               . dtd-mode)
 ;;       ("\\.mod$"                               . dtd-mode)
-
-;;}}}
-;;{{{ nxml
-
-;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
-(load "rng-auto")
-;;(when (string-match "/\"" (prin1-to-string load-path)) (error 'fucked))
-
-(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
-(defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
-(autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
-(add-hook 'nxml-mode-hook
-          (lambda () (local-set-key [(control meta q)] 'mhj-format-xml)))
-(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xhtml\\)$" . nxml-mode))
 
 ;;}}}
 ;;{{{ psgml (SGML and XML)
@@ -829,28 +785,18 @@ that name."
 ;;}}}
 
 ;;}}}
-;;{{{ CSS
+;;{{{ nxml
 
-(autoload 'css-mode "css-mode" "mode for editing CSS files" t)
-(defvar cssm-indent-function 'cssm-c-style-indenter
-  "Which function to use when deciding which column to indent to. To get
-C-style indentation, use cssm-c-style-indenter.")
-(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
+(load "rng-auto")
+;;(when (string-match "/\"" (prin1-to-string load-path)) (error 'fucked))
 
-;;}}}
-;;{{{ MMM mode
-
-(defvar mmm-mode-ext-classes-alist)
-(defvar mmm-global-mode)
-(setq mmm-global-mode 'maybe)
-
-(defvar mmm-mode-ext-classes-alist)
-(setq mmm-mode-ext-classes-alist
-      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
-
-(defun mmm-add-mode-ext-class (a b c))
-(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
-(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
+(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
+(defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
+(autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
+(add-hook 'nxml-mode-hook
+          (lambda () (local-set-key [(control meta q)] 'mhj-format-xml)))
+(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xhtml\\)$" . nxml-mode))
 
 ;;}}}
 ;;{{{ HTML
@@ -893,14 +839,93 @@ C-style indentation, use cssm-c-style-indenter.")
 (defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
+;;{{{ CSS
+
+(autoload 'css-mode "css-mode" "mode for editing CSS files" t)
+(defvar cssm-indent-function 'cssm-c-style-indenter
+  "Which function to use when deciding which column to indent to. To get
+C-style indentation, use cssm-c-style-indenter.")
+(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+
+;;}}}
+
+;;}}}
+;;{{{ Configuration languages
+
+;;{{{ rpm-spec-mode
+
+(add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
+(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
+
+;;}}}
+;;{{{ sawfish
+
+(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
+;;(add-hook 'sawfish-mode-hook
+;;          (function (lambda () (turn-on-font-lock))))
+;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
+(add-to-list 'auto-mode-alist
+             '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
+
+;;}}}
 ;;{{{ Apache
 
 (autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
 
 ;;}}}
-;;{{{ mutt
 
-(autoload 'mutt-mode "mutt" "Mode for editing mutt files")
+;;}}}
+;;{{{ Semi-natural languages / documentation
+
+;;{{{ Text
+
+;; Turn on auto-fill if composing e-mail or news.
+;;
+;; For some reason the local buffer-file-name isn't set at the
+;; stage when text-mode-hook gets run (possibly because it isn't
+;; the current buffer at that stage?), but fortunately the
+;; symbol filename is set to the loading file so we can use that
+;; instead.
+
+;; Silence compile errors (I know what I'm doing, honest)
+(or (boundp 'filename) (defvar filename "" "sod knows"))
+
+(add-hook 'text-mode-hook
+          (function (lambda ()
+                      (local-unset-key "\e\t")
+                      (and
+		       (boundp 'filename)
+		       (not (eq filename t))
+                       (string-match
+			"mutt-\\|\\.article\\|\\.letter"
+			filename)
+                       (turn-on-auto-fill)))))
+
+;; Expand all tabs to spaces
+(add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+(defun itm () "Shortcut to indented-text-mode."
+  (interactive)
+  (indented-text-mode))
+
+;;}}}
+;;{{{ ReStructuredText mode
+
+(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
+(autoload 'rst-mode "rst")
+(autoload 'rst-text-mode-bindings "rst")
+(add-hook 'text-mode-hook 'rst-text-mode-bindings)
+
+;; Update the TOC automatically everytime you adjust a section title::
+(add-hook 'rst-adjust-hook 'rst-toc-insert-update)
+
+;;}}}
+
+;;{{{ gnus
+
+(defvar gnus-face-1 'gnus-cite-face-1)
+(defvar gnus-face-2 'italic)
+(defvar gnus-face-3 'gnus-cite-face-4)
+(defvar gnus-sum-thread-tree-root "")
 
 ;;}}}
 ;;{{{ TeX
@@ -915,11 +940,6 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; Turn on font-lock mode on entry
 
 (add-hook 'tex-mode-hook 'as-font-lock-mode-if-window-system)
-
-;;}}}
-;;{{{ C
-
-(add-hook 'c-mode-hook 'as-font-lock-mode-if-window-system)
 
 ;;}}}
 ;;{{{ man
@@ -941,106 +961,38 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
-;;{{{ pjb-manager
-
-(autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
-;;{{{ cvs helper modes
+;;{{{ Organisation / productivity
 
-;; diff mode
-(add-hook 'diff-mode-hook 'mhj-set-q-to-close)
+;;{{{ muse-mode
 
-;; cvs-status mode
-(add-hook 'cvs-status-mode-hook 'mhj-set-q-to-close)
-
-;; log-view mode
-(add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
-
-;;}}}
-;;{{{ psvn
-
-(autoload 'svn-status "psvn" "svn-status" t)
-(global-set-key "\C-cE" 'svn-status)
-;; (require 'psvn)
-
-;;}}}
-;;{{{ gnus
-
-(defvar gnus-face-1 'gnus-cite-face-1)
-(defvar gnus-face-2 'italic)
-(defvar gnus-face-3 'gnus-cite-face-4)
-(defvar gnus-sum-thread-tree-root "")
-
-;;}}}
-;;{{{ rpm-spec-mode
-
-(add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
-(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
-
-;;}}}
-;;{{{ gtypist-mode
-
-(add-to-list 'auto-mode-alist '("\\.typ\\'" . gtypist-mode))
-(autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
-
-;;}}}
-;;{{{ python-mode
-
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(autoload 'python-mode "python-mode" "python-mode" t)
-
-;;}}}
-;;{{{ ecmascript-mode
-
-(add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
-(autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
-
-;;}}}
-;;{{{ xtla
-
-;; Used to build xtla with:
-;;
-;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
-;; make
-;; make install
-;; emk
-
-;; now integrated into lib/emacs/Makefile
-
-(load-library "xtla-load")
-
-;;}}}
-;;{{{ etask-mode
-
-(autoload 'etask "etask" "etask project management mode" t)
-
-;;}}}
-;;{{{ w3m-mode
-
-;; Pull in autoloads
-(require 'w3m-load "w3m-load" t)
-
-(eval-when-compile (require 'dired))
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
-
-(defun dired-w3m-find-file ()
+(defun muse-mode ()
+  "Pseudo-autoloader which does (require 'muse-mode)."
   (interactive)
-  (require 'w3m)
-  (let ((file (dired-get-filename)))
-    (if (y-or-n-p (format "Open 'w3m' %s " (file-name-nondirectory file)))
-        (w3m-find-file file))))
+  (require 'muse-mode)
+  (require 'muse-html)
+  (require 'muse-docbook)
+  (require 'muse-latex)
+  (require 'muse-texinfo)
+  (require 'muse-wiki)
+  (require 'muse-project)
+  (muse-mode))
 
-(defun mhj-w3m-browse-current-buffer ()
-  (interactive)
-  (let ((filename (concat (make-temp-file "w3m-" nil) ".html")))
-    (unwind-protect
-        (progn
-          (write-region (point-min) (point-max) filename)
-          (w3m-find-file filename))
-      (delete-file filename))))
+(defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
+(add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+
+;;}}}
+;;{{{ emacs-wiki-mode
+
+(autoload 'emacs-wiki-mode "emacs-wiki")
+(defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
+
+;;}}}
+;;{{{ planner-mode
+
+(autoload 'planner-mode "planner" nil t)
+(autoload 'plan "planner" nil t)
 
 ;;}}}
 ;;{{{ outline and org-mode
@@ -1071,40 +1023,121 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
 
 ;;}}}
+;;{{{ etask-mode
+
+(autoload 'etask "etask" "etask project management mode" t)
+
+;;}}}
+
+;;}}}
+;;{{{ Interaction with other people
+
+;;{{{ mutt
+
+(autoload 'mutt-mode "mutt" "Mode for editing mutt files")
+
+;;}}}
 ;;{{{ crm114-mode
 
 (autoload 'crm114-mode "crm114-mode" "crm114-mode" t)
 (add-to-list 'auto-mode-alist '("\\.crm$" . crm114-mode))
 
 ;;}}}
-;;{{{ emacs-wiki-mode
+;;{{{ w3m-mode
 
-(autoload 'emacs-wiki-mode "emacs-wiki")
-(defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
+;; Pull in autoloads
+(require 'w3m-load "w3m-load" t)
 
-;;}}}
-;;{{{ muse-mode
+(eval-when-compile (require 'dired))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
 
-(defun muse-mode ()
-  "Pseudo-autoloader which does (require 'muse-mode)."
+(defun dired-w3m-find-file ()
   (interactive)
-  (require 'muse-mode)
-  (require 'muse-html)
-  (require 'muse-docbook)
-  (require 'muse-latex)
-  (require 'muse-texinfo)
-  (require 'muse-wiki)
-  (require 'muse-project)
-  (muse-mode))
+  (require 'w3m)
+  (let ((file (dired-get-filename)))
+    (if (y-or-n-p (format "Open 'w3m' %s " (file-name-nondirectory file)))
+        (w3m-find-file file))))
 
-(defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
-(add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+(defun mhj-w3m-browse-current-buffer ()
+  (interactive)
+  (let ((filename (concat (make-temp-file "w3m-" nil) ".html")))
+    (unwind-protect
+        (progn
+          (write-region (point-min) (point-max) filename)
+          (w3m-find-file filename))
+      (delete-file filename))))
 
 ;;}}}
-;;{{{ planner-mode
 
-(autoload 'planner-mode "planner" nil t)
-(autoload 'plan "planner" nil t)
+;;}}}
+;;{{{ Version control
+
+;;{{{ cvs helper modes
+
+;; diff mode
+(add-hook 'diff-mode-hook 'mhj-set-q-to-close)
+
+;; cvs-status mode
+(add-hook 'cvs-status-mode-hook 'mhj-set-q-to-close)
+
+;; log-view mode
+(add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
+
+;;}}}
+;;{{{ psvn
+
+(autoload 'svn-status "psvn" "svn-status" t)
+(global-set-key "\C-cE" 'svn-status)
+;; (require 'psvn)
+
+;;}}}
+;;{{{ xtla
+
+;; Used to build xtla with:
+;;
+;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
+;; make
+;; make install
+;; emk
+
+;; now integrated into lib/emacs/Makefile
+
+(load-library "xtla-load")
+
+;;}}}
+
+;;}}}
+;;{{{ Miscellaneous
+
+;;{{{ MMM mode
+
+(defvar mmm-mode-ext-classes-alist)
+(defvar mmm-global-mode)
+(setq mmm-global-mode 'maybe)
+
+(defvar mmm-mode-ext-classes-alist)
+(setq mmm-mode-ext-classes-alist
+      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
+
+(defun mmm-add-mode-ext-class (a b c))
+(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
+(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
+
+;;}}}
+;;{{{ gtypist-mode
+
+(add-to-list 'auto-mode-alist '("\\.typ\\'" . gtypist-mode))
+(autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
+
+;;}}}
+
+;;}}}
+
+;;{{{ pjb-manager
+
+(autoload 'pjb-manager "pjb-manager" "PJB manager mode" t)
 
 ;;}}}
 
