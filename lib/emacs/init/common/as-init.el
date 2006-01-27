@@ -965,7 +965,6 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; (require 'psvn)
 
 ;;}}}
-
 ;;{{{ gnus
 
 (defvar gnus-face-1 'gnus-cite-face-1)
@@ -1090,10 +1089,22 @@ C-style indentation, use cssm-c-style-indenter.")
   "Pseudo-autoloader which does (require 'muse-mode)."
   (interactive)
   (require 'muse-mode)
+  (require 'muse-html)
+  (require 'muse-docbook)
+  (require 'muse-latex)
+  (require 'muse-texinfo)
+  (require 'muse-wiki)
+  (require 'muse-project)
   (muse-mode))
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+
+;;}}}
+;;{{{ planner-mode
+
+(autoload 'planner-mode "planner" nil t)
+(autoload 'plan "planner" nil t)
 
 ;;}}}
 
