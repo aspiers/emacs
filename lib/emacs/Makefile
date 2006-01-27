@@ -166,7 +166,11 @@ install: .installed
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 clean: uninstall
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
-	rm major-modes/nxml-mode-20041004/stamp-byte-compile
+	rm -f .*-made
+	rm -f major-modes/nxml-mode-20041004/stamp-byte-compile
+	for dir in $(THIRD_PARTY_PKG_DIRS); do \
+		( cd $$dir && make clean )      \
+	done
 
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
@@ -259,3 +263,4 @@ xtla: .xtla-made
 major-modes/xtla/configure: major-modes/xtla/configure.ac
 	-cd major-modes/xtla && autoconf
 
+major-modes/remember/remember-experimental.elc: .planner-made
