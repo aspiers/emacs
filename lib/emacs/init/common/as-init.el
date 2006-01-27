@@ -121,6 +121,13 @@ that name."
 
 ;;}}}
 
+(autoload 'as-make-backup-file-name
+                                 "as-bufs-files" "Make backup filenames"    t)
+;; Need this in as-custom:
+;; (custom-set-variables
+;;  '(make-backup-file-name-function (quote as-make-backup-file-name)))
+
+
 (autoload 'as-display-buffer-filename
                                  "as-bufs-files" "Display buffer filename"  t)
 (autoload 'as-bounce-buffer      "as-bufs-files" "Bounce buffers"           t)

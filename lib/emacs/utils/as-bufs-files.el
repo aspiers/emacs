@@ -120,6 +120,73 @@ Wraps around `rename-file'."
   (dired-rename-file (buffer-file-name) new-file-name nil))
 
 ;;}}}
+;;{{{ as-make-backup-file-name
+
+(defun as-make-backup-file-name (file)
+  "Adam's replacement for `make-backup-file-name', since
+`backup-directory-alist' isn't flexible enough."
+  (let ((home (getenv "HOME"))
+        backup-root
+        sub-path)
+    (cond
+     ;; If the file's in the current user's home directory, keep the
+     ;; backup at the top-level of the home directory.
+     ((string-match (format "^\\(%s\\)/\\(.+\\)" home) file)
+;;     ((string-match "^\\(/home/[^/]+\\)/\\(.+\\)" file)
+      (setq backup-root (format "%s/.emacs.backup" (match-string 1 file)))
+      (setq sub-path (match-string 2 file)))
+     ;; Otherwise stick it in /tmp.
+     (t
+      (setq backup-root (format "/tmp/.emacs.backup-%s" user-login-name))
+      (setq sub-path (substring file 1)))) ;; trim leading /
+    (let* ((sub-dir (format "%s/%s" backup-root (file-name-directory sub-path))))
+      (make-directory sub-dir t)
+      (format "%s/%s" backup-root sub-path))))
+  
+(defun backup-file-name-p (file)
+  "Return non-nil if FILE is a backup file name (numeric or not).
+This is a separate function so you can redefine it for customization.
+You may need to redefine `file-name-sans-versions' as well."
+  (and (or (string-match "~\\'" file)
+           (string-match "\\.emacs\\.backup\\(-[a-zA-Z]+\\)?/" file))
+       t))
+
+;; Don't actually use this at the moment - create dir tree instead.
+(defun as-absolute-path-to-file-name (file)
+  "Converts a full path name to a file name by substituting path
+separators for '!'.
+
+Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
+  (let ((backup-directory "/tmp"))
+    (progn
+      (when (memq system-type '(windows-nt ms-dos))
+        ;; Normalize DOSish file names: convert all slashes to
+        ;; directory-sep-char, downcase the drive letter, if any,
+        ;; and replace the leading "x:" with "/drive_x".
+        (or (file-name-absolute-p file)
+            (setq file (expand-file-name file))) ; make defaults explicit
+        ;; Replace any invalid file-name characters (for the
+        ;; case of backing up remote files).
+        (setq file (expand-file-name (convert-standard-filename file)))
+        (setq dir-sep-string (char-to-string directory-sep-char))
+        (if (eq (aref file 1) ?:)
+            (setq file (concat dir-sep-string
+                               "drive_"
+                               (char-to-string (downcase (aref file 0)))
+                               (if (eq (aref file 2) directory-sep-char)
+                                   ""
+                                 dir-sep-string)
+                               (substring file 2)))))
+      ;; Make the name unique by substituting directory
+      ;; separators.  It may not really be worth bothering about
+      ;; doubling `!'s in the original name...
+      (expand-file-name
+       (subst-char-in-string
+        directory-sep-char ?!
+        (replace-regexp-in-string "!" "!!" file))
+       backup-directory))))
+
+;;}}}
 
 ;;{{{ bury-and-close-buffer
 
