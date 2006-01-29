@@ -115,9 +115,14 @@ Wraps around `rename-file'."
 ;;   (rename-file buffer-file-name new-file-name)
 ;;   (rename-buffer new-file-name t)
 
+  (if (file-directory-p new-file-name)
+      (setq new-file-name
+            (concat new-file-name "/" (file-name-nondirectory (buffer-file-name)))))
+
   ;; The nil below means "not ok if already exists" and gets passed to
   ;; rename-file.
-  (dired-rename-file (buffer-file-name) new-file-name nil))
+  (dired-rename-file (buffer-file-name) new-file-name nil)
+  (message (format "Renamed to %s" new-file-name)))
 
 ;;}}}
 ;;{{{ as-make-backup-file-name
