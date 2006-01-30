@@ -343,7 +343,7 @@ that name."
 (autoload 'as-insert-snail-mail "as-autotext" "Insert snail mail" t)
 (global-set-key "\C-cia" 'as-insert-snail-mail)
 
-(autoload 'as-insert-snail-mail "as-autotext" "Insert work snail mail" t)
+(autoload 'as-insert-work-snail-mail "as-autotext" "Insert work snail mail" t)
 (global-set-key "\C-ciA" 'as-insert-work-snail-mail)
 
 (autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
