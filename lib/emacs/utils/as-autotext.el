@@ -169,4 +169,15 @@ London
 E14 8JS
 "))
 
+(defun as-insert-work-snail-mail () 
+  "Inserts Adam's work snail mail address"
+  (interactive)
+  (insert "Novell (UK) Ltd.
+1 Arlington Square
+Downshire Way
+Bracknell
+Berkshire
+RG12 1WA
+"))
+
 ;;}}}
