@@ -1,6 +1,6 @@
-;;; folding.el --- A folding-editor-like minor mode.
+;;; folding-2.107.el --- A folding-editor-like minor mode.
 
-;; Copyright (C) 1994-2002
+;; Copyright (C) 1994-2003
 ;;           Jari Aalto, Anders Lindgren, All rights reserved.
 ;; Copyright (C) 1992, 1993
 ;;           Jamie Lokier, All rights reserved.
@@ -11,6 +11,7 @@
 ;; Maintainer:  Jari Aalto      <jari.aalto@poboxes.com>
 ;;              Anders Lindgren <andersl@csd.uu.se>
 ;; Created:     1992
+;; Version:     2.107
 ;; RCS version: $Revision$
 ;; Date:        $Date$
 ;; Keywords:    tools
@@ -71,17 +72,17 @@
 ;;      Emacs `load-path' (or extend the load path to include the
 ;;      directory containing this file) and optionally byte compile it.
 ;;
-;;	The best way to install folding is the autolaod installation,
-;;	so that folding is loaded into your emacs only when you turn on
-;;	`folding-mode'. This statement speeds up loading your .emacs
+;;      The best way to install folding is the autoload installation,
+;;      so that folding is loaded into your emacs only when you turn on
+;;      `folding-mode'. This statement speeds up loading your .emacs
 ;;
-;;	    (autoload 'folding-mode          "folding" "Folding mode" t)
-;;	    (autoload 'turn-off-folding-mode "folding" "Folding mode" t)
-;;	    (autoload 'turn-on-folding-mode  "folding" "Folding mode" t)
+;;          (autoload 'folding-mode          "folding" "Folding mode" t)
+;;          (autoload 'turn-off-folding-mode "folding" "Folding mode" t)
+;;          (autoload 'turn-on-folding-mode  "folding" "Folding mode" t)
 ;;
-;;	But if you always use folding, then perhaps you want more traditional
-;;	installation. Here Folding mode starts automatically when you
-;;	load a folded file.
+;;      But if you always use folding, then perhaps you want more traditional
+;;      installation. Here Folding mode starts automatically when you
+;;      load a folded file.
 ;;
 ;;          ;; (setq folding-default-keys-function
 ;;          ;;      'folding-bind-backward-compatible-keys)
@@ -89,14 +90,13 @@
 ;;          (if (load "folding" 'nomessage 'noerror)
 ;;              (folding-mode-add-find-file-hook))
 ;;
-;;      Folding Uses a keymap which conforms with the new Emacs (started
-;;      19.29) style. The key bindings are the same as in previous versions
-;;      of folding, but they are prefixed with "C-c@" instead of "C-c".
+;;      Folding uses a keymap which conforms with the new Emacs
+;;      (started 19.29) style. The key bindings are prefixed with
+;;      "C-c@" instead of old "C-c". To use the old keyboard bindings,
+;;      uncomment the lines in the the above installation example
 ;;
-;;      To use the old keyboard bindings, uncomment the lines in the
-;;      the instalation example above. Also genally speaking: Define all
-;;      variables before package uses or sees them, and only then load this
-;;      file.
+;;      The same folding marks can be used in `vim' editor command
+;;      "set fdm=marker".
 
 ;;}}}
 ;;{{{ Documentation
@@ -104,7 +104,7 @@
 ;;
 ;;  Compatibility
 ;;
-;;      Folding support following Emacs flavors:
+;;      Folding supports following Emacs flavors:
 ;;
 ;;          Unix Emacs  19.28+  and Win32 Emacs  19.34+
 ;;          Unix XEmacs 19.14+  and Win32 XEmacs 21.0+
@@ -115,9 +115,9 @@
 ;;      by using adviced kill/yank functions. The advice functions are
 ;;      only instantiated under problematic NT Emacs versions.
 ;;
-;;      Windows NT/9x 19.34-20.3.1 (i386-*-nt4.0) version contains a bug which
-;;      affects using folding: reported by Trey Jackson
-;;      <trey@cs.berkeley.edu>
+;;      Windows NT/9x 19.34 - 20.3.1 (i386-*-nt4.0) versions contained
+;;      a bug which affected using folding. At the time the bug was
+;;      reported by Trey Jackson <trey@cs.berkeley.edu>
 ;;
 ;;          If you kill folded area and yank it back, the ^M marks are
 ;;          removed for some reason.
@@ -181,21 +181,16 @@
 ;;      When searching using the incremental search (C-s) facilities, folds
 ;;      will be automagically entered and closed.
 ;;
-;;      BUG: There is known and unresolved bug with ISearch code of the
-;;      folding when used the latest XEmacs 21.2+ versions. This is due to
-;;      changed infrastructure in XEmacs side. Folding maintainers at this
-;;      time do not know how to regain compatibility with XEmacs.
-;;
 ;;  Problems
 ;;
 ;;     uneven fold marks
 ;;
-;;      Oops, I just deleted some text, and a fold mark just happened to be
-;;      deleted!  What should I do?  Trust me, you will eventually do this
+;;      Oops, I just deleted some text, and a fold mark got deleted!
+;;      What should I do?  Trust me, you will eventually do this
 ;;      sometime. the easiest way is to open the buffer using
-;;      `folding-open-buffer' (C-c @ C-o) and add the fold mark by hand. To
-;;      find mismatching fold marks, the package `occur' is useful. The
-;;      command:
+;;      `folding-open-buffer' (C-c @ C-o) and add the fold mark by
+;;      hand. To find mismatching fold marks, the package `occur' is
+;;      useful. The command:
 ;;
 ;;          M-x occur RET {{{\|}}} RET
 ;;
@@ -210,8 +205,8 @@
 ;;     Fold must have a label
 ;;
 ;;      When you make a fold, be sure to write some text for the name
-;;	of the fold, otherwise you will have an error "extraneous fold mark...
-;;      For example write:
+;;      of the fold, otherwise you will have an error "extraneous fold
+;;      mark..." Write like this:
 ;;
 ;;          {{{ Note
 ;;          }}}
@@ -223,10 +218,10 @@
 ;;
 ;;     folding-whole-buffer doesn't fold whole buffer
 ;;
-;;	If you call commands `folding-open-buffer' and `folding-whole-buffer'
-;;	and notice that there are open fold sections in the buffer, then
-;;	you have mismatch of folds somewhere. Run occur to check where
-;;	is the extra open or colosing fold mark.
+;;      If you call commands `folding-open-buffer' and `folding-whole-buffer'
+;;      and notice that there are open fold sections in the buffer, then
+;;      you have mismatch of folds somewhere. Run occur to check where
+;;      is the extra open or closing fold mark.
 ;;
 ;;  Folding and outline modes
 ;;
@@ -255,9 +250,9 @@
 ;;          document by clicking on fold marks. (The XEmacs version of
 ;;          Outline mode has mouse support.)
 ;;
-;;      o   The Isearch facilities of Folding is capable of automatically open
-;;          folds. Under Outline, the isearch is practically useless unless
-;;          the entire document is opened prior to use.
+;;      o   The Isearch facilities of Folding is capable of automatically to
+;;          open folds. Under Outline, the the entire document must be opened
+;;          prior isearch.
 ;;
 ;;      In conclusion, Outline mode is useful when the document being
 ;;      edited contains natural markers, like LaTeX. When writing code
@@ -268,12 +263,12 @@
 ;;
 ;;      When writing this, version 2.0 of Folding mode is just about to be
 ;;      released. The current version has proven itself stable during a
-;;      six months beta testing period. In other words: we haven't had
-;;      time to touch the damn thing for quite some time.
+;;      months of testing period. In other words: we haven't had time to
+;;      touch the damn thing for quite some time.
 ;;
 ;;      Our plan was from the beginning to rewrite the entire package,
-;;      including replacing the core of the program, written using Emacs 18
-;;      technology (selective display), and replace it with modern
+;;      including replacing the core of the program, written using Emacs
+;;      18 technology (selective display), and replace it with modern
 ;;      equivalences, like overlays or text-properties for Emacs 19 and
 ;;      extents for XEmacs.
 ;;
@@ -287,20 +282,20 @@
 
 ;;}}}
 
-;;{{{ Customisation
+;;{{{ Customization
 
-;;  Customisation: general
+;;  Customization: general
 ;;
-;;      The behaviour of Folding mode is controlled mainly by a set of
+;;      The behavior of Folding mode is controlled mainly by a set of
 ;;      Emacs Lisp variables. This section will discuss the most useful
 ;;      ones, for more details please see the code. The descriptions below
 ;;      assumes that you know a bit about how to use simple Emacs Lisp and
 ;;      knows how to edit ~/.emacs, your init file.
 ;;
-;;  Customisation: hooks
+;;  Customization: hooks
 ;;
-;;      The normal procedure when customising a package is to write a
-;;      function doing the customisation. The function is then added to
+;;      The normal procedure when customizing a package is to write a
+;;      function doing the customization. The function is then added to
 ;;      a hook which is called at an appropriate time. (Please see the
 ;;      example section below.)
 ;;
@@ -317,19 +312,19 @@
 ;;      o   `folding-load-hook'
 ;;           Called when folding mode is loaded into Emacs.
 ;;
-;;  Customisation: The Mouse
+;;  Customization: The Mouse
 ;;
-;;      The variable `folding-behave-table' contains the actions which should
-;;      be performed when the user clicks on an open fold, a closed fold etc.
-;;      For example, if you prefer to `enter' a fold rather than `open' it
-;;      you should rebind this variable.
+;;      The variable `folding-behave-table' contains the actions which
+;;      should be performed when the user clicks on an open fold, a closed
+;;      fold etc.  For example, if you prefer to `enter' a fold rather
+;;      than `open' it you should rebind this variable.
 ;;
-;;      The variable `folding-default-mouse-keys-function' contains the name
-;;      of the function used to bind your mouse keys. To use your own
-;;      mouse bindings, create a function, say `my-folding-bind-mouse', and set
-;;      this variable to it.
+;;      The variable `folding-default-mouse-keys-function' contains the
+;;      name of the function used to bind your mouse keys. To use your own
+;;      mouse bindings, create a function, say `my-folding-bind-mouse',
+;;      and set this variable to it.
 ;;
-;;  Customisation: Keymaps
+;;  Customization: Keymaps
 ;;
 ;;      When Emacs 19.29 was released, the keymap was
 ;;      divided into strict parts. (This division existed before, but a lot
@@ -341,27 +336,27 @@
 ;;          C-c <Punctuation Char> <Whatever>
 ;;                          -- Reserved for minor modes.
 ;;
-;;      The reason why I choosed C-c@ as the default prefix is that it is used
-;;      by outline-minor-mode. I suspect that few people will try to use
-;;      folding and outline at the same time.
+;;      The reason why I choosed C-c@ as the default prefix is that it is
+;;      used by outline-minor-mode. I suspect that few people will try to
+;;      use folding and outline at the same time.
 ;;
-;;      However, I have made it possible to keep your old keybindings. The
-;;      variable `folding-default-keys-function' specifies which function should
-;;      be called to bind the keys. The plan is to define a selection of
-;;      keybinding functions. For example, we have one which tries to bind
-;;      the keys in a way compatible to outline mode.
+;;      However, I have made it possible to keep your old key bindings. The
+;;      variable `folding-default-keys-function' specifies which function
+;;      should be called to bind the keys. The plan is to define a
+;;      selection of key binding functions. For example, we have one which
+;;      tries to bind the keys in a way compatible to outline mode.
 ;;
-;;      To use the old keybindings, add the following line to your init file:
+;;      To use the old key bindings, add the following line to your init file:
 ;;
-;;	    (setq folding-default-keys-function
-;;		  'folding-bind-backward-compatible-keys)
+;;          (setq folding-default-keys-function
+;;                'folding-bind-backward-compatible-keys)
 ;;
 ;;      To define keys similar to the keys used by Outline mode, use:
 ;;
-;;	    (setq folding-default-keys-function
+;;          (setq folding-default-keys-function
 ;;                'folding-bind-outline-compatible-keys)
 ;;
-;;  Customisation: adding new major modes
+;;  Customization: adding new major modes
 ;;
 ;;      To add fold marks for a new major mode, use the function
 ;;      `folding-add-to-marks-list'. Example:
@@ -369,7 +364,7 @@
 ;;          (folding-add-to-marks-list 'c-mode "/* {{{ " "/* }}} */" " */" t)
 ;;          (folding-add-to-marks-list 'java-mode "// {{{ " "// }}}" nil t)
 ;;
-;;  Customisation: ISearch
+;;  Customization: ISearch
 ;;
 ;;      If you don't like the extension folding.el applies to isearch,
 ;;      set the variable `folding-isearch-install' to nil before loading
@@ -380,15 +375,15 @@
 
 ;;  Example: personal setup
 ;;
-;;      To define your own keybinding instead of using the standard ones,
+;;      To define your own key binding instead of using the standard ones,
 ;;      you can do like this:
 ;;
-;;           (defconst folding-mode-prefix-key "\C-c")
+;;           (setq folding-mode-prefix-key "\C-c")
 ;;           ;;
-;;           (defconst folding-default-keys-function
+;;           (setq folding-default-keys-function
 ;;               '(folding-bind-backward-compatible-keys))
 ;;           ;;
-;;           (defconst folding-load-hook 'my-folding-load-hook)
+;;           (setq folding-load-hook 'my-folding-load-hook)
 ;;
 ;;
 ;;           (defun my-folding-load-hook ()
@@ -398,8 +393,8 @@
 ;;
 ;;             ;; ............................................... markers ...
 ;;
-;;             ;;  Change text-mode fold marks. I ussually program my
-;;             ;;  sh/perl/awk there, so use "#"
+;;             ;;  Change text-mode fold marks. Handy for quick
+;;             ;;  sh/perl/awk code
 ;;
 ;;             (defvar folding-mode-marks-alist nil)
 ;;
@@ -434,23 +429,23 @@
 ;;
 ;;  Example: choosing different fold marks for mode
 ;;
-;;	Suppose you sometimes want to use different fold marks for the major
-;;	mode: eg. if to alaternate between "# {{{" and "{{{" in `text-mode'
-;;	Call `M-x' `my-folding-text-mode-setup' to change the marks.
+;;      Suppose you sometimes want to use different fold marks for the major
+;;      mode: e.g. to alternate between "# {{{" and "{{{" in `text-mode'
+;;      Call `M-x' `my-folding-text-mode-setup' to change the marks.
 ;;
 ;;            (defun my-folding-text-mode-setup (&optional use-custom-folding-marks)
-;;            	(interactive
+;;              (interactive
 ;;                (list (y-or-n-p "Use Custom fold marks now? ")))
-;;            	(let* ((ptr (assq major-mode folding-mode-marks-alist))
-;;            	       (default-begin "# {{{")
-;;            	       (default-end   "# }}}")
-;;            	       (begin "{{{")
-;;            	       (end   "}}}"))
-;;            	  (when (eq major-mode 'text-mode)
-;;            	    (unless use-custom-folding-marks
-;;            	      (setq  begin default-begin  end default-end)))
-;;            	  (setcdr ptr (list begin end))
-;;            	  (folding-set-marks begin end)))
+;;              (let* ((ptr (assq major-mode folding-mode-marks-alist))
+;;                     (default-begin "# {{{")
+;;                     (default-end   "# }}}")
+;;                     (begin "{{{")
+;;                     (end   "}}}"))
+;;                (when (eq major-mode 'text-mode)
+;;                  (unless use-custom-folding-marks
+;;                    (setq  begin default-begin  end default-end)))
+;;                (setcdr ptr (list begin end))
+;;                (folding-set-marks begin end)))
 ;;
 ;;  Example: AucTex setup
 ;;
@@ -477,24 +472,24 @@
 ;;            "Select folding marks: prefixes nil, C-u and C-u C-u."
 ;;            (interactive "P")
 ;;            (let ((ptr (assq major-mode folding-mode-marks-alist))
-;;          	    input)
-;;          	(when (string-match "^\\(plain-\\|la\\|auc\\)?tex-"
-;;          			    (symbol-name  major-mode))
-;;          	  (setq input
-;;          		(read-string "Latex \\end(X) Marker (default O): "
-;;          			     nil nil "O" nil))
-;;          	  (setq input (upcase input))
-;;          	  (turn-off-folding-mode)
-;;          	  (folding-add-to-marks-list
-;;          	   major-mode (concat "\\" input) (concat "\\end" input) nil nil t)
-;;          	  ;; (setcdr ptr (list (concat "\\" input) (concat "\\end" input)))
-;;          	  (turn-on-folding-mode))))
+;;                  input)
+;;              (when (string-match "^\\(plain-\\|la\\|auc\\)?tex-"
+;;                                  (symbol-name  major-mode))
+;;                (setq input
+;;                      (read-string "Latex \\end(X) Marker (default O): "
+;;                                   nil nil "O" nil))
+;;                (setq input (upcase input))
+;;                (turn-off-folding-mode)
+;;                (folding-add-to-marks-list
+;;                 major-mode (concat "\\" input) (concat "\\end" input) nil nil t)
+;;                ;; (setcdr ptr (list (concat "\\" input) (concat "\\end" input)))
+;;                (turn-on-folding-mode))))
 ;;          ;;  End of example
 ;;
 ;;  Bugs: Lazy-shot.el conflict in XEmacs
 ;;
-;;	[XEmacs 20.4 lazy-shot-mode]
-;;	1998-05-28 Reported by Solofo Ramangalahy <solofo@mpi-sb.mpg.de>
+;;      [XEmacs 20.4 lazy-shot-mode]
+;;      1998-05-28 Reported by Solofo Ramangalahy <solofo@mpi-sb.mpg.de>
 ;;
 ;;          % xemacs -q folding.el
 ;;          M-x eval-buffer
@@ -506,12 +501,12 @@
 ;;      then search for mouse again and again. At some point you will see
 ;;      "Deleting extent" in the minibuffer and XEmacs freezes.
 ;;
-;;      The strange point is that I have this bug only under solaris 2.5 sparc
-;;      (binaries from ftp.xemacs.org) but not under solaris 2.6 x86. (XEmacs
+;;      The strange point is that I have this bug only under Solaris 2.5 sparc
+;;      (binaries from ftp.xemacs.org but not under Solaris 2.6 x86. (XEmacs
 ;;      20.4, folding 2.35). I will try to access more machines to see if it's
 ;;      the same.
 ;;
-;;      I suspect that the culprit is lazy-sho2t as it is beta, but maybe you
+;;      I suspect that the culprit is lazy-shot as it is beta, but maybe you
 ;;      will be able to describe the bug more precisely to the XEmacs people I
 ;;      you can reproduce it.
 
@@ -605,7 +600,33 @@
 ;; X.x                  = code under development
 ;; [person version]     = developer and his revision tree number.
 ;;
-;; X.x   Jul  19  2001  20.7             [2.92-2.97]
+;; X.x   Jan  23  2003  21.2             [jari 2.107]
+;;
+;; X.x   Aug  21  2002  21.2             [jari 2.105-2.106]
+;; - Added user function `folding-uninstall'.
+;; - Removed `ineractive' status: `folding-install-hooks' and
+;;   `folding-uninstall-hooks'
+;;
+;; X.x   Aug  02  2002  20.7             [jari 2.101-2.104]
+;; - Added font lock support. Now beginning and end markers are
+;;   highlighted with user variables `folding-font-lock-begin-mark'
+;;   `folding-font-lock-end-mark'. Feature suggested by
+;;   <Claude.BOUCHER@astrium-space.com>
+;; - Removed LCD entry - unnecessary.
+;;
+;; X.x   Jan  24  2002  20.7             [jari 2.100]
+;; - (folding-context-next-action):New user function.
+;;   Code by Scott Evans <gse@antisleep.com>
+;; - (folding-bind-default-keys): Added
+;;   C-x . to run `folding-context-next-action'
+;; - (folding-mouse-call-original): Added `car-safe' to read
+;;   EVENT, which may be nil.
+;;
+;; X.x   Jul  31  2001  20.7             [jari 2.98-2.99]
+;; - Gleb Arshinov  <gleb@barsook.com> fixed the broken XEmacs
+;;   isearch support and sent nice patch.
+;;
+;; X.x   Jul  19  2001  20.7             [jari 2.92-2.97]
 ;; - Beatified lisp code by removing parens that were alone.
 ;; - XEmacs latex-mode fix. The folds were strangely indented too
 ;;   far right. The cause was `indent-according-to-mode' which is
@@ -616,14 +637,14 @@
 ;;   Brand Michael <michael.brand@siemens.com>
 ;;
 ;; X.x   Apr  04  2001  20.7             [jari 2.89-2.91]
-;; - Small corrections to find.func.el::find-function-search-for-symbol
+;; - Small corrections to find-func.el::find-function-search-for-symbol
 ;;   implementation.
 ;;
 ;; X.x   Mar  08  2001  20.6             [jari 2.88]
 ;; - Dave Masterson <dmasters@rational.com> reported that jumping to a
 ;;   url displayed by the C-h f FUNCTION which told where the function was
 ;;   located died. The reason was that the buffer was folded and
-;;   find.func.el::find-function-search-for-symbol used regexps that
+;;   find-func.el::find-function-search-for-symbol used regexps that
 ;;   do not take into account folded buffers. The regexps used there rely
 ;;   on syntax tables.
 ;; - Added two new advices to catch find-func.el and unfold the buffer
@@ -842,7 +863,7 @@
 ;;
 ;; X.x   Nov  28  1998  19.34             [jari 2.49-2.50]
 ;; - Gleb Arshinov <gleb@CS.Stanford.EDU> reported that the
-;;   zmacs-region-stays must not be set blobally but in the functions that
+;;   zmacs-region-stays must not be set globally but in the functions that
 ;;   need it. He tested the change on  tested on XEmacs 21.0 beta and FSF
 ;;   Emacs 19.34.6 on NT and sent a patch . Thank you.
 ;; - (folding-preserve-active-region): New macro to set `zmacs-region-stays'
@@ -853,7 +874,7 @@
 ;; - (folding-isearch-general): Variables `is-fold' and `is narrowed' removed,
 ;;   because they were not used. (Byte Compilation fix)
 ;; - Later: interestingly using `defmacro' folding-preserve-active-region
-;;   does not work in XEmacs 21.0 beta, bute `defsubst' does. Reported
+;;   does not work in XEmacs 21.0 beta, but `defsubst' does. Reported
 ;;   and corrected by Gleb.
 ;;
 ;; X.x   Oct  22  1998  19.34             [jari 2.47-2.48]
@@ -1176,7 +1197,7 @@
 ;;
 ;; X.x   Aug 01 1996  19.31             [andersl]
 ;; - folding-subst-regions, variable `font-lock-mode' set to nil.
-;;   (Thanks to "stig@hackvan.com")
+;;   Thanks to <stig@hackvan.com>
 ;;
 ;; X.x   Jun 19 1996  19.31             [andersl]
 ;; - The code has proven iteself stable through the beta testing phase
@@ -1215,10 +1236,10 @@
 ;;   automatic folding if the return value is nil.
 ;;
 ;;   folding-check-allow-folding-function   :+ new variable
-;;   folding-check-if-folding-allowed	    :+ new func
-;;   folding-mode-find-file		    :! modified
-;;   folding-mode-write-file		    :! better docs
-;;   folding-goto-line			    :! arg "n" --> "N" due to XEmacs 19.13
+;;   folding-check-if-folding-allowed       :+ new func
+;;   folding-mode-find-file                 :! modified
+;;   folding-mode-write-file                :! better docs
+;;   folding-goto-line                      :! arg "n" --> "N" due to XEmacs 19.13
 ;;
 ;; X.x   Mar 11 1996  19.28             [jari 1.21]
 ;; - Integrated changes made by Anders's to v1.19 [folding in beta dir]
@@ -1274,15 +1295,15 @@
 ;;   he suggested that every mouse function should accept standard event,
 ;;   and it should be called directly.
 ;;   folding-global                 :- v, not needed
-;;   folding-mode-off-hook	    :- v, not needed
+;;   folding-mode-off-hook          :- v, not needed
 ;;   folding-mouse-action-table     :- v, not needed any more
 ;;   folding-default-keys-function  :+ v, key settings
 ;;   folding-default-mouse-keys-function:+ v, key settings
 ;;   folding-mouse                  :- f, unnecessary
-;;   'all mouse funcs'		    :! f, now accept "e" parameter
+;;   'all mouse funcs'              :! f, now accept "e" parameter
 ;;   folding-default-keys           :+ f, defines keys
 ;;   folding-mouse-call-original    :+ f, call orig mouse func
-;;   "examples"			    :! t, radical rewrote, only one left
+;;   "examples"                     :! t, radical rewrote, only one left
 ;;
 ;; X.x   Aug 24 1995  19.28             [jari  1.15]
 ;; - some minor changes. If we're inside a fold, Mouse-3 will go one
@@ -1332,21 +1353,21 @@
 ;; - Anders wanted mouse to operate according to 'mouse cursor', not
 ;;   current 'point'.
 ;;   folding-mouse-yank-at-point: controls it. Phwew, I like this one a lot!
-;;   examples			    :! t, totally changed, now 2 choices
-;;   folding-mode-off-hook	    :+ v, when folding ends
-;;   folding-global		    :+ v, global store value
-;;   folding-mouse-action-table	    :! v, changed
-;;   folding-mouse		    :! f, stores event to global
-;;   folding-mouse-open-close	    :! f, renamed, mouse activated open
-;;   folding-mode		    :! f, added 'off' hook
-;;   folding-event-posn		    :+ f, handles FSF mouse event
-;;   folding-mouse-yank-at-p	    :+ f, check which mouse mode is on
-;;   folding-mouse-point	    :+ f, return working point
-;;   folding-mouse-move		    :+ f, mouse moving down  , obsolete ??
-;;   folding-mouse-pick-move		:+ f, mouse move accord. fold mark
-;;   folding-next-visible-heading	:+ f, from tinyfold.el
-;;   folding-previous-visible-heading	:+ f, from tinyfold.el
-;;   folding-pick-move			:+ f, from tinyfold.el
+;;   examples                       :! t, totally changed, now 2 choices
+;;   folding-mode-off-hook          :+ v, when folding ends
+;;   folding-global                 :+ v, global store value
+;;   folding-mouse-action-table     :! v, changed
+;;   folding-mouse                  :! f, stores event to global
+;;   folding-mouse-open-close       :! f, renamed, mouse activated open
+;;   folding-mode                   :! f, added 'off' hook
+;;   folding-event-posn             :+ f, handles FSF mouse event
+;;   folding-mouse-yank-at-p        :+ f, check which mouse mode is on
+;;   folding-mouse-point            :+ f, return working point
+;;   folding-mouse-move             :+ f, mouse moving down  , obsolete ??
+;;   folding-mouse-pick-move            :+ f, mouse move accord. fold mark
+;;   folding-next-visible-heading       :+ f, from tinyfold.el
+;;   folding-previous-visible-heading   :+ f, from tinyfold.el
+;;   folding-pick-move                  :+ f, from tinyfold.el
 ;;
 ;;
 ;; X.x   Aug 22 1995  19.28             [jari  1.10]
@@ -1470,15 +1491,6 @@
 
 ;;}}}
 
-;;{{{ LCD Entry:
-
-;; LCD Archive Entry:
-;; folding|Jamie Lokier|jamie@rebellion.co.uk|
-;; A folding-editor-like minor mode|
-;; 25-Jun-1996|?.?|~/modes/folding.el.Z|
-
-;;}}}
-
 ;;; Code:
 
 ;;{{{ setup: require packages
@@ -1489,7 +1501,7 @@
 (require 'easymenu)
 
 (defvar folding-package-url-location
-  "http://www.csd.uu.se/~andersl/emacs.shtml"
+  "http://www.csd.uu.se/~andersl/emacs.shtml - included in XEmacs"
   "Location where to get folding. `folding-insert-advertise-folding-mode'.")
 
 ;;}}}
@@ -1509,7 +1521,7 @@
   (require 'advice)
 
   (defvar folding-xemacs-p (or (boundp 'xemacs-logo)
-			       (featurep 'xemacs))
+                               (featurep 'xemacs))
     "Folding determines which emacs version it is running. t if Xemacs.")
 
   ;;  loading overlay.el package removes some byte compiler whinings.
@@ -1517,8 +1529,8 @@
   ;;
   (if folding-xemacs-p
       (or (fboundp 'overlay-start)  ;; Already loaded
-	  (load "overlay" 'noerr)   ;; No? Try loading it.
-	  (message "\
+          (load "overlay" 'noerr)   ;; No? Try loading it.
+          (message "\
 ** folding.el: XEmacs 19.15+ has package overlay.el, try to get it.
                This is only warning. Folding does not use overlays by default.
                You can safely ignore possible overlay byte compilation error
@@ -1529,8 +1541,8 @@
 
   (when nil ;; Disabled 2000-01-05
     (if (string= (buffer-name) " *Compiler Input*")  ;; While byte compiling
-	(progn
-	  (message "** folding.el:\
+        (progn
+          (message "** folding.el:\
  Info, Ignore [X]Emacs specific missing motion/event/posn functions calls"))))
 
 
@@ -1539,24 +1551,24 @@
     "Set folding flag for `find-file-noselect' to open all folds."
     (let ((file (ad-get-arg 2)))
       (when file
-	(message "FILE %s" file)
-	(put 'find-file-noselect 'folding file)))
+        (message "FILE %s" file)
+        (put 'find-file-noselect 'folding file)))
     ad-do-it
     (put 'find-file-noselect 'folding nil))
 
 
   (defun folding-find-file-noselect ()
     (let* ((file   (get 'find-file-noselect 'folding))
-	   (buffer (and file
-			;; It may be absolute path name, file.el,
-			;; or just "file".
-			(or (find-buffer-visiting file)
-			    (get-buffer file)
-			    (get-buffer (concat file ".el"))))))
+           (buffer (and file
+                        ;; It may be absolute path name, file.el,
+                        ;; or just "file".
+                        (or (find-buffer-visiting file)
+                            (get-buffer file)
+                            (get-buffer (concat file ".el"))))))
       (when buffer
-	(with-current-buffer buffer
-	  (when (symbol-value 'folding-mode) ;; Byte compiler silencer
-	    (turn-off-folding-mode))))))
+        (with-current-buffer buffer
+          (when (symbol-value 'folding-mode) ;; Byte compiler silencer
+            (turn-off-folding-mode))))))
 
 
   ;;  See find.func.el  find-function-search-for-symbol
@@ -1594,8 +1606,8 @@ with XEmacs.")
 
 (defsubst folding-preserve-active-region ()
   "In XEmacs keep the region alive. In Emacs do nothing."
-  (if (boundp 'zmacs-region-stays)	;Keep regions alive
-      (set 'zmacs-region-stays t)))	;use `set' to Quiet Emacs Byte Compiler
+  (if (boundp 'zmacs-region-stays)      ;Keep regions alive
+      (set 'zmacs-region-stays t)))     ;use `set' to Quiet Emacs Byte Compiler
 
 
 
@@ -1604,8 +1616,8 @@ with XEmacs.")
 
 (eval-and-compile
   (when (and (not folding-xemacs-p)
-	     (memq (symbol-value 'window-system) '(win32 w32)) ; NT Emacs
-	     (string< emacs-version "20.4")) ;at least in 19.34 .. 20.3.1
+             (memq (symbol-value 'window-system) '(win32 w32)) ; NT Emacs
+             (string< emacs-version "20.4")) ;at least in 19.34 .. 20.3.1
 
   (unless (fboundp 'char-equal)
     (defalias 'char-equal  'equal))
@@ -1614,18 +1626,18 @@ with XEmacs.")
     (defun subst-char (str char to-char)
       "Replace in STR every CHAR with TO-CHAR."
       (let ((len   (length str))
-	    (ret   (copy-sequence str)))     ;because 'aset' is destructive
-	(while (> len 0)
-	  (if (char-equal (aref str (1- len)) char)
-	      (aset ret (1- len) to-char))
-	  (decf len))
-	ret)))
+            (ret   (copy-sequence str)))     ;because 'aset' is destructive
+        (while (> len 0)
+          (if (char-equal (aref str (1- len)) char)
+              (aset ret (1- len) to-char))
+          (decf len))
+        ret)))
 
   (defadvice kill-new (around folding-win32-fix-selective-display act)
     "In selctive display, convert each C-m to C-a. See `current-kill'."
     (let* ((string (ad-get-arg 0)))
       (when (and selective-display (string-match "\C-m" (or string "")))
-	(setq string (subst-char string ?\C-m ?\C-a)))
+        (setq string (subst-char string ?\C-m ?\C-a)))
       ad-do-it))
 
 
@@ -1634,8 +1646,8 @@ with XEmacs.")
     ad-do-it
     (let* ((string ad-return-value))
       (when (and selective-display (string-match "\C-a" (or string "")))
-	(setq string (subst-char string ?\C-a ?\C-m))
-	(setq ad-return-value string))))))
+        (setq string (subst-char string ?\C-a ?\C-m))
+        (setq ad-return-value string))))))
 
 
 (defvar folding-mode)  ;; Byte Compiler fix
@@ -1649,14 +1661,14 @@ with XEmacs.")
        (symbol-function 'mode-motion-highlight-internal)
        event
        (function
-	(lambda ()
-	  (beginning-of-line)
-	  (if (folding-mark-look-at)
-	      (search-forward-regexp "^[ \t]*"))))
+        (lambda ()
+          (beginning-of-line)
+          (if (folding-mark-look-at)
+              (search-forward-regexp "^[ \t]*"))))
        (function
-	(lambda ()
-	  (if (folding-mark-look-at)
-	      (end-of-line)))))))
+        (lambda ()
+          (if (folding-mark-look-at)
+              (end-of-line)))))))
   (require 'mode-motion)
   (add-hook 'mode-motion-hook 'folding-mode-motion-highlight-fold 'at-end))
 
@@ -1689,7 +1701,7 @@ with XEmacs.")
 ;;; .......................................................... &v-bind ...
 
 ;; Custom hack for Emacs that does not have custom
-;; http://www.dina.kvl.dk/~abraham/custom/
+;; <a href="<a href="http://www.dina.kvl.dk/~abraham/custom/">http://www.dina.kvl.dk/~abraham/custom/</a>"><a href="http://www.dina.kvl.dk/~abraham/custom/">http://www.dina.kvl.dk/~abraham/custom/</a></a>
 
 (eval-and-compile
   (condition-case ()
@@ -1710,14 +1722,24 @@ with XEmacs.")
 
 (defcustom folding-mode-prefix-key "\C-c@"
   "*Prefix key to use for Folding commands in Folding mode."
-  :type 'string
+  :type  'string
   :group 'folding)
 
 (defcustom folding-goto-key "\M-g"
   "*Key to be bound to `folding-goto-line' in folding mode.
 The default value is M - g, but you propably don't want folding to
 occupy it if you have used M - g got `goto-line'."
-  :type 'string
+  :type  'string
+  :group 'folding)
+
+(defcustom folding-font-lock-begin-mark 'font-lock-reference-face
+  "Face to highligh beginning fold mark."
+  :type  'face
+  :group 'folding)
+
+(defcustom folding-font-lock-end-mark 'font-lock-reference-face
+  "Face to highligh end fold mark."
+  :type  'face
   :group 'folding)
 
 
@@ -1763,10 +1785,10 @@ See also `folding-mode-prefix-key'."
 (defun folding-bind-terminal-keys ()
   "In non-window system, rebind C - f and C - b as folding-{forward,backward}-char."
   (unless (or (and (boundp 'window-system)       ;; Emacs
-		 (symbol-value 'window-system))  ;; Byte compiler silencer
-	    (and (fboundp 'console-type)         ;; XEmacs
-		 (let ((val (fboundp 'console-type)))
-		   (not (eq 'tty val)))))
+                 (symbol-value 'window-system))  ;; Byte compiler silencer
+            (and (fboundp 'console-type)         ;; XEmacs
+                 (let ((val (fboundp 'console-type)))
+                   (not (eq 'tty val)))))
     (define-key folding-mode-map "\C-f" 'folding-forward-char)
     (define-key folding-mode-map "\C-b" 'folding-backward-char)))
 
@@ -1787,55 +1809,56 @@ For the good ol' key bindings, please use the function
 
   (define-key folding-mode-map "\C-e" 'folding-end-of-line)
 
-  (folding-kbd "\C-f"	'folding-fold-region)
+  (folding-kbd "\C-f"   'folding-fold-region)
 
-  (folding-kbd ">"	'folding-shift-in)
-  (folding-kbd "<"	'folding-shift-out)
-  (folding-kbd "\C-t"	'folding-show-all)
+  (folding-kbd ">"      'folding-shift-in)
+  (folding-kbd "<"      'folding-shift-out)
+  (folding-kbd "\C-t"   'folding-show-all)
 
-  (folding-kbd "\C-s"	'folding-show-current-entry)
-  (folding-kbd "\C-x"	'folding-hide-current-entry)
-  (folding-kbd "\C-o"	'folding-open-buffer)
-  (folding-kbd "\C-w"	'folding-whole-buffer)
+  (folding-kbd "\C-s"   'folding-show-current-entry)
+  (folding-kbd "\C-x"   'folding-hide-current-entry)
+  (folding-kbd "\C-o"   'folding-open-buffer)
+  (folding-kbd "\C-w"   'folding-whole-buffer)
 
-  (folding-kbd "\C-r"	'folding-convert-buffer-for-printing)
-  (folding-kbd "\C-k"	'folding-marks-kill)
+  (folding-kbd "\C-r"   'folding-convert-buffer-for-printing)
+  (folding-kbd "\C-k"   'folding-marks-kill)
 
 
-  (folding-kbd	"\C-v"	'folding-pick-move)
-  (folding-kbd	"v"	'folding-previous-visible-heading)
-  (folding-kbd	" "	'folding-next-visible-heading)
+  (folding-kbd  "\C-v"  'folding-pick-move)
+  (folding-kbd  "v"     'folding-previous-visible-heading)
+  (folding-kbd  " "     'folding-next-visible-heading)
+  (folding-kbd  "."     'folding-context-next-action)
 
   ;;  C-u:  kinda "up" -- "down"
 
-  (folding-kbd "\C-u"	'folding-toggle-enter-exit)
-  (folding-kbd "\C-q"	'folding-toggle-show-hide)
+  (folding-kbd "\C-u"   'folding-toggle-enter-exit)
+  (folding-kbd "\C-q"   'folding-toggle-show-hide)
 
   ;; Think "#" as a 'fence'
 
-  (folding-kbd "#"	'folding-region-open-close)
+  (folding-kbd "#"      'folding-region-open-close)
 
   ;; Esc-; is the standard emacs commend add key.
 
-  (folding-kbd ";"	'folding-comment-fold)
-  (folding-kbd "%"	'folding-convert-to-major-folds)
-  (folding-kbd "/"	'folding-all-comment-blocks-in-region)
+  (folding-kbd ";"      'folding-comment-fold)
+  (folding-kbd "%"      'folding-convert-to-major-folds)
+  (folding-kbd "/"      'folding-all-comment-blocks-in-region)
 
-  (folding-kbd "\C-y"	'folding-show-current-subtree)
-  (folding-kbd "\C-z"	'folding-hide-current-subtree)
-  (folding-kbd "\C-n"	'folding-display-name)
+  (folding-kbd "\C-y"   'folding-show-current-subtree)
+  (folding-kbd "\C-z"   'folding-hide-current-subtree)
+  (folding-kbd "\C-n"   'folding-display-name)
 
-  (folding-kbd "I"	'folding-insert-advertise-folding-mode))
+  (folding-kbd "I"      'folding-insert-advertise-folding-mode))
 
 (defun folding-bind-backward-compatible-keys ()
   "Bind keys traditionally used by Folding mode.
-For bindings which follows Emacs 19.29 style conventions, please
+For bindings which follow newer Emacs minor mode conventions, please
 use the function `folding-bind-default-keys'.
 
-This function ignores the variable `folding-mode-prefix-key'!"
+This function sets `folding-mode-prefix-key' to `C-c'."
   (interactive)
-  (let ((folding-mode-prefix-key "\C-c"))
-    (folding-bind-default-keys)))
+  (setq folding-mode-prefix-key "\C-c")
+  (folding-bind-default-keys))
 
 (defun folding-bind-outline-compatible-keys ()
   "Bind keys used by the minor mode `folding-mode'.
@@ -1860,8 +1883,8 @@ For the good ol' key bindings, please use the function
 
   ;; Mimic Emacs 20.3 allout.el bindings
 
-  (folding-kbd ">"	    'folding-shift-in)
-  (folding-kbd "<"	    'folding-shift-out)
+  (folding-kbd ">"          'folding-shift-in)
+  (folding-kbd "<"          'folding-shift-out)
   (folding-kbd "\C-n"  'folding-next-visible-heading)
   (folding-kbd "\C-p"  'folding-previous-visible-heading)
 
@@ -1891,7 +1914,7 @@ For the good ol' key bindings, please use the function
   (folding-kbd "\C-r"  'folding-convert-buffer-for-printing)
   (folding-kbd "\C-w"  'folding-fold-region)
 
-  (folding-kbd "I"	'folding-insert-advertise-folding-mode))
+  (folding-kbd "I"      'folding-insert-advertise-folding-mode))
 
 
 ;;{{{ goto-line (advice)
@@ -1924,31 +1947,31 @@ See also `folding-goto-key'."
   (defadvice goto-line (around folding-goto-line first activate)
     "Go to line ARG, entering folds if `folding-shift-in-on-goto' is t.
 It attempts to keep the buffer in the same visibility state as before."
-    (let () 	  ;; (oldposn (point))
+    (let ()       ;; (oldposn (point))
       ad-do-it
       (if (and folding-mode
-	       (or (folding-point-folded-p (point))
-		   (<= (point) (point-min-marker))
-		   (>= (point) (point-max-marker))))
-	  (let ((line (ad-get-arg 0)))
-	    (if folding-shift-in-on-goto
-		(progn
-		  (folding-show-all)
-		  (goto-char 1)
-		  (and (< 1 line)
-		       (not (folding-use-overlays-p))
-		       (re-search-forward "[\n\C-m]" nil 0 (1- line)))
-		  (let ((goal (point)))
-		    (while (prog2 (beginning-of-line)
-			       (if (eq folding-shift-in-on-goto 'show)
-				   (progn
-				     (folding-show-current-entry t t)
-				     (folding-point-folded-p goal))
-				 (folding-shift-in t))
+               (or (folding-point-folded-p (point))
+                   (<= (point) (point-min-marker))
+                   (>= (point) (point-max-marker))))
+          (let ((line (ad-get-arg 0)))
+            (if folding-shift-in-on-goto
+                (progn
+                  (folding-show-all)
+                  (goto-char 1)
+                  (and (< 1 line)
+                       (not (folding-use-overlays-p))
+                       (re-search-forward "[\n\C-m]" nil 0 (1- line)))
+                  (let ((goal (point)))
+                    (while (prog2 (beginning-of-line)
+                               (if (eq folding-shift-in-on-goto 'show)
+                                   (progn
+                                     (folding-show-current-entry t t)
+                                     (folding-point-folded-p goal))
+                                 (folding-shift-in t))
                              (goto-char goal)))
-		    (folding-narrow-to-region (point-min) (point-max) t)))
-	      (if (or folding-stack (folding-point-folded-p (point)))
-		  (folding-open-buffer))))))))
+                    (folding-narrow-to-region (point-min) (point-max) t)))
+              (if (or folding-stack (folding-point-folded-p (point)))
+                  (folding-open-buffer))))))))
 
 
 ;;}}}
@@ -2018,7 +2041,7 @@ Possible values are:
 All except `folding-bind-backward-compatible-keys' used the value of
 the variable `folding-mode-prefix-key' as prefix the key.
 The default is C - c @"
-  :type 'function
+  :type  'function
   :group 'folding)
 
 
@@ -2036,7 +2059,7 @@ The default is C - c @"
 (defvar folding-mode-menu nil
   "Keymap containing the menu for Folding mode.")
 
-(defvar folding-mode-menu-name "Fld"	;; Short menu name
+(defvar folding-mode-menu-name "Fld"    ;; Short menu name
   "Name of pull down menu.")
 
 ;;}}}
@@ -2152,8 +2175,8 @@ a fold, you just change the function entry in this table.
 Table form:
   '( (LOGICAL-ACTION  CMD) (..) ..)"
   :type '(repeat
-	  (symbol   :tag "logical action")
-	  (function :tag "callback"))
+          (symbol   :tag "logical action")
+          (function :tag "callback"))
   :group 'folding)
 
 
@@ -2244,28 +2267,29 @@ too highly for selective displayt to make the chnage worthwhile."
    "Folding menu"
    (list
     folding-mode-menu-name
-    ["Enter Fold"			folding-shift-in		t]
-    ["Exit Fold"			folding-shift-out		t]
-    ["Show Fold"			folding-show-current-entry	t]
-    ["Hide Fold"			folding-hide-current-entry	t]
+    ["Enter Fold"                       folding-shift-in                t]
+    ["Exit Fold"                        folding-shift-out               t]
+    ["Show Fold"                        folding-show-current-entry      t]
+    ["Hide Fold"                        folding-hide-current-entry      t]
     "----"
-    ["Show Whole Buffer"		folding-open-buffer		t]
-    ["Fold Whole Buffer"		folding-whole-buffer		t]
-    ["Show subtree"			folding-show-current-subtree	t]
-    ["Hide subtree"			folding-hide-current-subtree	t]
-    ["Display fold name"		folding-display-name		t]
+    ["Show Whole Buffer"                folding-open-buffer             t]
+    ["Fold Whole Buffer"                folding-whole-buffer            t]
+    ["Show subtree"                     folding-show-current-subtree    t]
+    ["Hide subtree"                     folding-hide-current-subtree    t]
+    ["Display fold name"                folding-display-name            t]
     "----"
-    ["Move previous"			folding-previous-visible-heading t]
-    ["Move next"			folding-next-visible-heading	t]
-    ["Pick fold"			folding-pick-move		t]
+    ["Move previous"                    folding-previous-visible-heading t]
+    ["Move next"                        folding-next-visible-heading    t]
+    ["Pick fold"                        folding-pick-move               t]
+    ["Next action (context)"            folding-context-next-action     t]
     "----"
-    ["Foldify region"			folding-fold-region	        t]
-    ["Open or close folds in region"	folding-region-open-close	t]
-    ["Open folds to top level"		folding-show-all		t]
+    ["Foldify region"                   folding-fold-region             t]
+    ["Open or close folds in region"    folding-region-open-close       t]
+    ["Open folds to top level"          folding-show-all                t]
     "----"
-    ["Comment text in fold"		folding-comment-fold	        t]
+    ["Comment text in fold"             folding-comment-fold            t]
     ["Convert for printing(temp buffer)" folding-convert-buffer-for-printing t]
-    ["Convert to major-mode folds"	folding-convert-to-major-folds  t]
+    ["Convert to major-mode folds"      folding-convert-to-major-folds  t]
     ["Move comments inside folds in region" folding-all-comment-blocks-in-region t]
     ["Delete fold marks in this fold"   folding-marks-kill              t]
     ["Insert folding URL reference"     folding-insert-advertise-folding-mode t]
@@ -2273,19 +2297,19 @@ too highly for selective displayt to make the chnage worthwhile."
     ["Toggle enter and exit mode"       folding-toggle-enter-exit       t]
     ["Toggle show and hide"             folding-toggle-show-hide        t]
     "----"
-    ["Folding mode off"			folding-mode		        t])))
+    ["Folding mode off"                 folding-mode                    t])))
 
 
 ;;; ----------------------------------------------------------------------
 ;;;
-(defun folding-install  ()
-  "Install folding."
-  (interactive)
+(defun folding-install (&optional uninstall)
+  "Install or UNINSTALL folding."
+  (interactive "P")
 
   ;; .................................................... make keymaps ...
 
   (unless folding-mode-map
-    (setq folding-mode-map	    (make-sparse-keymap)))
+    (setq folding-mode-map          (make-sparse-keymap)))
 
   (unless folding-mode-prefix-map
     (setq folding-mode-prefix-map   (make-sparse-keymap)))
@@ -2302,26 +2326,59 @@ too highly for selective displayt to make the chnage worthwhile."
 
   ;; .............................................. install minor mode ...
 
-  ;; Install the keymap into `minor-mode-map-alist'. The keymap will
-  ;; be activated as soon as the variable `folding-mode' is set to
-  ;; non-nil.
+  (cond
+   (uninstall
+    (let ((elt (assq 'folding-mode minor-mode-map-alist)))
+      (if elt
+          (setq minor-mode-map-alist
+                (delete elt minor-mode-map-alist)))
+      (if (setq elt (assq 'folding-mode minor-mode-alist))
+          (setq minor-mode-alist
+                (delete elt minor-mode-alist)))
+      (folding-uninstall-hooks)
+      (message "Folding UNINSTALLED.")))
+   (t
 
-  (let ((elt (assq 'folding-mode minor-mode-map-alist)))
-    ;;  Always remove old map before adding new definitions.
-    (if elt
-	(setq minor-mode-map-alist
-	      (delete elt minor-mode-map-alist)))
-    (push (cons 'folding-mode folding-mode-map) minor-mode-map-alist))
+    ;; Install the keymap into `minor-mode-map-alist'. The keymap will
+    ;; be activated as soon as the variable `folding-mode' is set to
+    ;; non-nil.
+
+    (let ((elt (assq 'folding-mode minor-mode-map-alist)))
+      ;;  Always remove old map before adding new definitions.
+      (if elt
+          (setq minor-mode-map-alist
+                (delete elt minor-mode-map-alist)))
+      (push (cons 'folding-mode folding-mode-map) minor-mode-map-alist))
 
 
-  ;;  Update minor-mode-alist
-  (or (assq 'folding-mode minor-mode-alist)
-      (push '(folding-mode folding-mode-string) minor-mode-alist))
+    ;;  Update minor-mode-alist
+    (or (assq 'folding-mode minor-mode-alist)
+        (push '(folding-mode folding-mode-string) minor-mode-alist))
 
 
-  ;;  Needed for XEmacs
-  (or (fboundp 'buffer-disable-undo)
-      (fset 'buffer-disable-undo (symbol-function 'buffer-flush-undo))))
+    ;;  Needed for XEmacs
+    (or (fboundp 'buffer-disable-undo)
+        (fset 'buffer-disable-undo (symbol-function 'buffer-flush-undo)))
+    (message "Folding installed."))))
+
+;;; ----------------------------------------------------------------------
+;;;
+(defun folding-uninstall ()
+  "Uninstall folding."
+  (interactive)
+  (folding-install 'uninstall)
+  ;; Unwrap all buffers.
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (goto-char (point-min))
+      (when (or folding-mode
+                ;;  To be sure, check this at the same time
+                ;;  Somebody may have just done
+                ;;  (setq folding-mode nil), which is bad thing.
+                ;;  Setting variable won't restore the buffer.
+                (re-search-forward "{{{" nil t))
+        (turn-off-folding-mode)))))
+
 
 ;;}}}
 
@@ -2338,8 +2395,9 @@ Return:
   \(beg-marker end-marker\)"
   (interactive)
   (let* (elt)
-    (unless (setq elt (assq (or mode major-mode) folding-mode-marks-alist))
-      (error "*err: current mode not in `folding-mode-marks-alist'"))
+    (unless (setq elt (assq (or mode major-mode)
+                            folding-mode-marks-alist))
+      (error "Folding error: mode is not in `folding-mode-marks-alist'"))
     (list (nth 1 elt) (nth 2 elt) (nth 3 elt))))
 
 
@@ -2358,7 +2416,7 @@ Return:
 ;;;   are of type integerp if it is found.
 ;;;
 (defun folding-mark-look-at (&optional mode)
-  "Check status of current line. Does it contain fold mark?.
+  "Check status of current line. Does it contain a fold mark?.
 
 MODE
 
@@ -2367,7 +2425,7 @@ MODE
 Return:
 
   0 1       numberp, line has fold begin mark
-	    0 = closed, 1 = open,
+            0 = closed, 1 = open,
             11 = open, we're inside fold, and this is top marker
 
   'end      end mark
@@ -2376,28 +2434,28 @@ Return:
 
   nil       no fold marks .."
   (let* (case-fold-search
-	 (marks  (folding-get-mode-marks))
+         (marks  (folding-get-mode-marks))
          (stack  folding-stack)
          (bm     (regexp-quote (nth 0 marks))) ;begin mark
          (em     (concat "^[ \t\n]*" (regexp-quote  (nth 1 marks))))
-	 (bm-re  (concat
-		  (concat "^[ \t\n]*" bm)
-		  (if (and nil
-			   (string= " " (substring (nth 0 marks)
-						   (length (nth 1 marks)))))
-		      ;; Like "}}} *"
-		      "*"
-		    "")))
+         (bm-re  (concat
+                  (concat "^[ \t\n]*" bm)
+                  (if (and nil
+                           (string= " " (substring (nth 0 marks)
+                                                   (length (nth 1 marks)))))
+                      ;; Like "}}} *"
+                      "*"
+                    "")))
 
-	 ret
-	 point)
+         ret
+         point)
 
     (save-excursion
       (beginning-of-line)
 
       (cond
        ((looking-at bm-re)
-	(setq point (point))
+        (setq point (point))
 
         (cond
          ((looking-at (concat "^[ \t\n]*" bm "[^\r\n]*\r"))  ;; closed
@@ -2406,14 +2464,14 @@ Return:
           (goto-char (point-min))
           (cond
            ((and stack                               ;; we're inside fold
-		 ;;  allow spaces
+                 ;;  allow spaces
                  (looking-at (concat "[ \t\n]*" bm)))
             (setq ret 11))
            (t
             (setq ret 1))))))
 
        ((looking-at em)
-	(setq point (point))
+        (setq point (point))
 
         ;; - The stack is a list if we've entered inside fold. There
         ;;   is no text after fold END mark
@@ -2473,8 +2531,8 @@ References:
   "Open all folds inside region BEG END. Close if optional CLOSE is non-nil."
   (interactive "r\nP")
   (let* ((func (if (null close)
-		   'folding-show-current-entry
-		 'folding-hide-current-entry))
+                   'folding-show-current-entry
+                 'folding-hide-current-entry))
          tmp)
     (save-excursion
       ;;   make sure the beg is first.
@@ -2483,17 +2541,17 @@ References:
       (goto-char beg)
 
       (while (and
-	      ;;   the folding-show-current-entry/hide will move point
-	      ;;   to beg-of-line So we must move to the end of
-	      ;;   line to continue search.
-	      (if (and close
-		       (eq 0 (folding-mark-look-at))) ;already closed ?
-		  t
-		(funcall func)
-		(end-of-line)
-		t)
-	      (folding-next-visible-heading)
-	      (< (point) end))))))
+              ;;   the folding-show-current-entry/hide will move point
+              ;;   to beg-of-line So we must move to the end of
+              ;;   line to continue search.
+              (if (and close
+                       (eq 0 (folding-mark-look-at))) ;already closed ?
+                  t
+                (funcall func)
+                (end-of-line)
+                t)
+              (folding-next-visible-heading)
+              (< (point) end))))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -2503,20 +2561,20 @@ Return t ot nil if marks were removed."
   (interactive)
   (if (not (folding-mark-look-at))
       (when (interactive-p)
-	(message "Folding: Cursor not over fold. Can't removed fold marks.")
-	nil)
+        (message "Folding: Cursor not over fold. Can't removed fold marks.")
+        nil)
     (multiple-value-bind (beg end)
-	(folding-show-current-entry)
+        (folding-show-current-entry)
       (let* ((kill-whole-line t))
-	;;  must be done in this order, because point moves after kill.
-	(goto-char end)
-	(beginning-of-line)
-	(kill-line)
-	(goto-char beg)
-	(beginning-of-line)
-	(kill-line)
-	;; Return status
-	t))))
+        ;;  must be done in this order, because point moves after kill.
+        (goto-char end)
+        (beginning-of-line)
+        (kill-line)
+        (goto-char beg)
+        (beginning-of-line)
+        (kill-line)
+        ;; Return status
+        t))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -2532,24 +2590,24 @@ Return t ot nil if marks were removed."
 Point must be over beginning fold mark."
   (interactive "P")
   (let* ((stat  (folding-mark-look-at 'move))
-	 (beg   (point))
+         (beg   (point))
          end)
     (cond
-     ((memq stat '(0 1 11))		;It's BEG fold
+     ((memq stat '(0 1 11))             ;It's BEG fold
 
-      (when (eq 0 stat)			;it was closed
-	(folding-show-current-entry)
-	(goto-char beg))		;folding-pick-move needs point at fold
+      (when (eq 0 stat)                 ;it was closed
+        (folding-show-current-entry)
+        (goto-char beg))                ;folding-pick-move needs point at fold
 
       (save-excursion
-	(if (folding-pick-move)
-	    (setq end (point))))
+        (if (folding-pick-move)
+            (setq end (point))))
 
       (if (and beg end)
           (folding-region-open-close beg end hide)))
      (t
       (if (interactive-p)
-	  (message "point is not at fold beginnning."))))))
+          (message "point is not at fold beginnning."))))))
 
 
 ;;; ----------------------------------------------------------------------
@@ -2616,7 +2674,7 @@ ACT
      ;; Must be tested! (However, it's not used...)
      ((eq act 'col-row)
       (list (funcall (symbol-function 'event-x) event)
-	    (funcall (symbol-function 'event-y) event)))
+            (funcall (symbol-function 'event-y) event)))
      (t
       (error "Unknown request" act))))
    (t
@@ -2656,14 +2714,13 @@ When used on XEmacs, return nil if no character was under the mouse."
 ;;;###autoload
 (defun folding-uninstall-hooks ()
   "Remove hooks set by folding."
-  (interactive)
+  (turn-off-folding-mode)
   (remove-hook 'write-file-hooks 'folding-mode-write-file)
   (remove-hook 'find-file-hooks  'folding-mode-find-file))
 
 ;;;###autoload
 (defun folding-install-hooks ()
   "Install folding hooks."
-  (interactive)
   (folding-mode-add-find-file-hook)
   (or (memq 'folding-mode-write-file write-file-hooks)
       (add-hook 'write-file-hooks 'folding-mode-write-file 'end)))
@@ -2711,25 +2768,25 @@ Sets global:
           (let (mouse-key)
             (cond
              ((not folding-xemacs-p)
-              (setq mouse-key (make-vector 1 (car event))))
+              (setq mouse-key (make-vector 1 (car-safe event))))
              (folding-xemacs-p
               (setq mouse-key
                     (vector
                      (append
-		      (event-modifiers event)
-		      (list (intern
-			     (format "button%d"
-				     (funcall
-				      (symbol-function 'event-button)
-				      event))))))))
+                      (event-modifiers event)
+                      (list (intern
+                             (format "button%d"
+                                     (funcall
+                                      (symbol-function 'event-button)
+                                      event))))))))
              (t
               (error "This version of Emacs can't handle events.")))
 
-            ;; Test string: http://www.csd.uu.se/~andersl
+            ;; Test string: <a href="<a href="http://www.csd.uu.se/~andersl">http://www.csd.uu.se/~andersl</a>"><a href="http://www.csd.uu.se/~andersl">http://www.csd.uu.se/~andersl</a></a>
             ;;              andersl@csd.uu.se
             ;; (I have `ark-goto-url' bound to the same key as
             ;; this function.)
-	    ;;
+            ;;
             ;; turn off folding, so that we can see the real
             ;; fuction behind it.
             ;;
@@ -2745,29 +2802,29 @@ Sets global:
                    (orig-func (key-binding mouse-key)))
               ;; call only if exist
               (when orig-func
-		;; Check if the original function has arguments. If
-		;; it does, call it with the event as argument.
-		(unwind-protect
-		    (progn
-		      (setq this-command orig-func)
-		      (call-interactively orig-func)
+                ;; Check if the original function has arguments. If
+                ;; it does, call it with the event as argument.
+                (unwind-protect
+                    (progn
+                      (setq this-command orig-func)
+                      (call-interactively orig-func)
 
 ;;; #untested, but included here for furher reference
-;;;		    (cond
-;;;		     ((not (string-match "mouse" (symbol-name orig-func)))
-;;;		      (call-interactively orig-func))
-;;;			((string-match "^mouse" (symbol-name orig-func))
-;;;			 (funcall orig-func event)
-;;;			 )
-;;;			(t
-;;;			 ;;  Some other package's mouse command,
-;;;			 ;;  should we do something speacial here for
-;;;			 ;;  somelbody?
-;;;			 (funcall orig-func event)
-;;;			 ))
+;;;                 (cond
+;;;                  ((not (string-match "mouse" (symbol-name orig-func)))
+;;;                   (call-interactively orig-func))
+;;;                     ((string-match "^mouse" (symbol-name orig-func))
+;;;                      (funcall orig-func event)
+;;;                      )
+;;;                     (t
+;;;                      ;;  Some other package's mouse command,
+;;;                      ;;  should we do something speacial here for
+;;;                      ;;  somelbody?
+;;;                      (funcall orig-func event)
+;;;                      ))
 ;;;
-		      )
-		  (set-buffer orig-buf))))))
+                      )
+                  (set-buffer orig-buf))))))
       ;; This is always executed, even if the above generates an error.
       (setq folding-calling-original nil))))
 
@@ -2801,8 +2858,8 @@ pointer depending in the setting of the user option
         (folding-act 'other event)
 
       (save-excursion
-	(goto-char point)
-	(setq state (folding-mark-look-at)))
+        (goto-char point)
+        (setq state (folding-mark-look-at)))
 
       (cond
        ((eq state 0)
@@ -2860,7 +2917,7 @@ taken."
      ((not (null state))
       (goto-char point)
       (if (= point
-	     (save-excursion (beginning-of-line) (point)))
+             (save-excursion (beginning-of-line) (point)))
           (folding-previous-visible-heading)
         (folding-pick-move)))
      (t
@@ -2913,13 +2970,13 @@ The variable `folding-check-allow-folding-function' normally contains this
 function. Change the variable to use your own scheme."
 
   (or (let ((file (get 'find-file-noselect 'folding)))
-	;;  When a file reference is "pushed" is a C-h v buffer that says:
-	;;  test is a Lisp function in `~/foo/tmp/test.el' A flag gets set
-	;;  (see adviced code) and we must not fold this buffer, because
-	;;  it will be immediately searched.
-	(and file
-	     (not (string-match (regexp-quote file)
-				(or buffer-file-name "")))))
+        ;;  When a file reference is "pushed" is a C-h v buffer that says:
+        ;;  test is a Lisp function in `~/foo/tmp/test.el' A flag gets set
+        ;;  (see adviced code) and we must not fold this buffer, because
+        ;;  it will be immediately searched.
+        (and file
+             (not (string-match (regexp-quote file)
+                                (or buffer-file-name "")))))
       ;;  Do not fold these files
       (null (string-match folding-mode-hook-no-regexp (buffer-name)))))
 
@@ -2950,7 +3007,7 @@ See also `folding-mode-add-find-file-hook'."
                   (kill-local-variable 'folded-file)))
        ;; In all other cases, unfold buffer.
        (if folding-mode
-	   (folding-mode -1)))))
+           (folding-mode -1)))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -3019,7 +3076,57 @@ It prevents 'binary pollution' upon save."
 
 ;;{{{ code: Folding mode
 
+
 ;;; ............................................................ &main ...
+
+
+(defun folding-font-lock-keywords (&optional mode)
+  "Return folding font-lock keywords for MODE."
+  ;;  Add support mode-by-mode basis. Check if mode is already
+  ;;  handled from the property list.
+  (multiple-value-bind (beg end)
+      (folding-get-mode-marks (or mode major-mode))
+    (setq beg (concat "^[ \t]*" (regexp-quote beg) "[^\r\n]+"))
+    (setq end (concat "^[ \t]*" (regexp-quote end)))
+    (list
+     ;;  the `t' says to overwrite any previous highlight.
+     ;;  => Needed because folding marks are in comments.
+     (list beg 0 folding-font-lock-begin-mark  t)
+     (list end 0 folding-font-lock-end-mark t))))
+
+
+(defun folding-font-lock-support-instantiate (&optional mode)
+  "Add fold marks with `font-lock-add-keywords'."
+  (or mode
+      (setq mode major-mode))
+  ;;  Hide function from Byte Compiler.
+  (let* ((function 'font-lock-add-keywords))
+    (when (fboundp function)
+      (funcall function
+               mode
+               (folding-font-lock-keywords mode))
+      ;; In order to see new keywords font lock must be restarted.
+      (dolist (buffer (buffer-list))
+        (with-current-buffer buffer
+          (when (and (eq major-mode mode)
+                     (or font-lock-mode
+                         ;;  Hide variable from byte compiler.
+                         (let ((sym 'global-font-lock-mode))
+                           (and (boundp sym)
+                                (symbol-value sym)))))
+            ;; #todo: should we use font-lock-fontify-buffer instead?
+            (font-lock-mode -1)
+            (font-lock-mode 1)))))))
+
+
+(defun folding-font-lock-support ()
+  "Add font lock support."
+  (let* ((list (get 'folding-mode 'font-lock)))
+    (unless (memq major-mode list)
+      ;;  Support added, update known list
+      (push major-mode list)
+      (put 'folding-mode 'font-lock list)
+      (folding-font-lock-support-instantiate major-mode))))
 
 (defun folding-set-local-variables ()
   "Set local fold mark variables.
@@ -3035,19 +3142,19 @@ If you're going to change the beginning and end mark in
   (make-local-variable 'folding-regexp)
 
   (or (and (boundp 'folding-top-regexp)
-	   folding-top-regexp
-	   (boundp 'folding-bottom-regexp)
-	   folding-bottom-regexp)
+           folding-top-regexp
+           (boundp 'folding-bottom-regexp)
+           folding-bottom-regexp)
       (let ((folding-marks (assq major-mode
-				 folding-mode-marks-alist)))
-	(if folding-marks
-	    (setq folding-marks (cdr folding-marks))
-	  (setq folding-marks '("{{{ " "}}}")))
-	(apply 'folding-set-marks folding-marks))))
+                                 folding-mode-marks-alist)))
+        (if folding-marks
+            (setq folding-marks (cdr folding-marks))
+          (setq folding-marks '("{{{" "}}}")))
+        (apply 'folding-set-marks folding-marks))))
 
 ;;;###autoload
 (defun turn-off-folding-mode ()
-  "Turn on folding."
+  "Turn off folding."
   (folding-mode -1))
 
 ;;;###autoload
@@ -3178,10 +3285,10 @@ Mouse behavior
 
     To customise the mouse actions, look at `folding-behave-table'."
   (interactive)
-  (folding-keep-hooked)                  ;set hooks if not there
 
   (let ((new-folding-mode
-         (if (not arg) (not folding-mode)
+         (if (not arg)
+             (not folding-mode)
            (> (prefix-numeric-value arg) 0))))
 
     (or (eq new-folding-mode
@@ -3210,20 +3317,24 @@ Mouse behavior
           (cond
            ((folding-use-overlays-p)
             ;;  This may be Emacs specific; howabout XEmacs?
-	    ;;
-	    ;; make line-move-ignore-invisible buffer local, matches
-	    ;; outline.el, and the 21 pre-release gets upset if this is
-	    ;; defined globally in shell buffer...
-	    (make-local-variable 'line-move-ignore-invisible)
+            ;;
+            ;; make line-move-ignore-invisible buffer local, matches
+            ;; outline.el, and the 21 pre-release gets upset if this is
+            ;; defined globally in shell buffer...
+            (make-local-variable 'line-move-ignore-invisible)
             (setq  line-move-ignore-invisible t
                    buffer-invisibility-spec   '((t . t))))
            (t
             (setq selective-display t)
             (setq selective-display-ellipses t)))
 
+          (folding-keep-hooked) ;set hooks if not there
+
           (widen)
           (setq folding-narrow-overlays nil)
-	  (folding-set-local-variables)
+          (folding-set-local-variables)
+
+          (folding-font-lock-support)
 
           (unwind-protect
               (let ((hook-symbol (intern-soft
@@ -3257,7 +3368,7 @@ Mouse behavior
     (setq folding-mode new-folding-mode)
 
     (if folding-mode
-	(easy-menu-add folding-mode-menu)
+        (easy-menu-add folding-mode-menu)
       (easy-menu-remove folding-mode-menu))))
 
 ;;}}}
@@ -3274,11 +3385,11 @@ Mouse behavior
 
 Input:
 
-  TOP		The topmost fold mark. Comment start + fold begin string.
-  BOTTOM	The bottom fold mark Comment end + fold end string.
-  SECONDARY	Usually the comment end indicator for the mode. This
-		is inserted by `folding-fold-region' after the fold top mark,
-		and is presumed to be put after the title of the fold.
+  TOP           The topmost fold mark. Comment start + fold begin string.
+  BOTTOM        The bottom fold mark Comment end + fold end string.
+  SECONDARY     Usually the comment end indicator for the mode. This
+                is inserted by `folding-fold-region' after the fold top mark,
+                and is presumed to be put after the title of the fold.
 
 Example:
 
@@ -3321,11 +3432,11 @@ mark variables directly."
   "Move up/down fold headers.
 Backward if DIRECTION is non-nil returns nil if not moved = no next marker."
   (interactive)
-  (let* ((bm  (nth 0 (folding-get-mode-marks)))               ;begin mark
-	 case-fold-search)
+  (let* ((begin-mark (nth 0 (folding-get-mode-marks)))
+         case-fold-search)
      (if direction
-	 (re-search-backward (concat "^" (regexp-quote bm)) nil t)
-       (re-search-forward  (concat "^" (regexp-quote bm)) nil t))))
+         (re-search-backward (concat "^" (regexp-quote begin-mark)) nil t)
+       (re-search-forward  (concat "^" (regexp-quote begin-mark)) nil t))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -3346,7 +3457,7 @@ Return:
   nil
   point     position of fold mark"
   (let* (case-fold-search
-	 (elt   (folding-get-mode-marks))
+         (elt   (folding-get-mode-marks))
          (bm    (regexp-quote (nth 0 elt))) ; markers defined for mode
          (em    (regexp-quote (nth 1 elt))) ; markers defined for mode
          (re    (concat "^" bm "\\|^" em ))
@@ -3358,7 +3469,7 @@ Return:
       (cond
        (end-fold
 
-	(folding-end-of-line)
+        (folding-end-of-line)
 
         ;; We must skip over inner folds
         (while (and (null moved)
@@ -3407,22 +3518,48 @@ Return:
  t      if moved"
   (interactive)
   (let* (case-fold-search
-	 (elt   (folding-get-mode-marks))
+         (elt   (folding-get-mode-marks))
          (bm    (nth 0 elt))              ; markers defined for mode
          (stat  (folding-mark-look-at))
          moved)
     (cond
      ((eq 0 stat)                       ;closed fold
       (when (re-search-forward  (concat "^" (regexp-quote bm)) nil t)
-	(setq moved t)
-	(forward-char 3)))
+        (setq moved t)
+        (forward-char 3)))
      ((symbolp stat)                    ;End fold
       (setq moved (folding-find-folding-mark)))
      ((integerp stat)                   ;Beg fold
       (setq moved (folding-find-folding-mark 'end-fold))))
     (if (integerp moved)
-	(goto-char moved))
+        (goto-char moved))
     moved))
+
+;;; ----------------------------------------------------------------------
+;;; Original code by Scott Evans <gse@antisleep.com>
+(defun folding-context-next-action ()
+  "Take next action according to point and context.
+If point is at:
+
+  Begin Fold  :  toggle open - close
+  End Fold    :  close
+  inside      :  fold current level."
+  (interactive)
+  (let ((state (folding-mark-look-at)))
+    (cond
+     ((eq state 0)
+      (folding-act 'open))
+     ((eq state 1)
+      (folding-act 'close))
+     ((eq state 11)
+      (folding-act 'up))
+     ((eq 'end state)
+      (folding-act 'close))
+     ((eq state 'end-in)
+      (folding-act 'up))
+     (t
+      (folding-act 'other)))))
+
 
 ;;; ----------------------------------------------------------------------
 ;;
@@ -3598,7 +3735,7 @@ visible. This is useful after some commands eg., search commands."
           (goto-char (overlay-end (car folding-narrow-overlays))))
          (t
           (folding-subst-regions (list (point-min) (point-max)) ?\n ?\r)
-	  ;; So point is correct in other window
+          ;; So point is correct in other window
           (goto-char (point-min))))
 
         (if (eq (car folding-stack) 'folded)
@@ -3667,8 +3804,8 @@ subfolds."
   (beginning-of-line)
   (let ((current-line-mark (folding-mark-look-at)))
     (if (and (numberp current-line-mark)
-	     (= current-line-mark 0))
-	(folding-shift-in)
+             (= current-line-mark 0))
+        (folding-shift-in)
       (folding-shift-out))))
 
 (defun folding-toggle-show-hide ()
@@ -3677,8 +3814,8 @@ subfolds."
   (beginning-of-line)
   (let ((current-line-mark (folding-mark-look-at)))
     (if (and (numberp current-line-mark)
-	     (= current-line-mark 0))
-	(folding-show-current-entry)
+             (= current-line-mark 0))
+        (folding-show-current-entry)
       (folding-hide-current-entry))))
 
 (defun folding-hide-current-entry (&optional event)
@@ -3762,28 +3899,28 @@ checking that it really is a proper fold mark, then considering the
 earliest one found. The position of the other (if found) is
 maintained to avoid an unnecessary search at the next iteration."
   (let ((first-mark (if backward folding-bottom-mark folding-top-mark))
-	(last-mark  (if backward folding-top-mark    folding-bottom-mark))
-	(search     (if backward 'search-backward    'search-forward))
-	(top-re     folding-top-regexp)
-	(depth 0)
-	pairs point
-	temp
-	start
-	first
-	last
-	case-fold-search)
+        (last-mark  (if backward folding-top-mark    folding-bottom-mark))
+        (search     (if backward 'search-backward    'search-forward))
+        (top-re     folding-top-regexp)
+        (depth 0)
+        pairs point
+        temp
+        start
+        first
+        last
+        case-fold-search)
 
     ;; Ignore trailing space?
     (when nil
       (when (and (stringp first-mark)
-		 (string-match "^\\(.*[^ ]+\\) +$"  first-mark))
-	(setq first-mark (match-string 1 first-mark)))
+                 (string-match "^\\(.*[^ ]+\\) +$"  first-mark))
+        (setq first-mark (match-string 1 first-mark)))
       (when (and (stringp last-mark)
-		 (string-match "^\\(.*[^ ]+\\) +$"  last-mark))
-	(setq last-mark (match-string 1 last-mark)))
+                 (string-match "^\\(.*[^ ]+\\) +$"  last-mark))
+        (setq last-mark (match-string 1 last-mark)))
       (when (and (stringp top-re)
-		 (string-match "^\\(.*[^ ]+\\) +$"  top-re))
-	(setq top-re (match-string 1 top-re))))
+                 (string-match "^\\(.*[^ ]+\\) +$"  top-re))
+        (setq top-re (match-string 1 top-re))))
 
 
     (save-excursion
@@ -3792,10 +3929,10 @@ maintained to avoid an unnecessary search at the next iteration."
       (unless outside
         (and (eq (preceding-char) ?\r)
              (forward-char -1))
-	(if (looking-at top-re)
-	    (if backward
-		(setq last (match-end 1))
-	      (skip-chars-forward "^\r\n"))))
+        (if (looking-at top-re)
+            (if backward
+                (setq last (match-end 1))
+              (skip-chars-forward "^\r\n"))))
 
       (while (progn
                ;; Find last first, prevents unnecessary searching for first.
@@ -3912,70 +4049,70 @@ there already. The amount of space left depends on the variable
   (interactive)
   (if buffer-read-only nil
     (let (
-;;;	     (top-re       (if (string-match "^\\(.*\\) $"  folding-top-mark)
-;;;			       (match-string 1 folding-top-mark)
-;;;			     folding-top-mark))
-	  )
+;;;          (top-re       (if (string-match "^\\(.*\\) $"  folding-top-mark)
+;;;                            (match-string 1 folding-top-mark)
+;;;                          folding-top-mark))
+          )
       (if (folding-use-overlays-p)
-	  (goto-char (- (overlay-end (car folding-narrow-overlays)) 1))
-	(goto-char (point-min)))
+          (goto-char (- (overlay-end (car folding-narrow-overlays)) 1))
+        (goto-char (point-min)))
 
       (and (eolp)
-	   (progn (skip-chars-forward "\n\t ")
-		  (delete-region (point-min) (point))))
+           (progn (skip-chars-forward "\n\t ")
+                  (delete-region (point-min) (point))))
       (and (if (let (case-fold-search) (folding-mark-look-at-top-mark-p))
-	       (progn (forward-line 1)
-		      (and (eobp) (insert ?\n))
-		      t)
-	     (and (y-or-n-p "Insert missing folding-top-mark? ")
-		  (progn (insert (concat folding-top-mark
-					 "<Replaced missing fold top mark>"
-					 (or folding-secondary-top-mark "")
-					 "\n"))
-			 t)))
-	   folding-internal-margins
-	   (<= 0 folding-internal-margins)
-	   (let* ((p1 (point))
-		  (p2 (progn (skip-chars-forward "\n") (point)))
-		  (p3 (progn (skip-chars-forward "\n\t ")
-			     (skip-chars-backward "\t " p2) (point))))
-	     (if (eq p2 p3)
-		 (or (eq p2 (setq p3 (+ p1 folding-internal-margins)))
-		     (if (< p2 p3)
-			 (newline (- p3 p2))
-		       (delete-region p3 p2)))
-	       (delete-region p1 p3)
-	       (or (eq 0 folding-internal-margins)
-		   (newline folding-internal-margins)))))
+               (progn (forward-line 1)
+                      (and (eobp) (insert ?\n))
+                      t)
+             (and (y-or-n-p "Insert missing folding-top-mark? ")
+                  (progn (insert (concat folding-top-mark
+                                         "<Replaced missing fold top mark>"
+                                         (or folding-secondary-top-mark "")
+                                         "\n"))
+                         t)))
+           folding-internal-margins
+           (<= 0 folding-internal-margins)
+           (let* ((p1 (point))
+                  (p2 (progn (skip-chars-forward "\n") (point)))
+                  (p3 (progn (skip-chars-forward "\n\t ")
+                             (skip-chars-backward "\t " p2) (point))))
+             (if (eq p2 p3)
+                 (or (eq p2 (setq p3 (+ p1 folding-internal-margins)))
+                     (if (< p2 p3)
+                         (newline (- p3 p2))
+                       (delete-region p3 p2)))
+               (delete-region p1 p3)
+               (or (eq 0 folding-internal-margins)
+                   (newline folding-internal-margins)))))
 
       (if (folding-use-overlays-p)
-	  (goto-char  (overlay-start (cdr folding-narrow-overlays)))
-	(goto-char (point-max)))
+          (goto-char  (overlay-start (cdr folding-narrow-overlays)))
+        (goto-char (point-max)))
 
       (and (bolp)
-	   (progn (skip-chars-backward "\n")
-		  (delete-region (point) (point-max))))
+           (progn (skip-chars-backward "\n")
+                  (delete-region (point) (point-max))))
       (beginning-of-line)
       (and (or (let (case-fold-search) (folding-mark-look-at-bottom-mark-p))
-	       (progn (goto-char (point-max)) nil)
-	       (and (y-or-n-p "Insert missing folding-bottom-mark? ")
-		    (progn
-		      (insert (concat "\n" folding-bottom-mark))
-		      (beginning-of-line)
-		      t)))
-	   folding-internal-margins
-	   (<= 0 folding-internal-margins)
-	   (let* ((p1 (point))
-		  (p2 (progn (skip-chars-backward "\n") (point)))
-		  (p3 (progn (skip-chars-backward "\n\t ")
-			     (skip-chars-forward "\t " p2) (point))))
-	     (if (eq p2 p3)
-		 (or (eq p2 (setq p3 (- p1 1 folding-internal-margins)))
-		     (if (> p2 p3)
-			 (newline (- p2 p3))
-		       (delete-region p2 p3)))
-	       (delete-region p3 p1)
-	       (newline (1+ folding-internal-margins))))))))
+               (progn (goto-char (point-max)) nil)
+               (and (y-or-n-p "Insert missing folding-bottom-mark? ")
+                    (progn
+                      (insert (concat "\n" folding-bottom-mark))
+                      (beginning-of-line)
+                      t)))
+           folding-internal-margins
+           (<= 0 folding-internal-margins)
+           (let* ((p1 (point))
+                  (p2 (progn (skip-chars-backward "\n") (point)))
+                  (p3 (progn (skip-chars-backward "\n\t ")
+                             (skip-chars-forward "\t " p2) (point))))
+             (if (eq p2 p3)
+                 (or (eq p2 (setq p3 (- p1 1 folding-internal-margins)))
+                     (if (> p2 p3)
+                         (newline (- p2 p3))
+                       (delete-region p2 p3)))
+               (delete-region p3 p1)
+               (newline (1+ folding-internal-margins))))))))
 
 ;;}}}
 
@@ -4005,14 +4142,14 @@ function will work on read-only buffers."
       (narrow-to-region narrow-min narrow-max)
       (and (eq t folding-list)
            (error
-	    "Cannot fold whole buffer -- unmatched begin-fold mark `%s' ´%s'"
-	    (current-buffer)
-	    folding-top-mark))
+            "Cannot fold whole buffer -- unmatched begin-fold mark `%s' ´%s'"
+            (current-buffer)
+            folding-top-mark))
       (and (integerp (car folding-list))
            (error
-	    "Cannot fold whole buffer -- extraneous end-fold mark `%s' `%s'"
-	    (current-buffer)
-	    folding-bottom-mark))
+            "Cannot fold whole buffer -- extraneous end-fold mark `%s' `%s'"
+            (current-buffer)
+            folding-bottom-mark))
       (folding-show-all)
       (widen)
       (goto-char 1)
@@ -4071,33 +4208,33 @@ the title."
   (or folding-mode
       (error "Must be in Folding mode before removing folds"))
   (let* ((new-buffer (get-buffer-create (concat "*Unfolded: "
-						(buffer-name buffer)
-						"*")))
-	 (section-list '(1))
-	 (section-prefix-list '(""))
+                                                (buffer-name buffer)
+                                                "*")))
+         (section-list '(1))
+         (section-prefix-list '(""))
 
-	 (secondary-mark-length (length folding-secondary-top-mark))
+         (secondary-mark-length (length folding-secondary-top-mark))
 
-	 (secondary-mark folding-secondary-top-mark)
-	 (mode major-mode)
+         (secondary-mark folding-secondary-top-mark)
+         (mode major-mode)
 
-	 ;;  [jari] Aug 14 1997
-	 ;;  Regexp doesn't allow "footer text" like, so we add one more
-	 ;;  regexp to loosen the end criteria
-	 ;;
-	 ;;  {{{ Subsubsection 1
-	 ;;  }}} Subsubsection 1
-	 ;;
-	 ;;  was:  (regexp folding-regexp)
-	 ;;
-	 (regexp
-	  (concat "\\(^\\|\r\\)\\([ \t]*\\)\\(\\("
-		  (regexp-quote folding-top-mark)
-		  "\\)\\|\\("
-		  (regexp-quote folding-bottom-mark)
-		  "[ \t]*.*\\(\\)\\($\\|\r\\)\\)\\)"))
-	 title
-	 prefix)
+         ;;  [jari] Aug 14 1997
+         ;;  Regexp doesn't allow "footer text" like, so we add one more
+         ;;  regexp to loosen the end criteria
+         ;;
+         ;;  {{{ Subsubsection 1
+         ;;  }}} Subsubsection 1
+         ;;
+         ;;  was:  (regexp folding-regexp)
+         ;;
+         (regexp
+          (concat "\\(^\\|\r\\)\\([ \t]*\\)\\(\\("
+                  (regexp-quote folding-top-mark)
+                  "\\)\\|\\("
+                  (regexp-quote folding-bottom-mark)
+                  "[ \t]*.*\\(\\)\\($\\|\r\\)\\)\\)"))
+         title
+         prefix)
 
     ;;  was obsolete function: (buffer-flush-undo new-buffer)
     (buffer-disable-undo new-buffer)
@@ -4119,9 +4256,9 @@ the title."
           (progn
             (goto-char (match-end 4))
 
-	    ;;  - Move after start fold and read thetitle from there
-	    ;;  - Then move back and kill the fold mark
-	    ;;
+            ;;  - Move after start fold and read thetitle from there
+            ;;  - Then move back and kill the fold mark
+            ;;
             (setq title
                   (buffer-substring (point)
                                     (progn (end-of-line)
@@ -4151,8 +4288,8 @@ the title."
             (or (cdr section-list)
                 (insert ?\n))
             (setq section-list (cons 1
-				     (cons (1+ (car section-list))
-					   (cdr section-list))))
+                                     (cons (1+ (car section-list))
+                                           (cdr section-list))))
 
 
             (setq title (concat prefix
@@ -4301,67 +4438,67 @@ buffer without affecting the default value for a particular mode."
 ;;}}}
 ;;{{{ Set some useful default fold marks
 
-(folding-add-to-marks-list 'ada-mode		   "-- {{{ " "-- }}}" nil t)
-(folding-add-to-marks-list 'asm-mode		   "; {{{ " "; }}}" nil t)
-(folding-add-to-marks-list 'awk-mode		   "# {{{ " "# }}}" nil t)
-(folding-add-to-marks-list 'Bison-mode		   "/* {{{ " "/* }}} */" " */" t)
-(folding-add-to-marks-list 'LaTeX-mode		   "%{{{ "	  "%}}}" nil t)
-(folding-add-to-marks-list 'TeX-mode		   "%{{{ "	  "%}}}" nil t)
-(folding-add-to-marks-list 'bib´tex-mode    "@Comment {{{ " "@Comment }}} */" nil t)
-(folding-add-to-marks-list 'bison-mode             "/* {{{ " "/* }}} */" " */" t)
-(folding-add-to-marks-list 'c++-mode               "// {{{ " "// }}}" nil t)
-(folding-add-to-marks-list 'c-mode                 "/* {{{ " "/* }}} */" " */" t)
-(folding-add-to-marks-list 'dcl-mode		   "! {{{ " "! }}}" nil t)
-(folding-add-to-marks-list 'cperl-mode             "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'emacs-lisp-mode        ";;{{{ "  ";;}}}" nil t)
-(folding-add-to-marks-list 'erlang-mode            "%%{{{ "  "%%}}}" nil t)
-(folding-add-to-marks-list 'fortran-mode           "! {{{ "  "! }}}" nil t)
-(folding-add-to-marks-list 'f90-mode               "! {{{ "  "! }}}" nil t)
-(folding-add-to-marks-list 'generic-mode	   ";# "	  ";\$" nil t)
-(folding-add-to-marks-list 'gofer-mode             "-- {{{ " "-- }}}" nil t)
-(folding-add-to-marks-list 'html-mode	"<!-- [[[ " "<!-- ]]] -->" " -->" t)
-(folding-add-to-marks-list 'icon-mode              "# {{{ " "# }}}" nil t)
-(folding-add-to-marks-list 'indented-text-mode     "{{{ "    "}}}" nil t)
-(folding-add-to-marks-list 'java-mode              "// {{{ " "// }}}" nil t)
-(folding-add-to-marks-list 'jde-mode               "// {{{ " "// }}}" nil t)
-(folding-add-to-marks-list 'ksh-mode               "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'latex-mode             "%{{{ "   "%}}}" nil t)
-(folding-add-to-marks-list 'lisp-interaction-mode  ";;{{{ "  ";;}}}" nil t)
-(folding-add-to-marks-list 'lisp-mode              ";;{{{ "  ";;}}}" nil t)
-(folding-add-to-marks-list 'm4-mode                "# {{{ " "# }}}" nil t)
-(folding-add-to-marks-list 'makefile-mode          "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'matlab-mode            "%%%{{{ " "%%%}}}" nil t)
-(folding-add-to-marks-list 'meta-mode              "% {{{ " "% }}}" nil t)
-(folding-add-to-marks-list 'ml-mode                "(* {{{ " "(* }}} *)" " *)" t)
-(folding-add-to-marks-list 'modula-2-mode          "(* {{{ " "(* }}} *)" " *)" t)
-(folding-add-to-marks-list 'nroff-mode             "\\\\ {{{ " "\\\\ }}}" nil t)
-(folding-add-to-marks-list 'occam-mode             "-- {{{ " "-- }}}" nil t)
-(folding-add-to-marks-list 'orwell-mode            "{{{ "    "}}}" nil t)
+(folding-add-to-marks-list 'ada-mode               "-- {{{" "-- }}}" nil t)
+(folding-add-to-marks-list 'asm-mode               "; {{{" "; }}}" nil t)
+(folding-add-to-marks-list 'awk-mode               "# {{{" "# }}}" nil t)
+(folding-add-to-marks-list 'Bison-mode             "/* {{{" "/* }}} */" " */" t)
+(folding-add-to-marks-list 'LaTeX-mode             "%{{{"         "%}}}" nil t)
+(folding-add-to-marks-list 'TeX-mode               "%{{{"         "%}}}" nil t)
+(folding-add-to-marks-list 'bib´tex-mode    "@Comment {{{" "@Comment }}} */" nil t)
+(folding-add-to-marks-list 'bison-mode             "/* {{{" "/* }}} */" " */" t)
+(folding-add-to-marks-list 'c++-mode               "// {{{" "// }}}" nil t)
+(folding-add-to-marks-list 'c-mode                 "/* {{{" "/* }}} */" " */" t)
+(folding-add-to-marks-list 'dcl-mode               "! {{{" "! }}}" nil t)
+(folding-add-to-marks-list 'cperl-mode             "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'emacs-lisp-mode        ";;{{{"  ";;}}}" nil t)
+(folding-add-to-marks-list 'erlang-mode            "%%{{{"  "%%}}}" nil t)
+(folding-add-to-marks-list 'fortran-mode           "! {{{"  "! }}}" nil t)
+(folding-add-to-marks-list 'f90-mode               "! {{{"  "! }}}" nil t)
+(folding-add-to-marks-list 'generic-mode           ";# "          ";\$" nil t)
+(folding-add-to-marks-list 'gofer-mode             "-- {{{" "-- }}}" nil t)
+(folding-add-to-marks-list 'html-mode   "<!-- [[[ " "<!-- ]]] -->" " -->" t)
+(folding-add-to-marks-list 'icon-mode              "# {{{" "# }}}" nil t)
+(folding-add-to-marks-list 'indented-text-mode     "{{{"    "}}}" nil t)
+(folding-add-to-marks-list 'java-mode              "// {{{" "// }}}" nil t)
+(folding-add-to-marks-list 'jde-mode               "// {{{" "// }}}" nil t)
+(folding-add-to-marks-list 'ksh-mode               "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'latex-mode             "%{{{"   "%}}}" nil t)
+(folding-add-to-marks-list 'lisp-interaction-mode  ";;{{{"  ";;}}}" nil t)
+(folding-add-to-marks-list 'lisp-mode              ";;{{{"  ";;}}}" nil t)
+(folding-add-to-marks-list 'm4-mode                "# {{{" "# }}}" nil t)
+(folding-add-to-marks-list 'makefile-mode          "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'matlab-mode            "%%%{{{" "%%%}}}" nil t)
+(folding-add-to-marks-list 'meta-mode              "% {{{" "% }}}" nil t)
+(folding-add-to-marks-list 'ml-mode                "(* {{{" "(* }}} *)" " *)" t)
+(folding-add-to-marks-list 'modula-2-mode          "(* {{{" "(* }}} *)" " *)" t)
+(folding-add-to-marks-list 'nroff-mode             "\\\\ {{{" "\\\\ }}}" nil t)
+(folding-add-to-marks-list 'occam-mode             "-- {{{" "-- }}}" nil t)
+(folding-add-to-marks-list 'orwell-mode            "{{{"    "}}}" nil t)
 (folding-add-to-marks-list 'pascal-mode            "{ ((( " "{ ))) }" " }" t)
-(folding-add-to-marks-list 'perl-mode              "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'plain-TeX-mode         "%{{{ "   "%}}}" nil t)
-(folding-add-to-marks-list 'plain-tex-mode         "%{{{ "   "%}}}" nil t)
-(folding-add-to-marks-list 'prolog-mode            "% {{{ "   "% }}}" nil t)
-(folding-add-to-marks-list 'rexx-mode              "/* {{{ " "/* }}} */" " */" t)
-(folding-add-to-marks-list 'sh-mode                "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'sh-script-mode         "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'shellscript-mode       "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'sgml-mode	"<!-- [[[ " "<!-- ]]] -->" " -->" t)
-(folding-add-to-marks-list 'simula-mode            "! {{{ "  "! }}}" nil t)
-(folding-add-to-marks-list 'sml-mode               "(* {{{ " "(* }}} *)" " *)" t)
-(folding-add-to-marks-list 'sql-mode               "-- {{{ "  "-- }}}" nil t)
-(folding-add-to-marks-list 'tcl-mode               "#{{{ "   "#}}}" nil t)
-(folding-add-to-marks-list 'tex-mode               "%{{{ "   "%}}}" nil t)
-(folding-add-to-marks-list 'texinfo-mode   "@c {{{ " "@c {{{endfold}}}" " }}}" t)
-(folding-add-to-marks-list 'text-mode              "{{{ "    "}}}" nil t)
-(folding-add-to-marks-list 'vhdl-mode              "# {{{ "  "# }}}" nil t)
-(folding-add-to-marks-list 'xerl-mode              "%%{{{ "  "%%}}}" nil t)
-(folding-add-to-marks-list 'xrdb-mode              "! {{{ "  "! }}}" nil t)
+(folding-add-to-marks-list 'perl-mode              "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'plain-TeX-mode         "%{{{"   "%}}}" nil t)
+(folding-add-to-marks-list 'plain-tex-mode         "%{{{"   "%}}}" nil t)
+(folding-add-to-marks-list 'prolog-mode            "% {{{"   "% }}}" nil t)
+(folding-add-to-marks-list 'rexx-mode              "/* {{{" "/* }}} */" " */" t)
+(folding-add-to-marks-list 'sh-mode                "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'sh-script-mode         "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'shellscript-mode       "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'sgml-mode   "<!-- [[[ " "<!-- ]]] -->" " -->" t)
+(folding-add-to-marks-list 'simula-mode            "! {{{"  "! }}}" nil t)
+(folding-add-to-marks-list 'sml-mode               "(* {{{" "(* }}} *)" " *)" t)
+(folding-add-to-marks-list 'sql-mode               "-- {{{"  "-- }}}" nil t)
+(folding-add-to-marks-list 'tcl-mode               "#{{{"   "#}}}" nil t)
+(folding-add-to-marks-list 'tex-mode               "%{{{"   "%}}}" nil t)
+(folding-add-to-marks-list 'texinfo-mode   "@c {{{" "@c {{{endfold}}}" " }}}" t)
+(folding-add-to-marks-list 'text-mode              "{{{"    "}}}" nil t)
+(folding-add-to-marks-list 'vhdl-mode              "# {{{"  "# }}}" nil t)
+(folding-add-to-marks-list 'xerl-mode              "%%{{{"  "%%}}}" nil t)
+(folding-add-to-marks-list 'xrdb-mode              "! {{{"  "! }}}" nil t)
 
 
 ;; heavy shell-perl-awk programmer in fundamental-mode need # prefix...
 
-(folding-add-to-marks-list 'fundamental-mode       "# {{{ " "# }}}" nil t)
+(folding-add-to-marks-list 'fundamental-mode       "# {{{" "# }}}" nil t)
 
 ;;}}}
 
@@ -4419,15 +4556,15 @@ buffer without affecting the default value for a particular mode."
 (defun folding-subst-regions (list find replace)
   "Substitute \\r and \\n using LIST FIND REPLACE."
   (let ((buffer-read-only   buffer-read-only) ;; Protect read-only flag.
-	(modified	    (buffer-modified-p))
-	(font-lock-mode	    nil)
-	(lazy-lock-mode	    nil)
-	(overlay-p	    (folding-use-overlays-p))
+        (modified           (buffer-modified-p))
+        (font-lock-mode     nil)
+        (lazy-lock-mode     nil)
+        (overlay-p          (folding-use-overlays-p))
         (ask1 (symbol-function 'ask-user-about-supersession-threat))
         (ask2 (symbol-function 'ask-user-about-lock)))
 
     (if lazy-lock-mode                ;; no-op: Byte compiler silencer
-	(setq lazy-lock-mode t))
+        (setq lazy-lock-mode t))
 
 
     (unwind-protect
@@ -4488,12 +4625,12 @@ buffer without affecting the default value for a particular mode."
 
 (defun folding-narrow-to-region (&optional start end centre)
   "Narrow to region START END, possibly CENTRE."
-  (let* ((the-window	    (selected-window))
-	 (selected-buffer   (window-buffer the-window))
-	 (window-ring	    the-window)
-	 (window	    the-window)
-	 (point		    (point))
-	 (buffer	    (current-buffer))
+  (let* ((the-window        (selected-window))
+         (selected-buffer   (window-buffer the-window))
+         (window-ring       the-window)
+         (window            the-window)
+         (point             (point))
+         (buffer            (current-buffer))
          temp)
     (unwind-protect
         (progn
@@ -4524,7 +4661,7 @@ buffer without affecting the default value for a particular mode."
                                 (set-window-point window point)))
 
                          (not (eq (setq window (next-window window nil t))
-				  window-ring)))))
+                                  window-ring)))))
             nil ;; epoch screen
             (select-window the-window)) ;; unwind-protect INNER
 
@@ -4726,20 +4863,33 @@ nil means discard it; anything else is stream for print."
         ;; Install our keymap
 
         (cond
-	 (folding-xemacs-p
-	  (let ((f 'set-keymap-name))
-	    (funcall f folding-isearch-mode-map 'folding-isearch-mode-map))
-	  (setq minor-mode-map-alist
-		(cons (cons 'isearch-mode folding-isearch-mode-map)
-		      (delq (assoc 'isearch-mode minor-mode-map-alist)
-			    minor-mode-map-alist))))
+         (folding-xemacs-p
+          (let ((f 'set-keymap-name))
+            (funcall f folding-isearch-mode-map 'folding-isearch-mode-map))
+          ;; Later version of XEmacs (21.2+) use overriding-local-map
+          ;; for isearch keymap rather than fiddling with
+          ;; minor-mode-map-alist.  This is so isearch keymaps take
+          ;; precedence over extent-local keymaps.  We will support
+          ;; both ways here.  Keymaps will be restored as side-effect
+          ;; of isearch-abort and isearch-quit
+          (cond
+           ;; if overriding-local-map is in use
+           ((and (boundp 'overriding-local-map) overriding-local-map)
+            (set-keymap-parent folding-isearch-mode-map overriding-local-map)
+            (setq overriding-local-map folding-isearch-mode-map))
+           ;; otherwise fiddle with minor-mode-map-alist
+           (t
+            (setq minor-mode-map-alist
+                  (cons (cons 'isearch-mode folding-isearch-mode-map)
+                        (delq (assoc 'isearch-mode minor-mode-map-alist)
+                              minor-mode-map-alist))))))
 
-	 ((boundp 'overriding-terminal-local-map)
-	  (funcall (symbol-function 'set)
-		   'overriding-terminal-local-map folding-isearch-mode-map))
+         ((boundp 'overriding-terminal-local-map)
+          (funcall (symbol-function 'set)
+                   'overriding-terminal-local-map folding-isearch-mode-map))
 
-	 ((boundp 'overriding-local-map)
-	  (setq overriding-local-map folding-isearch-mode-map))))))
+         ((boundp 'overriding-local-map)
+          (setq overriding-local-map folding-isearch-mode-map))))))
 
 
 ;; Undoes the `folding-isearch-hook-function' function.
@@ -4781,8 +4931,6 @@ nil means discard it; anything else is stream for print."
          (area-end      (point-max))
          pos)
     (cond
-     ((memq function '(isearch-abort isearch-quit))
-      (setq quit-isearch t))
      (t
       (save-restriction
         (widen)
@@ -4800,10 +4948,12 @@ nil means discard it; anything else is stream for print."
           ;; "current mode has no fold marks..."
           (folding-region-has-folding-marks-p area-beg area-end)
         (error (setq quit-isearch t)))
-      (if (and (null quit-isearch))
-          (folding-goto-char pos))))
+
+      (folding-goto-char pos)))
+
     (if quit-isearch
-        (signal 'quit nil))))
+        (signal 'quit '(isearch)))
+))
 
 ;;}}}
 ;;{{{ Edit search string support
@@ -4957,24 +5107,24 @@ This may be useful 'banner' to inform other people why your code
 is formatted like it is and how to view it correctly."
   (interactive)
   (let* ((prefix "")
-	 (re    (or comment-start-skip
-		    (and comment-start
-			 (concat "^[ \t]*" comment-start "+[ \t]*")))))
+         (re    (or comment-start-skip
+                    (and comment-start
+                         (concat "^[ \t]*" comment-start "+[ \t]*")))))
 
     (when re
       (save-excursion
-	(beginning-of-line)
-	(when (or (re-search-forward re nil t)
-		  (progn
-		    (goto-char (point-min))
-		    (re-search-forward re nil t)))
-	  (setq prefix (match-string 0)))))
+        (beginning-of-line)
+        (when (or (re-search-forward re nil t)
+                  (progn
+                    (goto-char (point-min))
+                    (re-search-forward re nil t)))
+          (setq prefix (match-string 0)))))
 
     (beginning-of-line)
     (dolist (line
-	     (list
-	      "File layout controlled by Emacs folding.el available at: "
-	      folding-package-url-location))
+             (list
+              "File layout controlled by Emacs folding.el available at: "
+              folding-package-url-location))
       (insert "\n" prefix line ))))
 
 (defun folding-uncomment-mode-generic (beg end tag)
@@ -5041,45 +5191,45 @@ References:
 
  `folding-comment-folding-table'"
   (interactive "P")
-  (let* ((state	    (folding-mark-look-at 'move))
-	 (closed    (eq 0 state))
-	 (id	    "-COM-")
-	 (opoint    (point))
-	 (mode-elt  (assq major-mode folding-comment-folding-table))
+  (let* ((state     (folding-mark-look-at 'move))
+         (closed    (eq 0 state))
+         (id        "-COM-")
+         (opoint    (point))
+         (mode-elt  (assq major-mode folding-comment-folding-table))
 
-	 comment
-	 ret
-	 beg
-	 end)
+         comment
+         ret
+         beg
+         end)
 
     (unless mode-elt
       (if (stringp (nth 2 (folding-get-mode-marks major-mode)))
-	  (error "\
+          (error "\
 Folding: function usage error, mode with `comment-end' is not supported.")))
 
     (when (or (null comment-start)
-	      (not (string-match "[^ \t\n]" comment-start)))
+              (not (string-match "[^ \t\n]" comment-start)))
       (error "Empty comment-start."))
 
     (unless (memq state '( 0 1 11))
       (error "Incorrect fold state. Point must be over {{{."))
 
 
-    ;;	There is nothing to do if this fold heading does not have
-    ;;	the ID when uncommeting the fold.
+    ;;  There is nothing to do if this fold heading does not have
+    ;;  the ID when uncommeting the fold.
 
     (setq state (looking-at (concat ".*" id)))
 
     (when (or (and uncomment state)
-	      (and (null uncomment) (null state)))
+              (and (null uncomment) (null state)))
       (when closed (save-excursion (folding-show-current-entry)))
 
-      (folding-pick-move)			;Go to end
+      (folding-pick-move)                       ;Go to end
       (beginning-of-line)
 
       (setq end (point-marker))
 
-      (goto-char opoint)		;And off the fold heading
+      (goto-char opoint)                ;And off the fold heading
       (forward-line 1)
       (setq beg (point))
 
@@ -5087,25 +5237,25 @@ Folding: function usage error, mode with `comment-end' is not supported.")))
 
       (cond
        (mode-elt
-	(setq ret
-	      (if uncomment
-		  (funcall (nth 2 mode-elt) (point) end)
-		(funcall (nth 1 mode-elt) (point) end)))
-	(goto-char (cdr ret)))
+        (setq ret
+              (if uncomment
+                  (funcall (nth 2 mode-elt) (point) end)
+                (funcall (nth 1 mode-elt) (point) end)))
+        (goto-char (cdr ret)))
 
        (uncomment
-	(while (< (point) (marker-position end))
-	  (if (looking-at comment)
-	      (delete-region (point) (match-end 0)))
-	  (forward-line 1)))
+        (while (< (point) (marker-position end))
+          (if (looking-at comment)
+              (delete-region (point) (match-end 0)))
+          (forward-line 1)))
 
        (t
-	(while (< (point) (marker-position end))
-	  (if (not (looking-at comment))
-	      (insert comment))
-	  (forward-line 1))))
+        (while (< (point) (marker-position end))
+          (if (not (looking-at comment))
+              (insert comment))
+          (forward-line 1))))
 
-      (setq end nil)			;kill marker
+      (setq end nil)                    ;kill marker
 
       ;;  Remove the possible tag from the fold name line
 
@@ -5114,14 +5264,14 @@ Folding: function usage error, mode with `comment-end' is not supported.")))
       (setq id (concat (or comment-start "") id (or comment-end "")))
 
       (if (re-search-forward (regexp-quote id) beg t)
-	  (delete-region (match-beginning 0)  (match-end 0)))
+          (delete-region (match-beginning 0)  (match-end 0)))
 
       (when (null uncomment)
-	(end-of-line)
-	(insert id))
+        (end-of-line)
+        (insert id))
 
       (if closed
-	  (folding-hide-current-entry))
+          (folding-hide-current-entry))
 
       (goto-char opoint))))
 
@@ -5148,56 +5298,56 @@ Note that /// marks foldings.
 You must 'unfold' whole buffer before using this function."
   (interactive)
   (let (case-fold-search
-	(bm "{{{")			; begin match mark
-	(em "}}}")			;
-	el				; element
-	b				; begin
-	e				; end
-	e2				; end2
-	pp)
+        (bm "{{{")                      ; begin match mark
+        (em "}}}")                      ;
+        el                              ; element
+        b                               ; begin
+        e                               ; end
+        e2                              ; end2
+        pp)
 
-    (catch 'out				; is folding active/loaded ??
+    (catch 'out                         ; is folding active/loaded ??
 
       (unless (setq el (folding-get-mode-marks major-mode))
-	(throw 'out t))			; ** no mode found
+        (throw 'out t))                 ; ** no mode found
 
       ;; ok , we're in busines. Search whole buffer and replace.
 
       (setq b  (elt el 0)
-	    e  (elt el 1)
-	    e2 (or (elt el 2) ""))
+            e  (elt el 1)
+            e2 (or (elt el 2) ""))
 
       (save-excursion
-	(goto-char (point-min))		; start from the beginnig of buffer
+        (goto-char (point-min))         ; start from the beginnig of buffer
 
-	(while (re-search-forward (regexp-quote bm) nil t)
+        (while (re-search-forward (regexp-quote bm) nil t)
 
-	  ;; set the end position for fold marker
+          ;; set the end position for fold marker
 
-	  (setq pp (point))
-	  (beginning-of-line)
+          (setq pp (point))
+          (beginning-of-line)
 
-	  (if (looking-at (regexp-quote b)) ; should be mode-marked; ok, ignore
-	      (goto-char pp)		; note that beg-of-l cmd, move rexp
-	    (delete-region (point) pp)
-	    (insert b)
-	    (when (not (string= "" e2))
-	      (unless (looking-at (concat ".*" (regexp-quote e2)))
-		;; replace with right fold mark
-		(end-of-line)
-		(insert e2)))))
+          (if (looking-at (regexp-quote b)) ; should be mode-marked; ok, ignore
+              (goto-char pp)            ; note that beg-of-l cmd, move rexp
+            (delete-region (point) pp)
+            (insert b)
+            (when (not (string= "" e2))
+              (unless (looking-at (concat ".*" (regexp-quote e2)))
+                ;; replace with right fold mark
+                (end-of-line)
+                (insert e2)))))
 
-	;; handle end marks , identical func compared to prev.
+        ;; handle end marks , identical func compared to prev.
 
-	(goto-char (point-min))
+        (goto-char (point-min))
 
-	(while (re-search-forward (regexp-quote em)nil t)
-	  (setq pp (point))
-	  (beginning-of-line)
-	  (if (looking-at (regexp-quote e))
-	      (goto-char pp)
-	    (delete-region (point) (progn (end-of-line) (point)))
-	    (insert e)))))))
+        (while (re-search-forward (regexp-quote em)nil t)
+          (setq pp (point))
+          (beginning-of-line)
+          (if (looking-at (regexp-quote e))
+              (goto-char pp)
+            (delete-region (point) (progn (end-of-line) (point)))
+            (insert e)))))))
 
 (defun folding-all-comment-blocks-in-region (beg end)
   "Put all comments in folds inside BEG END.
@@ -5246,15 +5396,15 @@ The result will be:
     (error "Folding: Mode does not define `comment-start'"))
 
   (when (and (stringp comment-end)
-	     (string-match "[^ \t]" comment-end))
+             (string-match "[^ \t]" comment-end))
     (error "Folding: Mode defines non-empty `comment-end'."))
 
   (let* ((count          0)
-	 (comment-regexp (concat "^" comment-start))
-	 (marker         (point-marker))
-	 done)
+         (comment-regexp (concat "^" comment-start))
+         (marker         (point-marker))
+         done)
     (multiple-value-bind (left right ignore)
-	(folding-get-mode-marks)
+        (folding-get-mode-marks)
 
       ;; Bytecomp silencer: variable ignore bound but not referenced
       (if ignore (setq ignore ignore))
@@ -5264,37 +5414,37 @@ The result will be:
       (string-match (concat (regexp-quote comment-start) "+") left)
 
       (save-excursion
-	(goto-char beg)
-	(beginning-of-line)
-	(while (re-search-forward comment-regexp nil t)
+        (goto-char beg)
+        (beginning-of-line)
+        (while (re-search-forward comment-regexp nil t)
 
-	  (move-marker marker (point))
-	  (setq done nil)
-	  (beginning-of-line)
-	  (forward-line -1)
+          (move-marker marker (point))
+          (setq done nil)
+          (beginning-of-line)
+          (forward-line -1)
 
-	  ;; 2 previous lines Must not contain FOLD beginning already
+          ;; 2 previous lines Must not contain FOLD beginning already
 
-	  (unless (looking-at (regexp-quote left))
-	    (forward-line -1)
-	    (unless (looking-at (regexp-quote left))
-	      (goto-char (marker-position marker))
-	      (beginning-of-line)
-	      (insert  left " " (int-to-string count) "\n\n")
-	      (incf count)
-	      (setq done t)))
+          (unless (looking-at (regexp-quote left))
+            (forward-line -1)
+            (unless (looking-at (regexp-quote left))
+              (goto-char (marker-position marker))
+              (beginning-of-line)
+              (insert  left " " (int-to-string count) "\n\n")
+              (incf count)
+              (setq done t)))
 
-	  (goto-char (marker-position marker))
+          (goto-char (marker-position marker))
 
-	  (when done
+          (when done
 
-	    ;; Try finding pat of the comment block
+            ;; Try finding pat of the comment block
 
-	    (if (not (re-search-forward "^[ \t]*$" nil t))
-		(goto-char end))
-	    (open-line 1)
-	    (forward-line 1)
-	    (insert right "\n")))))))
+            (if (not (re-search-forward "^[ \t]*$" nil t))
+                (goto-char end))
+            (open-line 1)
+            (forward-line 1)
+            (insert right "\n")))))))
 
 ;;}}}
 ;;{{{ Overlay support
@@ -5303,11 +5453,11 @@ The result will be:
   "Should folding use overlays?."
   (if folding-allow-overlays
       (if folding-xemacs-p
-	  ;;  See if we can load overlay.el library that comes in 19.15
-	  ;;  This call returns t or nil if load was successfull
-	  ;;  Note: is there provide statement? Load is so radical
-	  ;;
-	  (load "overlay" 'noerr)
+          ;;  See if we can load overlay.el library that comes in 19.15
+          ;;  This call returns t or nil if load was successfull
+          ;;  Note: is there provide statement? Load is so radical
+          ;;
+          (load "overlay" 'noerr)
         t)))
 
 (defun folding-flag-region (from to flag)
@@ -5325,7 +5475,7 @@ If FLAG is nil then text is shown, while if FLAG is t the text is hidden."
        (t
         (if (fboundp 'hs-discard-overlays)
             (funcall (symbol-function 'hs-discard-overlays)
-		     (point) to 'invisible t)))))))
+                     (point) to 'invisible t)))))))
 
 (defun folding-make-overlay-hidden (overlay)
   "Make OVERLAY hidden."
@@ -5367,11 +5517,11 @@ And from END t `point-min'. If ARG is nil, delete overlays."
 (folding-install)
 
 (provide 'folding)
-(provide 'folding-isearch)                 ; This used to be a separate package.
+(provide 'folding-isearch)   ;; This used to be a separate package.
 
 (run-hooks 'folding-load-hook)
 
 ;;}}}
 
 
-;;; folding.el ends here
+;;; folding-2.107.el ends here
