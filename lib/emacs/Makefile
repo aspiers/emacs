@@ -36,7 +36,8 @@ IGNORE_PATHS = 				\
 	major-modes/planner--main--1.0 	\
 	major-modes/monkey-2
 IGNORE_FILES =		    \
-	major-modes/sdf.el
+	major-modes/sdf.el  \
+	major-modes/mediawiki.el
 
 # Phony targets are bad except for top-level rules because if a rule A
 # has a phony prerequisite B, that phony rule B will always get
@@ -242,12 +243,18 @@ pgg: pgg-made
 	@touch $@
 
 .xtla-configured: major-modes/xtla/configure Makefile
-	-( 								\
+	@-( 								\
+	  if which baz >/dev/null 2>&1; then 				\
+	    with_arch=--with-arch=baz; 					\
+	    echo "Found baz; using that in preference to tla";		\
+	  else								\
+	    with_arch= ; 	 					\
+	  fi; 								\
 	  cd major-modes/xtla && 					\
 	  ./configure 							\
 	    --prefix=$(HOME)/local 					\
 	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
-	    --with-arch=baz 						\
+	    $$with_arch							\
 	) && 								\
 	touch $@
 
