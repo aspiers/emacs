@@ -371,7 +371,7 @@ that name."
 (global-set-key "\C-cid" 'as-insert-date-and-time)
 
 (autoload 'as-insert-date "as-autotext" "Insert date" t)
-(global-set-key "\C-ciD" 'as-insert-date)
+(global-set-key "\C-ciD" 'as-insert-date-interactive)
 
 (autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
 (global-set-key "\C-cie" 'as-insert-email-address)
@@ -989,10 +989,19 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ Organisation / productivity
 
+;;{{{ emacs-wiki-mode
+
+;; N.B. superceded by muse-mode
+
+(autoload 'emacs-wiki-mode "emacs-wiki")
+(defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
+
+;;}}}
 ;;{{{ muse-mode
 
 (defun muse-mode ()
-  "Pseudo-autoloader which does (require 'muse-mode)."
+  "Pseudo-autoloader which does (require 'muse-mode) and a whole load
+of other useful muse-* libraries."
   (interactive)
   (require 'muse-mode)
   (require 'muse-html)
@@ -1007,16 +1016,24 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
 
 ;;}}}
-;;{{{ emacs-wiki-mode
-
-(autoload 'emacs-wiki-mode "emacs-wiki")
-(defun wk () "Abbreviation for `emacs-wiki-mode'." (interactive) (emacs-wiki-mode))
-
-;;}}}
 ;;{{{ planner-mode
 
-(autoload 'planner-mode "planner" nil t)
-(autoload 'plan "planner" nil t)
+;; (autoload 'planner-mode "planner" nil t)
+;; (autoload 'plan "planner" nil t)
+
+(defun plan ()
+  "Pseudo-autoloader"
+  (interactive)
+  (and
+   (as-load-planner-mode)
+   (plan)))
+
+(defun as-load-planner-mode ()
+  (interactive)
+  "Load planner mode and all the nice stuff."
+  (and
+   (require 'planner)
+   (require 'planner-id)))
 
 ;;}}}
 ;;{{{ outline and org-mode
@@ -1344,7 +1361,33 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'visible-whitespace-mode "visws" "Visible whitespace mode" t)
 
 ;;}}}
+;;{{{ tempo
 
+(defvar tempo-initial-pos nil
+  "Initial position in template after expansion")
+
+;; FIXME: this should be done using tempo-user-elements, not defadvice.
+(defadvice tempo-insert (around tempo-insert-pos act)
+  "Define initial position."
+  (if (eq element '~)
+      (setq tempo-initial-pos (point-marker))
+    ad-do-it))
+
+(defadvice tempo-insert-template (around tempo-insert-template-pos act)
+  "Set initial position when defined.  ChristophConrad"
+  (setq tempo-initial-pos nil)
+  ad-do-it
+  (if tempo-initial-pos
+      (progn
+        (put template 'no-self-insert t)
+        (goto-char tempo-initial-pos))
+    (put template 'no-self-insert nil)))
+
+(defadvice tempo-define-template (after no-self-insert-in-abbrevs activate)
+  "Skip self-insert if template function is called by an abbrev."
+  (put (intern (concat "tempo-template-" (ad-get-arg 0))) 'no-self-insert t))
+
+;;}}}
 ;;}}}
 
 ;;{{{ comment-start
