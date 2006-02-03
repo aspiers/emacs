@@ -9,13 +9,62 @@
 ;; (current-time-string)
 ;; (shell-command-to-string "date")
 
-(defun as-insert-date (&optional prefix)
-  "Inserts the current date into the current buffer at the point.
-Defaults to ISO 8601 format suitable for chronological/lexical
-sorting, but reverts to more human-readable version if a prefix
-argument is given."
+(defun as-date-to-epoch (date-time-string)
+  "Uses date(1) to convert an arbitrary date string to UNIX epoch
+time.  Note that the epoch time is a number of seconds too big to be
+an elisp integer, so it has to be a float."
+  (let ((epoch
+         (shell-command-to-string (format "date -d '%s' +%%s" date-time-string))))
+    ;; trim trailing newline
+    (if (string-match "\\(.+?\\)\n+" epoch)
+        (setq epoch (match-string 1 epoch)))
+    (string-to-number epoch)))
+
+(defun as-epoch-to-high-low (float)
+  "Converts a UNIX epoch time (as a float) to a list suitable for use
+with `format-time-string' and similar functions."
+  (let ((divisor (lsh 1 16)))
+    (cons (round (/   float divisor))
+          (round (mod float divisor)))))
+
+(defun as-insert-date (format &optional date)
+  "Inserts the current date into the current buffer at the point using
+the given format.
+
+If the optional argument is supplied, parses that as a string for an
+alternative date to use."
+  (insert
+   (format-time-string format
+                       (if date (as-epoch-to-high-low (as-date-to-epoch date))
+                         nil)
+                       'utc)))
+
+(defvar as-iso8601-date-format "%F %a"
+  "ISO8601 date format suitable for passing to `format-time-string'.")
+(defvar as-human-date-format "%a %b %e %Y"
+  "Human-readable date format suitable for passing to `format-time-string'.")
+
+(defun as-insert-date-interactive (&optional prefix)
+  "Inserts a date into the current buffer.
+
+With no prefix argument, inserts the current date in ISO8601 format.
+
+With any prefix argument other than 1 or 2, inserts the current date in
+human-readable format.
+
+With a prefix argument of 1, prompts for a date string to be parsed by
+the date(1) command, and inserts that date in ISO8601 format.
+
+With a prefix argument of 2, prompts for a date string to be parsed by
+the date(1) command, and inserts that date in human-readable format."
   (interactive "*P")
-  (insert (format-time-string (if prefix "%a %b %e %Y" "%F %a"))))
+  (let ((date (if (or (eq prefix 1) (eq prefix 2))
+                  (read-string "Date: ")
+                nil))
+        (format (if (or (not prefix) (eq prefix 1))
+                    as-iso8601-date-format
+                  as-human-date-format)))
+    (as-insert-date format date)))
 
 (defun as-insert-time ()
   "Inserts the current time into the current buffer at the point."
@@ -24,11 +73,9 @@ argument is given."
 
 (defun as-insert-date-and-time (&optional prefix)
   "Inserts the current date and time into the current buffer at the
-point.  Defaults to ISO 8601 date format suitable for
-chronological/lexical sorting, but reverts to more human-readable
-version if a prefix argument is given."
+point.  "
   (interactive "*P")
-  (as-insert-date prefix)
+  (as-insert-date-interactive prefix)
   (insert " ")
   (as-insert-time))
 
