@@ -434,12 +434,20 @@ that name."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
-(global-set-key "\C-con"  'plan) ;; _N_ow (today)
-(autoload 'planner-goto-plan-page "planner" nil t)
-(global-set-key "\C-cop"  (lambda () (interactive)
-                            (planner-goto-plan-page "TaskPool")))
+;; _T_oday
+(global-set-key "\C-cot"  'plan) 
+
+;; _N_ew
+(autoload 'planner-create-task-from-buffer "planner" nil t)
+(global-set-key "\C-con"  'planner-create-task-from-buffer)
+
+;; _R_emember
 (global-set-key "\C-cor"  'remember)
-(global-set-key "\C-cot"  'planner-create-task-from-buffer)
+
+;; _T_askPool
+(autoload 'planner-goto-plan-page "planner" nil t)
+(global-set-key "\C-coT"  (lambda () (interactive)
+                            (planner-goto-plan-page "TaskPool")))
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
@@ -1045,12 +1053,16 @@ of other useful muse-* libraries."
 (defvar remember-handler-functions)
 (defvar remember-annotation-functions)
 (defvar planner-annotation-functions)
+(add-hook 'planner-mode-hook
+          (lambda ()
+            (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
+            (planner-install-extra-context-keybindings)))
+
 (defun as-load-planner-mode ()
   (interactive)
   "Load planner mode and all the nice stuff."
   (and
    (require 'planner)
-   (define-key planner-mode-map "\C-c\C-d" 'planner-delete-task)
    (setq remember-handler-functions '(remember-planner-append))
    (setq remember-annotation-functions planner-annotation-functions)
    (require 'planner-id)
