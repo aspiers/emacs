@@ -1033,7 +1033,9 @@ of other useful muse-* libraries."
   "Load planner mode and all the nice stuff."
   (and
    (require 'planner)
-   (require 'planner-id)))
+   (define-key planner-mode-map "\C-c\C-d" 'planner-delete-task)
+   (require 'planner-id)
+   (require 'planner-multi)))
 
 ;;}}}
 ;;{{{ outline and org-mode
@@ -1388,6 +1390,7 @@ of other useful muse-* libraries."
   (put (intern (concat "tempo-template-" (ad-get-arg 0))) 'no-self-insert t))
 
 ;;}}}
+
 ;;}}}
 
 ;;{{{ comment-start
