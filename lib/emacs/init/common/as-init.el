@@ -353,13 +353,18 @@ that name."
 (global-set-key "\C-cA"   'as-align-to-previous-line)
 (fset 'as-next-cvs-buffer "\C-xb*cvs*") ;; must be something nicer than this
 (global-set-key "\C-cb"   'as-next-cvs-buffer)
-(global-set-key "\C-cc"   'comment-region)
+;;{{{ PCL-_C_VS (C-c c)
+
+(global-set-key "\C-cce"  'cvs-examine)
+(global-set-key "\C-ccq"  'cvs-quickdir)
+(global-set-key "\C-ccs"  'cvs-status)
+(global-set-key "\C-ccu"  'cvs-update)
+
+;;}}}
 (global-set-key "\C-cd"   'as-duplicate-line)
-(global-set-key "\C-ce"   'cvs-examine)
 (global-set-key "\C-cf"   'auto-fill-mode)
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
-
-;;{{{ Auto-text (C-c i)
+;;{{{ _I_nsert auto-text (C-c i)
 
 (autoload 'as-insert-snail-mail "as-autotext" "Insert snail mail" t)
 (global-set-key "\C-cia" 'as-insert-snail-mail)
@@ -422,21 +427,26 @@ that name."
 (global-set-key "\C-ciT" 'as-insert-tigerpig-url)
 
 ;;}}}
-
 (global-set-key "\C-ck"   'delete-file)
 (global-set-key "\C-cK"   'as-destroy-buffer-delete-file)
-
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
 ;; I reserve C-c m for mode-specific user bindings
 (global-set-key "\C-cn"   'as-display-buffer-filename)
+;;{{{ _O_rganisation/productivity (C-c o)
+
+(global-set-key "\C-con"  'plan) ;; _N_ow (today)
+(autoload 'planner-goto-plan-page "planner" nil t)
+(global-set-key "\C-cop"  (lambda () (interactive)
+                            (planner-goto-plan-page "TaskPool")))
+(global-set-key "\C-cor"  'remember)
+(global-set-key "\C-cot"  'planner-create-task-from-buffer)
+
+;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cP"   'as-align-to-previous-line)
-(global-set-key "\C-cq"   'cvs-quickdir)
 (global-set-key "\C-cr"   'revert-buffer)
 (global-set-key "\C-cR"   'as-rename-current-buffer-file)
-(global-set-key "\C-cs"   'cvs-status)
-
-;;{{{ Toggles and settings (C-c t)
+;;{{{ _T_oggles and settings (C-c t)
 
 ;;{{{ as-toggle-indent-tabs-mode
 
@@ -476,8 +486,6 @@ that name."
 (global-set-key "\C-ctw"   'as-set-tab-width)
 
 ;;}}}
-
-(global-set-key "\C-cu"   'cvs-update)
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
@@ -1016,6 +1024,11 @@ of other useful muse-* libraries."
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
 
 ;;}}}
+;;{{{ remember-mode
+
+(autoload 'remember "remember" nil t)
+
+;;}}}
 ;;{{{ planner-mode
 
 ;; (autoload 'planner-mode "planner" nil t)
@@ -1028,6 +1041,7 @@ of other useful muse-* libraries."
    (as-load-planner-mode)
    (plan)))
 
+(defvar planner-mode-map)
 (defun as-load-planner-mode ()
   (interactive)
   "Load planner mode and all the nice stuff."
@@ -1132,7 +1146,8 @@ of other useful muse-* libraries."
 ;;{{{ psvn
 
 (autoload 'svn-status "psvn" "svn-status" t)
-(global-set-key "\C-cE" 'svn-status)
+(global-set-key "\C-css" 'svn-status)
+(global-set-key "\C-csu" 'svn-status-update-cmd)
 ;; (require 'psvn)
 
 ;;}}}
