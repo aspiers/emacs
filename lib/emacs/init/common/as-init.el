@@ -1042,14 +1042,20 @@ of other useful muse-* libraries."
    (plan)))
 
 (defvar planner-mode-map)
+(defvar remember-handler-functions)
+(defvar remember-annotation-functions)
+(defvar planner-annotation-functions)
 (defun as-load-planner-mode ()
   (interactive)
   "Load planner mode and all the nice stuff."
   (and
    (require 'planner)
    (define-key planner-mode-map "\C-c\C-d" 'planner-delete-task)
+   (setq remember-handler-functions '(remember-planner-append))
+   (setq remember-annotation-functions planner-annotation-functions)
    (require 'planner-id)
-   (require 'planner-multi)))
+   (require 'planner-multi)
+   (require 'remember-planner)))
 
 ;;}}}
 ;;{{{ outline and org-mode
