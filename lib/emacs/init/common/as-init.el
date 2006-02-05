@@ -442,7 +442,8 @@ that name."
 (global-set-key "\C-con"  'planner-create-task-from-buffer)
 
 ;; _R_emember
-(global-set-key "\C-cor"  'remember)
+;; use C-c q q instead
+;;(global-set-key "\C-cor"  'remember)
 
 ;; _T_askPool
 (autoload 'planner-goto-plan-page "planner" nil t)
@@ -452,6 +453,13 @@ that name."
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cP"   'as-align-to-previous-line)
+;;{{{ remember (C-c q for _q_uick) 
+
+(global-set-key "\C-cqq"   'remember)
+(global-set-key "\C-cqr"   'remember-region)
+(global-set-key "\C-cqc"   'remember-clipboard)
+
+;;}}}
 (global-set-key "\C-cr"   'revert-buffer)
 (global-set-key "\C-cR"   'as-rename-current-buffer-file)
 ;;{{{ _T_oggles and settings (C-c t)
@@ -1049,13 +1057,14 @@ of other useful muse-* libraries."
    (as-load-planner-mode)
    (plan)))
 
-(defvar planner-mode-map)
-(defvar remember-handler-functions)
-(defvar remember-annotation-functions)
-(defvar planner-annotation-functions)
+(eval-when-compile (require 'planner)
+                   (require 'remember-planner))
+
 (add-hook 'planner-mode-hook
           (lambda ()
             (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
+            (planner-install-extra-task-keybindings)
+            (planner-install-extra-note-keybindings)
             (planner-install-extra-context-keybindings)))
 
 (defun as-load-planner-mode ()
@@ -1063,11 +1072,11 @@ of other useful muse-* libraries."
   "Load planner mode and all the nice stuff."
   (and
    (require 'planner)
+   (require 'remember-planner)
    (setq remember-handler-functions '(remember-planner-append))
    (setq remember-annotation-functions planner-annotation-functions)
    (require 'planner-id)
-   (require 'planner-multi)
-   (require 'remember-planner)))
+   (require 'planner-multi)))
 
 ;;}}}
 ;;{{{ outline and org-mode
