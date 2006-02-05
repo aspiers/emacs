@@ -434,6 +434,9 @@ that name."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
+;; _J_ump
+(global-set-key "\C-coj" 'planner-goto-plan-page)
+
 ;; _T_oday
 (global-set-key "\C-cot"  'plan) 
 
@@ -455,6 +458,9 @@ that name."
 (global-set-key "\C-cP"   'as-align-to-previous-line)
 ;;{{{ remember (C-c q for _q_uick) 
 
+(autoload 'remember "remember" nil t)
+(autoload 'remember-region "remember" nil t)
+(autoload 'remember-clipboard "remember" nil t)
 (global-set-key "\C-cqq"   'remember)
 (global-set-key "\C-cqr"   'remember-region)
 (global-set-key "\C-cqc"   'remember-clipboard)
@@ -560,6 +566,9 @@ that name."
                "major-modes/pcl-cvs"
                "major-modes/nxml-mode-20041004"
                "major-modes/xtla/lisp"
+               "major-modes/planner" 
+               "major-modes/remember" 
+               "major-modes/muse/lisp" 
                "major-modes" 
                "minor-modes" 
                "utils" 
@@ -1044,39 +1053,30 @@ of other useful muse-* libraries."
 
 (autoload 'remember "remember" nil t)
 
+(eval-when-compile (require 'remember-planner))
+(add-hook 'remember-mode-hook
+          (lambda ()
+            (require 'remember-planner)
+            (setq remember-handler-functions '(remember-planner-append))
+            (setq remember-annotation-functions planner-annotation-functions)))
+
 ;;}}}
 ;;{{{ planner-mode
 
-;; (autoload 'planner-mode "planner" nil t)
-;; (autoload 'plan "planner" nil t)
+(autoload 'planner-mode "planner" nil t)
+(autoload 'plan "planner" nil t)
 
-(defun plan ()
-  "Pseudo-autoloader"
-  (interactive)
-  (and
-   (as-load-planner-mode)
-   (plan)))
-
-(eval-when-compile (require 'planner)
-                   (require 'remember-planner))
+(eval-when-compile (require 'planner))
 
 (add-hook 'planner-mode-hook
           (lambda ()
             (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
             (planner-install-extra-task-keybindings)
             (planner-install-extra-note-keybindings)
-            (planner-install-extra-context-keybindings)))
-
-(defun as-load-planner-mode ()
-  (interactive)
-  "Load planner mode and all the nice stuff."
-  (and
-   (require 'planner)
-   (require 'remember-planner)
-   (setq remember-handler-functions '(remember-planner-append))
-   (setq remember-annotation-functions planner-annotation-functions)
-   (require 'planner-id)
-   (require 'planner-multi)))
+            (planner-install-extra-context-keybindings)
+            (require 'remember-planner)
+            (require 'planner-id)
+            (require 'planner-multi)))
 
 ;;}}}
 ;;{{{ outline and org-mode
