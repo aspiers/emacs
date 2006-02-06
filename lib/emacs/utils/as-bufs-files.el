@@ -121,6 +121,7 @@ Wraps around `rename-file'."
 
   ;; The nil below means "not ok if already exists" and gets passed to
   ;; rename-file.
+  (require 'dired) ;; does this avoid 'dired-fun-in-all-buffers: Symbol's function definition is void: dired-buffers-for-dir' error?
   (dired-rename-file (buffer-file-name) new-file-name nil)
   (message (format "Renamed to %s" new-file-name)))
 
