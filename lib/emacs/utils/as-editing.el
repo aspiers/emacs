@@ -228,7 +228,9 @@ parenthesis has just been removed."
                             (save-excursion
                               (forward-char -1)
                               (looking-at "[a-zA-Z]"))
-                          (insert " "))))
+                          (progn
+                            (insert " ")
+                            'dwim-space-inserted))))
         on-open-p
         on-close-p)
     (while (and (progn
@@ -241,7 +243,8 @@ parenthesis has just been removed."
         (save-excursion
           (forward-sexp)
           (delete-char -1))
-        (funcall open-remover))
+        (when (funcall open-remover)
+          (forward-char -1)))
       (when on-close-p
         (save-excursion
           (forward-char 1)
