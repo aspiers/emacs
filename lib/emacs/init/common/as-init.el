@@ -434,24 +434,33 @@ that name."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
+(eval-when-compile (require 'planner))
+
 ;; _J_ump
 (global-set-key "\C-coj" 'planner-goto-plan-page)
 
 ;; _T_oday
 (global-set-key "\C-cot"  'plan) 
 
+;; New from _b_uffer
+(autoload 'planner-create-task-from-buffer "planner.el" nil t)
+(global-set-key "\C-cob"  'planner-create-task-from-buffer)
+
 ;; _N_ew
-(autoload 'planner-create-task-from-buffer "planner" nil t)
-(global-set-key "\C-con"  'planner-create-task-from-buffer)
+(autoload 'planner-create-task "planner.el" nil t)
+(global-set-key "\C-con"  'planner-create-task)
 
 ;; _R_emember
 ;; use C-c q q instead
 ;;(global-set-key "\C-cor"  'remember)
 
 ;; _T_askPool
-(autoload 'planner-goto-plan-page "planner" nil t)
-(global-set-key "\C-coT"  (lambda () (interactive)
-                            (planner-goto-plan-page "TaskPool")))
+(autoload 'planner-goto-plan-page "planner.el" nil t)
+(defun as-planner-goto-taskpool ()
+  "Jumps to TaskPool plan page using `planner-goto-plan-page'."
+  (interactive)
+  (planner-goto-plan-page "TaskPool"))
+(global-set-key "\C-coT" 'as-planner-goto-taskpool)
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
@@ -552,27 +561,21 @@ that name."
 
 ;;{{{ find-function-source-path
 
-(defvar as-emacs-dir)
+;; Don't need this, as the Makefile now copys all .el files into the
+;; installdir alongside the .elc files.
 
-(custom-set-variables
- '(find-function-source-path
-   (append load-path
-      (mapcar (lambda (p) (concat as-emacs-dir "/" p))
-              (list
-               "fun" 
-               "major-modes/monkey-2"
-               "major-modes/mmm" 
-               "major-modes/tdtd" 
-               "major-modes/pcl-cvs"
-               "major-modes/nxml-mode-20041004"
-               "major-modes/xtla/lisp"
-               "major-modes/planner" 
-               "major-modes/remember" 
-               "major-modes/muse/lisp" 
-               "major-modes" 
-               "minor-modes" 
-               "utils" 
-               )))))
+;; (defvar as-emacs-dir)
+
+;; (custom-set-variables
+;;  '(find-function-source-path
+;;    (append load-path
+;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
+;;               (list
+;;                "fun" 
+;;                "major-modes/monkey-2"
+;; [snipped]
+;;                "utils" 
+;;                )))))
 
 ;;}}}
 ;;{{{ e-mail address
@@ -1063,7 +1066,7 @@ of other useful muse-* libraries."
 ;;}}}
 ;;{{{ planner-mode
 
-(autoload 'planner-mode "planner" nil t)
+(autoload 'planner-mode "planner.el" nil t)
 (autoload 'plan "planner" nil t)
 
 (eval-when-compile (require 'planner))
@@ -1076,7 +1079,10 @@ of other useful muse-* libraries."
             (planner-install-extra-context-keybindings)
             (require 'remember-planner)
             (require 'planner-id)
-            (require 'planner-multi)))
+            (require 'planner-multi)
+            (require 'planner-accomplishments)
+            (planner-accomplishments-insinuate)
+            (require 'planner-deadline)))
 
 ;;}}}
 ;;{{{ outline and org-mode
