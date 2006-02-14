@@ -154,9 +154,9 @@ $(install_dir):
 install: .installed
 
 .installed: Makefile .elcs $(install_dir) #uninstall
-	@echo "Installing all .elcs in $(install_dir)"
-	@for elc in $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
-	  cp $$elc $(install_dir); 				\
+	@echo "Installing .el and .elc files in $(install_dir)"
+	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
+	  cp $$file $(install_dir); 							\
 	done
 	@touch $@
 
