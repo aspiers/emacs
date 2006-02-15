@@ -153,6 +153,8 @@ $(install_dir):
 
 install: .installed
 
+# N.B. Must install .el files as well as .elc files so that
+# find-function-source-path doesn't need to be extended excessively.
 .installed: Makefile .elcs $(install_dir) #uninstall
 	@echo "Installing .el and .elc files in $(install_dir)"
 	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
