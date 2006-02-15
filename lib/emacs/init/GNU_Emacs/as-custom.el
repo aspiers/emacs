@@ -145,6 +145,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(mwheel-scroll-amount (quote (5 1 nil)))
  '(ps-paper-type (quote a4) t)
  '(ps-print-color-p (quote black-white))
+ '(rst-toc-insert-number-separator ". ")
  '(scroll-bar-mode (quote right))
  '(scroll-conservatively 10)
  '(scroll-margin 20)
