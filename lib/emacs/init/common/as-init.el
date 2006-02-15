@@ -1291,6 +1291,14 @@ of other useful muse-* libraries."
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
 (autoload 'folding-set-marks "folding" "folding mode")
 
+;; FIXME - preactivation?
+;; (defadvice find-function-search-for-symbol (before as-folding act)
+;;     "blah"
+;;     (require 'folding))
+;; (defadvice find-function (before as-folding act)
+;;     "blah"
+;;     (require 'folding))
+
 (cond ((as-quick-startup)
        (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
       (t
