@@ -64,3 +64,6 @@
 (load (concat as-init-dir "/as-custom") 'noerror)
 (load (concat as-version-lib-dir "/as-init"))
 (load (concat edotdir "/.emacs.local") 'noerror)
+
+;; Stop Red Hat trampling over my nice config :-(
+(setq inhibit-default-init t)
