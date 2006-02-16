@@ -554,7 +554,8 @@ that name."
 (setq next-line-add-newlines nil)
 
 ;; IntelliMouse
-(cond (window-system (load "mwheel" t)))
+(cond (window-system (load "mwheel" t)
+                     (mwheel-install)))
 
 ;;}}}
 ;;{{{ Little odds and ends
