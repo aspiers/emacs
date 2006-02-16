@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cd
-[ -e .as-init.el ] || ln -s lib/emacs/init/common/as-init.el .as-init.el
+[ -e .as-init.el ]   || ln -s lib/emacs/init/common/as-init.el .as-init.el
+[ -e .as-custom.el ] || ln -s lib/emacs/init/GNU_Emacs/as-custom.el .as-custom.el
 
 emk
