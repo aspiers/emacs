@@ -104,7 +104,6 @@
  '(eldoc-mode t t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
- '(find-function-source-path (append load-path (mapcar (lambda (p) (concat as-emacs-dir "/" p)) (list "fun" "major-modes/monkey-2" "major-modes/mmm" "major-modes/tdtd" "major-modes/pcl-cvs" "major-modes/nxml-mode-20041004" "major-modes/xtla/lisp" "major-modes" "minor-modes" "utils"))))
  '(folding-mode-prefix-key "")
  '(global-font-lock-mode t nil (font-lock))
  '(gnus-asynchronous t)
@@ -141,11 +140,13 @@
  '(message-default-news-headers "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
+ '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(mwheel-follow-mouse t)
  '(mwheel-scroll-amount (quote (5 1 nil)))
  '(ps-paper-type (quote a4) t)
  '(ps-print-color-p (quote black-white))
+ '(require-final-newline t)
  '(rst-toc-insert-number-separator ". ")
  '(scroll-bar-mode (quote right))
  '(scroll-conservatively 10)
