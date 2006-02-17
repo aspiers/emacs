@@ -1514,13 +1514,16 @@ necessary for all the children of this level to align."
 							 (cdr node))))))))
                 ))
 
+          ;; Starting a sublist requires a blank line
+          (and (cdr node) (insert "\n"))
           (dolist (child (cdr node))
             (rst-toc-insert-node child
 				 (1+ level)
 				 indent
 				 (if do-child-numbering
 				     (concat pfx (format fmt count)) pfx))
-            (incf count)))
+            (incf count))
+          (and (cdr node) (insert "\n")))
 
       )))
 
