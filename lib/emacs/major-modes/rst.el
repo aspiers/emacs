@@ -1515,15 +1515,23 @@ necessary for all the children of this level to align."
                 ))
 
           ;; Starting a sublist requires a blank line
-          (and (cdr node) (insert "\n"))
-          (dolist (child (cdr node))
-            (rst-toc-insert-node child
-				 (1+ level)
-				 indent
-				 (if do-child-numbering
-				     (concat pfx (format fmt count)) pfx))
-            (incf count))
-          (and (cdr node) (insert "\n")))
+          (when (cdr node)
+            (insert "\n")
+            (let
+                ;; It's nice (but not required by rst) to have a blank
+                ;; line when we outdent.  This happens when the previous
+                ;; sibling had children.
+                ((previous-had-children-p nil))
+              (dolist (child (cdr node))
+                (and previous-had-children-p (insert "\n"))
+                (rst-toc-insert-node child
+                                     (1+ level)
+                                     indent
+                                     (if do-child-numbering
+                                         (concat pfx (format fmt count)) pfx))
+                (setq previous-had-children-p (cdr child))
+                (incf count)))
+            ))
 
       )))
 
