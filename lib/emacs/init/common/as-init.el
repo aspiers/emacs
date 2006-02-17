@@ -1070,7 +1070,8 @@ of other useful muse-* libraries."
 (autoload 'planner-mode "planner.el" nil t)
 (autoload 'plan "planner" nil t)
 
-(eval-when-compile (require 'planner))
+(eval-when-compile (require 'planner)
+                   (require 'planner-accomplishments))
 
 (add-hook 'planner-mode-hook
           (lambda ()
@@ -1086,9 +1087,25 @@ of other useful muse-* libraries."
             (require 'planner-deadline)))
 
 ;;}}}
-;;{{{ outline and org-mode
+;;{{{ outline-mode and org-mode
 
+;; outline-mode
 (eval-after-load "outline" '(require 'foldout))
+
+;; org-mode
+(autoload 'org-mode "org" "Org mode" t)
+(defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(autoload 'org-diary "org" "Diary entries from Org mode")
+(autoload 'org-agenda "org" "Multi-file agenda from Org mode" t)
+(autoload 'org-store-link "org" "Store a link to the current location" t)
+(autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
+(autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+
+;; both
 (mapc (function
        (lambda (x)
          (add-hook x
@@ -1101,17 +1118,6 @@ of other useful muse-* libraries."
                      (local-set-key [(control shift right)] 'foldout-zoom-subtree)
                      ))))
       '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
-
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; (define-key global-map "\C-cl" 'org-store-link)
-;; (define-key global-map "\C-ca" 'org-agenda)
-
-(autoload 'org-mode "org" "Org mode" t)
-(autoload 'org-diary "org" "Diary entries from Org mode")
-(autoload 'org-agenda "org" "Multi-file agenda from Org mode" t)
-(autoload 'org-store-link "org" "Store a link to the current location" t)
-(autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
-(autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
 
 ;;}}}
 ;;{{{ etask-mode
@@ -1292,7 +1298,14 @@ of other useful muse-* libraries."
 (autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
 (autoload 'folding-set-marks "folding" "folding mode")
 
+(defun fm () "Loads folding-mode." (interactive) (folding-mode))
+(defun as-folding-init ()
+  "Sets up folding-mode for use."
+  (require 'folding)
+  (folding-mode-add-find-file-hook))
+
 ;; FIXME - preactivation?
+(eval-after-load "find-func" (as-folding-init))
 ;; (defadvice find-function-search-for-symbol (before as-folding act)
 ;;     "blah"
 ;;     (require 'folding))
@@ -1300,10 +1313,7 @@ of other useful muse-* libraries."
 ;;     "blah"
 ;;     (require 'folding))
 
-(cond ((as-quick-startup)
-       (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
-      (t
-       (folding-mode-add-find-file-hook)))
+(or (as-quick-startup) (as-folding-init))
 
 ;;}}}
 ;;{{{ Key bindings
