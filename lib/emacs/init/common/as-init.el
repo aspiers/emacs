@@ -375,7 +375,7 @@ that name."
 (autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
 (global-set-key "\C-cid" 'as-insert-date-and-time)
 
-(autoload 'as-insert-date "as-autotext" "Insert date" t)
+(autoload 'as-insert-date-interactive "as-autotext" "Insert date" t)
 (global-set-key "\C-ciD" 'as-insert-date-interactive)
 
 (autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
@@ -439,16 +439,20 @@ that name."
 ;; _J_ump
 (global-set-key "\C-coj" 'planner-goto-plan-page)
 
-;; _T_oday
-(global-set-key "\C-cot"  'plan) 
+;; _P_lan (today)
+(global-set-key "\C-cop"  'plan) 
 
 ;; New from _b_uffer
 (autoload 'planner-create-task-from-buffer "planner.el" nil t)
 (global-set-key "\C-cob"  'planner-create-task-from-buffer)
 
-;; _N_ew
+;; New _t_ask
 (autoload 'planner-create-task "planner.el" nil t)
-(global-set-key "\C-con"  'planner-create-task)
+(global-set-key "\C-cot"  'planner-create-task)
+
+;; New _n_ote
+(autoload 'planner-create-note "planner.el" nil t)
+(global-set-key "\C-cot"  'planner-create-note)
 
 ;; _R_emember
 ;; use C-c q q instead
@@ -1083,6 +1087,8 @@ of other useful muse-* libraries."
             (require 'planner-id)
             (require 'planner-multi)
             (require 'planner-accomplishments)
+            (require 'planner-trunk)
+            (require 'planner-rank)
             (planner-accomplishments-insinuate)
             (require 'planner-deadline)))
 
