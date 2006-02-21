@@ -978,7 +978,34 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
 (autoload 'rst-mode "rst")
 (autoload 'rst-text-mode-bindings "rst")
-(add-hook 'text-mode-hook 'rst-text-mode-bindings)
+
+;; This stomps over everything :-(
+;;(add-hook 'text-mode-hook 'rst-text-mode-bindings)
+
+(eval-when-compile (load-library "rst"))
+(defun as-rst-bindings ()
+  "Adam's key bindings for `rst-mode'."
+  (interactive)
+  
+  (local-set-key [(control ?=)] 'rst-adjust)
+
+
+;;   (local-set-key [(control c) (control p)] 'rst-backward-section)
+  (local-set-key [(control c) (control n)] 'rst-forward-section)
+  (local-set-key [(control c) (control r)] 'rst-shift-region-right)
+  (local-set-key [(control c) (control l)] 'rst-shift-region-left)
+;;   (define-key mode-specific-map [(control p)] 'rst-backward-section)
+;;   (define-key mode-specific-map [(control n)] 'rst-forward-section)
+;;   (define-key mode-specific-map [(control r)] 'rst-shift-region-right)
+;;   (define-key mode-specific-map [(control l)] 'rst-shift-region-left)
+
+  ;; Bind the rst commands on the C-c p prefix.
+  (local-set-key [(control c) (control p)] 'rst-prefix-map)
+  ;;(define-key mode-specific-map [(p)] 'rst-prefix-map)
+  )
+
+;; FIXME: do we always want these in text mode?
+;;(add-hook 'text-mode-hook 'as-rst-bindings)
 
 ;; Update the TOC automatically everytime you adjust a section title::
 (add-hook 'rst-adjust-hook 'rst-toc-insert-update)
