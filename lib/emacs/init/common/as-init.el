@@ -989,7 +989,6 @@ C-style indentation, use cssm-c-style-indenter.")
   
   (local-set-key [(control ?=)] 'rst-adjust)
 
-
 ;;   (local-set-key [(control c) (control p)] 'rst-backward-section)
   (local-set-key [(control c) (control n)] 'rst-forward-section)
   (local-set-key [(control c) (control r)] 'rst-shift-region-right)
@@ -1000,12 +999,13 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;   (define-key mode-specific-map [(control l)] 'rst-shift-region-left)
 
   ;; Bind the rst commands on the C-c p prefix.
-  (local-set-key [(control c) (control p)] 'rst-prefix-map)
+  (local-set-key [(control c) (control p)] rst-prefix-map)
   ;;(define-key mode-specific-map [(p)] 'rst-prefix-map)
   )
 
 ;; FIXME: do we always want these in text mode?
 ;;(add-hook 'text-mode-hook 'as-rst-bindings)
+(add-hook 'rst-mode-hook 'as-rst-bindings)
 
 ;; Update the TOC automatically everytime you adjust a section title::
 (add-hook 'rst-adjust-hook 'rst-toc-insert-update)
