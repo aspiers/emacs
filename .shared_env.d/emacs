@@ -1,0 +1,4 @@
+LE=$ZDOTDIR/lib/emacs
+  LEI=$LE/init
+  MAJ=$LE/major-modes
+  MIN=$LE/minor-modes
