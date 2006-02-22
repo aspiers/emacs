@@ -1338,7 +1338,7 @@ of other useful muse-* libraries."
   (folding-mode-add-find-file-hook))
 
 ;; FIXME - preactivation?
-(eval-after-load "find-func" (as-folding-init))
+(eval-after-load "find-func" '(as-folding-init))
 ;; (defadvice find-function-search-for-symbol (before as-folding act)
 ;;     "blah"
 ;;     (require 'folding))
