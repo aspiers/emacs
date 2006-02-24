@@ -617,6 +617,14 @@ that name."
 (autoload 'desktop-save "desktop" "Saves desktop session state." t)
 
 ;;}}}
+;;{{{ client/server mode
+
+(defun ss ()
+  "Abbreviation for `server-start'."
+  (interactive)
+  (server-start))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
