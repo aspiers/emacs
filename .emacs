@@ -63,7 +63,17 @@
 (setq custom-file (concat as-init-dir "/as-custom.el"))
 (load (concat as-init-dir "/as-custom") 'noerror)
 (load (concat as-version-lib-dir "/as-init"))
-(load (concat edotdir "/.emacs.local") 'noerror)
+
+(defun as-find-hooks (hook-name)
+  "Uses .zsh/functions/find_hooks to return a list of hooks for `hook-name'."
+  (split-string
+   (shell-command-to-string
+    (concat ". $ZDOTDIR/.zsh/functions/find_hooks "
+            hook-name)) "\n"))
+
+(mapcar (lambda (hook) (load hook))
+        ;; .emacs.d already taken
+        (as-find-hooks ".emacs-hooks.d"))
 
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
