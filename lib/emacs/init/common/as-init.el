@@ -452,7 +452,7 @@ that name."
 
 ;; New _n_ote
 (autoload 'planner-create-note "planner.el" nil t)
-(global-set-key "\C-cot"  'planner-create-note)
+(global-set-key "\C-con"  'planner-create-note)
 
 ;; _R_emember
 ;; use C-c q q instead
