@@ -1075,18 +1075,16 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ muse-mode
 
-(defun muse-mode ()
-  "Pseudo-autoloader which does (require 'muse-mode) and a whole load
-of other useful muse-* libraries."
-  (interactive)
-  (require 'muse-mode)
-  (require 'muse-html)
-  (require 'muse-docbook)
-  (require 'muse-latex)
-  (require 'muse-texinfo)
-  (require 'muse-wiki)
-  (require 'muse-project)
-  (muse-mode))
+(autoload 'muse-mode "muse" "muse-mode autoload" t)
+(eval-after-load "muse"
+  '(progn
+     (require 'muse-mode)
+     (require 'muse-html)
+     (require 'muse-docbook)
+     (require 'muse-latex)
+     (require 'muse-texinfo)
+     (require 'muse-wiki)
+     (require 'muse-project)))
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
@@ -1107,7 +1105,7 @@ of other useful muse-* libraries."
 ;;{{{ planner-mode
 
 (autoload 'planner-mode "planner.el" nil t)
-(autoload 'plan "planner" nil t)
+(autoload 'plan "planner.el" nil t)
 
 (eval-when-compile (require 'planner)
                    (require 'planner-accomplishments))
@@ -1131,7 +1129,9 @@ of other useful muse-* libraries."
 ;;{{{ outline-mode and org-mode
 
 ;; outline-mode
-(eval-after-load "outline" '(require 'foldout))
+;;(eval-after-load "outline" '(require 'foldout))
+(require 'allout)
+(outline-init t)
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
