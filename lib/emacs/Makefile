@@ -2,7 +2,7 @@ el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
 	major-modes/mmm 		\
-	major-modes/org-3.15 		\
+	major-modes/org-4.06 		\
 	major-modes/pcl-cvs 		\
 	major-modes/remember 		\
 	minor-modes 			\
