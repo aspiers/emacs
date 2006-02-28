@@ -5,6 +5,7 @@ el_search_paths = 			\
 	major-modes/org-4.06 		\
 	major-modes/pcl-cvs 		\
 	major-modes/remember 		\
+	major-modes/pgg 		\
 	minor-modes 			\
 	utils 				\
 	fun
@@ -251,7 +252,7 @@ w3m: .emacs-w3m-made
 
 pgg: pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
-	@touch $@
+	@cp major-modes/pgg/pgg.{el,elc} $(install_dir) && touch $@
 
 .xtla-configured: major-modes/xtla/configure Makefile
 	@-( 								\
