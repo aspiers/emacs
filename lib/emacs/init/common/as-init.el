@@ -1130,8 +1130,13 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; outline-mode
 ;;(eval-after-load "outline" '(require 'foldout))
-(require 'allout)
-(outline-init t)
+(eval-after-load "outline"
+  '(progn
+     ;;(require 'allout)
+     (load "allout.el")
+     (if (boundp 'outline-init)
+         (outline-init t)
+       (allout-init t))))
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
