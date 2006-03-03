@@ -206,16 +206,25 @@ wiki: .emacs-wiki-made
 	) && 								\
 	touch $@
 
-muse: .muse-made
+muse: .muse-installed
+
 .muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs Makefile
 	( 								\
 	  cd major-modes/muse && 					\
 	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
                        s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
 	  	Makefile.defs && 					\
-	  make lisp && 							\
-	  make install-bin 						\
+	  make lisp  							\
 	) && 								\
+	touch $@
+
+.muse-installed: .muse-made Makefile
+	( 								\
+	  cd major-modes/muse;						\
+	  make install-bin;						\
+	  make install-info ||						\
+	    echo "muse install-info failure ignored"			\
+	) &&								\
 	touch $@
 
 planner: .planner-installed
@@ -229,7 +238,7 @@ planner: .planner-installed
 	) &&								\
 	touch $@
 
-.planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-made .xtla-made
+.planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed .xtla-made
 	( 								\
 	  cd major-modes/planner && 					\
 	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS_LOADPATHS)!;	\
