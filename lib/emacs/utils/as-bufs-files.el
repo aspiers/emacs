@@ -193,6 +193,18 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
        backup-directory))))
 
 ;;}}}
+;;{{{ find-library
+
+(defun find-library (library)
+  "Runs `find-file' on the file containing the given library."
+  (interactive "sFind library: ")
+  (let ((file (locate-library library)))
+    (or file (error (format "Could not locate library %s" library)))
+    (find-file file)))
+
+(global-set-key "\C-x\M-f" 'find-library)
+
+;;}}}
 
 ;;{{{ bury-and-close-buffer
 
