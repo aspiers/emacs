@@ -1,3 +1,4 @@
+# Where do we pick up .el files which don't have their own Makefiles?
 el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
