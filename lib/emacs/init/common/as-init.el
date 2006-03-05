@@ -1021,7 +1021,8 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ Info
 
-(define-key Info-mode-map [(shift tab)] 'Info-prev-reference)
+(eval-after-load "info"
+  '(define-key Info-mode-map [(shift tab)] 'Info-prev-reference))
 
 ;;}}}
 
@@ -1258,6 +1259,8 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; now integrated into lib/emacs/Makefile
 
 (load-library "xtla-load")
+(global-set-key "\C-xTT"    'tla-browse)
+(global-set-key "\C-xT\C-m" 'xtla)
 
 ;;}}}
 
