@@ -434,7 +434,7 @@ that name."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
-(eval-when-compile (require 'planner))
+(eval-when-compile (load "planner.el"))
 
 ;; _J_ump
 (global-set-key "\C-coj" 'planner-goto-plan-page)
@@ -1019,6 +1019,11 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-hook 'rst-adjust-hook 'rst-toc-insert-update)
 
 ;;}}}
+;;{{{ Info
+
+(define-key Info-mode-map [(shift tab)] 'Info-prev-reference)
+
+;;}}}
 
 ;;{{{ gnus
 
@@ -1123,7 +1128,8 @@ C-style indentation, use cssm-c-style-indenter.")
             (require 'planner-trunk)
             (require 'planner-rank)
             (planner-accomplishments-insinuate)
-            (require 'planner-deadline)))
+            (require 'planner-deadline)
+            (require 'planner-tasks-overview)))
 
 ;;}}}
 ;;{{{ outline-mode and org-mode
@@ -1136,7 +1142,10 @@ C-style indentation, use cssm-c-style-indenter.")
      (load "allout.el")
      (if (boundp 'outline-init)
          (outline-init t)
-       (allout-init t))))
+       (allout-init t)
+       (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
+       (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
+       (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_"))))))
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
