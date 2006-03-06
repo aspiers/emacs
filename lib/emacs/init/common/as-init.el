@@ -564,6 +564,14 @@ that name."
 ;;}}}
 ;;{{{ Little odds and ends
 
+;;{{{ ll => load-library
+
+(defun ll (library)
+  "Shortcut to `load-library'."
+  (interactive "sLoad library: ")
+  (load-library library))
+
+;;}}}
 ;;{{{ find-function-source-path
 
 ;; Don't need this, as the Makefile now copys all .el files into the
