@@ -128,26 +128,42 @@ Wraps around `rename-file'."
 ;;}}}
 ;;{{{ as-make-backup-file-name
 
+(defvar as-make-backup-file-name-hooks '()
+  "Hooks for adding more customisability when making backup filenames.
+Each hook will get called in turn with the filename of the buffer to be
+backed up.  The hook should return the backup filename if it wants to
+suggest one, otherwise nil.")
+
 (defun as-make-backup-file-name (file)
   "Adam's replacement for `make-backup-file-name', since
-`backup-directory-alist' isn't flexible enough."
-  (let ((home (getenv "HOME"))
-        backup-root
-        sub-path)
-    (cond
-     ;; If the file's in the current user's home directory, keep the
-     ;; backup at the top-level of the home directory.
-     ((string-match (format "^\\(%s\\)/\\(.+\\)" home) file)
-;;     ((string-match "^\\(/home/[^/]+\\)/\\(.+\\)" file)
-      (setq backup-root (format "%s/.emacs.backup" (match-string 1 file)))
-      (setq sub-path (match-string 2 file)))
-     ;; Otherwise stick it in /tmp.
-     (t
-      (setq backup-root (format "/tmp/.emacs.backup-%s" user-login-name))
-      (setq sub-path (substring file 1)))) ;; trim leading /
-    (let* ((sub-dir (format "%s/%s" backup-root (file-name-directory sub-path))))
-      (make-directory sub-dir t)
-      (format "%s/%s" backup-root sub-path))))
+`backup-directory-alist' isn't flexible enough.
+
+Runs hooks in `as-make-backup-file-name-hooks' with the filename as
+the only argument, until one returns a backup file-name.  If there is
+no hook which does this, anything within the user's home directory
+gets backed up under ~/.emacs.backup, and everything else to
+/tmp/.emacs.backup-$USER.
+
+Also ensures that the directory part of the proposed backup file-name
+exists, so that hooks don't have to create directories."
+  (let* ((home (getenv "HOME"))
+         (backup-file
+          (or
+           (run-hook-with-args-until-success 'as-make-backup-file-name-hooks file)
+           (cond
+            ;; If the file's in the current user's home directory, keep the
+            ;; backup at the top-level of the home directory.
+            ((string-match (format "^%s/\\(.+\\)" home) file)
+             (format "%s/.emacs.backup/%s" home (match-string 1 file)))
+            ;; Otherwise stick it in /tmp.
+            (t
+             (format "/tmp/.emacs.backup-%s/%s"
+                     user-login-name
+                     ;; trim leading /
+                     (substring file 1))))))
+         (sub-dir (file-name-directory backup-file)))
+    (make-directory sub-dir t)
+    backup-file))
   
 (defun backup-file-name-p (file)
   "Return non-nil if FILE is a backup file name (numeric or not).
