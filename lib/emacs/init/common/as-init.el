@@ -440,7 +440,7 @@ that name."
 (global-set-key "\C-coj" 'planner-goto-plan-page)
 
 ;; _P_lan (today)
-(global-set-key "\C-cop"  'plan) 
+(global-set-key "\C-coP"  'plan) 
 
 ;; New from _b_uffer
 (autoload 'planner-create-task-from-buffer "planner.el" nil t)
@@ -458,13 +458,18 @@ that name."
 ;; use C-c q q instead
 ;;(global-set-key "\C-cor"  'remember)
 
-;; _T_askPool
+;; Next_A_ctions
 (autoload 'planner-goto-plan-page "planner.el" nil t)
 (defun as-planner-goto-taskpool ()
   "Jumps to TaskPool plan page using `planner-goto-plan-page'."
   (interactive)
   (planner-goto-plan-page "TaskPool"))
-(global-set-key "\C-coT" 'as-planner-goto-taskpool)
+(defun as-planner-goto-next-actions ()
+  "Jumps to NextActions plan page using `planner-goto-plan-page'."
+  (interactive)
+  (planner-goto-plan-page "NextActions"))
+(global-set-key "\C-coa" 'as-planner-goto-next-actions)
+(global-set-key "\C-cop" 'as-planner-goto-next-actions)
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
@@ -631,6 +636,12 @@ that name."
   "Abbreviation for `server-start'."
   (interactive)
   (server-start))
+
+;;}}}
+;;{{{ Diary, appointments
+
+(display-time) ;; this is required
+(add-hook 'diary-hook 'appt-make-list)
 
 ;;}}}
 
