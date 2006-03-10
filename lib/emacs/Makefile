@@ -311,7 +311,7 @@ xtla: .xtla-installed
 	-( 								\
 	  cd major-modes/$(xtla_mode) && 				\
 	  make install-pkg 						\
-	) &&
+	) &&								\
 	cp major-modes/$(xtla_mode)/texinfo/xtla.info $(info_dir) && 	\
 	touch $@
 
