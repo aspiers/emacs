@@ -1,9 +1,12 @@
+org_mode  = org-4.06
+xtla_mode = xtla
+
 # Where do we pick up .el files which don't have their own Makefiles?
 el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
 	major-modes/mmm 		\
-	major-modes/org-4.06 		\
+	major-modes/$(org_mode)		\
 	major-modes/pcl-cvs 		\
 	major-modes/remember 		\
 	major-modes/pgg 		\
@@ -19,7 +22,8 @@ THIRD_PARTY_PKGS = 		\
 	emacs-w3m 		\
 	muse 			\
 	planner 		\
-	xtla
+	xtla			\
+	calc-2.02f
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
@@ -29,7 +33,8 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	emacs-w3m-1.4.4 				\
 	muse 						\
 	planner 					\
-	xtla 						\
+	$(xtla_mode) 					\
+	calc-2.02f					\
 	)
 
 # Pretend these don't exist at all.
@@ -46,10 +51,6 @@ IGNORE_FILES =		    \
 # executed, even if B's prerequisites don't need to be, hence the
 # parent rule will too.
 
-# Set up targets for dealing with third-party Makefiles
-THIRD_PARTY_TARGETS = $(addprefix .,$(THIRD_PARTY_PKGS))
-THIRD_PARTY_TARGETS := $(addsuffix -made,$(THIRD_PARTY_TARGETS))
-
 EMACSLIB = $(HOME)/lib/emacs
 
 # Add these loadpaths during compilation only.
@@ -59,7 +60,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/pcl-cvs 		\
             $(EMACSLIB)/major-modes/monkey-2 		\
             $(EMACSLIB)/major-modes/nxml-mode-20041004	\
-            $(EMACSLIB)/major-modes/xtla/lisp           \
+            $(EMACSLIB)/major-modes/$(xtla_mode)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
             $(EMACSLIB)/major-modes/planner     	\
@@ -72,6 +73,9 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
 
 gnuinstall_dir = $(EMACSLIB)/GNU_Emacs
 xinstall_dir = $(EMACSLIB)/XEmacs
+
+prefix   = $(HOME)/local
+info_dir = $(prefix)/share/info
 
 # Figure out which .els to compile ourselves.  The list should comprise of
 # everything we can find which we're not completely ignoring, but excluding
@@ -147,17 +151,17 @@ list-els-to-compile:
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
-.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_TARGETS) Makefile
+.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile
 	@touch $@
 
 $(install_dir):
 	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
 
-install: .installed
+install: .installed 
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-.installed: Makefile .elcs $(install_dir) #uninstall
+.installed: Makefile .elcs $(install_dir) $(info_dir)/dir #uninstall
 	@echo "Installing .el and .elc files in $(install_dir)"
 	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
 	  cp $$file $(install_dir); 							\
@@ -174,18 +178,27 @@ clean: uninstall
 	rm -f .*-made
 	rm -f major-modes/nxml-mode-20041004/stamp-byte-compile
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
-		( cd $$dir && make clean )      \
+		( cd $$dir && make clean )     \
 	done
 
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
+
+$(info_dir)/org: major-modes/$(org_mode)/org
+	cp $< $@
+
+$(info_dir)/dir:: $(info_dir)/org
+	install-info --info-dir=$(info_dir) $<
+
+#############################################################################
 
 psgml: .psgml-made
 .psgml-made:
 	( cd major-modes/psgml && $(MAKE) ) && \
 	touch $@
 
-nxml: .nxml-mode-20041004-made
+nxml: nxml-mode-20041004
+nxml-mode-20041004: .nxml-mode-20041004-made
 .nxml-mode-20041004-made: $(install_dir)
 	( 					\
 	  cd major-modes/nxml-mode-20041004 && 	\
@@ -194,12 +207,14 @@ nxml: .nxml-mode-20041004-made
 	) && 					\
 	touch $@
 
-wiki: .emacs-wiki-made
+wiki: emacs-wiki
+emacs-wiki: .emacs-wiki-made
 .emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el) major-modes/emacs-wiki/Makefile.defs
 	( 								\
 	  cd major-modes/emacs-wiki && 					\
-	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
-                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
+	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS)!; 		\
+                       s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
+                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
 	  	Makefile.defs && 					\
 	  make && 							\
 	  make doc && 							\
@@ -209,17 +224,18 @@ wiki: .emacs-wiki-made
 
 muse: .muse-installed
 
-.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs Makefile
+.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
 	( 								\
 	  cd major-modes/muse && 					\
-	  perl -pi -e 's/^(EMACS\s*=\s*).*/$$1$(EMACS)/; 		\
-                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
+	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS)!; 		\
+                       s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
+                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
 	  	Makefile.defs && 					\
 	  make lisp  							\
 	) && 								\
 	touch $@
 
-.muse-installed: .muse-made Makefile
+.muse-installed: .muse-made
 	( 								\
 	  cd major-modes/muse;						\
 	  make install-bin;						\
@@ -233,29 +249,34 @@ planner: .planner-installed
 .planner-installed: .planner-made
 	( 								\
 	  cd major-modes/planner; 					\
-	  make install-lisp;						\
-	  make install-info ||						\
-	    echo "planner install-info failure ignored"			\
+	  make install							\
 	) &&								\
 	touch $@
+# FIXME need separate targets
+# 	  make install-lisp;						\
+# 	  make install-info ||						\
+# 	    echo "planner install-info failure ignored"			\
 
 .planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed .xtla-made
 	( 								\
 	  cd major-modes/planner && 					\
 	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS_LOADPATHS)!;	\
-                       s!^(PREFIX\s*=\s*).*!$${1}$(HOME)/local!' 	\
+                       s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
+                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
 	  	Makefile.defs && 					\
 	  make lisp    							\
 	) && 								\
 	touch $@
 
-w3m: .emacs-w3m-made
+w3m: emacs-w3m
+emacs-w3m: .emacs-w3m-made
 .emacs-w3m-made:
 	( 					\
-	  cd major-modes/emacs-w3m-1.4.4     && \
-	  ./configure --prefix=$(HOME)/local && \
-	  make				     && \
-	  make install			     && \
+	  cd major-modes/emacs-w3m-1.4.4    && 	\
+	  ./configure --prefix=$(prefix)	\
+		      --infodir=$(info_dir) && 	\
+	  make				    && 	\
+	  make install			    && 	\
 	  cp w3m-load.el $(install_dir) 	\
 	) && 					\
 	touch $@
@@ -264,7 +285,8 @@ pgg: pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
 	@cp major-modes/pgg/pgg.{el,elc} $(install_dir) && touch $@
 
-.xtla-configured: major-modes/xtla/configure Makefile
+xtla: .xtla-installed
+.xtla-configured: major-modes/$(xtla_mode)/configure
 	@-( 								\
 	  if which baz >/dev/null 2>&1; then 				\
 	    with_arch=--with-arch=baz; 					\
@@ -272,24 +294,42 @@ pgg: pgg-made
 	  else								\
 	    with_arch= ; 	 					\
 	  fi; 								\
-	  cd major-modes/xtla && 					\
+	  cd major-modes/$(xtla_mode) && 				\
 	  ./configure 							\
-	    --prefix=$(HOME)/local 					\
+	    --prefix=$(prefix)	 					\
 	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
 	    $$with_arch							\
 	) && 								\
 	touch $@
 
-xtla: .xtla-made
-.xtla-made: $(wildcard major-modes/xtla/*.el) $(wildcard major-modes/xtla/*/*.el) .xtla-configured Makefile
-	-( 				\
-	  cd major-modes/xtla && 	\
-	  make && 			\
-	  make install-pkg 		\
-	) && 				\
+.xtla-made: $(wildcard major-modes/$(xtla_mode)/*.el) $(wildcard major-modes/$(xtla_mode)/*/*.el) .xtla-configured
+	-( 					\
+	  cd major-modes/$(xtla_mode) && 	\
+	  make  				\
+	) && 					\
 	touch $@
 
-major-modes/xtla/configure: major-modes/xtla/configure.ac
-	-cd major-modes/xtla && autoconf
+.xtla-installed: .xtla-made
+	-( 								\
+	  cd major-modes/$(xtla_mode) && 				\
+	  make install-pkg 						\
+	) &&
+	cp major-modes/$(xtla_mode)/texinfo/xtla.info $(info_dir) && 	\
+	touch $@
+
+$(info_dir)/xtla.info: .xtla-made major-modes/$(xtla_mode)/texinfo/xtla.info
+	cp $< $@
+
+$(info_dir)/dir:: $(info_dir)/xtla.info
+	install-info --info-dir=$(info_dir) $<
+
+major-modes/$(xtla_mode)/configure: major-modes/$(xtla_mode)/configure.ac
+	-cd major-modes/$(xtla_mode) && autoconf
 
 major-modes/remember/remember-experimental.elc: .planner-made
+
+calc: calc-2.02f
+calc-2.02f: .calc-2.02f-installed
+.calc-2.02f-installed:
+	@echo "FIXME: get tla/baz interfacing with cfgctl and apply patch from PROBLEMS"
+#	-cd major-modes/calc-2.02f && make all
