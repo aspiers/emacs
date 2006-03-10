@@ -161,7 +161,7 @@ install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-.installed: Makefile .elcs $(install_dir) $(info_dir)/dir #uninstall
+.installed: Makefile .elcs $(install_dir) #uninstall
 	@echo "Installing .el and .elc files in $(install_dir)"
 	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
 	  cp $$file $(install_dir); 							\
@@ -186,9 +186,7 @@ uninstall:
 
 $(info_dir)/org: major-modes/$(org_mode)/org
 	cp $< $@
-
-$(info_dir)/dir:: $(info_dir)/org
-	install-info --info-dir=$(info_dir) $<
+	install-info --info-dir=$(info_dir) $@
 
 #############################################################################
 
@@ -319,9 +317,7 @@ xtla: .xtla-installed
 
 $(info_dir)/xtla.info: .xtla-made major-modes/$(xtla_mode)/texinfo/xtla.info
 	cp $< $@
-
-$(info_dir)/dir:: $(info_dir)/xtla.info
-	install-info --info-dir=$(info_dir) $<
+	install-info --info-dir=$(info_dir) $@
 
 major-modes/$(xtla_mode)/configure: major-modes/$(xtla_mode)/configure.ac
 	-cd major-modes/$(xtla_mode) && autoconf
