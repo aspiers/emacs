@@ -220,8 +220,6 @@ code.  Do not include the '.el' suffix in the library argument."
     (or file (error (format "Could not locate library %s" library)))
     (find-file file)))
 
-(global-set-key "\C-x\M-f" 'find-library-source)
-
 ;;}}}
 
 ;;{{{ bury-and-close-buffer

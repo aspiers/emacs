@@ -264,6 +264,8 @@ that name."
 (global-set-key [(control meta y)] 'as-join-line-with-next)
 (global-set-key [(control x) (control y)] 'vim-yy)
 (global-set-key [(control x) (I)] 'insert-buffer)
+(autoload 'find-library-source "as-bufs-files" "find-library-source" t)
+(global-set-key [(control x) (meta f)] 'find-library-source)
 (global-set-key [(meta o)] 'overwrite-mode)
 (global-set-key [(control meta return)] 'repeat-complex-command)
 (autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
