@@ -310,14 +310,10 @@ xtla: .xtla-installed
 .xtla-installed: .xtla-made
 	-( 								\
 	  cd major-modes/$(xtla_mode) && 				\
-	  make install-pkg 						\
+	  make install-pkg &&						\
+	  install-info --info-dir=$(info_dir) $(info_dir)/xtla.info	\
 	) &&								\
-	cp major-modes/$(xtla_mode)/texinfo/xtla.info $(info_dir) && 	\
 	touch $@
-
-$(info_dir)/xtla.info: .xtla-made major-modes/$(xtla_mode)/texinfo/xtla.info
-	cp $< $@
-	install-info --info-dir=$(info_dir) $@
 
 major-modes/$(xtla_mode)/configure: major-modes/$(xtla_mode)/configure.ac
 	-cd major-modes/$(xtla_mode) && autoconf
