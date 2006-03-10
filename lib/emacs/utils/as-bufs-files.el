@@ -190,15 +190,15 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
         ;; Replace any invalid file-name characters (for the
         ;; case of backing up remote files).
         (setq file (expand-file-name (convert-standard-filename file)))
-        (setq dir-sep-string (char-to-string directory-sep-char))
-        (if (eq (aref file 1) ?:)
-            (setq file (concat dir-sep-string
-                               "drive_"
-                               (char-to-string (downcase (aref file 0)))
-                               (if (eq (aref file 2) directory-sep-char)
-                                   ""
-                                 dir-sep-string)
-                               (substring file 2)))))
+        (let (dir-sep-string (char-to-string directory-sep-char))
+          (if (eq (aref file 1) ?:)
+              (setq file (concat dir-sep-string
+                                 "drive_"
+                                 (char-to-string (downcase (aref file 0)))
+                                 (if (eq (aref file 2) directory-sep-char)
+                                     ""
+                                   dir-sep-string)
+                                 (substring file 2))))))
       ;; Make the name unique by substituting directory
       ;; separators.  It may not really be worth bothering about
       ;; doubling `!'s in the original name...
