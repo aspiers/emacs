@@ -739,6 +739,9 @@ that name."
 ;;{{{ Lisp
 
 (add-hook 'lisp-mode-hook 'as-font-lock-mode-if-window-system)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
 ;;{{{ local-unset-key M-tab for hippie-expand
 
