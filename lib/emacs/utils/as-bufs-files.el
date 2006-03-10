@@ -211,14 +211,16 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
 ;;}}}
 ;;{{{ find-library
 
-(defun find-library (library)
-  "Runs `find-file' on the file containing the given library."
+(defun find-library-source (library)
+  "Runs `find-file' on the file containing the given library's source
+code.  Do not include the '.el' suffix in the library argument."
   (interactive "sFind library: ")
-  (let ((file (locate-library library)))
+  (let ((file (locate-library (concat library ".el")
+                              'nosuffix load-path 'echo-file)))
     (or file (error (format "Could not locate library %s" library)))
     (find-file file)))
 
-(global-set-key "\C-x\M-f" 'find-library)
+(global-set-key "\C-x\M-f" 'find-library-source)
 
 ;;}}}
 
