@@ -65,11 +65,10 @@
 (load (concat as-version-lib-dir "/as-init"))
 
 (defun as-find-hooks (hook-name)
-  "Uses .zsh/functions/find_hooks to return a list of hooks for `hook-name'."
+  "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
   (split-string
    (shell-command-to-string
-    (concat ". $ZDOTDIR/.zsh/functions/find_hooks "
-            hook-name)) "\n"))
+    (concat ". $ZDOT_FIND_HOOKS " hook-name)) "\n"))
 
 (mapcar (lambda (hook) (load hook))
         ;; .emacs.d already taken
