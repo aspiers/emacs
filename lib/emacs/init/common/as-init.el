@@ -970,6 +970,19 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
 
 ;;}}}
+;;{{{ xrdb
+
+(autoload 'xrdb-mode "xrdb-mode" "Mode for editing X resource files" t)
+
+(setq auto-mode-alist
+      (append '(("\\.Xdefaults$"    . xrdb-mode)
+                ("\\.Xenvironment$" . xrdb-mode)
+                ("\\.Xresources$"   . xrdb-mode)
+                ("*.\\.ad$"         . xrdb-mode)
+                )
+              auto-mode-alist))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Semi-natural languages / documentation
