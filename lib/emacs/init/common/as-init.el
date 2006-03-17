@@ -1389,10 +1389,6 @@ C-style indentation, use cssm-c-style-indenter.")
     (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
     ))
 
-(setq as-find-file-matching-regexp-alist
-      (append '(("\*\.rdb$" . (lambda () (folding-set-marks "! {{{ " "! }}} "))))
-              as-find-file-matching-regexp-alist))
-
 ;;}}}
 ;;{{{ Autoload mode via local variables
 
