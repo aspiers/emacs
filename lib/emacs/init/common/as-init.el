@@ -979,6 +979,7 @@ C-style indentation, use cssm-c-style-indenter.")
                 ("\\.Xenvironment$" . xrdb-mode)
                 ("\\.Xresources$"   . xrdb-mode)
                 ("*.\\.ad$"         . xrdb-mode)
+                ("*.\\.x?rdb$"      . xrdb-mode)
                 )
               auto-mode-alist))
 
