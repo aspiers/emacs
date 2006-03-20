@@ -1135,6 +1135,12 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;        (emacs-wiki-grep (muse-page-name)))
 ;;      (define-key muse-mode-map "\C-c\C-b" 'muse-wiki-backlink)
      ))
+(add-hook 'muse-mode-hook
+          (lambda ()
+            (define-key muse-mode-map "\C-c."        'org-time-stamp)
+            (define-key muse-mode-map [(shift up)]   'org-timestamp-up)
+            (define-key muse-mode-map [(shift down)] 'org-timestamp-down)))
+
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
@@ -1195,6 +1201,10 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
+(autoload 'org-time-stamp "org" "org-time-stamp" t)
+(autoload 'org-timestamp-up "org" "org-timestamp-up" t)
+(autoload 'org-timestamp-down "org" "org-timestamp-down" t)
+
 (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (autoload 'org-diary "org" "Diary entries from Org mode")
