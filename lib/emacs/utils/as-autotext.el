@@ -179,7 +179,7 @@ line before and after the text."
     ;; straight away.
     (or prefix (goto-char p))))
 
-(defvar as-work-email-address "aspiers@lehman.com"
+(defvar as-work-email-address "aspiers@novell.com"
   "Adam's work email address.")
 
 (defun as-insert-work-email-address ()
