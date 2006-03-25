@@ -172,6 +172,7 @@
   :keymap  (make-sparse-keymap)
   (if msf-abbrev-mode
       (progn (msf-abbrev-install-locally major-mode)
+             (msf-abbrev-install-locally 'global)
 	     (abbrev-mode msf-abbrev-mode))
     (msf-abbrev-uninstall-locally major-mode)
     (abbrev-mode msf-abbrev-mode)))
