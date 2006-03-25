@@ -38,9 +38,10 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	)
 
 # Pretend these don't exist at all.
-IGNORE_PATHS = 				\
-	major-modes/xtla-main 		\
-	major-modes/planner--main--1.0 	\
+IGNORE_PATHS = 					\
+	major-modes/xtla-main 			\
+	major-modes/planner--main--1.0 		\
+	minor-modes/msf-abbrev/mode-abbrevs 	\
 	major-modes/monkey-2
 IGNORE_FILES =		    \
 	major-modes/sdf.el  \
@@ -63,6 +64,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/$(xtla_mode)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
+            $(EMACSLIB)/major-modes/$(org_mode)     	\
             $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/emacs-wiki	        \
             $(EMACSLIB)/major-modes/muse/lisp	        \
@@ -91,6 +93,7 @@ ELs_TO_COMPILE_cmd =   				        \
 		-name \*.el 				\
 	      $(prune_dirs)				\
 	      $(prune_files)				\
+	      ! -name as-init.el			\
 	      ! -name remember-bbdb.el 			\
 	      ! -name remember-bibl.el 			\
 	      ! -name remember-blosxom.el 		\
@@ -108,6 +111,7 @@ THIRD_PARTY_ELCs = $(shell \
 	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
 	  ! -path 'major-modes/emacs-w3m-1.4.4/*' \
 )
+AS_INIT_ELC = init/common/as-init.elc
 
 ifndef EMACS
   EMACS=emacs
@@ -132,9 +136,9 @@ endif
 
 COMPILER=$(EMACS_LOADPATHS) -batch -f batch-byte-compile
 
-.PHONY: all elcs install clean uninstall
+.PHONY: all install clean uninstall
 
-all: elcs install
+all: .elcs install
 
 list-loadpaths:
 	@echo "$(loadpaths)"
@@ -151,7 +155,7 @@ list-els-to-compile:
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
-.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile
+.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile $(AS_INIT_ELC)
 	@touch $@
 
 $(install_dir):
@@ -163,8 +167,9 @@ install: .installed
 # find-function-source-path doesn't need to be extended excessively.
 .installed: Makefile .elcs $(install_dir) #uninstall
 	@echo "Installing .el and .elc files in $(install_dir)"
-	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs); do 	\
-	  cp $$file $(install_dir); 							\
+	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs) 	\
+		     $(AS_INIT_ELC); do 					\
+	  cp $$file $(install_dir); 						\
 	done
 	@touch $@
 
@@ -183,6 +188,8 @@ clean: uninstall
 
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
+
+#############################################################################
 
 $(info_dir)/org: major-modes/$(org_mode)/org
 	cp $< $@
