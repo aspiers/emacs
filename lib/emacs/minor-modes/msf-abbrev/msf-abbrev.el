@@ -175,13 +175,17 @@
     (msf-abbrev-uninstall-locally major-mode)
     (abbrev-mode msf-abbrev-mode)))
 
-(or (functionp 'define-global-minor-mode)
-    (defalias 'define-global-minor-mode 'easy-mmode-define-global-mode))
-
-(define-global-minor-mode global-msf-abbrev-mode
-  msf-abbrev-mode msf-abbrev-maybe-enable
-  :group 'msf-abbrev)
-  
+(eval-when-compile
+  ;; bah, easy-mmode-define-global-mode appears to suck
+  (defvar global-msf-abbrev-mode)
+  (defvar msf-abbrev-maybe-enable))
+(if (functionp 'define-global-minor-mode)
+    (define-global-minor-mode global-msf-abbrev-mode
+      msf-abbrev-mode msf-abbrev-maybe-enable
+      :group 'msf-abbrev)
+    (easy-mmode-define-global-mode global-msf-abbrev-mode
+      msf-abbrev-mode msf-abbrev-maybe-enable
+      :group 'msf-abbrev))
 
 ;;;_* Customizable Variables
 
@@ -654,7 +658,7 @@ Run `msf-abbrev-after-expansion-hook'"
 	 (msf-form-parse-endpoint form))
        (when msf-abbrev-indent-after-expansion
          (indent-region (msf-form-start form)
-                        (msf-form-end form)))
+                        (msf-form-end form) nil))
        (msf-form-put form 'modification-hooks
 		    (list 'msf-form-on-modification))
        (msf-form-put form 'insert-in-front-hooks
