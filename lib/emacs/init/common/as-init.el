@@ -196,6 +196,12 @@ that name."
 ;;}}}
 
 ;;}}}
+;;{{{ elisp helper functions
+
+(autoload 'function-arg-types "as-elisp")
+(autoload 'function-arity "as-elisp")
+
+;;}}}
 
 ;;{{{ Enable disabled functions
 
@@ -214,8 +220,7 @@ that name."
 (as-progress "key bindings...done")
 
 ;; Ben uses (define-key global-map ...) instead of (global-set-key ...)
-;; Think maybe the latter is better because doesn't make assumptions
-;; about global-map being used?
+;; The latter is a wrapper around the former, so is a bit safer.
 
 ;;{{{ Navigation/outlining
 
@@ -228,8 +233,25 @@ that name."
 ;;{{{ for changing visibility:
 
 ;; These don't need to be easily repeatable, so a key sequence is ok.
-(local-set-key [(shift left)] 'foldout-exit-fold)
+
+
+;; outline-mode
+;;(eval-after-load "outline" '(require 'foldout))
+;; both
+(mapc (lambda (x)
+        (add-hook x
+                  (lambda ()
+                    (auto-fill-mode 1)
+                    ;; Quick navigation
+                    (local-set-key [(shift left)] 'foldout-exit-fold)
+                    (local-set-key [(shift right)] 'foldout-zoom-subtree)
+                    )))
+      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
+
+(local-set-key [(shift left )] 'foldout-exit-fold)
 (local-set-key [(shift right)] 'foldout-zoom-subtree)
+
+;;{{{ as-folding-{hide,show}-current
 
 (defun as-folding-hide-current ()
   "Hides the current fold, ensuring a consistent landing spot."
@@ -247,6 +269,8 @@ that name."
            ;; ensure consistent landing spot
            (folding-mark-look-at 'mark))
     (message "Not on top fold mark")))
+
+;;}}}
 
 (add-hook 'folding-mode-hook
           (lambda ()
@@ -272,6 +296,7 @@ that name."
                                   ;; ensure consistent landing spot
                                   (folding-mark-look-at 'mark))))
             ))
+
             
 
 ;;       C-c C-o    show entire tree
@@ -442,13 +467,13 @@ that name."
 ;; But if bs-show is available, choose that cos it's much nicer.
 (if (functionp 'bs-show)
      (global-set-key [(control x)(control b)]
-                     (function (lambda (arg)
-                                 (interactive "P")
-                                 (bs-show arg)
-                                 (let ((inhibit-read-only t))
-                                   (save-excursion
-                                     (end-of-buffer)
-                                     (insert "\n")))))))
+                     (lambda (arg)
+                       (interactive "P")
+                       (bs-show arg)
+                       (let ((inhibit-read-only t))
+                         (save-excursion
+                           (end-of-buffer)
+                           (insert "\n"))))))
 
 (global-set-key [(meta tab)] 'hippie-expand) ;; was complete-symbol etc.
                                              ;; depending on mode
@@ -914,7 +939,7 @@ that name."
 
 (if (eq running-xemacs t)
     (add-hook 'emacs-lisp-mode-hook
-              (function (lambda () (local-unset-key [(meta tab)])))))
+              (lambda () (local-unset-key [(meta tab)]))))
 
 ;;}}}
 
@@ -1066,10 +1091,10 @@ that name."
 (defalias 'html-mode 'html-helper-mode)
 (autoload 'html-helper-mode "html-helper-mode" t)
 (add-hook 'html-mode-hook
-          (function (lambda ()
-                      (auto-fill-mode -1)
-;;                    (setq truncate-lines t)
-                      )))
+          (lambda ()
+            (auto-fill-mode -1)
+            ;; (setq truncate-lines t)
+            ))
 (defvar tempo-interactive t)
 
 (setq auto-mode-alist
@@ -1124,7 +1149,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
 ;;(add-hook 'sawfish-mode-hook
-;;          (function (lambda () (turn-on-font-lock))))
+;;          (lambda () (turn-on-font-lock)))
 ;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
 (add-to-list 'auto-mode-alist
              '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
@@ -1167,18 +1192,18 @@ C-style indentation, use cssm-c-style-indenter.")
 (or (boundp 'filename) (defvar filename "" "sod knows"))
 
 (add-hook 'text-mode-hook
-          (function (lambda ()
-                      (local-unset-key "\e\t")
-                      (and
-		       (boundp 'filename)
-		       (not (eq filename t))
-                       (string-match
-			"mutt-\\|\\.article\\|\\.letter"
-			filename)
-                       (turn-on-auto-fill)))))
+          (lambda ()
+            (local-unset-key "\e\t")
+            (and
+             (boundp 'filename)
+             (not (eq filename t))
+             (string-match
+              "mutt-\\|\\.article\\|\\.letter"
+              filename)
+             (turn-on-auto-fill))))
 
 ;; Expand all tabs to spaces
-(add-hook 'text-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+(add-hook 'text-mode-hook (lambda () (setq indent-tabs-mode nil)))
 (defun itm () "Shortcut to indented-text-mode."
   (interactive)
   (indented-text-mode))
@@ -1200,8 +1225,8 @@ C-style indentation, use cssm-c-style-indenter.")
 
   (local-set-key [(control ?=)] 'rst-adjust)
 
-;;   (local-set-key [(control c) (control p)] 'rst-backward-section)
-  (local-set-key [(control c) (control n)] 'rst-forward-section)
+  (local-set-key [(control up  )] 'rst-backward-section)
+  (local-set-key [(control down)] 'rst-forward-section)
   (local-set-key [(control c) (control r)] 'rst-shift-region-right)
   (local-set-key [(control c) (control l)] 'rst-shift-region-left)
 ;;   (define-key mode-specific-map [(control p)] 'rst-backward-section)
@@ -1350,33 +1375,7 @@ C-style indentation, use cssm-c-style-indenter.")
             (require 'planner-tasks-overview)))
 
 ;;}}}
-;;{{{ outline-mode and org-mode
-
-;; outline-mode
-;;(eval-after-load "outline" '(require 'foldout))
-(eval-after-load "outline" 'as-allout-init)
-
-(defun as-allout-maybe-init ()
-  "Hook for use within `find-file-hooks' to check whether a file needs
-allout mode initialized."
-  (interactive)
-  (when (boundp 'allout-layout)
-    (as-allout-init)))
-
-(add-hook 'find-file-hooks 'as-allout-maybe-init)
-
-(defun as-allout-init ()
-  "Initialize allout-mode the way Adam likes it."
-  (interactive)
-  (when (not (featurep 'allout))
-    (load "allout.el") ;; Loading .elc causes problems?
-    (if (boundp 'outline-init)
-        ;; Old versions init in a different way
-        (outline-init t)
-      (allout-init t))
-    (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
-    (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
-    (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")))))
+;;{{{ org-mode
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
@@ -1394,18 +1393,6 @@ allout mode initialized."
 
 ;; (define-key global-map "\C-cl" 'org-store-link)
 ;; (define-key global-map "\C-ca" 'org-agenda)
-
-;; both
-(mapc (function
-       (lambda (x)
-         (add-hook x
-                   (lambda ()
-                     ;; Quick navigation
-                     (auto-fill-mode 1)
-                     (local-set-key [(shift left)] 'foldout-exit-fold)
-                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
-                     ))))
-      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
 
 ;;}}}
 ;;{{{ etask-mode
@@ -1727,16 +1714,73 @@ allout mode initialized."
   (put (intern (concat "tempo-template-" (ad-get-arg 0))) 'no-self-insert t))
 
 ;;}}}
+;;{{{ allout
+
+(eval-after-load "outline" '(as-allout-init))
+
+(defun as-allout-maybe-init ()
+  "Hook for use within `find-file-hooks' to check whether a file needs
+allout mode initialized."
+  (interactive)
+  (when (boundp 'allout-layout)
+    (as-allout-init)))
+
+(add-hook 'find-file-hooks 'as-allout-maybe-init)
+
+(defun as-allout-init ()
+  "Initialize allout-mode the way Adam likes it."
+  (interactive)
+  (when (not (featurep 'allout))
+    (load "allout.el") ;; Loading .elc causes problems?
+    (if (boundp 'outline-init)
+        ;; Old versions init in a different way
+        (outline-init t)
+      (allout-init t))
+    (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
+    (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
+    (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")))))
+
+;;}}}
+;;{{{ msf-abbrev
+
+(autoload 'msf-abbrev-mode "msf-abbrev" nil t)
+
+;; Has indent-region changed arity?  Do we need a compatability wrapper?
+;; (eval-after-load "msf-abbrev"
+;;   (let ((arity (function-arity 'indent-region)))
+;;     (if (eq (car arity) 2)
+;;         (defun indent-region ...
+
+;; This goes into an infinite loop :-(
+;; (defadvice abbrev-mode (before abbrev-mode-msf-advice act)
+;;   "Always use `msf-abbrev-mode' when `abbrev-mode' is enabled."
+;;   (msf-abbrev-mode 1))
+
+;; custom-set-variables takes care of this:
+;;(eval-after-load "abbrev" '(require 'msf-abbrev))
+
+;;}}}
+
+;;}}}
+;;{{{ Dual major/minor modes
+
+;;{{{ outline-mode
+
+(mapc (lambda (x)
+        (add-hook x 'turn-on-auto-fill))
+      '(outline-mode-hook outline-minor-mode-hook))
+
+;;}}}
 
 ;;}}}
 
 ;;{{{ comment-start
 
-(add-hook 'lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
-(add-hook 'emacs-lisp-mode-hook (function (lambda () (setq comment-start ";; "))))
-(add-hook 'text-mode-hook (function (lambda () (setq comment-start "> "))))
-(add-hook 'cperl-mode-hook (function (lambda () (setq comment-start "#"))))
-(add-hook 'shell-script-mode-hook (function (lambda () (setq comment-start "#"))))
+(add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
+(add-hook 'text-mode-hook (lambda () (setq comment-start "> ")))
+(add-hook 'cperl-mode-hook (lambda () (setq comment-start "#")))
+(add-hook 'shell-script-mode-hook (lambda () (setq comment-start "#")))
 
 (setq as-find-file-matching-regexp-alist
       (append '(("\*\.rdb$" . (lambda () (setq comment-start "! "))))
