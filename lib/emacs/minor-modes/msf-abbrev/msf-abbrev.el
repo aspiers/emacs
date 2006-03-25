@@ -50,7 +50,8 @@
 ;; support sym-links.
 ;;;_  . selecting a region and M-x `msf-cmd-define' inserts the
 ;; selection to the abbrev file.
-;;;_ , Adam Spiers 
+;;;_ , Adam Spiers
+;;;_  . FIXME
 
 ;;;_* Commentary
 ;;
@@ -618,11 +619,14 @@ ends with .el"
   (if (and (string-match "\\.el$" file)
 	   (file-exists-p file))
       (msf-abbrev-eval file)
-    (msf-form-insert
-	     (with-temp-buffer 
-	       (insert-file-contents file)
-	       (buffer-substring-no-properties
-		(point-min) (point-max))))))
+    (let ((msf-orig-buffer (current-buffer))
+          (msf-saved-point (point))
+          (msf-saved-mark (mark 'force)))
+      (msf-form-insert
+       (with-temp-buffer 
+         (insert-file-contents file)
+         (buffer-substring-no-properties
+          (point-min) (point-max)))))))
 
 ;;;_  > msf-abbrev-just-expanded (function)
 (defun msf-abbrev-just-expanded (function)
@@ -654,6 +658,7 @@ Run `msf-abbrev-after-expansion-hook'"
 	 (msf-form-parse-trims form)
 	 (msf-form-parse-elisp form)
 	 (msf-form-parse-vars  form)
+	 (msf-form-parse-regions form)
 	 (msf-form-parse-choices form)
 	 (msf-form-parse-fields form)
 	 (msf-form-parse-links form)
@@ -727,6 +732,24 @@ Run `msf-abbrev-after-expansion-hook'"
       (let ((v (match-string 2)))
 	(replace-match (format "%s" (eval (intern v)) 
                                nil t))))))
+
+;;;_  > msf-form-parse-regions (form)
+(defun msf-form-parse-regions (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (let (region)
+      (while (and (< (point) (msf-form-end form))
+                  (re-search-forward 
+                   "<\\(region\\)>"
+                   (msf-form-end form) t))
+        (let ((v (match-string 2)))
+          (or region
+              (setq region
+                    (if msf-saved-mark
+                        (with-current-buffer msf-orig-buffer
+                          (buffer-substring msf-saved-mark msf-saved-point))
+                      "")))
+          (replace-match region))))))
 
 ;;;_  > msf-form-parse-elisp (form)
 (defun msf-form-parse-elisp (form)
