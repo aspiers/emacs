@@ -4,7 +4,7 @@
 ;; Copyright (C) 2004,2005,2006 Free Software Foundation, Inc.
 
 ;; Author: Benjamin Rutt <brutt@bloomington.in.us>
-;; Version: 0.99a
+;; Version: 0.99b
 ;; Keywords: abbrev convenience
 
 ;; This file is free software; you can redistribute it and/or modify
@@ -50,6 +50,7 @@
 ;; support sym-links.
 ;;;_  . selecting a region and M-x `msf-cmd-define' inserts the
 ;; selection to the abbrev file.
+;;;_ , Adam Spiers 
 
 ;;;_* Commentary
 ;;
@@ -122,13 +123,23 @@
 ;; Checkout the documentation and demo in the same page.
 
 ;;;_* TODO and Wishlist
-;;;_ , A better parser (and sintax) for abbrev files
+;;;_ , A better parser (and syntax) for abbrev files
 ;;;_ ? Some fields being dependant on a chooseable field's value
 ;;     (Triggers on fields change, maybe to delete/insert other templates)
 ;;;_ ! many more users and contributors =)
+;;;_ , <region> - replace with region (only makes sense when expansion
+;;     bound to a dedicated key, as region won't be relevant when
+;;     typing an abbrev
+;;;_ , <region-or-query "prompt? "> - as above, but prompt if region
+;;     not selected
+;;;_ , <include "../other-mode/other-template">
+;;;_ , make TAB/S-TAB bindings customisable
+;;;_ , make replacing existing abbrevs optional per mode (e.g. cperl-mode)
 
 ;;;_* Known Bugs and Not Intended Features
-;; 
+;;   , <elisp "(beginning-of-buffer)"> doesn't work
+;;   , <comment "foo"> -> <trim...> mechanism doesn't work - leaves
+;;     spurious \n
 
 ;;;_* Implementation & Developer Notes
 ;;;_ , I(vic) re-implemented almost 90% of version 0.98a using 
@@ -163,6 +174,9 @@
 	     (abbrev-mode msf-abbrev-mode))
     (msf-abbrev-uninstall-locally major-mode)
     (abbrev-mode msf-abbrev-mode)))
+
+(or (functionp 'define-global-minor-mode)
+    (defalias 'define-global-minor-mode 'easy-mmode-define-global-mode))
 
 (define-global-minor-mode global-msf-abbrev-mode
   msf-abbrev-mode msf-abbrev-maybe-enable
@@ -487,10 +501,10 @@ before scanning the directory."
 	      (msf-abbrev-directory-files mode_dir)))))
 
 ;;;_  > msf-abbrev-install-locally (mode)
-(defun msf-abbrev-install-locally (mode)
+(defun msf-abbrev-install-locally (mode &optional replace)
   "Install abbrevs for MODE in the `local-abbrev-table'"  
   (msf-abbrev-init-mode mode)
-  (msf-abbrev-scan-mode mode)
+  (msf-abbrev-scan-mode mode replace)
   (msf-abbrev-define-on-table mode local-abbrev-table))
 
 ;;;_  > msf-abbrev-uninstall-locally (mode)
