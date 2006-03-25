@@ -1749,6 +1749,9 @@ allout mode initialized."
   '(setq msf-abbrev-root
          (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
 
+(global-set-key [(control <)] 'msf-cmd-previous-real)
+(global-set-key [(control >)] 'msf-cmd-next-real)
+
 ;; Has indent-region changed arity?  Do we need a compatability wrapper?
 ;; (eval-after-load "msf-abbrev"
 ;;   (let ((arity (function-arity 'indent-region)))
