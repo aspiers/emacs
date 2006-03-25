@@ -1745,6 +1745,10 @@ allout mode initialized."
 
 (autoload 'msf-abbrev-mode "msf-abbrev" nil t)
 
+(eval-after-load "msf-abbrev"
+  '(setq msf-abbrev-root
+         (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
+
 ;; Has indent-region changed arity?  Do we need a compatability wrapper?
 ;; (eval-after-load "msf-abbrev"
 ;;   (let ((arity (function-arity 'indent-region)))
