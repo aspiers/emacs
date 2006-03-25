@@ -1,0 +1,29 @@
+inline unsigned long long csnum(const std::string & num)
+{
+    std::string num_part(num);
+    int lastIdx = num.size() - 1;
+    char lastChar = num[lastIdx];
+    unsigned long long multiplier = 1;
+    unsigned long long kb_1 = (unsigned long long)1024;
+    if ((lastChar == 'k') || (lastChar == 'K')) {
+        multiplier = kb_1;
+    }
+    else if ((lastChar == 'm') || (lastChar == 'M')) {
+        multiplier = kb_1*kb_1;
+    }
+    else if ((lastChar == 'g') || (lastChar == 'G')) {
+        multiplier = kb_1*kb_1*kb_1;
+    }
+    else if ((lastChar == 't') || (lastChar == 'T')) {
+        multiplier = kb_1*kb_1*kb_1*kb_1;
+    }
+    else if ((lastChar == 'p') || (lastChar == 'P')) {
+        multiplier = kb_1*kb_1*kb_1*kb_1*kb_1;
+    }
+
+    if (multiplier != 1) {
+        num_part.erase(lastIdx, 1);
+    }
+    unsigned long long n = strtoull(num_part.c_str(), NULL, 10);
+    return n * multiplier;
+}

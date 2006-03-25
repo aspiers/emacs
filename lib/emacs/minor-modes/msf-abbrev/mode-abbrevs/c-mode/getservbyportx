@@ -1,0 +1,1 @@
+getservbyport(<field "int PORT">, <field "const char *PROTO">)<endpoint>

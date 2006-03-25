@@ -1,0 +1,1 @@
+pathconf(<field "const char *FILENAME">, <field "int PARAMETER">)<endpoint>

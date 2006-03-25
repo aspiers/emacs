@@ -1,0 +1,1 @@
+frexp(<field "double VALUE">, <field "int *EXPONENT">)<endpoint>

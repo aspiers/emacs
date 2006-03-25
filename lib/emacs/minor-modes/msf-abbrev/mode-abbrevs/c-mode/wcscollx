@@ -1,0 +1,1 @@
+wcscoll(<field "const wchar_t *WS1">, <field "const wchar_t *WS2">)<endpoint>

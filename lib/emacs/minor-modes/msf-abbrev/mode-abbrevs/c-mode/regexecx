@@ -1,0 +1,1 @@
+regexec(<field "regex_t *COMPILED">, <field "char *STRING">, <field "size_t NMATCH">, <field "regmatch_t MATCHPTR []">, <field "int EFLAGS">)<endpoint>

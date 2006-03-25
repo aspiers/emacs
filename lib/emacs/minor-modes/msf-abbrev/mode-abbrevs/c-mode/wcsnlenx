@@ -1,0 +1,1 @@
+wcsnlen(<field "const wchar_t *WS">, <field "size_t MAXLEN">)<endpoint>

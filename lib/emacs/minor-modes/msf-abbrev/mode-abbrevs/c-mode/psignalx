@@ -1,0 +1,1 @@
+psignal(<field "int SIGNUM">, <field "const char *MESSAGE">)<endpoint>

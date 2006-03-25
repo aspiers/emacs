@@ -1,0 +1,1 @@
+hasmntopt(<field "const struct mntent *MNT">, <field "const char *OPT">)<endpoint>

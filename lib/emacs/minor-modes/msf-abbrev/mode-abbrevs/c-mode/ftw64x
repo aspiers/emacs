@@ -1,0 +1,1 @@
+ftw64(<field "const char *FILENAME">, <field "__ftw64_func_t FUNC">, <field "int DESCRIPTORS">)<endpoint>

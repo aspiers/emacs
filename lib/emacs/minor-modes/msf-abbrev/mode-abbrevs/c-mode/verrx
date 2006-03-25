@@ -1,0 +1,1 @@
+verr(<field "int STATUS">, <field "const char *FORMAT">, <field "va_list">)<endpoint>

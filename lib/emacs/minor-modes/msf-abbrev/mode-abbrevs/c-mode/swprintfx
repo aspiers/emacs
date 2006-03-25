@@ -1,0 +1,1 @@
+swprintf(<field "wchar_t *S">, <field "size_t SIZE">, <field "const wchar_t *TEMPLATE">, <field "...">)<endpoint>

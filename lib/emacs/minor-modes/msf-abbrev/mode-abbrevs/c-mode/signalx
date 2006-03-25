@@ -1,0 +1,1 @@
+signal(<field "int SIGNUM">, <field "sighandler_t ACTION">)<endpoint>

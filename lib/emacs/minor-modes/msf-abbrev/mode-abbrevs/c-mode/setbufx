@@ -1,0 +1,1 @@
+setbuf(<field "FILE *restrict stream">, <field "char *restrict buf">)

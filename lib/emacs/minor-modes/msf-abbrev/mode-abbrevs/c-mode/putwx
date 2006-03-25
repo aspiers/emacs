@@ -1,0 +1,1 @@
+putw(<field "int W">, <field "FILE *STREAM">)<endpoint>

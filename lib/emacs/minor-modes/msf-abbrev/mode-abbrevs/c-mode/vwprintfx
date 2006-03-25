@@ -1,0 +1,1 @@
+vwprintf(<field "const wchar_t *TEMPLATE">, <field "va_list AP">)<endpoint>

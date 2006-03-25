@@ -1,0 +1,1 @@
+swapcontext(<field "ucontext_t *restrict OUCP">, <field "const ucontext_t *restrict UCP">)<endpoint>

@@ -1,0 +1,1 @@
+re.sub(<cursor>pattern, replacement, string)

@@ -1,0 +1,1 @@
+ntohs(<field "uint16_t NETSHORT">)<endpoint>

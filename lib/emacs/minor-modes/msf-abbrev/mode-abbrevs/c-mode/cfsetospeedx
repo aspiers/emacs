@@ -1,0 +1,1 @@
+cfsetospeed(<field "struct termios *TERMIOS-P">, <field "speed_t SPEED">)<endpoint>

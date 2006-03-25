@@ -1,0 +1,1 @@
+settimeofday(<field "const struct timeval *TP">, <field "const struct timezone *TZP">)<endpoint>

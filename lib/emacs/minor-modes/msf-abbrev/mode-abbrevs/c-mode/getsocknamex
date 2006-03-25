@@ -1,0 +1,1 @@
+getsockname(<field "int SOCKET">, <field "struct sockaddr *ADDR">, <field "socklen_t *LENGTH-PTR">)<endpoint>

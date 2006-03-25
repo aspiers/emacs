@@ -1,0 +1,1 @@
+open64(<field "const char *FILENAME">, <field "int FLAGS[">, <field "mode_t MODE]">)<endpoint>

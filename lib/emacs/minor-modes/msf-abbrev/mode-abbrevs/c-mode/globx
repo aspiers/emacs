@@ -1,0 +1,1 @@
+glob(<field "const char *PATTERN">, <field "int FLAGS">, <field "int(">, <field "*ERRFUNC">, <field ")(">, <field "CONST">, <field "CHAR">, <field "*FILENAME">, <field " ">, <field "INT">, <field "ERROR-CODE">, <field ")">, <field "glob_t *VECTOR-PTR">)<endpoint>

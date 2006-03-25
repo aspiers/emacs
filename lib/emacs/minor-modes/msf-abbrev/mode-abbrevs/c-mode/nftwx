@@ -1,0 +1,1 @@
+nftw(<field "const char *FILENAME">, <field "__nftw_func_t FUNC">, <field "int DESCRIPTORS">, <field "int FLAG">)<endpoint>

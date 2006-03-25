@@ -1,0 +1,1 @@
+fgetpos64(<field "FILE *STREAM">, <field "fpos64_t *POSITION">)<endpoint>

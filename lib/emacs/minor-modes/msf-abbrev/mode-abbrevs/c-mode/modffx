@@ -1,0 +1,1 @@
+modff(<field "float VALUE">, <field "float *INTEGER-PART">)<endpoint>

@@ -1,0 +1,13 @@
+inline off_t file_size(std::string filename)
+{
+    struct stat stat_out;
+    if (stat(filename.c_str(), &stat_out) != 0) {
+        std::cerr << "ERROR: file " << filename
+                  << " does not exist"
+                  << " at " << __FILE__ << ":" << __LINE__
+                  << std::endl << std::flush;
+        exit(1);
+    }
+    off_t out = stat_out.st_size;
+    return out;
+}

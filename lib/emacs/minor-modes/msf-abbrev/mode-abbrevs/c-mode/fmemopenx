@@ -1,0 +1,1 @@
+fmemopen(<field "void *BUF">, <field "size_t SIZE">, <field "const char *OPENTYPE">)<endpoint>

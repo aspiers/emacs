@@ -1,0 +1,1 @@
+tcsetattr(<field "int FILEDES">, <field "int WHEN">, <field "const struct termios *TERMIOS-P">)<endpoint>

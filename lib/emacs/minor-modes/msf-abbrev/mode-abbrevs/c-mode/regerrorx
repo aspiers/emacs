@@ -1,0 +1,1 @@
+regerror(<field "int ERRCODE">, <field "regex_t *COMPILED">, <field "char *BUFFER">, <field "size_t LENGTH">)<endpoint>

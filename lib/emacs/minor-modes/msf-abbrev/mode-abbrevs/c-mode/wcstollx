@@ -1,0 +1,1 @@
+wcstoll(<field "const wchar_t *restrict STRING">, <field "wchar_t **restrict TAILPTR">, <field "int BASE">)<endpoint>

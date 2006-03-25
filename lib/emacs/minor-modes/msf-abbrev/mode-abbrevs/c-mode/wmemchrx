@@ -1,0 +1,1 @@
+wmemchr(<field "const wchar_t *BLOCK">, <field "wchar_t WC">, <field "size_t SIZE">)<endpoint>

@@ -1,0 +1,3 @@
+def usage():
+    print 'usage:', os.path.basename(sys.argv[0]) + ' <cursor>'
+    sys.exit(1)

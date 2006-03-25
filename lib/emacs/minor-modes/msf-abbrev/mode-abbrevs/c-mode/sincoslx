@@ -1,0 +1,1 @@
+sincosl(<field "long double X">, <field "long double *SINX">, <field "long double *COSX">)<endpoint>

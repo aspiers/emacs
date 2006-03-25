@@ -1,0 +1,1 @@
+lsearch(<field "const void *KEY">, <field "void *BASE">, <field "size_t *NMEMB">, <field "size_t SIZE">, <field "comparison_fn_t COMPAR">)<endpoint>

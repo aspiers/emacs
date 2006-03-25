@@ -1,0 +1,1 @@
+getitimer(<field "int WHICH">, <field "struct itimerval *OLD">)<endpoint>

@@ -1,0 +1,1 @@
+getgrouplist(<field "const char *USER">, <field "gid_t GROUP">, <field "gid_t *GROUPS">, <field "int *NGROUPS">)<endpoint>

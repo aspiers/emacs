@@ -1,0 +1,1 @@
+wcsncmp(<field "const wchar_t *WS1">, <field "const wchar_t *WS2">, <field "size_t SIZE">)<endpoint>

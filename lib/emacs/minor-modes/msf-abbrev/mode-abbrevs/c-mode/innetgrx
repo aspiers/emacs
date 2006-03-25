@@ -1,0 +1,1 @@
+innetgr(<field "const char *NETGROUP">, <field "const char *HOST">, <field "const char *USER">, <field "const char *DOMAIN">)<endpoint>

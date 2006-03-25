@@ -1,0 +1,1 @@
+wcrtomb(<field "char *restrict S">, <field "wchar_t WC">, <field "mbstate_t *restrict PS">)<endpoint>

@@ -1,0 +1,1 @@
+wcstombs(<field "char *restrict s">, <field "const wchar_t *restrict wcs">, <field "size_t n">)

@@ -1,0 +1,1 @@
+mbstowcs(<field "wchar_t *restrict wcs">, <field "const char *restrict s">, <field "size_t n">)

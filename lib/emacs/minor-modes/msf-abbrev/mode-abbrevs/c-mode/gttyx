@@ -1,0 +1,1 @@
+gtty(<field "int FILEDES">, <field "struct sgttyb *ATTRIBUTES">)<endpoint>

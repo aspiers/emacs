@@ -1,0 +1,1 @@
+sincos(<field "double X">, <field "double *SINX">, <field "double *COSX">)<endpoint>

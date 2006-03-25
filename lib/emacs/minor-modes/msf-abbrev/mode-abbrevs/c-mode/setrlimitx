@@ -1,0 +1,1 @@
+setrlimit(<field "int RESOURCE">, <field "const struct rlimit *RLP">)<endpoint>

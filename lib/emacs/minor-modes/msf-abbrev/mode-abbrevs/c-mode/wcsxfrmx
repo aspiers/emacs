@@ -1,0 +1,1 @@
+wcsxfrm(<field "wchar_t *restrict WTO">, <field "const wchar_t *WFROM">, <field "size_t SIZE">)<endpoint>

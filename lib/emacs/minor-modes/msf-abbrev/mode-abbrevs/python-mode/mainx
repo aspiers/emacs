@@ -1,0 +1,8 @@
+if __name__ == "__main__": # when run as a script
+    # psyco
+    try:
+        import psyco
+        psyco.full()
+    except ImportError:
+        pass
+    <cursor>

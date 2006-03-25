@@ -1,0 +1,1 @@
+getnetbyname(<field "const char *NAME">)<endpoint>

@@ -1,0 +1,1 @@
+ldexpf(<field "float VALUE">, <field "int EXPONENT">)<endpoint>

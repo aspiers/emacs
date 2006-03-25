@@ -1,0 +1,1 @@
+umount2(<field "const char *FILE">, <field "int FLAGS">)<endpoint>

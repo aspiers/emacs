@@ -1,0 +1,1 @@
+sigpending(<field "sigset_t *SET">)<endpoint>

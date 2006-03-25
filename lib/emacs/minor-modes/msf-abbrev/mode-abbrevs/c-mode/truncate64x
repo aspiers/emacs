@@ -1,0 +1,1 @@
+truncate64(<field "const char *NAME">, <field "off64_t LENGTH">)<endpoint>

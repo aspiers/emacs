@@ -1,0 +1,1 @@
+getgrnam(<field "const char *NAME">)<endpoint>

@@ -1,0 +1,1 @@
+regcomp(<field "regex_t *COMPILED">, <field "const char *PATTERN">, <field "int CFLAGS">)<endpoint>

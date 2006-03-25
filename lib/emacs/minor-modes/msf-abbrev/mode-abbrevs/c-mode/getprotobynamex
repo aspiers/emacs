@@ -1,0 +1,1 @@
+getprotobyname(<field "const char *NAME">)<endpoint>

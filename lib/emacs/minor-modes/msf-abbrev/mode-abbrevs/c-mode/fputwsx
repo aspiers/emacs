@@ -1,0 +1,1 @@
+fputws(<field "const wchar_t *WS">, <field "FILE *STREAM">)<endpoint>

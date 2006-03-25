@@ -1,0 +1,1 @@
+sigismember(<field "const sigset_t *SET">, <field "int SIGNUM">)<endpoint>

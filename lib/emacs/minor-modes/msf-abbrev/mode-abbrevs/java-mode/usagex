@@ -1,0 +1,4 @@
+public static void usage(String appname) {
+    System.out.println("usage: " + appname + " <cursor><ARG...>");
+    System.exit(1);
+}

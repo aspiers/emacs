@@ -1,0 +1,1 @@
+initstate(<field "unsigned int SEED">, <field "void *STATE">, <field "size_t SIZE">)<endpoint>

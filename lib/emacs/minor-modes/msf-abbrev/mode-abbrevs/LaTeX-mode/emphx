@@ -1,0 +1,9 @@
+<COMMENT "There are other ways to do this.">
+<COMMENT "For example, with AUCTeX, that is C-c C-f C-e">
+<COMMENT "This method may be slower, but it is consistent with">
+<COMMENT "the use of msf-abbrev. So it may be faster in the long run">
+<COMMENT "(depending on what is easier to remember).">
+<COMMENT "Besides, this is a very simple one, hence a good">
+<COMMENT "way to start with for people beginning writing">
+<COMMENT "msf-abbrev mode files.">
+\emph{<cursor>}

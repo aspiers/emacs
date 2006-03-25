@@ -1,0 +1,1 @@
+getnetgrent(<field "char **HOSTP">, <field "char **USERP">, <field "char **DOMAINP">)<endpoint>

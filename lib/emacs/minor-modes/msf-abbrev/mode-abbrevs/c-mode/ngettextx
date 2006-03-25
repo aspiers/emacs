@@ -1,0 +1,1 @@
+ngettext(<field "const char *MSGID1">, <field "const char *MSGID2">, <field "unsigned long int N">)<endpoint>

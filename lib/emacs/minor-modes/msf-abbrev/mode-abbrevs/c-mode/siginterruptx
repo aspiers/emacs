@@ -1,0 +1,1 @@
+siginterrupt(<field "int SIGNUM">, <field "int FAILFLAG">)<endpoint>

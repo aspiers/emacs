@@ -1,0 +1,1 @@
+getservbyname(<field "const char *NAME">, <field "const char *PROTO">)<endpoint>

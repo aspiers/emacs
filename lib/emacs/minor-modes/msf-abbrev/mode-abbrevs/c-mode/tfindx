@@ -1,0 +1,1 @@
+tfind(<field "const void *KEY">, <field "void *const *ROOTP">, <field "comparison_fn_t COMPAR">)<endpoint>

@@ -1,0 +1,1 @@
+getutxid(<field "const struct utmpx *ID">)<endpoint>

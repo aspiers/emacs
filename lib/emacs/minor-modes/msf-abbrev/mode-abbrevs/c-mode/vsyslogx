@@ -1,0 +1,1 @@
+vsyslog(<field "int FACILITY_PRIORITY">, <field "char *FORMAT">, <field "va_list arglist">)<endpoint>

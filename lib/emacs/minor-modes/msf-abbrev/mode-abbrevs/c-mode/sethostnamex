@@ -1,0 +1,1 @@
+sethostname(<field "const char *NAME">, <field "size_t LENGTH">)<endpoint>

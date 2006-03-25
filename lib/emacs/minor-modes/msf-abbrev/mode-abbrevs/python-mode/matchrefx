@@ -1,0 +1,2 @@
+m = re.match(<cursor>pattern, string)
+m.group(1) # references \1

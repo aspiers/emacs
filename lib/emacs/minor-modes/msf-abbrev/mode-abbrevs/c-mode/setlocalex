@@ -1,0 +1,1 @@
+setlocale(<field "int CATEGORY">, <field "const char *LOCALE">)<endpoint>

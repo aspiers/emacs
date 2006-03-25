@@ -1,0 +1,1 @@
+swscanf(<field "const wchar_t *WS">, <field "const char *TEMPLATE">, <field "...">)<endpoint>

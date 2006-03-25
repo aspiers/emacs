@@ -1,0 +1,1 @@
+rawmemchr(<field "const void *BLOCK">, <field "int C">)<endpoint>

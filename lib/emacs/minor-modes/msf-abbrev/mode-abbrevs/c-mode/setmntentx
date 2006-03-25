@@ -1,0 +1,1 @@
+setmntent(<field "const char *FILE">, <field "const char *MODE">)<endpoint>

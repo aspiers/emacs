@@ -1,0 +1,1 @@
+sigsuspend(<field "const sigset_t *SET">)<endpoint>

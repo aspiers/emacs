@@ -1,0 +1,1 @@
+getutmpx(<field "const struct utmp *utmp">, <field "struct utmpx *utmpx">)<endpoint>

@@ -1,0 +1,1 @@
+initgroups(<field "const char *USER">, <field "gid_t GROUP">)<endpoint>

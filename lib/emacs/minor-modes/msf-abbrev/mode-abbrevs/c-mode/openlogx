@@ -1,0 +1,1 @@
+openlog(<field "const char *IDENT">, <field "int OPTION">, <field "int FACILITY">)<endpoint>

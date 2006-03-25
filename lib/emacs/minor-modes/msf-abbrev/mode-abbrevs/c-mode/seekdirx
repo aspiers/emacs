@@ -1,0 +1,1 @@
+seekdir(<field "DIR *DIRSTREAM">, <field "off_t POS">)<endpoint>

@@ -1,0 +1,1 @@
+fsetpos64(<field "FILE *STREAM">, <field "const fpos64_t *POSITION">)<endpoint>

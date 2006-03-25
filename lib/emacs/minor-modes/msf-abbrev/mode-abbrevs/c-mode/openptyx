@@ -1,0 +1,1 @@
+openpty(<field "int *AMASTER">, <field "int *ASLAVE">, <field "char *NAME">, <field "struct termios *TERMP">, <field "struct winsize *WINP">)<endpoint>

@@ -1,0 +1,1 @@
+fputwc(<field "wchar_t WC">, <field "FILE *STREAM">)<endpoint>

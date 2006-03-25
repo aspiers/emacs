@@ -1,0 +1,1 @@
+setrlimit64(<field "int RESOURCE">, <field "const struct rlimit64 *RLP">)<endpoint>

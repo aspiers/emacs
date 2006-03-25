@@ -1,0 +1,1 @@
+fmtmsg(<field "long int CLASSIFICATION">, <field "const char *LABEL">, <field "int SEVERITY">, <field "const char *TEXT">, <field "const char *ACTION">, <field "const char *TAG">)<endpoint>

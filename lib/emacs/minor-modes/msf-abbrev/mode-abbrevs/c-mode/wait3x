@@ -1,0 +1,1 @@
+wait3(<field "union wait *STATUS-PTR">, <field "int OPTIONS">, <field "struct rusage *USAGE">)<endpoint>

@@ -1,0 +1,1 @@
+mbtowc(<field "wchar_t *restrict pwc">, <field "const char *restrict s">, <field "size_t n">)

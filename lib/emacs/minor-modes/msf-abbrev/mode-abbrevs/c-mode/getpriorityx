@@ -1,0 +1,1 @@
+getpriority(<field "int CLASS">, <field "int ID">)<endpoint>

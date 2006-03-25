@@ -1,0 +1,1 @@
+mbrlen(<field "const char *restrict S">, <field "size_t N">, <field "mbstate_t *PS">)<endpoint>

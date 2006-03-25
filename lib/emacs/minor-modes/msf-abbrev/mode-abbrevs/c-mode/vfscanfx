@@ -1,0 +1,1 @@
+vfscanf(<field "FILE *restrict stream">, <field "const char *restrict format">, <field "va_list ap">)

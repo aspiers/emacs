@@ -1,0 +1,1 @@
+setitimer(<field "int WHICH">, <field "struct itimerval *NEW">, <field "struct itimerval *OLD">)<endpoint>

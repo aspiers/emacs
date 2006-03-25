@@ -1,0 +1,1 @@
+forkpty(<field "int *AMASTER">, <field "char *NAME">, <field "struct termios *TERMP">, <field "struct winsize *WINP">)<endpoint>

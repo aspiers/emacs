@@ -1,0 +1,1 @@
+wprintf(<field "const wchar_t *TEMPLATE">, <field "...">)<endpoint>

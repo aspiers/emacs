@@ -1,0 +1,1 @@
+wmemcmp(<field "const wchar_t *A1">, <field "const wchar_t *A2">, <field "size_t SIZE">)<endpoint>

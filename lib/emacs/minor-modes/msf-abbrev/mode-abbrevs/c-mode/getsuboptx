@@ -1,0 +1,1 @@
+getsubopt(<field "char **OPTIONP">, <field "const char* const *TOKENS">, <field "char **VALUEP">)<endpoint>

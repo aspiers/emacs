@@ -1,0 +1,1 @@
+logwtmp(<field "const char *UT_LINE">, <field "const char *UT_NAME">, <field "const char *UT_HOST">)<endpoint>

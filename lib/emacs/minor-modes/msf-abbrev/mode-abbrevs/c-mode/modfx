@@ -1,0 +1,1 @@
+modf(<field "double VALUE">, <field "double *INTEGER-PART">)<endpoint>

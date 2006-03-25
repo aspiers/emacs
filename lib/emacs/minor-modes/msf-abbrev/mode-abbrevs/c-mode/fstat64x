@@ -1,0 +1,1 @@
+fstat64(<field "int FILEDES">, <field "struct stat64 *BUF">)<endpoint>

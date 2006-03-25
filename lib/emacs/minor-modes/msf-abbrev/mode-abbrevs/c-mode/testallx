@@ -1,0 +1,12 @@
+query results: <QUERY "query test: ">EOL
+query results(repeat): <QUERY "query test: ">EOL
+user full name (VARLOOKUP): <VARLOOKUP "user-full-name">
+user full name (elisp): <ELISP "(insert user-full-name)">
+buffer file name: <ELISP "(insert buffer-file-name)">
+comment: <COMMENT "this is a comment">
+<COMMENT "this will be eaten">
+line after comment
+<field "form1">
+<field "form2">
+
+<field "form3"> <field "form4">

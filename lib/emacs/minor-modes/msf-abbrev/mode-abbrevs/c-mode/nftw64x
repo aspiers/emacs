@@ -1,0 +1,1 @@
+nftw64(<field "const char *FILENAME">, <field "__nftw64_func_t FUNC">, <field "int DESCRIPTORS">, <field "int FLAG">)<endpoint>

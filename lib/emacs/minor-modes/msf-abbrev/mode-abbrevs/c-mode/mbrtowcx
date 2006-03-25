@@ -1,0 +1,1 @@
+mbrtowc(<field "wchar_t *restrict PWC">, <field "const char *restrict S">, <field "size_t N">, <field "mbstate_t *restrict PS">)<endpoint>

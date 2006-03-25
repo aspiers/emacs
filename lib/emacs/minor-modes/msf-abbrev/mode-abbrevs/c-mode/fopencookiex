@@ -1,0 +1,1 @@
+fopencookie(<field "void *COOKIE">, <field "const char *OPENTYPE">, <field "cookie_io_functions_t IO-FUNCTIONS">)<endpoint>

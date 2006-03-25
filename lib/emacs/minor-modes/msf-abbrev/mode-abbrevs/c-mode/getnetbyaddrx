@@ -1,0 +1,1 @@
+getnetbyaddr(<field "unsigned long int NET">, <field "int TYPE">)<endpoint>

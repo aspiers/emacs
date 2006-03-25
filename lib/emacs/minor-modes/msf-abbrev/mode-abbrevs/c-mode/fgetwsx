@@ -1,0 +1,1 @@
+fgetws(<field "wchar_t *WS">, <field "int COUNT">, <field "FILE *STREAM">)<endpoint>
