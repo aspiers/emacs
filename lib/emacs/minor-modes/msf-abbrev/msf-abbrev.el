@@ -1,9 +1,11 @@
 ;;; msf-abbrev.el --- maintain abbrevs in a directory tree
 
-;; Copyright (C) 2004,2005 Free Software Foundation, Inc.
+;;;_* Copyright
+;; Copyright (C) 2004,2005,2006 Free Software Foundation, Inc.
 
 ;; Author: Benjamin Rutt <brutt@bloomington.in.us>
-;; Version: 0.98a
+;; Version: 0.99a
+;; Keywords: abbrev convenience
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,261 +22,1328 @@
 ;; the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 ;; Boston, MA 02111-1307, USA.
 
-;;; Commentary:
 
+;;;_* Credits 
+;;;_ , Benjamin Rutt <brutt@bloomington.in.us>  ;;;_  . Original Author
+;;;_ , Victor Hugo Borja <vic@thehatcher.com>
+;;;_  . almost a complete re-implementation
+;;;_  . msf-abbrev minor mode
+;;;_  . more customizable variables
+;;;_  . faces and categories for each field type
+;;;_  . linked fields
+;;  modification of a linked field is replicated to other linked
+;;  fields with the same name in the template.
+;;  It can be unliked using C-c u, thus becoming just another 
+;;  *real* field
+;;;_  . multiple field resurrection (even if linked)
+;;;_  . added/changed some key bindings and commands
+;;;_  . the trim tag used to remove/replace blanks in templates
+;;;_  . choose fields can use `completing-read' like functions
+;;;_  . improvements to the choose-selection buffer
+;;;_  . minor support for blank characters between <choice> tags
+;;;_  . a bit of code organization using `allout-mode'
+;;;_  . another bit of documentation
+;;;_  . custom per major-mode elisp initialization file.
+;;  see `msf-abbrev-init-mode'
+;;;_  . by using `msf-abbrev-install-locally' you can include
+;; abbrevs from other modes without if your file system does not
+;; support sym-links.
+;;;_  . selecting a region and M-x `msf-cmd-define' inserts the
+;; selection to the abbrev file.
+
+;;;_* Commentary
+;;
 ;; This package allows you to place your abbrevs into your filesystem,
-;; in a special directory tree.  More information and a demo available at
+;; in a special directory tree. At least that was the original purpose 
+;; but recently it has gained some cool features, making from it an
+;; alternative templating system for emacs.
+;;
+;; More information and an impressive demo are available at
 ;; http://www.bloomington.in.us/~brutt/msf-abbrev.html
 
+;;;_* Usage
+;; 
+;; Put this file in your load-path and in your .emacs
+;;   (require 'msf-abbrev)
+;; 
+;;   (global-msf-abbrev-mode t) ;; for all modes with abbrevs or
+;;   ;; M-x msf-abbrev-mode RET ;; for only one buffer
+;;
+;;   ;; You may also want to make some bindings:
+;;   (global-set-key (kbd "C-c l") 'msf-cmd-goto-root)
+;;   (global-set-key (kbd "C-c a") 'msf-cmd-define)
+;;
+;; While editing in your favorite mode (say ruby =) just make:
+;;   M-x msf-cmd-define RET
+;; 
+;; Enter a name for the new abbrev, eg. "edr" (each_do_render)
+;; and in the new created buffer <edr> type:
+;;
+;;   <field "@collection">.each do |<field link="e" "element">|
+;;     <linked "e">.<endpoint>
+;;   end
+;;   render :<choose link="r">
+;;            <choice "nothing">
+;;            <choice "inline">
+;;            <choice "text">
+;;           </choose> => "rendereing using :<linked "r">"
+;;
+;; Of course this just an example =
+;; This is just ruby code, but some text is tagged, this are the
+;; modificable fields of this template (not valid sgml format).
+;; Save the "edr" buffer and return to your original working
+;; buffer, now type the abbreviation name followed with a space to
+;; expand the abbreviation:
+;;
+;;   edr SPC
+;;
+;; You may as well define a key binding for it's expansion function
+;;
+;;   (define-key ruby-mode-map 
+;;               (kbd "C-c e") 'msf-expand/ruby-mode/edr)
+;;   
+;; Now the abbreviation is expanded with the template, and you are
+;; moved to the first field, so you can navigate between
+;; them using TAB or S-TAB, type something while over a linked field,
+;; delete one, then recreate it in the same position, press RET
+;; over "nothing", when finished either TAB one more time after
+;; the last field, or press M-RET over a field to finish with this
+;; template, expand another abbrev, experiment a bit and see if 
+;; this can help you while coding.
+;;
+;; There are many key-bindings mapped for each field, to know them
+;; place the cursor over a certain field and press: C-h b
+;; And take a look after `keymap' Property Bindings.
+;; Try doing this while over a chooseable field or a linked field.
+;; 
+;;
+;; Many abbreviation files for popular major-modes are available at 
+;; http://www.bloomington.in.us/~brutt/msf-abbrev.html
+;; Checkout the documentation and demo in the same page.
+
+;;;_* TODO and Wishlist
+;;;_ , A better parser (and sintax) for abbrev files
+;;;_ ? Some fields being dependant on a chooseable field's value
+;;     (Triggers on fields change, maybe to delete/insert other templates)
+;;;_ ! many more users and contributors =)
+
+;;;_* Known Bugs and Not Intended Features
+;; 
+
+;;;_* Implementation & Developer Notes
+;;;_ , I(vic) re-implemented almost 90% of version 0.98a using 
+;; overlays as the *form* containing *fields*, this reduced many
+;; searches in the whole buffer.
+;; This way the form overlay can serve as a medium for 
+;; data interchange between fields and/or functions. 
+;;;_ , Also modification hooks are implemented by the function
+;; `msf-form-on-modification' that dispatches to other functions.
+;; Using overlays allow us to monitor changes only between the form
+;; boundaries as anything that happens outside is of no interest
+;; to us.
+;;;_ , The advice for `yank' became simpler, so I expect pasting
+;; large text yanking can be faster.
+;;;_ , Resurrection data, cons of (markers . properties) are saved
+;; in the form overlay. 
+;;;_ , Each field can have a custom modification hook.
+
+;;;_* Code:
 (require 'cl)
+;;;_* Minor mode
 
-(defgroup msf-abbrev nil
-  "Load abbrevs from a filesystem tree."
-  :group 'convenience)
+(define-minor-mode msf-abbrev-mode
+  "File based abbrevs"
+  :init-value nil
+  :global nil
+  :group   'msf-abbrev
+  :lighter ""
+  :keymap  (make-sparse-keymap)
+  (if msf-abbrev-mode
+      (progn (msf-abbrev-install-locally major-mode)
+	     (abbrev-mode msf-abbrev-mode))
+    (msf-abbrev-uninstall-locally major-mode)
+    (abbrev-mode msf-abbrev-mode)))
 
-;; begin user customizable vars
-(defcustom msf-abbrev-root nil
+(define-global-minor-mode global-msf-abbrev-mode
+  msf-abbrev-mode msf-abbrev-maybe-enable
+  :group 'msf-abbrev)
+  
+
+;;;_* Customizable Variables
+
+;;;_ = msf-abbrev-root
+(defcustom msf-abbrev-root (expand-file-name 
+			    ".emacs.d/mode-abbrevs")
   "*Root directory of user abbreviation files.
 
 This directory should have subdirectories such as c-mode, lisp-mode, etc."
   :group 'msf-abbrev
-  :type 'boolean)
+  :type 'directory)
 
-(defcustom msf-abbrev-verbose nil
-  "*Whether to be verbose for various msf-abbrev actions."
+(defcustom msf-abbrev-indent-after-expansion nil
+  "*Whether to indent the region inserted after the abbrev is expanded."
   :group 'msf-abbrev
   :type 'boolean)
 
-(defcustom msf-abbrev-expand-function 'msf-abbrev-expand-function-default
-  "*Which function should be called to expand a abbrev in a file.
+(defcustom msf-abbrev-first-insertion-replaces t
+  "*Whether to replace a field's content when first inserting text at
+  it.
 
-The function should take one argument, the filename to expand.
-This function will be used for all files except those with .el
-extensions, which will be handled by the elisp interpreter
-directly."
+If non-nil, and the first change to a field is text insertion then 
+replace the default content with the inserted text."
   :group 'msf-abbrev
-  :type 'function)
+  :type 'boolean)
 
-(defcustom msf-abbrev-expand-hook nil
+(defcustom msf-abbrev-first-deletion-removes nil
+ "*Whether to remove a fields content when first deleting text.
+
+If non-nil, and the first change to a field is text deletion then
+the full field content is removed."
+  :group 'msf-abbrev
+  :type 'boolean)
+
+(defcustom msf-abbrev-goto-next-loops nil
+  "*Whether to loop after the last field in a form.
+
+If non-nil, `msf-cmd-goto-next' goes to the first field in the
+form instead of deleting the form and going to the end point."
+  :group 'msf-abbrev
+  :type 'boolean)
+
+(defcustom msf-abbrev-after-expansion-hook nil
   "Hook called after expansion of an msf abbrev."
   :group 'msf-abbrev
   :type 'hook)
 
-(defcustom msf-abbrev-indent-after-expansion nil
-  "*Whether to indent the region inserted after the abbrev is expanded.
+(defcustom msf-abbrev-choose-method
+  'msf-choose-selecting
+  "Function used to get the value for a multiple choice field.
 
-This is only relevant when the default expandsion function is
-used (see `msf-abbrev-expand-function')."
+If you specify the name of some another function, please ensure it
+has an argument list like `completing-read' does."
   :group 'msf-abbrev
-  :type 'boolean)
-;; end of user customizable vars
+  :type '(choice 
+          (function-item :tag "Using the msf selection buffer."
+                         msf-choose-selecting)
+          (function-item :tag "Detect a completion function."
+                         msf-choose-completing)
+          (function-item :tag "Builtin basic completion"
+                         completing-read)
+          (function-item :tag "IDO completion"
+                         ido-completing-read)
+          (function :tag "User specified function"
+                    msf-choose-completing)))
 
-(defvar msf-abbrev-fields-created 0)
+;;;_ , Keymaps
 
-;; begin inlined fld.el stuff
-(defvar fld-id-to-group-id (make-hash-table))
-(defvar fld-group-id-to-exit-point (make-hash-table))
+;;;_  = msf-fld-field-keymap
+(defvar msf-fld-field-keymap 
+  (let ((map (make-sparse-keymap)))
+    (define-key map 
+      (kbd "TAB") 'msf-cmd-next-real)
+    (define-key map
+      (kbd "S-TAB") 'msf-cmd-previous-real)
+    (define-key map 
+      (kbd "C-c n") 'msf-cmd-next-real)
+    (define-key map
+      (kbd "C-c p") 'msf-cmd-previous-real)
+    (define-key map
+      (kbd "<S-iso-lefttab>") 'msf-cmd-previous-real)
+    (define-key map
+      (kbd "C-c f") 'msf-cmd-next-fld)
+    (define-key map
+      (kbd "C-c b") 'msf-cmd-previous-fld)
+    (define-key map
+      (kbd "C-c >") 'msf-cmd-goto-end)
+    (define-key map
+      (kbd "C-c <") 'msf-cmd-goto-start)
+    (define-key map
+      (kbd "M-RET") 'msf-cmd-end-form)
+    (define-key map
+      (kbd "C-c e") 'msf-cmd-make-editable)
+    (define-key map
+      (kbd "C-c q") 'msf-cmd-clean-field)
+    (define-key map
+      (kbd "C-c Q") 'msf-cmd-clean-form)
+;;    (define-key map
+;;       (kbd "C-c d") 'fld-delete)
+;;     (define-key map
+;;       (kbd "C-c q") 'fld-cleanup-form-at-point)
+    map)
+  "Keymap active on form simple fields")
 
-(defvar fld-keymap (make-sparse-keymap))
-(define-key fld-keymap (kbd "M-RET") 'fld-cleanup-form-at-point)
-(define-key fld-keymap (kbd "TAB") 'fld-next)
-(define-key fld-keymap (kbd "S-TAB") 'fld-prev)
-(define-key fld-keymap (kbd "<S-iso-lefttab>") 'fld-prev)
-(defvar fld-choose-keymap (copy-keymap fld-keymap))
-(define-key fld-choose-keymap (kbd "RET") 'fld-choose)			       
-(defvar fld-category-defaults nil)
-(setq fld-category-defaults
-      `(face highlight front-sticky t rear-sticky t
-	     keymap ,fld-keymap))
-(setplist 'fld-category fld-category-defaults)
 
-(defvar fld-id-next 0)
-(defun fld-nextid ()
-  (setq fld-id-next (1+ fld-id-next))
-  fld-id-next)
+;;;_  = msf-fld-linked-keymap
+(defvar msf-fld-linked-keymap 
+  (let ((map (copy-keymap msf-fld-field-keymap)))
+    (define-key map
+      (kbd "C-c u") 'msf-cmd-unlink)
+    map)
+  "Keymap active on form linked fields")
 
-(defvar fld-group-id-next 0)
-(defun fld-nextgroupid ()
-  (setq fld-group-id-next (1+ fld-group-id-next))
-  fld-group-id-next)
 
-(defsubst fld-in ()
-  (if (get-text-property (point) 'fld-id) t nil))
+;;;_  = msf-fld-choice-keymap
+(defvar msf-fld-choice-keymap 
+  (let ((map (copy-keymap msf-fld-field-keymap)))
+    (define-key map
+      (kbd "RET") 'msf-cmd-make-choice)
+    map)
+  "Keymap active on form choice fields")
 
-(defun fld-after ()
-  (interactive)
-  (and (not (fld-in))
-       (not (bobp))
-       (save-excursion
-	 (forward-char -1)
-	 (fld-in))))
+;;;_  . Faces
 
-(defun fld-id ()
-  (assert (or (fld-in) (fld-after)))
+;;;_   , msf-fld-field-face
+(defface msf-fld-field-face 
+  (list (cons t (cons :inherit (list 'highlight))))
+  "Face used to highlight form simple fields"
+  :group 'msf-abbrev)
+
+;;;_   , msf-fld-linked-face
+(defface msf-fld-linked-face 
+  (list (cons t (cons :inherit (list 'lazy-highlight))))
+  "Face used to highlight form linked fields"
+  :group 'msf-abbrev)
+
+;;;_   , msf-fld-choice-face
+(defface msf-fld-choice-face 
+  (list (cons t (cons :inherit (list 'button))))
+  "Face used to highlight form choice fields"
+  :group 'msf-abbrev)
+
+;;;_* Variables
+
+;;;_ , global variables
+
+;;;_  . msf-abbrev-form-priority
+(defvar msf-abbrev-form-priority 0
+  "Priority counter used for form overlays")
+
+;;;_  . msf-abbrev-mode-abbrevs
+(defvar msf-abbrev-mode-abbrevs nil
+  "Global alist of mode abbrevs")
+
+;;;_  . field modification hooks
+(defvar msf-fld-before-deletion-hook 
+  nil
+  "Hook to be run before a text deletion ocurrs in a field")
+(defvar msf-fld-after-deletion-hook 
+  'msf-fld-after-deletion
+  "Hook to be run after a text deletion ocurrs in a field")
+
+(defvar msf-fld-before-insertion-hook 
+  nil
+  "Hook to be run before a text insertion ocurrs in a field")
+(defvar msf-fld-after-insertion-hook 
+  'msf-fld-after-insertion
+  "Hook to be run after a text insertion ocurrs in a field")
+
+(defvar msf-fld-before-resurrection-hook 
+  'msf-fld-before-resurrection
+  "Hook to be run before a field will be killed")
+(defvar msf-fld-after-resurrection-hook 
+  'msf-fld-after-resurrection
+  "Hook to be run after a field has been resurrected")
+
+(defvar msf-fld-linked-modification-hooks
+  '((fld-after-insertion-hook
+     msf-fld-linked-replicate)
+    
+    (fld-after-deletion-hook
+     msf-fld-linked-replicate)
+    
+    (fld-before-resurrection-hook
+     msf-fld-linked-before-resurrection)
+    
+    (fld-after-resurrection-hook
+     msf-fld-linked-after-resurrection))
+  "Hooks to be run on modification to a linked field")
+
+;;;_ , buffer local variables
+
+;;;_ , fields categories
+
+;;;_  . msf-fld-field-category
+(setplist 'msf-fld-field-category
+	  `(face msf-fld-field-face 
+		 keymap ,msf-fld-field-keymap))
+
+;;;_  . msf-fld-linked-category		 
+(setplist 'msf-fld-linked-category
+	  `(face msf-fld-linked-face 
+		 fld-modification-hooks 
+		 msf-fld-linked-modification-hooks
+		 keymap ,msf-fld-linked-keymap))
+
+;;;_  . msf-fld-choice-category		 
+(setplist 'msf-fld-choice-category
+	  `(face msf-fld-choice-face 
+		 keymap ,msf-fld-choice-keymap))
+
+;;;_* Functions (msf-abbrev)
+
+;;;_ , Helpers
+
+;;;_  > msf-abbrev-directory-files (dir)
+(defun msf-abbrev-directory-files (dir)
+  "List abbrev files on DIR"
+  (delq nil
+	(mapcar
+	 (lambda (x)
+	   (if (or (string-match "^\\." (file-name-nondirectory x))
+		   (string-match "~$" (file-name-nondirectory x)))
+	       nil x))
+	 (directory-files dir t))))
+
+;;;_  > msf-abbrev-eval (lisp)
+(defun msf-abbrev-eval(lisp)
+  (eval (cond ((consp lisp) lisp)
+	      ((and (stringp lisp) (file-exists-p lisp))
+	       (with-temp-buffer
+		 (insert-file-contents lisp)
+		 (read (buffer-substring-no-properties
+			(point-min) (point-max)))))
+	      ((stringp lisp) (read lisp))
+	      (t (error "Invalid argument type: %s"
+			(type-of lisp))))))
+      
+
+;;;_ , Initialization
+
+;;;_  > msf-abbrev-maybe-enable
+(defun msf-abbrev-maybe-enable nil
+  "Called if `globa-msf-abbrev-mode' is enabled
+
+Enable `msf-abbrev-mode' only for those buffer whose
+major-mode has an abbrev directory or init file."
+  (when (or (assq major-mode msf-abbrev-mode-abbrevs)
+            (file-exists-p 
+             (format "%s%s"
+                     (file-name-as-directory msf-abbrev-root)
+                     major-mode))
+            (file-directory-p
+             (format "%s%s"
+                     (file-name-as-directory msf-abbrev-root)
+                     major-mode)))
+    (msf-abbrev-mode 1)))
+
+;;;_  > msf-abbrev-init-all-modes nil
+(defun msf-abbrev-init-all-modes nil
+  "Initialize msf-abbrev and setup mode-specific hooks"
+  (let (major_mode)
+    (mapc (lambda (mode-dir)
+	    (setq major_mode
+		  (intern (file-name-nondirectory mode-dir)))
+	    (eval-after-load 
+		(cond ((eq 'global major_mode) 'emacs)
+		      (t major_mode))
+	      `(msf-abbrev-init-mode ',major_mode)))
+	  (msf-abbrev-directory-files 
+	   (expand-file-name msf-abbrev-root)))))
+
+;;;_  > msf-abbrev-init-mode (&optional modename)
+(defun msf-abbrev-init-mode (&optional modename)
+  "Load the file <MODENAME>.el if present in the `msf-abbrev-root'
+directory. 
+
+This file can use the variable `modename' and the 
+`msf-abbrev-define-abbrev' function."
+  (or modename (setq modename major-mode))
+  (assert (symbolp modename))
+  (let ((init-file (format "%s%s.el" 
+                           (file-name-as-directory msf-abbrev-root)
+                           modename)))
+    (and (file-exists-p init-file)
+         (msf-abbrev-eval init-file))))
+
+;;;_  > msf-abbrev-scan-mode (&optional modename replace)
+(defun msf-abbrev-scan-mode (&optional modename replace)
+  "Scan abbrevs and generate interactive functions from abbrev 
+files in the corresponding directory of MODENAME.
+
+MODENAME must be a symbol like 'ruby-mode, defaults to the 
+current value of the variable `major-mode'
+
+If REPLACE is non-nil then the abbrevs for MODENAME are removed 
+before scanning the directory."
+  (or modename (setq modename major-mode))
+  (assert (symbolp modename))
+  (and replace
+       (assq-delete-all modename msf-abbrev-mode-abbrevs))
+  (let* ((mode_dir (format "%s%s" (file-name-as-directory 
+				     msf-abbrev-root) modename)))
+    (when (file-directory-p mode_dir)
+	;; define a function for each abbrev on mode directory
+	(mapc (lambda (abbr-file)
+		(msf-abbrev-define-abbrev
+		 (intern (file-name-nondirectory 
+			  (file-name-sans-extension 
+			   abbr-file)))
+		 (msf-abbrev-eval 
+		  `(lambda nil
+		     ,(format "Expand content of file %s"
+			      abbr-file)
+		     (msf-abbrev-expand-file ,abbr-file)))
+		 modename))
+	      (msf-abbrev-directory-files mode_dir)))))
+
+;;;_  > msf-abbrev-install-locally (mode)
+(defun msf-abbrev-install-locally (mode)
+  "Install abbrevs for MODE in the `local-abbrev-table'"  
+  (msf-abbrev-init-mode mode)
+  (msf-abbrev-scan-mode mode)
+  (msf-abbrev-define-on-table mode local-abbrev-table))
+
+;;;_  > msf-abbrev-uninstall-locally (mode)
+(defun msf-abbrev-uninstall-locally (mode)
+  "Uninstall abbrevs for MODE from the `local-abbrev-table'"
+  (msf-abbrev-define-on-table mode local-abbrev-table 'undefine))
+
+;;;_ , Abbrevs
+
+;;;_  > msf-abbrev-define-on-table (&optional mode table undefine)
+(defun msf-abbrev-define-on-table (&optional mode table undefine)
+  "Install msf-abbrevs defined for MODE in TABLE
+
+MODE defaults to the current value of `major-mode'.
+TABLE defaults to the local variable `local-abbrev-table'.
+If UNDEFINE is non-nil undefine MODE's abbrevs from TABLE"
+  (or mode (setq mode major-mode))
+  (or table (setq table local-abbrev-table))
+  (let ((mode-abbrevs (assq mode msf-abbrev-mode-abbrevs)))
+    (when mode-abbrevs
+      (mapc (lambda (name-function)
+	      (let ((name (car name-function))
+		    (expand-function (cdr name-function)))
+		(define-abbrev table
+		  (symbol-name name)
+		  (if undefine nil "")
+		  expand-function 0)))
+	    (cdr mode-abbrevs)))))
+
+;;;_  > msf-abbrev-choose-abbrev 
+(defun msf-abbrev-choose-abbrev (&optional mode requires-match)
+  (let ((abbrevs (assq (or mode major-mode) 
+                       msf-abbrev-mode-abbrevs))
+        (choice nil)
+        (choices nil))
+    (when abbrevs
+      (mapc (lambda (abbrev)
+              (setq choices (cons (format "%s" (car abbrev))
+                                  choices)))
+            (cdr abbrevs))
+      (msf-choose-completing "Abbrev name: " choices nil
+                             requires-match))))
+
+;;;_  > msf-abbrev-define-abbrev (name function &optional mode)
+(defun msf-abbrev-define-abbrev (name function &optional mode)
+  "Define an abbrev for MODE inserted by FUNCTION and 
+named NAME.
+
+MODE defaults to the current value of the variable `major-mode'.
+FUNCTION is called with no arguments by the generated wrapper.
+
+Return the name of the wrapper function with format:
+`msf-expand/MODE/NAME'"
+  (and (stringp name) (setq name (intern name)))
+  (or mode (setq mode major-mode))
+  (let (funname fundoc funobj mode-abbrevs)
+    (setq funname 
+	  (intern (format "msf-expand/%s/%s" mode name)))
+    (setq fundoc 
+	  (format "Expansion function for \"%s\" in %s" 
+		  name mode))
+    (if (symbolp function)
+      (setq fundoc (format "%s wrapping the `%s' function" 
+			   fundoc function))
+      (when (documentation function)
+	(setq fundoc 
+	      (format "%s\n\nDocumentation:\n\n%s"
+		      fundoc
+		      (documentation function)))))
+    (setq funobj 
+	  (msf-abbrev-eval 
+	   `(defun ,funname nil ,fundoc
+	      (interactive)
+	      (apply ,function nil)
+	      (msf-abbrev-just-expanded ',funname)
+	      ',funname)))
+    (put funname 'no-self-insert t)
+    (put funname 'abbrev-name name)
+    (setq mode-abbrevs 
+	  (or (assq mode msf-abbrev-mode-abbrevs)
+	      (list mode)))
+    (setcdr mode-abbrevs
+	    (append (cdr mode-abbrevs)
+		    (list (cons name funname))))
+    (assq-delete-all mode msf-abbrev-mode-abbrevs)
+    (add-to-list 'msf-abbrev-mode-abbrevs mode-abbrevs)))
+
+;;;_  > msf-abbrev-expand-abbrev (name &optional mode)
+(defun msf-abbrev-expand-abbrev (name &optional mode)
+  (or mode (setq mode major-mode))
+  (or (symbolp name) (setq name (intern name)))
+  (let ((mode-abbrevs (assq mode msf-abbrev-mode-abbrevs)))
+    (if mode-abbrevs
+	(let ((expand-function (assq name (cdr mode-abbrevs))))
+	  (if expand-function
+	      (apply (cdr expand-function) nil)
+	    (error "No such abbrev %s for %s" name mode)))
+      (error "No msf-abbrevs defined for %s" mode))))
+
+;;;_  > msf-abbrev-expand-file (file)
+(defun msf-abbrev-expand-file (file)
+  "Insert FILE contents as a form or eval it if the file name
+ends with .el"
+  (if (and (string-match "\\.el$" file)
+	   (file-exists-p file))
+      (msf-abbrev-eval file)
+    (msf-form-insert
+	     (with-temp-buffer 
+	       (insert-file-contents file)
+	       (buffer-substring-no-properties
+		(point-min) (point-max))))))
+
+;;;_  > msf-abbrev-just-expanded (function)
+(defun msf-abbrev-just-expanded (function)
+  "Notify that FUNCTION has just made an expansion.
+
+Run `msf-abbrev-after-expansion-hook'"
+  (run-hooks 'msf-abbrev-after-expansion-hook))
+
+;;;_ , Forms Methods
+
+;;;_  > msf-form-insert (string)
+(defun msf-form-insert (str)
+  "Insert STR and generate editable fields"
+  (let ((inhibit-modification-hooks t)
+	(case-fold-search t)
+	(form nil))
+    (goto-char
+     (save-excursion
+       (save-match-data
+	 (setq form
+	       (make-overlay (point)
+			     (save-excursion (insert str)
+					     (point))))
+	 (msf-form-put form 'priority 
+		       (incf msf-abbrev-form-priority))
+	 (msf-form-put form 'msf-form msf-abbrev-form-priority)
+	 (run-hook-with-args 'msf-form-insert-hook form)
+	 (msf-form-parse-comments form)
+	 (msf-form-parse-trims form)
+	 (msf-form-parse-elisp form)
+	 (msf-form-parse-vars  form)
+	 (msf-form-parse-choices form)
+	 (msf-form-parse-fields form)
+	 (msf-form-parse-links form)
+	 (msf-form-parse-queries form)
+	 (msf-form-parse-endpoint form))
+       (when msf-abbrev-indent-after-expansion
+         (indent-region (msf-form-start form)
+                        (msf-form-end form)))
+       (msf-form-put form 'modification-hooks
+		    (list 'msf-form-on-modification))
+       (msf-form-put form 'insert-in-front-hooks
+		    (list 'msf-form-on-modification))
+       (msf-form-put form 'insert-behind-hooks
+		    (list 'msf-form-on-modification))
+       (msf-form-put form 'evaporate t)       
+       (msf-form-start-point form)))
+    (unless (msf-form-first-fld form)
+      (msf-form-delete form))))
+
+;;;_  > msf-form-parse-endpoint (form)
+(defun msf-form-parse-endpoint (form)
   (save-excursion
-    (when (fld-after)
-      (fld-focus))
-    (get-text-property (point) 'fld-id)))
+    (goto-char (msf-form-start form))
+    (while (re-search-forward "<\\(cursor\\|start-?point\\)>"
+			      (msf-form-end form) t)
+      (replace-match "" nil t)
+      (msf-form-put form 'start-point (point-marker)))
+    (goto-char (msf-form-start form))
+    (while (re-search-forward "<end-?point>"
+			      (msf-form-end form) t)
+      (replace-match "" nil t)
+      (msf-form-put form 'end-point (point-marker)))))
 
-(defun fld-group-id ()
-  (interactive)
-  (assert (or (fld-in) (fld-after)))
+;;;_  > msf-form-parse-comments (form)
+(defun msf-form-parse-comments (form)
   (save-excursion
-    (when (fld-after)
-      (fld-focus))
-    (get-text-property (point) 'fld-group-id)))
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward "<comment +\".*?\">"
+				   (msf-form-end form) t))
+      (replace-match "<trim \"\n\">" nil t))))
 
-(defun fld-focus ()
-  (assert (or (fld-in) (fld-after)))
-  (when (fld-after)
-    (forward-char -1)))
+;;;_  > msf-form-parse-trims (form)
+(defun msf-form-parse-trims (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 (concat "[ \t\n\r\f]*<\\(trim\\)"
+			 "\\([ \t\n\r\f]+\"\\(.*?\\|"
+			 "[ \t\n\r\f]+\\)\"\\)?>"
+			 "[\t\n\r\f]*")
+		 (msf-form-end form) t))
+      (let* ((newsep (match-string 3))
+             (spaces (and newsep (string-to-int newsep))))
+        (replace-match "")
+        (cond ((> spaces 0)
+               (insert-char ?  spaces))
+              ((stringp newsep)
+               (insert newsep))
+              (t nil))))))
 
-(defun fld-beginning ()
-  (assert (or (fld-in) (fld-after)))
-  (let ((pt nil)
-	(thisid nil)
-	(done nil))
-    (save-excursion
-      (fld-focus)
-      (setq thisid (get-text-property (point) 'fld-id))
-      (if (bobp)
-	  (setq pt (point-min))
-	(while (not done)
-	  (if (eq thisid (get-text-property (point) 'fld-id))
-	      (progn
-		(forward-char -1)
-		(when (eq (point) (point-min))
-		  (setq pt (point-min))
-		  (setq done t)))
-	    (setq pt (1+ (point)))
-	    (setq done t)))))
-    pt))
+;;;_  > msf-form-parse-vars (form)
+(defun msf-form-parse-vars (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 "<\\(varlookup\\)[ \t]+\"\\(.*?\\)\">"
+		 (msf-form-end form) t))
+      (let ((v (match-string 2)))
+	(replace-match (format "%s" (eval (intern v)) 
+                               nil t))))))
 
+;;;_  > msf-form-parse-elisp (form)
+(defun msf-form-parse-elisp (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 "<\\(elisp\\|eval\\)[ \t]+\"\\(.*?\\)\">"
+		 (msf-form-end form) t))
+      (let ((v (match-string 2)))
+	(replace-match "")
+	(eval (read v))))))
 
-(defun fld-end ()
-  (assert (or (fld-in) (fld-after)))
-  (if (fld-after)
-      (point)
-    (let ((pt nil))
+;;;_  > msf-form-parse-queries (form)
+(defun msf-form-parse-queries (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (let ((query-alist nil))
+      (while (and (< (point) (msf-form-end form))
+		  (re-search-forward 
+		   "\\(<\\(query\\) \"\\(.*?\\)\">\\)"
+		   (msf-form-end form) t))
+	(let ((key (match-string 3)))
+	  (when (not (assoc key query-alist))
+	    (setq query-alist
+		  (cons (list key (read-from-minibuffer key))
+			query-alist)))
+	  (replace-match (cadr (assoc key query-alist))))))))
+
+;;;_  > msf-form-parse-fields (form)
+(defun msf-form-parse-fields (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 (concat "<\\(formjump\\|field\\)"
+			 "\\([ \t\n\r\f]+link=\"\\(..*?\\)\"\\)?"
+			 "[ \t\n\r\f]+\"\\(..*?\\)\">")
+		 (msf-form-end form) t))
+      (let ((link (match-string 3))
+	    (txt (match-string 4))
+	    (properties '(category msf-fld-field-category)))
+	(replace-match "" nil t)
+	(when link
+	  (setq properties
+		(append (list 'fld-link link
+			      'fld-modification-hooks
+			      'msf-fld-linked-modification-hooks)
+			properties)))
+	(msf-fld-insert txt form properties)))))
+
+;;;_  > msf-form-parse-links (form)
+(defun msf-form-parse-links (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 "<link\\(ed\\)?[ \t]+\"\\(..*?\\)\">"
+		 (msf-form-end form) t))
+      (let (name source)
+	(setq name (match-string 2))
+	(replace-match "" nil t)
+	(setq source (msf-form-first-fld 
+		      form nil nil
+		      (list 'fld-link name)))
+	(if source
+	    (msf-fld-insert 
+	     (buffer-substring-no-properties(msf-fld-start source)
+					    (msf-fld-end source))
+	     form
+	     (list 'category 'msf-fld-linked-category
+		   'fld-link  name))
+	  ;; no link source exists, create a normal field
+	  (msf-fld-insert 
+	   name form 
+	   (list 'category 'msf-fld-field-category
+		 'fld-link name
+		 'fld-modification-hooks
+		 'msf-fld-linked-modification-hooks)))))))
+
+;;;_  > msf-form-parse-choices (form)
+(defun msf-form-parse-choices (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (let ((choice-start nil)
+	  (choice-end   nil)
+	  (choices nil)
+	  (link nil)
+	  (properties '(category msf-fld-choice-category)))
+      (while (and (< (point) (msf-form-end form))
+		  (re-search-forward 
+		   (concat "<choose"
+			   "\\([ \t]+link=\"\\(..*?\\)\"[ \t]*\\)?>"
+			   "[ \t\n\r\f]*")
+		   (msf-form-end form) t))
+	(setq link (match-string 2))
+	(and link 
+	     (setq properties
+		   (append (list 'fld-link link
+				 'fld-modification-hooks
+				 'msf-fld-linked-modification-hooks)
+			   properties)))
+	(replace-match "" nil t)
+	(setq choice-start (point-marker))
+	(assert (re-search-forward 
+		 "[ \t\n\r\f]*</choose>"
+		 (msf-form-end form) t))
+	(replace-match "" nil t)
+	(setq choice-end (point-marker))
+	(goto-char choice-start)
+	(setq choices nil)
+	(while (and (< (point) (msf-form-end form))
+		    (re-search-forward
+		     (concat "[ \t\n\r\f]*<choice +"
+			     "\"\\(..*?\\)\">[ \t\n\r\f]*")
+		     choice-end t))
+	  (setq choices (cons (match-string 1) choices))
+	  (replace-match "" nil t))
+	(setq choices (reverse choices))
+	(setq properties (append (list 'fld-choices choices)
+				 properties))
+	(msf-fld-insert (car choices) form properties)))))
+
+;;;_  > msf-form-start-point (form)
+(defun msf-form-start-point (form)
+  "Return the starting point for the user in this FORM.
+
+If a point was defined with <start-point> then it is returned,
+otherwise the first real (not linked) field position. If no
+fields are present in the FORM return `msf-form-end-point'"
+  (or (msf-form-get form 'start-point)
+      (msf-form-first-real form)
+      (msf-form-end-point form)))
+
+;;;_  > msf-form-end-point (form)
+(defun msf-form-end-point (form)
+  "Return the end point of FORM"
+  (or (msf-form-get form 'end-point)
+      (msf-form-end form)))
+
+;;;_  > msf-form-first-fld (form &optional start end properties category)
+(defun msf-form-first-fld (form &optional start end properties category)
+  "Find the first field position in FORM, if not found return nil.
+
+Search is restricted to FORM boundaries or START and END if they
+are given.
+If PROPERTIES is given, it must be a list used to restrict search
+to those fields wich text-properties has PROPERTIES as a subset.
+If CATEGORY is given it must match the field's 'category property"
+  (catch :field
+    (let (field)
+      (or start (setq start (msf-form-start form)))
+      (or end (setq end (msf-form-end form)))
+      (while (setq field
+		   (text-property-any start end 'fld-form form))
+	(cond ((and (subsetp properties (msf-fld-properties field)
+                             :test 'equal)
+                    (cond ((functionp category)
+                           (apply category
+                                  (msf-fld-get 'category field)
+                                  nil))
+                          (category
+                           (member (msf-fld-get 'category field)
+                                   (if (listp category) category
+                                     (list category))))
+                          (t t)))
+	       (throw :field (msf-fld-start field)))
+	      ((> end (msf-fld-end field)) ;; can search again
+	       (setq start (msf-fld-end field)))
+	      (t ;; not found in boundary
+	       (throw :field nil)))))))
+
+;;;_  > msf-form-last-fld (form &optional start end properties category)
+(defun msf-form-last-fld (form &optional start end properties category)
+  "Like `msf-form-first-fld' but search is made backwards."
+  (save-excursion
+    (catch :field
+      (or start (setq start (msf-form-start form)))
+      (or end (setq end (msf-form-end form)))
+      (goto-char end)
+      (while (and (setq field
+			(previous-single-property-change
+			 (point) 'fld-form nil start)))
+	(cond ((and (eq (msf-fld-form field) form)
+		    (subsetp properties 
+			     (msf-fld-properties field)
+			     :test 'equal)
+                    (cond ((functionp category)
+                           (apply category 
+                                  (msf-fld-get 'category field)
+                                  nil))
+                          (category
+                           (member (msf-fld-get 'category field)
+                                   (if (listp category) category
+                                     (list category))))
+                          (t t)))
+	       (throw :field (msf-fld-start field)))
+	      ((> field start)
+	       (goto-char field))
+	      (t (throw :field nil)))))))
+
+;;;_  > msf-form-first-link
+(defsubst msf-form-first-link (form &optional start end properties)
+  "Return the first link in FORM"
+  (msf-form-first-fld form start end properties 
+                      'msf-fld-linked-category))
+
+;;;_  > msf-form-last-link
+(defsubst msf-form-last-link (form &optional start end properties)
+  "Return the last link in FORM"
+  (msf-form-last-fld form start end properties
+                     'msf-fld-linked-category))
+
+;;;_  > msf-form-first-real
+(defsubst msf-form-first-real (form &optional start end properties)
+  "Return the first REAL field (not a link) in FORM."
+  (msf-form-first-fld 
+   form start end properties
+   (lambda (c) (not (eq c 'msf-fld-linked-category)))))
+
+;;;_  > msf-form-last-real
+(defsubst msf-form-last-real (form &optional start end properties)
+  "Return the last REAL field (not a link) in FORM"
+  (msf-form-last-fld
+   form start end properties
+   (lambda (c) (not (eq c 'msf-fld-linked-category)))))
+
+;;;_  > msf-form-delete (form)
+(defun msf-form-delete (form)
+  "Destroy FORM and make all fields on it simple text"
+  (let ((inhibit-modification-hooks t)
+	(field nil)
+	(properties nil))
+    (while (setq field (msf-form-first-fld form field))
+      (msf-fld-set default-text-properties field))
+    (delete-overlay form)))
+
+;;;_  > msf-form-start (form)
+(defsubst msf-form-start (form)
+  (overlay-start form))
+
+;;;_  > msf-form-end (form)
+(defsubst msf-form-end (form)
+  (overlay-end form))
+
+;;;_  > msf-form-get (form prop)
+(defsubst msf-form-get (form prop)
+  (overlay-get form prop))
+
+;;;_  > msf-form-put (form prop value)
+(defsubst msf-form-put (form prop value)
+  (overlay-put form prop value))
+
+(defsubst msf-form-at (point)
+  "Return the form at POINT.
+
+If a field is located at POINT return it's form, otherwise returnp
+the form with highest priority if any."
+  (or (msf-fld-form point)
+      (let (form (priority -1))
+	(mapc (lambda (overlay)
+		(when (and (msf-form-get overlay 'msf-form)
+			   (< priority
+			      (msf-form-get overlay 'priority)))
+		  (setq form overlay)))
+	      (overlays-at point))
+	form)))
+
+;;;_   , Modification hooks
+
+;;;_    > msf-form-on-modification
+(defun msf-form-on-modification (form after begin end &optional count)
+  "Run when a modification is made to FORM"
+  (let ((fld-pos (cond ((eq (msf-fld-form begin) form) 
+			(set-marker (make-marker) begin))
+		       ((eq (msf-fld-form end) form) 
+			(set-marker (make-marker) end))
+		       ((eq (msf-fld-form (1- end)) form)
+			(set-marker (make-marker) (1- end)))))
+	(inhibit-modification-hooks t)
+	(begin (set-marker (make-marker) begin))
+	(end (set-marker (make-marker) end))
+	(hook-name nil)
+	(fld-hook nil)
+	(args nil))
+
+    (setq args
+	  (cond ((and fld-pos after (= begin end)) ;;after deletion
+		 (setq hook-name 'fld-after-deletion-hook)
+		 (list form fld-pos begin count))
+		((and fld-pos after) ;; after insertion
+		 (setq hook-name 'fld-after-insertion-hook)
+		 (list form fld-pos begin end))
+		((and fld-pos (= begin end)) ;; before insertion
+		 (setq hook-name 'fld-before-insertion-hook)
+		 (list form fld-pos begin))
+		((and fld-pos  ;; before resurrection
+		      (= (msf-fld-start fld-pos) begin)
+		      (= (msf-fld-end fld-pos) end))
+		 (setq hook-name 'fld-before-resurrection-hook)
+		 (list form begin end))
+		(fld-pos  ;; before deletion
+		 (setq hook-name 'fld-before-deletion-hook)
+		 (list form fld-pos begin end))
+		((and after (/= begin end)  ;; after resurrection
+		      (let ((res (msf-form-get 
+				  form 
+				  'fld-resurrection)))
+			(and res (assoc begin res))))
+		 (setq hook-name 'fld-after-resurrection-hook)
+		 (list form begin end))))
+    
+    ;; for debugging
+    ;; (require 'warnings)
+    ;; (setq warning-minimum-log-level :debug)
+    (and (boundp 'warning-minimum-log-level)
+         (lwarn 'msf-abbrev :debug  "msf-form-on-modification %s"
+                (list form after begin end count)))
+    
+    (when (and hook-name args (not undo-in-progress))
+      
+      (and (boundp 'warning-minimum-log-level)
+           (lwarn 'msf-abbrev :debug "%s %s" hook-name args))
+
+      (catch :fld-end-modification
+        (setq fld-hook ;; get the field specific hook alist
+              (or (and fld-pos
+                       (msf-fld-get 'fld-modification-hooks fld-pos))
+                  (msf-fld-get 'fld-modification-hooks begin)
+                  (msf-fld-get 'fld-modification-hooks end)))
+        
+        (eval `(run-hook-with-args
+                ',(intern (format "msf-%s" hook-name)) ,@args))
+        
+        (unless fld-hook ;; for ressurection the hook did not
+          (setq fld-hook ;; exist before adding the properties
+                (or (and fld-pos
+                         (msf-fld-get 'fld-modification-hooks 
+                                      fld-pos))
+                    (msf-fld-get 'fld-modification-hooks begin)
+                    (msf-fld-get 'fld-modification-hooks end))))
+        
+        (when (and (symbolp fld-hook) (boundp fld-hook))
+          (setq fld-hook (symbol-value fld-hook)))
+        
+        (mapc (lambda (hook) (apply hook args))
+              (cdr (assoc hook-name fld-hook)))
+        
+        ))))
+
+;;;_    % yank advice
+(defadvice yank (around msf-fld-around-yank activate)
+  (let ((form (msf-fld-form)))
+    (if (or form
+	    (some (lambda (overlay)
+		    (and (setq form
+			       (msf-form-get 
+				overlay 'fld-resurrection))
+			 (assoc (point-marker) form)
+			 (setq form overlay)))
+		  (overlays-at (point))))
+	(let ((inhibit-modification-hooks t)
+	      (yank-excluded-properties t)
+	      (begin (point)))
+	  (msf-form-on-modification form nil begin begin)
+	  ad-do-it
+	  (msf-form-on-modification form 'after begin (point)))
+      ad-do-it)))
+
+;;;_   , Field modification hooks
+
+;;;_    > msf-fld-before-insertion
+;;;_    > msf-fld-after-insertion
+(defun msf-fld-after-insertion (form fld-pos begin end)
+  (set-text-properties begin end 
+		       (msf-fld-properties fld-pos))
+  (unless (msf-fld-get 'fld-state fld-pos)
+    (msf-fld-add '(fld-state typed) fld-pos)
+    (when msf-abbrev-first-insertion-replaces
       (save-excursion
-	(setq pt (or (next-single-property-change (point) 'fld-id)
-		     (point-max))))
-      pt)))
+        (and (> begin (msf-fld-start fld-pos))
+             (delete-region (msf-fld-start fld-pos) begin))
+        (and (> (msf-fld-end fld-pos) end)
+             (delete-region end (msf-fld-end fld-pos)))))
+    (move-marker fld-pos begin)))
 
-(defun fld-cleanup-form-at-point ( )
-  (interactive)
-  (when (or (fld-in) (fld-after))
-    (fld-cleanup (fld-group-id))))
+;;;_    > msf-fld-before-deletion
 
-(defun fld-cleanup (gid)
-  (interactive)
-  (fld-disable-monitoring)
-  (setq fld-ressurection-id nil
-	fld-ressurection-now nil
-	fld-ressurection-pos nil
-	fld-transition-to-typed-id nil
-	fld-transition-to-typed-now nil)
-  (let ((ids
-	 (delq nil
-	       (mapcar
-		(lambda (ls)
-		  (if (eq gid (caddr ls))
-		      (car ls)
-		    nil))
-		(fld-list-in-buffer)))))
-    (mapc
-     (lambda (id)
-       (remhash id fld-id-to-group-id))
-     ids)
-    (remhash gid fld-group-id-to-exit-point)
+;;;_    > msf-fld-after-deletion
+(defun msf-fld-after-deletion (form fld-pos begin count)
+  (when (and (not (msf-fld-get 'fld-state))
+             msf-abbrev-first-deletion-removes)
+    (let ((inhibit-modification-hooks nil))
+      (throw :fld-end-modification
+             (delete-region (msf-fld-start fld-pos)
+                            (msf-fld-end fld-pos)))))
+  (msf-fld-add '(fld-state untyped) fld-pos))
+
+;;;_    > msf-fld-before-resurrection
+(defun msf-fld-before-resurrection (form begin end)
+  ;; save resurrection point and properties on the form
+  (msf-form-put form 'fld-resurrection 
+	       (cons (cons begin 
+			   (msf-fld-properties begin))
+		     (msf-form-get form 'fld-resurrection))))
+
+;;;_    > msf-fld-after-resurrection
+(defun msf-fld-after-resurrection (form begin end)
+  (let* ((res-info (msf-form-get form 'fld-resurrection))
+	 (old-properties (assoc begin res-info)))
+    (set-text-properties begin end (cdr old-properties))
+    (add-text-properties begin end '(fld-state resurrected))
+    ;; delete old-properties from the form's resurrection info 
+    (msf-form-put form 'fld-resurrection 
+		 (delq old-properties res-info))))
+
+;;;_ , Functions
+
+;;;_  > msf-fld-insert (text form &optional properties)
+(defun msf-fld-insert (text form &optional properties)
+  (let ((begin (point-marker)))
+    (insert text)
+    (and properties
+	 (add-text-properties begin (point) properties))
+    (add-text-properties begin (point)
+			 `(fld-form ,form))
+    (when (> (point) (msf-form-end form))
+      (move-overlay form (msf-form-start form) (point)))))
+
+;;;_  > msf-fld-form (&optional pos)
+(defun msf-fld-form (&optional pos)
+  (msf-fld-get 'fld-form (or pos (point))))
+
+;;;_  > msf-fld-start (&optional pos)
+(defun msf-fld-start (&optional pos)
+  (or pos (setq pos (point)))
+  (let ((form (msf-fld-form pos)))
+    (assert form)
+    (if (eq (msf-fld-form (1- pos)) form)
+	(previous-single-property-change 
+	 pos 'fld-form nil (msf-form-start form))
+      pos)))
+
+;;;_  > msf-fld-end (&optional pos)
+(defun msf-fld-end (&optional pos)
+  (or pos (setq pos (point)))
+  (let ((form (msf-fld-form pos)))
+    (assert form)
+    (next-single-property-change
+     pos 'fld-form nil (msf-form-end form))))
+
+;;;_  > msf-fld-set-text (text &optional pos)
+(defun msf-fld-set-text (text &optional pos)
+  (save-excursion
+    (let ((form (msf-fld-form pos))
+	  (old-properties (msf-fld-properties pos))
+          (text (with-temp-buffer
+                  (goto-char (point-min)) (insert text)
+                  (buffer-substring-no-properties (point-min)
+                                                  (point-max))))
+	  (inhibit-modification-hooks t))
+      (goto-char (msf-fld-start pos))
+      (delete-region (msf-fld-start pos) (msf-fld-end pos))
+      (msf-fld-insert text form old-properties))))
+  
+;;;_  > msf-fld-text (&optional pos)
+(defsubst msf-fld-text (&optional pos)
+  (buffer-substring (msf-fld-start pos) (msf-fld-end pos)))
+
+;;;_  > msf-fld-text-no-properties (&optional pos)
+(defsubst msf-fld-text-no-properties (&optional pos)
+  (buffer-substring-no-properties (msf-fld-start pos)
+				  (msf-fld-end pos)))
+
+;;;_  > msf-fld-put (property value &optional pos)
+(defsubst msf-fld-put (property value &optional pos)
+  (put-text-property (msf-fld-start pos)
+                     (msf-fld-end pos)
+                     property value))
+
+;;;_  > msf-fld-get (property &optional pos)
+(defsubst msf-fld-get (property &optional pos)
+  (get-text-property (or pos (point)) property))
+
+;;;_  > msf-fld-set (properties &optional pos)
+(defsubst msf-fld-set (properties &optional pos)
+  (set-text-properties (msf-fld-start pos)
+		       (msf-fld-end pos)
+		       properties))
+
+;;;_  > msf-fld-add (properties &optional pos)
+(defsubst msf-fld-add (properties &optional pos)
+  (add-text-properties (msf-fld-start pos)
+		       (msf-fld-end pos)
+		       properties))
+
+;;;_  > msf-fld-remove (properties &optional pos)
+(defsubst msf-fld-remove (properties &optional pos)
+  (remove-text-properties (msf-fld-start pos)
+                          (msf-fld-end pos)
+                          properties))
+
+;;;_  > msf-fld-properties (&optional pos)
+(defsubst msf-fld-properties (&optional pos)
+  (text-properties-at (or pos (point))))
+
+;;;_  > msf-fld-forget (field)
+(defun msf-fld-forget (field)
+  (let ((form (msf-fld-form field))
+        (link (msf-fld-get 'fld-link field))
+        (category (msf-fld-get 'category field))
+        (inhibit-modification-hooks t))
+    (assert (and form link))
+    (when (and link (not (eq category 'msf-fld-linked-category)))
+      (msf-fld-make-real (msf-form-first-link 
+                          form nil nil
+                          (list 'fld-link link))))
+    (msf-fld-set default-text-properties field)
+    (unless (msf-form-first-fld form)
+      (msf-form-delete form))))
+  
+;;;_  > msf-fld-make-real (field)
+(defun msf-fld-make-real (field)
+  (let ((form (msf-fld-form field))
+        (link (msf-fld-get 'fld-link field))
+        (inhibit-modification-hooks t)
+        (real nil))
+    (assert (and form link))
+    (setq real (msf-form-first-real 
+                form nil nil (list 'fld-link link)))
+    (assert real)
+    (msf-fld-set-text (msf-fld-text-no-properties real) field)
+    (msf-fld-set (msf-fld-properties real) field)))
+
+;;;_  > msf-fld-unlink (field)
+(defun msf-fld-unlink (field)
+  (let ((inhibit-modification-hooks t))
+    (msf-fld-make-real field)
+    (msf-fld-remove '(fld-link t fld-modification-hooks t) field)))
+
+;;;_  > msf-fld-linked-replicate (form fld-pos &rest ignored)
+(defun msf-fld-linked-replicate (form fld-pos &rest ignored)
+  "Update the text for other linked fields with the same link name.
+
+Called after text insertion/deletion on a linked field"
+  (let ((new-txt (buffer-substring-no-properties
+		  (msf-fld-start fld-pos)
+		  (msf-fld-end fld-pos)))
+	(link (msf-fld-get 'fld-link fld-pos))
+	(field (msf-form-start form))
+	(properties nil))
     (save-excursion
-      (mapcar
-       (lambda (id_point_groupid)
-	 (when (member (car id_point_groupid) ids)
-	   (goto-char (cadr id_point_groupid))
-	   (when (get-text-property (point) 'fld-choices)
-	     (remove-text-properties
-	      (point) (fld-end)
-	      '(keymap nil fld-choices nil)))
-	   (remove-text-properties
-	    (point) (fld-end)
-	    '(category nil fld-id nil fld-group-id nil fld-state nil))))
-       (fld-list-in-buffer))))
-  (fld-enable-monitoring))
+      (while (setq field (msf-form-first-fld
+			   form field nil (list 'fld-link link)))
+	(goto-char (setq field (msf-fld-start field)))
+	(if (= (msf-fld-start fld-pos) field)
+	    (setq field (msf-fld-end fld-pos)) ;; skip my self
+	  (setq properties (msf-fld-properties field))
+	  (delete-region (msf-fld-start field)
+			 (msf-fld-end field))
+	  (msf-fld-insert new-txt form
+			  (append properties
+				  '(fld-state replicated)))
+	  (setq field (point)))))))
 
-(defun fld-find-next-startpos-same-group ()
-  (assert (or (fld-in) (fld-after)))
-  (let ((done nil)
-	(tmp nil)
-	(result nil)
-	(gid (fld-group-id)))
+;;;_  > msf-fld-linked-before-resurrection
+(defun msf-fld-linked-before-resurrection (form begin end)
+  "Save information for other linked fields and delete them.
+
+This must be called AFTER a linked field has been fully deleted"
+  (let ((res-info (msf-form-get form 'fld-resurrection))
+	(link (msf-fld-get 'fld-link begin))
+	(field (msf-form-start form))
+	(properties nil))
     (save-excursion
-      (while (not done)
-	(setq tmp (next-single-property-change (fld-end) 'fld-id))
-	(if (not tmp)
-	    (setq done t)
-	  (if (eq gid (get-text-property tmp 'fld-group-id))
-	      (setq done t
-		    result tmp)
-	    (goto-char tmp)))))
-    result))
+      (while (setq field (msf-form-first-fld
+			  form field nil (list 'fld-link link)))
+	(goto-char (setq field (msf-fld-start field)))
+	(setq properties (msf-fld-properties field))
+	(delete-region (msf-fld-start field)
+		       (msf-fld-end field))
+	(add-to-list 'res-info (cons (point-marker) properties))
+	(setq field (point))))
+    (msf-form-put form 'fld-resurrection res-info)))
 
-(defun fld-find-prev-startpos-same-group ()
-  (assert (or (fld-in) (fld-after)))
-  (let ((done nil)
-	(tmp nil)
-	(result nil)
-	(gid (fld-group-id)))
-    (save-excursion
-      (while (not done)
-	(setq tmp (previous-single-property-change (fld-beginning) 'fld-id))
-	(if (not tmp)
-	    (setq done t)
-	  (goto-char tmp)
-	  (fld-focus)
-	  (if (eq gid (get-text-property (point) 'fld-group-id))
-	      (setq done t
-		    result (fld-beginning))))))
-    result))
+;;;_  > msf-fld-linked-after-resurrection
+(defun msf-fld-linked-after-resurrection (form begin end)
+  "Resurrect other linked fields on a linked field resurrection"
+  (let ((new-txt (buffer-substring-no-properties begin end))
+	(res-info (msf-form-get form 'fld-resurrection))
+	(link (msf-fld-get 'fld-link begin))
+	(predicate nil))    
+    (setq predicate 
+	  (lambda (field)
+	    (when (equal link (cadr (member 'fld-link 
+					    (cdr field))))
+	      (unless (= begin (car field))
+		(save-excursion
+		  (goto-char (car field))
+		  (msf-fld-insert 
+		   new-txt form 
+		   (append (cdr field)
+			   '(fld-state resurrected)))))
+	      t)))    
+    (msf-form-put form 'fld-resurrection
+		 (delete-if predicate res-info))))
 
-(defun fld-next ()
-  (interactive)
-  (assert (or (fld-in) (fld-after)))
-  (let ((next (fld-find-next-startpos-same-group))
-	(loc nil)
-	(id nil)
-	(gid nil))
-    (if next
-	(goto-char next)
-      (save-excursion
-	(fld-focus)
-	(setq gid (get-text-property (point) 'fld-group-id))
-	(setq loc (gethash gid fld-group-id-to-exit-point)))
-      (when loc
-	;; cleanup form, and go to departure location
-	(fld-cleanup gid)
-	(goto-char loc)))))
+;;;_  > msf-choose-completing
+(defun msf-choose-completing (prompt table &optional 
+					  predicate require-match
+                                          initial-input hist def 
+                                          inherit-input-method)
+  "Use a `completing-read' like function to make a selection"
+  (let ((fun (cond 
+              ((featurep 'ido) 'ido-completing-read)
+              (t 'completing-read))))
+    (apply fun prompt table predicate require-match 
+           initial-input hist def inherit-input-method)))
 
-(defun fld-prev ()
-  (interactive)
-  (assert (or (fld-in) (fld-after)))
-  (let ((prev (fld-find-prev-startpos-same-group)))
-    (when prev
-      (goto-char prev))))
+;;;_  > msf-choose-selecting
+(defun msf-choose-selecting (prompt choices-list &optional 
+				    predicate initial-input 
+				    hist existing-choice 
+				    inherit-im)
+  "Choose an item from a list using a simple selection buffer.
 
-(defun fld-make (text group-id)
-  (let* ((id (fld-nextid)))
-    (puthash id group-id fld-id-to-group-id)
-    (add-text-properties 0 (length text)
-			 `(category fld-category
-				    fld-id ,id
-				    fld-group-id ,group-id
-				    fld-state untyped)
-			 text)
-    text))
+  This creates a new selection buffer with very limited 
+  key-bindings:
 
-(defun fld-choose-1 (prompt choices-list existing-choice)
-  "Choose an item from a list."
+  C-n     : Next option
+  <down>  : Next option
+
+  C-p     : Previous option
+  <up>    : Previous option
+
+  RET     : Select current option
+  TAB     : Select current option
+  "
   (let* (i map done o choice-index choice-info out)
     (setq map (make-sparse-keymap))
     (setq i 0)
@@ -313,7 +1382,8 @@ used (see `msf-abbrev-expand-function')."
 	    (setq keys (read-key-sequence-vector prompt))
 ;; 	    (message "keys are %s" keys)
 	    (cond
-	     ((equal keys [up])
+	     ((or (equal keys [16]) ;; C-p
+                  (equal keys [up]))
 	      (when (> choice-index 0)
 		(set-buffer buf)
 		(setq choice-index (1- choice-index))
@@ -323,7 +1393,8 @@ used (see `msf-abbrev-expand-function')."
 			      (+ (line-beginning-position)
 				 (cadr (cdr (assoc choice-index
 						  choice-info)))))))
-	     ((equal keys [down])
+	     ((or (equal keys [14]) ;; C-n
+                  (equal keys [down]))
 	      (when (< choice-index (1- i))
 		(set-buffer buf)
 		(setq choice-index (1+ choice-index))
@@ -333,7 +1404,8 @@ used (see `msf-abbrev-expand-function')."
 			      (+ (line-beginning-position)
 				 (cadr (cdr (assoc choice-index
 						  choice-info)))))))
-	     ((equal keys [13])
+	     ((or (equal keys [9])   ;; tab
+                  (equal keys [13])) ;; ret
 	      (setq out (nth choice-index choices-list)
 		    done t))
 	     ((equal keys [7])
@@ -342,614 +1414,19 @@ used (see `msf-abbrev-expand-function')."
     (message "")
     out))
 
-;; (fld-choose-1 "Pick a letter" '("a" "b" "cabbie") "b")
+;;;_ * Commands
 
-(defun fld-choose ()
-  (interactive)
-  (assert (or (fld-in) (fld-after)))
-  (let ((choices nil)
-	(existing-choice nil))
-    (save-excursion
-      (fld-focus)
-      (setq choices (get-text-property (point) 'fld-choices))
-      (setq existing-choice (buffer-substring-no-properties (fld-beginning)
-							    (fld-end))))
-    (setq choice (fld-choose-1 "choose one" choices existing-choice))
-    (when (member choice choices)
-;;       (message "replacing with %s" choice)
-      (save-excursion
-	(let ((props nil)
-	      (oldpt nil)
-	      (inhibit-modification-hooks t))
-	(fld-focus)
-	(goto-char (fld-beginning))
-	(setq props (text-properties-at (point)))
-	(delete-region (fld-beginning) (fld-end))
-	(setq oldpt (point))
-	(insert choice)
-	(add-text-properties oldpt (point) props))))))
-
-(defun fld-insert-choice (default choices group-id)
-  (interactive)
-  (let ((old-pt (point)))
-    (fld-insert default group-id)
-    (add-text-properties old-pt (point)
-			 `(fld-choices
-			   ,(mapcar
-			     (lambda (x)
-			       (set-text-properties 0 (length x) nil x)
-			       x) choices)))
-    (put-text-property old-pt (point) 'keymap fld-choose-keymap)))
-
-(defun fld-list-in-buffer ()
-  ;; return list of 3-tuples:  (id starting-position group-id)
-  (let ((out nil)
-	(pt nil)
-	(flds (make-hash-table)))
-    (save-excursion
-      (goto-char (point-min))
-      (when (fld-in)
-	(puthash (fld-id) (list (point) (fld-group-id)) flds)
-	(goto-char (fld-end)))
-      (while (not (eobp))
-	(setq pt (next-single-property-change (point) 'fld-id))
-	(if (not pt)
-	    (goto-char (point-max))
-	  (goto-char pt)
-	  (puthash (fld-id) (list (point) (fld-group-id)) flds)
-	  (goto-char (fld-end)))))
-    (maphash
-     (lambda (k v)
-       (setq out (cons (cons k v) out)))
-     flds)
-    (reverse out)))
-
-(defun fld-kill-replaced-regions ()
-  (let ((inhibit-modification-hooks t))
-    (save-excursion
-      (goto-char (point-min))
-      (while (not (eobp))
-	(if (get-text-property (point) 'fld-about-to-be-replaced)
-	    (delete-region (point) (1+ (point))) 
-	  (forward-char 1))))))
-
-(defvar fld-detect-before nil)
-(defvar fld-ressurection-pos nil)
-(defvar fld-ressurection-id nil)
-(defvar fld-ressurection-now nil)
-(defvar fld-transition-to-typed-now nil)
-(defvar fld-transition-to-typed-id nil)
-(defvar fld-transition-to-typed-gid nil)
-(defvar fld-during-save nil)
-(defun fld-detect-pre (beg end)
-  (if undo-in-progress
-      nil
-    (if (eq beg end) ;; insertion
-	(progn
-	  (cond
-	   ((or (fld-in) (fld-after))
-	    (save-excursion
-	      (fld-focus)
-	      (when (and (eq (get-text-property (point) 'fld-state) 'untyped)
-			 (not fld-during-save))	;; avoid
-		;; require-final-newline
-		;; corner case
-		(setq fld-transition-to-typed-id
-		      (get-text-property (point) 'fld-id)
-		      fld-transition-to-typed-gid
-		      (get-text-property (point) 'fld-group-id)
-		      fld-transition-to-typed-now t)
-		(add-text-properties
-		 (fld-beginning) (fld-end)
-		 '(fld-about-to-be-replaced t)))))
-	   ((eq (point) fld-ressurection-pos)
-	    (setq fld-ressurection-now t))
-	   (t nil)))
-      ;; deletion
-      (setq fld-detect-before (fld-list-in-buffer)))))
-(defun fld-detect-post (beg end len)
-;;   (if
-;;       nil
-;;       ;; (> beg end)
-;;       (message "fld-detect-post: beg < end ?  %s < %s" beg end)
-  (if undo-in-progress
-      nil
-    (if (eq beg end)
-	(progn
-	  ;; deletion
-	  (let ((flds-now (fld-list-in-buffer)))
-	    (when (< (length flds-now) (length fld-detect-before))
-;; 	      (message "yo, we lost fields: %s"
-;; 		       (set-difference (mapcar 'car fld-detect-before)
-;; 				       (mapcar 'car flds-now)))
-	      (let ((ls (copy-sequence fld-detect-before))
-		    (done nil)
-		    (id nil))
-		(while (and (not done) ls)
-		  (if (eq (point) (cadr (car ls)))
-		      (progn
-			(setq done t)
-			(setq id (car (car ls))))
-		    (setq ls (cdr ls))))
-		(if (not id)
-		    (setq fld-ressurection-pos nil)
-;; 		  (message "could ressurect id %s" id)
-		  (setq fld-ressurection-pos (point))
-		  (setq fld-ressurection-id id))))))
-      ;; insertion
-      (cond
-       ((eq fld-transition-to-typed-now t)
-	(setq fld-transition-to-typed-now nil)
-	(add-text-properties
-	 beg end
-	 `(category fld-category
-		    fld-id ,fld-transition-to-typed-id
-		    fld-group-id ,fld-transition-to-typed-gid
-		    fld-state typed))
-	(remove-text-properties beg end
-				'(fld-about-to-be-replaced nil))
-	(fld-kill-replaced-regions))
-       ((eq fld-ressurection-now t)
-	(setq fld-ressurection-now nil)
-	(let ((inhibit-modification-hooks t))
-	  (add-text-properties
-	   beg end
-	   `(category fld-category
-		      fld-id ,fld-ressurection-id
-		      fld-group-id ,(gethash fld-ressurection-id
-					     fld-id-to-group-id)
-		      fld-state typed))))
-       (nil t)))))
-
-(defun fld-before-save ()
-  (setq fld-during-save t))
-(defun fld-after-save ()
-  (setq fld-during-save nil))
-
-(defadvice yank (around fld-handle-yank activate)
-  (let ((after nil)
-;; 	(debug-on-error t)
-	)
-    (if (or (fld-in) (fld-after))
-	(progn
-	  (when (fld-after)
-	    (setq after t))
-	  (let ((inhibit-modification-hooks t)
-		(yank-excluded-properties t)
-		(old-point (point))
-		(old-id (save-excursion (fld-focus) (fld-id))))
-	    (when (eq (get-text-property (point) 'fld-state) 'untyped)
-	      (add-text-properties
-	       (fld-beginning) (fld-end)
-	       '(fld-about-to-be-replaced t)))
-	    ad-do-it
-	    (add-text-properties
-	     old-point (point)
-	     `(category fld-category
-			fld-id ,old-id
-			fld-group-id ,(gethash old-id fld-id-to-group-id)
-			fld-state typed))
-	    (fld-kill-replaced-regions)))
-      ad-do-it)))
-
-(defadvice yank (after fld-handle-yank-after activate)
-  (let ((yanked (copy-sequence (car kill-ring)))
-	(s nil)
-;; 	(debug-on-error t)
-	(preserve-fld-props nil))
-    (while (> (length yanked) 0)
-      (setq s (substring yanked 0 1))
-      (if (get-text-property 0 'fld-id s)
-	  (progn
-	    (setq preserve-fld-props t)
-	    (setq yanked ""))
-	(setq yanked (substring yanked 1))))
-    (if preserve-fld-props
-	(let ((pos (mark))
-	      (end (point)))
-	  (while (< pos end)
-	    (when (get-text-property pos 'fld-id)
-	      (add-text-properties pos (1+ pos)
-				   '(category fld-category)))
-	    (setq pos (1+ pos)))))))
-
-(defadvice expand-abbrev (around fld-handle-expand-abbrev activate)
-  (let* ((from-fld (or (fld-in) (fld-after)))
-	 (from-fld-id (and from-fld (fld-id)))
-	 (from-fld-start (and from-fld (fld-beginning)))
-	 (fields-before msf-abbrev-fields-created))
-    ad-do-it
-    (when from-fld
-      (let ((inhibit-modification-hooks t))
-	(if (eq msf-abbrev-fields-created fields-before) ;; didn't
-							 ;; make new
-							 ;; form
-	    (add-text-properties
-	     from-fld-start (point)
-	     `(category fld-category
-			fld-id ,from-fld-id
-			fld-group-id ,(gethash from-fld-id fld-id-to-group-id)
-			fld-state typed))
-	  ;; made new form, assimilate into our group
-	  (save-excursion
-	    (let ((flds (fld-list-in-buffer)))
-	      (mapc
-	       (lambda (id_point_groupid)
-		 (let ((id (car id_point_groupid))
-		       (pt (cadr id_point_groupid))
-		       (gid (caddr id_point_groupid)))
-		   (when (eq gid fld-last-group-id)
-		     (goto-char pt)
-		     (puthash id (gethash from-fld-id fld-id-to-group-id)
-			      fld-id-to-group-id)
-		     (add-text-properties
-		      (point) (fld-end)
-		      `(fld-group-id
-			,(gethash from-fld-id fld-id-to-group-id))))))
-	       flds))))))))
-
-(defadvice dabbrev-expand (around fld-handle-dabbrev-expand activate)
-  (let* ((from-fld (or (fld-in) (fld-after)))
-	 (orig-point (point))
-	 (from-fld-start (and from-fld (fld-beginning)))
-	 (from-fld-id (and from-fld (fld-id))))
-    ad-do-it
-    (when from-fld
-      (add-text-properties
-       from-fld-start (point)
-       `(category fld-category
-		  fld-id ,from-fld-id
-		  fld-group-id ,(gethash from-fld-id fld-id-to-group-id)
-		  fld-state typed)))))
-
-(defun fld-enable-monitoring ()
-  (add-hook 'before-change-functions 'fld-detect-pre nil t)
-  (add-hook 'after-change-functions 'fld-detect-post nil t)
-  (add-hook 'before-save-hook 'fld-before-save nil t)
-  (add-hook 'after-save-hook 'fld-after-save nil t))
-
-(defun fld-disable-monitoring ()
-  (remove-hook 'before-change-functions 'fld-detect-pre t)
-  (remove-hook 'after-change-functions 'fld-detect-post t)
-  (remove-hook 'before-save-hook 'fld-before-save t)
-  (remove-hook 'after-save-hook 'fld-after-save t))
-
-(defvar fld-last-group-id nil)
-(defun fld-insert (text group-id)
-  (fld-disable-monitoring)
-  (setq fld-last-group-id group-id)
-  (let ((fld (fld-make text group-id)))
-    (insert fld)))
-
-(defun fld-set-exit-location (point-or-marker)
-  (puthash fld-last-group-id point-or-marker fld-group-id-to-exit-point))
-
-(defun fld-activate ()
-  (fld-enable-monitoring))
-
-;; (defun msf-abbrev-endpoint-marker-flash ()
-;;   (interactive)
-;;   (when msf-abbrev-endpoint-marker
-;;     (let* ((pos (marker-position msf-abbrev-endpoint-marker))
-;; 	   (o (make-overlay pos pos)))
-;;       (overlay-put o 'before-string "*")
-;;       (sit-for 1)
-;;       (delete-overlay o))))
-    
-(defun msf-abbrev-expand-function-default (file)
-  (let* ((orig-buffer (current-buffer))
-	 (cursor-leave-point nil)
-	 (insertion-point-begin (point-marker))
-	 (insertion-point-end nil)
-	 (trigger-line-opening-whitespace nil)
-	 (text-expanded nil)
-	 (work-buffer nil)
-	 (fields-created-this-abbrev 0)
-	 (gid (fld-nextgroupid))
-	 (set-endpoint nil)
-	 (first-field-marker nil))
-    (setq text-expanded
-	  (with-temp-buffer
-	    (insert-file-contents file)
-	    (buffer-substring-no-properties (point-min) (point-max))))
-
-    ;; replace any <query "Loop iterator: ">-style snippets first before
-    ;; insertion
-    (setq text-expanded
-	  (let ((query-alist nil))
-	    (with-temp-buffer
-	      (insert text-expanded)
-	      (goto-char (point-min))
-	      (while (re-search-forward "\\(<\\(QUERY\\|query\\) \"\\(.*?\\)\">\\)" nil t)
-		(let ((beginpt (match-beginning 1))
-		      (endpt (match-end 1))
-		      (key (match-string 3)))
-		  (when (not (assoc key query-alist))
-		    (setq query-alist
-			  (cons (list key (read-from-minibuffer key))
-				query-alist)))
-		  (goto-char beginpt)
-		  (delete-region beginpt endpt)
-		  (insert (cadr (assoc key query-alist)))))
-	      (buffer-substring-no-properties (point-min) (point-max)))))
-
-    ;; insert the text
-    (insert text-expanded)
-    (setq insertion-point-end (point-marker))
-    (set-marker-insertion-type insertion-point-end t)
-
-    ;; remove all props
-    (set-text-properties insertion-point-begin
-			 insertion-point-end
-			 nil)
-    
-    ;; replace any <varlookup "user-full-name">-style snippets
-    (goto-char insertion-point-begin)
-    (while (re-search-forward "<\\(VARLOOKUP\\|varlookup\\) \"\\(.*?\\)\">"
-			      insertion-point-end t)
-      (let ((v (match-string 2)))
-	(replace-match (eval (intern v)) nil t)))
-
-    ;; replace any <ELISP "(insert "hi")">-style snippets
-    (goto-char insertion-point-begin)
-    (while (re-search-forward "<\\(ELISP\\|elisp\\) \"\\(.*?\\)\">" insertion-point-end t)
-      (let ((v (match-string 2)))
-	(replace-match "")
-	(eval (read v))))
-
-    ;; replace any <COMMENT "blah blah"> snippets
-    (goto-char insertion-point-begin)
-    (while (re-search-forward "^<\\(COMMENT\\|comment\\) \"\\(.*?\\)\">$" insertion-point-end t)
-      (replace-match "")
-      (let ((kill-ring-old kill-ring))
-	(kill-line)
-	(setq kill-ring kill-ring-old)))
-    (goto-char insertion-point-begin)
-    (while (re-search-forward "<\\(COMMENT\\|comment\\) \"\\(.*?\\)\">" insertion-point-end t)
-      (replace-match ""))
-
-    ;; calculate the whitespace on the beginning of the trigger line
-    ;; and mimic it as a prefix throughout insertions
-    (setq trigger-line-opening-whitespace
-	  (save-excursion
-	    (goto-char insertion-point-begin)
-	    (let ((beg nil)
-		  (end nil))
-	      (beginning-of-line)
-	      (setq beg (point))
-	      (while (looking-at "[ \t]")
-		(forward-char))
-	      (setq end (point))
-	      (buffer-substring beg end))))
-
-    ;; expand any trigger-line opening whitespace on subsequent lines
-    (goto-char insertion-point-begin)
-    (forward-line 1)
-    (while (< (point) insertion-point-end)
-      (insert trigger-line-opening-whitespace)
-      (forward-line 1))
-
-    ;; position at end of insertion
-    (goto-char insertion-point-end)
-
-    (save-excursion
-      (goto-char insertion-point-begin)
-      (while (re-search-forward "<\\(FORMJUMP\\|field\\) \"\\(.*?\\)\">"
-				(marker-position insertion-point-end) t)
-	(let ((txt (match-string 2)))
-	  (replace-match "" nil t)
-	  (if (not first-field-marker)
-	      (setq first-field-marker (point-marker)))
-	  (fld-insert txt gid))
-	(setq fields-created-this-abbrev
-	      (1+ fields-created-this-abbrev))))
-
-    ;; handle <choose><choice "OH"><choice "TX"></choose>
-    (save-excursion
-      (let ((choice-start nil)
-	    (choice-stop nil)
-	    (choices nil))
-	(goto-char insertion-point-begin)
-	(while (re-search-forward "<choose>"
-				  (marker-position insertion-point-end) t)
-	  (replace-match "" nil t)
-	  (setq choice-start (point-marker))
-	  (assert (re-search-forward "</choose>"
-				     (marker-position insertion-point-end) t))
-	  (replace-match "" nil t)
-	  (setq choice-stop (point-marker))
-	  (goto-char choice-start)
-	  (if (or (not first-field-marker)
-		  (< (point-marker) first-field-marker))
-	      (setq first-field-marker (point-marker)))
-	  (setq choices nil)
-	  (while (re-search-forward "<choice \"\\(.*?\\)\">"
-				    (marker-position choice-stop) t)
-	    (setq choices (cons (match-string 1) choices))
-	    (replace-match "" nil t))
-	  (setq choices (reverse choices))
-	  (fld-insert-choice (car choices) choices gid)
-	  (setq fields-created-this-abbrev
-	      (1+ fields-created-this-abbrev)))))
-
-    (save-excursion
-      (goto-char insertion-point-begin)
-      (when (re-search-forward "<endpoint>"
-			       (marker-position insertion-point-end) t)
-	(replace-match "" nil t)
-	(fld-set-exit-location (point-marker))
-	(setq set-endpoint t)))
-    
-    (when (> fields-created-this-abbrev 0)
-      (when (not set-endpoint)
-	(fld-set-exit-location insertion-point-end)
-	(setq set-endpoint t))
-      
-      (fld-activate)
-      
-      ;; leave cursor at first field location from this expansion
-      (goto-char first-field-marker)
-      (set-marker first-field-marker nil))
-    
-    (save-excursion
-      (save-restriction
-	(goto-char insertion-point-begin)
-	(when (re-search-forward "<\\(CURSOR\\|cursor\\)>"
-				 (marker-position insertion-point-end) t)
-	  (replace-match "")
-	  (setq cursor-leave-point (point)))))
-    (when cursor-leave-point
-      (goto-char cursor-leave-point))
-    
-    ;; possibly indent the expanded text
-    (when msf-abbrev-indent-after-expansion
-      (indent-region insertion-point-begin insertion-point-end))
-
-    (setq msf-abbrev-fields-created
-	  (+ msf-abbrev-fields-created fields-created-this-abbrev))))
-
-(defun msf-abbrev-expand-file (file)
-  (if (string-match "\\.el$" file)
-      ;; if the abbrev is an .el file, just use elisp to evaluate it
-      (let ((evalstr
-	     (with-temp-buffer
-	       (insert-file-contents file)
-	       (buffer-substring (point-min) (point-max)))))
-	(msf-abbrev-eval (read evalstr)))
-    (apply msf-abbrev-expand-function (list file)))
-  (run-hooks 'msf-abbrev-expand-hook))
-
-(defun msf-abbrev-directory-files (dir)
-  (delq nil
-	(mapcar
-	 (lambda (x)
-	   (if (or (string-match "^\\." (file-name-nondirectory x))
-		   (string-match "~$" (file-name-nondirectory x)))
-	       nil x))
-	 (directory-files dir t))))
-
-(defun msf-abbrev-report-if-verbose (abbr modename)
-  (when msf-abbrev-verbose
-    (message "defined abbrev %10s for mode %s" abbr modename)))
-
-(defun msf-abbrev-eval (text)
-;;   (message "about to eval %s" text)
-  (eval text))
-
-(defmacro msf-abbrev-try-require (lib)
-  `(let ((succeeded t))
-     (condition-case err
-         (require ,lib)
-       (error (setq succeeded nil)))
-     succeeded))
-(defvar msf-abbrev-table nil)
-
-(defun msf-abbrev-load ()
-  "Load all abbrevs under `msf-abbrev-root'.
-
-`msf-abbrev-root' should have subdirectories like c-mode,
-c++-mode, cperl-mode. etc. each of which contain files whose
-names will be used as abbreviations, expanding to the file's
-contents."
-  (let* ((modedirs (msf-abbrev-directory-files msf-abbrev-root))
-	 (sym nil)
-	 (symstr nil)
-	 (modename nil)
-	 (method nil)
-	 (hookname nil)
-	 (abbrs-this-mode nil))
-    (mapc
-     (lambda (modedir)
-       (setq modename (file-name-nondirectory modedir))
-       (setq abbrs-this-mode nil)
-       (when (not (string= modename "global"))
-	 (msf-abbrev-eval `(msf-abbrev-try-require ',(intern modename))))
-       (cond
-	((and (boundp (setq sym (intern (concat modename "-abbrev-table"))))
-	      (eval sym))
-	 (setq method 'abbrev-table))
-	((boundp (setq sym (intern (concat modename "-hook"))))
-	 (setq method 'mode-hook))
-	(t (progn
-	     (message "WARNING from msf-abbrev.el:  no abbrev table %s-abbrev-table and no hook %s-hook, abbrevs for mode %s will not be loaded"
-		      modename modename modename)
-	     (setq method nil))))
-       (setq symstr (symbol-name sym))
-       (let ((abbrs (msf-abbrev-directory-files modedir))
-	     (abbr-sans-extension nil))
-	 (mapc
-	  (lambda (abbr)
-	    (setq abbr-sans-extension
-		  (file-name-sans-extension abbr))
-	    (setq abbrs-this-mode
-		  (cons (file-name-nondirectory abbr-sans-extension)
-			abbrs-this-mode))
-	    ;; define the new function
-	    (let ((newfuncnm
-		   (format "msf-abbrev-generatedfunc-%s-%s"
-			   modename (file-name-nondirectory
-				     abbr-sans-extension))))
-	      ;; defun it
-	      (msf-abbrev-eval
-	       `(defun ,(intern newfuncnm) ()
-		  (interactive)
-		  (msf-abbrev-expand-file ,abbr)
-		  'returning-nonnil-here-inhibits-self-insertion))
-
-	      ;; add property to inhibit expansion of trigger (e.g. SPC)
-	      (msf-abbrev-eval
-	       `(put ',(intern newfuncnm) 'no-self-insert t))
-
-	      (cond
-	       ;; abbrev table method
-	       ((eq method 'abbrev-table)
-		(msf-abbrev-eval
-		 `(define-abbrev ,sym ,(file-name-nondirectory
-					abbr-sans-extension) ""
-		    ',(intern newfuncnm)))
-		(msf-abbrev-report-if-verbose
-		 (file-name-nondirectory abbr-sans-extension) modename))
-
-	       ;; mode hook method
-	       ((eq method 'mode-hook)
-
-		(let ((evtext
-		       `(add-hook ',sym
-				  (lambda ()
-				    (define-abbrev local-abbrev-table
-				      ,(file-name-nondirectory
-					abbr-sans-extension) ""
-				      ',(intern newfuncnm))))))
-		  (msf-abbrev-eval evtext))
-		(msf-abbrev-report-if-verbose
-		 (file-name-nondirectory abbr-sans-extension) modename))
-
-	       ;; do nothing if no <MODE>-abbrev-table or <MODE>-hook exists
-	       (t nil))))
-
-	  abbrs)
-	 (add-to-list 'msf-abbrev-table
-		      (list (file-name-nondirectory modedir)
-			    (sort abbrs-this-mode 'string<)))))
-     modedirs)))
-
-(defun msf-abbrev-reload-after-save ()
-  (let* ((bfn (expand-file-name (buffer-file-name)))
-	 (root (expand-file-name msf-abbrev-root)))
-    (when (string-match (concat "^" root) bfn)
-      ;; we just saved an msf-abbrev file, so reload the tree
-      (msf-abbrev-load))))
-(add-hook 'after-save-hook 'msf-abbrev-reload-after-save)
-
-(defun msf-abbrev-goto-root ()
+;;;_  > msf-cmd-goto-root nil
+(defun msf-cmd-goto-root nil
   (interactive)
   (let ((current-mode-str (format "%s" major-mode)))
-    (if (assoc current-mode-str msf-abbrev-table)
+    (if (assq major-mode msf-abbrev-mode-abbrevs)
 	(dired (concat (file-name-as-directory msf-abbrev-root)
 		       current-mode-str))
       (dired msf-abbrev-root))))
 
-(defun msf-abbrev-define-new-abbrev-this-mode ()
+;;;_  > msf-cmd-define nil
+(defun msf-cmd-define ()
   (interactive)
   (let* ((current-mode-str
 	  (cond
@@ -972,50 +1449,178 @@ contents."
 		   (progn
 		     (make-directory d)
 		     t)))
-      (let ((name (read-from-minibuffer "Abbrev name: ")))
+      (let ((name (msf-abbrev-choose-abbrev major-mode nil))
+            (reloader
+             (eval `(lambda nil 
+                      (with-current-buffer ,(current-buffer)
+                        (msf-abbrev-scan-mode major-mode 'replace)
+                        (msf-abbrev-define-on-table 
+                         major-mode local-abbrev-table)
+                        (message "Abbrevs for %s reloaded." 
+                                 major-mode)))))
+            (find-file-hook
+             (eval `(lambda nil 
+                      (make-variable-buffer-local 
+                       'after-save-hook)
+                      (setq after-save-hook reloader)
+                      (goto-char (point-max))
+                      (insert ,(if mark-active
+                                   (buffer-substring-no-properties
+                                    (region-beginning)
+                                    (region-end))
+                                 ""))))))
 	(find-file (concat (file-name-as-directory d) name))))))
 
-(defun msf-abbrev-abbrev-choose ()
+
+;;;_  > msf-cmd-expand ()
+(defun msf-cmd-expand ()
   (interactive)
-  (let ((tbl (assoc (format "%s" major-mode) msf-abbrev-table))
-	(choice nil))
-    (when tbl
-      (setq choice (completing-read "Choose abbrev: " (cadr tbl) nil t))
-      (insert choice)
-      (expand-abbrev))))
+  (let ((abbrev (msf-abbrev-choose-abbrev major-mode t)))
+    (if abbrev
+        (msf-abbrev-expand-abbrev abbrev major-mode)
+      (message "Expansion canceled"))))
 
-(defun msf-abbrev-string-no-properties (str)
-  (with-temp-buffer
-    (insert str)
-    (buffer-substring-no-properties (point-min) (point-max))))
-
-(defun msf-abbrev-abbrev-complete ()
+;;;_  > msf-cmd-goto-start
+(defun msf-cmd-goto-start nil
   (interactive)
-  (let ((tbl (assoc (format "%s" major-mode) msf-abbrev-table))
-	(choice nil)
-	(thing (thing-at-point 'word))
-	(s nil)
-	(result nil))
-    (when (and thing tbl)
-      (setq tbl (cadr tbl))
-      (setq s (msf-abbrev-string-no-properties thing))
-      (setq result (try-completion s tbl))
-      (when result
-	(cond
-	 ((eq result t)
-	  (delete-windows-on (get-buffer-create "*msf-abbrev completions*"))
-	  (delete-region (- (point) (length s)) (point))
-	  (insert result)
-	  (expand-abbrev))
-	 ((not (string= result s))
-	  (delete-windows-on (get-buffer-create "*msf-abbrev completions*"))
-	  (delete-region (- (point) (length s)) (point))
-	  (insert result)
-	  (when (member result tbl)
-	    (expand-abbrev)))
-	 (t
-	  (with-output-to-temp-buffer "*msf-abbrev completions*"
-	    (display-completion-list
-	     (all-completions s tbl)))))))))
+  (goto-char (msf-form-start-point (msf-form-at (point)))))
 
+;;;_  > msf-cmd-goto-end
+(defun msf-cmd-goto-end nil
+  (interactive)
+  (goto-char (msf-form-end-point (msf-form-at (point)))))
+
+;;;_  > msf-cmd-unlink
+(defun msf-cmd-unlink nil
+  (interactive)
+  (let (form field)
+    (setq form (or (msf-fld-form (setq field (point)))
+                   (msf-fld-form (setq field (1- (point))))))
+    (assert (and form field))
+    (save-excursion
+      (msf-fld-unlink field))))
+
+;;;_  > msf-cmd-clean-field
+(defun msf-cmd-clean-field nil
+  (interactive)
+  (let (form field)
+    (setq form (or (msf-fld-form (setq field (point)))
+                   (msf-fld-form (setq field (1- (point))))))
+    (assert (and form field))
+    (save-excursion
+      (msf-fld-forget field))))
+
+;;;_  > msf-cmd-end-form 
+(defun msf-cmd-end-form nil
+  (interactive)
+  (let ((form (msf-form-at (point))))
+    (goto-char (msf-form-end-point form))
+    (msf-form-delete form)))
+
+;;;_  > msf-cmd-clean-form
+(defun msf-cmd-clean-form nil
+  (interactive)
+  (let ((form (msf-form-at (point))))
+    (msf-form-delete form)))
+
+;;;_  . msf-cmd-goto-next (scanner)
+(defun msf-cmd-goto-next (scanner)
+  (let ((form (msf-form-at (point)))
+	(start (if (msf-fld-form (point))
+		   (msf-fld-end (point))
+		 (point)))
+	(next nil))
+    (assert form)
+    (if (setq next (apply scanner (list form start)))
+	(goto-char (msf-fld-start next))
+      (if msf-abbrev-goto-next-loops
+          (goto-char (apply scanner (list form)))
+        ;; No more fields in the form, delete the form 
+        ;; and go to the end point
+        (call-interactively 'msf-cmd-end-form)))))
+
+;;;_  . msf-cmd-goto-previous
+(defun msf-cmd-goto-previous (scanner)
+  (let (form end prev)
+    (setq form (or (msf-fld-form (setq end (point)))
+                   (msf-fld-form (setq end (1- (point))))))
+    (assert form)
+    (setq end (msf-fld-start end))
+    (if (setq prev (apply scanner (list form nil end)))
+	(goto-char (msf-fld-start prev))
+      ;; No previous field, go to the last one
+      (setq prev (apply scanner (list form)))
+      (if prev
+	  (goto-char (msf-fld-start prev))
+	(display-warning 'msf-abbrev
+                         "No previous field in form"
+                         :warning)))))
+
+;;;_  > msf-cmd-next-fld
+(defun msf-cmd-next-fld nil
+  (interactive)
+  (msf-cmd-goto-next 'msf-form-first-fld))
+
+;;;_  > msf-cmd-previous-fld
+(defun msf-cmd-previous-fld nil
+  (interactive)
+  (msf-cmd-goto-previous 'msf-form-last-fld))
+
+;;;_  > msf-cmd-next-real
+(defun msf-cmd-next-real nil
+  "Go to the next real field in the form at point.
+
+If no field exists after point, go to the end point and
+delete the form."
+  (interactive)
+  (msf-cmd-goto-next 'msf-form-first-real))
+
+;;;_  > msf-cmd-previous-real
+(defun msf-cmd-previous-real nil
+  "Go to the previous real field in FORM"
+  (interactive)
+  (msf-cmd-goto-previous 'msf-form-last-real))
+
+;;;_  > msf-cmd-make-choice
+(defun msf-cmd-make-choice nil
+  (interactive)
+  (let (form field choices selection)
+    (setq form (or (msf-fld-form (setq field (point)))
+		   (msf-fld-form (setq field (1- (point))))))
+    (assert (and form field))
+    (setq field (set-marker (make-marker) field))
+    (setq selection (msf-fld-text-no-properties field))
+    (setq choices (msf-fld-get 'fld-choices field))
+    (setq selection
+	  (apply msf-abbrev-choose-method
+                 (concat "Choose a field value and press RET."
+                         " Navigate using C-n and C-p")
+                 (copy-list choices) nil t
+                 nil nil selection nil))
+    (when (member selection choices)
+      (msf-fld-set-text selection field)
+      (msf-form-on-modification ;; notify about replacement
+       form 'after (msf-fld-start field)(msf-fld-end field) 0)
+      (goto-char (msf-fld-end field)))))
+
+;;;_  > msf-cmd-make-editable
+(defun msf-cmd-make-editable nil
+  "Like setting `msf-abbrev-first-insertion-replaces' to nil just 
+for the field at point."
+  (interactive)
+  (let (form field (inhibit-modification-hooks t))             
+    (setq form (or (msf-fld-form (setq field (point)))
+                   (msf-fld-form (setq field (1- (point))))))
+    (assert (and form field))
+    (msf-fld-add '(fld-state editable) field)))
+    
+;;;_* Provide
 (provide 'msf-abbrev)
+
+;;;_* Local variables
+;; Local Variables:
+;;  indent-tabs-mode: nil
+;;  allout-layout: (1 -1 1 1 1 -1 :)
+;; End:
+
+;;; msf-abbrev.el ends here
