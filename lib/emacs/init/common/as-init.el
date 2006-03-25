@@ -28,7 +28,7 @@
       ;; Can't find a way of auto-detecting source file :-(
       ;; This doesn't work for byte-compiled functions:
 
-;;       ((caller-function (cdr (backtrace-frame 3))) 
+;;       ((caller-function (cdr (backtrace-frame 3)))
 ;;        (caller-filename (symbol-file caller-fn)))
 
       ;; Maybe we could use defadvice to `put' the originating
@@ -68,7 +68,7 @@
 ;;{{{ as-find-file-matching-regexp-hook
 
 (defvar as-find-file-matching-regexp-alist '()
-  "alist mapping filename regexps to functions which will be evaluated when 
+  "alist mapping filename regexps to functions which will be evaluated when
 filenames matching the regexps are visited.
 
 This allows you to set local variables specific to sets of files, e.g.
@@ -97,7 +97,7 @@ Controlled by `as-find-file-matching-regexp-alist'."
 ;;}}}
 ;;{{{ as-buffer-rename-via-alist-hook
 
-(defvar as-buffer-renamings-alist '() 
+(defvar as-buffer-renamings-alist '()
   "Each element in this alist is a buffer renaming directive of the form
 
   (REGEXP . REPLACE)
@@ -152,12 +152,12 @@ that name."
 (autoload 'as-display-buffer-filename
                                  "as-bufs-files" "Display buffer filename"  t)
 (autoload 'as-bounce-buffer      "as-bufs-files" "Bounce buffers"           t)
-(autoload 'as-destroy-buffer-delete-file 
+(autoload 'as-destroy-buffer-delete-file
                                  "as-bufs-files" "Destroy buffer & file"    t)
 (autoload 'as-destroy-buffer     "as-bufs-files" "Destroy buffer"           t)
 (autoload 'as-rename-current-buffer-file
-                                 "as-bufs-files" "Renames the file in the current buffer"
-                                                                            t)
+                                 "as-bufs-files"
+                                 "Renames the file in the current buffer"   t)
 (autoload 'bury-and-close-buffer "as-bufs-files" "Bury and close buffers"   t)
 (autoload 'mhj-set-q-to-close    "as-bufs-files" "Bind q to bury and close" t)
 
@@ -213,143 +213,302 @@ that name."
 
 (as-progress "key bindings...done")
 
-;; Ben uses (define-key global-map ...)
-;; instead of (global-set-key ...)
-;; Think maybe the latter is better?
+;; Ben uses (define-key global-map ...) instead of (global-set-key ...)
+;; Think maybe the latter is better because doesn't make assumptions
+;; about global-map being used?
 
-;;{{{ Global keymap (possibly naughty)
+;;{{{ Navigation/outlining
 
+;; I do these here rather than in per-mode folds to get consistency
+;; across modes.
+
+;; I need the following (in general, the entries within each section
+;; are ordered in decreasing frequency of use):
+
+;;{{{ for changing visibility:
+
+;; These don't need to be easily repeatable, so a key sequence is ok.
+(local-set-key [(shift left)] 'foldout-exit-fold)
+(local-set-key [(shift right)] 'foldout-zoom-subtree)
+
+(defun as-folding-hide-current ()
+  "Hides the current fold, ensuring a consistent landing spot."
+  (interactive)
+  (if (eq (folding-mark-look-at) 0)
+      (message "Fold already closed")
+    (folding-hide-current-entry)
+    (folding-mark-look-at 'mark)))
+
+(defun as-folding-show-current ()
+  "Shows the current fold, ensuring a consistent landing spot."
+  (interactive)
+  (if (folding-mark-look-at-top-mark-p)
+      (and (folding-show-current-entry)
+           ;; ensure consistent landing spot
+           (folding-mark-look-at 'mark))
+    (message "Not on top fold mark")))
+
+(add-hook 'folding-mode-hook
+          (lambda ()
+            (local-set-key [(control left )] 'as-folding-hide-current)
+            (local-set-key [(control right)] 'as-folding-show-current)
+
+            ;; TODO
+;;             (local-set-key [(control left)]
+;;             (local-set-key [(control right)]
+            ;;   increase/decrease depth of subheadings in current heading
+            ;; possible useful functions for this:
+            ;;   folding-mark-look-at-top-mark-p: numberp folding-mark-look-at
+            ;;   folding-mark-look-at-bottom-mark-p: symbolp folding-mark-look-at
+            ;;   folding-region-open-close
+            ;;   folding-region-has-folding-marks-p
+            ;;   folding-show-current-subtree
+            ;;   folding-find-folding-mark
+            
+            (local-set-key [(control shift left )]
+                           (lambda ()
+                             (interactive)
+                             (and (folding-hide-current-entry)
+                                  ;; ensure consistent landing spot
+                                  (folding-mark-look-at 'mark))))
+            ))
+            
+
+;;       C-c C-o    show entire tree
+;;       C-c C-w    hide entire tree
+
+;;   C-  left         decrease depth of subheadings in current heading
+;;   C-S-left         hide subtree
+;;   C-  right        increase depth of subheadings in current heading
+;;   C-S-right        show all subheadings
+;; M-C-S-right        show whole subtree
+;;
+
+;;}}}
+;;{{{ for navigation:
+
+;; Define fast scroll keys, may be overridden per mode.
+(defun as-fast-up   () "Move up two lines."   (interactive) (forward-line -2))
+(defun as-fast-down () "Move down two lines." (interactive) (forward-line  2))
+(global-set-key [(shift down)] 'as-fast-down)
+(global-set-key [(shift up)]   'as-fast-up)
+
+(eval-when-compile (require 'folding))
+(add-hook 'folding-mode-hook
+          (lambda ()
+            (local-set-key [(control up)]
+                           (lambda ()
+                             (interactive)
+                             (and (folding-previous-visible-heading)
+                                  ;; ensure consistent landing spot
+                                  (folding-mark-look-at 'mark))))
+            (local-set-key [(control down)]
+                           (lambda ()
+                             (interactive)
+                             (and (folding-next-visible-heading)
+                                  ;; ensure consistent landing spot
+                                  (folding-mark-look-at 'mark))))
+            ;; FIXME: not implemented yet
+;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
+;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
+            ))
+
+(eval-when-compile (require 'allout))
+(add-hook 'allout-mode-hook
+          (lambda ()
+            (local-set-key [(control left)]       'allout-up-current-level)
+            (local-set-key [(control up)]         'allout-previous-visible-heading)
+            (local-set-key [(control down)]       'allout-next-visible-heading)
+            (local-set-key [(control shift up)]   'allout-backward-current-level)
+            (local-set-key [(control shift down)] 'allout-forward-current-level)))
+
+(eval-when-compile (load-library "org"))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key [(control left)]       'outline-up-heading)
+            (local-set-key [(control up  )]       'outline-previous-visible-heading)
+            (local-set-key [(control down)]       'outline-next-visible-heading)
+            (local-set-key [(control shift up)]   'outline-forward-same-level)
+            (local-set-key [(control shift down)] 'outline-backward-same-level)))
+
+;;
+;;     need to be easily repeatable, should be a chord:
+;;       C-c u?     up level
+;;       C-c d?     down level
+;;       C-c f?     next heading at current level
+;;       C-c b?     next heading at current level
+;;       C-c n?     next heading
+;;       C-c p?     prev heading
+;;
+
+(global-set-key [(shift meta f)]          'as-forward-next-word)
+(global-set-key [(shift meta b)]          'as-backward-before-word)
+
+;;}}}
+;;{{{ for editing structure:
+
+;;    (choose to be analogous to navigation except:
+;;      - with extra meta, current item moves with point
+;;      - with extra meta-shift, current subtree moves with point)
+;;                move heading up before previous sibling
+;;                move heading down after next sibling
+;;                promote heading up a level
+;;                demote heading down a level?
+
+;;}}}
+;;{{{ other misc:
+
+;;                  mark subtree
+;;
+
+;;}}}
+;;{{{ unassigned
+
+
+;; in use by org-mode:
+;;     S-{up,down}               org-shift{up,down}
+
+;; (global-set-key [(     control        left )] 'as-controlleft)
+;; (global-set-key [(     control        right)] 'as-controlright)
+;; conflict with global bindings:
+;;     C-{up,down}    {forward,backward}-paragraph - scrap for M-curlies
+;;     C-{left,right} {forward,backward}-word - scrap for M-{S-,}{b,f}
+
+
+;; (global-set-key [(     control shift  left )] 'as-controlshiftleft)
+;; (global-set-key [(     control shift  right)] 'as-controlshiftright)
+;; (global-set-key [(     control shift  up   )] 'as-controlshiftup)
+;; (global-set-key [(     control shift  down )] 'as-controlshiftdown)
+
+;; (global-set-key [(meta                left )] 'as-metaleft)
+;; (global-set-key [(meta                right)] 'as-metaright)
+;; (global-set-key [(meta                up   )] 'as-metaup)
+;; (global-set-key [(meta                down )] 'as-metadown)
+;; conflict with org-mode bindings:
+;;       M-{left,right,up,down}  org-meta{left,down,up,right}
+
+;; (global-set-key [(meta         shift  left )] 'as-metashiftleft)
+;; (global-set-key [(meta         shift  right)] 'as-metashiftright)
+;; (global-set-key [(meta         shift  up   )] 'as-metashiftup)
+;; (global-set-key [(meta         shift  down )] 'as-metashiftdown)
+;; conflict with org-mode bindings:
+;;     S-M-{left,right,up,down}  org-shiftmeta{left,down,up,right}
+
+;; (global-set-key [(meta control        left )] 'as-metacontrolleft)
+;; (global-set-key [(meta control        right)] 'as-metacontrolright)
+;; (global-set-key [(meta control        up   )] 'as-metacontrolup)
+;; (global-set-key [(meta control        down )] 'as-metacontroldown)
+
+;; (global-set-key [(meta control shift  left )] 'as-metacontrolshiftleft)
+;; (global-set-key [(meta control shift  right)] 'as-metacontrolshiftright)
+;; (global-set-key [(meta control shift  up   )] 'as-metacontrolshiftup)
+;; (global-set-key [(meta control shift  down )] 'as-metacontrolshiftdown)
+
+;;}}}
+
+;;}}}
 ;;{{{ Rebinding for improvement - naughty but nice
 
-(global-set-key "\M-\\"        'fixup-whitespace)   ;; was delete-horizontal-space
-(global-set-key "\M-g"         'goto-line)          ;; was set-face
-(global-set-key "\C-ha"        'apropos)            ;; was apropos-command
-(autoload 'as-transpose-lines "as-editing" "as-transpose-lines" t)
-(global-set-key "\C-x\C-t"     'as-transpose-lines) ;; was transpose-lines
+(global-set-key [(meta "\\")]   'fixup-whitespace)
+                                ;; was delete-horizontal-space
+(global-set-key [(meta g)]      'goto-line)          ;; was set-face
+(global-set-key [(control h) a] 'apropos)            ;; was apropos-command
+(autoload 'as-transpose-lines
+          "as-editing" "as-transpose-lines" t)
+(global-set-key [(control x)(control t)] 'as-transpose-lines) ;; was transpose-lines
 
-(autoload 'bn-kill-region-or-backword-word "as-editing" "bn-kill-region-or-backword-word" t)
-(global-set-key [(control w)]  'bn-kill-region-or-backword-word) ;; was kill-region
-(autoload 'bn-kill-line-or-region-save "as-editing" "bn-kill-line-or-region-save" t)
-(global-set-key [(meta w)]     'bn-kill-line-or-region-save)     ;; kill-ring-save
+(autoload 'bn-kill-region-or-backword-word
+          "as-editing" "bn-kill-region-or-backword-word" t)
+(global-set-key [(control w)]  'bn-kill-region-or-backword-word)
+                               ;; was kill-region
+(autoload 'bn-kill-line-or-region-save
+          "as-editing" "bn-kill-line-or-region-save" t)
+(global-set-key [(meta w)]     'bn-kill-line-or-region-save)
+                               ;; kill-ring-save
 (autoload 'bn-zap-nearly-to-char "as-editing" "bn-zap-nearly-to-char" t)
-(global-set-key [(meta z)]     'bn-zap-nearly-to-char)           ;; was zap-to-char
+(global-set-key [(meta z)]     'bn-zap-nearly-to-char)
+                               ;; was zap-to-char
 
 (global-set-key [(delete)]     'delete-char)        ;; to make sure
 (global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
 
+(global-set-key [(meta i)]     'indent-relative)    ;; was tab-to-tab-stop
+
+
 ;; Set C-x C-b to buffer-menu rather than list-buffers so that the
 ;; point automatically gets put in the buffer menu.
-(global-set-key "\C-x\C-b"     'buffer-menu)
+(global-set-key [(control x)(control b)] 'buffer-menu)
 
 ;; But if bs-show is available, choose that cos it's much nicer.
-(and (functionp 'bs-show)
-     (global-set-key "\C-x\C-b" (function (lambda (arg)
-                                            (interactive "P")
-                                            (bs-show arg)
-                                            (let ((inhibit-read-only t))
-                                              (save-excursion
-                                                (end-of-buffer)
-                                                (insert "\n")))))))
+(if (functionp 'bs-show)
+     (global-set-key [(control x)(control b)]
+                     (function (lambda (arg)
+                                 (interactive "P")
+                                 (bs-show arg)
+                                 (let ((inhibit-read-only t))
+                                   (save-excursion
+                                     (end-of-buffer)
+                                     (insert "\n")))))))
 
-;;}}}
-;;{{{ Additions (hope for no conflicts)
+(global-set-key [(meta tab)] 'hippie-expand) ;; was complete-symbol etc.
+                                             ;; depending on mode
 
-(global-set-key "\C-xK" 'as-destroy-buffer) ;; more powerful than C-x k
-(autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
-(global-set-key [(control E)] 'bn-end-of-line-but-one)
-(global-set-key [(control ?')] 'speedbar-get-focus)
-(global-set-key [(control ,)] 'delete-other-windows)
-(global-set-key [(control .)] 'delete-window)
-(global-set-key [(control \;)] 'bury-buffer)
-(global-set-key [(control meta y)] 'as-join-line-with-next)
-(global-set-key [(control x) (control y)] 'vim-yy)
-(global-set-key [(control x) (I)] 'insert-buffer)
-(autoload 'find-library-source "as-bufs-files" "find-library-source" t)
-(global-set-key [(control x) (meta f)] 'find-library-source)
-(global-set-key [(meta o)] 'overwrite-mode)
-(global-set-key [(control meta return)] 'repeat-complex-command)
-(autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
-(global-set-key [(control meta \()] 'bn-strip-parentheses)
-(global-set-key [(shift meta f)] 'as-forward-next-word)
-(global-set-key [(shift meta b)] 'as-backward-before-word)
+;; why is this necessary?
+;;(global-set-key "\e\C-i"     'hippie-expand)
 
-
-(global-set-key [(control meta ??)] 'bn-make-region-into-secondary)
-(global-set-key [(control meta T)] 'bn-exchange-region-and-secondary)
-(global-set-key [(control g)] 'bn-keyboard-quit)
-
-;;}}}
-;;{{{ TAB and family
-
-(global-set-key "\C-c\C-i"      'indent-region)
-(global-set-key [(control tab)]         'other-window)
-(global-set-key [(control meta $)]      'ispell-buffer)
-(global-set-key [(control meta tab)]    'ispell-complete-word)
-(global-set-key [(meta i)]              'indent-relative)
-
-;;{{{ hippie-expand
-
-(global-set-key [(meta tab)] 'hippie-expand)
-(global-set-key "\e\C-i"     'hippie-expand)
-
-(setq hippie-expand-try-functions-list 
+(setq hippie-expand-try-functions-list
       '(
         try-expand-all-abbrevs
         try-expand-dabbrev
-        try-expand-dabbrev-all-buffers 
+        try-expand-dabbrev-all-buffers
         try-expand-line
         try-expand-dabbrev-from-kill
-        try-complete-file-name-partially 
+        try-complete-file-name-partially
         try-complete-file-name
         try-expand-list
-        try-complete-lisp-symbol-partially 
+        try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
         ))
 
 ;;}}}
+;;{{{ Additions (hope for no conflicts)
 
-;;}}}
+(global-set-key [(meta o)]                'overwrite-mode)
 
-;;}}}
-;;{{{ Keypad
+(global-set-key [(control x) K]           'as-destroy-buffer)
+(global-set-key [(control x) (I)]         'insert-buffer)
+(global-set-key [(control x) (control y)] 'vim-yy)
+(autoload 'find-library-source "as-bufs-files" "find-library-source" t)
+(global-set-key [(control x) (meta f)]    'find-library-source)
 
-(global-set-key [(kp-4)]        'backward-char)
-(global-set-key [(kp-6)]        'forward-char)
-(global-set-key [(kp-2)]        'next-line)
-(global-set-key [(kp-8)]        'previous-line)
-(global-set-key [(kp-7)]        'beginning-of-buffer)
-(global-set-key [(kp-1)]        'end-of-buffer)
-(global-set-key [(kp-9)]        'scroll-down)
-(global-set-key [(kp-3)]        'scroll-up)
-(global-set-key [(meta kp-4)]   'backward-word)
-(global-set-key [(meta kp-6)]   'forward-word)
+(autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
+(global-set-key [(control E)]             'bn-end-of-line-but-one)
+(global-set-key [(control ?')]            'speedbar-get-focus)
+(global-set-key [(control ,)]             'delete-other-windows)
+(global-set-key [(control .)]             'delete-window)
+(global-set-key [(control \;)]            'bury-buffer)
+(global-set-key [(control tab)]           'other-window)
+(global-set-key [(control tab)]           'other-window)
 
-;;}}}
-;;{{{ Define fast scroll keys
+(global-set-key [(control meta y)]        'as-join-line-with-next)
+(global-set-key [(control meta return)]   'repeat-complex-command)
+(global-set-key [(control c) .]           'repeat)
+(autoload 'bn-strip-parentheses "as-editing" "bn-strip-parentheses" t)
+(global-set-key [(control meta \()]       'bn-strip-parentheses)
+(global-set-key [(control c) tab]         'indent-region)
 
-(defun as-fast-up () "Move up two lines." (interactive) (forward-line -2))
-(defun as-fast-down () "Move down two lines." (interactive) (forward-line 2))
 
-;;; Can only use M-down and M-up in X
+(global-set-key [(control meta ??)]       'bn-make-region-into-secondary)
+(global-set-key [(control meta T)]        'bn-exchange-region-and-secondary)
+(global-set-key [(control g)]             'bn-keyboard-quit)
 
-(if window-system
-    (progn
-      (global-set-key [(meta down)] 'as-fast-down)
-      (global-set-key [(meta up)]   'as-fast-up)
-      (global-set-key [(meta kp-2)] 'as-fast-down)
-      (global-set-key [(meta kp-8)] 'as-fast-up)))
-
-;;}}}
-;;{{{ Mouse
-
-(and window-system (not running-xemacs)
-     (global-set-key [(M-mouse-4)] 'raise-frame)
-     (global-set-key [(M-mouse-5)] 'lower-frame))
+(global-set-key [(control $)]             'ispell-complete-word)
+(global-set-key [(control meta $)]        'ispell-buffer)
 
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
-;;{{{ C-c - 
+;;{{{ C-c -
 
 (global-set-key "\C-ca"   'bury-buffer)
 (global-set-key "\C-cA"   'as-align-to-previous-line)
@@ -364,7 +523,6 @@ that name."
 
 ;;}}}
 (global-set-key "\C-cd"   'as-duplicate-line)
-(global-set-key "\C-cf"   'auto-fill-mode)
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ _I_nsert auto-text (C-c i)
 
@@ -442,7 +600,7 @@ that name."
 (global-set-key "\C-coj" 'planner-goto-plan-page)
 
 ;; _P_lan (today)
-(global-set-key "\C-coP"  'plan) 
+(global-set-key "\C-coP"  'plan)
 
 ;; New from _b_uffer
 (autoload 'planner-create-task-from-buffer "planner.el" nil t)
@@ -476,7 +634,7 @@ that name."
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cP"   'as-align-to-previous-line)
-;;{{{ remember (C-c q for _q_uick) 
+;;{{{ remember (C-c q for _q_uick)
 
 (autoload 'remember "remember" nil t)
 (autoload 'remember-region "remember" nil t)
@@ -493,7 +651,7 @@ that name."
 ;;{{{ as-toggle-indent-tabs-mode
 
 (defun as-toggle-indent-tabs-mode
-  () 
+  ()
   "Toggles the value of indent-tabs-mode in the current buffer"
   (interactive)
   (setq indent-tabs-mode (not indent-tabs-mode))
@@ -544,6 +702,13 @@ that name."
 ;;}}}
 
 ;;}}}
+;;{{{ Mouse
+
+(and window-system (not running-xemacs)
+     (global-set-key [(M-mouse-4)] 'raise-frame)
+     (global-set-key [(M-mouse-5)] 'lower-frame))
+
+;;}}}
 
 (as-progress "key bindings...done")
 
@@ -591,10 +756,10 @@ that name."
 ;;    (append load-path
 ;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
 ;;               (list
-;;                "fun" 
+;;                "fun"
 ;;                "major-modes/monkey-2"
 ;; [snipped]
-;;                "utils" 
+;;                "utils"
 ;;                )))))
 
 ;;}}}
@@ -607,7 +772,7 @@ that name."
 
 (cond ((or running-xemacs (<= emacs-major-version 20))
        (resize-minibuffer-mode)
-       (setq resize-minibuffer-window-max-height 5 
+       (setq resize-minibuffer-window-max-height 5
              resize-minibuffer-frame-max-height 5)))
 
 ;;}}}
@@ -659,7 +824,7 @@ that name."
 ;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
 ;; with "indented-text-mode".
 (mapcar (function
-         (lambda (x) 
+         (lambda (x)
            (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
         auto-mode-alist)
 
@@ -900,7 +1065,7 @@ that name."
 
 (defalias 'html-mode 'html-helper-mode)
 (autoload 'html-helper-mode "html-helper-mode" t)
-(add-hook 'html-mode-hook 
+(add-hook 'html-mode-hook
           (function (lambda ()
                       (auto-fill-mode -1)
 ;;                    (setq truncate-lines t)
@@ -1032,7 +1197,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (defun as-rst-bindings ()
   "Adam's key bindings for `rst-mode'."
   (interactive)
-  
+
   (local-set-key [(control ?=)] 'rst-adjust)
 
 ;;   (local-set-key [(control c) (control p)] 'rst-backward-section)
@@ -1135,6 +1300,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;        (emacs-wiki-grep (muse-page-name)))
 ;;      (define-key muse-mode-map "\C-c\C-b" 'muse-wiki-backlink)
      ))
+(eval-when-compile (require 'muse-mode))
 (add-hook 'muse-mode-hook
           (lambda ()
             (define-key muse-mode-map "\C-c."        'org-time-stamp)
@@ -1188,16 +1354,29 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; outline-mode
 ;;(eval-after-load "outline" '(require 'foldout))
-(eval-after-load "outline"
-  '(progn
-     ;;(require 'allout)
-     (load "allout.el")
-     (if (boundp 'outline-init)
-         (outline-init t)
-       (allout-init t)
-       (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
-       (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
-       (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_"))))))
+(eval-after-load "outline" 'as-allout-init)
+
+(defun as-allout-maybe-init ()
+  "Hook for use within `find-file-hooks' to check whether a file needs
+allout mode initialized."
+  (interactive)
+  (when (boundp 'allout-layout)
+    (as-allout-init)))
+
+(add-hook 'find-file-hooks 'as-allout-maybe-init)
+
+(defun as-allout-init ()
+  "Initialize allout-mode the way Adam likes it."
+  (interactive)
+  (when (not (featurep 'allout))
+    (load "allout.el") ;; Loading .elc causes problems?
+    (if (boundp 'outline-init)
+        ;; Old versions init in a different way
+        (outline-init t)
+      (allout-init t))
+    (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
+    (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
+    (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")))))
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
@@ -1225,8 +1404,6 @@ C-style indentation, use cssm-c-style-indenter.")
                      (auto-fill-mode 1)
                      (local-set-key [(shift left)] 'foldout-exit-fold)
                      (local-set-key [(shift right)] 'foldout-zoom-subtree)
-                     (local-set-key [(control shift left)] 'foldout-exit-fold)
-                     (local-set-key [(control shift right)] 'foldout-zoom-subtree)
                      ))))
       '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
 
@@ -1432,22 +1609,6 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (add-hook 'folding-mode-hook
           (lambda ()
-            ;; keypad
-            (define-key folding-mode-map [kp-7] 'folding-shift-in)
-            (define-key folding-mode-map [kp-9] 'folding-shift-out)
-            (define-key folding-mode-map [kp-1] 'fold-show)
-            (define-key folding-mode-map [kp-3] 'fold-hide)
-            (define-key folding-mode-map [kp-4] 'fold-backward-char)
-            (define-key folding-mode-map [kp-6] 'fold-forward-char)
-
-            ;; These ones for VT100s (I think)
-            (define-key folding-mode-map "\M-Ow" 'folding-shift-in)
-            (define-key folding-mode-map "\M-Oy" 'folding-shift-out)
-            (define-key folding-mode-map "\M-Oq" 'fold-show)
-            (define-key folding-mode-map "\M-Os" 'fold-hide)
-            (define-key folding-mode-map "\M-OP" 'folding-shift-in)
-            (define-key folding-mode-map "\M-OQ" 'folding-shift-out)
-
             ;; Quick navigation
             (local-set-key [(control meta <)] 'folding-shift-out)
             (local-set-key [(control meta >)] 'folding-shift-in)
@@ -1516,7 +1677,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ recentf
 
 (and window-system
-     (load "recentf" 'noerror) 
+     (load "recentf" 'noerror)
      (recentf-mode t))
 
 ;;}}}
