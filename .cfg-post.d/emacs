@@ -1,7 +1,8 @@
 #!/bin/sh
 
 cd
-[ -e .as-init.el ]   || ln -s lib/emacs/init/common/as-init.el .as-init.el
+[ -e .as-init.el   ] || ln -s lib/emacs/init/common/as-init.el .as-init.el
 [ -e .as-custom.el ] || ln -s lib/emacs/init/GNU_Emacs/as-custom.el .as-custom.el
+[ -e .msf-abbrevs  ] || ln -s lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 
 emk
