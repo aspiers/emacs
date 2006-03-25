@@ -418,9 +418,12 @@ has an argument list like `completing-read' does."
 	      ((and (stringp lisp) (file-exists-p lisp))
 	       (with-temp-buffer
 		 (insert-file-contents lisp)
-		 (read (buffer-substring-no-properties
-			(point-min) (point-max)))))
-	      ((stringp lisp) (read lisp))
+		 (condition-case nil
+                     (read (buffer-substring-no-properties
+                            (point-min) (point-max)))
+                   (error "read of lisp stream from %s failed" lisp))))
+	      ((stringp lisp)
+               (read lisp))
 	      (t (error "Invalid argument type: %s"
 			(type-of lisp))))))
       
