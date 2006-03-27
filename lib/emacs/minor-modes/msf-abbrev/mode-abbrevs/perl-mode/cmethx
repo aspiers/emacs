@@ -1,0 +1,4 @@
+sub <query "method name? "> {
+  my $class = shift;
+  <cursor>
+}

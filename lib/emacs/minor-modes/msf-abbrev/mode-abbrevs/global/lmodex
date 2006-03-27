@@ -1,2 +1,2 @@
-<elisp "(beginning-of-buffer)"># -*- mode: <cursor> -*-
+<elisp "(progn (beginning-of-buffer) (message (format "%s" (current-buffer))))"># -*- mode: <cursor> -*-
 

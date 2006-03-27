@@ -1,0 +1,8 @@
+<field "@collection">.each do |<field link="e" "element">|
+  <linked "e">.<endpoint>
+end
+render :<choose link="r">
+         <choice "nothing">
+         <choice "inline">
+         <choice "text">
+        </choose> => "rendereing using :<linked "r">"

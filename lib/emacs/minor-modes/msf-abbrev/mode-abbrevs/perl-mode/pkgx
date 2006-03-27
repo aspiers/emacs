@@ -1,0 +1,34 @@
+package <field link="package" "Package">;
+
+=head1 NAME
+
+<linked "package"> - <field "name">
+
+=head1 SYNOPSIS
+
+<field "synopsis">
+
+=head1 DESCRIPTION
+
+<field "description">
+
+=cut
+
+use strict;
+use warnings;
+
+=head1 CONSTRUCTORS
+
+=cut
+
+=head1 METHODS
+
+=cut
+
+=head1 BUGS
+
+=head1 SEE ALSO
+
+=cut
+
+1;
