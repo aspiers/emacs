@@ -158,6 +158,7 @@
 ;;;_ , Resurrection data, cons of (markers . properties) are saved
 ;; in the form overlay. 
 ;;;_ , Each field can have a custom modification hook.
+;;;_ , Case-insensitive abbrev expansion
 
 ;;;_* Code:
 (require 'cl)
@@ -762,7 +763,8 @@ Run `msf-abbrev-after-expansion-hook'"
 		 (msf-form-end form) t))
       (let ((v (match-string 2)))
 	(replace-match "")
-	(eval (read v))))))
+        (with-current-buffer msf-orig-buffer
+          (eval (read v)))))))
 
 ;;;_  > msf-form-parse-queries (form)
 (defun msf-form-parse-queries (form)
