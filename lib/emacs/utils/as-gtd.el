@@ -13,7 +13,11 @@
   "Yank from file defined by `as-mairix-links-clipboard'."
   (interactive)
   (let ((bytes (cadr (insert-file-contents as-mairix-links-clipboard))))
-    (forward-char bytes)))
+    (forward-char bytes)
+    (save-excursion
+      (forward-char -1)
+      (if (looking-at "\n")
+          (delete-char 1)))))
 
 (defun as-mairix-search-at-point ()
   "Return the start and end points of a mairix link at the current
