@@ -4,17 +4,17 @@
 
 ;;{{{ Word motion
 
-(defun as-forward-next-word (&optional prefix)
+(defun as-forward-word-start (&optional count)
   "As `forward-word', but lands at the start of a word not the end."
   (interactive "p")
-  (forward-word prefix)
+  (forward-word (or count 1))
   (forward-word 1)
   (forward-word -1))
 
-(defun as-backward-before-word (&optional prefix)
+(defun as-backward-before-word (&optional count)
   "As `backward-word', but lands at the start of a word not the end."
   (interactive "p")
-  (forward-word (- prefix))
+  (forward-word (- (or count 1)))
   (forward-word -1)
   (forward-word 1))
 

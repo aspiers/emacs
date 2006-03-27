@@ -366,8 +366,8 @@ that name."
 ;;       C-c p?     prev heading
 ;;
 
-(global-set-key [(shift meta f)]          'as-forward-next-word)
-(global-set-key [(shift meta b)]          'as-backward-before-word)
+(global-set-key [(shift meta f)] 'as-forward-word-start)
+(global-set-key [(shift meta b)] 'as-backward-before-word)
 
 ;;}}}
 ;;{{{ for editing structure:
@@ -499,6 +499,12 @@ that name."
 ;;{{{ Additions (hope for no conflicts)
 
 (global-set-key [(meta o)]                'overwrite-mode)
+(global-set-key [(meta D)]                'as-kill-word)
+(defun as-kill-word ()
+  "Kills forward to where as-forward-word-start would land."
+  (interactive)
+  (kill-region (point)
+               (save-excursion (as-forward-word-start) (point))))
 
 (global-set-key [(control x) K]           'as-destroy-buffer)
 (global-set-key [(control x) (I)]         'insert-buffer)
