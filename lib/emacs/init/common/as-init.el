@@ -353,8 +353,8 @@ that name."
             (local-set-key [(control left)]       'outline-up-heading)
             (local-set-key [(control up  )]       'outline-previous-visible-heading)
             (local-set-key [(control down)]       'outline-next-visible-heading)
-            (local-set-key [(control shift up)]   'outline-forward-same-level)
-            (local-set-key [(control shift down)] 'outline-backward-same-level)))
+            (local-set-key [(control shift down)] 'outline-forward-same-level)
+            (local-set-key [(control shift up  )] 'outline-backward-same-level)))
 
 ;;
 ;;     need to be easily repeatable, should be a chord:
@@ -499,12 +499,8 @@ that name."
 ;;{{{ Additions (hope for no conflicts)
 
 (global-set-key [(meta o)]                'overwrite-mode)
+(autoload 'as-kill-word "as-editing" "as-kill-word" t)
 (global-set-key [(meta D)]                'as-kill-word)
-(defun as-kill-word ()
-  "Kills forward to where as-forward-word-start would land."
-  (interactive)
-  (kill-region (point)
-               (save-excursion (as-forward-word-start) (point))))
 
 (global-set-key [(control x) K]           'as-destroy-buffer)
 (global-set-key [(control x) (I)]         'insert-buffer)
@@ -622,6 +618,12 @@ that name."
 (global-set-key "\C-cK"   'as-destroy-buffer-delete-file)
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
 ;; I reserve C-c m for mode-specific user bindings
+
+(autoload 'as-mairix-yank-links "as-gtd" "as-mairix-yank-links" t)
+(autoload 'as-mairix-view-link-at-point "as-gtd" "as-mairix-view-link-at-point" t)
+(global-set-key [(control c) (M) (y)]      'as-mairix-yank-links)
+(global-set-key [(control c) (M) (return)] 'as-mairix-view-link-at-point)
+
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
@@ -1771,6 +1773,11 @@ allout mode initialized."
 
 ;; custom-set-variables takes care of this:
 ;;(eval-after-load "abbrev" '(require 'msf-abbrev))
+
+(defun msf (&optional prefix)
+  "Alias for msf-abbrev-mode."
+  (interactive "p")
+  (msf-abbrev-mode (or prefix 1)))
 
 ;;}}}
 
