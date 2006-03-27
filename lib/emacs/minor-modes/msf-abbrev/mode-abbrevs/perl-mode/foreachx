@@ -1,4 +1,3 @@
 foreach my $<field "var"> (<field "list">) {
   <field "...">
 }
-
