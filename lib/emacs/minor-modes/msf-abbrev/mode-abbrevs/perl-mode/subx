@@ -1,3 +1,4 @@
-sub <linked "sub"> {
-  <field "code"><cursor>
+sub <field "subrname"> {
+  my (<field "args">) = @_;
+  <field "code">
 }

@@ -1,0 +1,4 @@
+open(<cursor><field link="fh" "FH">, "><field link="file" "file">")
+  or die "Couldn't open(<linked "file">): $!\n";
+print <linked "fh"> <field "..."><endpoint>;
+close(<linked "fh">);

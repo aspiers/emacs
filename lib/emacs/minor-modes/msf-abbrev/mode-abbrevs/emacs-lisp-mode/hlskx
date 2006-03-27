@@ -1,0 +1,2 @@
+(add-hook '<field "mode">-mode-hook
+    (lambda () (local-set-key [(<field "keys">)] '<field "fn">)))

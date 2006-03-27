@@ -17,13 +17,7 @@ package <field link="package" "Package">;
 use strict;
 use warnings;
 
-=head1 CONSTRUCTORS
-
-=cut
-
-=head1 METHODS
-
-=cut
+<field "code">
 
 =head1 BUGS
 

@@ -1,0 +1,10 @@
+=head2 <field link="subr" "subrname">
+
+<field "docs">
+
+=cut
+
+sub <linked "subr"> {
+  my (<field "args">) = @_;
+  <field "code"><cursor>
+}
