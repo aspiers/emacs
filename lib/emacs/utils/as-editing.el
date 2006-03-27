@@ -18,6 +18,12 @@
   (forward-word -1)
   (forward-word 1))
 
+(defun as-kill-word ()
+  "Kills forward to where as-forward-word-start would land."
+  (interactive)
+  (kill-region (point)
+               (save-excursion (as-forward-word-start) (point))))
+
 ;;}}}
 ;;{{{ as-duplicate-line
 
