@@ -6,7 +6,7 @@
 (defvar as-mairix-results-folder (concat (getenv "HOME") "/mail/novell/mairix")
   "Folder where mairix writes results.")
 
-(defvar as-mairix-link-viewer-command "mairix %search% && xterm -e 'unset COLUMNS; mutt -f %folder% -e \"push <display-message>\"' &"
+(defvar as-mairix-link-viewer-command "mairix %search% && xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -f %folder% -e \"push <display-message>\"' &"
   "Command to view messages linked to by 'mairix://...' links.")
 
 (defun as-mairix-yank-links ()
@@ -36,4 +36,9 @@ defined by `as-mairix-link-viewer-command'."
         (setq cmd (replace-match message-id 'fixedcase 'literal cmd)))
       (while (string-match "%folder%" cmd)
         (setq cmd (replace-match as-mairix-results-folder 'fixedcase 'literal cmd)))
-      (shell-command cmd))))
+      ;; By default, async shell-command invocations display the temp
+      ;; buffer, which is annoying here.  We choose a deterministic
+      ;; buffer name so we can hide it again immediately.,
+      (let ((tmpbufname (generate-new-buffer-name " *mairix-view*")))
+        (shell-command cmd tmpbufname)
+        (delete-windows-on (get-buffer tmpbufname))))))
