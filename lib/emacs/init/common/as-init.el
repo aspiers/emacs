@@ -606,8 +606,9 @@ that name."
 
 (autoload 'as-mairix-yank-links "as-gtd" "as-mairix-yank-links" t)
 (autoload 'as-mairix-view-link-at-point "as-gtd" "as-mairix-view-link-at-point" t)
-(global-set-key [(control c) (M) (y)]      'as-mairix-yank-links)
-(global-set-key [(control c) (M) (return)] 'as-mairix-view-link-at-point)
+(global-set-key [(control c) (M) (y)]         'as-mairix-yank-links)
+(global-set-key [(control c) (M) (control y)] 'as-mairix-yank-links)
+(global-set-key [(control c) (M) (return)]    'as-mairix-view-link-at-point)
 
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
@@ -1383,9 +1384,11 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'org-store-link "org" "Store a link to the current location" t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
-
-;; (define-key global-map "\C-cl" 'org-store-link)
-;; (define-key global-map "\C-ca" 'org-agenda)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key [(control c)(control a)] 'org-agenda)
+            ;; (local-set-key [(control c)(control l)] 'org-store-link)
+            ))
 
 ;;}}}
 ;;{{{ etask-mode
