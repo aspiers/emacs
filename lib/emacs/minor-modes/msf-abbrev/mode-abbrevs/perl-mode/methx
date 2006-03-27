@@ -1,4 +1,10 @@
-sub <query "method name? "> {
+=head2 <query link="method" "method name? ">
+
+<field "docs">
+
+=cut
+
+sub <linked "method"> {
   my $self = shift;
-  <cursor>
+  <field "code"><cursor>
 }

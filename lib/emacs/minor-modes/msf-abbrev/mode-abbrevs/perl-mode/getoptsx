@@ -1,0 +1,9 @@
+use Getopt::Long;
+
+my %opts;
+GetOptions(
+  \%opts,
+  'help',
+  <cursor><field "options">
+) or usage();
+usage() if @ARGV == 0 or $opts{help};
