@@ -553,12 +553,6 @@ that name."
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ _I_nsert auto-text (C-c i)
 
-(autoload 'as-insert-snail-mail "as-autotext" "Insert snail mail" t)
-(global-set-key "\C-cia" 'as-insert-snail-mail)
-
-(autoload 'as-insert-work-snail-mail "as-autotext" "Insert work snail mail" t)
-(global-set-key "\C-ciA" 'as-insert-work-snail-mail)
-
 (autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
 (global-set-key "\C-cid" 'as-insert-date-and-time)
 
@@ -576,9 +570,6 @@ that name."
 
 (autoload 'as-insert-name-and-work-email "as-autotext" "Insert name and work email address" t)
 (global-set-key "\C-ciW" 'as-insert-name-and-work-email)
-
-(autoload 'as-insert-homepage-url "as-autotext" "Insert homepage url" t)
-(global-set-key "\C-cih" 'as-insert-homepage-url)
 
 (autoload 'as-insert-japh-method-chain-sig "as-autotext" "Insert JAPH method chain sig" t)
 (global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
@@ -598,9 +589,6 @@ that name."
 (autoload 'as-insert-name "as-autotext" "Insert name" t)
 (global-set-key "\C-cin" 'as-insert-name)
 
-(autoload 'as-insert-old-homepage-url "as-autotext" "Insert old homepage url" t)
-(global-set-key "\C-cio" 'as-insert-old-homepage-url)
-
 (autoload 'as-insert-scissors "as-autotext" "Insert scissors" t)
 (global-set-key "\C-cis" 'as-insert-scissors)
 
@@ -609,9 +597,6 @@ that name."
 
 (autoload 'as-insert-time "as-autotext" "Insert time" t)
 (global-set-key "\C-cit" 'as-insert-time)
-
-(autoload 'as-insert-tigerpig-url "as-autotext" "Insert tigerpig url" t)
-(global-set-key "\C-ciT" 'as-insert-tigerpig-url)
 
 ;;}}}
 (global-set-key "\C-ck"   'delete-file)

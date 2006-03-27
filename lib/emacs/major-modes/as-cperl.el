@@ -13,165 +13,6 @@
   (setq cperl-close-paren-offset (- width)))
 
 ;;}}}
-;;{{{ as-cperl-insert-self-and-args-line
-
-;;(eval-when-compile (defun cperl-indent-command (&optional whole-exp)))
-(defun as-cperl-insert-self-and-args-line ()
-  "Inserts
-
-  my $self = shift;
-  my () = @_;
-
-line before the current line, and leaves the point poised for adding
-subroutine arguments."
-  (interactive)
-;;   (beginning-of-line)
-;;   (open-line 1)
-;;   (cperl-indent-command)
-;;   (insert "my ($self) = @_;")
-;;   (backward-char 7)
-  (as-cperl-insert-self-line)
-  (as-cperl-insert-args-line)
-  )
-
-;;}}}
-;;{{{ as-cperl-insert-self-line
-
-(defun as-cperl-insert-self-line ()
-  "Inserts a
-
-  my $self = shift;
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my $self = shift;")
-  (beginning-of-line)
-  (forward-line 1)
-  )
-
-;;}}}
-;;{{{ as-cperl-insert-args-line
-
-(defun as-cperl-insert-args-line ()
-  "Inserts a
-
-  my () = @_;
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "my () = @_;")
-  (backward-char 7))
-
-;;}}}
-;;{{{ as-cperl-insert-data-dumper-line
-
-(defun as-cperl-insert-data-dumper-line ()
-  "Inserts a
-
-  use Data::Dumper;
-  warn Dumper();
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "use Data::Dumper;")
-  (newline-and-indent)
-  (insert "warn Dumper();")
-  (backward-char 2))
-
-;;}}}
-;;{{{ as-cperl-insert-carp-line
-
-(defun as-cperl-insert-carp-line ()
-  "Inserts a
-
-  use Carp qw(carp cluck croak confess);
-
-line before the current line."
-  (interactive)
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "use Carp qw(carp cluck croak confess);")
-  (newline-and-indent))
-
-;;}}}
-;;{{{ as-cperl-make-method
-
-(defun as-cperl-make-method (method)
-  "Makes a new Perl method."
-  (interactive "sMethod name: ")
-  (beginning-of-line)
-  (open-line 1)
-  (cperl-indent-command)
-  (insert "sub " method " {")
-  (newline-and-indent)
-  (insert "}\n")
-  (forward-line -1)
-  (cperl-indent-command)
-  (beginning-of-line)
-  (as-cperl-insert-self-and-args-line)
-)
-
-;;}}}
-;;{{{ as-cperl-make-method-and-pod
-
-(defun as-cperl-make-method-and-pod (method)
-  "Makes a new Perl method with an accompanying pod stub."
-  (interactive "sMethod name: ")
-  (beginning-of-line)
-  (insert "=head2 " method "()")
-  (newline 2)
-  (insert "=cut")
-  (newline 2)
-  (cperl-find-pods-heres)
-  (as-cperl-make-method method)
-)
-
-;;}}}
-;;{{{ as-cperl-insert-head
-
-(defun as-cperl-insert-head ()
-  "Inserts an empty pod =head directive."
-  (interactive)
-  (beginning-of-line)
-  (insert "=head2 
-
-=cut
-
-")
-  (forward-line -4)
-  (end-of-line)
-  (cperl-find-pods-heres)
-)
-
-;;}}}
-;;{{{ as-cperl-insert-pod-list
-
-(defun as-cperl-insert-pod-list ()
-  "Inserts Makes a new Perl method with an accompanying pod stub."
-  (interactive)
-  (beginning-of-line)
-  (insert "=over 4
-
-=item * 
-
-=back
-
-")
-  (forward-line -4)
-  (end-of-line)
-)
-
-;;}}}
 ;;{{{ as-cperl-insert-unique-warning
 
 (defvar as-cperl-unique-warning-counter 0
@@ -196,64 +37,6 @@ Can be optionally given a numeric prefix which
   (insert (format "warn \"%2d\";" as-cperl-unique-warning-counter))
   (forward-line 2)
   (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
-
-;;}}}
-;;{{{ as-cperl-insert-self-method-call
-
-(fset 'as-cperl-insert-self-method-call "$self->")
-
-;;}}}
-;;{{{ as-cperl-insert-pkg-template
-
-(defun as-cperl-insert-pkg-template (pkg)
-  "Inserts a template for a complete Perl package."
-  (interactive "sPackage name: ")
-  (beginning-of-buffer)
-  (insert "package " pkg ";
-
-=head1 NAME
-
-" pkg " -
-
-=head1 SYNOPSIS
-
-=head1 DESCRIPTION
-
-=cut
-
-use strict;
-use warnings;
-
-=head1 CONSTRUCTORS
-
-=cut
-
-=head1 METHODS
-
-=cut
-
-=head1 BUGS
-
-=head1 SEE ALSO
-
-=cut
-
-1;
-")
-  (forward-line -3))
-
-;;}}}
-;;{{{ as-cperl-insert-script-template
-
-(defun as-cperl-insert-script-template ()
-  "Inserts a template for a Perl script."
-  (interactive)
-  (insert "#!/usr/bin/perl
-
-use strict;
-use warnings;
-
-"))
 
 ;;}}}
 ;;{{{ as-cperl-insert-check-syscall
@@ -338,23 +121,11 @@ point somewhere *before* the if/unless/while/until/for/foreach modifier."
 
 (defun as-cperl-setup ()
   "Set up cperl-mode the way Adam likes it."
-  (local-set-key "\C-cma"      'as-cperl-insert-args-line)
-  (local-set-key "\C-cmc"      'as-cperl-insert-self-method-call)
-  (local-set-key "\C-cmC"      'as-cperl-insert-carp-line)
-  (local-set-key "\C-cmD"      'as-cperl-insert-data-dumper-line)
-  (local-set-key "\C-cmh"      'as-cperl-insert-head)
   (local-set-key "\C-cmj"      'imenu)
-  (local-set-key "\C-cml"      'as-cperl-insert-pod-list)
-  (local-set-key "\C-cmm"      'as-cperl-make-method)
-  (local-set-key "\C-cmM"      'as-cperl-make-method-and-pod)
   (local-set-key "\C-cmo"      'as-cperl-insert-check-syscall)
   (local-set-key "\C-cmp"      'cperl-find-pods-heres)
-  (local-set-key "\C-cmP"      'as-cperl-insert-pkg-template)
   (local-set-key "\C-cmi"      'as-cperl-set-indent-level)
-  (local-set-key "\C-cms"      'as-cperl-insert-self-and-args-line)
-  (local-set-key "\C-cmS"      'as-cperl-insert-self-line)
   (local-set-key "\C-cmt"      'as-cperl-reinvert-if-unless)
-  (local-set-key "\C-cmT"      'as-cperl-insert-script-template)
   (local-set-key [(f10)]       'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
   (setq indent-tabs-mode nil)

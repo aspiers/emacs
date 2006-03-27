@@ -154,21 +154,6 @@ line before and after the text."
 ;;}}}
 ;;{{{ Information about me
 
-(defun as-insert-homepage-url ()
-  "Inserts Adam's homepage URL"
-  (interactive)
-  (insert "http://adamspiers.org/"))
-
-(defun as-insert-old-homepage-url ()
-  "Inserts Adam's old homepage URL"
-  (interactive)
-  (insert "http://www.new.ox.ac.uk/~adam/"))
-
-(defun as-insert-tigerpig-url ()
-  "Inserts the tigerpig.org URL"
-  (interactive)
-  (insert "http://tigerpig.org/"))
-
 (defun as-insert-email-address (&optional prefix)
   "Inserts Adam's e-mail address."
   (interactive)
@@ -206,25 +191,5 @@ line before and after the text."
   (interactive)
   (as-insert-name)
   (insert " <" as-work-email-address ">"))
-
-(defun as-insert-snail-mail () 
-  "Inserts Adam's snail mail address"
-  (interactive)
-  (insert "70 Ocean Wharf
-60 Westferry Road
-London
-E14 8JS
-"))
-
-(defun as-insert-work-snail-mail () 
-  "Inserts Adam's work snail mail address"
-  (interactive)
-  (insert "Novell (UK) Ltd.
-1 Arlington Square
-Downshire Way
-Bracknell
-Berkshire
-RG12 1WA
-"))
 
 ;;}}}
