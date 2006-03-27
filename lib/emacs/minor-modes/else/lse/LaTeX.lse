@@ -1,0 +1,738 @@
+;; Copyright (C) 1997,1998,1999,2000,2001,2002,2003 Peter Milliken
+;;
+;; Author: Peter Milliken <peterm@resmed.com.au>,
+;;                        <peter.millken@exemail.com.au>
+;;
+;; Keywords: language sensitive abbreviation template placeholder token
+;;
+
+;; GNU Emacs is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
+
+
+DELETE LANGUAGE "LaTeX" -
+DEFINE LANGUAGE "LaTeX" -
+    /INITIAL_STRING="{compilation_unit}" -
+    /PUNCTUATION_CHARACTERS=",;()*.'" -
+    /SELF_INSERT_CHARACTERS=" `~!@#$%^&*(),.<>/?;:'[]{}=\-+|""
+    /VALID_IDENTIFIER_CHARACTERS="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+    /INDENT_SIZE=2
+    /VERSION=1.10
+
+END DEFINE
+
+DELETE PLACEHOLDER STATEMENT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER STATEMENT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION=""
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU -
+    
+    "list"/PLACEHOLDER
+    "section"/PLACEHOLDER
+    "subsection"/PLACEHOLDER
+    "subsubsection"/PLACEHOLDER
+    "verbatim_"/PLACEHOLDER
+    "quote"/PLACEHOLDER
+    "figure_"/PLACEHOLDER
+    "marginal_note"/PLACEHOLDER
+    "footnote"/PLACEHOLDER
+    "footnotemark"/PLACEHOLDER
+    "footnotetext"/PLACEHOLDER
+    "footnoterule"/PLACEHOLDER
+    "general_label"/PLACEHOLDER
+    "symbols"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER COMPILATION_UNIT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER COMPILATION_UNIT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\documentclass[[options]...]{article}"
+    "\newcommand{\ie}{i.e.\ }"
+    "\newcommand{\eg}{e.g.\ }"
+    "\newcommand{\smiley}{:-)}"
+    "{style}"
+
+END DEFINE
+
+DELETE PLACEHOLDER STYLE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER STYLE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "title"/PLACEHOLDER
+    "notitle"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER TITLE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER TITLE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\title{{title_text}}"
+    "\author{{author_text}}"
+    "\date{{date_text}}"
+    "\begin{document}"
+    "\maketitle"
+    "{statement}..."
+    "\end{document}"
+
+END DEFINE
+
+DELETE PLACEHOLDER NOTITLE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER NOTITLE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{document}"
+    "{statement}..."
+    "\end{document}"
+
+END DEFINE
+
+DELETE PLACEHOLDER TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Just type some text here, please"
+
+END DEFINE
+
+DELETE PLACEHOLDER OPTIONS -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER OPTIONS -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=", " -
+    /TYPE=MENU
+
+    "a4paper"
+    "12pt"
+
+END DEFINE
+
+DELETE PLACEHOLDER SECTION -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER SECTION -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\section{{section_text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER SUBSECTION -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER SUBSECTION -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\subsection{{section_text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER SUBSUBSECTION -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER SUBSUBSECTION -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION=""
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL -
+    
+    "\subsubsection{{section_text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER TITLE_TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER TITLE_TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter some title text, spaces are allowed"
+
+END DEFINE
+
+DELETE PLACEHOLDER SECTION_TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER SECTION_TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter some text for the section title, spaces are allowed"
+
+END DEFINE
+
+DELETE PLACEHOLDER AUTHOR_TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER AUTHOR_TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Either type your name here or redefine the placeholder to insert your name."
+
+END DEFINE
+
+DELETE PLACEHOLDER DATE_TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER DATE_TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter the date ie 8th August 1997"
+
+END DEFINE
+
+DELETE PLACEHOLDER LIST -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER LIST -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "description_list"/PLACEHOLDER
+    "enumeration_list"/PLACEHOLDER
+    "itemise_list"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER DESCRIPTION_LIST -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER DESCRIPTION_LIST -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{description}"
+    "{desc_list_item}..."
+    "\end{description}"
+    ""
+
+END DEFINE
+
+
+DELETE PLACEHOLDER DESC_LIST_ITEM -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER DESC_LIST_ITEM -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\item [{text}] {text}"
+    ""
+
+END DEFINE
+
+DELETE PLACEHOLDER ENUMERATION_LIST -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER ENUMERATION_LIST -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{enumerate}"
+    "[item]..."
+    "\end{enumerate}"
+    ""
+
+END DEFINE
+
+DELETE PLACEHOLDER ITEM -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER ITEM -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\item {text}"
+    ""
+
+END DEFINE
+
+DELETE PLACEHOLDER ITEMISE_LIST -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER ITEMISE_LIST -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{itemize}"
+    "[item]..."
+    "\end{itemize}"
+
+END DEFINE
+
+DELETE PLACEHOLDER VERBATIM_ -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER VERBATIM_ -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Provide the verbatim construct" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{verbatim}"
+    "{text}"
+    "\end{verbatim}"{language_name}
+
+END DEFINE
+
+DELETE PLACEHOLDER FIGURE_ -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FIGURE_ -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{figure} [position]"
+    "[statement]..."
+    "[caption]"
+    "\end{figure}"
+
+END DEFINE
+
+DELETE PLACEHOLDER TABLE_ -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER TABLE_ -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION=""
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL -
+    
+    "\begin{table} [position]"
+    "\begin{tabularx}{{width}}{{preamble}}
+    "[statement]..."
+    "[caption]"
+    "\end{table}"
+
+END DEFINE
+
+DELETE PLACEHOLDER CAPTION -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER CAPTION -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\caption[text]{{text}} [general_label]"
+
+END DEFINE
+
+DELETE PLACEHOLDER GENERAL_LABEL -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER GENERAL_LABEL -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Used to generate \label{text}" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\label{{text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER POSITION -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER POSITION -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "[h]"
+    "[ht]"
+    "[t]"
+    "[b]"
+    "[hb]"
+    "[H]"
+    "[p]"
+
+END DEFINE
+
+DELETE PLACEHOLDER MARGINAL_NOTE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER MARGINAL_NOTE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Generate a marginal note." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\marginpar{{text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOTNOTE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOTNOTE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Generate a foot note" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\footnote[footnotenum]{{text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOTNOTENUM -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOTNOTENUM -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="The number of the footnote" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[{foot_number}]"
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOT_NUMBER -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOT_NUMBER -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter a footnote number."
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOTNOTEMARK -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOTNOTEMARK -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Generate a foot note mark. Used with footnotetext." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\footnotemark[footnotenum]"
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOTNOTETEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOTNOTETEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Used with footnotemark to footnote text." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\footnotetext[footnotenum]{{text}}"
+
+END DEFINE
+
+DELETE PLACEHOLDER FOOTNOTERULE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER FOOTNOTERULE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Draws line separating footnote text from main text." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\footnoterule"
+
+END DEFINE
+
+DELETE PLACEHOLDER SYMBOLS -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER SYMBOLS -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Special symbols" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "copyright"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER COPYRIGHT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER COPYRIGHT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Copyright symbol" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\copyright"
+
+END DEFINE
+
+DELETE PLACEHOLDER WIDTH -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER WIDTH -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter a width parameter."
+
+END DEFINE
+
+DELETE PLACEHOLDER PREAMBLE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER PREAMBLE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="|" -
+    /TYPE=TERMINAL
+
+    "Enter a preamble."
+
+END DEFINE
+
+[placeholder_definition]...
+
+
+END DEFINE
+
+DELETE PLACEHOLDER LABEL -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER LABEL -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[{label_text}]"
+
+END DEFINE
+
+DELETE PLACEHOLDER LABEL_TEXT -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER LABEL_TEXT -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "This is the preliminary stuff followed by the style"
+    "ie EX i - will generate lists with 'EX' and then a Roman numeral"
+
+END DEFINE
+
+DELETE PLACEHOLDER QUOTE -
+    /LANGUAGE="LaTeX" -
+DEFINE PLACEHOLDER QUOTE -
+    /LANGUAGE="LaTeX" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Provide a quote construct" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "\begin{quote}"
+    "``[text]''"
+    "\end{quote}"
+    ""
+
+END DEFINE
+
+DELETE TOKEN QU -
+    /LANGUAGE="LaTeX" -
+DEFINE TOKEN QU -
+    /LANGUAGE="LaTeX" -
+    /PLACEHOLDER=QUOTE
+
+END DEFINE
+
+DELETE TOKEN LD -
+     /LANGUAGE="LaTeX" -
+DEFINE TOKEN LD -
+     /LANGUAGE="LaTeX" -
+     /PLACEHOLDER=DESCRIPTION_LIST
+
+END DEFINE
+
+DELETE TOKEN LE -
+     /LANGUAGE="LaTeX" -
+DEFINE TOKEN LE -
+     /LANGUAGE="LaTeX" -
+     /PLACEHOLDER=ENUMERATION_LIST
+
+END DEFINE
+
+DELETE TOKEN LI -
+     /LANGUAGE="LaTeX" -
+DEFINE TOKEN LI -
+     /LANGUAGE="LaTeX" -
+     /PLACEHOLDER=ITEMISE_LIST
+
+END DEFINE
+
+DELETE TOKEN VB -
+     /LANGUAGE="LaTeX" -
+DEFINE TOKEN VB -
+     /LANGUAGE="LaTeX" -
+     /PLACEHOLDER=VERBATIM_
+
+END DEFINE
+
+DELETE TOKEN IT -
+  /LANGUAGE="LaTeX" -
+DEFINE TOKEN IT -
+  /LANGUAGE="LaTeX" -
+  /DESCRIPTION="" - -
+
+  "\textit{{text}}"
+
+END DEFINE
+
+DELETE TOKEN BF -
+  /LANGUAGE="LaTeX" -
+DEFINE TOKEN BF -
+  /LANGUAGE="LaTeX" -
+  /DESCRIPTION="" - -
+
+  "\textbf{{text}}"
+
+END DEFINE
+
+DELETE TOKEN FIG -
+    /LANGUAGE="LaTeX" -
+DEFINE TOKEN FIG -
+    /LANGUAGE="LaTeX" -
+    /PLACEHOLDER=FIGURE_
+
+END DEFINE
+
+[token_definition]...
+[placeholder_definition]...
+
+DELETE TOKEN TB -
+    /LANGUAGE="LaTeX" -
+DEFINE TOKEN TB -
+    /LANGUAGE="LaTeX" -
+    /PLACEHOLDER=TABLE_
+
+END DEFINE
+

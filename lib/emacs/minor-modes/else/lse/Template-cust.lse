@@ -1,0 +1,398 @@
+;; These are customization Templates for the TEMPLATE language
+;; for use with the Emacs Language Sensitive Editor (ELSE).
+;;
+;; Created 2003 Douglas Harter
+;;
+;; Author: Douglas Harter <dharter46@comcast.net> and 
+;;         Peter Milliken <peter.millken@exemail.com.au>
+;;
+;; $Revision$
+;;
+;;******************************************************************************
+;; These definitions are my personal customisations for the language. This is
+;; where you should place YOUR customisations.
+;;
+;; Sometimes there is a definition(s) in here that override definitions in the
+;; main language template file that are here to make that definition more
+;; "usable" - this is because I (primarily) try and generate/maintain the main
+;; .lse files from EBNF definitions of the language. Sometimes I just can't
+;; express the appropriate customisation in the EBNF and so I am forced to
+;; override the placeholder definition in this file.
+;;
+;; This entries in this file should be used as an example of how to create your
+;; own customisations. I would caution that you don't delete any definitions
+;; though until you are sure that your edit sessions will not be adversely
+;; affected. The best way to check out the effects of a delete is to "compile"
+;; (else-compile-buffer) the "delete" command for that definition (this will
+;; remove it from your edit session and you can nolonger access the definition
+;; until next you load language template files) and then see whether anything
+;; has been "lost" in your code generation ability i.e. say you think you don't
+;; need the definition for placeholder XXX, just place the following lines at
+;; the end of one of your source files (when ELSE is enabled for that buffer)
+;; and perform a compile (M-x else-compile-buffer) with the cursor positioned at
+;; the beginning of the line:
+;;
+;; DELETE PLACEHOLDER XXX -
+;;    /LANGUAGE = "Template" -         
+;;
+;; This will delete definition XXX from memory.
+;;
+;;****************************************************************************** 
+
+DELETE PLACEHOLDER LANGUAGE_DEFINITION -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER LANGUAGE_DEFINITION -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "DELETE LANGUAGE {language_name} -"
+    "DEFINE LANGUAGE {language_name} -"
+    "    /INITIAL_STRING="{compilation_unit}" -"
+    "    /PUNCTUATION_CHARACTERS="{punctuation_characters}" -"
+    "    /SELF_INSERT_CHARACTERS="{self_insert_characters}" -"
+    "    /VALID_IDENTIFIER_CHARACTERS="{valid_identifier_characters}" -"
+    "    /INDENT_SIZE={indent_number} -"
+    ""
+    "END DEFINE"
+    ""
+
+DELETE PLACEHOLDER indent_number -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER indent_number -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter a numerical value for the indentation of each line of code."
+
+END DEFINE
+
+DELETE PLACEHOLDER substitute_number -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER substitute_number -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter a numerical value for the *maximum* number of times this"
+    "placeholder repeats."
+
+END DEFINE
+
+
+DELETE PLACEHOLDER TYPE_TYPE -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER TYPE_TYPE -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "NONTERMINAL"
+    "TERMINAL"
+
+END DEFINE
+
+DELETE PLACEHOLDER punctuation_characters -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER punctuation_characters -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "default_punctuation"/PLACEHOLDER
+    "user_punctuation"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER default_punctuation -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER default_punctuation -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    ",;()*.'-"
+
+END DEFINE
+
+DELETE PLACEHOLDER user_punctuation -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER user_punctuation -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter the punctuation characters for the language being defined. "
+    "The defaults are: ,;()*.'-"
+
+END DEFINE
+
+DELETE PLACEHOLDER self_insert_characters -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER self_insert_characters -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "default_self_insert"/PLACEHOLDER
+    "user_self_insert"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER default_self_insert -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER default_self_insert -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    " `~!@#$%^&*(),.<>/?;:'[]{}=\-+|""
+
+END DEFINE
+
+DELETE PLACEHOLDER user_self_insert -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER user_self_insert -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter the characters that check to see if ELSE is within a placeholder"
+    "for self insert."
+    "The defaults are:  `~!@#$%^&*(),.<>/?;:'[]{}=\-+|""
+
+END DEFINE
+
+DELETE PLACEHOLDER valid_identifier_characters -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER valid_identifier_characters -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "default_valid_identifier"/PLACEHOLDER
+    "user_valid_identifier"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER default_valid_identifier -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER default_valid_identifier -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+
+END DEFINE
+
+DELETE PLACEHOLDER user_valid_identifier -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER user_valid_identifier -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Enter the characters that check to see if ELSE is within a placeholder"
+    "for valid identifier."
+    "The defaults are:"
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+
+END DEFINE
+
+DELETE PLACEHOLDER PLACEHOLDER_DEFINITION -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER PLACEHOLDER_DEFINITION -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "DELETE PLACEHOLDER {place_name} -"
+    "    /LANGUAGE="{language_name}" -"
+    "DEFINE PLACEHOLDER [place_name] -"
+    "    /LANGUAGE="{language_name}" -"
+    "{placeholder_type}"
+    ""
+    "END DEFINE"
+    ""
+
+END DEFINE
+
+DELETE PLACEHOLDER placeholder_type -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER placeholder_type -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Type of placeholder" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "nonterminal|terminal_placeholder"/PLACEHOLDER
+    "menu_placeholder"/PLACEHOLDER
+    "cross_ref_placeholder"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER CROSS_REF_PLACEHOLDER -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER CROSS_REF_PLACEHOLDER -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="/PLACEHOLDER={place_name}" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "/PLACEHOLDER=[place_name]"
+
+END DEFINE
+
+DELETE PLACEHOLDER nonterminal|terminal_placeholder -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER nonterminal|terminal_placeholder -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Templates for NONTERMINAL and TERMINAL types" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "    /{substitute}"
+    "    [substitute_count]"
+    "    /DESCRIPTION={descriptive_text} -"
+    "    /DUPLICATION={dup_type}"
+    "    /SEPARATOR={separator_text}"
+    "    /TYPE={type_type}"
+    ""
+    "    {line_of_text}..."
+
+END DEFINE
+
+DELETE PLACEHOLDER menu_placeholder -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER menu_placeholder -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Template for a MENU type -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "    /{substitute}"
+    "    [substitute_count]"
+    "    /DESCRIPTION={descriptive_text} -"
+    "    /DUPLICATION={dup_type}"
+    "    /SEPARATOR={separator_text}"
+    "    /TYPE=MENU"
+    ""
+    "{menu placeholder body line}..."
+
+END DEFINE
+
+DELETE PLACEHOLDER "menu placeholder body line" -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER "menu placeholder body line" -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    ""{menu body item}"[menu body qualifier]"
+
+END DEFINE
+
+DELETE PLACEHOLDER "menu body item" -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER "menu body item" -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "In a Menu Placeholder, you may have a string, a placeholder name, or"
+    "a token. Placeholders and Tokens must be followed by the appropriate"
+    "qualifier."
+
+END DEFINE
+
+DELETE PLACEHOLDER "menu body qualifier" -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER "menu body qualifier" -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "/PLACEHOLDER"
+    "/TOKEN"
+
+END DEFINE
+
+DELETE PLACEHOLDER PLACEHOLDER_REFERENCE -
+    /LANGUAGE="Template" -
+DEFINE PLACEHOLDER PLACEHOLDER_REFERENCE -
+    /LANGUAGE="Template" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Token that references a placeholder definition" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "DELETE TOKEN {token_name} -"
+    "     /LANGUAGE="{language_name}" -"
+    "DEFINE TOKEN [token_name] -"
+    "     /LANGUAGE="{language_name}" -"
+    "     /PLACEHOLDER={place_name}"
+    ""
+    "END DEFINE"
+    ""

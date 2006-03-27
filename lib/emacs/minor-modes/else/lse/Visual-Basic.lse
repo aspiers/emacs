@@ -1,0 +1,4609 @@
+;; These are primary Templates for the Visual Basic language
+;; for use with the Emacs Language Sensitive Editor (ELSE).
+;; This implmentation is for Visual Basic 6.0.
+;;
+;; Created 2003 Douglas Harter
+;;
+;; Author: Douglas Harter <djharter@aol.com>
+;; Date modified : Time-stamp: <2003-04-17 08:59:31>
+;; Version: 1.0
+;;
+;; This is not meant to be a complete implementation of Visual Basic.
+;; I hope I have included all the most commonly used VB statements and
+;; functions. I have also included the commonly used Microsoft Scripting
+;; Runtime FileSystemObject and TextStream functions. These are based
+;; upon having the following defined in your program:
+;; Public FSO As New FileSystemObject
+;; Public TS As TextStream
+;;
+DELETE LANGUAGE "Visual-Basic" -
+DEFINE LANGUAGE "Visual-Basic" -
+    /INITIAL_STRING="{compilation_unit}" -
+    /PUNCTUATION_CHARACTERS=",;()*.'" -
+    /SELF_INSERT_CHARACTERS=" `~!@#$%^&*(),.<>/?;:'[]{}=\-+|"
+    /VALID_IDENTIFIER_CHARACTERS="'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789$"
+    /INDENT_SIZE=4 -
+
+END DEFINE
+
+DELETE PLACEHOLDER compilation_unit -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER compilation_unit -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Attribute VB_Name = "{text}""
+    "Option Explicit"
+    ""
+    "[declarations]..."
+    " "
+    "[subroutine|function]..."
+
+END DEFINE
+
+DELETE PLACEHOLDER "subroutine|function" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER subroutine|function -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Subroutine or Function" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "subroutine"/PLACEHOLDER
+    "function"/PLACEHOLDER
+
+END DEFINE
+
+DELETE TOKEN subr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN subr -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=subroutine
+
+END DEFINE
+
+DELETE PLACEHOLDER subroutine -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER subroutine -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Subroutine definition" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[Scope] Sub {varname} ([arglist]...)"
+    "[sub-declarations]..."
+    "{statement}..."
+    "End Sub"
+    ""
+
+END DEFINE
+
+DELETE TOKEN funct -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN funct -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=function
+
+END DEFINE
+
+DELETE PLACEHOLDER function -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER function -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Function definition" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[Scope] Function {functname} ([arglist]...) As {type}"
+    "[sub-declarations]..."
+    "{statement}..."
+    "{functname} = {value}"
+    "End Function"
+    " "
+
+END DEFINE
+
+DELETE TOKEN do -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN do -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=do-loop
+
+END DEFINE
+
+DELETE TOKEN for-each -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN for-each -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=for-each-next
+
+END DEFINE
+
+DELETE TOKEN for -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN for -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=for-next
+
+END DEFINE
+
+DELETE TOKEN if -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN if -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=if-then-else
+
+END DEFINE
+
+DELETE TOKEN case -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN case -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=select-case
+
+END DEFINE
+
+DELETE TOKEN while -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN while -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=while-wend
+
+END DEFINE
+
+
+DELETE PLACEHOLDER do-loop -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER do-loop -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Variations of DO loop" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "do-while|until"/PLACEHOLDER
+    "do-loop-while|until"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER do-while|until -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER do-while|until -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Do while or until loop" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Do {while|until} {condition}"
+    "   {statement}..."
+    "Loop"
+
+END DEFINE
+
+DELETE PLACEHOLDER do-loop-while|until -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER do-loop-while|until -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="do loop while or until -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Do"
+    "   {statement}..."
+    "Loop {while|until} {condition}"
+
+END DEFINE
+
+DELETE PLACEHOLDER while|until -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER while|until -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="while or until" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Until"
+    "While"
+
+END DEFINE
+
+DELETE PLACEHOLDER while-wend -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER while-wend -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="While statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "While {condition}"
+    "   {CONDITION}..."
+    "Wend"
+
+END DEFINE
+
+DELETE PLACEHOLDER statement -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER statement -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A Visual Basic statemnt" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A Visual Basic statement"
+
+END DEFINE
+
+DELETE PLACEHOLDER condition -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER condition -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A comparison" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=" "
+    /TYPE=MENU
+
+    "string-comparison"/PLACEHOLDER
+    "integer-comparison"/PLACEHOLDER
+    "integer-expr"/PLACEHOLDER
+    "! {integer-expr}"
+
+END DEFINE
+
+DELETE PLACEHOLDER string-comparison -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER string-comparison -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="string comparison expression" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{string-expr} {string-op} {string-expr}"
+
+END DEFINE
+
+DELETE PLACEHOLDER integer-comparison -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER integer-comparison -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="integer comparison expression" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{integer-expr} {integer-op} {integer-expr}"
+
+END DEFINE
+
+DELETE PLACEHOLDER paren-expr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER paren-expr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="(expression)" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({condition}...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER integer-expr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER integer-expr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="integer expressions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "varname"/PLACEHOLDER
+    "function"/PLACEHOLDER
+    "integer"/PLACEHOLDER
+    "paren-expr"/PLACEHOLDER
+    "integer-comparison"/PLACEHOLDER
+    "string-comparison"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER string-expr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER string-expr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Character string expressions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "quoted-string"/PLACEHOLDER
+    "null-string"/PLACEHOLDER
+    "varname"/PLACEHOLDER
+    "function"/PLACEHOLDER
+    "paren-expr"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER integer-op -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER integer-op -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="integer comparison operator" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "="
+    "<>"
+    "<"
+    ">"
+    "<="
+    ">="
+
+END DEFINE
+
+DELETE PLACEHOLDER string-op -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER string-op -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=integer-op
+
+END DEFINE
+
+DELETE PLACEHOLDER integer -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER integer -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An integer" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "string of digits 0-9"
+
+END DEFINE
+
+DELETE PLACEHOLDER quoted-string -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER quoted-string -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    ""{text}""
+
+END DEFINE
+
+DELETE PLACEHOLDER text -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER text -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A string of characters"
+
+END DEFINE
+
+DELETE PLACEHOLDER null-string -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER null-string -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    """"
+
+END DEFINE
+
+DELETE PLACEHOLDER varname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER varname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=TERMINAL
+
+    "The name of a variable (or literal)"
+
+END DEFINE
+
+DELETE PLACEHOLDER functname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER functname -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER value -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER value -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A numeric or string value, variable name, or function name"
+
+END DEFINE
+
+DELETE PLACEHOLDER scope -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER scope -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Public"
+    "Private"
+
+END DEFINE
+
+DELETE PLACEHOLDER declarations -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER declarations -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="declarations" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "variable-declaration"/PLACEHOLDER
+    "constant-declaration"/PLACEHOLDER
+    "enum-declaration"/PLACEHOLDER
+    "user-defined-type-declaration"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER sub-declarations -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER sub-declarations -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="declarations in a subroutine or function" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Dim"/PLACEHOLDER
+    "static"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER type -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER type -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Variable type" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Integer"
+    "String"
+    "Boolean"
+    "Date"
+    "Long"
+    "Byte"
+    "Single"
+    "Double"
+    "Object"
+    "Variant"
+    "user-defined-type-name"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER user-defined-type-name -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER user-defined-type-name -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER variable-declaration -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER variable-declaration -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Declaration of a variable" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{scope} {variable-dec}"
+
+END DEFINE
+
+DELETE PLACEHOLDER variable-dec -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER variable-dec -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="The variable part of the declaration" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{varname}[(subscripts)] As [New] {type}"
+
+END DEFINE
+
+DELETE PLACEHOLDER "(subscripts)" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "(subscripts)" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({subscript}...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER subscript -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER subscript -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=", "
+    /TYPE=NONTERMINAL
+
+    "{integer}"
+
+END DEFINE
+
+DELETE PLACEHOLDER new -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER new -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "New"
+
+END DEFINE
+
+DELETE PLACEHOLDER constant-declaration -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER constant-declaration -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Const Declaration" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{scope} Const {varname} As {type} = {const-expression}"
+
+END DEFINE
+
+DELETE PLACEHOLDER const-expression -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER const-expression -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "integer"
+    ""{text}""
+
+END DEFINE
+
+DELETE PLACEHOLDER enum-declaration -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER enum-declaration -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An enumumeration" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[scope] Enum {varname}"
+    "   {enum-member}..."
+    "End Enum"
+
+END DEFINE
+
+DELETE PLACEHOLDER enum-member -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER enum-member -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{membername}[=constant]"
+
+END DEFINE
+
+DELETE PLACEHOLDER membername -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER membername -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER =constant -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER =constant -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    " = {integer}"
+
+END DEFINE
+
+DELETE PLACEHOLDER user-defined-type-declaration -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER user-defined-type-declaration -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A User defined type" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[scope] Type {varname}"
+    "   {type_element}..."
+    "End Type"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER type_element -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER type_element -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{varname}[(subscripts)] As {type}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER dim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER dim -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="a Dim variable declaration" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+
+    "Dim {variable-dec}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER static -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER static -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A Static variable declaration" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Static {variable-dec}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER arglist -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER arglist -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An argument list" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=", "
+    /TYPE=NONTERMINAL
+
+    "[Optional] [ParamArray] {varname}[()] [as type] [=default]"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER optional -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER optional -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Optional"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER paramarray -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER paramarray -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "ParamArray"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER "As type" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "As type" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "As {type}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER =default -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER =default -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "= {value}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER for-each-next -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER for-each-next -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="For Each...Next Statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "For Each {element} In {group}"
+    "   {statement]..."
+    "Next [element]"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER element -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER element -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER group -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER group -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER for-next -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER for-next -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="For...Next Statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "For {counter} = {start} To {end} [stpopt]"
+    "    {statement}..."
+    "Next [counter]"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER counter -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER counter -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER start -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER start -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER end -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER end -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER stpopt -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER stpopt -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Step {stpcount}"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER stpcount -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER stpcount -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE PLACEHOLDER () -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER () -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "()"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER if-then-else -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER if-then-else -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Types of IF statements" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "simple-if"/PLACEHOLDER
+    "one-line-if"/PLACEHOLDER
+    "if-else"/PLACEHOLDER
+    "if-then-elseif"/PLACEHOLDER
+    "iif-function"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER simple-if -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER simple-if -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="If...Then" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "If {condition} Then"
+    "    {statement}..."
+    "End If"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER one-line-if -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER one-line-if -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="If condition then statement [Else part]" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "If {condition} then {statement} [one-line-Else]"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER one-line-else -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER one-line-else -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Else {statement}"
+
+
+END DEFINE
+
+DELETE TOKEN else -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN else -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=else-part
+
+END DEFINE
+
+DELETE PLACEHOLDER if-else -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER if-else -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="If...Then...Else" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "If {condition} Then"
+    "    {statement}..."
+    "[else-part]"
+    "End If"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER else-part -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER else-part -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Else portion if If-Else" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Else"
+    "    {statement}..."
+
+
+END DEFINE
+
+DELETE PLACEHOLDER if-then-elseif -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER if-then-elseif -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "If {condition} Then"
+    "    {statement}..."
+    "[elseif-part]..."
+    "[else-part]"
+    "End If"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER elseif-part -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER elseif-part -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "ElseIf {condition} Then"
+    "    {statement}..."
+
+
+END DEFINE
+
+DELETE PLACEHOLDER select-case -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER select-case -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Select Case Statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Select Case {expression}"
+    "    {case-list}..."
+    "    [case-else]"
+    "End Select"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER case-else -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER case-else -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Case Else"
+    "    {statement}..."
+
+
+END DEFINE
+
+DELETE PLACEHOLDER expression -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER expression -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=", " -
+    /TYPE=TERMINAL
+
+    "Any numeric or string expression"
+
+
+END DEFINE
+
+DELETE PLACEHOLDER case-list -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER case-list -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Case {expressionlist}"
+    "    {statement}..."
+
+
+END DEFINE
+
+DELETE PLACEHOLDER expressionlist -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER expressionlist -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "expression"/PLACEHOLDER
+    "{expression} To {expression}"
+    "Is {comparison-operator} {expression}"
+
+END DEFINE
+
+DELETE PLACEHOLDER comparison-operator -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER comparison-operator -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=integer-op
+
+END DEFINE
+
+DELETE TOKEN tsopts -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN tsopts -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=tsopt
+
+END DEFINE
+
+DELETE PLACEHOLDER tsopt -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tsopt -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="TS. common options" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "TSAtEndStr"/PLACEHOLDER
+    "TSClose"/PLACEHOLDER
+    "TSReadLine"/PLACEHOLDER
+    "TSWriteLine"/PLACEHOLDER
+    "TSWriteBlankLines"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER tsatendstr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tsatendstr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="TS.AtEndOfStream" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "TS.AtEndOfStream"
+
+END DEFINE
+
+DELETE PLACEHOLDER tsclose -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tsclose -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="TS.Close" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "TS.Close"
+
+END DEFINE
+
+DELETE PLACEHOLDER tsreadline -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tsreadline -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="varname = TS.Readline" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{varname} = TS.ReadLine"
+
+END DEFINE
+
+DELETE PLACEHOLDER tswriteline -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tswriteline -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="TS.WriteLine" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "TS.WriteLine {expression}"
+
+END DEFINE
+
+DELETE PLACEHOLDER tswriteblanklines -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tswriteblanklines -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="TS.WriteBlankLines" -
+    /TYPE=NONTERMINAL
+
+    "TS.WriteBlankLines [Value]"
+
+END DEFINE
+
+DELETE TOKEN fsoopts -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN fsoopts -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=fsoopts
+
+END DEFINE
+
+DELETE TOKEN fsopts -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN fsopts -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=fsoopts
+
+END DEFINE
+
+
+DELETE PLACEHOLDER fsoopts -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsoopts -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO functions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "fsoopen"/PLACEHOLDER
+    "fsocreate"/PLACEHOLDER
+    "fsoexists"/PLACEHOLDER
+    "fsobasename"/PLACEHOLDER
+    "fsoextname"/PLACEHOLDER
+    "fsofilename"/PLACEHOLDER
+    "fsoabsname"/PLACEHOLDER
+    "fsocopy"/PLACEHOLDER
+    "fsodelete"/PLACEHOLDER
+    "fsodrname"/PLACEHOLDER
+    "fsodirname"/PLACEHOLDER
+    "fsotempname"/PLACEHOLDER
+    "fsomove"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER fsocopy -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsocopy -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.CopyFile" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.CopyFile {Source}, {Destination}, [overwrite]"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsocreate -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsocreate -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Set Ts = FSO.CreateTextFile" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Set TS = FSO.CreateTextFile({filename},[overwrite])"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsodelete -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsodelete -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.DeleteFile()" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.DeleteFile ({filename},[force])"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsoexists -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsoexists -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.FileExists" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.FileExists({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsoabsname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsoabsname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetAbsolutePathName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetAbsolutePathName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsobasename -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsobasename -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetBaseName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetBaseName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsodrname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsodrname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetDriveName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetDriveName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsoextname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsoextname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetExtensionName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetExtensionName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsofilename -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsofilename -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetFileName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetFileName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsodirname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsodirname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetParentFolderName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetParentFolderName({filename})"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsotempname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsotempname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.GetTempName" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.GetTempName"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsomove -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsomove -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="FSO.MoveFile" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "FSO.MoveFile {source}, {destination}"
+
+END DEFINE
+
+DELETE PLACEHOLDER fsoopen -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER fsoopen -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Set TS = FSO.OpenTextFile" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Set TS = FSO.OpenTextFile({filename}, [iomode], [create])"
+
+END DEFINE
+    
+DELETE PLACEHOLDER filename -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER filename -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE PLACEHOLDER source -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER source -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=filename
+
+END DEFINE
+
+DELETE PLACEHOLDER destination -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER destination -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=filename
+
+END DEFINE
+
+DELETE PLACEHOLDER overwrite -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER overwrite -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{True|False}"
+
+END DEFINE
+
+DELETE PLACEHOLDER force -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER force -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{True|False}"
+
+END DEFINE
+
+DELETE PLACEHOLDER create -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER create -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{True|False}"
+
+END DEFINE
+
+DELETE PLACEHOLDER True|False -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER True|False -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "True"
+    "False"
+
+END DEFINE
+
+DELETE PLACEHOLDER iomode -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER iomode -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "ForReading"
+    "ForAppending"
+    "ForWriting"
+
+END DEFINE
+
+DELETE TOKEN msgbox -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN msgbox -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=msgbox
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbox -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbox -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Message Box" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "msgbox-function"/PLACEHOLDER
+    "msgbox-subr"/PLACEHOLDER
+
+END DEFINE
+
+DELETE TOKEN msgboxs -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN msgboxs -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=msgbox-subr
+
+END DEFINE
+
+DELETE TOKEN msgboxf -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN msgboxf -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=msgbox-function
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbox-subr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbox-subr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="MsgBox [msgbox-options]" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "MsgBox {msgbx-options}"
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbox-function -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbox-function -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="MsgBox([msgbox-options])" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "MsgBox({msgbx-options})"
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbx-options -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbx-options -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{msgbx-prompt}, [msgbx-buttons]..., [msgbx-title]"
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbx-prompt -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbx-prompt -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbx-title -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbx-title -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER msgbx-buttons -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER msgbx-buttons -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Msgbox button options" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR="+"
+    /TYPE=MENU
+
+    "vbYesNo"
+    "vbOKOnly"
+    "vbOKCancel"
+    "vbYesNoCancel"
+    "vbQuestion"
+    "vbExclamation"
+    "vbInformation"
+    "vbDefaultButton1"
+    "vbDefaultButton2"
+    "vbAbortRetryIgnore"
+    "vbRetryCancel"
+    "vbCritical"
+    "vbDefaultButton3"
+    "vbDefaultButton4"
+
+END DEFINE
+
+DELETE PLACEHOLDER IIF-FUNCTION -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER IIF-FUNCTION -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="IIF function" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "IIf({condition},{truepart},{falsepart})"
+
+END DEFINE
+
+DELETE PLACEHOLDER truepart -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER truepart -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE PLACEHOLDER falsepart -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER falsepart -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE TOKEN public -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN public -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Public variable declaration" -
+
+    "Public {varname}[(subscripts)] As [New] {type}"
+
+END DEFINE
+
+DELETE TOKEN dim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN dim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Dim variable declaration" -
+
+    "Dim {varname}[(subscripts)] As [New] {type}"
+
+END DEFINE
+
+DELETE TOKEN private -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN private -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Private variable declaration" -
+
+    "Private {varname}[(subscripts)] As [New] {type}"
+
+END DEFINE
+
+DELETE TOKEN chdir -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN chdir -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="ChDir statement" -
+
+    "ChDir {filepath}"
+
+END DEFINE
+
+DELETE TOKEN chdrive -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN chdrive -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="ChDrive statement" -
+
+    "ChDrive {drive}"
+
+END DEFINE
+
+DELETE PLACEHOLDER drive -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER drive -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "String expression specifying a drive name. A multicharacter "
+    "string uses only the first letter."
+
+END DEFINE
+
+DELETE TOKEN close -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN close -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Close statement" -
+
+    "Close [filenumberlist]"
+
+END DEFINE
+
+DELETE PLACEHOLDER filenumberlist -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER filenumberlist -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="List of file numbers" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{#fileNumber}..."
+
+END DEFINE
+
+DELETE PLACEHOLDER #filenumber -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER #filenumber -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "[#]{filenumber}"
+
+END DEFINE
+
+DELETE PLACEHOLDER filenumber -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER filenumber -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A number used in the Open statement"
+
+END DEFINE
+
+DELETE PLACEHOLDER # -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER # -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "#"
+
+END DEFINE
+
+
+DELETE TOKEN delsetting -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN delsetting -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DeleteSetting statement" -
+
+    "DeleteSetting {applname}, {section},[keyname]"
+
+END DEFINE
+
+DELETE PLACEHOLDER applname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER applname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Application name" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "String expression containing the name of the application or project"
+    "to which the section or key setting applies."
+
+END DEFINE
+
+DELETE PLACEHOLDER section -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER section -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Section name" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "String expression containing the name of the section where the key"
+    "setting is being used."
+
+END DEFINE
+
+DELETE PLACEHOLDER keyname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER keyname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A key name" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "String expression containing the name of the key setting."
+
+END DEFINE
+
+DELETE PLACEHOLDER array-name -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER array-name -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=TERMINAL
+
+    "A variant array name"
+
+END DEFINE
+
+DELETE TOKEN erase -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN erase -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Erase statement" -
+
+    "Erase {array-name}..."
+
+END DEFINE
+
+DELETE TOKEN exdo -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exdo -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Do" -
+
+    "Exit Do"
+
+END DEFINE
+
+DELETE TOKEN exfor -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exfor -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit For" -
+
+    "Exit For"
+
+END DEFINE
+
+DELETE TOKEN exfun -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exfun -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Function" -
+
+    "Exit Function"
+
+END DEFINE
+
+DELETE TOKEN exprop -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exprop -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Property" -
+
+    "Exit Property"
+
+END DEFINE
+
+DELETE TOKEN exsub -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exsub -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Sub" -
+
+    "Exit Sub"
+
+END DEFINE
+
+DELETE TOKEN filecopy -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN filecopy -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FileCopy statement" -
+
+    "FileCopy {source},{Destination}"
+
+END DEFINE
+
+DELETE TOKEN get -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN get -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Get statement" -
+
+    "Get [#]{filenumber},[recnumber],{varname}"
+
+END DEFINE
+
+DELETE PLACEHOLDER recnumber -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER recnumber -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Record Number or byte number at which reading begins"
+
+END DEFINE
+
+DELETE TOKEN lab -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN lab -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="A label" -
+
+    "{labelname}:"
+
+END DEFINE
+
+DELETE PLACEHOLDER labelname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER labelname -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=", " -
+    /TYPE=TERMINAL
+
+    "A sequence of characters"
+
+END DEFINE
+
+DELETE TOKEN gosub -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN gosub -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="GoSub statement" -
+
+    "GoSub {labelname}"
+
+END DEFINE
+
+DELETE TOKEN goto -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN goto -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="GoTo statement" -
+
+    "GoTo {labelname}"
+
+END DEFINE
+
+DELETE TOKEN ret -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ret -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Return statement" -
+
+    "Return"
+
+END DEFINE
+
+DELETE TOKEN input# -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN input# -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Input # statement" -
+
+    "Input #[filenumber],{varname}..."
+
+END DEFINE
+
+DELETE TOKEN kill -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN kill -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Kill (Delete file) statement" -
+
+    "Kill {filepath}"
+
+END DEFINE
+
+DELETE TOKEN let -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN let -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Let statement" -
+
+    "[Let] {varname} = {expression}"
+
+END DEFINE
+
+DELETE PLACEHOLDER let -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER let -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Let"
+
+END DEFINE
+
+DELETE TOKEN LineInp -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN LineInp -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Line Input # statement" -
+
+    "Line Input #{filenumber},{varname}"
+
+END DEFINE
+
+DELETE TOKEN midst -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN midst -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Mid statement" -
+
+    "Mid({varname},{start},[length}) = {string-expr}"
+
+END DEFINE
+
+DELETE TOKEN mkdir -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN mkdir -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="MkDir Statement" -
+
+    "MkDir {filepath}"
+
+END DEFINE
+
+DELETE TOKEN name -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN name -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Name (rename) statement" -
+
+    "name {source} As {destination}"
+
+END DEFINE
+
+DELETE TOKEN onerr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN onerr -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=onerror
+
+END DEFINE
+
+DELETE PLACEHOLDER onerror -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER onerror -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="On Error etc." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "On Error GoTo {labelname}"
+    "On Error Resume Next"
+    "On Error GoTo 0"
+
+END DEFINE
+
+DELETE TOKEN ongosub -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ongosub -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="On...GoSub statement" -
+
+    "On {expression} GoSub {labelname}..."
+
+END DEFINE
+
+DELETE TOKEN ongoto -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ongoto -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="On...GoTo statement" -
+
+    "On {expression} GoTo {labelname}..."
+
+END DEFINE
+
+DELETE TOKEN open -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN open -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Open statement" -
+
+    "Open {filepath} For {mode} [Access] [lock] as [#]{filenumber}[Len=reclen]"
+
+END DEFINE
+
+DELETE PLACEHOLDER mode -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER mode -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="file modes" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Append"
+    "Input"
+    "Output"
+    "Binary"
+    "Random"
+
+END DEFINE
+
+DELETE PLACEHOLDER access -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER access -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="File operations" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Access Read"
+    "Access Write"
+    "Acess Read Writw"
+
+END DEFINE
+
+DELETE PLACEHOLDER lock -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER lock -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="File operations restricted by others" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Shared"
+    "Lock Read"
+    "Lock Write"
+    "Lock Read Write"
+
+END DEFINE
+
+DELETE PLACEHOLDER len=reclen -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER len=reclen -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="file record length" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Len={reclength}"
+
+END DEFINE
+
+DELETE PLACEHOLDER reclen -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER reclen -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Record Length" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Random: record length"
+    "Sequential: number of characters buffered"
+
+END DEFINE
+
+DELETE TOKEN print -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN print -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Print # statement" -
+
+    "Print #{filenumber},[outputlist]..."
+
+END DEFINE
+
+DELETE PLACEHOLDER outputlist -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER outputlist -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Print # outputlist arguments" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=" "
+    /TYPE=MENU
+
+    "Spc({number)}[charpos]"
+    "Tab({number})}[charpos]"
+    "Tab[charpos][charpos]"
+    "{expression}[charpos]"
+
+END DEFINE
+
+DELETE PLACEHOLDER charpos -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER charpos -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="; or ," -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    ";"
+
+END DEFINE
+
+DELETE TOKEN put -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN put -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Put statement" -
+
+    "Put [#]{filenumber},[recnumber],{varname}"
+
+END DEFINE
+
+DELETE TOKEN rndize -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rndize -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Randomize statement" -
+
+    "Randomize [number]"
+
+END DEFINE
+
+DELETE PLACEHOLDER number -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER number -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="a number" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Just a number"
+
+END DEFINE
+
+DELETE TOKEN redim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN redim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="ReDim statement" -
+
+    "Redim [Preserve] {varname}({subscripts}) [As type] "
+
+END DEFINE
+
+DELETE PLACEHOLDER preserve -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER preserve -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Preserve"
+
+END DEFINE
+
+DELETE TOKEN "'" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN "'" -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="A ' comment" -
+
+    "{'}..."
+
+END DEFINE
+
+DELETE PLACEHOLDER "'" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "'" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A ' comment" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "' [text]"
+
+END DEFINE
+
+DELETE TOKEN rem -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rem -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="a Rem comment" -
+
+    "{rem}..."
+
+END DEFINE
+
+DELETE PLACEHOLDER rem -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER rem -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "Rem [text]"
+
+END DEFINE
+
+DELETE TOKEN resume -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN resume -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=resume
+
+END DEFINE
+
+DELETE PLACEHOLDER resume -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER resume -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Resume statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "Resume"
+    "Resume 0"
+    "Resume Next"
+    "Resume {labelname}"
+
+END DEFINE
+
+DELETE TOKEN rmdir -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rmdir -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="RmDir statement" -
+
+    "RmDir {filepath}"
+
+END DEFINE
+
+DELETE TOKEN savepic -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN savepic -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="SavePicture statement" -
+
+    "SavePicture {PicControl},{filename}"
+
+END DEFINE
+
+DELETE PLACEHOLDER piccontrol -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER piccontrol -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Pic|im cont" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Picture or Image control name"
+
+END DEFINE
+
+DELETE TOKEN savsetting -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN savsetting -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="SaveSetting statement" -
+
+    "SaveSetting {applname},{section},{keyname},{setting}"
+
+END DEFINE
+
+DELETE PLACEHOLDER setting -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER setting -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE TOKEN seek -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN seek -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Seek statement" -
+
+    "Seek [#]{filenumber},{position}"
+
+END DEFINE
+
+DELETE PLACEHOLDER position -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER position -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE TOKEN set -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN set -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Set statement" -
+
+    "Set {objname} = {New exp|Nothing}"
+
+END DEFINE
+
+DELETE PLACEHOLDER "new exp|nothing" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "new exp|nothing" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "[New] {expression}"
+    "Nothing"
+
+END DEFINE
+
+DELETE PLACEHOLDER objname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER objname -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=varname
+
+END DEFINE
+
+DELETE TOKEN unload -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN unload -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Unload statement" -
+
+    "Unload {objname}"
+
+END DEFINE
+
+DELETE TOKEN with -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN with -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="With statement" -
+
+    "With {objname}"
+    "   {statement}..."
+    "End With"
+
+END DEFINE
+
+DELETE TOKEN write -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN write -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Write # statement" -
+
+    "Write #{filenumber},[outputlst]..."
+
+END DEFINE
+
+DELETE PLACEHOLDER outputlst -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER outputlst -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE TOKEN asc -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN asc -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Asc function" -
+
+    "Asc({string_expr})"
+
+END DEFINE
+
+DELETE TOKEN abs -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN abs -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Abs function" -
+
+    "Abs({integer_expr})"
+
+END DEFINE
+
+DELETE TOKEN array -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN array -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Array function" -
+
+    "Array([arrvals]...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER arrvals -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER arrvals -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER="subscript"
+
+END DEFINE
+
+DELETE TOKEN atn -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN atn -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Atn function" -
+
+    "Atn({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN choose -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN choose -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Choose function" -
+
+    "Choose({integer-expr},{choice}...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER choice -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER choice -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A choice in Choose" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=", "
+    /TYPE=NONTERMINAL
+
+    "Expression containing a possible choice"
+
+END DEFINE
+
+DELETE TOKEN chr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN chr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Chr function" -
+
+    "Chr({integer=expr})"
+
+END DEFINE
+
+DELETE TOKEN cos -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cos -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Cos function" -
+
+    "Cos({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN curdir -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN curdir -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CurDir function" -
+
+    "Curdir[(drive)]"
+
+END DEFINE
+
+DELETE PLACEHOLDER "(drive)" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "(drive)" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({drive})"
+
+END DEFINE
+
+DELETE TOKEN dateadd -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN dateadd -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DateAdd function" -
+
+    "DateAdd({interval},{integer-expr},{date-expr})"
+
+END DEFINE
+
+DELETE PLACEHOLDER interval -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER interval -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Intervals for date functions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    ""yyyy""
+    ""q""
+    ""m""
+    ""y""
+    ""d""
+    ""w""
+    ""ww""
+    ""h""
+    ""n""
+    ""s""
+
+END DEFINE
+
+DELETE PLACEHOLDER date-expr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER date-expr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A date" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable or a date literal representing a vaild date"
+
+END DEFINE
+
+
+DELETE TOKEN datediff -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN datediff -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DateDiff function" -
+
+    "DateDiff({interval},{date-expr1},{date-expr2},[firstdayofweek],[firstweekofyear])"
+
+END DEFINE
+
+DELETE PLACEHOLDER date-expr1 -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER date-expr1 -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=date-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER date-expr2 -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER date-expr2 -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=date-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER firstdayofweek -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER firstdayofweek -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="First Day of Week for Date functions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "vbUseSystem"
+    "vbSunday"
+    "vbMonday"
+    "vbTuesday"
+    "vbWednesday"
+    "vbThursday"
+    "vbFriday"
+    "vbSaturday"
+
+END DEFINE
+
+DELETE PLACEHOLDER firstweekofyear -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER firstweekofyear -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="First Week of Year for Date functions" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=MENU
+
+    "vbUseSystem"
+    "vbFirstJan1"
+    "vbFirstFourDays"
+    "vbFirstFullWeek"
+
+END DEFINE
+
+DELETE TOKEN datepart -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN datepart -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DatePart function" -
+
+    "DatePart({interval},{date-expr},[firstdayofweek],[firstweekofyear])"
+
+END DEFINE
+
+DELETE TOKEN dateserial -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN dateserial -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DateSerial function" -
+
+    "DateSerial({dyear},{dmonth},{dday})"
+
+END DEFINE
+
+DELETE PLACEHOLDER dyear -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER dyear -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A year" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable or numberic expression representing a valid year."
+
+END DEFINE
+
+DELETE PLACEHOLDER dmonth -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER dmonth -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A month" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable or numeric expression representing a valid month"
+
+END DEFINE
+
+DELETE PLACEHOLDER dday -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER dday -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A day" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable or numeric expression representing a valid day"
+
+END DEFINE
+
+DELETE TOKEN dateval -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN dateval -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DateValue function" -
+
+    "DateValue({string-date|time})"
+
+END DEFINE
+
+DELETE PLACEHOLDER string-date|time -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER string-date|time -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A date/time in string format" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable or string expression representing a valid date or time"
+    "from Jan 1, 100 thru Dec 31, 1999"
+
+END DEFINE
+
+DELETE TOKEN day -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN day -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Day function" -
+
+    "Day({date-expr})"
+
+END DEFINE
+
+DELETE TOKEN dir -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN dir -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Dir function" -
+
+    "Dir[(path,attr)]"
+
+END DEFINE
+
+DELETE PLACEHOLDER "(path,attr)" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "(path,attr)" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Dir options" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({filepath},[attributes]...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER attributes -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER attributes -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Dir attributes" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="+"
+    /TYPE=MENU
+
+    "vbNormal"
+    "vbReadOnly"
+    "vbHidden"
+    "vbSystem"
+    "vbVolume"
+    "vbDirectory"
+
+END DEFINE
+
+DELETE TOKEN doev -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN doev -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="DoEvents function" -
+
+    "DoEvents()"
+
+END DEFINE
+
+DELETE TOKEN env -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN env -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Environ function" -
+
+    "Environ({string-exp|number})"
+
+END DEFINE
+
+DELETE PLACEHOLDER "string-exp|number" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "string-exp|number" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Environ values" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "string-expr"/PLACEHOLDER/NOFOLLOW
+    "integer-expr"/PLACEHOLDER/NOFOLLOW
+
+END DEFINE
+
+DELETE TOKEN eof -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN eof -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Eof function" -
+
+    "EOF({filenumber})"
+
+END DEFINE
+
+DELETE TOKEN error -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN error -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Error function" -
+
+    "Error[(errornumber)]"
+
+END DEFINE
+
+DELETE PLACEHOLDER "(errornumber)" -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER "(errornumber)" -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({errornumber})"
+
+END DEFINE
+
+DELETE PLACEHOLDER errornumber -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER errornumber -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "A valid error number"
+
+END DEFINE
+
+DELETE TOKEN exp -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN exp -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exp function" -
+
+    "Exp({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN fileattr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN fileattr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FileAttr function" -
+
+    "FileAttr({filenumber},1)"
+
+END DEFINE
+
+DELETE TOKEN filedatetime -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN filedatetime -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FileDateTime function" -
+
+    "FileDateTime({filepath})"
+
+END DEFINE
+
+DELETE TOKEN filelen -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN filelen -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FileLen function" -
+
+    "FileLen({filepath})"
+
+END DEFINE
+
+DELETE TOKEN filter -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN filter -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Filter function" -
+
+    "Filter({array-name},{string-expr},[include],[compare])"
+
+END DEFINE
+
+DELETE PLACEHOLDER include -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER include -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Filter include" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{true|false}"
+
+END DEFINE
+
+DELETE PLACEHOLDER compare -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER compare -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "vbUseCompareOption"
+    "vbBinaryCompare"
+    "vbTextCompare"
+    "vbDatabaseCompare"
+
+END DEFINE
+
+DELETE TOKEN format -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN format -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Format function" -
+
+    "Format({expression},[format],[firstdayofweek],[firstweekofyear])"
+
+END DEFINE
+
+DELETE PLACEHOLDER format -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER format -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Formats" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=MENU
+
+    "NamedDateTime"/PLACEHOLDER/NOFOLLOW
+    "NamedNumeric"/PLACEHOLDER/NOFOLLOW
+    "UserDefinedFormats"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER nameddatetime -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER nameddatetime -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Named Date/Time Formats" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    ""General Date""
+    ""Long Date""
+    ""Medium Date""
+    "Short Date""
+    ""Long Time""
+    ""Medium Time""
+    ""Short Time""
+
+END DEFINE
+
+DELETE PLACEHOLDER namednumeric -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER namednumeric -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Named Numeric Formats" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    ""Currency""
+    ""General Number""
+    ""Fixed""
+    ""Standard""
+    ""Percent""
+    ""Scientific""
+    ""Yes/No""
+    ""True/False""
+    ""On/Off""
+
+END DEFINE
+
+DELETE PLACEHOLDER userdefinedformats -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER userdefinedformats -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="User Defined Formats" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "See the following items in the manual or On-Line Help:"
+    "Different Formats for Different Numeric Values"
+    "Different Formats for Different String Values"
+    "User-Defined Date/Time Formats"
+    "User-Defined Numeric Formats"
+    "User-Defined String Formats"
+
+END DEFINE
+
+DELETE TOKEN formatcurr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN formatcurr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FormatCurrency function" -
+
+    "FormatCurrency({expression},[NumDigitsAfterDecimal],[IncludeLeadingDigit],[UseParensForNegativeNumbers],[GroupDigits])"
+
+END DEFINE
+
+DELETE PLACEHOLDER numdigitsafterdecimal -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER numdigitsafterdecimal -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=TERMINAL
+
+    "Numeric value indication how many places to the right of the decimal"
+    "are displayed. Default value is -1. which i"
+
+END DEFINE
+
+DELETE PLACEHOLDER TriState -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER TriState -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tristate settings" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=MENU
+
+    "vbTrue"
+    "vbFalse"
+    "vbUseDefault"
+
+END DEFINE
+
+DELETE PLACEHOLDER includeleadingdigit -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER includeleadingdigit -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=tristate
+
+END DEFINE
+
+DELETE PLACEHOLDER useparensfornegativenumbers -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER useparensfornegativenumbers -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=tristate
+
+END DEFINE
+
+DELETE PLACEHOLDER groupdigits -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER groupdigits -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=tristate
+
+END DEFINE
+
+DELETE TOKEN Formatdattim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN Formatdattim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FormatDateTime function" -
+
+    "FormatDateTime({date-expr},[NamedDTFormat])"
+
+END DEFINE
+
+DELETE PLACEHOLDER namedformat -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER namedformat -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Named formats for FormatDateTime" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "vbGeneralDate"
+    "vbLongDate"
+    "vbShortDate"
+    "vbLongTime"
+    "vbShortTime"
+
+END DEFINE
+
+DELETE TOKEN formatnum -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN formatnum -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FormatNumber function" -
+
+    "FormatNumber({expression},[NumDigitsAfterDecimal],[IncludeLeadingDigit],[UseParensForNegativeNumbers],[GroupDigits])"
+
+END DEFINE
+
+DELETE TOKEN formatperc -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN formatperc -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FormatPercent function" -
+
+    "FormatPercent({expression},[NumDigitsAfterDecimal],[IncludeLeadingDigit],[UseParensForNegativeNumbers],[GroupDigits])"
+
+END DEFINE
+
+DELETE TOKEN freefile -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN freefile -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="FreeFile function" -
+
+    "FreeFile[(rangenumber)]"
+
+END DEFINE
+
+DELETE PLACEHOLDER rangenumber -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER rangenumber -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="0:1-255, 1:256-511" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "0"
+    "1"
+
+END DEFINE
+
+DELETE TOKEN getallset -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN getallset -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="GetAllSettings function" -
+
+    "GetAllSettings({applname},{section})"
+
+END DEFINE
+
+DELETE TOKEN getattr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN getattr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="GetAttr function" -
+
+    "GetAttr({filepath})"
+
+END DEFINE
+
+DELETE TOKEN getsetting -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN getsetting -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="GetSetting function" -
+
+    "GetSetting({applname},{section},{keyname},[DefaultSetting])"
+
+END DEFINE
+
+DELETE PLACEHOLDER defaultsetting -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER defaultsetting -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=TERMINAL
+
+    "Expression containing the value to return if no value is set"
+    "in the key setting. If omitted, default is assumed to be a"
+    "zero-length string ("")."
+
+END DEFINE
+
+DELETE TOKEN hex -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN hex -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Hex function" -
+
+    "Hex({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN hour -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN hour -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Hour function" -
+
+    "Hour({time-expr})"
+
+END DEFINE
+
+DELETE PLACEHOLDER time-expr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER time-expr -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A tme expression" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A variable, numeric expression, string expression or any"
+    "combination, that can represent a time"
+
+END DEFINE
+
+DELETE TOKEN iif -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN iif -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=iif-function
+
+END DEFINE
+
+DELETE TOKEN input -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN input -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Input function" -
+
+    "Input({integer-expr},{#filenumber})"
+
+END DEFINE
+
+DELETE TOKEN inputbox -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN inputbox -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="InputBox function" -
+
+    "InputBox({inp-prompt},[inp-title],[defaultsetting])"
+
+END DEFINE
+
+DELETE PLACEHOLDER inp-prompt -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER inp-prompt -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER inp-title -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER inp-title -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE TOKEN instr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN instr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="InStr function" -
+
+    "Instr([start],{string-expr},{substring},[compare])"
+
+END DEFINE
+
+DELETE TOKEN instrrev -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN instrrev -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="InStrRev function" -
+
+    "InStrRev({string-expr},{substring},[start],[compare])"
+
+END DEFINE
+
+DELETE TOKEN int -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN int -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Int function" -
+
+    "Int({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN fix -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN fix -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Fix function" -
+
+    "Fix({integer-expr})"
+
+END DEFINE
+
+DELETE TOKEN isarray -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isarray -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsArray function" -
+
+    "IsArray({varname})"
+
+END DEFINE
+
+DELETE TOKEN isdate -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isdate -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsDate function" -
+
+    "IsDate({expression})"
+
+END DEFINE
+
+DELETE TOKEN isempty -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isempty -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsEmpty function" -
+
+    "IsEmpty({varname})"
+
+END DEFINE
+
+DELETE TOKEN iserror -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN iserror -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsError function" -
+
+    "IsError({expression})"
+
+END DEFINE
+
+DELETE TOKEN ismissing -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ismissing -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsMissing function" -
+
+    "IsMissing({varname})"
+
+END DEFINE
+
+DELETE TOKEN isnull -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isnull -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsNull function" -
+
+    "IsNull({expression})"
+
+END DEFINE
+
+DELETE TOKEN isnumeric -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isnumeric -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsNumeric function" -
+
+    "IsNumeric({expression})"
+
+END DEFINE
+
+DELETE TOKEN isobject -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN isobject -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="IsObject function" -
+
+    "IsObject({varname})"
+
+END DEFINE
+
+DELETE TOKEN join -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN join -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Join function" -
+
+    "Join({array-name},[delimiter])"
+
+END DEFINE
+
+DELETE TOKEN lbound -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN lbound -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="LBound function" -
+
+    "LBound({array-name},[dimension])"
+
+END DEFINE
+
+DELETE PLACEHOLDER dimension -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER dimension -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=TERMINAL
+
+    "Number indicating which dimension of array to reference"
+
+END DEFINE
+
+DELETE TOKEN lcase -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN lcase -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="LCase function" -
+
+    "LCase({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN left -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN left -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Left function" -
+
+    "Left({string-expr},{length})"
+
+END DEFINE
+
+DELETE TOKEN len -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN len -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Len function" -
+
+    "Len({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN loadpicture -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN loadpicture -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="LoadPicture function" -
+
+    "LoadPicture([filename],[picsize],[piccolordepth],[picxy])"
+
+END DEFINE
+
+DELETE PLACEHOLDER picsize -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER picsize -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "vbLPSmall"
+    "vbLPLarge"
+    "vbLPSmallShell"
+    "vbLPLargeShell"
+    "vbLPCustom"
+
+END DEFINE
+
+DELETE PLACEHOLDER piccolordepth -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER piccolordepth -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=MENU
+
+    "vbLPDefault"
+    "vbLPMonochrome"
+    "vbLPVGAColor"
+    "vbLPColor"
+
+END DEFINE
+
+DELETE PLACEHOLDER picxy -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER picxy -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{picx},{picy}"
+
+END DEFINE
+
+DELETE PLACEHOLDER picx -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER picx -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=integer-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER picy -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER picy -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=integer-expr
+
+END DEFINE
+
+DELETE TOKEN loc -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN loc -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Loc function" -
+
+    "Loc({filenumber})"
+
+END DEFINE
+
+DELETE TOKEN lof -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN lof -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="LOF function" -
+
+    "LOF({filenumber})"
+
+END DEFINE
+
+DELETE TOKEN log -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN log -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Log function" -
+
+    "Log({number})"
+
+END DEFINE
+
+DELETE TOKEN ltrim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ltrim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="LTrim function" -
+
+    "LTrim({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN rtrim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rtrim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="RTrim function" -
+
+    "RTrim({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN trim -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN trim -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Trim function" -
+
+    "Trim({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN mid -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN mid -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Mid function" -
+
+    "Mid({varname},{start},[length})"
+
+END DEFINE
+
+DELETE TOKEN minute -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN minute -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Minute function" -
+
+    "Minute({time-expr})"
+
+END DEFINE
+
+DELETE TOKEN month -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN month -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Month function" -
+
+    "Month({date-expr})"
+
+END DEFINE
+
+DELETE TOKEN monthname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN monthname -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="MonthName function" -
+
+    "MonthName({number},[abbreviate])"
+
+END DEFINE
+
+DELETE PLACEHOLDER abbreviate -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER abbreviate -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=true|false
+
+END DEFINE
+
+DELETE TOKEN oct -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN oct -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Oct function" -
+
+    "Oct({number})"
+
+END DEFINE
+
+DELETE TOKEN qbcolor -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN qbcolor -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="QBColor function" -
+
+    "QBColor({colorvalue})"
+
+END DEFINE
+
+DELETE PLACEHOLDER colorvalue -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER colorvalue -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "0"
+    "1"
+    "2"
+    "3"
+    "4"
+    "5"
+    "6"
+    "7"
+    "8"
+    "9"
+    "10"
+    "11"
+    "12"
+    "13"
+    "14"
+    "15"
+
+END DEFINE
+
+DELETE TOKEN replace -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN replace -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Replace function" -
+
+    "Replace({expression},{substring},{replacestring},[start],[count],[compare])"
+
+END DEFINE
+
+DELETE PLACEHOLDER replacestring -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER replacestring -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE PLACEHOLDER count -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER count -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=","
+    /TYPE=TERMINAL
+
+    "Number of substring substitutions to perform"
+
+END DEFINE
+
+DELETE TOKEN rgb -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rgb -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="RGB function" -
+
+    "RGB({red},{green},{blue})"
+
+END DEFINE
+
+DELETE PLACEHOLDER red -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER red -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE PLACEHOLDER green -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER green -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE PLACEHOLDER blue -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER blue -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE TOKEN right -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN right -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Right function" -
+
+    "Right({string-expr},{length})"
+
+END DEFINE
+
+DELETE TOKEN rnd -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN rnd -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Rnd function" -
+
+    "Rnd[(number)]"
+
+END DEFINE
+
+DELETE PLACEHOLDER (number) -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER (number) -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "({number})"
+
+END DEFINE
+
+DELETE TOKEN round -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN round -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Round function" -
+
+    "Round({expression},[numdecimalplaces])"
+
+END DEFINE
+
+DELETE PLACEHOLDER numdecimalplaces -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER numdecimalplaces -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Number indication how many places to the right of the"
+    "decimal are included in the answer."
+
+END DEFINE
+
+DELETE TOKEN second -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN second -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Second function" -
+
+    "Second({time-expr})"
+
+END DEFINE
+
+DELETE TOKEN seek -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN seek -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Seek function" -
+
+    "Seek({filenumber})"
+
+END DEFINE
+
+DELETE TOKEN sgn -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN sgn -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Sgn function" -
+
+    "Sgn({number})"
+
+END DEFINE
+
+DELETE TOKEN shell -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN shell -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Shell function" -
+
+    "Shell({filename},[windowstyle])"
+
+END DEFINE
+
+DELETE PLACEHOLDER windowstyle -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER windowstyle -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "vbHide"
+    "vbNormalFocus"
+    "vbMinimizedFocus"
+    "vnMaximizedFocus"
+    "vbNormalNoFocus"
+    "vbMinimizedNoFocus"
+
+END DEFINE
+
+DELETE TOKEN sin -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN sin -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Sin function" -
+
+    "Sin({number})"
+
+END DEFINE
+
+DELETE TOKEN space -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN space -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Space function" -
+
+    "Space({number})"
+
+END DEFINE
+
+DELETE TOKEN spc -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN spc -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Spc function used in Print statements" -
+
+    "Spc({number})"
+
+END DEFINE
+
+DELETE TOKEN split -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN split -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Split function" -
+
+    "Split({string-expr},[delimiter],[limit],[compare])"
+
+END DEFINE
+
+DELETE PLACEHOLDER limit -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER limit -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=TERMINAL
+
+    "Number of substrings to be returned"
+
+END DEFINE
+
+DELETE TOKEN sqr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN sqr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Sqr function" -
+
+    "Sqr({number})"
+
+END DEFINE
+
+DELETE TOKEN str -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN str -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Str function" -
+
+    "Str({number})"
+
+END DEFINE
+
+DELETE TOKEN strcomp -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN strcomp -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="StrComp function" -
+
+    "StrComp({string-expr},{string-expr2},[compare])"
+
+END DEFINE
+
+DELETE PLACEHOLDER string-expr2 -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER string-expr2 -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=string-expr
+
+END DEFINE
+
+DELETE TOKEN strconv -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN strconv -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="StrConv function" -
+
+    "StrConv({string-expr},{conversion},[LocaleID])"
+
+END DEFINE
+
+DELETE PLACEHOLDER localeid -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER localeid -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="," -
+    /TYPE=NONTERMINAL
+
+    "The LocaleID"
+
+END DEFINE
+
+DELETE PLACEHOLDER conversion -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER conversion -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "vbUpperCase"
+    "vbLowerCase"
+    "vbProperCase"
+    "vbUnicode"
+    "vbFromUnicode"
+
+END DEFINE
+
+DELETE TOKEN string -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN string -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="String function" -
+
+    "String({number},{character})"
+
+END DEFINE
+
+DELETE PLACEHOLDER character -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER character -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Character code or string expression whose first character is used"
+
+END DEFINE
+
+DELETE TOKEN strreverse -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN strreverse -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="StrReverse function" -
+
+    "StrReverse({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN switch -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN switch -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Switch function" -
+
+    "Switch({ExpressionValuePair}...)"
+
+END DEFINE
+
+DELETE PLACEHOLDER expressionvaluepair -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER expressionvaluepair -
+    /LANGUAGE="Visual-Basic" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=","
+    /TYPE=NONTERMINAL
+
+    "{expression},{value}"
+
+END DEFINE
+
+DELETE PLACEHOLDER value -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER value -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=expression
+
+END DEFINE
+
+DELETE TOKEN tab -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN tab -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Tab function used in Print statement" -
+
+    "Tab[(number)]"
+
+END DEFINE
+
+DELETE TOKEN tan -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN tan -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Tan function" -
+
+    "Tan({number})"
+
+END DEFINE
+
+DELETE TOKEN timeserial -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN timeserial -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="TimeSerial function" -
+
+    "TimeSerial({thour},{tminute},{tsecond})"
+
+END DEFINE
+
+DELETE PLACEHOLDER thour -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER thour -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE PLACEHOLDER tminute -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tminute -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE PLACEHOLDER tsecond -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER tsecond -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE TOKEN timevalue -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN timevalue -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="TimeValue function" -
+
+    "TimeValue({time-expr})"
+
+END DEFINE
+
+DELETE TOKEN ubound -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ubound -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="UBound function" -
+
+    "UBound({array-name},[dimension])"
+
+END DEFINE
+
+DELETE TOKEN ucase -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ucase -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="UCase function" -
+
+    "UCase({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN val -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN val -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Val function" -
+
+    "Val({string-expr})"
+
+END DEFINE
+
+DELETE TOKEN vartype -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN vartype -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="VarType function" -
+
+    "VarType({varname})"
+
+END DEFINE
+
+DELETE TOKEN weekday -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN weekday -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Weekday function" -
+
+    "Weekday({date-expr},[firstdayofweek])"
+
+END DEFINE
+
+DELETE TOKEN weekdayname -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN weekdayname -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="WeekdayName function" -
+
+    "WeekdayName({number},[abbreviate],[firstdayofweek])"
+
+END DEFINE
+
+DELETE TOKEN year -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN year -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Year function" -
+
+    "Year({date-expr})"
+
+END DEFINE
+
+DELETE TOKEN ed -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ed -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Do" -
+
+    "Exit Do"
+
+END DEFINE
+
+DELETE TOKEN ef -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN ef -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit For" -
+
+    "Exit For"
+
+END DEFINE
+
+DELETE TOKEN efu -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN efu -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Function" -
+
+    "Exit Function"
+
+END DEFINE
+
+DELETE TOKEN es -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN es -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="Exit Sub" -
+
+    "Exit Sub"
+
+END DEFINE
+
+DELETE PLACEHOLDER num -
+    /LANGUAGE="Visual-Basic" -
+DEFINE PLACEHOLDER num -
+    /LANGUAGE="Visual-Basic" -
+    /PLACEHOLDER=number
+
+END DEFINE
+
+DELETE TOKEN cbool -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cbool -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CBool Type Conversion Function" -
+
+    "CBool({expression})"
+
+END DEFINE
+
+DELETE TOKEN cByte -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cByte -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CByte Type Conversion Function" -
+
+    "CByte({expression})"
+
+END DEFINE
+
+DELETE TOKEN cCur -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cCur -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CCur Type Conversion Function" -
+
+    "CCur({expression})"
+
+END DEFINE
+
+DELETE TOKEN cDate -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cDate -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CDate Type Conversion Function" -
+
+    "CDate({expression})"
+
+END DEFINE
+
+DELETE TOKEN cDbl -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cDbl -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CDbl Type Conversion Function" -
+
+    "CDbl({expression})"
+
+END DEFINE
+
+DELETE TOKEN cDec -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cDec -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CDec Type Conversion Function" -
+
+    "CDec({expression})"
+
+END DEFINE
+
+DELETE TOKEN cInt -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cInt -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CInt Type Conversion Function" -
+
+    "CInt({expression})"
+
+END DEFINE
+
+DELETE TOKEN cLng -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cLng -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CLng Type Conversion Function" -
+
+    "CLng({expression})"
+
+END DEFINE
+
+DELETE TOKEN cSng -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cSng -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CSng Type Conversion Function" -
+
+    "CSng({expression})"
+
+END DEFINE
+
+DELETE TOKEN cstr -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cstr -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CStr Type Conversion Function" -
+
+    "CStr({expression})"
+
+END DEFINE
+
+DELETE TOKEN cVar -
+    /LANGUAGE="Visual-Basic" -
+DEFINE TOKEN cVar -
+    /LANGUAGE="Visual-Basic" -
+    /DESCRIPTION="CVar Type Conversion Function" -
+
+    "CVar({expression})"
+
+END DEFINE
+

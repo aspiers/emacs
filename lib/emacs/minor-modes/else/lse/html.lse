@@ -1,0 +1,2244 @@
+;; These are primary Templates for the HTML language
+;; for use with the Emacs Language Sensitive Editor (ELSE).
+;;
+;; Created 2003 Douglas Harter
+;;
+;; Author: Douglas Harter <djharter@aol.com>
+;; Date modified : Time-stamp: <2003-04-29 14:14:11>
+;; Version: V1.1
+;;
+;; This is not a complete implementation of HTML. Most of the commonly
+;; used HTML tags are included. What might not be included is all the options 
+;; for a particular tag. I have included the options I use most frequently.
+;; At a later time, I will try to include more tags and options.
+;; The tags used were taken from my DoHTML templates in VB
+;; and Web Publishing with HTML 4 in a Week, Fourth Edition
+;; by Laura Lemay.
+;;
+DELETE LANGUAGE HTML -
+DEFINE LANGUAGE HTML -
+    /INITIAL_STRING="{initial_html}" -
+    /PUNCTUATION_CHARACTERS=",;()*.'" -<>" -
+    /SELF_INSERT_CHARACTERS=" `~!@#$%^&*(),.<>/?;:'[]{}=\-+|"" -
+    /VALID_IDENTIFIER_CHARACTERS="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&0123456789_""
+    /INDENT_SIZE=4 -
+    /VERSION="HTML 4.0" -
+
+END DEFINE
+
+DELETE PLACEHOLDER initial_html -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER initial_html -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Basic HTML file format" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<HTML>"
+    "<HEAD>"
+    "<TITLE>{header_title}</TITLE>"
+    "</HEAD>"
+    "<BODY BGCOLOR={color} TEXT={color} LINK={color} VLINK={color} ALINK={color}>"
+    "{html_tag}..."
+    "</BODY>"
+    "</HTML>"
+
+END DEFINE
+
+DELETE PLACEHOLDER header_title -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER header_title -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="The Header Title"  -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "The text for the Header Title"
+
+END DEFINE
+
+DELETE PLACEHOLDER color -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER color -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Browser safe Colors used in tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "silver"
+    "gray"
+    "white"
+    "black"
+    "maroon"
+    "red"
+    "green"
+    "lime"
+    "purple"
+    "fuchsia"
+    "olive"
+    "yellow"
+    "navy"
+    "blue"
+    "teal"
+    "aqua"
+    "magenta"
+    "cyan"
+    ""#{hex_color}""/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER hex_color -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER hex_color -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Hex colors are entered as a 6-digit hex number."
+    "The hex numbers for colors can be found in a HTML reference."
+
+END DEFINE
+
+DELETE PLACEHOLDER html_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER html_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="tag Groups" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "structure_tags"/PLACEHOLDER
+    "text_phrase_and_paragraph_tags"/PLACEHOLDER
+    "text_formatting_tags"/PLACEHOLDER
+    "list_tags"/PLACEHOLDER
+    "link_tags"/PLACEHOLDER
+    "table_tags"/PLACEHOLDER
+    "frame_tags"/PLACEHOLDER
+    "embedded_content_tags"/PLACEHOLDER
+    "style_tag"/PLACEHOLDER
+    "form_tags"/PLACEHOLDER
+    "script_tags"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER structure_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER structure_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags related to structure of the document" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "horiz_line"/PLACEHOLDER
+    "body_tag"/PLACEHOLDER
+    "comment_tag"/PLACEHOLDER
+    "div_tag"/PLACEHOLDER
+    "doctype_tag"/PLACEHOLDER
+    "H#_tags"/PLACEHOLDER
+    "head_tag"/PLACEHOLDER
+    "hr_tag"/PLACEHOLDER
+    "html_tag"/PLACEHOLDER
+    "meta_tag"/PLACEHOLDER
+    "title_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER text_phrase_and_paragraph_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER text_phrase_and_paragraph_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags related to text phrases and paragraphs" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "carriage_return"/PLACEHOLDER
+    "CR"/PLACEHOLDER
+    "emphasized_text"/PLACEHOLDER
+    "line_break"/PLACEHOLDER
+    "paragraph"/PLACEHOLDER
+   "short_quotations"/PLACEHOLDER
+   "Subscript"/PLACEHOLDER
+   "superscript"/PLACEHOLDER
+   "acronym_tag"/PLACEHOLDER
+   "address_tag"/PLACEHOLDER
+   "blockquote_tag"/PLACEHOLDER
+    "br_tag"/PLACEHOLDER
+   "cite_tag"/PLACEHOLDER
+   "code_tag"/PLACEHOLDER
+   "del_tag"/PLACEHOLDER
+   "dfn_tag"/PLACEHOLDER
+   "em_tag"/PLACEHOLDER
+   "ins_tag"/PLACEHOLDER
+   "kbd_tag"/PLACEHOLDER
+    "p_tag"/PLACEHOLDER
+    "pre_tag"/PLACEHOLDER
+   "q_tag"/PLACEHOLDER
+   "samp_tag"/PLACEHOLDER
+   "strong_tag"/PLACEHOLDER
+   "sub_tag"/PLACEHOLDER
+   "sup_tag"/PLACEHOLDER
+   "var_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER TEXT_FORMATTING_TAGS -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER TEXT_FORMATTING_TAGS -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Text formatting elements tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "bold"/PLACEHOLDER
+    "italics"/PLACEHOLDER
+   "strikethrough"/PLACEHOLDER
+   "teletype"/PLACEHOLDER
+    "underlined"/PLACEHOLDER
+    "b_tag"/PLACEHOLDER
+   "basefont_tag"/PLACEHOLDER
+   "big_tag"/PLACEHOLDER
+    "center_tag"/PLACEHOLDER
+   "font_tag"/PLACEHOLDER
+    "i_tag"/PLACEHOLDER
+   "s_tag"/PLACEHOLDER
+   "small_tag"/PLACEHOLDER
+   "strike_tag"/PLACEHOLDER
+   "tt_tag"/PLACEHOLDER
+    "u_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER list_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER list_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags related to lists" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "ordered_list"/PLACEHOLDER
+    "unordered_list"/PLACEHOLDER
+   "dd_tag"/PLACEHOLDER
+   "dir_tag"/PLACEHOLDER
+   "dl_tag"/PLACEHOLDER
+   "dt_tag"/PLACEHOLDER
+    "li_tag"/PLACEHOLDER
+   "menu_tag"/PLACEHOLDER
+    "ol_tag"/PLACEHOLDER
+    "ul_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER link_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER link_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags to anchor/link in the same and other documents" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "named_anchor"/PLACEHOLDER
+    "anchor_doc_in_other_Dir"/PLACEHOLDER
+    "anchor_other_doc"/PLACEHOLDER
+    "anchor_remote_doc"/PLACEHOLDER
+    "anchor_same_doc"/PLACEHOLDER
+    "ftp_remote_doc"/PLACEHOLDER
+    "mailto_href"/PLACEHOLDER
+    "link_doc_other_dir"/PLACEHOLDER
+    "link_doc_same_dir"/PLACEHOLDER
+    "link_remote_doc"/PLACEHOLDER
+   "a_tag(all_options)"/PLACEHOLDER
+   "base_tag"/PLACEHOLDER
+   "link_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER table_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER table_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags for displaying data in a tabular format" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "complete_table_layout"/PLACEHOLDER
+    "header_row"/PLACEHOLDER
+    "regular_row"/PLACEHOLDER
+   "caption_tag"/PLACEHOLDER
+   "col_tag"/PLACEHOLDER
+   "colgroup_tag"/PLACEHOLDER
+   "table_tag"/PLACEHOLDER
+    "td_tag"/PLACEHOLDER
+   "tfoot_tag"/PLACEHOLDER
+    "th_tag"/PLACEHOLDER
+   "thead_tag"/PLACEHOLDER
+   "tr_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER frame_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER frame_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tagsrelated to Frames(panels)" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+   "frame_tag"/PLACEHOLDER
+   "frameset_tag"/PLACEHOLDER
+   "iframe_tag"/PLACEHOLDER
+   "noframes_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER embedded_content_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER embedded_content_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags related to applets, images, etc." -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+   "applet_tag"/PLACEHOLDER
+    "image_same_loc"/PLACEHOLDER
+    "image_diff_dir"/PLACEHOLDER
+    "image_remote_loc"/PLACEHOLDER
+   "img_tag(all_options)"/PLACEHOLDER
+   "map_tag"/PLACEHOLDER
+   "object_tag"/PLACEHOLDER
+   "param_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER form_tags -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER form_tags -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags for a User Interface on the form" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "basic_form_layout"/PLACEHOLDER
+   "button"/PLACEHOLDER
+    "checkbox"/PLACEHOLDER
+    "hidden_information"/PLACEHOLDER
+    "password_input_box"/PLACEHOLDER
+    "radio_input_button"/PLACEHOLDER
+    "reset_input_button"/PLACEHOLDER
+    "submit_input_button"/PLACEHOLDER
+    "select_option_combination"/PLACEHOLDER
+   "button_tag"/PLACEHOLDER
+   "fieldset_tag"/PLACEHOLDER
+    "form_tag"/PLACEHOLDER
+   "input_tag(all_options)"/PLACEHOLDER
+   "legend_tag"/PLACEHOLDER
+    "option_tag"/PLACEHOLDER
+    "select_tag"/PLACEHOLDER
+    "textarea_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER script_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER script_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Tags related to scripting" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "javascript"/PLACEHOLDER
+    "phpscript"/PLACEHOLDER
+    "vbscript"/PLACEHOLDER
+   "script_tag"/PLACEHOLDER
+   "noscript_tag"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER hr -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER hr -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<HR> A horizontal line" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<HR>"
+
+END DEFINE
+
+DELETE PLACEHOLDER horiz_line -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER horiz_line -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=hr
+
+END DEFINE
+
+DELETE PLACEHOLDER h# -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h# -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H1> thru <H6> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "h1"/PLACEHOLDER
+    "h2"/PLACEHOLDER
+    "h3"/PLACEHOLDER
+    "h4"/PLACEHOLDER
+    "h5"/PLACEHOLDER
+    "h6"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER h1 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h1 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H1> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H1 [align]>{header_title}</H1>"
+
+END DEFINE
+
+DELETE PLACEHOLDER h2 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h2 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H2> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H2 [align]>{header_title}</H2>"
+
+END DEFINE
+
+DELETE PLACEHOLDER h3 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h3 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H3> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H3 [align]>{header_title}</H3>"
+
+END DEFINE
+
+DELETE PLACEHOLDER h4 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h4 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H4> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H4 [align]>{header_title}</H4>"
+
+END DEFINE
+
+DELETE PLACEHOLDER h5 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h5 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H5> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H5 [align]>{header_title}</H5>"
+
+END DEFINE
+
+DELETE PLACEHOLDER h6 -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER h6 -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<H6> tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<H6 [align]>{header_title}</H6>"
+
+END DEFINE
+
+DELETE PLACEHOLDER comment_tag -
+    /LANGUAGE="HTML" 
+DEFINE PLACEHOLDER comment_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<!-- --> Comment tags" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<!-- {Document text} -->"
+
+END DEFINE
+
+DELETE PLACEHOLDER "document text" -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER "document text" -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Document Text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Any text you want to use."
+
+END DEFINE
+
+DELETE PLACEHOLDER align -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER align -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Alignment of text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "align={AlignValue}"
+
+END DEFINE
+
+DELETE PLACEHOLDER AlignValue -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER AlignValue -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "left"
+    "center"
+    "right"
+    "justify"
+
+END DEFINE
+
+DELETE PLACEHOLDER br_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER br_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<BR> A carriage return" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<BR>"
+
+END DEFINE
+
+DELETE PLACEHOLDER carriage_return -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER carriage_return -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=br_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER cr -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER cr -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=br_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER line_break -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER line_break -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=br_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER p_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER p_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<P> A paragraph" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<P>{document text}"
+
+END DEFINE
+
+DELETE PLACEHOLDER paragraph -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER paragraph -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=p_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER pre_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER pre_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<PRE> Preformatted text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<PRE>{document text}</PRE>"
+
+END DEFINE
+
+DELETE PLACEHOLDER b_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER b_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<B> Bold text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<B>{document text}</B>"
+
+END DEFINE
+
+DELETE PLACEHOLDER bold -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER bold -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=b_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER center_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER center_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<CENTER> Center all information within tag" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<CENTER>{document text}</CENTER>"
+
+END DEFINE
+
+DELETE PLACEHOLDER i_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER i_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<I> Italics text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<I>{document text}</I>"
+
+END DEFINE
+
+DELETE PLACEHOLDER italics -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER italics -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=i_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER u_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER u_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<U> Underlined text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<U>{document text}</U>"
+
+END DEFINE
+
+DELETE PLACEHOLDER underlined -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER underlined -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="U> Underlined text" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "<U>{document text}</U>"
+
+END DEFINE
+
+DELETE PLACEHOLDER ol_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ol_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<OL> An ordered list" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+     "<OL [ol_type] [list_start]>[document text]"
+    "   {li_tag}..."
+    "</OL>"
+
+END DEFINE
+
+DELETE PLACEHOLDER ol_type -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ol_type -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "type={ol_type_value}"
+
+END DEFINE
+
+DELETE PLACEHOLDER ol_type_value -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ol_type_value -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "1"
+    "a"
+    "A"
+    "i"
+    "I"
+
+END DEFINE
+
+DELETE PLACEHOLDER li_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER li_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<LI> An item in a list" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<LI>{document text}"
+
+END DEFINE
+
+DELETE PLACEHOLDER list_start -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER list_start -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Starting value for ordered list" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "start={start_value}"
+
+END DEFINE
+
+DELETE PLACEHOLDER start_value -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER start_value -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "starting value for list"
+
+END DEFINE
+
+DELETE PLACEHOLDER ordered_list -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ordered_list -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=ol_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER ul_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ul_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<UL> An unordered list" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+     "<UL [ul_type] >[document text]"
+    "   {li_tag}..."
+    "</UL>"
+
+END DEFINE
+
+DELETE PLACEHOLDER ul_type -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ul_type -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    "type={ul_type_value}"
+
+END DEFINE
+
+DELETE PLACEHOLDER ul_type_value -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ul_type_value -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "disc"
+    "square"
+    "circle"
+
+END DEFINE
+
+DELETE PLACEHOLDER unordered_list -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER unordered_list -
+    /LANGUAGE="HTML" -
+/PLACEHOLDER=ul_tag
+
+END DEFINE
+
+DELETE PLACEHOLDER named_anchor -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER named_anchor -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<A name="text" A named anchor" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A Name="{anchor_name}">[link document text]</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER anchor_name -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER anchor_name -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A name for the anchor(label)"
+
+END DEFINE
+
+DELETE PLACEHOLDER "link document text" -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER "link document text" -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "This is the text within an anchor/link tag and will be shown "
+    "highlited in the document"
+
+END DEFINE
+
+DELETE PLACEHOLDER anchor_same_doc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER anchor_same_doc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An anchor(label) is this document" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="#{anchor_name}">[link document text]</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER anchor_other_doc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER anchor_other_doc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An anchor(label) in document under same directory>" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="{filename}#{anchor_name}">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER filename -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER filename -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A filename consisting of name and type (myfile.txt)"
+
+END DEFINE
+
+DELETE PLACEHOLDER anchor_doc_in_other_dir -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER anchor_doc_in_other_dir -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Anchor(label) link to document in another directory" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="{path}/{filename}#{anchor_name}">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER path -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER path -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A path to the file in filename."
+
+END DEFINE
+
+DELETE PLACEHOLDER anchor_remote_doc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER anchor_remote_doc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Anchor(label) link to document in remote (URL) location" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="http://{url}[urlpath]/{filename}#{anchor_name}">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER urlpath -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER urlpath -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Whatever path is needed from the URL to filename"
+
+END DEFINE
+
+DELETE PLACEHOLDER link_doc_same_dir -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER link_doc_same_dir -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<A href-document in same dir"> -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="{filename}">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER link_doc_other_dir -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER link_doc_other_dir -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<A href=document in another directory>" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="{path}/{filename}">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER link_remote_doc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER link_remote_doc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A link to a document in remote (URL) location" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="http://{url}[urlpath]/[filename]">{link document text}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER url -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER url -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A URL in format www.xxxxxx.xxx[xxxx] or num.num.num.num"
+    "Examples: www.sunfreeware.com, 192.107.115.5, memberpages.comcast.net/me"
+    "    homepages.aol.com/~mypage/"
+
+END DEFINE
+
+DELETE PLACEHOLDER ftp_remote_doc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER ftp_remote_doc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="<A href="ftp://url in remote location>" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="ftp://{url}[urlpath]/{filename}">{link document text}</A>""
+
+END DEFINE
+
+DELETE PLACEHOLDER complete_table_layout -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER complete_table_layout -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Table layout including header (TH) and regular (TD) rows" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TABLE [table_border] [Table_width] [table_align]>"
+    "[header_row]"
+    "{regular_row}..."
+    "</TABLE>"
+
+END DEFINE
+
+DELETE PLACEHOLDER table_width -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER table_width -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "width={pixels|percent}"
+
+END DEFINE
+
+DELETE PLACEHOLDER pixels|percent -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER pixels|percent -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+    "{pixels}"
+    "{percent}%"
+
+END DEFINE
+
+DELETE PLACEHOLDER pixels -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER pixels -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Number of pixels."
+
+END DEFINE
+
+DELETE PLACEHOLDER percent -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER percent -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A percent from 1 to 100"
+
+END DEFINE
+
+DELETE PLACEHOLDER table_border -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER table_border -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "border={border_size}"
+
+END DEFINE
+
+DELETE PLACEHOLDER border_size -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER border_size -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Size of the cell border."
+
+END DEFINE
+
+DELETE PLACEHOLDER table_align -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER table_align -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "align={table_align_value}"
+
+END DEFINE
+
+DELETE PLACEHOLDER table_align_value -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER table_align_value -
+    /LANGUAGE="HTML" -
+        /NOAUTO_SUBSTITUTE -
+        /DESCRIPTION="" -
+        /DUPLICATION=CONTEXT_DEPENDENT -
+        /SEPARATOR="" -
+        /TYPE=MENU
+    
+    "left"
+    "center"
+    "right"
+
+END DEFINE
+
+DELETE PLACEHOLDER header_row -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER header_row -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A <TR><TH></TH>...</TR> row" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TR [align]>"
+    "{th_tag}..."
+    "</TR>"
+
+END DEFINE
+
+DELETE PLACEHOLDER regular_row -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER regular_row -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A <TR><TD></TD>...</TR> row" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TR [align]>"
+    "{td_tag}..."
+    "</TR>"
+
+END DEFINE
+
+DELETE PLACEHOLDER th_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER th_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A <TH></TH> tag" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TH [bgcolor] [table_width] [align]>{document text}</TH>"
+
+END DEFINE
+
+DELETE PLACEHOLDER bgcolor -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER bgcolor -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "bgcolor={color}"
+
+END DEFINE
+
+DELETE PLACEHOLDER td_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER td_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A <TD></TD> tag" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TD [bgcolor] [table_width] [align]>{document text}</TD>"
+
+END DEFINE
+
+DELETE PLACEHOLDER mailto_href -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER mailto_href -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A mailing address link" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<A href="mailto:{A_email_address}">{a_email_address}</A>"
+
+END DEFINE
+
+DELETE PLACEHOLDER a_email_address -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER a_email_address -
+    /LANGUAGE="HTML" -
+    /AUTO_SUBSTITUTE -
+    /SUBSTITUTE_COUNT=1
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{email_address}"
+
+END DEFINE
+
+DELETE PLACEHOLDER email_address -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER email_address -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "An EMail address of form <name>@<host>"
+
+END DEFINE
+
+DELETE PLACEHOLDER image_same_loc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER image_same_loc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An image in currect location" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<IMG src="{filename}" [image_width] [image_height]>"
+
+END DEFINE
+
+DELETE PLACEHOLDER image_diff_dir -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER image_diff_dir -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An image on a different directory" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<IMG src="{path{/{filename}" [image_width] [image_height]>"
+
+END DEFINE
+
+DELETE PLACEHOLDER image_remote_loc -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER image_remote_loc -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An image at a URL" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<IMG src="http://{url}[urlpath]/{filename}" [image_width] [image_height]>"
+
+END DEFINE
+
+DELETE PLACEHOLDER image_width -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER image_width -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    "width={units}"
+
+END DEFINE
+
+DELETE PLACEHOLDER units -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER units -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Width or height of the image in units"
+
+END DEFINE
+
+DELETE PLACEHOLDER image_height -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER image_height -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "height={units}"
+
+END DEFINE
+
+DELETE PLACEHOLDER checkbox -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER checkbox -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputBox with type of checkbox" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT type="checkbox" name="{elementname}" value="{elementvalue}" [CHECKED]"
+
+END DEFINE
+
+DELETE PLACEHOLDER elementname -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER elementname -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "The name of the element"
+
+END DEFINE
+
+DELETE PLACEHOLDER elementvalue -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER elementvalue -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "The value (string or numeric) of the element"
+
+END DEFINE
+
+DELETE PLACEHOLDER checked -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER checked -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "CHECKED"
+
+END DEFINE
+
+DELETE PLACEHOLDER basic_form_layout -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER basic_form_layout -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A Form tag with elements" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<FORM [form_title] method="POST" [action]>
+    "{form_tag}..."
+    "</FORM>"
+
+END DEFINE
+
+DELETE PLACEHOLDER form_title -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER form_title -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "title="{formtitle}""
+
+END DEFINE
+
+DELETE PLACEHOLDER formtitle -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER formtitle -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A title for the form"
+
+END DEFINE
+
+DELETE PLACEHOLDER action -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER action -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    "action="{actionlocation}""
+
+END DEFINE
+
+DELETE PLACEHOLDER actionlocation -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER actionlocation -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "[url]/[path]/{filename}"
+
+END DEFINE
+
+DELETE PLACEHOLDER hidden_information -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER hidden_information -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputTag with type of hidden" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT type="hidden" name="{elementname}" value="[value]">"
+
+END DEFINE
+
+DELETE PLACEHOLDER password_input_box -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER password_input_box -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputBox with a type of Password" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT type=password name="{elementname}" [value] [textsize] [maxlen]>"
+
+END DEFINE
+
+DELETE PLACEHOLDER value -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER value -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "value="{elementvalue}""
+
+END DEFINE
+
+DELETE PLACEHOLDER textsize -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER textsize -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "size={elementvalue}"
+
+END DEFINE
+
+DELETE PLACEHOLDER maxlen -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER maxlen -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "maxlength={elementvalue}"
+
+END DEFINE
+
+DELETE PLACEHOLDER radio_input_button -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER radio_input_button -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputBox with a type of radio" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT type="radio" name="{elementname}" value="{elementvalue)" [CHECKED}>"
+
+END DEFINE
+
+DELETE PLACEHOLDER reset_input_button -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER reset_input_button -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputBox with a type of reset" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT type=reset value="[elementvalue}">"
+
+END DEFINE
+
+DELETE PLACEHOLDER submit_input_button -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER submit_input_button -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="An InputBox with a type of submit" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<INPUT Type=submit value="{elementvalue}">"
+
+END DEFINE
+
+DELETE PLACEHOLDER select_option_combination -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER select_option_combination -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A <SELECT> /n <OPTION>... combination" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<SELECT name="{elementname}">"
+    "{option_tag}..."
+    "</SELECT>"
+
+END DEFINE
+
+DELETE PLACEHOLDER option_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER option_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="The <OPTION> part of a SELECT" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<OPTION value="{elementvalue}"[SELECTED]>{Option text}"
+
+END DEFINE
+
+DELETE PLACEHOLDER "option text"
+    /LANGUAGE="html
+DEFINE PLACEHOLDER  -
+    /LANGUAGE="" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTIVCAL -""
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "What the User sees in an option""
+
+END DEFINE
+
+DELETE PLACEHOLDER textarea_tag -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER textarea_tag -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A TextArea tag" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<TEXTAREA name="{elementname}" rows={elementvalue} cols={elementvalue}>"
+    "{default text}"
+    "</TEXTAREA>""
+
+END DEFINE
+
+DELETE PLACEHOLDER "default text" -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER "default text" -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "The default text for the TextBox."
+
+END DEFINE
+
+DELETE PLACEHOLDER javascript -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER javascript -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A block of JavaScript code" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<SCRIPT LANGUAGE="JavaScript">"
+    "<!-- //Activate cloak (Change ELSE language to javascript)"
+    "{command}..."
+    "// Deactivate cloak (Change ELSE language to html) -->"
+    "</SCRIPT>"
+
+END DEFINE
+
+DELETE PLACEHOLDER phpscript -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER phpscript -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A block of php code" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<?php"
+    "# Change ELSE language to php"
+    "{command}..."
+    "# Change ELSE language to html"
+    "?>"
+
+END DEFINE
+
+DELETE PLACEHOLDER vbscript -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER vbscript -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A block of VBScript code" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "<SCRIPT LANGUAGE="VBS">"
+    "rem Change ELSE language to VB6"
+    "{command}..."
+    "rem Change ELSE language to html"
+    "</SCRIPT>"
+
+END DEFINE
+
+DELETE TOKEN title -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN title -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=header_title
+
+END DEFINE
+
+DELETE TOKEN line -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN line -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=hr
+
+END DEFINE
+
+DELETE TOKEN h1 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h1 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h1
+
+END DEFINE
+
+DELETE TOKEN h2 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h2 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h2
+
+END DEFINE
+
+DELETE TOKEN h3 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h3 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h3
+
+END DEFINE
+
+DELETE TOKEN h4 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h4 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h4
+
+END DEFINE
+
+DELETE TOKEN h5 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h5 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h5
+
+END DEFINE
+
+DELETE TOKEN h6 -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN h6 -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=h6
+
+END DEFINE
+
+DELETE TOKEN comm -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN comm -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=comment_tag
+
+END DEFINE
+
+DELETE TOKEN cr -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN cr -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=br_tag
+
+END DEFINE
+
+DELETE TOKEN p -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN p -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=p_tag
+
+END DEFINE
+
+DELETE TOKEN pre -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN pre -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=pre_tag
+
+END DEFINE
+
+DELETE TOKEN b -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN b -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=b_tag
+
+END DEFINE
+
+DELETE TOKEN center -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN center -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=center_tag
+
+END DEFINE
+
+DELETE TOKEN i -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN i -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=i_tag
+
+END DEFINE
+
+DELETE TOKEN u -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN u -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=u_tag
+
+END DEFINE
+
+DELETE TOKEN ol -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN ol -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=ol_tag
+
+END DEFINE
+
+DELETE TOKEN li -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN li -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=li_tag
+
+END DEFINE
+
+DELETE TOKEN ul -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN ul -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=ul_tag
+
+END DEFINE
+
+DELETE TOKEN lab -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN lab -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=named_anchor
+
+END DEFINE
+
+DELETE TOKEN lab_same -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN lab_same -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=anchor_same_doc
+
+END DEFINE
+
+DELETE TOKEN lab_oth -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN lab_oth -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=anchor_other_doc
+
+END DEFINE
+
+DELETE TOKEN lab_dir -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN lab_dir -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=anchor_doc_in_other_dir
+
+END DEFINE
+
+DELETE TOKEN lab_rem -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN lab_rem -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=anchor_remote_doc
+
+END DEFINE
+
+DELETE TOKEN link_same -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN link_same -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=link_doc_same_dir
+
+END DEFINE
+
+DELETE TOKEN link_oth -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN link_oth -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=link_doc_other_dir
+
+END DEFINE
+
+DELETE TOKEN link_rem -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN link_rem -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=link_remote_doc
+
+END DEFINE
+
+DELETE TOKEN ftp -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN ftp -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=ftp_remote_doc
+
+END DEFINE
+
+DELETE TOKEN table -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN table -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=complete_table_layout
+
+END DEFINE
+
+DELETE TOKEN hrow -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN hrow -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=header_row
+
+END DEFINE
+
+DELETE TOKEN row -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN row -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=regular_row
+
+END DEFINE
+
+DELETE TOKEN tr -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN tr -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=regular_rom
+
+END DEFINE
+
+
+DELETE TOKEN th -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN th -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=th_tag
+
+END DEFINE
+
+DELETE TOKEN td -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN td -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=td_tag
+
+END DEFINE
+
+DELETE TOKEN mailto -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN mailto -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=mailto_href
+
+END DEFINE
+
+DELETE TOKEN img_same -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN img_same -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=image_same_loc
+
+END DEFINE
+
+DELETE TOKEN img_diff -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN img_diff -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=image_diff_dir
+
+END DEFINE
+
+DELETE TOKEN img_rem -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN img_rem -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=image_remote_loc
+
+END DEFINE
+
+DELETE TOKEN check -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN check -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=checkbox
+
+END DEFINE
+
+DELETE TOKEN form -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN form -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=basic_form_layout
+
+END DEFINE
+
+DELETE TOKEN hidden -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN hidden -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=hidden_information
+
+END DEFINE
+
+DELETE TOKEN password -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN password -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=password_input_box
+
+END DEFINE
+
+DELETE TOKEN radio -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN radio -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=radio_input_button
+
+END DEFINE
+
+DELETE TOKEN reset -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN reset -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=reset_input_button
+
+END DEFINE
+
+DELETE TOKEN submit -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN submit -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=submit_input_button
+
+END DEFINE
+
+DELETE TOKEN select -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN select -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=select_option_combination
+
+END DEFINE
+
+DELETE TOKEN textarea -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN textarea -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=textarea_tag
+
+END DEFINE
+
+DELETE TOKEN javas -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN javas -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=javascript
+
+END DEFINE
+
+DELETE TOKEN phps -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN phps -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=phpscript
+
+END DEFINE
+
+DELETE TOKEN vbs -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN vbs -
+    /LANGUAGE="HTML" -
+    /PLACEHOLDER=vbscript
+
+END DEFINE
+
+
+DELETE TOKEN "&" -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN "&" -
+    /LANGUAGE="HTML" -
+    /DESCRIPTION="HTML version of & (&amp;)" -
+
+    "&amp;"
+
+END DEFINE
+
+DELETE TOKEN "lt" -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN "lt" -
+    /LANGUAGE="HTML" -
+    /DESCRIPTION="HTML version of < (&lt;)" -
+
+    "&lt;"
+
+END DEFINE
+
+DELETE TOKEN "gt" -
+    /LANGUAGE="HTML" -
+DEFINE TOKEN "gt" -
+    /LANGUAGE="HTML" -
+    /DESCRIPTION="HTML version of > (&gt;)" -
+
+    "&gt;"
+
+END DEFINE
+
+DELETE PLACEHOLDER sp -
+    /LANGUAGE="HTML" -
+DEFINE PLACEHOLDER sp -
+    /LANGUAGE="HTML" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A hard space (&nbsp;)" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "&nbsp;"
+
+END DEFINE
+
+

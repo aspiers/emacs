@@ -1,0 +1,395 @@
+;; These are primary Templates for the DOS language
+;; for use with the Emacs Language Sensitive Editor (ELSE).
+;;
+;; Created 2003 Douglas Harter
+;;
+;; Author: Douglas Harter <djharter@aol.com>
+;; Date modified : Time-stamp: <>
+;; Version: 1.1
+;;
+;; This is NOT a very comprehensive implementation of DOS.
+;; I took it from the DOS templates in MultiEdit.
+;; It only covers for, the different types of if, and a label.
+;; At a later time I may make it more comprehensive.
+;;
+
+DELETE LANGUAGE DOS -
+DEFINE LANGUAGE DOS -
+    /INITIAL_STRING="{compilation_unit}" -
+    /PUNCTUATION_CHARACTERS=",;()*.'%" -" -
+    /SELF_INSERT_CHARACTERS="    `~!@#$%^&*(),.<>/?;:'[]{}=\-+|"" -
+    /VALID_IDENTIFIER_CHARACTERS="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789""
+    /INDENT_SIZE=4 -
+    /VERSION="DOS 6.0" -
+
+END DEFINE
+
+DELETE PLACEHOLDER for -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER for -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="For loop (for ## in (set) do command) -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "for %%{variable} in ({set}...) do {command} [command parameters]..."
+
+END DEFINE
+
+DELETE PLACEHOLDER variable -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER variable -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Provide a replacement variable."
+
+END DEFINE
+
+DELETE PLACEHOLDER set -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER set -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="A set of parameters" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    "{individual set}"
+
+END DEFINE
+
+DELETE PLACEHOLDER "individual set" -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER "individual set" -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "One or more text strings or file names. Wildcards may be used."
+
+END DEFINE
+
+DELETE PLACEHOLDER command -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER command -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A DOS command. This may be later expanded to include more"
+    "DOS commands."
+
+END DEFINE
+
+DELETE PLACEHOLDER "command parameters" -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER "command parameters" -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=HORIZONTAL -
+    /SEPARATOR=" "
+    /TYPE=NONTERMINAL
+
+    "{parameter}"
+
+END DEFINE
+
+DELETE PLACEHOLDER parameter -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER parameter -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A parameter to the command"
+
+END DEFINE
+
+DELETE PLACEHOLDER if -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER if -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="Different types of IF statement" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+    "if_errorlevel"/PLACEHOLDER
+    "if_exist"/PLACEHOLDER
+    "if_string"/PLACEHOLDER
+
+END DEFINE
+
+DELETE PLACEHOLDER if_errorlevel -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER if_errorlevel -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="if [not] errorlevel" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "if [NOT] errorlevel {number} {command}"
+
+END DEFINE
+
+DELETE PLACEHOLDER number -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER number -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A number corresponding to a valid exit code."
+
+END DEFINE
+
+DELETE PLACEHOLDER not -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER not -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR=" " -
+    /TYPE=NONTERMINAL
+
+    "NOT"
+
+END DEFINE
+
+DELETE PLACEHOLDER if_exist -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER if_exist -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="if [not] exist" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "if [NOT] exist {filename} {command}"
+
+END DEFINE
+
+DELETE PLACEHOLDER filename -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER filename -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A filename or directory. If testing for a directory, use the nul device."
+    "Examples: if exist myfile.bat goto process"
+    "          if not exist c:\mydir\nul goto process"
+
+END DEFINE
+
+DELETE PLACEHOLDER if_string -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER if_string -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="if [not] string==string" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "if [NOT] {string|batch_variable} == {string|batch_variable} {command}"
+
+END DEFINE
+
+DELETE PLACEHOLDER string|batch_variable -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER string|batch_variable -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=MENU
+
+	"'{string}'"
+	"%{variable}"
+
+END DEFINE
+
+DELETE PLACEHOLDER string -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER string -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "A group of characters to be treated as a unit. A"
+    "string can include letters, numbers, spaces, or any other"
+    "characters."
+
+END DEFINE
+
+DELETE PLACEHOLDER label_line -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER label_line -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    ":{label}"
+
+END DEFINE
+
+DELETE PLACEHOLDER label -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER label -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=CONTEXT_DEPENDENT -
+    /SEPARATOR="" -
+    /TYPE=TERMINAL
+
+    "Labels may contain spaces but no other separators. GOTO only"
+    "recognizes the first eight (8) characters."
+
+END DEFINE
+
+DELETE TOKEN if -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN if -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if
+
+END DEFINE
+
+DELETE TOKEN iferr -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN iferr -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_errorlevel
+
+END DEFINE
+
+DELETE TOKEN ifex -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN ifex -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_exist
+
+END DEFINE
+
+DELETE TOKEN ifnerr -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN ifnerr -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_errorlevel
+
+END DEFINE
+
+DELETE TOKEN ifnex -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN ifnex -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_exist
+
+END DEFINE
+
+DELETE TOKEN ifnst -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN ifnst -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_string
+
+END DEFINE
+
+DELETE TOKEN ifst -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN ifst -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_string
+
+END DEFINE
+
+DELETE TOKEN lab -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN lab -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=label_line
+
+END DEFINE
+
+DELETE TOKEN niferr -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN niferr -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_errorlevel
+
+END DEFINE
+
+DELETE TOKEN nifex -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN nifex -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_exist
+
+END DEFINE
+
+DELETE TOKEN nifst -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN nifst -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=if_string
+
+END DEFINE
+
+DELETE PLACEHOLDER compilation_unit -
+    /LANGUAGE="DOS" -
+DEFINE PLACEHOLDER compilation_unit -
+    /LANGUAGE="DOS" -
+    /NOAUTO_SUBSTITUTE -
+    /DESCRIPTION="" -
+    /DUPLICATION=VERTICAL -
+    /SEPARATOR="" -
+    /TYPE=NONTERMINAL
+
+    "{command}..."
+
+END DEFINE
+
+DELETE TOKEN for -
+    /LANGUAGE="DOS" -
+DEFINE TOKEN for -
+    /LANGUAGE="DOS" -
+    /PLACEHOLDER=for
+
+END DEFINE
