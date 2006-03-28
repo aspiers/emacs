@@ -24,7 +24,9 @@
 point.  The result is a paired list of character positions for a
 mairix link located at the current point in the current buffer."
   (save-excursion
-    (skip-chars-backward "^<")
+    (if (looking-at "<mairix://")
+        (forward-char 1)
+      (skip-chars-backward "^<"))
     (if (looking-at "mairix://\\([^>]+?\\)>")
         (match-string 1)
       nil)))
