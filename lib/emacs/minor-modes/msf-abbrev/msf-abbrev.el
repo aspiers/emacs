@@ -51,6 +51,12 @@
 ;;;_  . selecting a region and M-x `msf-cmd-define' inserts the
 ;; selection to the abbrev file.
 ;;;_ , Adam Spiers
+;;;_  . support <include "/path/to/file">
+;; where path can use ~ home directory notation and $FOO environment
+;; variable expansion
+;;;_  . support <region> to substitute active region
+;; (this is probably only useful when binding a key sequence to an
+;; msf-expand/foo function)
 ;;;_  . FIXME
 
 ;;;_* Commentary
@@ -659,6 +665,7 @@ Run `msf-abbrev-after-expansion-hook'"
 	 (msf-form-parse-comments form)
 	 (msf-form-parse-trims form)
 	 (msf-form-parse-elisp form)
+	 (msf-form-parse-includes form)
 	 (msf-form-parse-vars  form)
 	 (msf-form-parse-regions form)
 	 (msf-form-parse-choices form)
@@ -765,6 +772,20 @@ Run `msf-abbrev-after-expansion-hook'"
 	(replace-match "")
         (with-current-buffer msf-orig-buffer
           (eval (read v)))))))
+
+;;;_  > msf-form-parse-includes (form)
+(defun msf-form-parse-includes (form)
+  (save-excursion
+    (goto-char (msf-form-start form))
+    (while (and (< (point) (msf-form-end form))
+		(re-search-forward 
+		 "<include[ \t]+\"\\(.*?\\)\">"
+		 (msf-form-end form) t))
+      (replace-match
+       (let ((file (substitute-in-file-name
+                    (expand-file-name (match-string 1)))))
+         (with-temp-buffer (insert-file-contents file)
+                           (buffer-string)))))))
 
 ;;;_  > msf-form-parse-queries (form)
 (defun msf-form-parse-queries (form)
