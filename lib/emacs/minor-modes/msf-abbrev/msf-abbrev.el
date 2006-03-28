@@ -141,7 +141,8 @@
 ;;     not selected
 ;;;_ , <include "../other-mode/other-template">
 ;;;_ , make TAB/S-TAB bindings customisable
-;;;_ , make replacing existing abbrevs optional per mode (e.g. cperl-mode)
+;;;_ , make replacing existing abbrevs optional per mode/abbrev
+;;     (e.g. via cperl-mode.el / <disable>)
 
 ;;;_* Known Bugs and Not Intended Features
 ;;   , <elisp "(beginning-of-buffer)"> doesn't work
