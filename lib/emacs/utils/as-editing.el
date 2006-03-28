@@ -184,8 +184,8 @@ Right Thing with `query-replace' and friends."
     ;; called as part of another interactive function, make sure
     ;; we're only changing history for suitable functions.
     (when (memq (car-safe ch-top) bn-replace-functions-to-fix-up)
-      (setcar (cddddr ch-top) (list 'bn-safe-region-beginning))
-      (setcar (cdr (cddddr ch-top)) (list 'bn-safe-region-end)))))
+      (setcar (cddr (cddr ch-top)) (list 'bn-safe-region-beginning))
+      (setcar (cdr (cdddr (cddr ch-top))) (list 'bn-safe-region-end)))))
 
 (ad-activate 'perform-replace)
 
