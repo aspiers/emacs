@@ -1,9 +1,9 @@
 ;; Things to help me with Getting Things Done.
 
-(defvar as-mairix-links-clipboard (concat (getenv "HOME") "/.clip-mairix")
+(defvar as-mairix-links-clipboard "~/.clip-mairix"
   "Pseudo-clipboard file where mairix URLs get copied to.")
 
-(defvar as-mairix-results-folder (concat (getenv "HOME") "/mail/novell/mairix")
+(defvar as-mairix-results-folder "~/mail/novell/mairix"
   "Folder where mairix writes results.")
 
 (defvar as-mairix-link-viewer-command "mairix %search% && xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -f %folder% -e \"push <display-message>\"' &"
@@ -12,7 +12,8 @@
 (defun as-mairix-yank-links ()
   "Yank from file defined by `as-mairix-links-clipboard'."
   (interactive)
-  (let ((bytes (cadr (insert-file-contents as-mairix-links-clipboard))))
+  (let ((bytes (cadr (insert-file-contents
+                      (expand-file-name as-mairix-links-clipboard)))))
     (forward-char bytes)
     (save-excursion
       (forward-char -1)
