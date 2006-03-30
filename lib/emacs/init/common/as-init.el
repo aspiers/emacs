@@ -233,6 +233,14 @@ that name."
 ;;{{{ for changing visibility:
 
 ;; These don't need to be easily repeatable, so a key sequence is ok.
+;;   C-  left         decrease depth of subheadings in current heading
+;;   C-S-left         hide subtree
+;;   C-  right        increase depth of subheadings in current heading
+;;   C-S-right        show all subheadings
+;; M-C-S-right        show whole subtree
+;;
+;;     C-c C-o        show entire tree
+;;     C-c C-w        hide entire tree
 
 
 ;; outline-mode
@@ -289,28 +297,45 @@ that name."
             ;;   folding-show-current-subtree
             ;;   folding-find-folding-mark
             
-            (local-set-key [(control shift left )]
-                           (lambda ()
-                             (interactive)
-                             (and (folding-hide-current-entry)
-                                  ;; ensure consistent landing spot
-                                  (folding-mark-look-at 'mark))))
+            (local-set-key [(control shift left)] 'as-folding-hide-current)))
+
+(defun as-allout-show-current ()
+  "Shows the body and children of the current topic"
+  (interactive)
+  (allout-show-current-entry)
+  (allout-show-children))
+
+(defun as-allout-hide-current ()
+  "Hides the current topic, or the containing topic if the current one
+is already hidden."
+  (interactive)
+  (cond ((allout-current-topic-collapsed-p)
+         (allout-up-current-level 1)
+         (allout-hide-current-subtree))
+        (t (allout-hide-current-subtree))))
+
+(add-hook 'allout-mode-hook
+          (lambda ()
+            (local-set-key [(control left )] 'as-allout-hide-current)
+            (local-set-key [(control right)] 'as-allout-show-current)
+            (local-set-key [(control shift left)]  'allout-hide-current-subtree)
+            (local-set-key [(control shift right)] 'allout-show-current-subtree)
             ))
-
-            
-
-;;       C-c C-o    show entire tree
-;;       C-c C-w    hide entire tree
-
-;;   C-  left         decrease depth of subheadings in current heading
-;;   C-S-left         hide subtree
-;;   C-  right        increase depth of subheadings in current heading
-;;   C-S-right        show all subheadings
-;; M-C-S-right        show whole subtree
-;;
 
 ;;}}}
 ;;{{{ for navigation:
+
+;; need to be easily repeatable, should be a chord:
+;;
+;;    C-U       up level
+;;    C-???     down level
+;;    C-S-up    prev heading at current level
+;;    C-S-down  next heading at current level
+;;    C-up      prev heading
+;;    C-down    next heading
+
+(global-set-key [(shift meta f)] 'as-forward-word-start)
+(global-set-key [(shift meta b)] 'as-backward-before-word)
 
 ;; Define fast scroll keys, may be overridden per mode.
 (defun as-fast-up   () "Move up two lines."   (interactive) (forward-line -2))
@@ -318,21 +343,30 @@ that name."
 (global-set-key [(shift down)] 'as-fast-down)
 (global-set-key [(shift up)]   'as-fast-up)
 
+;;{{{ as-folding-{previous,next}-visible-heading
+
+(defun as-folding-previous-visible-heading ()
+  "Wrapper around `folding-previous-visible-heading' which ensures a
+consistent landing spot."
+  (interactive)
+  (and (folding-previous-visible-heading)
+       (folding-mark-look-at 'mark)))
+
+(defun as-folding-next-visible-heading ()
+  "Wrapper around `folding-next-visible-heading' which ensures a
+consistent landing spot."
+  (interactive)
+  (and (folding-next-visible-heading)
+       (folding-mark-look-at 'mark)))
+
+;;}}}
+
 (eval-when-compile (require 'folding))
 (add-hook 'folding-mode-hook
           (lambda ()
-            (local-set-key [(control up)]
-                           (lambda ()
-                             (interactive)
-                             (and (folding-previous-visible-heading)
-                                  ;; ensure consistent landing spot
-                                  (folding-mark-look-at 'mark))))
-            (local-set-key [(control down)]
-                           (lambda ()
-                             (interactive)
-                             (and (folding-next-visible-heading)
-                                  ;; ensure consistent landing spot
-                                  (folding-mark-look-at 'mark))))
+            (local-set-key [(control up  )] 'as-folding-previous-visible-heading)
+            (local-set-key [(control down)] 'as-folding-previous-visible-heading)
+
             ;; FIXME: not implemented yet
 ;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
 ;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
@@ -341,33 +375,20 @@ that name."
 (eval-when-compile (require 'allout))
 (add-hook 'allout-mode-hook
           (lambda ()
-            (local-set-key [(control left)]       'allout-up-current-level)
-            (local-set-key [(control up)]         'allout-previous-visible-heading)
-            (local-set-key [(control down)]       'allout-next-visible-heading)
-            (local-set-key [(control shift up)]   'allout-backward-current-level)
+            (local-set-key [(control U         )] 'allout-up-current-level)
+            (local-set-key [(control up        )] 'allout-previous-visible-heading)
+            (local-set-key [(control down      )] 'allout-next-visible-heading)
+            (local-set-key [(control shift up  )] 'allout-backward-current-level)
             (local-set-key [(control shift down)] 'allout-forward-current-level)))
 
 (eval-when-compile (load-library "org"))
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key [(control left)]       'outline-up-heading)
-            (local-set-key [(control up  )]       'outline-previous-visible-heading)
-            (local-set-key [(control down)]       'outline-next-visible-heading)
+            (local-set-key [(control U         )] 'outline-up-heading)
+            (local-set-key [(control up        )] 'outline-previous-visible-heading)
+            (local-set-key [(control down      )] 'outline-next-visible-heading)
             (local-set-key [(control shift down)] 'outline-forward-same-level)
             (local-set-key [(control shift up  )] 'outline-backward-same-level)))
-
-;;
-;;     need to be easily repeatable, should be a chord:
-;;       C-c u?     up level
-;;       C-c d?     down level
-;;       C-c f?     next heading at current level
-;;       C-c b?     next heading at current level
-;;       C-c n?     next heading
-;;       C-c p?     prev heading
-;;
-
-(global-set-key [(shift meta f)] 'as-forward-word-start)
-(global-set-key [(shift meta b)] 'as-backward-before-word)
 
 ;;}}}
 ;;{{{ for editing structure:
@@ -1324,7 +1345,8 @@ C-style indentation, use cssm-c-style-indenter.")
           (lambda ()
             (define-key muse-mode-map "\C-c."        'org-time-stamp)
             (define-key muse-mode-map [(shift up)]   'org-timestamp-up)
-            (define-key muse-mode-map [(shift down)] 'org-timestamp-down)))
+            (define-key muse-mode-map [(shift down)] 'org-timestamp-down)
+            (allout-minor-mode)))
 
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
@@ -1713,6 +1735,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ allout
 
 (eval-after-load "outline" '(as-allout-init))
+(eval-after-load "muse" '(as-allout-init))
 
 (defun as-allout-maybe-init ()
   "Hook for use within `find-file-hooks' to check whether a file needs
@@ -1733,8 +1756,10 @@ allout mode initialized."
         (outline-init t)
       (allout-init t))
     (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
-    (substitute-key-definition 'end-of-line 'move-end-of-line global-map)
-    (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")))))
+    (substitute-key-definition 'end-of-line 'move-end-of-line global-map)))
+
+(setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")
+                            (muse-mode       . "*")))
 
 ;;}}}
 ;;{{{ msf-abbrev
