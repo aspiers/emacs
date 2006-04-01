@@ -1,0 +1,14 @@
+me=`basename $0`
+
+usage () {
+  cat <<EOF >&2
+Usage: $me <field "[options]"> <field "ARGS">
+Options (must be in order specified above!)
+<field "options">
+EOF
+  exit 1
+}
+
+if [ "$1" == -h ] || [ "$1" == --help ]; then
+  usage
+fi
