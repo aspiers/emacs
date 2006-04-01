@@ -1,0 +1,4 @@
+if <field "expression">; then
+echo "<field "ERROR">" >&2
+exit 1
+fi
