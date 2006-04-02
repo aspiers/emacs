@@ -186,7 +186,8 @@
     (abbrev-mode msf-abbrev-mode)))
 
 (eval-when-compile
-  ;; bah, easy-mmode-define-global-mode appears to suck
+  ;; Unless I'm missing something, easy-mmode-define-global-mode
+  ;; doesn't appear to produce clean compiles without some help.
   (defvar global-msf-abbrev-mode)
   (defvar msf-abbrev-maybe-enable))
 (if (functionp 'define-global-minor-mode)
@@ -212,6 +213,12 @@ This directory should have subdirectories such as c-mode, lisp-mode, etc."
   "*Whether to indent the region inserted after the abbrev is expanded."
   :group 'msf-abbrev
   :type 'boolean)
+
+(defcustom msf-abbrev-case-fold nil
+  "*Whether abbrev expansion should be case-sensitive."
+  :group 'msf-abbrev
+  :type '(choice (const :tag "case-sensitive" nil)
+                 (const :tag "case-insensitive" t)))
 
 (defcustom msf-abbrev-first-insertion-replaces t
   "*Whether to replace a field's content when first inserting text at
@@ -650,7 +657,7 @@ Run `msf-abbrev-after-expansion-hook'"
 (defun msf-form-insert (str)
   "Insert STR and generate editable fields"
   (let ((inhibit-modification-hooks t)
-	(case-fold-search t)
+	(case-fold-search msf-abbrev-case-fold)
 	(form nil))
     (goto-char
      (save-excursion
