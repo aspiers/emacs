@@ -57,6 +57,7 @@
 ;;;_  . support <region> to substitute active region
 ;; (this is probably only useful when binding a key sequence to an
 ;; msf-expand/foo function)
+;;;_  . allow choice whether to apply case folding
 ;;;_  . FIXME
 
 ;;;_* Commentary
