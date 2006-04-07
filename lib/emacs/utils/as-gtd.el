@@ -32,10 +32,10 @@ mairix link located at the current point in the current buffer."
         (match-string 1)
       nil)))
 
-(defun as-mairix-view-link-at-point ()
+(defun as-mairix-view-link-at-point (show-async-buf)
   "View the 'mairix://...' link at the point using the shell command
 defined by `as-mairix-link-viewer-command'."
-  (interactive)
+  (interactive "P")
   (let ((message-id (as-mairix-search-at-point)))
     (or message-id (error "No mairix URL found at point"))
     (let ((cmd as-mairix-link-viewer-command))
@@ -48,4 +48,5 @@ defined by `as-mairix-link-viewer-command'."
       ;; buffer name so we can hide it again immediately.,
       (let ((tmpbufname (generate-new-buffer-name " *mairix-view*")))
         (shell-command cmd tmpbufname)
-        (delete-windows-on (get-buffer tmpbufname))))))
+        (or show-async-buf
+            (delete-windows-on (get-buffer tmpbufname)))))))
