@@ -1,0 +1,3 @@
+if ! out=$(<field "cmd"> 2>&1); then
+  echo "$out"
+fi
