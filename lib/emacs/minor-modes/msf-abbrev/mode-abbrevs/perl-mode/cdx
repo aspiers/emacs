@@ -1,0 +1,1 @@
+chdir(<field link="dir" "dir">) or die "chdir(<linked "dir">) failed: $!\n";

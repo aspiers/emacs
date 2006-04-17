@@ -1,0 +1,1 @@
+<comment "local attribute">my $<field link="name" "var"> = $self-><linked "name">;
