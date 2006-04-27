@@ -1495,7 +1495,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; now integrated into lib/emacs/Makefile
 
-(load-library "xtla-load")
+(load "xtla-load" 'noerror)
 (global-set-key "\C-xTT"    'tla-browse)
 (global-set-key "\C-xT\C-m" 'xtla)
 
