@@ -252,7 +252,7 @@ muse: .muse-installed
 planner: .planner-installed
 
 .planner-installed: .planner-made
-	( 								\
+	-( 								\
 	  cd major-modes/planner; 					\
 	  make install							\
 	) &&								\
