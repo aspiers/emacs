@@ -300,7 +300,7 @@ that name."
             (local-set-key [(control shift left)] 'as-folding-hide-current)))
 
 (defun as-allout-show-current ()
-  "Shows the body and children of the current topic"
+  "Shows the body and children of the current topic."
   (interactive)
   (allout-show-current-entry)
   (allout-show-children))
@@ -320,6 +320,20 @@ is already hidden."
             (local-set-key [(control right)] 'as-allout-show-current)
             (local-set-key [(control shift left)]  'allout-hide-current-subtree)
             (local-set-key [(control shift right)] 'allout-show-current-subtree)
+            ))
+
+(defun as-show-current ()
+  "Shows the body and children of the current topic."
+  (interactive)
+  (show-entry)
+  (show-children))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key [(control left )] 'hide-subtree)
+            (local-set-key [(control right)] 'as-show-current)
+            (local-set-key [(control shift left)]  'hide-subtree)
+            (local-set-key [(control shift right)] 'show-subtree)
             ))
 
 ;;}}}
