@@ -6,7 +6,7 @@
 (defvar as-mairix-results-folder "~/mail/novell/mairix"
   "Folder where mairix writes results.")
 
-(defvar as-mairix-link-viewer-command "mairix %search% && xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -f %folder% -e \"push <display-message>\"' &"
+(defvar as-mairix-link-viewer-command "mairix '%search%' && xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -f %folder% -e \"push <display-message>\"' &"
   "Command to view messages linked to by 'mairix://...' links.")
 
 (defun as-mairix-yank-links ()
