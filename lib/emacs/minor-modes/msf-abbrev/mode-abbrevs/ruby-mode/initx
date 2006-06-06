@@ -1,0 +1,3 @@
+def initialize(<field "args...">)
+  <field "code...">
+end
