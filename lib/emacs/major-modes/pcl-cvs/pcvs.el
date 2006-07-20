@@ -905,8 +905,10 @@ With a prefix argument, prompt for cvs FLAGS to use."
 into a file whose name is defined by `cvs-cache-filename'."
   (when (eq major-mode 'cvs-mode)
     (let ((cookies cvs-cookies))
-      (with-temp-file (expand-file-name cvs-cache-filename)
-        (prin1 (ewoc-map 'identity cookies) (current-buffer))))))
+      (condition-case err
+          (with-temp-file (expand-file-name cvs-cache-filename)
+            (prin1 (ewoc-map 'identity cookies) (current-buffer)))
+        (file-error (message "%s" (error-message-string err)))))))
 
 (add-hook 'kill-buffer-hook 'cvs-cache-buffer-fileinfos)
 (add-hook 'kill-emacs-hook  'cvs-cache-buffer-fileinfos)
