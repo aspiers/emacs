@@ -43,6 +43,12 @@ alternative date to use."
   "ISO8601 date format suitable for passing to `format-time-string'.")
 (defvar as-human-date-format "%a %b %e %Y"
   "Human-readable date format suitable for passing to `format-time-string'.")
+(defvar as-human-time-format "%H:%M:%S %Z"
+  "Human-readable time format suitable for passing to `format-time-string'.")
+(defvar as-filename-date-format "%Y-%m-%d"
+  "Filename-friendly date format suitable for passing to `format-time-string'.")
+(defvar as-filename-time-format "%H%Mh%Ss"
+  "Filename-friendly time format suitable for passing to `format-time-string'.")
 
 (defun as-insert-date-interactive (&optional prefix)
   "Inserts a date into the current buffer.
@@ -66,10 +72,12 @@ the date(1) command, and inserts that date in human-readable format."
                   as-human-date-format)))
     (as-insert-date format date)))
 
-(defun as-insert-time ()
-  "Inserts the current time into the current buffer at the point."
-  (interactive)
-  (insert (format-time-string "%H:%M:%S %Z")))
+(defun as-insert-time (&optional prefix)
+  "Inserts the current time into the current buffer at the point.  If
+a prefix argument, "
+  (interactive "*P")
+  (insert (format-time-string
+           (if prefix as-filename-time-format as-human-time-format))))
 
 (defun as-insert-date-and-time (&optional prefix)
   "Inserts the current date and time into the current buffer at the
@@ -78,6 +86,14 @@ point.  "
   (as-insert-date-interactive prefix)
   (insert " ")
   (as-insert-time))
+
+(defun as-insert-file-timestamp (&optional prefix)
+  "Inserts the current date and, if prefix given, time also, into the
+current buffer at the point, in a format suitable for use within a
+filename."
+  (interactive "*P")
+  (insert (format-time-string as-filename-date-format))
+  (if prefix (insert (format-time-string (concat "-" as-filename-time-format)))))
 
 (defun as-insert-log-timestamp (&optional prefix)
   "Inserts the current date, time and username into the current buffer
