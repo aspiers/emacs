@@ -1,2 +1,2 @@
 opendir(<field "DIR">, <field link="dir" "directory">)
-  or die "opendir(<linked "dir"> failed: $!\n";
+  or die "opendir(<linked "dir">) failed: $!\n";
