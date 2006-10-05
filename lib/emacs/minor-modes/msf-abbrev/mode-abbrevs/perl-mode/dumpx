@@ -1,2 +1,2 @@
 use Data::Dumper;
-warn Dumper();
+warn Dumper(<cursor>);
