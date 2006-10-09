@@ -1104,7 +1104,6 @@ consistent landing spot."
 ;;{{{ nxml
 
 ;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
-(load "rng-auto")
 ;;(when (string-match "/\"" (prin1-to-string load-path)) (error 'fucked))
 
 (autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
