@@ -1,10 +1,10 @@
+(my $ME = $0) =~ s,.*/,,;
+
 sub usage {
   warn @_, "\n" if @_;
 
-  (my $me = $0) =~ s,.*/,,;
-
   die <<EOUSAGE;
-Usage: $me <field "options">
+Usage: $ME <field "options">
 Options:
   -h, --help             Show this help
 <field "options2">
