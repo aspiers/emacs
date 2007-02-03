@@ -1,4 +1,4 @@
-if ! tmpfile=`mktemp /tmp/$me.tmp.XXXXXXXX`; then
+if ! tmpfile=`mktemp <field "path">/$me.tmp.XXXXXXXX`; then
   echo "mktemp failed: $!"
   exit 1
 fi
