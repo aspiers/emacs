@@ -111,7 +111,7 @@ the point.  Defaults to ISO 8601 date format suitable for
 chronological/lexical sorting, but reverts to more human-readable
 version if a prefix argument is given."
   (interactive "*P")
-  (as-insert-date prefix)
+  (as-insert-date-interactive prefix)
   (insert "  Adam Spiers <>")
   (backward-char 1))
 
