@@ -7,8 +7,8 @@ sub usage {
 Usage: $ME <field "options">
 Options:
   -h, --help         Show this help
-  -v, --verbose      Increase verbosity (can be specified multiple times)
-  -v, --version      Show version
+  -v, --verbosity=N  Control verbosity (defaults to 1)
+  -V, --version      Show version
 <field "options2">
 EOUSAGE
 }
