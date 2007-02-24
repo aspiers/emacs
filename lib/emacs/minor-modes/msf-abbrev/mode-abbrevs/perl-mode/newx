@@ -1,0 +1,12 @@
+sub new {
+  my $self = shift;
+  my $class = ref($self) || $self;
+  my (<field "args">) = @_;
+
+  <field "code">
+
+  my $new = bless {
+  }, $class;
+
+  return $new;
+}
