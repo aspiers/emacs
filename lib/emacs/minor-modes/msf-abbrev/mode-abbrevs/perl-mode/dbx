@@ -1,1 +1,1 @@
-debug(<field "1">, <field "message">);
+debug(<field "1">, "<field "message">");
