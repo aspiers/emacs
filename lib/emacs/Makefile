@@ -330,5 +330,5 @@ major-modes/remember/remember-experimental.elc: .planner-made
 calc: calc-2.02f
 calc-2.02f: .calc-2.02f-installed
 .calc-2.02f-installed:
-	@echo "FIXME: get tla/baz interfacing with cfgctl and apply patch from PROBLEMS"
+	@echo "$@: FIXME: apply patch from PROBLEMS"
 #	-cd major-modes/calc-2.02f && make all
