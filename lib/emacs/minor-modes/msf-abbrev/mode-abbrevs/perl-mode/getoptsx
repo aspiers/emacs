@@ -4,6 +4,9 @@ my %opts;
 GetOptions(
   \%opts,
   'help|h',
+  'debug|d',
+  'verbose|v',
+  'version|v',
   <cursor><field "options">
 ) or usage();
 usage() if @ARGV == 0 or $opts{help};
