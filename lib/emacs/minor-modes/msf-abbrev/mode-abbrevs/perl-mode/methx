@@ -1,9 +1,3 @@
-=head2 <cursor><field link="method" "methodname">
-
-<field "docs">
-
-=cut
-
 sub <linked "method"> {
   my $self = shift;
   my (<field "args">) = @_;

@@ -1,0 +1,7 @@
+=head2 <field link="method" "methodname">
+
+<field "docs">
+
+=cut
+
+<include "~/.msf-abbrevs/perl-mode/cmethx">
