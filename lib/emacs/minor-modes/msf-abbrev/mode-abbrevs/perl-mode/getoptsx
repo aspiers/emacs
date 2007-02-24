@@ -7,7 +7,7 @@ GetOptions(
   \%opts,
   'help|h',
   'debug|d',
-  'verbosity|v:+',
+  'verbose|v:+',
   'version|V',
   <cursor><field "options">
 ) or usage();
