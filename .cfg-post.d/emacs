@@ -5,6 +5,7 @@ cd
 [ -e .as-custom.el ] || ln -s lib/emacs/init/GNU_Emacs/as-custom.el .as-custom.el
 [ -e .msf-abbrevs  ] || ln -s lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 
-ln -s muse--main--1.0 lib/emacs/major-modes/muse
+[ -e lib/emacs/major-modes/muse ] || \
+  ln -s muse--main--1.0 lib/emacs/major-modes/muse
 
 emk
