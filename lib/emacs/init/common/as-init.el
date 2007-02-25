@@ -1508,9 +1508,15 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; now integrated into lib/emacs/Makefile
 
-(load "xtla-load" 'noerror)
-(global-set-key "\C-xTT"    'tla-browse)
-(global-set-key "\C-xT\C-m" 'xtla)
+;;(load "xtla-load" 'noerror)
+
+;;}}}
+;;{{{ dvc
+
+(require 'dvc-autoloads)
+;;(load "dvc-load" 'noerror)
+(global-set-key "\C-xTA"    'dvc-browse)
+(global-set-key "\C-xT\C-m" 'dvc)
 
 ;;}}}
 
@@ -1551,25 +1557,31 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ iswitchb - better buffer switching
 
-(eval-when-compile (require 'iswitchb))
-(iswitchb-default-keybindings)
-(add-hook 'iswitchb-define-mode-map-hook 'as-iswitchb-keys)
+;; (eval-when-compile (require 'iswitchb))
+;; (iswitchb-default-keybindings)
+;; (add-hook 'iswitchb-define-mode-map-hook 'as-iswitchb-keys)
 
-(defun iswitchb-bury-buffer ()
-  "Bury the buffer at the head of `iswitchb-matches'."
-  (interactive)
-  (let ((enable-recursive-minibuffers t) buf)
-    (setq buf (car iswitchb-matches))
-    (if buf
-	(progn
-	  (bury-buffer buf)
-          (iswitchb-next-match)
-          (setq iswitchb-rescan t)))))
+;; (defun iswitchb-bury-buffer ()
+;;   "Bury the buffer at the head of `iswitchb-matches'."
+;;   (interactive)
+;;   (let ((enable-recursive-minibuffers t) buf)
+;;     (setq buf (car iswitchb-matches))
+;;     (if buf
+;; 	(progn
+;; 	  (bury-buffer buf)
+;;           (iswitchb-next-match)
+;;           (setq iswitchb-rescan t)))))
 
-(defun as-iswitchb-keys ()
- "Adam's keybindings for iswitchb."
- (define-key iswitchb-mode-map "\C-z" 'iswitchb-bury-buffer)
- )
+;; (defun as-iswitchb-keys ()
+;;  "Adam's keybindings for iswitchb."
+;;  (define-key iswitchb-mode-map "\C-z" 'iswitchb-bury-buffer)
+;;  )
+
+;;}}}
+;;{{{ ido - superior replacement for iswitchb
+
+(require 'ido)
+(ido-mode t)
 
 ;;}}}
 ;;{{{ Folding mode
@@ -1747,18 +1759,6 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ allout
 
-(eval-after-load "outline" '(as-allout-init))
-(eval-after-load "muse" '(as-allout-init))
-
-(defun as-allout-maybe-init ()
-  "Hook for use within `find-file-hooks' to check whether a file needs
-allout mode initialized."
-  (interactive)
-  (when (boundp 'allout-layout)
-    (as-allout-init)))
-
-(add-hook 'find-file-hooks 'as-allout-maybe-init)
-
 (defun as-allout-init ()
   "Initialize allout-mode the way Adam likes it."
   (interactive)
@@ -1770,6 +1770,18 @@ allout mode initialized."
       (allout-init t))
     (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
     (substitute-key-definition 'end-of-line 'move-end-of-line global-map)))
+
+(eval-after-load "outline" '(as-allout-init))
+(eval-after-load "muse" '(as-allout-init))
+
+(defun as-allout-maybe-init ()
+  "Hook for use within `find-file-hooks' to check whether a file needs
+allout mode initialized."
+  (interactive)
+  (when (boundp 'allout-layout)
+    (as-allout-init)))
+
+(add-hook 'find-file-hooks 'as-allout-maybe-init)
 
 (setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")
                             (muse-mode       . "*")))
