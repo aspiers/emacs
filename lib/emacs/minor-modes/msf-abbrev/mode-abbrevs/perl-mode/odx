@@ -1,1 +1,1 @@
-or die "<field "text">";
+or die "<field "text"> failed: $!\n";
