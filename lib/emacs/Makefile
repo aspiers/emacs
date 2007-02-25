@@ -1,5 +1,6 @@
 org_mode  = org-4.06
-xtla_mode = xtla
+xtla_dir  = xtla
+dvc_dir   = dvc
 
 # Where do we pick up .el files which don't have their own Makefiles?
 el_search_paths = 			\
@@ -23,6 +24,7 @@ THIRD_PARTY_PKGS = 		\
 	muse 			\
 	planner 		\
 	xtla			\
+	dvc			\
 	calc-2.02f
 
 # Don't automatically compile *.el in these directories:
@@ -33,7 +35,8 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	emacs-w3m-1.4.4 				\
 	muse 						\
 	planner 					\
-	$(xtla_mode) 					\
+	$(xtla_dir) 					\
+	$(dvc_dir) 					\
 	calc-2.02f					\
 	)
 
@@ -61,7 +64,7 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/pcl-cvs 		\
             $(EMACSLIB)/major-modes/monkey-2 		\
             $(EMACSLIB)/major-modes/nxml-mode-20041004	\
-            $(EMACSLIB)/major-modes/$(xtla_mode)/lisp 	\
+            $(EMACSLIB)/major-modes/$(xtla_dir)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
             $(EMACSLIB)/major-modes/$(org_mode)     	\
@@ -78,6 +81,7 @@ xinstall_dir = $(EMACSLIB)/XEmacs
 
 prefix   = $(HOME)/local
 info_dir = $(prefix)/share/info
+lisp_dir = $(prefix)/share/emacs/site-lisp
 
 # Figure out which .els to compile ourselves.  The list should comprise of
 # everything we can find which we're not completely ignoring, but excluding
@@ -87,6 +91,7 @@ info_dir = $(prefix)/share/info
 prune_dirs = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
 prune_files = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
+# We exclude as-init.el here because it has to be compiled after everything else.
 ELs_TO_COMPILE_cmd =   				        \
 	find $(el_search_paths)				\
 	        -follow					\
@@ -120,17 +125,31 @@ endif
 version=$(shell $(EMACS) --version)
 version_number=$(shell echo "$(version)" | \
                    perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
-system_type=$(shell $(EMACS) -q --batch --eval '(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
+system_type=$(shell $(EMACS) -q --batch \
+	--eval '(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
 
-site_install_dir=$(shell $(EMACS) -q --batch --eval '(princ (car load-path))')
+site_install_dir=$(shell $(EMACS) -q --batch \
+	--eval '(princ (car load-path))')
 
 ifeq (, $(findstring XEmacs,$(version)))
-  EMACS_LOADPATHS=$(EMACS) $(addprefix -L ,$(loadpaths))
+  # GNU Emacs
+  # Really ugly hack to add all subdirs of lisp_dir to the load-path.
+  EMACS_LOADPATHS=$(EMACS) \
+	$(addprefix -L ,$(loadpaths)) 				\
+	--eval "(let ((orig-dir default-directory)) 		\
+		   (cd \"$(lisp_dir)\") 			\
+		   (normal-top-level-add-subdirs-to-load-path) 	\
+		   (cd orig-dir))"				\
+
+#	--eval "(message (princ-list load-path))" \
+#	--eval "(normal-top-level-add-to-load-path '(\"$(lisp_dir)\"))" \
+
   install_dir=$(gnuinstall_dir)/$(version_number)/$(system_type)
 else
-  # blegh!
+  # X Emacs.  Blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
-  EMACS_LOADPATHS=$(EMACS) -eval "(setq load-path (append '($(LOADPATHS)) load-path))"
+  EMACS_LOADPATHS=$(EMACS) \
+	--eval "(setq load-path (append '($(LOADPATHS)) load-path))"
   install_dir=$(xinstall_dir)/$(version_number)/$(system_type)
 endif
 
@@ -139,6 +158,9 @@ COMPILER=$(EMACS_LOADPATHS) -batch -f batch-byte-compile
 .PHONY: all install clean uninstall
 
 all: .elcs install
+
+show-compiler:
+	@echo "$(lisp_dir) $(COMPILER)"
 
 list-loadpaths:
 	@echo "$(loadpaths)"
@@ -291,7 +313,7 @@ pgg: pgg-made
 	@cp major-modes/pgg/pgg.{el,elc} $(install_dir) && touch $@
 
 xtla: .xtla-installed
-.xtla-configured: major-modes/$(xtla_mode)/configure
+.xtla-configured: major-modes/$(xtla_dir)/configure
 	@-( 								\
 	  if which baz >/dev/null 2>&1; then 				\
 	    with_arch=--with-arch=baz; 					\
@@ -299,7 +321,7 @@ xtla: .xtla-installed
 	  else								\
 	    with_arch= ; 	 					\
 	  fi; 								\
-	  cd major-modes/$(xtla_mode) && 				\
+	  cd major-modes/$(xtla_dir) && 				\
 	  ./configure 							\
 	    --prefix=$(prefix)	 					\
 	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
@@ -307,23 +329,60 @@ xtla: .xtla-installed
 	) && 								\
 	touch $@
 
-.xtla-made: $(wildcard major-modes/$(xtla_mode)/*.el) $(wildcard major-modes/$(xtla_mode)/*/*.el) .xtla-configured
+major-modes/$(xtla_dir)/configure: major-modes/$(xtla_dir)/configure.ac
+	-cd major-modes/$(xtla_dir) && autoconf
+
+.xtla-made: $(wildcard major-modes/$(xtla_dir)/*.el) $(wildcard major-modes/$(xtla_dir)/*/*.el) .xtla-configured
 	-( 					\
-	  cd major-modes/$(xtla_mode) && 	\
+	  cd major-modes/$(xtla_dir) && 	\
 	  make  				\
 	) && 					\
 	touch $@
 
 .xtla-installed: .xtla-made
 	-( 								\
-	  cd major-modes/$(xtla_mode) && 				\
+	  cd major-modes/$(xtla_dir) && 				\
 	  make install-pkg &&						\
 	  install-info --info-dir=$(info_dir) $(info_dir)/xtla.info	\
 	) &&								\
 	touch $@
 
-major-modes/$(xtla_mode)/configure: major-modes/$(xtla_mode)/configure.ac
-	-cd major-modes/$(xtla_mode) && autoconf
+dvc_build_dir=major-modes/$(dvc_dir)/++build
+dvc: .dvc-installed
+.dvc-configured: major-modes/$(dvc_dir)/configure
+	@-( 								\
+	  if which baz >/dev/null 2>&1; then 				\
+	    with_arch=--with-arch=baz; 					\
+	    echo "Found baz; using that in preference to tla";		\
+	  else								\
+	    with_arch= ; 	 					\
+	  fi; 								\
+	  [ -d $(dvc_build_dir) ] || mkdir $(dvc_build_dir);		\
+	  cd $(dvc_build_dir) &&	 				\
+	  ../configure 							\
+	    --prefix=$(prefix)	 					\
+	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
+	    $$with_arch							\
+	) && 								\
+	touch $@
+
+major-modes/$(dvc_dir)/configure: major-modes/$(dvc_dir)/configure.ac
+	-cd major-modes/$(dvc_dir) && autoconf
+
+.dvc-made: $(wildcard major-modes/$(dvc_dir)/*.el) $(wildcard major-modes/$(dvc_dir)/*/*.el) .dvc-configured
+	-( 					\
+	  cd major-modes/$(dvc_dir)/++build && 	\
+	  make  				\
+	) && 					\
+	touch $@
+
+.dvc-installed: .dvc-made
+	-( 								\
+	  cd major-modes/$(dvc_dir)/++build && 				\
+	  make install &&						\
+	  install-info --info-dir=$(info_dir) $(info_dir)/dvc.info	\
+	) &&								\
+	touch $@
 
 major-modes/remember/remember-experimental.elc: .planner-made
 
