@@ -174,6 +174,9 @@ list-els-to-compile-cmd:
 list-els-to-compile:
 	@for el in $(ELs_TO_COMPILE); do echo $$el; done
 
+list-third-party-pkg-dirs:
+	@for elc in $(THIRD_PARTY_PKG_DIRS); do echo $$elc; done
+
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
