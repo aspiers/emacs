@@ -784,8 +784,9 @@ consistent landing spot."
 (setq next-line-add-newlines nil)
 
 ;; IntelliMouse
-(cond (window-system (load "mwheel" t)
-                     (mwheel-install)))
+(cond ((and (< emacs-major-version 22) window-system)
+       (load "mwheel" t)
+       (mwheel-install)))
 
 ;;}}}
 ;;{{{ Little odds and ends
