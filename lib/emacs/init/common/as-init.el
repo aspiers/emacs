@@ -649,7 +649,7 @@ consistent landing spot."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
-(eval-when-compile (load "planner.el"))
+;;(eval-when-compile (load "planner.el"))
 
 ;; _J_ump
 (global-set-key "\C-coj" 'planner-goto-plan-page)
