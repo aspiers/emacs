@@ -180,11 +180,11 @@ uninstall:
 #############################################################################
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
-	@echo Compiling $< with $(EMACS) ...
+	@echo Compiling $< ...
 	$(COMPILER_PRE) -L major-modes/mmm $(COMPILER_POST) $<
 
 major-modes/remember/%.elc: major-modes/remember/%.el
-	@echo Compiling $< with $(EMACS) ...
+	@echo Compiling $< ...
 	$(COMPILER_PRE) -L major-modes/remember $(COMPILER_POST) $<
 
 psgml: .psgml-made
@@ -308,5 +308,5 @@ calc-2.02f: .calc-2.02f-installed
 
 # This has to come last so that specific compilation patterns can override it.
 %.elc: %.el
-	@echo Compiling $< with $(EMACS) ...
+	@echo Compiling $< ...
 	@$(COMPILER_PRE) $(COMPILER_POST) $<
