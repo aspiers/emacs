@@ -81,6 +81,7 @@ ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 THIRD_PARTY_ELCs = $(shell \
 	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
 )
+AS_INIT_EL  = init/common/as-init.el
 AS_INIT_ELC = init/common/as-init.elc
 
 ifndef EMACS
@@ -178,6 +179,15 @@ uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
 
 #############################################################################
+
+$(AS_INIT_ELC): $(AS_INIT_EL)
+	@echo Compiling $< ...
+	$(COMPILER_PRE) \
+		-L major-modes \
+		-L major-modes/mmm \
+		-L major-modes/planner \
+		-L minor-modes \
+		$(COMPILER_POST) $<
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
 	@echo Compiling $< ...
