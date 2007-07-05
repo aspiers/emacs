@@ -10,9 +10,6 @@
 (if (not (boundp 'running-xemacs))
     (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
 
-;; N.B. Personal .elc archive gets added to start of load-path,
-;; so that right version of stuff like mwheel gets loaded.
-
 ;; XEmacs adds crap to emacs-version
 (defvar emacs-version-number
   (format "%d.%d" emacs-major-version emacs-minor-version)
@@ -36,19 +33,39 @@
           (cond (running-xemacs "XEmacs") (t "GNU_Emacs")))
   "Path to emacs init libraries for a specific emacs vendor.")
 
-(defvar as-version-lib-dir
-  (format "%s/%s/%s" as-lib-dir emacs-version-number system-type)
-  "Path to emacs libraries for a particular system's emacs install.")
+(defvar as-version-pre-lib-dir
+  (format "%s/%s/%s/pre" as-lib-dir emacs-version-number system-type)
+  "Path to personal emacs libraries which supplement those of a
+particular system's emacs install.  They will be loaded in
+preference to those from the system's emacs install, due to
+appearing earlier on `load-path'.
+
+It is recommended that only cutting edge versions of libraries
+newer than those included in a distribution be placed under this
+directory, and that the contents be reviewed every time the
+system-wide emacs install is upgraded.")
+
+(defvar as-version-post-lib-dir
+  (format "%s/%s/%s/post" as-lib-dir emacs-version-number system-type)
+  "Path to personal emacs libraries which supplement those of a
+particular system's emacs install.  Libraries in the system's
+emacs install will be loaded in preference to these, due to
+appearing earlier on `load-path'.
+
+Libraries which do not appear in older emacs installs can be
+placed here.")
 
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
-(add-to-list 'load-path as-version-lib-dir)
+(add-to-list 'load-path as-version-pre-lib-dir 'append)
+(add-to-list 'load-path as-version-post-lib-dir)
 
+;; Add $ZDOTDIR/local/share/emacs/site-lisp and subdirs to load-path
 (let ((dir (format "%s/local/share/emacs/site-lisp" edotdir))
       (orig-dir default-directory))
   (when (file-accessible-directory-p dir)
-      (add-to-list 'load-path dir)
+      (add-to-list 'load-path dir 'append)
       (cd dir)
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
@@ -62,7 +79,7 @@
 
 (setq custom-file (concat as-init-dir "/as-custom.el"))
 (load (concat as-init-dir "/as-custom") 'noerror)
-(load (concat as-version-lib-dir "/as-init"))
+(load (concat as-version-post-lib-dir "/as-init"))
 
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
@@ -70,9 +87,10 @@
    (shell-command-to-string
     (concat ". $ZDOT_FIND_HOOKS " hook-name)) "\n"))
 
-(mapcar (lambda (hook) (load hook))
-        ;; .emacs.d already taken
-        (as-find-hooks ".emacs-hooks.d"))
+;; (mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
+;;         ;; .emacs.d already taken
+;;         (as-find-hooks ".emacs-hooks.d"))
 
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
+

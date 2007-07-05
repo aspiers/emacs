@@ -12,6 +12,8 @@ el_search_paths = 			\
 	utils 				\
 	fun
 
+elc_overrides = org.elc pcvs*.elc
+
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = 		\
 	psgml 			\
@@ -117,6 +119,9 @@ else
   install_dir=$(xinstall_dir)/$(version_number)/$(system_type)
 endif
 
+pre_install_dir  = $(install_dir)/pre
+post_install_dir = $(install_dir)/post
+
 COMPILER_PRE=$(EMACS_LOADPATHS) -batch --no-site-file
 COMPILER_POST=-f batch-byte-compile
 
@@ -149,19 +154,22 @@ list-third-party-elcs:
 .elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile $(AS_INIT_ELC)
 	@touch $@
 
-$(install_dir):
-	@[ -d $(install_dir) ] || mkdir -p $(install_dir)
+$(pre_install_dir) $(post_install_dir):
+	@[ -d $@ ] || mkdir -p $@
 
 install: .installed 
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-.installed: Makefile .elcs $(install_dir) #uninstall
-	@echo "Installing .el and .elc files in $(install_dir)"
+.installed: Makefile .elcs $(pre_install_dir) $(post_install_dir) #uninstall
+	@echo "Installing .el and .elc files in $(post_install_dir)"
 	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs) 	\
 		     $(AS_INIT_ELC); do 					\
-	  cp $$file $(install_dir); 						\
+	  cp $$file $(post_install_dir); 					\
 	done
+	@echo "Installing overrides in $(pre_install_dir)"
+	cd $(post_install_dir) && \
+	mv $(elc_overrides) $(pre_install_dir)
 	@touch $@
 
 
@@ -174,7 +182,8 @@ clean: uninstall
 	done
 
 uninstall:
-	-find $(install_dir) -name \*.elc -print | xargs rm -f
+	-find $(pre_install_dir) $(post_install_dir) -name \*.elc -print | \
+		xargs rm -f
 
 #############################################################################
 
@@ -199,11 +208,11 @@ psgml: .psgml-made
 	( cd major-modes/psgml && $(MAKE) ) && \
 	touch $@
 
-.nxml-mode-20041004-made: $(install_dir)
+.nxml-mode-20041004-made: $(post_install_dir)
 	( 					\
 	  cd major-modes/nxml-mode-20041004 && 	\
 	  $(MAKE) && 				\
-	  cp rng-auto.el $(install_dir) 	\
+	  cp rng-auto.el $(post_install_dir) 	\
 	) && 					\
 	touch $@
 
@@ -260,13 +269,13 @@ muse: .muse-installed
 		      --infodir=$(info_dir) && 	\
 	  make				    && 	\
 	  make install			    && 	\
-	  cp w3m-load.el $(install_dir) 	\
+	  cp w3m-load.el $(post_install_dir) 	\
 	) && 					\
 	touch $@
 
 pgg: pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
-	@cp major-modes/pgg/pgg.{el,elc} $(install_dir) && touch $@
+	@cp major-modes/pgg/pgg.{el,elc} $(post_install_dir) && touch $@
 
 dvc_build_dir=major-modes/$(dvc_dir)/++build
 dvc: .dvc-installed
