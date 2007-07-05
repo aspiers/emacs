@@ -1,6 +1,6 @@
 ;; Adam's cperl setup
 
-(eval-when-compile (require 'cperl-mode))
+(eval-when (compile) (require 'cperl-mode))
 
 ;;{{{ as-cperl-set-indent-level
 
