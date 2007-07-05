@@ -17,7 +17,6 @@ el_search_paths = 			\
 
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = 		\
-	nxml-mode-20041004 	\
 	psgml 			\
 	muse 			\
 	planner 		\
@@ -27,7 +26,6 @@ THIRD_PARTY_PKGS = 		\
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
-	nxml-mode-20041004 				\
 	psgml 						\
 	muse 						\
 	planner 					\
@@ -59,7 +57,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/tdtd 		\
             $(EMACSLIB)/major-modes/pcl-cvs 		\
             $(EMACSLIB)/major-modes/monkey-2 		\
-            $(EMACSLIB)/major-modes/nxml-mode-20041004	\
             $(EMACSLIB)/major-modes/$(xtla_dir)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/$(org_mode)     	\
@@ -199,7 +196,6 @@ install: .installed
 clean: uninstall
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
 	rm -f .*-made
-	rm -f major-modes/nxml-mode-20041004/stamp-byte-compile
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
 		( cd $$dir && make clean )     \
 	done
@@ -220,8 +216,6 @@ psgml: .psgml-made
 	( cd major-modes/psgml && $(MAKE) ) && \
 	touch $@
 
-nxml: nxml-mode-20041004
-nxml-mode-20041004: .nxml-mode-20041004-made
 .nxml-mode-20041004-made: $(install_dir)
 	( 					\
 	  cd major-modes/nxml-mode-20041004 && 	\
