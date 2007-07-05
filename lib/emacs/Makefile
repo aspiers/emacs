@@ -1,4 +1,3 @@
-org_mode  = org-4.06
 xtla_dir  = xtla
 dvc_dir   = dvc
 
@@ -7,7 +6,6 @@ el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
 	major-modes/mmm 		\
-	major-modes/$(org_mode)		\
 	major-modes/pcl-cvs 		\
 	major-modes/remember 		\
 	major-modes/pgg 		\
@@ -59,7 +57,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/monkey-2 		\
             $(EMACSLIB)/major-modes/$(xtla_dir)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
-            $(EMACSLIB)/major-modes/$(org_mode)     	\
             $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/muse/lisp	        \
             $(EMACSLIB)/major-modes/remember  	        \
@@ -202,12 +199,6 @@ clean: uninstall
 
 uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
-
-#############################################################################
-
-$(info_dir)/org: major-modes/$(org_mode)/org
-	cp $< $@
-	install-info --info-dir=$(info_dir) $@
 
 #############################################################################
 
