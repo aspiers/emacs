@@ -824,14 +824,6 @@ consistent landing spot."
 (setq user-mail-address "adam@spiers.net")
 
 ;;}}}
-;;{{{ Minibuffer (GNU Emacs 21 obsoletes resize-minibuffer-mode)
-
-(cond ((or running-xemacs (<= emacs-major-version 20))
-       (resize-minibuffer-mode)
-       (setq resize-minibuffer-window-max-height 5
-             resize-minibuffer-frame-max-height 5)))
-
-;;}}}
 ;;{{{ Apropos extension
 
 (defvar apropos-do-all)
