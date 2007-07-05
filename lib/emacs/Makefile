@@ -42,21 +42,6 @@ IGNORE_FILES =		    \
 
 EMACSLIB = $(HOME)/lib/emacs
 
-# Add these loadpaths during compilation only.
-# FIXME: these should be added via individual rules, so that each loadpath
-# is only added when absolutely necessary.
-loadpaths = $(EMACSLIB)/minor-modes 			\
-            $(EMACSLIB)/major-modes/mmm 		\
-            $(EMACSLIB)/major-modes/tdtd 		\
-            $(EMACSLIB)/major-modes/pcl-cvs 		\
-            $(EMACSLIB)/major-modes/monkey-2 		\
-            $(EMACSLIB)/major-modes/etask-0.3.91a       \
-            $(EMACSLIB)/major-modes/muse/lisp	        \
-            $(EMACSLIB)/major-modes/remember  	        \
-            $(EMACSLIB)/major-modes/pgg  	        \
-            $(EMACSLIB)/major-modes			\
-            $(EMACSLIB)/utils/tree-widget-2.0
-
 gnuinstall_dir = $(EMACSLIB)/GNU_Emacs
 xinstall_dir = $(EMACSLIB)/XEmacs
 
@@ -133,14 +118,16 @@ else
   install_dir=$(xinstall_dir)/$(version_number)/$(system_type)
 endif
 
-COMPILER=$(EMACS_LOADPATHS) -batch --no-site-file -f batch-byte-compile
+COMPILER_PRE=$(EMACS_LOADPATHS) -batch --no-site-file
+COMPILER_POST=-f batch-byte-compile
 
 .PHONY: all install clean uninstall
 
 all: .elcs install
 
 show-compiler:
-	@echo '$(COMPILER)'
+	@echo '$(COMPILER_PRE)'
+	@echo '$(COMPILER_POST)'
 
 list-loadpaths:
 	@echo "$(loadpaths)"
@@ -178,9 +165,6 @@ install: .installed
 	done
 	@touch $@
 
-%.elc: %.el
-	@echo Compiling $< with $(EMACS) ...
-	@$(COMPILER) $<
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 clean: uninstall
@@ -194,6 +178,14 @@ uninstall:
 	-find $(install_dir) -name \*.elc -print | xargs rm -f
 
 #############################################################################
+
+major-modes/mmm/%.elc: major-modes/mmm/%.el
+	@echo Compiling $< with $(EMACS) ...
+	$(COMPILER_PRE) -L major-modes/mmm $(COMPILER_POST) $<
+
+major-modes/remember/%.elc: major-modes/remember/%.el
+	@echo Compiling $< with $(EMACS) ...
+	$(COMPILER_PRE) -L major-modes/remember $(COMPILER_POST) $<
 
 psgml: .psgml-made
 .psgml-made:
@@ -311,3 +303,10 @@ calc-2.02f: .calc-2.02f-installed
 .calc-2.02f-installed:
 	@echo "$@: FIXME: apply patch from PROBLEMS"
 #	-cd major-modes/calc-2.02f && make all
+
+##############################################################################
+
+# This has to come last so that specific compilation patterns can override it.
+%.elc: %.el
+	@echo Compiling $< with $(EMACS) ...
+	@$(COMPILER_PRE) $(COMPILER_POST) $<
