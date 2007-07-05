@@ -16,7 +16,6 @@ el_search_paths = 			\
 THIRD_PARTY_PKGS = 		\
 	psgml 			\
 	muse 			\
-	planner 		\
 	dvc			\
 	calc-2.02f
 
@@ -24,14 +23,12 @@ THIRD_PARTY_PKGS = 		\
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	psgml 						\
 	muse 						\
-	planner 					\
 	$(dvc_dir) 					\
 	calc-2.02f					\
 	)
 
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
-	major-modes/planner--main--1.0 		\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
 	major-modes/monkey-2
 IGNORE_FILES =		    \
@@ -52,7 +49,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/pcl-cvs 		\
             $(EMACSLIB)/major-modes/monkey-2 		\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
-            $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/muse/lisp	        \
             $(EMACSLIB)/major-modes/remember  	        \
             $(EMACSLIB)/major-modes/pgg  	        \
@@ -232,8 +228,6 @@ muse: .muse-installed
 	) &&								\
 	touch $@
 
-planner: .planner-installed
-
 .planner-installed: .planner-made
 	-( 								\
 	  cd major-modes/planner; 					\
@@ -255,6 +249,8 @@ planner: .planner-installed
 	  make lisp    							\
 	) && 								\
 	touch $@
+
+#major-modes/remember/remember-experimental.elc: .planner-made
 
 .emacs-w3m-made:
 	( 					\
@@ -307,8 +303,6 @@ major-modes/$(dvc_dir)/configure: major-modes/$(dvc_dir)/configure.ac
 	  install-info --info-dir=$(info_dir) $(info_dir)/dvc.info	\
 	) &&								\
 	touch $@
-
-major-modes/remember/remember-experimental.elc: .planner-made
 
 calc: calc-2.02f
 calc-2.02f: .calc-2.02f-installed
