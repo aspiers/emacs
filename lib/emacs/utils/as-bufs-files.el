@@ -136,7 +136,8 @@ suggest one, otherwise nil.")
 
 (defun as-make-backup-file-name (file)
   "Adam's replacement for `make-backup-file-name', since
-`backup-directory-alist' isn't flexible enough.
+`backup-directory-alist' isn't flexible enough.  Set
+`make-backup-file-name-function' to this function to use it.
 
 Runs hooks in `as-make-backup-file-name-hooks' with the filename as
 the only argument, until one returns a backup file-name.  If there is
