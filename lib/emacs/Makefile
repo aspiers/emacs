@@ -20,7 +20,6 @@ THIRD_PARTY_PKGS = 		\
 	nxml-mode-20041004 	\
 	emacs-wiki 		\
 	psgml 			\
-	emacs-w3m 		\
 	muse 			\
 	planner 		\
 	xtla			\
@@ -32,7 +31,6 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	nxml-mode-20041004 				\
 	emacs-wiki 					\
 	psgml 						\
-	emacs-w3m-1.4.4 				\
 	muse 						\
 	planner 					\
 	$(xtla_dir) 					\
@@ -66,7 +64,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/nxml-mode-20041004	\
             $(EMACSLIB)/major-modes/$(xtla_dir)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
-            $(EMACSLIB)/major-modes/emacs-w3m-1.4.4     \
             $(EMACSLIB)/major-modes/$(org_mode)     	\
             $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/emacs-wiki	        \
@@ -113,8 +110,7 @@ ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 # Do a separate search for elcs since we want to include ones which were
 # built from vendor Makefiles.
 THIRD_PARTY_ELCs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
-	  ! -path 'major-modes/emacs-w3m-1.4.4/*' \
+	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc
 )
 AS_INIT_ELC = init/common/as-init.elc
 
@@ -298,8 +294,6 @@ planner: .planner-installed
 	) && 								\
 	touch $@
 
-w3m: emacs-w3m
-emacs-w3m: .emacs-w3m-made
 .emacs-w3m-made:
 	( 					\
 	  cd major-modes/emacs-w3m-1.4.4    && 	\
