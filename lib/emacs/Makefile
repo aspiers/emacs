@@ -18,7 +18,6 @@ el_search_paths = 			\
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = 		\
 	nxml-mode-20041004 	\
-	emacs-wiki 		\
 	psgml 			\
 	muse 			\
 	planner 		\
@@ -29,7 +28,6 @@ THIRD_PARTY_PKGS = 		\
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	nxml-mode-20041004 				\
-	emacs-wiki 					\
 	psgml 						\
 	muse 						\
 	planner 					\
@@ -66,7 +64,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/$(org_mode)     	\
             $(EMACSLIB)/major-modes/planner     	\
-            $(EMACSLIB)/major-modes/emacs-wiki	        \
             $(EMACSLIB)/major-modes/muse/lisp	        \
             $(EMACSLIB)/major-modes/remember  	        \
             $(EMACSLIB)/major-modes/pgg  	        \
@@ -231,21 +228,6 @@ nxml-mode-20041004: .nxml-mode-20041004-made
 	  $(MAKE) && 				\
 	  cp rng-auto.el $(install_dir) 	\
 	) && 					\
-	touch $@
-
-wiki: emacs-wiki
-emacs-wiki: .emacs-wiki-made
-.emacs-wiki-made: $(wildcard major-modes/emacs-wiki/*.el) major-modes/emacs-wiki/Makefile.defs
-	( 								\
-	  cd major-modes/emacs-wiki && 					\
-	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS)!; 		\
-                       s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
-                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
-	  	Makefile.defs && 					\
-	  make && 							\
-	  make doc && 							\
-	  make install 							\
-	) && 								\
 	touch $@
 
 muse: .muse-installed
