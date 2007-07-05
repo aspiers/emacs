@@ -16,15 +16,13 @@ el_search_paths = 			\
 THIRD_PARTY_PKGS = 		\
 	psgml 			\
 	muse 			\
-	dvc			\
-	calc-2.02f
+	dvc
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	psgml 						\
 	muse 						\
 	$(dvc_dir) 					\
-	calc-2.02f					\
 	)
 
 # Pretend these don't exist at all.
@@ -185,7 +183,6 @@ $(AS_INIT_ELC): $(AS_INIT_EL)
 	$(COMPILER_PRE) \
 		-L major-modes \
 		-L major-modes/mmm \
-		-L major-modes/planner \
 		-L minor-modes \
 		$(COMPILER_POST) $<
 
@@ -307,12 +304,6 @@ major-modes/$(dvc_dir)/configure: major-modes/$(dvc_dir)/configure.ac
 	  install-info --info-dir=$(info_dir) $(info_dir)/dvc.info	\
 	) &&								\
 	touch $@
-
-calc: calc-2.02f
-calc-2.02f: .calc-2.02f-installed
-.calc-2.02f-installed:
-	@echo "$@: FIXME: apply patch from PROBLEMS"
-#	-cd major-modes/calc-2.02f && make all
 
 ##############################################################################
 
