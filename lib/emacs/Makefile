@@ -1,4 +1,3 @@
-xtla_dir  = xtla
 dvc_dir   = dvc
 
 # Where do we pick up .el files which don't have their own Makefiles?
@@ -18,7 +17,6 @@ THIRD_PARTY_PKGS = 		\
 	psgml 			\
 	muse 			\
 	planner 		\
-	xtla			\
 	dvc			\
 	calc-2.02f
 
@@ -27,14 +25,12 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	psgml 						\
 	muse 						\
 	planner 					\
-	$(xtla_dir) 					\
 	$(dvc_dir) 					\
 	calc-2.02f					\
 	)
 
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
-	major-modes/xtla-main 			\
 	major-modes/planner--main--1.0 		\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
 	major-modes/monkey-2
@@ -55,7 +51,6 @@ loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/tdtd 		\
             $(EMACSLIB)/major-modes/pcl-cvs 		\
             $(EMACSLIB)/major-modes/monkey-2 		\
-            $(EMACSLIB)/major-modes/$(xtla_dir)/lisp 	\
             $(EMACSLIB)/major-modes/etask-0.3.91a       \
             $(EMACSLIB)/major-modes/planner     	\
             $(EMACSLIB)/major-modes/muse/lisp	        \
@@ -250,7 +245,7 @@ planner: .planner-installed
 # 	  make install-info ||						\
 # 	    echo "planner install-info failure ignored"			\
 
-.planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed .xtla-made
+.planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed
 	( 								\
 	  cd major-modes/planner && 					\
 	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS_LOADPATHS)!;	\
@@ -275,41 +270,6 @@ planner: .planner-installed
 pgg: pgg-made
 .pgg-made: major-modes/pgg/pgg.elc
 	@cp major-modes/pgg/pgg.{el,elc} $(install_dir) && touch $@
-
-xtla: .xtla-installed
-.xtla-configured: major-modes/$(xtla_dir)/configure
-	@-( 								\
-	  if which baz >/dev/null 2>&1; then 				\
-	    with_arch=--with-arch=baz; 					\
-	    echo "Found baz; using that in preference to tla";		\
-	  else								\
-	    with_arch= ; 	 					\
-	  fi; 								\
-	  cd major-modes/$(xtla_dir) && 				\
-	  ./configure 							\
-	    --prefix=$(prefix)	 					\
-	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
-	    $$with_arch							\
-	) && 								\
-	touch $@
-
-major-modes/$(xtla_dir)/configure: major-modes/$(xtla_dir)/configure.ac
-	-cd major-modes/$(xtla_dir) && autoconf
-
-.xtla-made: $(wildcard major-modes/$(xtla_dir)/*.el) $(wildcard major-modes/$(xtla_dir)/*/*.el) .xtla-configured
-	-( 					\
-	  cd major-modes/$(xtla_dir) && 	\
-	  make  				\
-	) && 					\
-	touch $@
-
-.xtla-installed: .xtla-made
-	-( 								\
-	  cd major-modes/$(xtla_dir) && 				\
-	  make install-pkg &&						\
-	  install-info --info-dir=$(info_dir) $(info_dir)/xtla.info	\
-	) &&								\
-	touch $@
 
 dvc_build_dir=major-modes/$(dvc_dir)/++build
 dvc: .dvc-installed
