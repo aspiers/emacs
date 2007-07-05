@@ -43,6 +43,8 @@ IGNORE_FILES =		    \
 EMACSLIB = $(HOME)/lib/emacs
 
 # Add these loadpaths during compilation only.
+# FIXME: these should be added via individual rules, so that each loadpath
+# is only added when absolutely necessary.
 loadpaths = $(EMACSLIB)/minor-modes 			\
             $(EMACSLIB)/major-modes/mmm 		\
             $(EMACSLIB)/major-modes/tdtd 		\
@@ -131,7 +133,7 @@ else
   install_dir=$(xinstall_dir)/$(version_number)/$(system_type)
 endif
 
-COMPILER=$(EMACS_LOADPATHS) -batch -f batch-byte-compile
+COMPILER=$(EMACS_LOADPATHS) -batch --no-site-file -f batch-byte-compile
 
 .PHONY: all install clean uninstall
 
