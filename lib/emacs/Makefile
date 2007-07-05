@@ -92,7 +92,7 @@ ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 # Do a separate search for elcs since we want to include ones which were
 # built from vendor Makefiles.
 THIRD_PARTY_ELCs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc
+	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
 )
 AS_INIT_ELC = init/common/as-init.elc
 
