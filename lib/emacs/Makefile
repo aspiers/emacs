@@ -138,7 +138,7 @@ COMPILER=$(EMACS_LOADPATHS) -batch -f batch-byte-compile
 all: .elcs install
 
 show-compiler:
-	@echo "$(lisp_dir) $(COMPILER)"
+	@echo '$(COMPILER)'
 
 list-loadpaths:
 	@echo "$(loadpaths)"
