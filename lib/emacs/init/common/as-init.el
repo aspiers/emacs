@@ -508,7 +508,7 @@ consistent landing spot."
                        (bs-show arg)
                        (let ((inhibit-read-only t))
                          (save-excursion
-                           (end-of-buffer)
+                           (goto-char (point-max))
                            (insert "\n"))))))
 
 (global-set-key [(meta tab)] 'hippie-expand) ;; was complete-symbol etc.
