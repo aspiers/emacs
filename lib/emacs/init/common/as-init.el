@@ -1363,13 +1363,14 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ remember-mode
 
 (autoload 'remember "remember" nil t)
+;; (autoload 'remember-handler-functions "remember" nil t)
+;; (autoload 'remember-annotation-functions "remember" nil t)
 
-(eval-when-compile (require 'remember-planner))
-(add-hook 'remember-mode-hook
-          (lambda ()
-            (require 'remember-planner)
-            (setq remember-handler-functions '(remember-planner-append))
-            (setq remember-annotation-functions planner-annotation-functions)))
+;; (add-hook 'remember-mode-hook
+;;           (lambda ()
+;;             (require 'remember-planner)
+;;             (setq remember-handler-functions '(remember-planner-append))
+;;             (setq remember-annotation-functions planner-annotation-functions)))
 
 ;;}}}
 ;;{{{ planner-mode
