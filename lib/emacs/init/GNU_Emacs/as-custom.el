@@ -8,27 +8,27 @@
 ;;    "gray90"
       )
 
-(setq frame-background-mode
-      (cond ((and (= emacs-major-version 21) window-system) 'light)
-            (t 'dark)))
+;; (setq frame-background-mode
+;;       (cond ((and (= emacs-major-version 21) window-system) 'light)
+;;             (t 'dark)))
 
-(and (eq frame-background-mode 'light)
-     (custom-set-variables
-      `(vc-annotate-background ,as-default-background)))
+;; (and (eq frame-background-mode 'light)
+;;      (custom-set-variables
+;;       `(vc-annotate-background ,as-default-background)))
 
-(and (>= emacs-major-version 21)
-     (progn
-       (custom-set-faces
-        `(default
-           ((((class color) (background light))
-             (:background ,as-default-background))))
-        `(fringe
-          ((((class color) (background light))
-            (:background ,as-default-background))))
-        `(mmm-default-submode-face
-          ((((class color) (background light))
-            (:background ,as-default-background)))))
-       ))
+;; (and (>= emacs-major-version 21)
+;;      (progn
+;;        (custom-set-faces
+;;         `(default
+;;            ((((class color) (background light))
+;;              (:background ,as-default-background))))
+;;         `(fringe
+;;           ((((class color) (background light))
+;;             (:background ,as-default-background))))
+;;         `(mmm-default-submode-face
+;;           ((((class color) (background light))
+;;             (:background ,as-default-background)))))
+;;        ))
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
@@ -152,7 +152,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
- '(mwheel-scroll-amount (quote (5 1 nil)))
  '(org-agenda-files (quote ("~/ifolder/TODO.org" "~/roaming/TODO.org" "~/ifolder/Novell-diary.org" "~/roaming/diary.org")))
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
