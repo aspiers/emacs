@@ -58,8 +58,8 @@ placed here.")
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
-(add-to-list 'load-path as-version-pre-lib-dir 'append)
-(add-to-list 'load-path as-version-post-lib-dir)
+(add-to-list 'load-path as-version-pre-lib-dir)
+(add-to-list 'load-path as-version-post-lib-dir 'append)
 
 ;; Add $ZDOTDIR/local/share/emacs/site-lisp and subdirs to load-path
 (let ((dir (format "%s/local/share/emacs/site-lisp" edotdir))
