@@ -12,7 +12,7 @@ el_search_paths = 			\
 	utils 				\
 	fun
 
-elc_overrides = org.elc pcvs*.elc
+el_overrides = org pcvs*
 
 # These ones have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -97,11 +97,16 @@ system_type=$(shell $(EMACS) -q --batch \
 site_install_dir=$(shell $(EMACS) -q --batch \
 	--eval '(princ (car load-path))')
 
+loadpaths=init/common 		\
+	  major-modes 		\
+	  major-modes/mmm 	\
+	  minor-modes 		\
+	  utils
+
 ifeq (, $(findstring XEmacs,$(version)))
   # GNU Emacs
   # Really ugly hack to add all subdirs of lisp_dir to the load-path.
-  EMACS_LOADPATHS=$(EMACS) \
-	$(addprefix -L ,$(loadpaths)) 				\
+  LOADPATHS=$(addprefix -L ,$(loadpaths)) 				\
 	--eval "(let ((orig-dir default-directory)) 		\
 		   (cd \"$(lisp_dir)\") 			\
 		   (normal-top-level-add-subdirs-to-load-path) 	\
@@ -114,24 +119,24 @@ ifeq (, $(findstring XEmacs,$(version)))
 else
   # X Emacs.  Blegh!
   LOADPATHS=$(addsuffix \" ,$(addprefix \",$(loadpaths)))
-  EMACS_LOADPATHS=$(EMACS) \
-	--eval "(setq load-path (append '($(LOADPATHS)) load-path))"
+  LOADPATHS=--eval "(setq load-path (append '($(LOADPATHS)) load-path))"
   install_dir=$(xinstall_dir)/$(version_number)/$(system_type)
 endif
 
 pre_install_dir  = $(install_dir)/pre
 post_install_dir = $(install_dir)/post
 
-COMPILER_PRE=$(EMACS_LOADPATHS) -batch --no-site-file
-COMPILER_POST=-f batch-byte-compile
+COMPILER=$(EMACS) --no-site-file
+COMPILER += --eval '(setq debug-on-error t)'
+COMPILER_BATCH=-batch -f batch-byte-compile
 
 .PHONY: all install clean uninstall
 
 all: .elcs install
 
 show-compiler:
-	@echo '$(COMPILER_PRE)'
-	@echo '$(COMPILER_POST)'
+	@echo '$(COMPILER)'
+	@echo '$(COMPILER_BATCH)'
 
 list-loadpaths:
 	@echo "$(loadpaths)"
@@ -169,7 +174,9 @@ install: .installed
 	done
 	@echo "Installing overrides in $(pre_install_dir)"
 	cd $(post_install_dir) && \
-	mv $(elc_overrides) $(pre_install_dir)
+	mv $(addsuffix .el,  $(el_overrides)) \
+	   $(addsuffix .elc, $(el_overrides)) \
+		$(pre_install_dir)
 	@touch $@
 
 
@@ -189,19 +196,19 @@ uninstall:
 
 $(AS_INIT_ELC): $(AS_INIT_EL)
 	@echo Compiling $< ...
-	$(COMPILER_PRE) \
-		-L major-modes \
-		-L major-modes/mmm \
-		-L minor-modes \
-		$(COMPILER_POST) $<
+	$(COMPILER) $(LOADPATHS) $(COMPILER_BATCH) $<
+
+debug-as-init-compile: $(AS_INIT_EL)
+	@echo Compiling $< ...
+	$(COMPILER) $(LOADPATHS) -l bytecomp -q $<
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
 	@echo Compiling $< ...
-	$(COMPILER_PRE) -L major-modes/mmm $(COMPILER_POST) $<
+	$(COMPILER) -L major-modes/mmm $(COMPILER_BATCH) $<
 
 major-modes/remember/%.elc: major-modes/remember/%.el
 	@echo Compiling $< ...
-	$(COMPILER_PRE) -L major-modes/remember $(COMPILER_POST) $<
+	$(COMPILER) -L major-modes/remember $(COMPILER_BATCH) $<
 
 psgml: .psgml-made
 .psgml-made:
@@ -252,7 +259,7 @@ muse: .muse-installed
 .planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed
 	( 								\
 	  cd major-modes/planner && 					\
-	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS_LOADPATHS)!;	\
+	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(LOADPATHS)!;		\
                        s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
                        s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
 	  	Makefile.defs && 					\
@@ -319,4 +326,4 @@ major-modes/$(dvc_dir)/configure: major-modes/$(dvc_dir)/configure.ac
 # This has to come last so that specific compilation patterns can override it.
 %.elc: %.el
 	@echo Compiling $< ...
-	@$(COMPILER_PRE) $(COMPILER_POST) $<
+	@$(COMPILER) $(COMPILER_BATCH) $<
