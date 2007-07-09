@@ -1,7 +1,5 @@
 ;; Adam's buffer/file utilities
 
-;; Should be autoloaded by as-init.el
-
 ;;{{{ as-bounce-buffer
 
 (defvar as-bounce-buffer-regexp-alist '()
@@ -236,6 +234,94 @@ code.  Do not include the '.el' suffix in the library argument."
 
 (defun mhj-set-q-to-close ()
   (local-set-key "q" 'bury-and-close-buffer))
+
+;;}}}
+
+;;{{{ as-find-file-matching-regexp-hook
+
+(defun as-find-file-matching-regexp-hook ()
+  "Hook to run arbitrary functions on newly visited files.
+
+Controlled by `as-find-file-matching-regexp-alist'."
+  (mapcar
+   (lambda (x)
+     (cond
+      ((let ((case-fold-search nil))
+         (string-match (concat ".*" (car x)) (buffer-file-name)))
+       ;; (message (format "%s matched %s" (buffer-file-name) (car x)))
+       (funcall (cdr x)))
+      (t
+       ;; (message (format "%s didn't match %s" (buffer-file-name) (car x)))
+       )))
+   as-find-file-matching-regexp-alist))
+
+(add-hook 'find-file-hooks 'as-find-file-matching-regexp-hook)
+
+;;}}}
+;;{{{ as-buffer-rename-via-alist-hook
+
+(defvar as-buffer-renamings-alist '()
+  "Each element in this alist is a buffer renaming directive of the form
+
+  (REGEXP . REPLACE)
+
+When a find-file is performed, this hook matches the filename against
+each REGEXP, and for the first one that matches, the matching part of
+the buffer name is replaced with REPLACE.
+
+The buffer is then renamed to the result.")
+
+(defun as-buffer-rename-via-alist-hook ()
+  "Hook to rename a buffer by matching it against regexps in
+`as-buffer-renamings-alist', for which see the documentation."
+  (catch 'endloop
+    (mapcar
+     (lambda (x)
+       (cond ((let ((case-fold-search nil))
+                (string-match (concat ".*" (car x)) (buffer-file-name)))
+              (let ((rename-to
+                     (replace-match (cdr x) t nil (buffer-file-name) nil)))
+                (rename-buffer rename-to t)
+;;              (message (format "renamed to %s" rename-to))
+                (throw 'endloop t)))))
+     as-buffer-renamings-alist)))
+
+(add-hook 'find-file-hooks 'as-buffer-rename-via-alist-hook)
+
+(defun as-buffer-rename-remove-unique-id ()
+  "Attempt to remove the unique suffix (e.g. \"<1>\") from the current
+buffer's name.  It will fail silently if a buffer already exists with
+that name."
+  (interactive)
+  (and
+   (string-match "<[0-9]+>$" (buffer-name))
+   (condition-case nil
+       (rename-buffer (replace-match "" t t (buffer-name) nil))
+     (error nil))))
+
+;; Always try to do this; occasionally things screw up and leave
+;; you with a foo<2> buffer when there's no need.
+(add-hook 'find-file-hooks 'as-buffer-rename-remove-unique-id)
+
+;;}}}
+
+;;{{{ Obsolete functions, may come in handy another time
+
+;; (defun as-containing-dir (filename)
+;;   "Return the containing directory of a filename when given the full path."
+;;   (string-match "\\([^/]+\\)/[^/]+$" filename)
+;;   (match-string 1 filename))
+
+;; (defun as-last-dir-and-filename (filename)
+;;   "Strip a full path of all of its directory components but the last."
+;;   (string-match "\\(.*/\\).+/.+$" (buffer-file-name))
+;;   (replace-match "" t t (buffer-file-name) 1))
+
+;; (defun as-buffer-rename-add-one-dir ()
+;;   "Add the name of the containing directory of the buffer's file
+;; to the beginning of the buffer name."
+;;   (interactive)
+;;   (rename-buffer (as-last-dir-and-filename (buffer-name))) t)
 
 ;;}}}
 
