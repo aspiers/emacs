@@ -201,14 +201,14 @@ uninstall:
 	rm -f $(@:.debug=)
 	$(MAKE) $(@:.debug=) DEBUG_COMPILE=1 COMPILER_OPTS='-q -l bytecomp'
 
-INIT_COMMON_LOADPATHS = 	\
+INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
 	major-modes/mmm 	\
 	minor-modes 		\
 	utils
 
-init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LOADPATHS)
+init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 init/common/as-bindings.elc: init/common/as-progress.elc 
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
