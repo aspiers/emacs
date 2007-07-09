@@ -199,7 +199,7 @@ uninstall:
 
 %.elc.debug:
 	rm -f $(@:.debug=)
-	$(MAKE) $(@:.debug=) DEBUG_COMPILE=1 COMPILER_OPTS='-q -l bytecomp'
+	$(MAKE) $(@:.debug=) COMPILER_OPTS='-q -l bytecomp'
 
 INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
