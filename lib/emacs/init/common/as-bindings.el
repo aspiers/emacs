@@ -15,12 +15,15 @@
 
 ;;{{{ for changing visibility:
 
-;; These don't need to be easily repeatable, so a key sequence is ok.
+;; These need to be easily repeatable, should be a chord:
+;;
 ;;   C-  left         decrease depth of subheadings in current heading
 ;;   C-S-left         hide subtree
 ;;   C-  right        increase depth of subheadings in current heading
 ;;   C-S-right        show all subheadings
 ;; M-C-S-right        show whole subtree
+;;
+;; These don't need to be easily repeatable, so a key sequence is ok.
 ;;
 ;;     C-c C-o        show entire tree
 ;;     C-c C-w        hide entire tree
@@ -121,7 +124,7 @@ is already hidden."
 ;;}}}
 ;;{{{ for navigation:
 
-;; need to be easily repeatable, should be a chord:
+;; Need to be easily repeatable, should be a chord:
 ;;
 ;;    C-U       up level
 ;;    C-???     down level
