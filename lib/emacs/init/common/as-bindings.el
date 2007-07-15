@@ -161,7 +161,7 @@ This allows a TODO keyword hierarchy to be imposed, e.g.
 if org-subheading-todo-alist is
 
   '((\"MASTERPLAN\" . \"PROJECT\")
-    (\"PROJECT\" . \"NEXTACTION\")
+    (\"PROJECT\"    . \"NEXTACTION\")
     (\"NEXTACTION\" . \"NEXTACTION\"))
 
 then invoking this function four times would yield:
