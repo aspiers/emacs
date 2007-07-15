@@ -5,11 +5,6 @@
 ;;
 
 
-;; Make sure running-xemacs exists for testing
-
-(if (not (boundp 'running-xemacs))
-    (defvar running-xemacs nil "non-nil if the current emacs is an XEmacs"))
-
 ;; XEmacs adds crap to emacs-version
 (defvar emacs-version-number
   (format "%d.%d" emacs-major-version emacs-minor-version)
@@ -25,12 +20,12 @@
 
 (defvar as-lib-dir
   (concat as-emacs-dir "/"
-          (cond (running-xemacs "XEmacs") (t "GNU_Emacs")))
+          (cond ((boundp 'running-xemacs) "XEmacs") (t "GNU_Emacs")))
   "Path to emacs libraries for a specific emacs vendor.")
 
 (defvar as-init-dir
   (concat as-emacs-dir "/init/"
-          (cond (running-xemacs "XEmacs") (t "GNU_Emacs")))
+          (cond ((boundp 'running-xemacs) "XEmacs") (t "GNU_Emacs")))
   "Path to emacs init libraries for a specific emacs vendor.")
 
 (defvar as-version-pre-lib-dir
@@ -71,7 +66,7 @@ placed here.")
       (cd orig-dir)))
 
 (cond 
- (running-xemacs
+ ((boundp 'running-xemacs)
   ;; XEmacs automatically saved settings go here:
   (setq save-options-init-file (concat as-init-dir "/as-options-init.el"))
   (setq save-options-file (concat as-init-dir "/as-options.el"))

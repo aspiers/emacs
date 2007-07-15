@@ -11,7 +11,6 @@
 
 ;;{{{ Compiler declarations
 
-(defvar running-xemacs nil "non-nil if the current emacs is an XEmacs")
 (defun as-quick-startup nil
   "Non-nil if the current emacs was required to start up quickly."
   (getenv "QUICK_EMACS"))
@@ -249,7 +248,7 @@
 
 ;;{{{ local-unset-key M-tab for hippie-expand
 
-(if (eq running-xemacs t)
+(if (eq (boundp 'running-xemacs) t)
     (add-hook 'emacs-lisp-mode-hook
               (lambda () (local-unset-key [(meta tab)]))))
 
@@ -931,7 +930,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ Transient Mark mode
 
 (eval-when-compile (defun transient-mark-mode (arg1) nil))
-(if (not running-xemacs) (transient-mark-mode 1))
+(if (not (boundp 'running-xemacs)) (transient-mark-mode 1))
 
 ;;}}}
 ;;{{{ Font-Lock mode
@@ -939,7 +938,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;(global-font-lock-mode t)
 
 ;; Do this via customisation since it's different for xemacs
-;;(and window-system (not running-xemacs) (global-font-lock-mode t))
+;;(and window-system (not (boundp 'running-xemacs)) (global-font-lock-mode t))
 
 ;;}}}
 ;;{{{ Load paren library
@@ -973,7 +972,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (eval-when-compile (defun blinking-cursor-mode (&optional arg)))
 (and window-system
-     (not running-xemacs)
+     (not (boundp 'running-xemacs))
      (= emacs-major-version 20)
      (load "blinking-cursor" t)
      (blinking-cursor-mode 1))
@@ -992,7 +991,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; frame-resizing problems.  See ~/.Xresources/emacs.rdb.
 
 ;; (and window-system
-;;      (not running-xemacs)
+;;      (not (boundp 'running-xemacs))
 ;;      (>= emacs-major-version 21)
 ;;      (tool-bar-mode -1))
 
