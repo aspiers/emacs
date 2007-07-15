@@ -113,12 +113,39 @@ is already hidden."
   (show-entry)
   (show-children))
 
+(defvar org-mode-map)
+
+(autoload 'org-todo "org" "org-todo")
+(defun org-todo-previous-keyword ()
+  "Move to previous TODO keyword in all sets."
+  (interactive)
+  (org-todo 'left))
+
+(defun org-todo-next-keyword ()
+  "Move to next TODO keyword in all sets."
+  (interactive)
+  (org-todo 'right))
+
+(defun org-todo-previous-set ()
+  "Move to previous TODO keyword set."
+  (interactive)
+  (org-todo 'previousset))
+
+(defun org-todo-next-set ()
+  "Move to next TODO keyword set."
+  (interactive)
+  (org-todo 'nextset))
+
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key [(control left )] 'hide-subtree)
-            (local-set-key [(control right)] 'as-show-current)
-            (local-set-key [(control shift left)]  'hide-subtree)
-            (local-set-key [(control shift right)] 'show-subtree)
+            (define-key org-mode-map [(control left )] 'hide-subtree)
+            (define-key org-mode-map [(control right)] 'as-show-current)
+            (define-key org-mode-map [(control shift left)]  'hide-subtree)
+            (define-key org-mode-map [(control shift right)] 'show-subtree)
+            (define-key org-mode-map [(control shift f)] 'org-todo-next-keyword)
+            (define-key org-mode-map [(control shift b)] 'org-todo-previous-keyword)
+            (define-key org-mode-map [(control shift p)] 'org-todo-previous-set)
+            (define-key org-mode-map [(control shift n)] 'org-todo-next-set)
             ))
 
 ;;}}}
@@ -543,7 +570,7 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Mouse
 
-(and window-system (not running-xemacs)
+(and window-system (not (boundp 'running-xemacs))
      (global-set-key [(M-mouse-4)] 'raise-frame)
      (global-set-key [(M-mouse-5)] 'lower-frame))
 
