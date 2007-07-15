@@ -113,9 +113,7 @@ is already hidden."
   (show-entry)
   (show-children))
 
-(defvar org-mode-map)
-
-(autoload 'org-todo "org" "org-todo")
+(eval-when-compile (require 'org))
 
 (defun org-todo-previous-keyword ()
   "Move to previous TODO keyword in all sets."
@@ -137,14 +135,20 @@ is already hidden."
   (interactive)
   (org-todo 'nextset))
 
-(autoload 'org-insert-heading "org" "org-insert-heading")
-(autoload 'org-demote-subtree "org" "org-demote-subtree")
-
 (defun org-new-subheading ()
   "Add a new heading, demoted from the current heading level."
   (interactive)
   (org-insert-heading)
-  (org-demote-subtree))
+  (org-do-demote))
+
+(defcustom org-subheading-todo-alist nil
+  "An associative map to help define which TODO keyword should be
+used for new subheadings, depending on the current heading's TODO
+keyword.  See the documentation for `org-new-subheading-todo' for
+an example."
+  :group 'org-todo
+  :type '(alist :key-type   (string :tag "Current heading keyword")
+                :value-type (string :tag "New sub-heading keyword")))
 
 (defun org-new-subheading-todo (&optional arg)
   "Add a new TODO item, demoted from the current heading level.
@@ -186,15 +190,6 @@ then invoking this function four times would yield:
              (car org-todo-keywords-1)))))
     (org-new-subheading)
     (insert new-keyword " ")))
-
-(defcustom org-subheading-todo-alist nil
-  "An associative map to help define which TODO keyword should be
-used for new subheadings, depending on the current heading's TODO
-keyword.  See the documentation for `org-new-subheading-todo' for
-an example."
-  :group 'org-todo
-  :type '(alist :key-type   (string :tag "Current heading keyword")
-                :value-type (string :tag "New sub-heading keyword")))
 
 (add-hook 'org-mode-hook
           (lambda ()
