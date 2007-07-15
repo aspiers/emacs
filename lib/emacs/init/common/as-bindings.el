@@ -146,7 +146,7 @@ is already hidden."
   (org-insert-heading)
   (org-demote-subtree))
 
-(defun org-new-subheading-todo (arg)
+(defun org-new-subheading-todo (&optional arg)
   "Add a new TODO item, demoted from the current heading level.
 
 The TODO keyword for the new item can be specified by a numeric
