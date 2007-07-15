@@ -29,6 +29,8 @@
 ;; outline-mode
 ;;(eval-after-load "outline" '(require 'foldout))
 ;; both
+(autoload 'foldout-exit-fold    "foldout")
+(autoload 'foldout-zoom-subtree "foldout")
 (mapc (lambda (x)
         (add-hook x
                   (lambda ()
@@ -37,10 +39,7 @@
                     (local-set-key [(shift left)] 'foldout-exit-fold)
                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
                     )))
-      '(outline-mode-hook outline-minor-mode-hook org-mode-hook))
-
-(local-set-key [(shift left )] 'foldout-exit-fold)
-(local-set-key [(shift right)] 'foldout-zoom-subtree)
+      '(outline-mode-hook outline-minor-mode-hook))
 
 ;;{{{ as-folding-{hide,show}-current
 
