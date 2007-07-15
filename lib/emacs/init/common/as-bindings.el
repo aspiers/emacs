@@ -150,7 +150,7 @@ is already hidden."
   "Add a new TODO item, demoted from the current heading level.
 
 The TODO keyword for the new item can be specified by a numeric
-prefix argument, in the same way as `org-todo'.
+prefix argument, as with `org-todo'.
 
 Otherwise, if `org-subheading-todo-alist' is non-nil, it is used
 to map the new keyword from the current one, and if it is nil,
