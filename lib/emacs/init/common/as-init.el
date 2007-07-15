@@ -655,28 +655,28 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ planner-mode
 
-(autoload 'planner-mode "planner.el" nil t)
-(autoload 'plan "planner.el" nil t)
+;; (autoload 'planner-mode "planner.el" nil t)
+;; (autoload 'plan "planner.el" nil t)
 
-(eval-when-compile (require 'planner)
-                   (require 'planner-accomplishments))
+;; (eval-when-compile (require 'planner)
+;;                    (require 'planner-accomplishments))
 
-(add-hook 'planner-mode-hook
-          (lambda ()
-            (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
-            (planner-install-extra-task-keybindings)
-            (planner-install-extra-note-keybindings)
-            (planner-install-extra-context-keybindings)
-            (require 'remember-planner)
-            (require 'planner-id)
-            (require 'planner-ical)
-            (require 'planner-multi)
-            (require 'planner-accomplishments)
-            (require 'planner-trunk)
-            (require 'planner-rank)
-            (planner-accomplishments-insinuate)
-            (require 'planner-deadline)
-            (require 'planner-tasks-overview)))
+;; (add-hook 'planner-mode-hook
+;;           (lambda ()
+;;             (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
+;;             (planner-install-extra-task-keybindings)
+;;             (planner-install-extra-note-keybindings)
+;;             (planner-install-extra-context-keybindings)
+;;             (require 'remember-planner)
+;;             (require 'planner-id)
+;;             (require 'planner-ical)
+;;             (require 'planner-multi)
+;;             (require 'planner-accomplishments)
+;;             (require 'planner-trunk)
+;;             (require 'planner-rank)
+;;             (planner-accomplishments-insinuate)
+;;             (require 'planner-deadline)
+;;             (require 'planner-tasks-overview)))
 
 ;;}}}
 ;;{{{ org-mode
