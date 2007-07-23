@@ -3,7 +3,7 @@
 (defvar as-mairix-links-clipboard "~/.clip-mairix"
   "Pseudo-clipboard file where mairix URLs get copied to.")
 
-(defvar as-mairix-results-folder "~/mail/novell/mairix"
+(defvar as-mairix-results-folder "~/mail/mairix"
   "Folder where mairix writes results.")
 
 (defvar as-mairix-link-viewer-command "mairix '%search%' && xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -F ~/.mutt/work -f %folder% -e \"push <display-message>\"' &"
@@ -43,9 +43,10 @@ defined by `as-mairix-link-viewer-command'."
         (setq cmd (replace-match message-id 'fixedcase 'literal cmd)))
       (while (string-match "%folder%" cmd)
         (setq cmd (replace-match as-mairix-results-folder 'fixedcase 'literal cmd)))
-      ;; By default, async shell-command invocations display the temp
+      ;; By default, async `shell-command' invocations display the temp
       ;; buffer, which is annoying here.  We choose a deterministic
-      ;; buffer name so we can hide it again immediately.,
+      ;; buffer name so we can hide it again immediately.
+      ;; FIXME: use `call-process' instead.
       (let ((tmpbufname (generate-new-buffer-name " *mairix-view*")))
         (shell-command cmd tmpbufname)
         (or show-async-buf
