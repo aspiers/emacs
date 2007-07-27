@@ -193,8 +193,8 @@ uninstall:
 
 #############################################################################
 
-%.elc: %.el
-	echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
+%.elc: %.el Makefile
+	@echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	$(COMPILER) $(LOADPATHS) $(COMPILER_OPTS) $<; \
 
 %.elc.debug:
