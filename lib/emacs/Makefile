@@ -30,10 +30,12 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
-	major-modes/monkey-2
+	major-modes/monkey-2			\
+	major-modes/remember*
 IGNORE_FILES =		    \
 	major-modes/sdf.el  \
-	major-modes/mediawiki.el
+	major-modes/mediawiki.el \
+	major-modes/planner*.el
 
 # Phony targets are bad except for top-level rules because if a rule A
 # has a phony prerequisite B, that phony rule B will always get
