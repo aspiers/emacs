@@ -606,6 +606,8 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;}}}
 
+;; muse mode is under productivity section
+
 ;;}}}
 ;;{{{ Organisation / productivity
 
@@ -629,11 +631,18 @@ C-style indentation, use cssm-c-style-indenter.")
      ))
 (eval-when-compile (require 'muse-mode))
 
+(autoload 'orgstruct-mode "org" t)
 (add-hook 'muse-mode-hook
           (lambda ()
-            (define-key muse-mode-map "\C-c."        'org-time-stamp)
-            (define-key muse-mode-map [(shift up)]   'org-timestamp-up)
-            (define-key muse-mode-map [(shift down)] 'org-timestamp-down)))
+            (orgstruct-mode)
+            (define-key muse-mode-map "\C-c."                 'org-time-stamp)
+            (define-key muse-mode-map [(shift up)]            'org-timestamp-up)
+            (define-key muse-mode-map [(shift down)]          'org-timestamp-down)
+            (define-key org-mode-map  [(control left )]       'hide-subtree)
+            (define-key org-mode-map  [(control right)]       'as-show-current)
+            (define-key org-mode-map  [(control shift left)]  'hide-subtree)
+            (define-key org-mode-map  [(control shift right)] 'show-subtree)
+            ))
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
