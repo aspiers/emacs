@@ -2,6 +2,16 @@
 
 (as-progress "key bindings...")
 
+;;{{{ Why is this a separate file?
+
+;; The follow bindings are grouped by their location in the "Universal
+;; Keymap", so that I can coordinate bindings globally and prevent
+;; conflicts.  Otherwise I would have preferred to group the code
+;; logically, e.g. a section for each mode, and have it all within
+;; as-init.el.
+
+;;}}}
+
 ;; Ben uses (define-key global-map ...) instead of (global-set-key ...)
 ;; The latter is a wrapper around the former, so is a bit safer.
 
@@ -29,23 +39,24 @@
 ;;     C-c C-w        hide entire tree
 
 
-;; outline-mode
-;;(eval-after-load "outline" '(require 'foldout))
-;; both
+;;{{{ S-{left,right} for foldout zoom/exit subtree in outline major/minor modes
+
 (autoload 'foldout-exit-fold    "foldout")
 (autoload 'foldout-zoom-subtree "foldout")
 (mapc (lambda (x)
         (add-hook x
                   (lambda ()
-                    (auto-fill-mode 1)
                     ;; Quick navigation
                     (local-set-key [(shift left)] 'foldout-exit-fold)
                     (local-set-key [(shift right)] 'foldout-zoom-subtree)
                     )))
       '(outline-mode-hook outline-minor-mode-hook))
 
+;;}}}
+
 ;;{{{ as-folding-{hide,show}-current
 
+(eval-when-compile (require 'folding))
 (defun as-folding-hide-current ()
   "Hides the current fold, ensuring a consistent landing spot."
   (interactive)
@@ -64,25 +75,7 @@
     (message "Not on top fold mark")))
 
 ;;}}}
-
-(add-hook 'folding-mode-hook
-          (lambda ()
-            (local-set-key [(control left )] 'as-folding-hide-current)
-            (local-set-key [(control right)] 'as-folding-show-current)
-
-            ;; TODO
-;;             (local-set-key [(control left)]
-;;             (local-set-key [(control right)]
-            ;;   increase/decrease depth of subheadings in current heading
-            ;; possible useful functions for this:
-            ;;   folding-mark-look-at-top-mark-p: numberp folding-mark-look-at
-            ;;   folding-mark-look-at-bottom-mark-p: symbolp folding-mark-look-at
-            ;;   folding-region-open-close
-            ;;   folding-region-has-folding-marks-p
-            ;;   folding-show-current-subtree
-            ;;   folding-find-folding-mark
-            
-            (local-set-key [(control shift left)] 'as-folding-hide-current)))
+;;{{{ as-allout-{show,hide}-current
 
 (defun as-allout-show-current ()
   "Shows the body and children of the current topic."
@@ -107,89 +100,40 @@ is already hidden."
             (local-set-key [(control shift right)] 'allout-show-current-subtree)
             ))
 
+;;}}}
+;;{{{ as-show-current (outline-mode)
+
 (defun as-show-current ()
-  "Shows the body and children of the current topic."
+  "Shows the body and children of the current topic in `outline-mode'."
   (interactive)
   (show-entry)
   (show-children))
 
-(eval-when-compile (require 'org))
+;;}}}
 
-(defun org-todo-previous-keyword ()
-  "Move to previous TODO keyword in all sets."
-  (interactive)
-  (org-todo 'left))
+;;{{{ folding-mode-hook bindings
 
-(defun org-todo-next-keyword ()
-  "Move to next TODO keyword in all sets."
-  (interactive)
-  (org-todo 'right))
+(add-hook 'folding-mode-hook
+          (lambda ()
+            (local-set-key [(control left )] 'as-folding-hide-current)
+            (local-set-key [(control right)] 'as-folding-show-current)
 
-(defun org-todo-previous-set ()
-  "Move to previous TODO keyword set."
-  (interactive)
-  (org-todo 'previousset))
+            ;; TODO
+;;             (local-set-key [(control left)]
+;;             (local-set-key [(control right)]
+            ;;   increase/decrease depth of subheadings in current heading
+            ;; possible useful functions for this:
+            ;;   folding-mark-look-at-top-mark-p: numberp folding-mark-look-at
+            ;;   folding-mark-look-at-bottom-mark-p: symbolp folding-mark-look-at
+            ;;   folding-region-open-close
+            ;;   folding-region-has-folding-marks-p
+            ;;   folding-show-current-subtree
+            ;;   folding-find-folding-mark
+            
+            (local-set-key [(control shift left)] 'as-folding-hide-current)))
 
-(defun org-todo-next-set ()
-  "Move to next TODO keyword set."
-  (interactive)
-  (org-todo 'nextset))
-
-(defun org-new-subheading ()
-  "Add a new heading, demoted from the current heading level."
-  (interactive)
-  (org-insert-heading)
-  (org-do-demote))
-
-(defcustom org-subheading-todo-alist nil
-  "An associative map to help define which TODO keyword should be
-used for new subheadings, depending on the current heading's TODO
-keyword.  See the documentation for `org-new-subheading-todo' for
-an example."
-  :group 'org-todo
-  :type '(alist :key-type   (string :tag "Current heading keyword")
-                :value-type (string :tag "New sub-heading keyword")))
-
-(defun org-new-subheading-todo (&optional arg)
-  "Add a new TODO item, demoted from the current heading level.
-
-The TODO keyword for the new item can be specified by a numeric
-prefix argument, as with `org-todo'.
-
-Otherwise, if `org-subheading-todo-alist' is non-nil, it is used
-to map the new keyword from the current one, and if it is nil,
-the next TODO keyword in the sequence is used, or the first one
-if the current heading does not have one.
-
-This allows a TODO keyword hierarchy to be imposed, e.g.
-if org-subheading-todo-alist is
-
-  '((\"MASTERPLAN\" . \"PROJECT\")
-    (\"PROJECT\"    . \"NEXTACTION\")
-    (\"NEXTACTION\" . \"NEXTACTION\"))
-
-then invoking this function four times would yield:
-
-* MASTERPLAN
-** PROJECT
-*** NEXTACTION
-**** NEXTACTION"
-  (interactive "P")
-  (save-excursion
-    (org-back-to-heading)
-    (looking-at org-todo-line-regexp))
-  (let* ((current-keyword (match-string 2))
-         (new-keyword
-          (if arg
-              (nth (1- (prefix-numeric-value arg))
-                   org-todo-keywords-1)
-            (or
-             (and current-keyword
-                  (or (car (assoc current-keyword org-subheading-todo-alist))
-                      (cadr (member current-keyword org-todo-keywords-1))))
-             (car org-todo-keywords-1)))))
-    (org-new-subheading)
-    (insert new-keyword " ")))
+;;}}}
+;;{{{ org-mode-hook bindings
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -197,13 +141,9 @@ then invoking this function four times would yield:
             (define-key org-mode-map [(control right)]       'as-show-current)
             (define-key org-mode-map [(control shift left)]  'hide-subtree)
             (define-key org-mode-map [(control shift right)] 'show-subtree)
-            (define-key org-mode-map [(control shift f)]     'org-todo-next-keyword)
-            (define-key org-mode-map [(control shift b)]     'org-todo-previous-keyword)
-            (define-key org-mode-map [(control shift p)]     'org-todo-previous-set)
-            (define-key org-mode-map [(control shift n)]     'org-todo-next-set)
-            (define-key org-mode-map [(meta j)]              'org-new-subheading)
-            (define-key org-mode-map [(shift meta j)]        'org-new-subheading-todo)
             ))
+
+;;}}}
 
 ;;}}}
 ;;{{{ for navigation:
@@ -265,13 +205,16 @@ consistent landing spot."
             (local-set-key [(control shift down)] 'allout-forward-current-level)))
 
 (eval-when-compile (load-library "org"))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key [(control U         )] 'outline-up-heading)
-            (local-set-key [(control up        )] 'outline-previous-visible-heading)
-            (local-set-key [(control down      )] 'outline-next-visible-heading)
-            (local-set-key [(control shift down)] 'outline-forward-same-level)
-            (local-set-key [(control shift up  )] 'outline-backward-same-level)))
+(defun as-local-set-outline-keys ()
+  "Bind local outline navigation keys the way Adam likes them."
+  (local-set-key [(control U         )] 'outline-up-heading)
+  (local-set-key [(control up        )] 'outline-previous-visible-heading)
+  (local-set-key [(control down      )] 'outline-next-visible-heading)
+  (local-set-key [(control shift down)] 'outline-forward-same-level)
+  (local-set-key [(control shift up  )] 'outline-backward-same-level))
+
+(add-hook 'org-mode-hook  'as-local-set-outline-keys)
+(add-hook 'muse-mode-hook 'as-local-set-outline-keys)
 
 ;;}}}
 ;;{{{ for editing structure:
