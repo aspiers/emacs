@@ -521,8 +521,8 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ ReStructuredText mode
 
-(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
 (autoload 'rst-mode "rst")
+(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
 (autoload 'rst-text-mode-bindings "rst")
 
 ;; This stomps over everything :-(
@@ -632,6 +632,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (eval-when-compile (require 'muse-mode))
 
 (autoload 'orgstruct-mode "org" t)
+(defvar org-mode-map)
 (add-hook 'muse-mode-hook
           (lambda ()
             (orgstruct-mode)
@@ -1066,8 +1067,8 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; (add-hook 'find-file-hooks 'as-allout-maybe-init)
 
-(setq allout-mode-leaders '((emacs-lisp-mode . ";;;_")
-                            (muse-mode       . "*")))
+(defvar allout-mode-leaders '((emacs-lisp-mode . ";;;_")
+                              (muse-mode       . "*")))
 
 ;;}}}
 ;;{{{ msf-abbrev
