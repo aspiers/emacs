@@ -797,15 +797,7 @@ then invoking this function four times would yield:
 (add-hook 'muse-mode-hook
           (lambda ()
             (orgstruct-mode)
-            (outline-minor-mode)
-            (define-key muse-mode-map "\C-c."                 'org-time-stamp)
-            (define-key muse-mode-map [(shift up)]            'org-timestamp-up)
-            (define-key muse-mode-map [(shift down)]          'org-timestamp-down)
-            (define-key muse-mode-map [(control left )]       'hide-subtree)
-            (define-key muse-mode-map [(control right)]       'as-show-current)
-            (define-key muse-mode-map [(control shift left)]  'hide-subtree)
-            (define-key muse-mode-map [(control shift right)] 'show-subtree)
-            ))
+            (outline-minor-mode)))
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
@@ -1225,9 +1217,8 @@ then invoking this function four times would yield:
 (add-hook 'cperl-mode-hook (lambda () (setq comment-start "#")))
 (add-hook 'shell-script-mode-hook (lambda () (setq comment-start "#")))
 
-(setq as-find-file-matching-regexp-alist
-      (append '(("\*\.rdb$" . (lambda () (setq comment-start "! "))))
-              as-find-file-matching-regexp-alist))
+(defvar as-find-file-matching-regexp-alist
+  '(("\*\.rdb$" . (lambda () (setq comment-start "! ")))))
 
 ;;}}}
 
