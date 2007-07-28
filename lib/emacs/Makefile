@@ -192,7 +192,7 @@ install: .installed
 	  cp $$file $(POST_INSTALL_DIR); 					\
 	done
 	@echo "Installing overrides in $(PRE_INSTALL_DIR)"
-	cd $(POST_INSTALL_DIR) && \
+	@cd $(POST_INSTALL_DIR) && \
 	mv $(addsuffix .el,  $(EL_OVERRIDES)) \
 	   $(addsuffix .elc, $(EL_OVERRIDES)) \
 		$(PRE_INSTALL_DIR)
@@ -364,7 +364,7 @@ loaddefs: $(LOADDEFS)
 $(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
 	@echo "### Generating $@"
 	@mkdir -p "$(LOADDEFS_DIR)"
-	$(BATCH_EVAL) \
+	@$(BATCH_EVAL) \
 	    '(progn '\
 '		(setq generated-autoload-file "$(LOADDEFS)") '\
 '		(update-directory-autoloads $(LOADDEFS_DIRS_LISP)))'
