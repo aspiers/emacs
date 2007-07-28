@@ -1,9 +1,8 @@
 ;; Adam's editing utilities
 
-;; Should be autoloaded by as-init.el
-
 ;;{{{ Word motion
 
+;;;###autoload
 (defun as-forward-word-start (&optional count)
   "As `forward-word', but lands at the start of a word not the end."
   (interactive "p")
@@ -11,6 +10,7 @@
   (forward-word 1)
   (forward-word -1))
 
+;;;###autoload
 (defun as-backward-before-word (&optional count)
   "As `backward-word', but lands at the start of a word not the end."
   (interactive "p")
@@ -18,6 +18,7 @@
   (forward-word -1)
   (forward-word 1))
 
+;;;###autoload
 (defun as-kill-word ()
   "Kills forward to where as-forward-word-start would land."
   (interactive)
@@ -27,6 +28,7 @@
 ;;}}}
 ;;{{{ as-duplicate-line
 
+;;;###autoload
 (defun as-duplicate-line (&optional count) 
   "Duplicates the current line."
   (interactive "*p")
@@ -46,6 +48,7 @@
 ;;}}}
 ;;{{{ as-join-line-with-next
 
+;;;###autoload
 (defun as-join-line-with-next (&optional preserve-comment)
   "Joins the current line with the next.  Removes any continuation
 backslash from the end of the line, and any comment prefix from the
@@ -71,6 +74,7 @@ joining."
 ;;}}}
 ;;{{{ as-copy-previous-line-suffix
 
+;;;###autoload
 (defun as-copy-previous-line-suffix ()
   "Copy the suffix of the line directly above the point and yank it at the point."
   (interactive "*")
@@ -87,6 +91,7 @@ joining."
 ;;}}}
 ;;{{{ as-align-to-previous-line
 
+;;;###autoload
 (defun as-align-to-previous-line (&optional count)
   "Runs indent-relative on the current line and moves down to enable repeating."
   (interactive "*p")
@@ -104,6 +109,7 @@ joining."
 ;;}}}
 ;;{{{ as-transpose-lines
 
+;;;###autoload
 (defun as-transpose-lines (arg)
   "Just like `transpose-lines', but preserves the point's position."
   (interactive "*p")
@@ -115,6 +121,7 @@ joining."
 ;;}}}
 ;;{{{ mark-list
 
+;;;###autoload
 (defun mark-list ()
   "Put point at end of this list, mark at beginning.
 The list marked is the one that contains point or follows point."
@@ -127,6 +134,7 @@ The list marked is the one that contains point or follows point."
 ;;}}}
 ;;{{{ vim-yy
 
+;;;###autoload
 (defun vim-yy (&optional lines)
   "Simulates vi's yy command."
   (interactive "p")
@@ -141,6 +149,7 @@ The list marked is the one that contains point or follows point."
 ;;}}}
 ;;{{{ bn-end-of-line-but-one
 
+;;;###autoload
 (defun bn-end-of-line-but-one (arg)
   "Move point to one character before the end of current line.
 With argument ARG not nil or 1, move forward ARG - 1 lines first.
@@ -154,6 +163,7 @@ If the line is empty, doesn't do anything."
 ;;}}}
 ;;{{{ bn-strip-parentheses
 
+;;;###autoload
 (defun bn-strip-parentheses (arg)
   "Delete the parenthesis character at point, and its match.
 If the character at point has either open-parenthesis or
@@ -211,6 +221,7 @@ parenthesis has just been removed."
 ;;}}}
 ;;{{{ bn-kill-region-or-backword-word
 
+;;;###autoload
 (defun bn-kill-region-or-backword-word (arg)
   "If mark is active, do `kill-region'.  If not, do `backward-kill-word'.
 \(This doesn't make very much sense unless you also have
@@ -224,6 +235,7 @@ active, ARG specifies how many words backwards to kill."
 ;;}}}
 ;;{{{ bn-kill-line-or-region-save
 
+;;;###autoload
 (defun bn-kill-line-or-region-save (arg)
   "If mark is active, do `kill-ring-save'; else copy current line\(s\).
 ARG is ignored if mark is active.  If mark is not active,
@@ -242,6 +254,7 @@ not included in the text copied."
 
 (autoload 'signum "cl" "signum")
 
+;;;###autoload
 (defun bn-zap-nearly-to-char (arg char)
   "Kill up to but not including ARG'th occurrence of CHAR.
 Goes backward if ARG is negative; error if CHAR not found."
@@ -258,9 +271,9 @@ Goes backward if ARG is negative; error if CHAR not found."
       (kill-region beg end))))
 
 ;;}}}
-
 ;;{{{ Ben's secondary selection hacks
 
+;;;###autoload
 (defun bn-make-region-into-secondary (start end)
   "Turn the region into the secondary selection.
 The secondary selection is enabled if required, and set equal to
@@ -277,8 +290,7 @@ altered at all."
                      (overlay-end mouse-secondary-overlay)))
   (deactivate-mark))
 
-
-
+;;;###autoload
 (defun bn-exchange-region-and-secondary (start end)
   "Interchange the region and the secondary selection.
 The results are not well-defined if the region and the
@@ -296,7 +308,7 @@ secondary selection overlap."
     (delete-overlay mouse-secondary-overlay)
     (setq mouse-secondary-overlay nil)))
 
-
+;;;###autoload
 (defun bn-keyboard-quit ()
   "Deactivate secondary region, deactivate region, or perform quit.
 If the secondary region is active, then deactivate it.  If not, then if

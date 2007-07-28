@@ -5,6 +5,7 @@
 (defvar as-bounce-buffer-regexp-alist '()
   "Controls the behaviour of `as-bounce-buffer'.")
 
+;;;###autoload
 (defun as-bounce-buffer ()
   "For each element of `as-bounce-buffer-regexp-alist', attempts a search
 and replace on the current buffer's filename.  (The CARs are the
@@ -31,6 +32,8 @@ from the replace is visited via `find-file'."
 
 (eval-when-compile
   (autoload 'x-select-text "term/x-win" nil t))
+
+;;;###autoload
 (defun as-display-buffer-filename (&optional save-to-clipboard)
   "Displays the current buffer's filename in the minibuffer.
 
@@ -56,6 +59,7 @@ the filename to an absolute one with all symlinks resolved."
 ;;}}}
 ;;{{{ as-destroy-buffer
 
+;;;###autoload
 (defun as-destroy-buffer ()
   "Kill the current buffer without leaving crappy auto-save files around."
   (interactive)
@@ -69,6 +73,7 @@ the filename to an absolute one with all symlinks resolved."
 ;;}}}
 ;;{{{ as-destroy-buffer-delete-file
 
+;;;###autoload
 (defun as-destroy-buffer-delete-file ()
   "Kill the current buffer and delete the associated file."
   (interactive)
@@ -81,6 +86,7 @@ the filename to an absolute one with all symlinks resolved."
 ;;}}}
 ;;{{{ as-rename-current-buffer-file
 
+;;;###autoload
 (defun as-rename-current-buffer-file (new-file-name)
   "Renames the file in the current buffer, and renames the buffer accordingly.
 
@@ -126,12 +132,17 @@ Wraps around `rename-file'."
 ;;}}}
 ;;{{{ as-make-backup-file-name
 
+;; Need this in as-custom:
+;; (custom-set-variables
+;;  '(make-backup-file-name-function (quote as-make-backup-file-name)))
+
 (defvar as-make-backup-file-name-hooks '()
   "Hooks for adding more customisability when making backup filenames.
 Each hook will get called in turn with the filename of the buffer to be
 backed up.  The hook should return the backup filename if it wants to
 suggest one, otherwise nil.")
 
+;;;###autoload
 (defun as-make-backup-file-name (file)
   "Adam's replacement for `make-backup-file-name', since
 `backup-directory-alist' isn't flexible enough.  Set
@@ -180,36 +191,36 @@ separators for '!'.
 Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
   (let ((backup-directory "/tmp"))
     (progn
-      (when (memq system-type '(windows-nt ms-dos))
-        ;; Normalize DOSish file names: convert all slashes to
-        ;; directory-sep-char, downcase the drive letter, if any,
-        ;; and replace the leading "x:" with "/drive_x".
+      (when (memq system-type '(windows-nt ms-dos cygwin))
+        ;; Normalize DOSish file names: downcase the drive
+        ;; letter, if any, and replace the leading "x:" with
+        ;; "/drive_x".
         (or (file-name-absolute-p file)
             (setq file (expand-file-name file))) ; make defaults explicit
         ;; Replace any invalid file-name characters (for the
         ;; case of backing up remote files).
         (setq file (expand-file-name (convert-standard-filename file)))
-        (let (dir-sep-string (char-to-string directory-sep-char))
-          (if (eq (aref file 1) ?:)
-              (setq file (concat dir-sep-string
-                                 "drive_"
-                                 (char-to-string (downcase (aref file 0)))
-                                 (if (eq (aref file 2) directory-sep-char)
-                                     ""
-                                   dir-sep-string)
-                                 (substring file 2))))))
+        (if (eq (aref file 1) ?:)
+            (setq file (concat "/"
+                               "drive_"
+                               (char-to-string (downcase (aref file 0)))
+                               (if (eq (aref file 2) ?/)
+                                   ""
+                                 "/")
+                               (substring file 2)))))
       ;; Make the name unique by substituting directory
       ;; separators.  It may not really be worth bothering about
       ;; doubling `!'s in the original name...
       (expand-file-name
        (subst-char-in-string
-        directory-sep-char ?!
+        ?/ ?!
         (replace-regexp-in-string "!" "!!" file))
        backup-directory))))
 
 ;;}}}
 ;;{{{ find-library
 
+;;;###autoload
 (defun find-library-source (library)
   "Runs `find-file' on the file containing the given library's source
 code.  Do not include the '.el' suffix in the library argument."
@@ -223,6 +234,7 @@ code.  Do not include the '.el' suffix in the library argument."
 
 ;;{{{ bury-and-close-buffer
 
+;;;###autoload
 (defun bury-and-close-buffer ()
   (interactive)
   (bury-buffer) 
@@ -232,6 +244,7 @@ code.  Do not include the '.el' suffix in the library argument."
 ;;}}}
 ;;{{{ mhj-set-q-to-close
 
+;;;###autoload
 (defun mhj-set-q-to-close ()
   (local-set-key "q" 'bury-and-close-buffer))
 
@@ -239,6 +252,16 @@ code.  Do not include the '.el' suffix in the library argument."
 
 ;;{{{ as-find-file-matching-regexp-hook
 
+(defvar as-find-file-matching-regexp-alist '()
+  "alist mapping filename regexps to functions which will be evaluated when
+filenames matching the regexps are visited.
+
+This allows you to set local variables specific to sets of files, e.g.
+
+(setq as-find-file-matching-regexp-alist
+      '((\"/foo/bar/.*\.pm\" . (lambda () (setq cperl-indent-level 2)))))")
+
+;;;###autoload
 (defun as-find-file-matching-regexp-hook ()
   "Hook to run arbitrary functions on newly visited files.
 

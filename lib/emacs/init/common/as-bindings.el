@@ -1,3 +1,4 @@
+(load-library "as-loaddefs")
 (require 'as-progress)
 
 (as-progress "key bindings...")
