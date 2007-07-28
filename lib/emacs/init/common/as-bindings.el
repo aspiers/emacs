@@ -43,8 +43,8 @@
 
 (autoload 'foldout-exit-fold    "foldout")
 (autoload 'foldout-zoom-subtree "foldout")
-(mapc (lambda (x)
-        (add-hook x
+(mapc (lambda (mode)
+        (add-hook mode
                   (lambda ()
                     ;; Quick navigation
                     (local-set-key [(shift left)] 'foldout-exit-fold)
@@ -56,7 +56,14 @@
 
 ;;{{{ as-folding-{hide,show}-current
 
-(eval-when-compile (require 'folding))
+(eval-and-compile
+  (mapc (lambda (fn) (autoload fn "folding"))
+        '(folding-mark-look-at
+          folding-hide-current-entry
+          folding-mark-look-at-top-mark-p
+          folding-show-current-entry
+          )))
+
 (defun as-folding-hide-current ()
   "Hides the current fold, ensuring a consistent landing spot."
   (interactive)
@@ -76,6 +83,14 @@
 
 ;;}}}
 ;;{{{ as-allout-{show,hide}-current
+
+(mapc (lambda (fn) (autoload fn "allout"))
+      '(allout-current-topic-collapsed-p
+        allout-hide-current-subtree
+        allout-show-children
+        allout-show-current-entry
+        allout-up-current-level
+        ))
 
 (defun as-allout-show-current ()
   "Shows the body and children of the current topic."
@@ -113,6 +128,17 @@ is already hidden."
 
 ;;{{{ folding-mode-hook bindings
 
+(mapc (lambda (fn) (autoload fn "folding"))
+      '(folding-narrow-to-region
+        folding-next-visible-heading
+        folding-open-buffer
+        folding-point-folded-p
+        folding-previous-visible-heading
+        folding-shift-in
+        folding-show-all
+        folding-use-overlays-p
+        ))
+
 (add-hook 'folding-mode-hook
           (lambda ()
             (local-set-key [(control left )] 'as-folding-hide-current)
@@ -135,12 +161,23 @@ is already hidden."
 ;;}}}
 ;;{{{ org-mode-hook bindings
 
-(add-hook 'org-mode-hook
+(eval-when-compile (require 'org))
+
+(defun as-local-set-outline-expose-keys ()
+  "Bind local outline expose keys the way Adam likes them."
+  (local-set-key [(control left )]       'hide-subtree)
+  (local-set-key [(control right)]       'as-show-current)
+  (local-set-key [(control shift left)]  'hide-sublevels)
+  (local-set-key [(control shift right)] 'show-subtree))
+
+(add-hook 'org-mode-hook  'as-local-set-outline-expose-keys)
+(add-hook 'muse-mode-hook 'as-local-set-outline-expose-keys)
+
+(add-hook 'muse-mode-hook
           (lambda ()
-            (define-key org-mode-map [(control left )]       'hide-subtree)
-            (define-key org-mode-map [(control right)]       'as-show-current)
-            (define-key org-mode-map [(control shift left)]  'hide-subtree)
-            (define-key org-mode-map [(control shift right)] 'show-subtree)
+            (define-key muse-mode-map "\C-c."        'org-time-stamp)
+            (define-key muse-mode-map [(shift up)]   'org-timestamp-up)
+            (define-key muse-mode-map [(shift down)] 'org-timestamp-down)
             ))
 
 ;;}}}
@@ -204,8 +241,8 @@ consistent landing spot."
             (local-set-key [(control shift up  )] 'allout-backward-current-level)
             (local-set-key [(control shift down)] 'allout-forward-current-level)))
 
-(eval-when-compile (load-library "org"))
-(defun as-local-set-outline-keys ()
+(eval-when-compile (require 'org))
+(defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
   (local-set-key [(control U         )] 'outline-up-heading)
   (local-set-key [(control up        )] 'outline-previous-visible-heading)
@@ -213,8 +250,8 @@ consistent landing spot."
   (local-set-key [(control shift down)] 'outline-forward-same-level)
   (local-set-key [(control shift up  )] 'outline-backward-same-level))
 
-(add-hook 'org-mode-hook  'as-local-set-outline-keys)
-(add-hook 'muse-mode-hook 'as-local-set-outline-keys)
+(add-hook 'org-mode-hook  'as-local-set-outline-nav-keys)
+(add-hook 'muse-mode-hook 'as-local-set-outline-nav-keys)
 
 ;;}}}
 ;;{{{ for editing structure:
