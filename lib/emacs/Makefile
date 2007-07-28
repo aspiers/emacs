@@ -27,15 +27,30 @@ THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	$(DVC_DIR) 					\
 	)
 
+# Directories to scan for autoload cookies
+LOADDEFS_DIRS=	\
+	utils
+
+LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix "$(EMACSLIB)/,$(LOADDEFS_DIRS)))
+
+# Where to put as-loaddefs.el?  We need it for both compile- and
+# run-time, but we don't want to pollute the compile-time load-path
+# with POST_INSTALL_DIR.
+LOADDEFS_DIR=$(POST_INSTALL_DIR)/loaddefs
+LOADDEFS=$(LOADDEFS_DIR)/as-loaddefs.el
+#LOADDEFS=$(POST_INSTALL_DIR:$(EMACSLIB)/%=%)/as-loaddefs.el
+
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
 	major-modes/monkey-2			\
 	major-modes/remember*
 IGNORE_FILES =		    \
+	loaddefs.el	\
 	major-modes/sdf.el  \
 	major-modes/mediawiki.el \
 	major-modes/planner*.el
+
 
 # Phony targets are bad except for top-level rules because if a rule A
 # has a phony prerequisite B, that phony rule B will always get
@@ -90,23 +105,26 @@ ifndef EMACS
   EMACS=emacs
 endif
 
+BATCH_EVAL=$(EMACS) -q --batch --no-site-file --eval
+
 version=$(shell $(EMACS) --version)
 VERSION_NUMBER=$(shell echo "$(version)" | \
                    perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
-SYSTEM_TYPE=$(shell $(EMACS) -q --batch \
-	--eval '(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
+SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
+		'(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
 
-SITE_INSTALL_DIR=$(shell $(EMACS) -q --batch \
-	--eval '(princ (car load-path))')
+SITE_INSTALL_DIR=$(shell $(BATCH_EVAL) '(princ (car load-path))')
 
 ifeq (, $(findstring XEmacs,$(version)))
   # GNU Emacs
+  LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
+
   # Really ugly hack to add all subdirs of lisp_dir to the load-path.
-  LOADPATHS=$(addprefix -L ,$(LIBDIRS)) 				\
-	--eval "(let ((orig-dir default-directory)) 		\
-		   (cd \"$(lisp_dir)\") 			\
-		   (normal-top-level-add-subdirs-to-load-path) 	\
-		   (cd orig-dir))"				\
+#  LOADPATH_OPTS += \
+#	--eval "(let ((orig-dir default-directory)) 		\
+#		   (cd \"$(lisp_dir)\") 			\
+#		   (normal-top-level-add-subdirs-to-load-path) 	\
+#		   (cd orig-dir))"				\
 
 #	--eval "(message (princ-list load-path))" \
 #	--eval "(normal-top-level-add-to-load-path '(\"$(lisp_dir)\"))" \
@@ -114,8 +132,8 @@ ifeq (, $(findstring XEmacs,$(version)))
   INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 else
   # X Emacs.  Blegh!
-  LOADPATHS=$(addsuffix \" ,$(addprefix \",$(LIBDIRS)))
-  LOADPATHS=--eval "(setq load-path (append '($(LOADPATHS)) load-path))"
+  LOADPATH_OPTS=$(addsuffix \" ,$(addprefix \",$(LIBDIRS)))
+#  LOADPATH_OPTS=--eval "(setq load-path (append '($(LOADPATH_OPTS)) load-path))"
   INSTALL_DIR=$(XINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 endif
 
@@ -138,8 +156,8 @@ show-compiler:
 list-libdirs:
 	@echo '$(LIBDIRS)'
 
-list-loadpaths:
-	@echo '$(LOADPATHS)'
+list-loadpath-opts:
+	@echo '$(LOADPATH_OPTS)'
 
 list-prune:
 	@echo "$(PRUNE_DIRS)"
@@ -195,9 +213,13 @@ uninstall:
 
 #############################################################################
 
-%.elc: %.el Makefile
-	@echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
-	$(COMPILER) $(LOADPATHS) $(COMPILER_OPTS) $<; \
+%.elc: %.el
+	@echo "### Compiling $< with libs: $(LIBDIRS) ..."
+	@$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $<
+
+%.elc.verbose: %.el
+	@echo "### Compiling $< with libs: $(LIBDIRS) ..."
+	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $(<:.verbose)
 
 %.elc.debug:
 	rm -f $(@:.debug=)
@@ -214,6 +236,9 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 init/common/as-bindings.elc: init/common/as-progress.elc 
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
+$(AS_INIT_ELC): $(LOADDEFS)
+$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR)
+#$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
 major-modes/mmm/%.elc: LIBDIRS += major-modes/mmm
@@ -331,3 +356,15 @@ major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
 	) &&								\
 	touch $@
 
+show-loaddefs:
+	@echo '$(LOADDEFS)'
+
+.PHONY: loaddefs
+loaddefs: $(LOADDEFS)
+$(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
+	@echo "### Generating $@"
+	@mkdir -p "$(LOADDEFS_DIR)"
+	$(BATCH_EVAL) \
+	    '(progn '\
+'		(setq generated-autoload-file "$(LOADDEFS)") '\
+'		(update-directory-autoloads $(LOADDEFS_DIRS_LISP)))'

@@ -19,9 +19,8 @@
 
 ;;{{{ Functions
 
+(load-library "as-loaddefs")
 (require 'as-progress)
-(require 'as-bufs-files-auto)
-(require 'as-editing-auto)
 
 (as-progress "functions...")
 
@@ -899,7 +898,7 @@ then invoking this function four times would yield:
 ;;}}}
 ;;{{{ dvc
 
-(require 'dvc-autoloads)
+(require 'dvc-autoloads nil t)
 ;;(load "dvc-load" 'noerror)
 (global-set-key "\C-xTA"    'dvc-browse)
 (global-set-key "\C-xT\C-m" 'dvc)
