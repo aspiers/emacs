@@ -236,15 +236,17 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
+$(AS_INIT_ELC): .muse-installed
 $(AS_INIT_ELC): $(LOADDEFS)
-$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR)
+$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 .org-installed:
 	$(MAKE) -C major-modes/org-mode install \
 		prefix=$(prefix) \
 		infodir=$(infodir) \
-		lispdir=$(PRE_INSTALL_DIR)
+		lispdir=$(PRE_INSTALL_DIR) \
+	&& touch $@
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
 major-modes/mmm/%.elc: LIBDIRS += major-modes/mmm
@@ -268,45 +270,30 @@ psgml: .psgml-made
 muse: .muse-installed
 
 .muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
-	( 								\
-	  cd major-modes/muse && 					\
-	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS)!; 		\
-                       s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
-                       s!^(INFODIR\s*=\s*).*!$${1}$(infodir)!'		\
-	  	Makefile.defs && 					\
-	  make lisp  							\
-	) && 								\
-	touch $@
+	$(MAKE) -C major-modes/muse lisp \
+		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
+	&& touch $@
 
 .muse-installed: .muse-made
 	( 								\
 	  cd major-modes/muse;						\
-	  make install-bin;						\
+	  make install-bin ELISPDIR=$(lispdir);						\
 	  make install-info ||						\
 	    echo "muse install-info failure ignored"			\
 	) &&								\
 	touch $@
 
 .planner-installed: .planner-made
-	-( 								\
-	  cd major-modes/planner; 					\
-	  make install							\
-	) &&								\
-	touch $@
+	-$(MAKE) -C major-modes/planner install \
+	&& touch $@
 # FIXME need separate targets
 # 	  make install-lisp;						\
 # 	  make install-info ||						\
 # 	    echo "planner install-info failure ignored"			\
 
 .planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed
-	( 								\
-	  cd major-modes/planner && 					\
-	  perl -pi -e 's!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
-                       s!^(INFODIR\s*=\s*).*!$${1}$(infodir)!'		\
-	  	Makefile.defs && 					\
-	  make lisp    							\
-	) && 								\
-	touch $@
+	$(MAKE) -C major-modes/planner lisp PREFIX=$(prefix) INFODIR=$(infodir) \
+	&& touch $@
 
 #major-modes/remember/remember-experimental.elc: .planner-made
 
@@ -365,12 +352,21 @@ major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
 show-loaddefs:
 	@echo '$(LOADDEFS)'
 
+# emacs 21 uses update-autoloads-from-directories
+# emacs 22 uses update-directory-autoloads
+define loaddefs_lisp
+(progn \
+    (setq generated-autoload-file "$(LOADDEFS)") \
+    (if (boundp '\''update-directory-autoloads) \
+        (update-directory-autoloads $(LOADDEFS_DIRS_LISP)) \
+        (update-autoloads-from-directories $(LOADDEFS_DIRS_LISP))))
+endef
+
 .PHONY: loaddefs
 loaddefs: $(LOADDEFS)
 $(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
 	@echo "### Generating $@"
 	@mkdir -p "$(LOADDEFS_DIR)"
-	@$(BATCH_EVAL) \
-	    '(progn '\
-'		(setq generated-autoload-file "$(LOADDEFS)") '\
-'		(update-directory-autoloads $(LOADDEFS_DIRS_LISP)))'
+# update-directory-autoloads requires non-empty file to update
+	@[ -s "$(LOADDEFS)" ] || echo " " >> "$(LOADDEFS)"
+	$(BATCH_EVAL) '$(loaddefs_lisp)'
