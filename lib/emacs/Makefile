@@ -63,8 +63,8 @@ GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
 XINSTALL_DIR = $(EMACSLIB)/XEmacs
 
 prefix   = $(HOME)/local
-info_dir = $(prefix)/share/info
-lisp_dir = $(prefix)/share/emacs/site-lisp
+infodir = $(prefix)/share/info
+lispdir = $(prefix)/share/emacs/site-lisp
 
 # Figure out which .els to compile ourselves.  The list should comprise of
 # everything we can find which we're not completely ignoring, but excluding
@@ -119,15 +119,14 @@ ifeq (, $(findstring XEmacs,$(version)))
   # GNU Emacs
   LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 
-  # Really ugly hack to add all subdirs of lisp_dir to the load-path.
+  # Really ugly hack to add all subdirs of lispdir to the load-path.
 #  LOADPATH_OPTS += \
 #	--eval "(let ((orig-dir default-directory)) 		\
-#		   (cd \"$(lisp_dir)\") 			\
+#		   (cd \"$(lispdir)\") 				\
 #		   (normal-top-level-add-subdirs-to-load-path) 	\
 #		   (cd orig-dir))"				\
-
 #	--eval "(message (princ-list load-path))" \
-#	--eval "(normal-top-level-add-to-load-path '(\"$(lisp_dir)\"))" \
+#	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))" \
 
   INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 else
@@ -229,16 +228,23 @@ INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
 	major-modes/mmm 	\
+	major-modes/org-mode 	\
 	minor-modes 		\
 	utils
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-init/common/as-bindings.elc: init/common/as-progress.elc 
+init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
+
+.org-installed:
+	$(MAKE) -C major-modes/org-mode install \
+		prefix=$(prefix) \
+		infodir=$(infodir) \
+		lispdir=$(PRE_INSTALL_DIR)
 
 major-modes/mmm/%.elc: major-modes/mmm/%.el
 major-modes/mmm/%.elc: LIBDIRS += major-modes/mmm
@@ -266,7 +272,7 @@ muse: .muse-installed
 	  cd major-modes/muse && 					\
 	  perl -pi -e 's!^(EMACS\s*=\s*).*!$$1$(EMACS)!; 		\
                        s!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
-                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
+                       s!^(INFODIR\s*=\s*).*!$${1}$(infodir)!'		\
 	  	Makefile.defs && 					\
 	  make lisp  							\
 	) && 								\
@@ -296,7 +302,7 @@ muse: .muse-installed
 	( 								\
 	  cd major-modes/planner && 					\
 	  perl -pi -e 's!^(PREFIX\s*=\s*).*!$${1}$(prefix)!;		\
-                       s!^(INFODIR\s*=\s*).*!$${1}$(info_dir)!'		\
+                       s!^(INFODIR\s*=\s*).*!$${1}$(infodir)!'		\
 	  	Makefile.defs && 					\
 	  make lisp    							\
 	) && 								\
@@ -308,7 +314,7 @@ muse: .muse-installed
 	( 					\
 	  cd major-modes/emacs-w3m-1.4.4    && 	\
 	  ./configure --prefix=$(prefix)	\
-		      --infodir=$(info_dir) && 	\
+		      --infodir=$(infodir) && 	\
 	  make				    && 	\
 	  make install			    && 	\
 	  cp w3m-load.el $(POST_INSTALL_DIR) 	\
@@ -352,7 +358,7 @@ major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
 	-( 								\
 	  cd major-modes/$(DVC_DIR)/++build && 				\
 	  make install &&						\
-	  install-info --info-dir=$(info_dir) $(info_dir)/dvc.info	\
+	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
 	) &&								\
 	touch $@
 
