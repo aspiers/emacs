@@ -54,6 +54,7 @@ placed here.")
 (setq orig-load-path load-path)
 
 (add-to-list 'load-path as-version-pre-lib-dir)
+(add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append)
 (add-to-list 'load-path as-version-post-lib-dir 'append)
 
 ;; Add $ZDOTDIR/local/share/emacs/site-lisp and subdirs to load-path
