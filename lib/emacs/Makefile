@@ -13,7 +13,7 @@ el_search_paths = 			\
 	utils 				\
 	fun
 
-EL_OVERRIDES = org pcvs*
+EL_OVERRIDES = pcvs*
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -237,7 +237,7 @@ INIT_COMMON_LIBDIRS = 	\
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
+init/common/as-bindings.elc: init/common/as-progress.elc org
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
 $(AS_INIT_ELC): .muse-installed
 $(AS_INIT_ELC): $(LOADDEFS)
