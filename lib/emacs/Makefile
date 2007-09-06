@@ -1,4 +1,5 @@
 DVC_DIR   = dvc
+ORG_DIR   = org-hg
 
 # Where do we pick up .el files which don't have their own Makefiles?
 el_search_paths = 			\
@@ -14,17 +15,19 @@ el_search_paths = 			\
 
 EL_OVERRIDES = org pcvs*
 
-# These ones have their own Makefiles
+# This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
 	psgml 			\
 	muse 			\
-	dvc
+	dvc			\
+	org
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
 	psgml 						\
 	muse 						\
 	$(DVC_DIR) 					\
+	$(ORG_DIR) 					\
 	)
 
 # Directories to scan for autoload cookies
@@ -144,7 +147,7 @@ COMPILER=$(EMACS) --no-site-file
 COMPILER_BATCH=-batch -f batch-byte-compile
 COMPILER_OPTS=$(COMPILER_BATCH)
 
-.PHONY: all install clean uninstall
+.PHONY: all install clean uninstall $(THIRD_PARTY_PKGS)
 
 all: .elcs install
 
@@ -241,8 +244,9 @@ $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
+org: .org-installed
 .org-installed:
-	$(MAKE) -C major-modes/org-mode install \
+	$(MAKE) -C major-modes/$(ORG_DIR) install-lisp install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir) \
 		lispdir=$(PRE_INSTALL_DIR) \
@@ -256,7 +260,7 @@ major-modes/remember/%.elc: LIBDIRS += major-modes/remember
 
 psgml: .psgml-made
 .psgml-made:
-	( cd major-modes/psgml && $(MAKE) ) && \
+	$(MAKE) -C major-modes/psgml && \
 	touch $@
 
 .nxml-mode-20041004-made: $(POST_INSTALL_DIR)
@@ -335,10 +339,7 @@ major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
 	-cd major-modes/$(DVC_DIR) && autoconf
 
 .dvc-made: $(wildcard major-modes/$(DVC_DIR)/*.el) $(wildcard major-modes/$(DVC_DIR)/*/*.el) .dvc-configured
-	-( 					\
-	  cd major-modes/$(DVC_DIR)/++build && 	\
-	  make  				\
-	) && 					\
+	make -C major-modes/$(DVC_DIR)/++build && \
 	touch $@
 
 .dvc-installed: .dvc-made
