@@ -202,7 +202,7 @@ install: .installed
 
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
-clean: uninstall
+clean: uninstall $(addprefix clean-, org psgml nxml muse planner emacs-w3m pgg dvc)
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
 	rm -f .*-made
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
@@ -245,6 +245,9 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 org: .org-installed
+clean-org:
+	rm -f .org-installed
+	$(MAKE) -C major-modes/$(ORG_DIR) clean
 .org-installed:
 	$(MAKE) -C major-modes/$(ORG_DIR) install-lisp install-info \
 		prefix=$(prefix) \
@@ -259,10 +262,17 @@ major-modes/remember/%.elc: major-modes/remember/%.el
 major-modes/remember/%.elc: LIBDIRS += major-modes/remember
 
 psgml: .psgml-made
+clean-psgml:
+	rm -f .psgml-made
+	$(MAKE) -C major-modes/psgml clean
 .psgml-made:
 	$(MAKE) -C major-modes/psgml && \
 	touch $@
 
+nxml: .nxml-mode-20041004-made
+clean-nxml:
+	rm -f .nxml-mode-20041004-made
+	$(MAKE) -C major-modes/nxml-mode-20041004 clean
 .nxml-mode-20041004-made: $(POST_INSTALL_DIR)
 	( 					\
 	  cd major-modes/nxml-mode-20041004 && 	\
@@ -272,7 +282,9 @@ psgml: .psgml-made
 	touch $@
 
 muse: .muse-installed
-
+clean-muse:
+	rm -f .muse-made .muse-installed
+	$(MAKE) -C major-modes/muse clean
 .muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
 	$(MAKE) -C major-modes/muse lisp \
 		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
@@ -287,6 +299,10 @@ muse: .muse-installed
 	) &&								\
 	touch $@
 
+planner: .planner-installed
+clean-planner:
+	rm -f .planner-installed
+	$(MAKE) -C major-modes/planner clean
 .planner-installed: .planner-made
 	-$(MAKE) -C major-modes/planner install \
 	&& touch $@
@@ -301,6 +317,10 @@ muse: .muse-installed
 
 #major-modes/remember/remember-experimental.elc: .planner-made
 
+emacs-w3m: .emacs-w3m-made
+clean-emacs-w3m:
+	rm -f .emacs-w3m-made
+	$(MAKE) -C major-modes/emacs-w3m-1.4.4 clean
 .emacs-w3m-made:
 	( 					\
 	  cd major-modes/emacs-w3m-1.4.4    && 	\
@@ -312,12 +332,18 @@ muse: .muse-installed
 	) && 					\
 	touch $@
 
-pgg: pgg-made
+pgg: .pgg-made
+clean-pgg:
+	rm -f .pgg-made
+	$(MAKE) -C major-modes/pgg clean
 .pgg-made: major-modes/pgg/pgg.elc
 	@cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
 
 dvc_build_dir=major-modes/$(DVC_DIR)/++build
 dvc: .dvc-installed
+clean-dvc:
+	rm -f .dvc-configured .dvc-installed
+	$(MAKE) -C major-modes/$(DVC_DIR) clean
 .dvc-configured: major-modes/$(DVC_DIR)/configure
 	@-( 								\
 	  if which baz >/dev/null 2>&1; then 				\
