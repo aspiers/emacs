@@ -342,6 +342,8 @@ consistent landing spot."
 (global-set-key [(delete)]     'delete-char)        ;; to make sure
 (global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
 
+(global-set-key [(shift insert)] 'x-clipboard-yank)
+
 (global-set-key [(meta i)]     'indent-relative)    ;; was tab-to-tab-stop
 
 
@@ -422,12 +424,23 @@ consistent landing spot."
 
 ;;{{{ C-c -
 
-(global-set-key "\C-ca"   'bury-buffer)
+(fset 'as-find-personal-todo "\C-x\C-f~/roaming/TODO.org")
+(global-set-key "\C-cat"  'as-find-personal-todo)
+(fset 'as-find-personal-diary "\C-x\C-f~/roaming/diary.org")
+(global-set-key "\C-cad"  'as-find-personal-diary)
+
+(fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
+(global-set-key "\C-caT"  'as-find-work-todo)
+(fset 'as-find-work-diary "\C-x\C-f~/ifolder/Novell-diary.org")
+(global-set-key "\C-caD"  'as-find-work-diary)
+
 (global-set-key "\C-cA"   'as-align-to-previous-line)
-(fset 'as-next-cvs-buffer "\C-xb*cvs*") ;; must be something nicer than this
-(global-set-key "\C-cb"   'as-next-cvs-buffer)
+(global-set-key "\C-cb"   'bury-buffer)
+(global-set-key "\C-cB"   'as-bounce-buffer)
 ;;{{{ PCL-_C_VS (C-c c)
 
+(fset 'as-next-cvs-buffer "\C-xb*cvs*")
+(global-set-key "\C-ccb"   'as-next-cvs-buffer)
 (global-set-key "\C-cce"  'cvs-examine)
 (global-set-key "\C-ccq"  'cvs-quickdir)
 (global-set-key "\C-ccs"  'cvs-status)
