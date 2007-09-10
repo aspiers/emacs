@@ -16,6 +16,12 @@ is implemented by activating `smooth-scroll-down' and
 afflicting `scroll-margin', such as a sudden jump and unexpected
 highlighting of a region when the mouse is clicked in the margin.
 
+Scrolling only occurs when the point is closer to the window
+boundary it is heading for (top or bottom) than the middle of the
+window.  This is to intelligently handle the case where the
+margins cover the whole buffer (e.g. `smooth-scroll-margin' set
+to 5 and `window-height' returning 10 or less).
+
 See also `smooth-scroll-strict-margins'.")
 
 (defvar smooth-scroll-strict-margins t
@@ -40,13 +46,15 @@ the point will be allowed to stray into the margin.")
                             activate)
   "Scroll down smoothly if cursor is within `smooth-scroll-margin'
 lines of the top of the window."
-  (if (and (> (window-start) (buffer-end -1))
-           (< (apply (if smooth-scroll-strict-margins
+  (and (> (window-start) (buffer-end -1))
+       (let ((lines-from-window-start
+              (apply (if smooth-scroll-strict-margins
                          'count-screen-lines
-                         'count-lines)
-                     (list (window-start) (point)))
-              smooth-scroll-margin))
-      (save-excursion (scroll-down 1))))
+                       'count-lines)
+                     (list (window-start) (point)))))
+         (and (< lines-from-window-start smooth-scroll-margin)
+              (< lines-from-window-start (/ (window-height) 2))))
+       (save-excursion (scroll-down 1))))
                             
 (defadvice next-line (after smooth-scroll-up
                             (&optional arg try-vscroll)
@@ -54,12 +62,14 @@ lines of the top of the window."
   "Scroll up smoothly if cursor is within `smooth-scroll-margin'
 lines of the bottom of the window."
   (interactive)
-  (if (and (< (window-end) (buffer-end 1))
-           (< (apply (if smooth-scroll-strict-margins
+  (and (< (window-end) (buffer-end 1))
+       (let ((lines-from-window-bottom
+              (apply (if smooth-scroll-strict-margins
                          'count-screen-lines
-                         'count-lines)
-                     (list (point) (window-end)))
-              smooth-scroll-margin))
-      (save-excursion (scroll-up 1))))
+                       'count-lines)
+                     (list (point) (window-end)))))
+         (and (< lines-from-window-bottom smooth-scroll-margin)
+              (< lines-from-window-bottom (/ (window-height) 2))))
+       (save-excursion (scroll-up 1))))
 
 (provide 'smooth-scrolling)
