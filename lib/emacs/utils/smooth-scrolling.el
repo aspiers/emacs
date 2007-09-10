@@ -28,8 +28,8 @@ by a mode such as folding-mode, outline-mode, org-mode etc., or
 fewer due to very long lines being displayed wrapped when
 `truncate-lines' is nil.
 
-However, using `count-screen-lines' can cause performance issues
-in a heavily folded buffer such as folding.el.
+However, using `count-screen-lines' can supposedly cause
+performance issues in buffers with extremely long lines.  Setting
 `cache-long-line-scans' may be able to address this;
 alternatively you can set this variable to nil so that the advice
 code uses `count-lines', and put up with the fact that sometimes
