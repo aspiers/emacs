@@ -75,6 +75,8 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
+(require 'smooth-scrolling)
+
 ;; Show position in modeline
 (line-number-mode 1)
 (column-number-mode 1)
@@ -757,7 +759,7 @@ then invoking this function four times would yield:
                    org-todo-keywords-1)
             (or
              (and current-keyword
-                  (or (car (assoc current-keyword org-subheading-todo-alist))
+                  (or (cdr (assoc current-keyword org-subheading-todo-alist))
                       (cadr (member current-keyword org-todo-keywords-1))))
              (car org-todo-keywords-1)))))
     (org-new-subheading)
