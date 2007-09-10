@@ -239,6 +239,7 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 init/common/as-bindings.elc: init/common/as-progress.elc org
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
+$(AS_INIT_ELC): utils/smooth-scrolling.elc
 $(AS_INIT_ELC): .muse-installed
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
@@ -384,7 +385,7 @@ show-loaddefs:
 define loaddefs_lisp
 (progn \
     (setq generated-autoload-file "$(LOADDEFS)") \
-    (if (boundp '\''update-directory-autoloads) \
+    (if (>= emacs-major-version 22) \
         (update-directory-autoloads $(LOADDEFS_DIRS_LISP)) \
         (update-autoloads-from-directories $(LOADDEFS_DIRS_LISP))))
 endef
