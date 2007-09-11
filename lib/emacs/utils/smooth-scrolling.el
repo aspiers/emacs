@@ -108,22 +108,26 @@ the point will be allowed to stray into the margin."
 (defun smooth-scroll-lines-from-window-top ()
   "Work out, using the function indicated by
 `smooth-scroll-strict-margins', what the current screen line is,
-relative to the top of the window."
+relative to the top of the window.  Counting starts with 1 referring
+to the top line in the window."
   (interactive)
-  (apply (if smooth-scroll-strict-margins
-             'count-screen-lines
-           'count-lines)
-         (list (window-start) (point))))
+  (cond ((= (window-start) (point))
+         ;; In this case, count-screen-lines would return 0, so we override.
+         1)
+        (smooth-scroll-strict-margins
+         (count-screen-lines (window-start) (point) 'count-final-newline))
+        (t
+         (count-lines (window-start) (point)))))
 
 (defun smooth-scroll-lines-from-window-bottom ()
   "Work out, using the function indicated by
 `smooth-scroll-strict-margins', how many screen lines there are
-between the point and the bottom of the window."
+between the point and the bottom of the window.  Counting starts
+with 1 referring to the bottom line in the window."
   (interactive)
-  (apply (if smooth-scroll-strict-margins
-             'count-screen-lines
-           'count-lines)
-         (list (point) (window-end))))
+  (if smooth-scroll-strict-margins
+      (count-screen-lines (point) (window-end))
+    (count-lines (point) (window-end))))
 ;;;_ + after advice
 (defadvice previous-line (after smooth-scroll-down
                             (&optional arg try-vscroll)
@@ -137,12 +141,18 @@ lines of the top of the window."
           (smooth-scroll-lines-from-window-top)))
      (and
       ;; Only scroll down if we're within the top margin
-      (< lines-from-window-top smooth-scroll-margin)
+      (<= lines-from-window-top smooth-scroll-margin)
       ;; Only scroll down if we're in the top half of the window
-      (< lines-from-window-top (/ (window-height) 2))
+      (<= lines-from-window-top
+          ;; N.B. `window-height' includes modeline, so if it returned 21,
+          ;; that would mean exactly 10 lines in the top half and 10 in
+          ;; the bottom.  22 (or any even number) means there's one in the
+          ;; middle.  In both cases the following expression will
+          ;; yield 10:
+          (/ (1- (window-height)) 2))
       (save-excursion
         (scroll-down
-              (- smooth-scroll-margin lines-from-window-top)))))))
+              (1+ (- smooth-scroll-margin lines-from-window-top))))))))
                             
 (defadvice next-line (after smooth-scroll-up
                             (&optional arg try-vscroll)
@@ -156,12 +166,14 @@ lines of the bottom of the window."
           (smooth-scroll-lines-from-window-bottom)))
      (and
       ;; Only scroll up if we're within the bottom margin
-      (< lines-from-window-bottom smooth-scroll-margin)
-      ;; Only scroll up if we're in the bottom half of the window
-      (< lines-from-window-bottom (/ (window-height) 2))
+      (<= lines-from-window-bottom smooth-scroll-margin)
+      ;; Only scroll up if we're in the bottom half of the window.
+      (<= lines-from-window-bottom
+          ;; See above notes on `window-height'.
+          (/ (1- (window-height)) 2))
       (save-excursion
         (scroll-up
-         (- smooth-scroll-margin lines-from-window-bottom)))))))
+         (1+ (- smooth-scroll-margin lines-from-window-bottom))))))))
 ;;;_ + provide
 (provide 'smooth-scrolling)
 
