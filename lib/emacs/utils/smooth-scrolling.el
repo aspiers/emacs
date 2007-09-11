@@ -35,12 +35,14 @@
 ;; The minimum number of lines are scrolled in order to keep the
 ;; point outside the margin.
 ;;
-;; If the point is placed inside one of the margins by another method
-;; (e.g. left mouse click) and then moved in the normal way, the
-;; advice code try to avoid sudden jumps by not scrolling more lines
-;; than the point was moved, even if this means remaining within the
-;; margin.  So for example, in this case C-u C-n would never cause the
-;; advice to scroll more than 4 lines.
+;; There is one case where moving the point in this fashion may cause
+;; a jump: if the point is placed inside one of the margins by another
+;; method (e.g. left mouse click, or M-x goto-line) and then moved in
+;; the normal way, the advice code will scroll the minimum number of
+;; lines in order to keep the point outside the margin.  This jump may
+;; cause some slight confusion at first, but hopefully it is justified
+;; by the benefit of automatically ensuring `smooth-scroll-margin'
+;; lines of context are visible around the point as often as possible.
 ;;
 ;;;_* TODO
 ;;
@@ -140,8 +142,7 @@ lines of the top of the window."
       (< lines-from-window-top (/ (window-height) 2))
       (save-excursion
         (scroll-down
-         (min arg
-              (- smooth-scroll-margin lines-from-window-top))))))))
+              (- smooth-scroll-margin lines-from-window-top)))))))
                             
 (defadvice next-line (after smooth-scroll-up
                             (&optional arg try-vscroll)
@@ -160,8 +161,7 @@ lines of the bottom of the window."
       (< lines-from-window-bottom (/ (window-height) 2))
       (save-excursion
         (scroll-up
-         (min arg
-              (- smooth-scroll-margin lines-from-window-bottom))))))))
+         (- smooth-scroll-margin lines-from-window-bottom)))))))
 ;;;_ + provide
 (provide 'smooth-scrolling)
 
