@@ -15,10 +15,53 @@
 ;;   http://www.emacswiki.org/cgi-bin/wiki/SmoothScrolling
 ;;
 ;; for the gory details.
+;;
+;;;_* Installation
+;;
+;; Put somewhere on your `load-path' and include
+;;
+;;   (require 'smooth-scrolling)
+;;
+;; in your .emacs initialization file.
+;;
+;;;_* Notes
+;;
+;; This only affects the behaviour of the `next-line' and
+;; `previous-line' functions, usually bound to the cursor keys and
+;; C-n/C-p.  Other methods of moving the point will behave as normal
+;; according to the standard custom variables.
+;;
+;; Prefix arguments to `next-line' and `previous-line' are honoured.
+;; The minimum number of lines are scrolled in order to keep the
+;; point outside the margin.
+;;
+;; If the point is placed inside one of the margins by another method
+;; (e.g. left mouse click) and then moved in the normal way, the
+;; advice code try to avoid sudden jumps by not scrolling more lines
+;; than the point was moved, even if this means remaining within the
+;; margin.  So for example, in this case C-u C-n would never cause the
+;; advice to scroll more than 4 lines.
+;;
+;;;_* TODO
+;;
+;; - fix corner case bugs when lines wrap
+;; 
+;;;_* Acknowledgements
+;; 
+;; Thanks to Mark Hulme-Jones and consolers on #emacs for helping
+;; debug issues with line-wrapping.
+;; 
+;;;_* License
+;; 
+;; Released under the GNU General Public License v2 or later, with
+;; all rights assigned to the Free Software Foundation.
+;;
 
+;;;_* Code follows
+;;;_ + disable `scroll-margin'
 (setq scroll-margin 0)
-
-(defvar smooth-scroll-margin 10
+;;;_ + defcustoms
+(defcustom smooth-scroll-margin 10
   "Number of lines of visible margin at the top and bottom of a window.
 If the point is within these margins, then scrolling will occur
 smoothly for `previous-line' at the top of the window, and for
@@ -37,9 +80,11 @@ window.  This is to intelligently handle the case where the
 margins cover the whole buffer (e.g. `smooth-scroll-margin' set
 to 5 and `window-height' returning 10 or less).
 
-See also `smooth-scroll-strict-margins'.")
+See also `smooth-scroll-strict-margins'."
+  :type  'integer
+  :group 'windows)
 
-(defvar smooth-scroll-strict-margins t
+(defcustom smooth-scroll-strict-margins t
   "If true, the advice code supporting `smooth-scroll-margin'
 will use `count-screen-lines' to determine the number of
 *visible* lines between the point and the window top/bottom,
@@ -54,37 +99,75 @@ performance issues in buffers with extremely long lines.  Setting
 `cache-long-line-scans' may be able to address this;
 alternatively you can set this variable to nil so that the advice
 code uses `count-lines', and put up with the fact that sometimes
-the point will be allowed to stray into the margin.")
+the point will be allowed to stray into the margin."
+  :type  'boolean
+  :group 'windows)
+;;;_ + helper functions
+(defun smooth-scroll-lines-from-window-top ()
+  "Work out, using the function indicated by
+`smooth-scroll-strict-margins', what the current screen line is,
+relative to the top of the window."
+  (interactive)
+  (apply (if smooth-scroll-strict-margins
+             'count-screen-lines
+           'count-lines)
+         (list (window-start) (point))))
 
+(defun smooth-scroll-lines-from-window-bottom ()
+  "Work out, using the function indicated by
+`smooth-scroll-strict-margins', how many screen lines there are
+between the point and the bottom of the window."
+  (interactive)
+  (apply (if smooth-scroll-strict-margins
+             'count-screen-lines
+           'count-lines)
+         (list (point) (window-end))))
+;;;_ + after advice
 (defadvice previous-line (after smooth-scroll-down
                             (&optional arg try-vscroll)
                             activate)
   "Scroll down smoothly if cursor is within `smooth-scroll-margin'
 lines of the top of the window."
-  (and (> (window-start) (buffer-end -1))
-       (let ((lines-from-window-start
-              (apply (if smooth-scroll-strict-margins
-                         'count-screen-lines
-                       'count-lines)
-                     (list (window-start) (point)))))
-         (and (< lines-from-window-start smooth-scroll-margin)
-              (< lines-from-window-start (/ (window-height) 2))))
-       (save-excursion (scroll-down 1))))
+  (and
+   ;; Only scroll down if there is buffer above the start of the window.
+   (> (window-start) (buffer-end -1))
+   (let ((lines-from-window-top
+          (smooth-scroll-lines-from-window-top)))
+     (and
+      ;; Only scroll down if we're within the top margin
+      (< lines-from-window-top smooth-scroll-margin)
+      ;; Only scroll down if we're in the top half of the window
+      (< lines-from-window-top (/ (window-height) 2))
+      (save-excursion
+        (scroll-down
+         (min arg
+              (- smooth-scroll-margin lines-from-window-top))))))))
                             
 (defadvice next-line (after smooth-scroll-up
                             (&optional arg try-vscroll)
                             activate)
   "Scroll up smoothly if cursor is within `smooth-scroll-margin'
 lines of the bottom of the window."
-  (interactive)
-  (and (< (window-end) (buffer-end 1))
-       (let ((lines-from-window-bottom
-              (apply (if smooth-scroll-strict-margins
-                         'count-screen-lines
-                       'count-lines)
-                     (list (point) (window-end)))))
-         (and (< lines-from-window-bottom smooth-scroll-margin)
-              (< lines-from-window-bottom (/ (window-height) 2))))
-       (save-excursion (scroll-up 1))))
-
+  (and
+   ;; Only scroll up if there is buffer below the end of the window.
+   (< (window-end) (buffer-end 1))
+   (let ((lines-from-window-bottom
+          (smooth-scroll-lines-from-window-bottom)))
+     (and
+      ;; Only scroll up if we're within the bottom margin
+      (< lines-from-window-bottom smooth-scroll-margin)
+      ;; Only scroll up if we're in the bottom half of the window
+      (< lines-from-window-bottom (/ (window-height) 2))
+      (save-excursion
+        (scroll-up
+         (min arg
+              (- smooth-scroll-margin lines-from-window-bottom))))))))
+;;;_ + provide
 (provide 'smooth-scrolling)
+
+;;;_* Local emacs variables
+
+;;Local variables:
+;;allout-layout: (0 : -1 0)
+;;mode: allout
+;;End:
