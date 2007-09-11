@@ -46,7 +46,8 @@
 ;;
 ;;;_* TODO
 ;;
-;; - fix corner case bugs when lines wrap
+;; - Maybe add option to avoid scroll jumps when point is within
+;;   margin.
 ;; 
 ;;;_* Acknowledgements
 ;; 
