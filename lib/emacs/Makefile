@@ -231,7 +231,7 @@ INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
 	major-modes/mmm 	\
-	major-modes/org-mode 	\
+	major-modes/$(ORG_DIR) 	\
 	minor-modes 		\
 	utils
 
