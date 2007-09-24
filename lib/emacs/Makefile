@@ -215,6 +215,9 @@ uninstall:
 
 show-loaddefs:
 	@echo '$(LOADDEFS)'
+LOADDEFS_DEPS = $(addsuffix /*.el,$(LOADDEFS_DIRS))
+show-loaddefs-deps:
+	@echo $(LOADDEFS_DEPS)
 
 # emacs 21 uses update-autoloads-from-directories
 # emacs 22 uses update-directory-autoloads
@@ -228,7 +231,8 @@ endef
 
 .PHONY: loaddefs
 loaddefs: $(LOADDEFS)
-$(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
+
+$(LOADDEFS): $(LOADDEFS_DEPS)
 	@echo "### Generating $@"
 	@mkdir -p "$(LOADDEFS_DIR)"
 # update-directory-autoloads requires non-empty file to update
