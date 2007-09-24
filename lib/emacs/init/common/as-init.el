@@ -491,30 +491,21 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;{{{ Text
 
-;; Turn on auto-fill if composing e-mail or news.
-;;
-;; For some reason the local buffer-file-name isn't set at the
-;; stage when text-mode-hook gets run (possibly because it isn't
-;; the current buffer at that stage?), but fortunately the
-;; symbol filename is set to the loading file so we can use that
-;; instead.
+(add-hook
+ 'text-mode-hook
+ (lambda ()
+   ;; Turn on auto-fill if composing e-mail or news.
+   (and
+    (string-match "mutt-\\|\\.article\\|\\.letter"
+                  (or (buffer-file-name) ""))
+    (turn-on-auto-fill))
 
-;; Silence compile errors (I know what I'm doing, honest)
-(or (boundp 'filename) (defvar filename "" "sod knows"))
+   ;; Expand all newly inserted tabs to spaces
+   (setq indent-tabs-mode nil)
 
-(add-hook 'text-mode-hook
-          (lambda ()
-            (local-unset-key "\e\t")
-            (and
-             (boundp 'filename)
-             (not (eq filename t))
-             (string-match
-              "mutt-\\|\\.article\\|\\.letter"
-              filename)
-             (turn-on-auto-fill))))
+   ;; Nicer version of fill-paragraph
+   (local-set-key [(control meta q)] 'fill-common-prefix-region)))
 
-;; Expand all tabs to spaces
-(add-hook 'text-mode-hook (lambda () (setq indent-tabs-mode nil)))
 (defun itm () "Shortcut to indented-text-mode."
   (interactive)
   (indented-text-mode))
@@ -978,6 +969,7 @@ then invoking this function four times would yield:
     (folding-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
     (folding-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
     (folding-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
+    (folding-add-to-marks-list 'makefile-gmake-mode "\# {{{ " "\# }}}")
     (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
     (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
     (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
