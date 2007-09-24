@@ -213,6 +213,28 @@ uninstall:
 	-find $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) -name \*.elc -print | \
 		xargs rm -f
 
+show-loaddefs:
+	@echo '$(LOADDEFS)'
+
+# emacs 21 uses update-autoloads-from-directories
+# emacs 22 uses update-directory-autoloads
+define loaddefs_lisp
+(progn \
+    (setq generated-autoload-file "$(LOADDEFS)") \
+    (if (>= emacs-major-version 22) \
+        (update-directory-autoloads $(LOADDEFS_DIRS_LISP)) \
+        (update-autoloads-from-directories $(LOADDEFS_DIRS_LISP))))
+endef
+
+.PHONY: loaddefs
+loaddefs: $(LOADDEFS)
+$(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
+	@echo "### Generating $@"
+	@mkdir -p "$(LOADDEFS_DIR)"
+# update-directory-autoloads requires non-empty file to update
+	@[ -s "$(LOADDEFS)" ] || echo " " >> "$(LOADDEFS)"
+	$(BATCH_EVAL) '$(loaddefs_lisp)'
+
 #############################################################################
 
 %.elc: %.el
@@ -377,24 +399,4 @@ major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
 	) &&								\
 	touch $@
 
-show-loaddefs:
-	@echo '$(LOADDEFS)'
-
-# emacs 21 uses update-autoloads-from-directories
-# emacs 22 uses update-directory-autoloads
-define loaddefs_lisp
-(progn \
-    (setq generated-autoload-file "$(LOADDEFS)") \
-    (if (>= emacs-major-version 22) \
-        (update-directory-autoloads $(LOADDEFS_DIRS_LISP)) \
-        (update-autoloads-from-directories $(LOADDEFS_DIRS_LISP))))
-endef
-
-.PHONY: loaddefs
-loaddefs: $(LOADDEFS)
-$(LOADDEFS): $(addsuffix /*.el,$(LOADDEFS_DIRS))
-	@echo "### Generating $@"
-	@mkdir -p "$(LOADDEFS_DIR)"
-# update-directory-autoloads requires non-empty file to update
-	@[ -s "$(LOADDEFS)" ] || echo " " >> "$(LOADDEFS)"
-	$(BATCH_EVAL) '$(loaddefs_lisp)'
+major-modes/dired+.elc: LIBDIRS += major-modes
