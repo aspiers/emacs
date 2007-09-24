@@ -504,7 +504,12 @@ C-style indentation, use cssm-c-style-indenter.")
    (setq indent-tabs-mode nil)
 
    ;; Nicer version of fill-paragraph
-   (local-set-key [(control meta q)] 'fill-common-prefix-region)))
+   (local-set-key [(control meta q)] 'fill-common-prefix-region))
+
+   ;; Treat single quoted ("> > ") lines the same as multiple
+   ;; w.r.t. filling.
+   (setq adaptive-fill-first-line-regexp adaptive-fill-regexp)
+ )
 
 (defun itm () "Shortcut to indented-text-mode."
   (interactive)
