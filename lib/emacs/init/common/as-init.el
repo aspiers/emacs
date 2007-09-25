@@ -173,8 +173,9 @@
                 ("\\.htaccess$"                          . apache-mode)
                 ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
                 ("\\.dump$"                              . tar-mode)
-                ("/.zsh\\(env\\|rc\\)"                   . sh-mode)
-                ("/.zsh/functions/"                      . sh-mode)
+                ("/\\.zsh\\(env\\|rc\\)"                 . sh-mode)
+                ("/\\.zsh/functions/"                    . sh-mode)
+                ("\\.stp$"                               . sh-mode)
                 ("\\.make$"                              . makefile-mode)
 
                 ;; TWiki
