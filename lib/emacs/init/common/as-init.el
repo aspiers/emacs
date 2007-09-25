@@ -498,7 +498,10 @@ C-style indentation, use cssm-c-style-indenter.")
    ;; Turn on auto-fill if composing e-mail or news.
    (and
     (string-match "mutt-\\|\\.article\\|\\.letter"
-                  (or (buffer-file-name) ""))
+                  (or (buffer-file-name)
+                      ;; For some reason I've seen mutt-invoked emacs
+                      ;; instances yield nil for (buffer-file-name)
+                      (buffer-name)))
     (turn-on-auto-fill))
 
    ;; Expand all newly inserted tabs to spaces
