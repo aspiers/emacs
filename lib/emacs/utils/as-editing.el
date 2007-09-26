@@ -327,6 +327,12 @@ the region is active, then deactivate it.  If not, then do
 ;;}}}
 ;;{{{ fill-common-prefix-region
 
+(autoload 'flet "cl"
+  "flet is an analogue of `let' that operates on the function cell of
+FUNC rather than its value cell."
+  nil ;; not interactive
+  'macro)
+
 ;;;###autoload
 (defun fill-common-prefix-region (&optional justify nosqueeze)
   "Call `fill-region' on the largest region surrounding the
@@ -340,44 +346,30 @@ This is particularly useful for filling subsections of
 paragraphs, e.g. email with different levels of nested \"> \"
 quoting, where by default emacs considers all the different
 levels as part of one big paragraph."
-  (interactive)
-  (let (start end common-prefix common-prefix-length)
-    (save-excursion
-      (beginning-of-line)
-      (or (looking-at adaptive-fill-regexp)
-          (error "Current line prefix does not match adaptive-fill-regexp"))
-      (setq common-prefix (match-string 0))
-      (setq common-prefix-length (length common-prefix))
-      ;; Find start of region
-      (save-excursion
-        (while
-            (progn
-              (setq start (point))
-              (and (not (bobp))
-                   (forward-line -1)
-                   ;; First check adaptive prefix hasn't changed
-                   (looking-at adaptive-fill-regexp)
-                   (equal common-prefix (match-string 0))
-                   (looking-at
-                    ;; There must also be some non-whitespace before
-                    ;; end of line.
-                    (concat (regexp-quote common-prefix)
-                            "[^\n]*[^[:space:]\n]"))))))
-      ;; Find end of region
-      (save-excursion
-        (while
-            (progn
-              (setq end (line-end-position))
-              (and (not (eobp))
-                   (forward-line 1)
-                   ;; First check adaptive prefix hasn't changed
-                   (looking-at adaptive-fill-regexp)
-                   (equal common-prefix (match-string 0))
-                   (looking-at
-                    ;; There must also be some non-whitespace before
-                    ;; end of line.
-                    (concat (regexp-quote common-prefix)
-                            "[^\n]*[^[:space:]\n]"))))))
-    (fill-region start end justify nosqueeze))))
+  (interactive (progn
+		 (barf-if-buffer-read-only)
+		 (list (if current-prefix-arg 'full))))
+  (save-excursion
+    (beginning-of-line)
+    (or (looking-at adaptive-fill-regexp)
+        (error "Current line prefix does not match adaptive-fill-regexp"))
+    (let* ((common-prefix (match-string 0))
+           (common-prefix-nw (concat (regexp-quote common-prefix)
+                                     "[^\n]*[^[:space:]\n]")))
+      (flet ((find-limit (result-fn buffer-limit-fn line-step)
+               (save-excursion
+                 (let (result)
+                   ;; Keep looking while we see the same fill-prefix
+                   ;; followed by some non-whitespace.
+                   (while (and (setq result (funcall result-fn))
+                               (not (funcall buffer-limit-fn))
+                               (forward-line line-step)
+                               (looking-at adaptive-fill-regexp)
+                               (equal common-prefix (match-string 0))
+                               (looking-at common-prefix-nw)))
+                   result))))
+        (let ((start (find-limit #'point #'bobp -1))
+              (end (find-limit #'line-end-position #'eobp 1)))
+          (fill-region start end justify nosqueeze))))))
 
 ;;}}}
