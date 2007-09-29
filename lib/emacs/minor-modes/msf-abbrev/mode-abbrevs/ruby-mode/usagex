@@ -1,0 +1,4 @@
+unless ARGV.length == 1
+  $stderr.puts "Usage: #{ME} <logfile>\n"
+  exit 1
+end
