@@ -487,7 +487,7 @@ directory.
 This file can use the variable `modename' and the 
 `msf-abbrev-define-abbrev' function."
   (or modename (setq modename major-mode))
-  (assert (symbolp modename))
+  ;;(assert (symbolp modename))
   (let ((init-file (format "%s%s.el" 
                            (file-name-as-directory msf-abbrev-root)
                            modename)))
@@ -505,7 +505,7 @@ current value of the variable `major-mode'
 If REPLACE is non-nil then the abbrevs for MODENAME are removed 
 before scanning the directory."
   (or modename (setq modename major-mode))
-  (assert (symbolp modename))
+  ;;(assert (symbolp modename))
   (and replace
        (assq-delete-all modename msf-abbrev-mode-abbrevs))
   (let* ((mode_dir (format "%s%s" (file-name-as-directory 
