@@ -1,4 +1,4 @@
 sub debug {
   my $level = shift;
-  warn @_, "\n" if $opts{verbose} >= $level;
+  warn @_, "\n" if $opts{verbosity} >= $level;
 }
