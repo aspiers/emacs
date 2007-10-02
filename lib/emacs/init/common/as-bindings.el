@@ -5,11 +5,11 @@
 
 ;;{{{ Why is this a separate file?
 
-;; The follow bindings are grouped by their location in the "Universal
-;; Keymap", so that I can coordinate bindings globally and prevent
-;; conflicts.  Otherwise I would have preferred to group the code
-;; logically, e.g. a section for each mode, and have it all within
-;; as-init.el.
+;; The following bindings are grouped by their location in the
+;; "Universal Keymap", so that I can coordinate bindings globally and
+;; prevent conflicts.  Otherwise I would have preferred to group the
+;; code logically, e.g. a section for each mode, and have it all
+;; within as-init.el.
 
 ;;}}}
 
