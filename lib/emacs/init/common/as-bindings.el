@@ -319,6 +319,9 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Rebinding for improvement - naughty but nice
 
+;; Non-mode-specific rebindings here.  Mode-specific rebindings should
+;; go in the mode-specific section of as-init.el.
+
 (global-set-key [(meta "\\")]   'fixup-whitespace)
                                 ;; was delete-horizontal-space
 (global-set-key [(meta g)]      'goto-line)          ;; was set-face
