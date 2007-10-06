@@ -667,11 +667,10 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'org-store-link "org" "Store a link to the current location" t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key [(control c)(control a)] 'org-agenda)
-            ;; (local-set-key [(control c)(control l)] 'org-store-link)
-            ))
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   (define-key org-mode-map [(control c)(control a)] 'org-agenda)))
 
 ;;{{{ org keyword switching
 
