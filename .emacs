@@ -75,6 +75,11 @@ placed here.")
 
 (setq custom-file (concat as-init-dir "/as-custom.el"))
 (load (concat as-init-dir "/as-custom") 'noerror)
+
+;; (when (getenv "EMACS_PROFILE_INIT")
+;;   (load "elp")
+;;   (elp-instrument-package "blah")
+       
 (load (concat as-version-post-lib-dir "/as-init"))
 
 (defun as-find-hooks (hook-name)
@@ -90,3 +95,4 @@ placed here.")
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
 
+(as-progress "end of ~/.emacs")
