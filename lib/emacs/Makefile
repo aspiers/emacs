@@ -305,16 +305,18 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 # }}}
 # {{{ org-mode
+
 org: .org-installed
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C major-modes/$(ORG_DIR) clean
-.org-installed:
+.org-installed: major-modes/$(ORG_DIR)/org.el
 	$(MAKE) -C major-modes/$(ORG_DIR) install-lisp install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir) \
 		lispdir=$(PRE_INSTALL_DIR) \
 	&& touch $@
+
 # }}}
 # {{{ mmm-mode
 
