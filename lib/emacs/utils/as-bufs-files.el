@@ -220,6 +220,7 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
 ;;}}}
 ;;{{{ find-library
 
+;; emacs 22 introduced find-library and find-library-name which do the same thing.
 ;;;###autoload
 (defun find-library-source (library)
   "Runs `find-file' on the file containing the given library's source
