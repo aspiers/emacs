@@ -1,3 +1,7 @@
+(defvar as-progress-clock (float-time)
+  "Internal wallclock for `as-progress' so that it can function
+as an extremely primitive profiler.")
+
 (defun as-progress (message)
   "Display progress of loading of init files."
   (let*
@@ -12,7 +16,11 @@
       ;; immediately after compilation?
 
       ;; Anyway, for now, we cop out.
-      ((caller-filename "as-init"))
-    (message (concat caller-filename ": " message))))
+      ((caller-filename "as-init")
+       (now (float-time))
+       (delta (- now as-progress-clock))
+       (as-progress-clock now)
+       )
+    (message "[+%.3f] %s: %s" delta caller-filename message)))
 
 (provide 'as-progress)
