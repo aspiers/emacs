@@ -156,6 +156,8 @@
 
 ;;{{{ Startup mode selection
 
+(as-progress "Startup mode selection...")
+
 (setq default-major-mode 'indented-text-mode)
 
 ;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
@@ -186,6 +188,8 @@
 
 ;;}}}
 ;;{{{ Major modes
+
+(as-progress "Major modes...")
 
 ;;{{{ Programming languages
 
@@ -655,7 +659,6 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;; org-mode
 (autoload 'org-mode "org" "Org mode" t)
-(autoload 'orgstruct-mode "org" t)
 (autoload 'org-time-stamp "org" "org-time-stamp" t)
 (autoload 'org-timestamp-up "org" "org-timestamp-up" t)
 (autoload 'org-timestamp-down "org" "org-timestamp-down" t)
@@ -667,6 +670,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'org-store-link "org" "Store a link to the current location" t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+(defvar org-mode-map)
 (add-hook
  'org-mode-hook
  (lambda ()
@@ -795,8 +799,10 @@ then invoking this function four times would yield:
 (eval-when-compile (require 'muse-mode))
 (eval-when-compile (require 'org))
 
+(autoload 'orgstruct-mode "org" t)
 (add-hook 'muse-mode-hook
           (lambda ()
+            (require 'org)
             (orgstruct-mode)
             (outline-minor-mode)))
 
@@ -891,8 +897,16 @@ then invoking this function four times would yield:
 ;;}}}
 ;;{{{ dvc
 
-(require 'dvc-autoloads nil t)
+(autoload 'dvc-browse "dvc" nil t)
+(autoload 'dvc        "dvc" nil t)
+(cond ((as-quick-startup))       
+      (t
+       ;; This appends a shitload of very costly stuff to `find-file-hook'.
+       ;; Just about OK after startup, but not during fast startup.
+       (require 'dvc-autoloads nil t)))
+
 ;;(load "dvc-load" 'noerror)
+
 (global-set-key "\C-xTA"    'dvc-browse)
 (global-set-key "\C-xT\C-m" 'dvc)
 
@@ -928,6 +942,8 @@ then invoking this function four times would yield:
 ;;}}}
 ;;{{{ Minor modes
 
+(as-progress "Minor modes...")
+
 ;;{{{ vc
 
 (require 'vc)
@@ -962,6 +978,7 @@ then invoking this function four times would yield:
 (ido-mode t)
 
 ;;}}}
+(as-progress "Minor modes... 10%")
 ;;{{{ Folding mode
 
 ;;{{{ Set marks for individual modes
@@ -1032,6 +1049,7 @@ then invoking this function four times would yield:
 ;;}}}
 
 ;;}}}
+(as-progress "Minor modes... 25%")
 ;;{{{ Transient Mark mode
 
 (eval-when-compile (defun transient-mark-mode (arg1) nil))
@@ -1058,6 +1076,7 @@ then invoking this function four times would yield:
 ;;(setq time-stamp-format "------ %02d %03b %4y %2H%2M %2H%2M  : %u")
 
 ;;}}}
+(as-progress "Minor modes... 50%")
 ;;{{{ Time
 
 ;;(display-time)
@@ -1068,9 +1087,9 @@ then invoking this function four times would yield:
 (cond ((as-quick-startup)
        (defun lac () "Load auto-compression-mode."
          (interactive)
-         (auto-compression-mode)))
+         (auto-compression-mode 1)))
       (t
-       (auto-compression-mode)))
+       (auto-compression-mode 1)))
 
 ;;}}}
 ;;{{{ blinking-cursor
@@ -1104,6 +1123,7 @@ then invoking this function four times would yield:
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
+(as-progress "Minor modes... 75%")
 ;;{{{ Visible whitespace mode
 
 (autoload 'visible-whitespace-mode "visws" "Visible whitespace mode" t)
@@ -1201,6 +1221,8 @@ then invoking this function four times would yield:
 ;;}}}
 ;;{{{ Dual major/minor modes
 
+(as-progress "Dual major/minor modes...")
+
 ;;{{{ outline-mode
 
 (mapc (lambda (x)
@@ -1211,7 +1233,9 @@ then invoking this function four times would yield:
 
 ;;}}}
 
-;;{{{ comment-start
+;;{{{ Per-mode commenting
+
+(as-progress "Per-mode commenting...")
 
 (add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
