@@ -31,8 +31,10 @@
 ;;        ))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(align-dq-string-modes (quote (vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode)))
  '(align-exclude-rules-list (quote ((exc-dq-string (regexp . "\"\\([^\"
@@ -54,6 +56,9 @@
 ]") (repeat . t) (modes . align-c++-modes) (run-if lambda nil current-prefix-arg)) (basic-comma-delimiter (regexp . ",\\(\\s-*\\)[^# 	
 ]") (repeat . t) (modes append align-perl-modes (quote (python-mode))) (run-if lambda nil current-prefix-arg)) (c++-comment (regexp . "\\(\\s-*\\)\\(//.*\\|/\\*.*\\*/\\s-*\\)$") (modes . align-c++-modes) (column . comment-column) (valid lambda nil (save-excursion (goto-char (match-beginning 1)) (not (bolp))))) (c-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-c++-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(/[*/]\\|$\\)")))) (perl-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-perl-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\)")))) (perl-short-method-braces (regexp . "^\\s-*sub\\(\\s-+\\)[a-zA-Z0-9_]+\\(\\s-*\\){\\(\\s-*\\).*?\\(\\s-*\\)}\\s-*$") (modes . align-perl-modes) (group 1 2 3 4) (separate . "^dontmatchthis$")) (python-chain-logic (regexp . "\\(\\s-*\\)\\(\\<and\\>\\|\\<or\\>\\)") (modes quote (python-mode)) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\|\\\\\\)")))) (c-macro-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes . align-c++-modes) (column . c-backslash-column)) (basic-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes quote (python-mode makefile-mode sh-mode))) (tex-record-separator (regexp lambda (end reverse) (align-match-tex-pattern "&" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t)) (tex-tabbing-separator (regexp lambda (end reverse) (align-match-tex-pattern "\\\\[=>]" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t) (run-if lambda nil (eq major-mode (quote latex-mode)))) (tex-record-break (regexp . "\\(\\s-*\\)\\\\\\\\") (modes . align-tex-modes)) (text-column (regexp . "\\(^\\|\\S-\\)\\(\\s-+\\)\\(\\S-\\|$\\)") (group . 2) (modes . align-text-modes) (repeat . t) (run-if lambda nil (and current-prefix-arg (not (eq (quote -) current-prefix-arg))))) (text-dollar-figure (regexp . "\\$?\\(\\s-+[0-9]+\\)\\.") (modes . align-text-modes) (justify . t) (run-if lambda nil (eq (quote -) current-prefix-arg))))))
  '(align-sq-string-modes (quote (python-mode)))
+ '(as-mairix-link-viewer-command "mairix-profile --view novell '%search%'" t)
+ '(as-mairix-links-clipboard "~/.clip-mairix" t)
+ '(as-mairix-results-folder "~/mail/mairix" t)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
  '(blink-cursor-delay 0.0)
@@ -63,8 +68,8 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
- '(browse-url-browser-function (quote browse-url-generic) t)
- '(browse-url-generic-program "url_handler.sh" t)
+ '(browse-url-browser-function (quote browse-url-generic))
+ '(browse-url-generic-program "url_handler.sh")
  '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
  '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
@@ -98,15 +103,16 @@
  '(diff-switches "-u")
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
+ '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(eldoc-minor-mode-string "")
- '(eldoc-mode t)
+ '(eldoc-mode t t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(folding-mode-prefix-key "")
  '(global-font-lock-mode t nil (font-lock))
- '(global-msf-abbrev-mode t nil (msf-abbrev))
+ '(global-msf-abbrev-mode t)
  '(gnus-asynchronous t)
  '(gnus-cache-active-file "~/.gnus/cache/active")
  '(gnus-cache-directory "~/.gnus/cache/")
@@ -152,19 +158,28 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
+ '(org-agenda-custom-commands (quote (("A" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("C" tags-todo "@CanaryWharf" nil) ("T" tags-todo "Ten" nil))))
  '(org-agenda-files (quote ("~/ifolder/TODO.org" "~/roaming/TODO.org" "~/ifolder/Novell-diary.org" "~/roaming/diary.org")))
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
+ '(org-agenda-skip-scheduled-if-done t)
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
+ '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
+ '(org-drawers (quote ("PROPERTIES" "HIDE")))
+ '(org-hide-leading-stars t)
+ '(org-replace-disputed-keys t)
+ '(org-subheading-todo-alist (quote (("PROJECT" . "NEXT") ("NEXT" . "NEXT"))))
+ '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
- '(org-todo-keywords (quote ("NEXTACTION" "PROJECT" "WAITING" "MAYBE" "CANCELLED" "DONE")))
+ '(org-use-fast-todo-selection t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
- '(save-abbrevs 'silently)
+ '(safe-local-variable-values (quote ((org-drawers quote ("PROPERTIES" "HIDE")) (byte-compile-warnings redefine callargs free-vars unresolved obsolete noruntime) (auto-recompile))))
+ '(save-abbrevs (quote silently))
  '(scroll-bar-mode (quote right))
  '(scroll-conservatively 10)
  '(scroll-margin 20)
@@ -179,16 +194,16 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(vc-annotate-background "nil")
- '(vc-follow-symlinks t)
- )
+ '(vc-follow-symlinks t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
- '(custom-button-face ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
- '(custom-face-tag-face ((t (:weight bold :height 1.44 :family "helvetica"))))
- '(custom-group-tag-face ((t (:weight bold :height 1.6 :family "helvetica"))))
- '(custom-variable-tag-face ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
+  ;; If there is more than one, they won't work right.
+ '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
+ '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
+ '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
+ '(custom-variable-tag ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
  '(cvs-msg-face ((t (:slant italic))))
- '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
-)
+ '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab")))))
