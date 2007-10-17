@@ -1,6 +1,9 @@
 (load-library "as-loaddefs")
 (require 'as-progress)
 
+;; For faster compilation
+(eval-when-compile (require 'cl))
+
 (as-progress "key bindings...")
 
 ;;{{{ Why is this a separate file?
@@ -85,13 +88,11 @@
 ;;}}}
 ;;{{{ as-allout-{show,hide}-current
 
-(mapc (lambda (fn) (autoload fn "allout"))
-      '(allout-current-topic-collapsed-p
-        allout-hide-current-subtree
-        allout-show-children
-        allout-show-current-entry
-        allout-up-current-level
-        ))
+(autoload 'allout-current-topic-collapsed-p "allout")
+(autoload 'allout-hide-current-subtree "allout")
+(autoload 'allout-show-children "allout")
+(autoload 'allout-show-current-entry "allout")
+(autoload 'allout-up-current-level "allout")
 
 (defun as-allout-show-current ()
   "Shows the body and children of the current topic."
@@ -119,6 +120,7 @@ is already hidden."
 ;;}}}
 ;;{{{ as-show-current (outline-mode)
 
+(eval-when (compile) (require 'outline))
 (defun as-show-current ()
   "Shows the body and children of the current topic in `outline-mode'."
   (interactive)
@@ -139,6 +141,7 @@ is already hidden."
         folding-show-all
         folding-use-overlays-p
         ))
+;;(eval-when (compile) (require 'folding))
 
 (add-hook 'folding-mode-hook
           (lambda ()
@@ -173,7 +176,9 @@ is already hidden."
 
 (add-hook 'org-mode-hook  'as-local-set-outline-expose-keys)
 (add-hook 'muse-mode-hook 'as-local-set-outline-expose-keys)
+(add-hook 'outline-mode-hook 'as-local-set-outline-expose-keys)
 
+(defvar muse-mode-map)
 (add-hook 'muse-mode-hook
           (lambda ()
             (define-key muse-mode-map "\C-c."        'org-time-stamp)
@@ -253,6 +258,7 @@ consistent landing spot."
 
 (add-hook 'org-mode-hook  'as-local-set-outline-nav-keys)
 (add-hook 'muse-mode-hook 'as-local-set-outline-nav-keys)
+(add-hook 'outline-mode-hook 'as-local-set-outline-nav-keys)
 
 ;;}}}
 ;;{{{ for editing structure:
