@@ -606,8 +606,9 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ lilypond
 
-(add-to-list 'auto-mode-alist '(".ly\\'" . lilypond-mode))
-(autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
+;; included in site-start.d now
+;;(add-to-list 'auto-mode-alist '(".ly\\'" . lilypond-mode))
+;;(autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
 
@@ -1000,6 +1001,7 @@ then invoking this function four times would yield:
     (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
     (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
     (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
+    (folding-add-to-marks-list 'lilypond-mode "% {{{ " "% }}}")
     ))
 
 ;;}}}
