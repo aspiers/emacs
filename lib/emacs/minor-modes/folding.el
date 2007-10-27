@@ -2394,11 +2394,13 @@ too highly for selective displayt to make the chnage worthwhile."
 Return:
   \(beg-marker end-marker\)"
   (interactive)
-  (let* (elt)
-    (unless (setq elt (assq (or mode major-mode)
-                            folding-mode-marks-alist))
-      (error "Folding error: mode is not in `folding-mode-marks-alist'"))
-    (list (nth 1 elt) (nth 2 elt) (nth 3 elt))))
+  (if mode
+      (let* (elt)
+        (unless (setq elt (assq (or mode major-mode)
+                                folding-mode-marks-alist))
+          (error "Folding error: mode is not in `folding-mode-marks-alist'"))
+        (list (nth 1 elt) (nth 2 elt) (nth 3 elt)))
+    (list folding-top-mark folding-bottom-mark folding-secondary-top-mark)))
 
 
 ;;; ----------------------------------------------------------------------
