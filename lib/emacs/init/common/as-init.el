@@ -999,9 +999,9 @@ then invoking this function four times would yield:
     (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
     (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
     (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-    (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
     (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
     (folding-add-to-marks-list 'lilypond-mode "% {{{ " "% }}}")
+    (folding-add-to-marks-list 'LilyPond-mode "% {{{ " "% }}}")
     ))
 
 ;;}}}
