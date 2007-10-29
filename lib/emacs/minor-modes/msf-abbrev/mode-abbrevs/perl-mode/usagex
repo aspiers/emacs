@@ -1,7 +1,7 @@
-(my $ME = $0) =~ s,.*/,,;
-
 sub usage {
   warn @_, "\n" if @_;
+
+  (my $ME = $0) =~ s,.*/,,;
 
   die <<EOUSAGE;
 Usage: $ME <field "options">
