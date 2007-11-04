@@ -31,10 +31,8 @@
 ;;        ))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(align-dq-string-modes (quote (vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode)))
  '(align-exclude-rules-list (quote ((exc-dq-string (regexp . "\"\\([^\"
@@ -68,8 +66,8 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
- '(browse-url-browser-function (quote browse-url-generic))
- '(browse-url-generic-program "url_handler.sh")
+ '(browse-url-browser-function (quote browse-url-generic) t)
+ '(browse-url-generic-program "url_handler.sh" t)
  '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
  '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
@@ -102,12 +100,13 @@
  '(delete-selection-mode nil nil (delsel))
  '(diff-switches "-u")
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-l" t)
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(eldoc-minor-mode-string "")
- '(eldoc-mode t t)
+ '(eldoc-mode t)
+ '(enable-local-eval t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(folding-mode-prefix-key "")
@@ -122,6 +121,7 @@
 ")
  '(gnus-group-mode-hook (quote (gnus-topic-mode)))
  '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
+ '(gnus-local-organization nil t)
  '(gnus-novice-user nil)
  '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
  '(gnus-select-method (quote (nntp "news.pipex.net")))
@@ -152,13 +152,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
- '(msf-abbrev-indent-after-expansion t)
  '(muse-colors-autogen-headings (quote outline))
- '(muse-project-alist (quote (("AS-notes" ("~/notes")) ("Novell-notes" ("~/ifolder/notes")) ("all-notes" ("~/notes" "~/ifolder/notes")))))
+ '(muse-mode-auto-p t)
+ '(muse-project-alist (quote (("AS-notes" ("~/roaming/notes")) ("Novell-notes" ("~/ifolder/notes")) ("all-notes" ("~/roaming/notes" "~/ifolder/notes")))))
  '(muse-wiki-allow-nonexistent-wikiword t)
- '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
+ '(muse-wiki-wikiword-regexp "\\<\\(\\(?:[A-Z]+[a-z]+\\)[0-9]*\\(?:[A-Z]+[a-z]*\\|[0-9]+\\)+\\)")
  '(mwheel-follow-mouse t)
- '(org-agenda-custom-commands (quote (("A" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("C" tags-todo "@CanaryWharf" nil) ("T" tags-todo "Ten" nil))))
+ '(org-agenda-custom-commands (quote (("#A" "priority #A tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#B" "priority #B tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#C" "priority #C tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("T" "" tags "Ten" nil) ("s1" "" tags "sub10" nil) ("s2" "" tags "sub120" nil) ("s3" "" tags "sub30" nil) ("s4" "" tags "sub4" nil) ("s6" "" tags "sub60" nil) ("sd" "" tags "subday" nil) ("s" . "TODOs by ETA time") ("#" . "TODOs by priority") ("@" . "TODOs by location") ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" nil) ("@B" "in Bracknell office" tags-todo "@Bracknell" nil) ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil) ("@L" "in London" tags-todo "@London" nil) ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" nil))))
  '(org-agenda-files (quote ("~/ifolder/TODO.org" "~/roaming/TODO.org" "~/ifolder/Novell-diary.org" "~/roaming/diary.org")))
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
@@ -167,14 +167,18 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
  '(org-drawers (quote ("PROPERTIES" "HIDE")))
  '(org-hide-leading-stars t)
+ '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
  '(org-replace-disputed-keys t)
+ '(org-return-follows-link t)
  '(org-subheading-todo-alist (quote (("PROJECT" . "NEXT") ("NEXT" . "NEXT"))))
+ '(org-tags-column -78)
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
  '(org-use-fast-todo-selection t)
+ '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
- '(ps-paper-type (quote a4))
+ '(ps-paper-type (quote a4) t)
  '(ps-print-color-p (quote black-white))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
@@ -197,10 +201,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-follow-symlinks t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
