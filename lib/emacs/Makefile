@@ -90,10 +90,6 @@ ELs_TO_COMPILE_cmd =   				        \
 	      $(PRUNE_DIRS)				\
 	      $(PRUNE_FILES)				\
 	      ! -name as-init.el			\
-	      ! -name remember-bbdb.el 			\
-	      ! -name remember-bibl.el 			\
-	      ! -name remember-blosxom.el 		\
-	      ! -name remember-emacs-wiki-journal.el 	\
 	      ! -path '*/attic/*'			\
 	      ! -path '*/shimbun/*'
 ELs_TO_COMPILE = $(shell $(ELs_TO_COMPILE_cmd)) 
@@ -341,8 +337,45 @@ major-modes/mmm/%.elc: LIBDIRS += major-modes/mmm
 
 # }}}
 # {{{ remember-mode
-major-modes/remember/%.elc: major-modes/remember/%.el
-major-modes/remember/%.elc: LIBDIRS += major-modes/remember
+
+#major-modes/remember/%.elc: major-modes/remember/%.el
+#major-modes/remember/%.elc: LIBDIRS += major-modes/remember
+
+REMEMBER_DISABLE=$(addprefix remember-,bbdb bibl blosxom emacs-wiki-journal planner experimental)
+
+remember: .remember-installed
+clean-remember:
+	rm -f .remember-made .remember-installed
+	$(MAKE) -C $(REMEMBER_DIR) clean
+.remember-made: $(wildcard $(REMEMBER_DIR)/*.el) $(REMEMBER_DIR)/Makefile.defs
+	@( \
+	  cd $(REMEMBER_DIR); \
+	  echo "Disabling $(REMEMBER_DISABLE)"; \
+	  for d in $(REMEMBER_DISABLE); do \
+	    el=$$d.el; \
+	    if [ -e "$$el" ]; then \
+	      if mv "$$el" "$$el.disabled"; then \
+	        echo "mv $$el $$el.disabled"; \
+	      else \
+	        echo "FAILED: mv $$el $$el.disabled"; \
+		exit 1; \
+	      fi; \
+	    else \
+	      echo "$$el not there"; \
+	    fi; \
+	  done; \
+	)
+	$(MAKE) -C $(REMEMBER_DIR) all \
+		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
+	&& touch $@
+
+.remember-installed: .remember-made
+	( 							\
+	  cd $(REMEMBER_DIR);					\
+	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir); \
+	) &&							\
+	touch $@
+
 # }}}
 # {{{ psgml-mode
 psgml: .psgml-made
@@ -380,31 +413,12 @@ clean-muse:
 .muse-installed: .muse-made
 	( 								\
 	  cd major-modes/muse;						\
-	  make install-bin ELISPDIR=$(lispdir);						\
-	  make install-info ||						\
+	  $(MAKE) install-bin ELISPDIR=$(lispdir);						\
+	  $(MAKE) install-info ||						\
 	    echo "muse install-info failure ignored"			\
 	) &&								\
 	touch $@
-# }}}
-# {{{ remember-mode
 
-remember: .remember-installed
-clean-remember:
-	rm -f .remember-made .remember-installed
-	$(MAKE) -C $(REMEMBER_DIR) clean
-.remember-made: $(wildcard $(REMEMBER_DIR)/*.el) $(REMEMBER_DIR)/Makefile.defs
-	$(MAKE) -C $(REMEMBER_DIR) lisp \
-		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
-	&& touch $@
-
-.remember-installed: .remember-made
-	( 								\
-	  cd $(REMEMBER_DIR);						\
-	  make install-bin ELISPDIR=$(lispdir);						\
-	  make install-info ||						\
-	    echo "remember install-info failure ignored"			\
-	) &&								\
-	touch $@
 # }}}
 # {{{ planner-mode
 
@@ -416,8 +430,8 @@ clean-planner:
 	-$(MAKE) -C major-modes/planner install \
 	&& touch $@
 # FIXME need separate targets
-# 	  make install-lisp;						\
-# 	  make install-info ||						\
+# 	  $(MAKE) install-lisp;						\
+# 	  $(MAKE) install-info ||						\
 # 	    echo "planner install-info failure ignored"			\
 
 .planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed
@@ -425,6 +439,7 @@ clean-planner:
 	&& touch $@
 
 #major-modes/remember/remember-experimental.elc: .planner-made
+
 # }}}
 # {{{ emacs-w3m-mode
 
@@ -438,10 +453,11 @@ clean-emacs-w3m:
 	  ./configure --prefix=$(prefix)	\
 		      --infodir=$(infodir) && 	\
 	  make				    && 	\
-	  make install			    && 	\
+	  $(MAKE) install			    && 	\
 	  cp w3m-load.el $(POST_INSTALL_DIR) 	\
 	) && 					\
 	touch $@
+
 # }}}
 # {{{ pgg-mode
 
@@ -486,10 +502,11 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 .dvc-installed: .dvc-made
 	-( 								\
 	  cd $(DVC_DIR)/++build && 				\
-	  make install &&						\
+	  $(MAKE) install &&						\
 	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
 	) &&								\
 	touch $@
+
 # }}}
 
 major-modes/dired+.elc: LIBDIRS += major-modes
