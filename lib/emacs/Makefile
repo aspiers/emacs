@@ -317,6 +317,8 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 # }}}
 # {{{ org-mode
 
+major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)
+
 org: .org-installed
 clean-org:
 	rm -f .org-installed
