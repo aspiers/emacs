@@ -219,9 +219,6 @@
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (autoload 'python-mode "python-mode" "python-mode" t)
 
-;; Novell ZENworks Orchestrator Job Definition Language (JDL) is Python.
-(add-to-list 'auto-mode-alist '("\\.jdl\\'" . python-mode))
-
 ;;}}}
 ;;{{{ Ruby
 
