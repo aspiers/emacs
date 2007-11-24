@@ -1,49 +1,63 @@
-# Where do we pick up .el files which don't have their own Makefiles?
+# {{{ Tweakable parameters
+
+# {{{ Where do we pick up .el files which don't have their own Makefiles?
+
 el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
 	major-modes/mmm 		\
 	major-modes/pcl-cvs 		\
-	major-modes/remember 		\
 	major-modes/pgg 		\
 	minor-modes 			\
 	utils 				\
 	fun
 
+# }}}
 EL_OVERRIDES = pcvs*
 
-DVC_DIR   = dvc
-ORG_DIR   = org-hg
+# {{{ 3rd party packages
+
+DVC_DIR      = major-modes/dvc
+ORG_DIR      = major-modes/org-hg
+REMEMBER_DIR = major-modes/remember-1.9
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
 	psgml 			\
 	muse 			\
 	dvc			\
-	org
+	org			\
+	remember
 
 # Don't automatically compile *.el in these directories:
-THIRD_PARTY_PKG_DIRS = $(addprefix major-modes/, 	\
-	psgml 						\
-	muse 						\
-	$(DVC_DIR) 					\
-	$(ORG_DIR) 					\
-	)
+THIRD_PARTY_PKG_DIRS =            \
+	major-modes/psgml 	  \
+	major-modes/muse 	  \
+	$(DVC_DIR) 	  \
+	$(ORG_DIR) 	  \
+	$(REMEMBER_DIR)
+
+# }}}
+# {{{ ignore paths and files
 
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
-	major-modes/monkey-2			\
-	major-modes/remember*
+	major-modes/monkey-2
 IGNORE_FILES =		    \
 	loaddefs.el	\
 	major-modes/sdf.el  \
 	major-modes/mediawiki.el \
 	major-modes/planner*.el
 
-# Directories to scan for autoload cookies
+# }}}
+# {{{ Directories to scan for autoload cookies
+
 LOADDEFS_DIRS=	\
 	utils
+
+# }}}
+# {{{ global paths
 
 EMACSLIB = $(HOME)/lib/emacs
 
@@ -52,10 +66,11 @@ XINSTALL_DIR = $(EMACSLIB)/XEmacs
 
 prefix   = $(HOME)/local
 infodir = $(prefix)/share/info
-lispdir = $(prefix)/share/emacs/site-lisp
 
-# End of tweakable parameters
-#############################################################################
+lispdir = $(prefix)/share/emacs/site-lisp
+# }}}
+
+# }}}
 
 # {{{ Figure out which .els to compile ourselves.
 
@@ -290,7 +305,7 @@ INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
 	major-modes/mmm 	\
-	major-modes/$(ORG_DIR) 	\
+	$(ORG_DIR) 	\
 	minor-modes 		\
 	utils
 
@@ -309,9 +324,9 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 org: .org-installed
 clean-org:
 	rm -f .org-installed
-	$(MAKE) -C major-modes/$(ORG_DIR) clean
-.org-installed: major-modes/$(ORG_DIR)/org.el
-	$(MAKE) -C major-modes/$(ORG_DIR) install-lisp install-info \
+	$(MAKE) -C $(ORG_DIR) clean
+.org-installed: $(ORG_DIR)/org.el
+	$(MAKE) -C $(ORG_DIR) install-lisp install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir) \
 		lispdir=$(PRE_INSTALL_DIR) \
@@ -371,6 +386,26 @@ clean-muse:
 	) &&								\
 	touch $@
 # }}}
+# {{{ remember-mode
+
+remember: .remember-installed
+clean-remember:
+	rm -f .remember-made .remember-installed
+	$(MAKE) -C $(REMEMBER_DIR) clean
+.remember-made: $(wildcard $(REMEMBER_DIR)/*.el) $(REMEMBER_DIR)/Makefile.defs
+	$(MAKE) -C $(REMEMBER_DIR) lisp \
+		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
+	&& touch $@
+
+.remember-installed: .remember-made
+	( 								\
+	  cd $(REMEMBER_DIR);						\
+	  make install-bin ELISPDIR=$(lispdir);						\
+	  make install-info ||						\
+	    echo "remember install-info failure ignored"			\
+	) &&								\
+	touch $@
+# }}}
 # {{{ planner-mode
 
 planner: .planner-installed
@@ -419,12 +454,12 @@ clean-pgg:
 # }}}
 # {{{ dvc-mode
 
-dvc_build_dir=major-modes/$(DVC_DIR)/++build
+dvc_build_dir=$(DVC_DIR)/++build
 dvc: .dvc-installed
 clean-dvc:
 	rm -f .dvc-configured .dvc-installed
-	$(MAKE) -C major-modes/$(DVC_DIR) clean
-.dvc-configured: major-modes/$(DVC_DIR)/configure
+	$(MAKE) -C $(DVC_DIR) clean
+.dvc-configured: $(DVC_DIR)/configure
 	@-( 								\
 	  if which baz >/dev/null 2>&1; then 				\
 	    with_arch=--with-arch=baz; 					\
@@ -441,16 +476,16 @@ clean-dvc:
 	) && 								\
 	touch $@
 
-major-modes/$(DVC_DIR)/configure: major-modes/$(DVC_DIR)/configure.ac
-	-cd major-modes/$(DVC_DIR) && autoconf
+$(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
+	-cd $(DVC_DIR) && autoconf
 
-.dvc-made: $(wildcard major-modes/$(DVC_DIR)/*.el) $(wildcard major-modes/$(DVC_DIR)/*/*.el) .dvc-configured
-	make -C major-modes/$(DVC_DIR)/++build && \
+.dvc-made: $(wildcard $(DVC_DIR)/*.el) $(wildcard $(DVC_DIR)/*/*.el) .dvc-configured
+	make -C $(DVC_DIR)/++build && \
 	touch $@
 
 .dvc-installed: .dvc-made
 	-( 								\
-	  cd major-modes/$(DVC_DIR)/++build && 				\
+	  cd $(DVC_DIR)/++build && 				\
 	  make install &&						\
 	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
 	) &&								\
