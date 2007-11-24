@@ -1,0 +1,28 @@
+2006-08-03  Michael Olson  <mwolson@gnu.org>
+
+	* Makefile: New build system for Remember.
+
+	* Makefile.defs: New definitions file for Remember.  Set version
+	to 1.9.
+
+	* scripts/remember-build.el: New file which helps build Remember.
+
+	* remember.el: Update header.
+	(remember-version): Set to 1.9, which was the version of the last
+	known release of Remember, plus one minor version number.
+
+	* remember-bbdb.el, remember-bibl.el, remember-diary.el:
+	remember-experimental.el, remember-planner.el: Remove Version
+	field in header.  Change URL.
+
+	* remember-el.texi: Rename from remember.texi.  Update header.
+	Set version to 1.9.
+
+	* ChangeLog.1: Rename from ChangeLog.  Don't auto-generate
+	anymore.  Clean up log cruft.  Add utf-8 encoding cookie.
+
+See ChangeLog.1 for earlier changes.
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
