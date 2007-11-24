@@ -619,6 +619,7 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;{{{ remember-mode
 
+;;(require 'remember)
 (autoload 'remember "remember" nil t)
 ;; (autoload 'remember-handler-functions "remember" nil t)
 ;; (autoload 'remember-annotation-functions "remember" nil t)
@@ -628,6 +629,12 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;             (require 'remember-planner)
 ;;             (setq remember-handler-functions '(remember-planner-append))
 ;;             (setq remember-annotation-functions planner-annotation-functions)))
+
+(setq org-directory "~/roaming")
+(setq org-default-notes-file (concat org-directory "/TODO.org"))
+(setq remember-annotation-functions '(org-remember-annotation))
+(setq remember-handler-functions '(org-remember-handler))
+(add-hook 'remember-mode-hook 'org-remember-apply-template)
 
 ;;}}}
 ;;{{{ planner-mode
