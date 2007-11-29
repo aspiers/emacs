@@ -351,7 +351,10 @@ consistent landing spot."
 (global-set-key [(delete)]     'delete-char)        ;; to make sure
 (global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
 
-(global-set-key [(shift insert)] 'x-clipboard-yank)
+;; emacs < 22 doesn't have x-clipboard-yank
+(if (boundp 'x-clipboard-yank)
+    (global-set-key [(shift insert)] 'x-clipboard-yank)
+  (global-set-key [(shift insert)] 'clipboard-yank))
 
 (global-set-key [(meta i)]     'indent-relative)    ;; was tab-to-tab-stop
 
