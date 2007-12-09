@@ -565,12 +565,8 @@ consistent landing spot."
 (global-set-key "\C-cP"   'as-align-to-previous-line)
 ;;{{{ remember (C-c q for _q_uick)
 
-(autoload 'remember "remember" nil t)
-(autoload 'remember-region "remember" nil t)
-(autoload 'remember-clipboard "remember" nil t)
-(global-set-key "\C-cqq"   'remember)
-(global-set-key "\C-cqr"   'remember-region)
-(global-set-key "\C-cqc"   'remember-clipboard)
+(autoload 'org-remember "org" nil t)
+(global-set-key "\C-cq"   'org-remember)
 
 ;;}}}
 (global-set-key "\C-cr"   'revert-buffer)
