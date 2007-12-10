@@ -158,31 +158,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\(\\(?:[A-Z]+[a-z]+\\)[0-9]*\\(?:[A-Z]+[a-z]*\\|[0-9]+\\)+\\)")
  '(mwheel-follow-mouse t)
- '(org-agenda-custom-commands
-   '(("#A" "priority #A tasks" tags ""
-      ((org-agenda-skip-function
-	(lambda nil (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#A\\]")))))
-     ("#B" "priority #B tasks" tags ""
-      ((org-agenda-skip-function
-	(lambda nil (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#B\\]")))))
-     ("#C" "priority #C tasks" tags ""
-      ((org-agenda-skip-function
-	(lambda nil (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#C\\]")))))
-     ("T" "" tags "Ten" nil)
-     ("s1" "" tags "sub10" nil)
-     ("s2" "" tags "sub120" nil)
-     ("s3" "" tags "sub30" nil)
-     ("s4" "" tags "sub4" nil)
-     ("s6" "" tags "sub60" nil)
-     ("sd" "" tags "subday" nil)
-     ("s" . "TODOs by ETA time")
-     ("#" . "TODOs by priority")
-     ("@" . "TODOs by location")
-     ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" nil)
-     ("@B" "in Bracknell office" tags-todo "@Bracknell" nil)
-     ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil)
-     ("@L" "in London" tags-todo "@London" nil)
-     ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" nil)))
+ '(org-agenda-custom-commands (quote (("#" . "TODOs by priority") ("#A" "priority #A tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#B" "priority #B tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#C" "priority #C tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("T" "" tags "Ten" nil) ("s" . "TODOs by ETC") ("s1" "" tags "sub10" nil) ("s2" "" tags "sub120" nil) ("s3" "" tags "sub30" nil) ("s4" "" tags "sub4" nil) ("s6" "" tags "sub60" nil) ("sd" "" tags "subday" nil) ("t" . "TODOs by time constraint") ("tO" "within office hours" tags-todo "officehrs" nil) ("tS" "Saturday" tags-todo "Saturday" nil) ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" nil) ("@B" "in Bracknell office" tags-todo "@Bracknell" nil) ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil) ("@L" "in London" tags-todo "@London" nil) ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" nil) ("@i" "internet (online)" tags-todo "@internet" nil) ("@0" "offline (but at a computer)" tags-todo "@offline" nil) ("@p" "can make phone calls" tags-todo "@phone" nil) ("@." "current context" (lambda (a) (error "Not implemented yet")) "" nil) ("e" "easy" tags-todo "easy" nil) ("p" . "personal TODOs") ("pe" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\"" nil) ("c" "CHASE" tags-todo "/CHASE" nil) ("W" "WAITING" tags-todo "/WAITING" nil))))
  '(org-agenda-files (quote ("~/ifolder/TODO.org" "~/roaming/TODO.org" "~/ifolder/Novell-diary.org" "~/roaming/diary.org")))
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
