@@ -31,10 +31,8 @@
 ;;        ))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(align-dq-string-modes (quote (vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode)))
  '(align-exclude-rules-list (quote ((exc-dq-string (regexp . "\"\\([^\"
@@ -42,6 +40,19 @@
 ]+\\)'") (repeat . t) (modes . align-sq-string-modes)) (exc-open-comment (regexp lambda (end reverse) (funcall (if reverse (quote re-search-backward) (quote re-search-forward)) (concat "[^ 	
 \\\\]" (regexp-quote comment-start) "\\(.+\\)$") end t)) (modes . align-open-comment-modes)) (exc-c-comment (regexp . "/\\*\\(.+\\)\\*/") (repeat . t) (modes . align-c++-modes)) (exc-c-func-params (regexp . "(\\([^)
 ]+\\))") (repeat . t) (modes . align-c++-modes)) (exc-c-macro (regexp . "^\\s-*#\\s-*\\(if\\w*\\|endif\\)\\(.*\\)$") (group . 2) (modes . align-c++-modes)) (exc-perl-comment (regexp . "^\\s-*#.*$") (modes . align-perl-modes)))))
+ '(align-rules-list (quote ((lisp-second-arg (regexp . "\\(^\\s-+[^( 	
+]\\|(\\(\\S-+\\)\\s-+\\)\\S-+\\(\\s-+\\)") (group . 3) (modes . align-lisp-modes) (run-if lambda nil current-prefix-arg)) (lisp-alist-dot (regexp . "\\(\\s-*\\)\\.\\(\\s-*\\)") (group 1 2) (modes . align-lisp-modes)) (open-comment (regexp lambda (end reverse) (funcall (if reverse (quote re-search-backward) (quote re-search-forward)) (concat "[^ 	
+\\\\]" (regexp-quote comment-start) "\\(.+\\)$") end t)) (modes . align-open-comment-modes)) (c-macro-definition (regexp . "^\\s-*#\\s-*define\\s-+\\S-+\\(\\s-+\\)") (modes . align-c++-modes)) (c-variable-declaration (regexp . "[*&0-9A-Za-z_]>?[&*]*\\(\\s-+[*&]*\\)[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|=[^=
+].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?\\s-*[;,]\\|)\\s-*$\\)") (group . 1) (modes . align-c++-modes) (justify . t) (valid lambda nil (not (or (save-excursion (goto-char (match-beginning 1)) (backward-word 1) (looking-at "\\(goto\\|return\\|new\\|delete\\|throw\\)")) (if (and (boundp (quote font-lock-mode)) font-lock-mode) (eq (get-text-property (point) (quote face)) (quote font-lock-comment-face)) (eq (caar (c-guess-basic-syntax)) (quote c))))))) (c-assignment (regexp . "[^-=!^&*+<>/| 	
+]\\(\\s-*[-=!^&*+<>/|]*\\)=\\(\\s-*\\)\\([^= 	
+]\\|$\\)") (group 1 2) (modes . align-c++-modes) (justify . t) (tab-stop)) (perl-assignment (regexp . "[^=!^&*-+<>/| 	
+]\\(\\s-*\\)=[~>]?\\(\\s-*\\)\\([^>= 	
+]\\|$\\)") (group 1 2) (modes . align-perl-modes) (tab-stop)) (python-assignment (regexp . "[^=!<> 	
+]\\(\\s-*\\)=\\(\\s-*\\)\\([^>= 	
+]\\|$\\)") (group 1 2) (modes quote (python-mode)) (tab-stop)) (make-assignment (regexp . "^\\s-*\\w+\\(\\s-*\\):?=\\(\\s-*\\)\\([^	
+ \\\\]\\|$\\)") (group 1 2) (modes quote (makefile-mode)) (tab-stop)) (c-comma-delimiter (regexp . ",\\(\\s-*\\)[^/ 	
+]") (repeat . t) (modes . align-c++-modes) (run-if lambda nil current-prefix-arg)) (basic-comma-delimiter (regexp . ",\\(\\s-*\\)[^# 	
+]") (repeat . t) (modes append align-perl-modes (quote (python-mode))) (run-if lambda nil current-prefix-arg)) (c++-comment (regexp . "\\(\\s-*\\)\\(//.*\\|/\\*.*\\*/\\s-*\\)$") (modes . align-c++-modes) (column . comment-column) (valid lambda nil (save-excursion (goto-char (match-beginning 1)) (not (bolp))))) (c-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-c++-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(/[*/]\\|$\\)")))) (perl-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-perl-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\)")))) (perl-short-method-braces (regexp . "^\\s-*sub\\(\\s-+\\)[a-zA-Z0-9_]+\\(\\s-*\\){\\(\\s-*\\).*?\\(\\s-*\\)}\\s-*$") (modes . align-perl-modes) (group 1 2 3 4) (separate . "^dontmatchthis$")) (python-chain-logic (regexp . "\\(\\s-*\\)\\(\\<and\\>\\|\\<or\\>\\)") (modes quote (python-mode)) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\|\\\\\\)")))) (c-macro-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes . align-c++-modes) (column . c-backslash-column)) (basic-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes quote (python-mode makefile-mode sh-mode))) (tex-record-separator (regexp lambda (end reverse) (align-match-tex-pattern "&" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t)) (tex-tabbing-separator (regexp lambda (end reverse) (align-match-tex-pattern "\\\\[=>]" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t) (run-if lambda nil (eq major-mode (quote latex-mode)))) (tex-record-break (regexp . "\\(\\s-*\\)\\\\\\\\") (modes . align-tex-modes)) (text-column (regexp . "\\(^\\|\\S-\\)\\(\\s-+\\)\\(\\S-\\|$\\)") (group . 2) (modes . align-text-modes) (repeat . t) (run-if lambda nil (and current-prefix-arg (not (eq (quote -) current-prefix-arg))))) (text-dollar-figure (regexp . "\\$?\\(\\s-+[0-9]+\\)\\.") (modes . align-text-modes) (justify . t) (run-if lambda nil (eq (quote -) current-prefix-arg))))))
  '(align-sq-string-modes (quote (python-mode)))
  '(as-mairix-link-viewer-command "mairix-profile --view novell '%search%'" t)
  '(as-mairix-links-clipboard "~/.clip-mairix" t)
@@ -55,8 +66,8 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
- '(browse-url-browser-function (quote browse-url-generic))
- '(browse-url-generic-program "url_handler.sh")
+ '(browse-url-browser-function (quote browse-url-generic) t)
+ '(browse-url-generic-program "url_handler.sh" t)
  '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
  '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
@@ -89,12 +100,13 @@
  '(delete-selection-mode nil nil (delsel))
  '(diff-switches "-u")
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-l" t)
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(eldoc-minor-mode-string "")
- '(eldoc-mode t t)
+ '(eldoc-mode t)
+ '(enable-local-eval t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(folding-mode-prefix-key "")
@@ -109,6 +121,7 @@
 ")
  '(gnus-group-mode-hook (quote (gnus-topic-mode)))
  '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
+ '(gnus-local-organization nil t)
  '(gnus-novice-user nil)
  '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
  '(gnus-select-method (quote (nntp "news.pipex.net")))
@@ -141,6 +154,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
  '(muse-colors-autogen-headings (quote outline))
+ '(muse-mode-auto-p t)
  '(muse-project-alist (quote (("AS-notes" ("~/notes")) ("Novell-notes" ("~/ifolder/notes")) ("all-notes" ("~/notes" "~/ifolder/notes")))))
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
@@ -157,8 +171,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
  '(org-hide-leading-stars t)
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
- '(org-remember-templates (quote (("mail reply within a day" 49 "* NEXT [#A] %^{TODO description}
-  %[~/.mairix-link]" "~/roaming/TODO.org" nil))))
+ '(org-remember-templates (quote (("reply to personal mail" 114 "* NEXT [#B] %?%^{description of personal TODO}
+  %[~/.mairix-link]" "~/roaming/TODO.org" nil) ("reply to work mail" 82 "* NEXT [#B] %?%^{description of work TODO}
+  %[~/.mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%^{description of learning material}
+  %[~/.mairix-link]" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
@@ -167,9 +183,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
  '(org-use-fast-todo-selection t)
+ '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
- '(ps-paper-type (quote a4))
+ '(ps-paper-type (quote a4) t)
  '(ps-print-color-p (quote black-white))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
@@ -192,10 +209,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-follow-symlinks t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
