@@ -273,11 +273,13 @@ endef
 .PHONY: loaddefs
 loaddefs: $(LOADDEFS)
 
-$(LOADDEFS): $(LOADDEFS_DEPS)
+$(LOADDEFS): $(LOADDEFS_DEPS) Makefile
 	@echo "### Generating $@"
 	@mkdir -p "$(LOADDEFS_DIR)"
-# update-directory-autoloads requires non-empty file to update
-	@[ -s "$(LOADDEFS)" ] || echo " " >> "$(LOADDEFS)"
+# update-directory-autoloads requires non-empty file to update.
+# It also sometimes fails to recognise that the source files have
+# relevant changes, so we truncate it every time.
+	@echo " " > "$(LOADDEFS)"
 	$(BATCH_EVAL) '$(loaddefs_lisp)'
 
 # }}}
