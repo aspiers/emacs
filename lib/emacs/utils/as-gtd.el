@@ -1,6 +1,6 @@
 ;; Things to help me with Getting Things Done.
 
-(defvar as-mairix-links-clipboard "~/.clip-mairix"
+(defvar as-mairix-links-clipboard "~/.org-mairix-link"
   "Pseudo-clipboard file where mairix URLs get copied to.")
 
 (defvar as-mairix-results-folder "~/mail/mairix"
