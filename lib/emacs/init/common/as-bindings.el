@@ -512,6 +512,8 @@ consistent landing spot."
 (global-set-key "\C-ck"   'delete-file)
 (global-set-key "\C-cK"   'as-destroy-buffer-delete-file)
 (global-set-key "\C-cl"   'align)                      ;; new in emacs 21
+(autoload 'org-store-link "org" "org-store-link" t)
+(global-set-key "\C-cL"   'org-store-link)
 ;; I reserve C-c m for mode-specific user bindings
 
 (autoload 'as-mairix-yank-links "as-gtd" "as-mairix-yank-links" t)
