@@ -617,26 +617,6 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ Organisation / productivity
 
-;;{{{ remember-mode
-
-;;(require 'remember)
-(autoload 'remember "remember" nil t)
-;; (autoload 'remember-handler-functions "remember" nil t)
-;; (autoload 'remember-annotation-functions "remember" nil t)
-
-;; (add-hook 'remember-mode-hook
-;;           (lambda ()
-;;             (require 'remember-planner)
-;;             (setq remember-handler-functions '(remember-planner-append))
-;;             (setq remember-annotation-functions planner-annotation-functions)))
-
-(setq org-directory "~/roaming")
-(setq org-default-notes-file (concat org-directory "/TODO.org"))
-(setq remember-annotation-functions '(org-remember-annotation))
-(setq remember-handler-functions '(org-remember-handler))
-(add-hook 'remember-mode-hook 'org-remember-apply-template)
-
-;;}}}
 ;;{{{ planner-mode
 
 ;; (autoload 'planner-mode "planner.el" nil t)
@@ -682,7 +662,8 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-hook
  'org-mode-hook
  (lambda ()
-   (define-key org-mode-map [(control c)(control a)] 'org-agenda)))
+   (define-key org-mode-map [(control c)(control a)] 'org-agenda)
+   (imenu-add-to-menubar "Imenu")))
 
 ;;{{{ org keyword switching
 
@@ -784,6 +765,39 @@ then invoking this function four times would yield:
    ))
 
 ;;}}}
+
+;;}}}
+;;{{{ remember-mode with org-mode
+
+;;(require 'remember)
+(autoload 'remember "remember" nil t)
+;; (autoload 'remember-handler-functions "remember" nil t)
+;; (autoload 'remember-annotation-functions "remember" nil t)
+
+;; (add-hook 'remember-mode-hook
+;;           (lambda ()
+;;             (require 'remember-planner)
+;;             (setq remember-handler-functions '(remember-planner-append))
+;;             (setq remember-annotation-functions planner-annotation-functions)))
+
+;; <mairix://m:m2zlxt9cxe.fsf@iu.edu>
+(defun org-set-buffer-todo-tags ()
+  "Set tags for all tagless TODO headings in the current buffer."
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "\\* \\(?:TODO\\|ACTION\\|WAITING\\) " nil t)
+      (let ((tags (org-get-tags)))
+        (if (or (not tags) (string= tags ""))
+            (org-set-tags))))))
+
+(add-hook 'remember-hook
+          (lambda ()
+            (define-key (current-local-map) "^C^C"
+              (lambda ()
+                (interactive)
+                (if (string= (buffer-name (current-buffer)) "*Remember*")
+                    (org-set-buffer-todo-tags))
+                (org-ctrl-c-ctrl-c)))))
 
 ;;}}}
 ;;{{{ muse-mode
