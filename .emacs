@@ -53,6 +53,29 @@ placed here.")
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
+(defvar find-function-source-path load-path
+  "The default list of directories where `find-function' searches.
+
+If this variable is nil then `find-function' searches `load-path' by
+default.")
+
+(mapcar (lambda (x)
+          (let ((path (concat as-emacs-dir "/" x)))
+	    (message path)
+            (and (file-directory-p path)
+                 (add-to-list 'find-function-source-path path))))
+	'(
+	  "major-modes"
+	  "major-modes/org-hg"
+	  "major-modes/remember"
+	  "major-modes/xtla"
+	  "major-modes/mmm"
+	  "major-modes/psgml"
+	  "major-modes/muse"
+	  "minor-modes"
+	  "utils"
+	  "fun"))
+
 (add-to-list 'load-path as-version-pre-lib-dir)
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append)
 (add-to-list 'load-path as-version-post-lib-dir 'append)
