@@ -233,7 +233,8 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
                    (append (find-library-suffixes) load-file-rep-suffixes))
       (error "Can't find library %s" library)))
 
-(defun find-library (library)
+;;;###autoload
+(defun find-library-backport (library)
   "Find the elisp source of LIBRARY."
   (interactive
    (list

@@ -404,8 +404,10 @@ consistent landing spot."
 (global-set-key [(control x) K]           'as-destroy-buffer)
 (global-set-key [(control x) (I)]         'insert-buffer)
 (global-set-key [(control x) (control y)] 'vim-yy)
-(autoload 'find-library-source "as-bufs-files" "find-library-source" t)
-(global-set-key [(control x) (meta f)]    'find-library-source)
+(global-set-key [(control x) (meta f)]
+                (if (functionp 'find-library)
+                    'find-library
+                  'find-library-backport))
 
 (autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
 (global-set-key [(control E)]             'bn-end-of-line-but-one)
