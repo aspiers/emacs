@@ -218,18 +218,31 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
        backup-directory))))
 
 ;;}}}
-;;{{{ find-library
+;;{{{ find-library-backport
 
-;; emacs 22 introduced find-library and find-library-name which do the same thing.
-;;;###autoload
-(defun find-library-source (library)
-  "Runs `find-file' on the file containing the given library's source
-code.  Do not include the '.el' suffix in the library argument."
-  (interactive "sFind library: ")
-  (let ((file (locate-library (concat library ".el")
-                              'nosuffix load-path 'echo-file)))
-    (or file (error (format "Could not locate library %s" library)))
-    (find-file file)))
+;; backport from emacs 22
+
+(defun find-library-name-backport (library)
+  "Return the absolute file name of the Lisp source of LIBRARY."
+  ;; If the library is byte-compiled, try to find a source library by
+  ;; the same name.
+  (if (string-match "\\.el\\(c\\(\\..*\\)?\\)\\'" library)
+      (setq library (replace-match "" t t library)))
+  (or (locate-file library
+                   (or find-function-source-path load-path)
+                   (append (find-library-suffixes) load-file-rep-suffixes))
+      (error "Can't find library %s" library)))
+
+(defun find-library (library)
+  "Find the elisp source of LIBRARY."
+  (interactive
+   (list
+    (completing-read "Library name: "
+                     'locate-file-completion
+                     (cons (or find-function-source-path load-path)
+                           (find-library-suffixes)))))
+  (let ((buf (find-file-noselect (find-library-name-backport library))))
+    (condition-case nil (switch-to-buffer buf) (error (pop-to-buffer buf)))))
 
 ;;}}}
 
