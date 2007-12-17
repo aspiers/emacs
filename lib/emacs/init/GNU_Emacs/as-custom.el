@@ -31,8 +31,10 @@
 ;;        ))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(align-dq-string-modes (quote (vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode)))
  '(align-exclude-rules-list (quote ((exc-dq-string (regexp . "\"\\([^\"
@@ -40,19 +42,6 @@
 ]+\\)'") (repeat . t) (modes . align-sq-string-modes)) (exc-open-comment (regexp lambda (end reverse) (funcall (if reverse (quote re-search-backward) (quote re-search-forward)) (concat "[^ 	
 \\\\]" (regexp-quote comment-start) "\\(.+\\)$") end t)) (modes . align-open-comment-modes)) (exc-c-comment (regexp . "/\\*\\(.+\\)\\*/") (repeat . t) (modes . align-c++-modes)) (exc-c-func-params (regexp . "(\\([^)
 ]+\\))") (repeat . t) (modes . align-c++-modes)) (exc-c-macro (regexp . "^\\s-*#\\s-*\\(if\\w*\\|endif\\)\\(.*\\)$") (group . 2) (modes . align-c++-modes)) (exc-perl-comment (regexp . "^\\s-*#.*$") (modes . align-perl-modes)))))
- '(align-rules-list (quote ((lisp-second-arg (regexp . "\\(^\\s-+[^( 	
-]\\|(\\(\\S-+\\)\\s-+\\)\\S-+\\(\\s-+\\)") (group . 3) (modes . align-lisp-modes) (run-if lambda nil current-prefix-arg)) (lisp-alist-dot (regexp . "\\(\\s-*\\)\\.\\(\\s-*\\)") (group 1 2) (modes . align-lisp-modes)) (open-comment (regexp lambda (end reverse) (funcall (if reverse (quote re-search-backward) (quote re-search-forward)) (concat "[^ 	
-\\\\]" (regexp-quote comment-start) "\\(.+\\)$") end t)) (modes . align-open-comment-modes)) (c-macro-definition (regexp . "^\\s-*#\\s-*define\\s-+\\S-+\\(\\s-+\\)") (modes . align-c++-modes)) (c-variable-declaration (regexp . "[*&0-9A-Za-z_]>?[&*]*\\(\\s-+[*&]*\\)[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|=[^=
-].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?\\s-*[;,]\\|)\\s-*$\\)") (group . 1) (modes . align-c++-modes) (justify . t) (valid lambda nil (not (or (save-excursion (goto-char (match-beginning 1)) (backward-word 1) (looking-at "\\(goto\\|return\\|new\\|delete\\|throw\\)")) (if (and (boundp (quote font-lock-mode)) font-lock-mode) (eq (get-text-property (point) (quote face)) (quote font-lock-comment-face)) (eq (caar (c-guess-basic-syntax)) (quote c))))))) (c-assignment (regexp . "[^-=!^&*+<>/| 	
-]\\(\\s-*[-=!^&*+<>/|]*\\)=\\(\\s-*\\)\\([^= 	
-]\\|$\\)") (group 1 2) (modes . align-c++-modes) (justify . t) (tab-stop)) (perl-assignment (regexp . "[^=!^&*-+<>/| 	
-]\\(\\s-*\\)=[~>]?\\(\\s-*\\)\\([^>= 	
-]\\|$\\)") (group 1 2) (modes . align-perl-modes) (tab-stop)) (python-assignment (regexp . "[^=!<> 	
-]\\(\\s-*\\)=\\(\\s-*\\)\\([^>= 	
-]\\|$\\)") (group 1 2) (modes quote (python-mode)) (tab-stop)) (make-assignment (regexp . "^\\s-*\\w+\\(\\s-*\\):?=\\(\\s-*\\)\\([^	
- \\\\]\\|$\\)") (group 1 2) (modes quote (makefile-mode)) (tab-stop)) (c-comma-delimiter (regexp . ",\\(\\s-*\\)[^/ 	
-]") (repeat . t) (modes . align-c++-modes) (run-if lambda nil current-prefix-arg)) (basic-comma-delimiter (regexp . ",\\(\\s-*\\)[^# 	
-]") (repeat . t) (modes append align-perl-modes (quote (python-mode))) (run-if lambda nil current-prefix-arg)) (c++-comment (regexp . "\\(\\s-*\\)\\(//.*\\|/\\*.*\\*/\\s-*\\)$") (modes . align-c++-modes) (column . comment-column) (valid lambda nil (save-excursion (goto-char (match-beginning 1)) (not (bolp))))) (c-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-c++-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(/[*/]\\|$\\)")))) (perl-chain-logic (regexp . "\\(\\s-*\\)\\(&&\\|||\\|\\<and\\>\\|\\<or\\>\\)") (modes . align-perl-modes) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\)")))) (perl-short-method-braces (regexp . "^\\s-*sub\\(\\s-+\\)[a-zA-Z0-9_]+\\(\\s-*\\){\\(\\s-*\\).*?\\(\\s-*\\)}\\s-*$") (modes . align-perl-modes) (group 1 2 3 4) (separate . "^dontmatchthis$")) (python-chain-logic (regexp . "\\(\\s-*\\)\\(\\<and\\>\\|\\<or\\>\\)") (modes quote (python-mode)) (valid lambda nil (save-excursion (goto-char (match-end 2)) (looking-at "\\s-*\\(#\\|$\\|\\\\\\)")))) (c-macro-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes . align-c++-modes) (column . c-backslash-column)) (basic-line-continuation (regexp . "\\(\\s-*\\)\\\\$") (modes quote (python-mode makefile-mode sh-mode))) (tex-record-separator (regexp lambda (end reverse) (align-match-tex-pattern "&" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t)) (tex-tabbing-separator (regexp lambda (end reverse) (align-match-tex-pattern "\\\\[=>]" end reverse)) (group 1 2) (modes . align-tex-modes) (repeat . t) (run-if lambda nil (eq major-mode (quote latex-mode)))) (tex-record-break (regexp . "\\(\\s-*\\)\\\\\\\\") (modes . align-tex-modes)) (text-column (regexp . "\\(^\\|\\S-\\)\\(\\s-+\\)\\(\\S-\\|$\\)") (group . 2) (modes . align-text-modes) (repeat . t) (run-if lambda nil (and current-prefix-arg (not (eq (quote -) current-prefix-arg))))) (text-dollar-figure (regexp . "\\$?\\(\\s-+[0-9]+\\)\\.") (modes . align-text-modes) (justify . t) (run-if lambda nil (eq (quote -) current-prefix-arg))))))
  '(align-sq-string-modes (quote (python-mode)))
  '(as-mairix-link-viewer-command "mairix-profile --view novell '%search%'" t)
  '(as-mairix-links-clipboard "~/.clip-mairix" t)
@@ -66,8 +55,8 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
- '(browse-url-browser-function (quote browse-url-generic) t)
- '(browse-url-generic-program "url_handler.sh" t)
+ '(browse-url-browser-function (quote browse-url-generic))
+ '(browse-url-generic-program "url_handler.sh")
  '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
  '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
@@ -100,12 +89,12 @@
  '(delete-selection-mode nil nil (delsel))
  '(diff-switches "-u")
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l" t)
+ '(dired-listing-switches "-l")
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(eldoc-minor-mode-string "")
- '(eldoc-mode t)
+ '(eldoc-mode t t)
  '(enable-local-eval t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
@@ -121,7 +110,6 @@
 ")
  '(gnus-group-mode-hook (quote (gnus-topic-mode)))
  '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
- '(gnus-local-organization nil t)
  '(gnus-novice-user nil)
  '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
  '(gnus-select-method (quote (nntp "news.pipex.net")))
@@ -154,27 +142,28 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
  '(muse-colors-autogen-headings (quote outline))
- '(muse-mode-auto-p t)
  '(muse-project-alist (quote (("AS-notes" ("~/notes")) ("Novell-notes" ("~/ifolder/notes")) ("all-notes" ("~/notes" "~/ifolder/notes")))))
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
- '(org-agenda-custom-commands (quote (("#" . "TODOs by priority") ("#A" "priority #A tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#B" "priority #B tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#C" "priority #C tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("T" "" tags "Ten" nil) ("s" . "TODOs by ETC") ("s1" "" tags "sub10" nil) ("s2" "" tags "sub120" nil) ("s3" "" tags "sub30" nil) ("s4" "" tags "sub4" nil) ("s6" "" tags "sub60" nil) ("sd" "" tags "subday" nil) ("t" . "TODOs by time constraint") ("tO" "within office hours" tags-todo "officehrs" nil) ("tS" "Saturday" tags-todo "Saturday" nil) ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" nil) ("@B" "in Bracknell office" tags-todo "@Bracknell" nil) ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil) ("@L" "in London" tags-todo "@London" nil) ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" nil) ("@i" "internet (online)" tags-todo "@internet" nil) ("@0" "offline (but at a computer)" tags-todo "@offline" nil) ("@p" "can make phone calls" tags-todo "@phone" nil) ("@." "current context" (lambda (a) (error "Not implemented yet")) "" nil) ("e" "easy" tags-todo "easy" nil) ("p" . "personal TODOs") ("pe" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\"" nil) ("c" "CHASE" tags-todo "/CHASE" nil) ("W" "WAITING" tags-todo "/WAITING" nil))))
+ '(org-agenda-custom-commands (quote (("#A" "priority #A tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#B" "priority #B tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#C" "priority #C tasks" tags "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("T" "" tags #("Ten" 0 3 (face org-warning)) nil) ("s1" "" tags "sub10" nil) ("s2" "" tags "sub120" nil) ("s3" "" tags "sub30" nil) ("s4" "" tags "sub4" nil) ("s6" "" tags "sub60" nil) ("sd" "" tags "subday" nil) ("tO" "within office hours" tags-todo "officehrs" nil) ("tS" "Saturday" tags-todo "Saturday" nil) ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" nil) ("@B" "in Bracknell office" tags-todo "@Bracknell" nil) ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil) ("@L" "in London" tags-todo "@London" nil) ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" nil) ("@i" "internet (online)" tags-todo "@internet" nil) ("@0" "offline (but at a computer)" tags-todo "@offline" nil) ("@p" "can make phone calls" tags-todo "@phone" nil) ("@." "current context" (lambda (a) (error "Not implemented yet")) "" nil) ("e" "easy" tags-todo #("easy" 0 4 (face org-warning)) nil) ("pe" "easy personal tasks" tags-todo #("easy" 0 4 (face org-warning)) ((org-agenda-files (list "~/roaming/TODO.org")))) ("we" "easy work tasks" tags-todo "easy" ((org-agenda-files (list "~/ifolder/TODO.org")))) ("c" "CHASE" todo #("CHASE" 0 5 (face org-warning)) nil) ("W" "WAITING" todo #("WAITING" 0 7 (face org-warning)) nil))))
  '(org-agenda-files (quote ("~/ifolder/TODO.org" "~/roaming/TODO.org" "~/ifolder/Novell-diary.org" "~/roaming/diary.org")))
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
  '(org-agenda-skip-scheduled-if-done t)
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
+ '(org-default-notes-file "~/roaming/TODO.org")
+ '(org-directory "~/roaming")
  '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
  '(org-drawers (quote ("PROPERTIES" "HIDE")))
  '(org-email-link-description-format "mail %c: %.30s")
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
  '(org-hide-leading-stars t)
+ '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
- '(org-remember-templates (quote (("reply to personal mail" 114 "* NEXT [#B] %?%^{description of personal TODO}
-  %[~/.mairix-link]" "~/roaming/TODO.org" nil) ("reply to work mail" 82 "* NEXT [#B] %?%^{description of work TODO}
-  %[~/.mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%^{description of learning material}
-  %[~/.mairix-link]" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
+ '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 114 "* NEXT [#B] %?%^{description of personal TODO}
+  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 82 "* NEXT [#B] %?%^{description of work TODO}
+  %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
@@ -183,11 +172,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
  '(org-use-fast-todo-selection t)
- '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
- '(ps-paper-type (quote a4) t)
+ '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(remember-annotation-functions (quote (org-remember-annotation)))
+ '(remember-handler-functions (quote (org-remember-handler)))
+ '(remember-mode-hook (quote (org-remember-apply-template)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
  '(safe-local-variable-values (quote ((org-drawers quote ("PROPERTIES" "HIDE")) (byte-compile-warnings redefine callargs free-vars unresolved obsolete noruntime) (auto-recompile))))
@@ -209,8 +200,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-follow-symlinks t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
