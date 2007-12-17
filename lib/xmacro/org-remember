@@ -1,9 +1,5 @@
-#!/bin/sh
-
 # Use M-x org-remember; works regardless of key-binding or current
 # buffer.  Also Escape should be more portable than Meta_L etc.
-switch-feed-emacs <<EOF
 KeyStr Escape
 String xorg-remember
 KeyStr Return
-EOF
