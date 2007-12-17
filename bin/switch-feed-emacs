@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ -z "$DISPLAY" ]; then
+    echo "$0: no DISPLAY" >&2
+    exit 1
+fi
+
+if ! wmctrl -a emacs; then
+    echo "$0: wmctrl failed" >&2
+    exit 1
+fi
+
+# It seems there is some kind of timing issue which requires this
+# sleep - probably we have to ensure that wmctrl has finished
+# switching before feeding the command to emacs.
+sleep 0.2
+
+xmacroplay $DISPLAY >/dev/null
