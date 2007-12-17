@@ -1,0 +1,5 @@
+KeyStrPress Control_L
+String xf
+KeyStrRelease Control_L
+String ~/ifolder/diary.org
+KeyStr Return
