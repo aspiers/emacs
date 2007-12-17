@@ -15,4 +15,4 @@ fi
 # switching before feeding the command to emacs.
 sleep 0.2
 
-xmacroplay $DISPLAY >/dev/null
+grep -v '^#' | xmacroplay $DISPLAY >/dev/null
