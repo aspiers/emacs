@@ -328,6 +328,9 @@ utils/as-gtd.elc: utils/org-mairix.elc
 utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
+utils/org-crypt.elc: epg
+utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
+
 # }}}
 # {{{ org-mode
 
