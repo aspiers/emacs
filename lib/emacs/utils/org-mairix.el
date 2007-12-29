@@ -71,10 +71,6 @@ Defaults to Gnus, feel free to add your own MUAs or methods."
   :group 'org-mairix
   :type 'hook)
 
-(custom-set-variables
- '(org-mairix-display-hook 'org-mairix-mutt-display-results)
- '(org-mairix-open-command "mairix-profile novell %args% '%search%'"))
-
 (defcustom org-mairix-open-command "mairix %args% '%search%'"
   "The mairix command-line to use. If your paths are set up
 correctly, you should not need to change this.
