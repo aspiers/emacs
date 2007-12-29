@@ -85,7 +85,7 @@
  '(delete-selection-mode nil nil (delsel))
  '(diff-switches "-u")
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-l" t)
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
@@ -161,6 +161,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
  '(org-mairix-mutt-display-command "mairix-profile --view novell %search%")
  '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
+ '(org-mairix-threaded-links nil)
  '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%^{description of personal TODO}
   %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%^{description of work TODO}
   %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
