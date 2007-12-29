@@ -658,11 +658,15 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'org-store-link "org" "Store a link to the current location" t)
 (autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+
+;; Need to bind C-c C-a globally *and* locally, otherwise gets set to
+;; show-all locally via outline mode.
+(global-set-key [(control c)(control a)] 'org-agenda)
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
  (lambda ()
-   (define-key org-mode-map [(control c)(control a)] 'org-agenda)
+   (org-defkey org-mode-map [(control c)(control a)] 'org-agenda)
    (imenu-add-to-menubar "Imenu")))
 
 ;;{{{ org keyword switching
