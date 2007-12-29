@@ -1,12 +1,14 @@
 #!/bin/sh
 
+version=$( emacs --version | \
+             perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$2"' )
+
 cd
 [ -e .as-init.el ] || \
   ln -s lib/emacs/init/common/as-init.el .as-init.el
 [ -e .as-bindings.el ] || \
   ln -s lib/emacs/init/common/as-bindings.el .as-bindings.el
-[ -e .as-custom.el ] || \
-  ln -s lib/emacs/init/GNU_Emacs/as-custom.el .as-custom.el
+ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 [ -e .msf-abbrevs ] || \
   ln -s lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 [ -e lib/emacs/major-modes/muse ] || \
