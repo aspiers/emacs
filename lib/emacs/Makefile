@@ -19,6 +19,7 @@ EL_OVERRIDES = pcvs*
 
 DVC_DIR      = major-modes/dvc
 ORG_DIR      = major-modes/org-hg
+EPG_DIR      = major-modes/epg-0.0.15
 REMEMBER_DIR = major-modes/remember-1.9
 
 # This is a list of make targets which have their own Makefiles
@@ -68,6 +69,7 @@ prefix   = $(HOME)/local
 infodir = $(prefix)/share/info
 
 lispdir = $(prefix)/share/emacs/site-lisp
+
 # }}}
 
 # }}}
@@ -198,6 +200,7 @@ list-third-party-pkg-dirs:
 
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
+
 # }}}
 # {{{ high-level targets
 
@@ -299,6 +302,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS) Makefile
 	$(MAKE) $(@:.debug=) COMPILER_OPTS='-q -l bytecomp'
 # }}}
 # {{{ Special rules for my init files
+
 INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
@@ -316,6 +320,7 @@ $(AS_INIT_ELC): .muse-installed
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
+
 # }}}
 # {{{ org-mode
 
@@ -471,6 +476,7 @@ clean-pgg:
 	$(MAKE) -C major-modes/pgg clean
 .pgg-made: major-modes/pgg/pgg.elc
 	@cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
+
 # }}}
 # {{{ dvc-mode
 
@@ -510,6 +516,19 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
 	) &&								\
 	touch $@
+
+# }}}
+# {{{ epg-mode
+
+epg: .epg-installed
+clean-epg:
+	rm -f .epg-installed
+	$(MAKE) -C $(EPG_DIR) clean
+.epg-installed: $(EPG_DIR)/epg.el
+	( cd $(EPG_DIR) && \
+	  ./configure --prefix=$(prefix) infodir=$(infodir) && \
+	  $(MAKE) install && \
+	  touch $@ )
 
 # }}}
 
