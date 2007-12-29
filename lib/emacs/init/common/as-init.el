@@ -666,6 +666,7 @@ C-style indentation, use cssm-c-style-indenter.")
 (add-hook
  'org-mode-hook
  (lambda ()
+   (require 'org-mairix)
    (org-defkey org-mode-map [(control c)(control a)] 'org-agenda)
    (imenu-add-to-menubar "Imenu")))
 
