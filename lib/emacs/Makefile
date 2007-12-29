@@ -322,6 +322,13 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 # }}}
+# {{{ Special rules for utils files
+
+utils/as-gtd.elc: utils/org-mairix.elc
+utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)
+init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
+
+# }}}
 # {{{ org-mode
 
 major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)
