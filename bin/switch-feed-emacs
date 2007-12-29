@@ -5,8 +5,11 @@ if [ -z "$DISPLAY" ]; then
     exit 1
 fi
 
-if ! wmctrl -a emacs; then
+if ! wmctrl -a 'emacs@'; then
     echo "$0: wmctrl failed" >&2
+    if ! wmctrl -l | grep 'emacs@'; then
+        echo "No windows matching 'emacs@' found; maybe you have >1 frame open?" >&2
+    fi
     exit 1
 fi
 
