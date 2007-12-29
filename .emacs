@@ -96,7 +96,8 @@ default.")
   (setq save-options-file (concat as-init-dir "/as-options.el"))
   (load (concat as-init-dir "/as-options") 'noerror)))
 
-(setq custom-file (concat as-init-dir "/as-custom.el"))
+(setq custom-file (format "%s/as-custom-%s.el"
+                          as-init-dir emacs-version-number))
 (load (concat as-init-dir "/as-custom") 'noerror)
 
 ;; (when (getenv "EMACS_PROFILE_INIT")

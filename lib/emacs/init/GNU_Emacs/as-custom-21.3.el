@@ -31,10 +31,8 @@
 ;;        ))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(Info-additional-directory-list (quote ("~/local/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
  '(align-dq-string-modes (quote (vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode)))
  '(align-exclude-rules-list (quote ((exc-dq-string (regexp . "\"\\([^\"
@@ -43,9 +41,7 @@
 \\\\]" (regexp-quote comment-start) "\\(.+\\)$") end t)) (modes . align-open-comment-modes)) (exc-c-comment (regexp . "/\\*\\(.+\\)\\*/") (repeat . t) (modes . align-c++-modes)) (exc-c-func-params (regexp . "(\\([^)
 ]+\\))") (repeat . t) (modes . align-c++-modes)) (exc-c-macro (regexp . "^\\s-*#\\s-*\\(if\\w*\\|endif\\)\\(.*\\)$") (group . 2) (modes . align-c++-modes)) (exc-perl-comment (regexp . "^\\s-*#.*$") (modes . align-perl-modes)))))
  '(align-sq-string-modes (quote (python-mode)))
- '(as-mairix-link-viewer-command "mairix-profile --view novell '%search%'" t)
  '(as-mairix-links-clipboard "~/.clip-mairix" t)
- '(as-mairix-results-folder "~/mail/mairix" t)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
  '(blink-cursor-delay 0.0)
@@ -55,8 +51,8 @@
  '(blinking-cursor-idle-states (quote (("coral" "box" 0.5) ("coral" -1 0.5))))
  '(blinking-cursor-non-idle-state (quote ("coral" "box")))
  '(blinking-cursor-states (quote (("coral" "box" 0.7) ("coral" 2 0.4))))
- '(browse-url-browser-function (quote browse-url-generic))
- '(browse-url-generic-program "url_handler.sh")
+ '(browse-url-browser-function (quote browse-url-generic) t)
+ '(browse-url-generic-program "url_handler.sh" t)
  '(bs-alternative-configuration "cvs")
  '(bs-attributes-list (quote (("" 1 1 left bs--get-marked-string) ("M" 1 1 left bs--get-modified-string) ("R" 2 2 left bs--get-readonly-string) ("Buffer" bs--get-name-length 10 left bs--get-name) ("" 1 1 left " ") ("Size" 5 8 right bs--get-size-string) ("" 1 1 left " ") ("Mode" 5 12 right bs--get-mode-name) ("" 2 2 left "  ") ("File" 12 12 left bs--get-file-name) ("" 2 2 left "  "))))
  '(bs-configurations (quote (("all" nil nil nil nil nil) ("files" nil nil ".~[0-9.]+~$" bs-visits-non-file bs-sort-buffer-interns-are-last) ("files-and-scratch" "^\\*scratch\\*$" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last) ("all-intern-last" nil nil nil nil bs-sort-buffer-interns-are-last) ("cvs" "\\*cvs\\*$" nil "" nil bs--sort-by-name))))
@@ -94,7 +90,7 @@
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(eldoc-minor-mode-string "")
- '(eldoc-mode t t)
+ '(eldoc-mode t)
  '(enable-local-eval t)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
@@ -161,6 +157,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-hide-leading-stars t)
  '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
+ '(org-mairix-augmented-links nil)
+ '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
+ '(org-mairix-mutt-display-command "mairix-profile --view novell %search%")
+ '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
  '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%^{description of personal TODO}
   %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%^{description of work TODO}
   %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
@@ -173,9 +173,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
  '(org-use-fast-todo-selection t)
+ '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
- '(ps-paper-type (quote a4))
+ '(ps-paper-type (quote a4) t)
  '(ps-print-color-p (quote black-white))
  '(remember-annotation-functions (quote (org-remember-annotation)))
  '(remember-handler-functions (quote (org-remember-handler)))
@@ -201,10 +202,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-follow-symlinks t))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
   ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
