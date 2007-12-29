@@ -211,7 +211,7 @@ applications in order to mimic `org-store-link'.  Used by
   :group 'org-mairix)
 
 (defcustom org-mairix-mutt-display-command
-  "xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -F ~/.mutt/work -f ~/mail/novell/mairix -e \"push <display-message>\"' &"
+  "xterm -title 'mairix search: %search%' -e 'unset COLUMNS; mutt -f ~/mail/mairix -e \"push <display-message>\"' &"
   "Command to execute to display mairix search results via mutt within
 an xterm.
 
