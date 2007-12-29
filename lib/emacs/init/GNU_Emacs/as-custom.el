@@ -156,14 +156,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-default-notes-file "~/roaming/TODO.org")
  '(org-directory "~/roaming")
  '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
- '(org-drawers (quote ("PROPERTIES" "HIDE")))
  '(org-email-link-description-format "mail %c: %.30s")
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
  '(org-hide-leading-stars t)
  '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
- '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 114 "* NEXT [#B] %?%^{description of personal TODO}
-  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 82 "* NEXT [#B] %?%^{description of work TODO}
+ '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%^{description of personal TODO}
+  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%^{description of work TODO}
   %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
