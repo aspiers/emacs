@@ -98,7 +98,8 @@ default.")
 
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))
-(load (concat as-init-dir "/as-custom") 'noerror)
+;; This load is required, according to the info pages:
+(load custom-file)
 
 ;; (when (getenv "EMACS_PROFILE_INIT")
 ;;   (load "elp")
