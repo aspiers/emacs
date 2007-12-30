@@ -8,7 +8,12 @@ cd
   ln -s lib/emacs/init/common/as-init.el .as-init.el
 [ -e .as-bindings.el ] || \
   ln -s lib/emacs/init/common/as-bindings.el .as-bindings.el
+
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
+for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do
+  echo ln -sf $c .${c##*/}
+done
+
 [ -e .msf-abbrevs ] || \
   ln -s lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 [ -e lib/emacs/major-modes/muse ] || \
