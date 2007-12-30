@@ -11,7 +11,7 @@ cd
 
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do
-  echo ln -sf $c .${c##*/}
+  ln -sf $c .${c##*/}
 done
 
 [ -e .msf-abbrevs ] || \
