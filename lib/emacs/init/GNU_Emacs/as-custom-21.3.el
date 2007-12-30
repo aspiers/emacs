@@ -92,6 +92,7 @@
  '(eldoc-minor-mode-string "")
  '(eldoc-mode t)
  '(enable-local-eval t)
+ '(enable-local-variables :all)
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(folding-mode-prefix-key "")
@@ -161,7 +162,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
  '(org-mairix-augmented-links nil)
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
- '(org-mairix-mutt-display-command "mairix-profile --view novell %search%")
+ '(org-mairix-mutt-display-command "mairix-profile --view novell %search% &")
  '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
  '(org-mairix-threaded-links nil)
  '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "%!* NEXT [#B] %?%^{description of personal TODO}
