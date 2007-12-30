@@ -149,6 +149,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-include-diary t)
  '(org-agenda-ndays 31)
  '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-with-follow-mode t)
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
  '(org-default-notes-file "~/roaming/TODO.org")
  '(org-directory "~/roaming")
