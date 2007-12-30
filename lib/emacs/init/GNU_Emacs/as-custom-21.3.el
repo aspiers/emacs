@@ -138,8 +138,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
  '(muse-colors-autogen-headings (quote outline))
- '(muse-mode-auto-p t)
- '(muse-project-alist (quote (("AS-notes" ("~/roaming/notes")) ("Novell-notes" ("~/ifolder/notes")) ("all-notes" ("~/roaming/notes" "~/ifolder/notes")))))
+ '(muse-mode-auto-p nil)
+ '(muse-project-alist (quote (("AS-notes" ("~/roaming/notes") nil) ("Novell-notes" ("~/ifolder/notes") nil) ("all-notes" ("~/roaming/notes" "~/ifolder/notes") nil))))
  '(muse-wiki-allow-nonexistent-wikiword t)
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
@@ -162,9 +162,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-mutt-display-command "mairix-profile --view novell %search%")
  '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
  '(org-mairix-threaded-links nil)
- '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%^{description of personal TODO}
-  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%^{description of work TODO}
-  %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
+ '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "%!* NEXT [#B] %?%^{description of personal TODO}
+  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "%!* NEXT [#B] %?%^{description of work TODO}
+  %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "%!* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
@@ -174,6 +174,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
  '(org-use-fast-todo-selection t)
+ '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
  '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
