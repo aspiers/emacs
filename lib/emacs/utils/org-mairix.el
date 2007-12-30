@@ -225,9 +225,13 @@ defined in `org-mairix-mutt-display-command'."
   ;; Note: `call-process' is synchronous so not useful here.
   (let ((cmd (org-mairix-command-substitution
               org-mairix-mutt-display-command search args))
-        (tmpbufname (generate-new-buffer-name " *mairix-view*")))
-    (shell-command cmd tmpbufname)
-    (delete-windows-on (get-buffer tmpbufname))))
+        (tmpbuf
+         (generate-new-buffer " *org-mairix-mutt-display-results*")))
+    (message "Executing '%s'" cmd)
+    ;; shell-command seems to blow away any previous contents of
+    ;; tmpbuf so we can't insert useful extra debug in it :-(
+    (shell-command cmd tmpbuf)
+    (delete-windows-on (get-buffer tmpbuf))))
 
 ;;; Functions necessary for gnus integration
 

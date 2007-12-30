@@ -34,14 +34,21 @@ shell command defined by `org-mairix-mutt-display-command'."
   (interactive "P")
   (let ((message-id (as-mairix-search-at-point)))
     (or message-id (error "No mairix URL found at point"))
-    (let ((cmd org-mairix-mutt-display-command))
-      (while (string-match "%search%" cmd)
-        (setq cmd (replace-match message-id 'fixedcase 'literal cmd)))
-      ;; By default, async `shell-command' invocations display the temp
-      ;; buffer, which is annoying here.  We choose a deterministic
-      ;; buffer name so we can hide it again immediately.
-      ;; FIXME: use `call-process' instead.
-      (let ((tmpbufname (generate-new-buffer-name " *mairix-view*")))
-        (shell-command cmd tmpbufname)
-        (or show-async-buf
-            (delete-windows-on (get-buffer tmpbufname)))))))
+    ;; Remove text properties to make for cleaner debugging
+    (set-text-properties 0 (length message-id) nil message-id)
+    ;; By default, async `shell-command' invocations display the temp
+    ;; buffer, which is annoying here.  We choose a deterministic
+    ;; buffer name so we can hide it again immediately.
+    ;; Note: `call-process' is synchronous so not useful here.
+    (let ((cmd (org-mairix-command-substitution
+                org-mairix-mutt-display-command search args))
+          (tmpbuf
+           (generate-new-buffer " *as-mairix-view-link-at-point*")))
+      (message "Executing '%s'" cmd)
+      ;; shell-command seems to blow away any previous contents of
+      ;; tmpbuf so we can't insert useful extra debug in it :-(
+      (shell-command cmd tmpbuf tmpbuf)
+      (or show-async-buf
+          (delete-windows-on (get-buffer tmpbuf))))))
+
+(provide 'as-gtd)
