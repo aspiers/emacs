@@ -2,7 +2,7 @@
 
 (require 'org-mairix)
 
-(defvar as-mairix-links-clipboard "~/.clip-mairix"
+(defvar as-mairix-links-clipboard "~/.org-mairix-link"
   "[Deprecated] Pseudo-clipboard file where mairix URLs get copied to.")
 
 (defun as-mairix-yank-links ()
