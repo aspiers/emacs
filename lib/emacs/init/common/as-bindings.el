@@ -579,8 +579,7 @@ consistent landing spot."
 
 ;;{{{ as-toggle-indent-tabs-mode
 
-(defun as-toggle-indent-tabs-mode
-  ()
+(defun as-toggle-indent-tabs-mode ()
   "Toggles the value of indent-tabs-mode in the current buffer"
   (interactive)
   (setq indent-tabs-mode (not indent-tabs-mode))
@@ -588,6 +587,17 @@ consistent landing spot."
 
 ;;}}}
 (global-set-key "\C-ctb"   'as-toggle-indent-tabs-mode)
+
+;;{{{ as-toggle-debug-on-error
+
+(defun as-toggle-debug-on-error ()
+  "Toggles the value of debug-on-error in the current buffer"
+  (interactive)
+  (setq debug-on-error (not debug-on-error))
+  (message "debug-on-error set to %s" debug-on-error))
+
+;;}}}
+(global-set-key "\C-cte"   'as-toggle-debug-on-error)
 
 (global-set-key "\C-ctf"   'auto-fill-mode)
 
