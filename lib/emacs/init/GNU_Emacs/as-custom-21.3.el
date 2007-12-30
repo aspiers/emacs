@@ -176,7 +176,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-column -78)
  '(org-tags-match-list-sublevels t)
  '(org-todo-interpretation (quote type))
- '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :bold t :weight bold) ("CHASE" :foreground "DarkOrange" :bold t :weight bold) ("WAITING" :foreground "#ffe000" :bold t :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :bold t :weight bold) ("SOMEDAY" :foreground "gray60" :bold t :weight bold) ("MAYBE" :foreground "gray85" :bold t :weight bold) ("CANCELLED" :foreground "black" :strike-through t))))
+ '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("CHASE" :foreground "DarkOrange" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :weight bold) ("SOMEDAY" :foreground "gray60" :weight bold) ("MAYBE" :foreground "gray85" :weight bold) ("CANCELLED" :foreground "black" :strike-through t))))
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
  '(outline-auto-activation t)
