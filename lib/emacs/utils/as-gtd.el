@@ -41,7 +41,7 @@ shell command defined by `org-mairix-mutt-display-command'."
     ;; buffer name so we can hide it again immediately.
     ;; Note: `call-process' is synchronous so not useful here.
     (let ((cmd (org-mairix-command-substitution
-                org-mairix-mutt-display-command search args))
+                org-mairix-mutt-display-command message-id ""))
           (tmpbuf
            (generate-new-buffer " *as-mairix-view-link-at-point*")))
       (message "Executing '%s'" cmd)
