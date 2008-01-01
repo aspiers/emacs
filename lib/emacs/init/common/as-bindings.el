@@ -202,6 +202,8 @@ is already hidden."
 
 (global-set-key [(shift meta f)] 'as-forward-word-start)
 (global-set-key [(shift meta b)] 'as-backward-before-word)
+(global-set-key [(control meta F)] 'as-forward-sexp-start)
+(global-set-key [(control meta B)] 'as-backward-before-sexp)
 
 ;; Define fast scroll keys, may be overridden per mode.
 (defun as-fast-up   () "Move up two lines."   (interactive) (forward-line -2))
@@ -279,7 +281,6 @@ consistent landing spot."
 
 ;;}}}
 ;;{{{ unassigned
-
 
 ;; in use by org-mode:
 ;;     S-{up,down}               org-shift{up,down}
@@ -400,6 +401,7 @@ consistent landing spot."
 (global-set-key [(meta o)]                'overwrite-mode)
 (autoload 'as-kill-word "as-editing" "as-kill-word" t)
 (global-set-key [(meta D)]                'as-kill-word)
+(global-set-key [(control meta K)]        'as-kill-sexp)
 
 (global-set-key [(control x) K]           'as-destroy-buffer)
 (global-set-key [(control x) (I)]         'insert-buffer)
