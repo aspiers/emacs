@@ -863,6 +863,7 @@ then invoking this function four times would yield:
 
 ;; Pull in autoloads
 (require 'w3m-load "w3m-load" t)
+(autoload 'w3m-find-file "w3m" nil t)
 
 (eval-when-compile (require 'dired))
 (add-hook 'dired-mode-hook
