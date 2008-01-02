@@ -662,6 +662,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;; Need to bind C-c C-a globally *and* locally, otherwise gets set to
 ;; show-all locally via outline mode.
 (global-set-key [(control c)(control a)] 'org-agenda)
+(autoload 'org-defkey "org")
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
