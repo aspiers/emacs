@@ -27,6 +27,7 @@ with `format-time-string' and similar functions."
     (cons (round (/   float divisor))
           (round (mod float divisor)))))
 
+;;;###autoload
 (defun as-insert-date (format &optional date)
   "Inserts the current date into the current buffer at the point using
 the given format.
@@ -50,6 +51,7 @@ alternative date to use."
 (defvar as-filename-time-format "%H%Mh%Ss"
   "Filename-friendly time format suitable for passing to `format-time-string'.")
 
+;;;###autoload
 (defun as-insert-date-interactive (&optional prefix)
   "Inserts a date into the current buffer.
 
@@ -72,6 +74,7 @@ the date(1) command, and inserts that date in human-readable format."
                   as-human-date-format)))
     (as-insert-date format date)))
 
+;;;###autoload
 (defun as-insert-time (&optional prefix)
   "Inserts the current time into the current buffer at the point.  If
 a prefix argument, "
@@ -79,6 +82,7 @@ a prefix argument, "
   (insert (format-time-string
            (if prefix as-filename-time-format as-human-time-format))))
 
+;;;###autoload
 (defun as-insert-date-and-time (&optional prefix)
   "Inserts the current date and time into the current buffer at the
 point.  "
@@ -87,6 +91,7 @@ point.  "
   (insert " ")
   (as-insert-time))
 
+;;;###autoload
 (defun as-insert-file-timestamp (&optional prefix)
   "Inserts the current date and, if prefix given, time also, into the
 current buffer at the point, in a format suitable for use within a
@@ -95,6 +100,7 @@ filename."
   (insert (format-time-string as-filename-date-format))
   (if prefix (insert (format-time-string (concat "-" as-filename-time-format)))))
 
+;;;###autoload
 (defun as-insert-log-timestamp (&optional prefix)
   "Inserts the current date, time and username into the current buffer
 at the point.  Defaults to ISO 8601 date format suitable for
@@ -105,6 +111,7 @@ version if a prefix argument is given."
   (insert "  Adam Spiers <>")
   (backward-char 1))
 
+;;;###autoload
 (defun as-insert-log-datestamp (&optional prefix)
   "Inserts the current date and username into the current buffer at
 the point.  Defaults to ISO 8601 date format suitable for
@@ -118,6 +125,7 @@ version if a prefix argument is given."
 ;;}}}
 ;;{{{ as-insert-local-mode
 
+;;;###autoload
 (defun as-insert-local-mode
   ()
   "Inserts an emacs local variables line which will set the local major mode."
@@ -129,11 +137,13 @@ version if a prefix argument is given."
 ;;}}}
 ;;{{{ Signatures
 
+;;;###autoload
 (defun as-insert-japh-indirect-sig ()
   "Inserts Adam's cool japh_indirect .sig"
   (interactive)
   (insert-file "~/.sig/perl/japh_indirect"))
 
+;;;###autoload
 (defun as-insert-japh-method-chain-sig ()
   "Inserts Adam's cool japh_method_chain .sig"
   (interactive)
@@ -142,6 +152,7 @@ version if a prefix argument is given."
 ;;}}}
 ;;{{{ Scissors
 
+;;;###autoload
 (defun as-insert-scissors ()
   "Inserts a cut-here-with-scissors"
   (interactive)
@@ -152,6 +163,7 @@ version if a prefix argument is given."
 ;;}}}
 ;;{{{ Snipping text
 
+;;;###autoload
 (defun as-snip-region ()
   "Replaces a region with `[snipped]' text, ensuring one blank
 line before and after the text."
@@ -170,6 +182,7 @@ line before and after the text."
 ;;}}}
 ;;{{{ Information about me
 
+;;;###autoload
 (defun as-insert-email-address (&optional prefix)
   "Inserts Adam's e-mail address."
   (interactive)
@@ -183,16 +196,19 @@ line before and after the text."
 (defvar as-work-email-address "aspiers@novell.com"
   "Adam's work email address.")
 
+;;;###autoload
 (defun as-insert-work-email-address ()
   "Inserts Adam's e-mail address"
   (interactive)
   (insert as-work-email-address))
 
+;;;###autoload
 (defun as-insert-name ()
   "Inserts Adam's name"
   (interactive)
   (insert "Adam Spiers"))
 
+;;;###autoload
 (defun as-insert-name-and-email (&optional email)
   "Inserts Adam's name and e-mail address"
   (interactive "MPrefix for '@adamspiers.org' ? ")
@@ -202,6 +218,7 @@ line before and after the text."
         (t (as-insert-email-address)))
   (insert ">"))
 
+;;;###autoload
 (defun as-insert-name-and-work-email ()
   "Inserts Adam's name and work e-mail address"
   (interactive)

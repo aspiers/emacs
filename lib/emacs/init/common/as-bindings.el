@@ -467,49 +467,20 @@ consistent landing spot."
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ _I_nsert auto-text (C-c i)
 
-(autoload 'as-insert-date-and-time "as-autotext" "Insert date and time" t)
 (global-set-key "\C-cid" 'as-insert-date-and-time)
-
-(autoload 'as-insert-date-interactive "as-autotext" "Insert date" t)
 (global-set-key "\C-ciD" 'as-insert-date-interactive)
-
-(autoload 'as-insert-email-address "as-autotext" "Insert email address" t)
 (global-set-key "\C-cie" 'as-insert-email-address)
-
-(autoload 'as-insert-local-mode "as-autotext" "Insert emacs local mode setting" t)
 (global-set-key "\C-cim" 'as-insert-local-mode)
-
-(autoload 'as-insert-email-address "as-autotext" "Insert work email address" t)
 (global-set-key "\C-ciw" 'as-insert-work-email-address)
-
-(autoload 'as-insert-name-and-work-email "as-autotext" "Insert name and work email address" t)
 (global-set-key "\C-ciW" 'as-insert-name-and-work-email)
-
-(autoload 'as-insert-japh-method-chain-sig "as-autotext" "Insert JAPH method chain sig" t)
 (global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
-
-(autoload 'as-insert-japh-indirect-sig "as-autotext" "Insert JAPH indirect method sig" t)
 (global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
-
-(autoload 'as-insert-log-timestamp "as-autotext" "Insert log timestamp" t)
 (global-set-key "\C-cil" 'as-insert-log-timestamp)
-
-(autoload 'as-insert-log-datestamp "as-autotext" "Insert log datestamp" t)
 (global-set-key "\C-ciL" 'as-insert-log-datestamp)
-
-(autoload 'as-insert-name-and-email "as-autotext" "Insert name and email" t)
 (global-set-key "\C-ciN" 'as-insert-name-and-email)
-
-(autoload 'as-insert-name "as-autotext" "Insert name" t)
 (global-set-key "\C-cin" 'as-insert-name)
-
-(autoload 'as-insert-scissors "as-autotext" "Insert scissors" t)
 (global-set-key "\C-cis" 'as-insert-scissors)
-
-(autoload 'as-snip-region "as-autotext" "Snip region" t)
 (global-set-key "\C-ciS" 'as-snip-region)
-
-(autoload 'as-insert-time "as-autotext" "Insert time" t)
 (global-set-key "\C-cit" 'as-insert-time)
 
 ;;}}}
