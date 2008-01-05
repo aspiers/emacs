@@ -1,5 +1,9 @@
-# Use M-x org-remember; works regardless of key-binding or current
-# buffer.  Also Escape should be more portable than Meta_L etc.
-KeyStr Escape
-String xorg-remember
-KeyStr Return
+# See org-agenda
+KeyStrPress Control_L
+String c
+KeyStrRelease Control_L
+String q
+
+#KeyStr Escape
+#String xorg-remember
+#KeyStr Return

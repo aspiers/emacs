@@ -1,13 +1,13 @@
 # Use M-x org-agenda; works regardless of key-binding or current
 # buffer.  Also Escape should be more portable than Meta_L etc.
-KeyStr Escape
-String xorg-agenda
-KeyStr Return
-String a
+#KeyStr Escape
+#String xorg-agenda
+#KeyStr Return
+#String a
 
-# Another way of doing it since I bind C-c C-a to `org-agenda',
-# but this only works if the current emacs buffer is in org-mode.
-#KeyStrPress Control_L
-#String ca
-#KeyStrRelease Control_L
-#EOF
+# Another way of doing it since I bind C-c C-a to `org-agenda'
+# both in org-mode and globally.
+KeyStrPress Control_L
+String ca
+KeyStrRelease Control_L
+String a
