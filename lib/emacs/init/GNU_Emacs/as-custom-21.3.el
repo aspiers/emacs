@@ -173,7 +173,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-threaded-links nil)
  '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "%!* NEXT [#B] %?%^{description of personal TODO}
   %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "%!* NEXT [#B] %?%^{description of work TODO}
-  %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "%!* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil))))
+  %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "%!* DONE %?%^{work task done}" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "%!* %T %?%^{description}" "~/roaming/notes/NuisanceCalls.org" nil) ("Wipfel learning" 119 "* SOMEDAY " "~/ifolder/TODO.org" "PROJECT rwipfel"))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
