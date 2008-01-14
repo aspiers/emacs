@@ -1,0 +1,22 @@
+#!/bin/sh
+# org-annotation-helper -- pass a remember-url to emacs
+#
+# Author: Geert Kloosterman <g.j.kloosterman@gmail.com>
+# Date: Sat Nov 19 22:33:18 2005
+
+if [ -z "$1" ]; then
+    echo "$0: Error: no arguments given!" 1>&2
+    exit 1
+fi
+
+# For years I've been using Martin Schwenke's dtemacs script to start
+# Emacs.  The script uses gnuclient to connect to Emacs and starts a
+# new Emacs process when necessary.
+# See http://www.meltin.net/hacks/emacs/
+#
+# dtemacs -batch -eval "(progn (gjk/planner-annotation-helper \"$1\" ) \"\")"
+
+# As of Emacs 22 emacsclient will work too
+emacsclient --eval "(progn (bzg/org-annotation-helper \"$1\" ) nil)"
+
+# EOF

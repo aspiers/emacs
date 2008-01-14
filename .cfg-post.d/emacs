@@ -20,3 +20,11 @@ done
   ln -s muse--main--1.0 lib/emacs/major-modes/muse
 
 emk
+
+gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
+  -t string 'org-annotation-helper %s'
+gconftool-2 -s /desktop/gnome/url-handlers/annotation/enabled -t bool yes
+
+gconftool-2 -s /desktop/gnome/url-handlers/remember/command \
+  -t string 'org-annotation-helper %s'
+gconftool-2 -s /desktop/gnome/url-handlers/remember/enabled -t bool yes
