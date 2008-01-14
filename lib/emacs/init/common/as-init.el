@@ -773,6 +773,8 @@ then invoking this function four times would yield:
 
 ;;}}}
 
+(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
+
 ;;}}}
 ;;{{{ remember-mode with org-mode
 
