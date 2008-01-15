@@ -1,4 +1,4 @@
 # See org-agenda
-KeyStrPress Control_L
-String ca
-KeyStrRelease Control_L
+KeyStr Escape
+String xorg-agenda
+KeyStr Return
