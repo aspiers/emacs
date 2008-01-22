@@ -16,6 +16,38 @@
       (if (looking-at "\n")
           (delete-char 1)))))
 
+(defcustom as-org-mairix-open-personal-command
+  "mairix-profile personal %args% '%search%'"
+  "The mairix command-line to use. If your paths are set up
+correctly, you should not need to change this.
+
+'%search%' will get substituted with the search expression, and
+'%args%' with any additional arguments."
+  :group 'org-mairix
+  :type 'string)
+
+(defcustom as-org-mairix-mutt-display-personal-command
+  "mairix-profile --view personal %search% &"
+  "Command to execute to display mairix search results for Adam's
+personal mail via mutt within an xterm.
+
+'%search%' will get substituted with the search expression, and
+'%args%' with any additional arguments used in the search."
+  :group 'org-mairix-mutt
+  :type 'string)
+
+(defun as-org-mairix-personal-open (search)
+  "Function to open mairix link to personal mail.  Uses
+`org-mairix-open' with a localised value of
+`org-mairix-open-command'."
+  (let ((org-mairix-open-command
+         as-org-mairix-open-personal-command)
+        (org-mairix-mutt-display-command
+         as-org-mairix-mutt-display-personal-command))
+    (org-mairix-open search)))
+
+(org-add-link-type "mairixp" 'as-org-mairix-personal-open)
+
 (defun as-mairix-search-at-point ()
   "[Deprecated] Return the start and end points of a mairix link at
 the current point.  The result is a paired list of character positions
