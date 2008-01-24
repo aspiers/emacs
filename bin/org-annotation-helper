@@ -14,9 +14,19 @@ fi
 # new Emacs process when necessary.
 # See http://www.meltin.net/hacks/emacs/
 #
-# dtemacs -batch -eval "(progn (gjk/planner-annotation-helper \"$1\" ) \"\")"
 
-# As of Emacs 22 emacsclient will work too
-emacsclient --eval "(progn (bzg/org-annotation-helper \"$1\" ) nil)"
+url="$1"
+# dtemacs -batch -eval "(progn (gjk/planner-annotation-helper \"$url\" ) \"\")"
 
-# EOF
+elisp="(progn (bzg/org-annotation-helper \"$url\" ) nil)"
+if emacsclient --help 2>&1 | grep -q -- --eval; then
+  # As of Emacs 22 emacsclient will work too
+  emacsclient --eval "$elisp"
+else
+  echo -n "$url" | \
+    perl -MURI::Escape -0777ne \
+         's!^annotation://![[!; 
+          s/%1C/][/;
+          print uri_unescape($_), "]]\n"' \
+  >> ~/.org-link
+fi
