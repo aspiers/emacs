@@ -186,8 +186,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-mutt-display-command "mairix-profile --view novell %search% &")
  '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
  '(org-mairix-threaded-links nil)
- '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "%!* NEXT [#B] %?
-  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "%!* NEXT [#B] %?
+ '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?" "~/roaming/TODO.org" nil) ("new work NEXT action" 78 "* NEXT %?" "~/ifolder/TODO.org" nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?
+  %[~/.org-mairix-link]" "~/roaming/TODO.org" nil) ("NEXT from work mail" 77 "* NEXT [#B] %?
   %[~/.org-mairix-link]" "~/ifolder/TODO.org" nil) ("work learning material" 76 "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" nil) ("personal task DONE" 100 "%!* DONE %?" "~/ifolder/TODO.org" nil) ("work task DONE" 68 "%!* DONE %?" "~/ifolder/TODO.org" nil) ("nuisance phone call" 88 "%!* %T %?" "~/roaming/notes/NuisanceCalls.org" nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]" "~/ifolder/TODO.org" "PROJECT rwipfel"))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
