@@ -173,6 +173,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-default-notes-file "~/roaming/TODO.org")
  '(org-directory "~/roaming")
  '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
+ '(org-drawers (quote ("PROPERTIES" "CLOCK" "HIDE" "STATE")))
  '(org-email-link-description-format "mail %c: %.30s")
  '(org-export-with-sub-superscripts (quote {}))
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
