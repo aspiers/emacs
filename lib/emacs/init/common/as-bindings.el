@@ -345,9 +345,6 @@ consistent landing spot."
           "as-editing" "bn-kill-line-or-region-save" t)
 (global-set-key [(meta w)]     'bn-kill-line-or-region-save)
                                ;; kill-ring-save
-(autoload 'bn-zap-nearly-to-char "as-editing" "bn-zap-nearly-to-char" t)
-(global-set-key [(meta z)]     'bn-zap-nearly-to-char)
-                               ;; was zap-to-char
 
 (global-set-key [(delete)]     'delete-char)        ;; to make sure
 (global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
@@ -401,6 +398,10 @@ consistent landing spot."
 (global-set-key [(meta o)]                'overwrite-mode)
 (autoload 'as-kill-word "as-editing" "as-kill-word" t)
 (global-set-key [(meta D)]                'as-kill-word)
+
+(autoload 'bn-zap-nearly-to-char "as-editing" "bn-zap-nearly-to-char" t)
+(global-set-key [(meta Z)]                'bn-zap-nearly-to-char)
+
 (global-set-key [(control meta K)]        'as-kill-sexp)
 
 (global-set-key [(control x) K]           'as-destroy-buffer)
