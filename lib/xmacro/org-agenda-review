@@ -1,4 +1,2 @@
 # See org-agenda
-KeyStr Escape
-String xorg-agenda
-KeyStr Return
+\e x org-agenda \n

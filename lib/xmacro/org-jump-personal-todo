@@ -1,5 +1,1 @@
-KeyStrPress Control_L
-String xf
-KeyStrRelease Control_L
-String ~/roaming/TODO.org
-KeyStr Return
+C-x C-f ~/roaming/TODO.org \n

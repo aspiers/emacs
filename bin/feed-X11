@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$DISPLAY" ]; then
+    echo "$0: no DISPLAY" >&2
+    exit 1
+fi
+
+grep -v '^#' | key-seq-to-xmacro | xmacroplay $DISPLAY >/dev/null

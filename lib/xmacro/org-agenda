@@ -1,13 +1,7 @@
-# Use M-x org-agenda; works regardless of key-binding or current
+# This works regardless of key-binding or current
 # buffer.  Also Escape should be more portable than Meta_L etc.
-KeyStr Escape
-String xorg-agenda
-KeyStr Return
-String a
+\e x org-agenda \n a
 
 # Another way of doing it since I bind C-c C-a to `org-agenda'
 # both in org-mode and globally.
-#KeyStrPress Control_L
-#String ca
-#KeyStrRelease Control_L
-#String a
+#C-c C-a a

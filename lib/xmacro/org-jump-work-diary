@@ -1,5 +1,1 @@
-KeyStrPress Control_L
-String xf
-KeyStrRelease Control_L
-String ~/ifolder/diary.org
-KeyStr Return
+C-x C-f ~/ifolder/diary.org \n

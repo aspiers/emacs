@@ -18,4 +18,4 @@ fi
 # switching before feeding the command to emacs.
 sleep 0.2
 
-grep -v '^#' | xmacroplay $DISPLAY >/dev/null
+feed-X11

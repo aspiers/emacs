@@ -1,5 +1,2 @@
 # See org-agenda
-KeyStrPress Control_L
-String c
-KeyStrRelease Control_L
-String qm
+C-c q m

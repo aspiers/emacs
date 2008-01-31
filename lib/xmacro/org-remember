@@ -1,9 +1,4 @@
 # See org-agenda
-KeyStrPress Control_L
-String c
-KeyStrRelease Control_L
-String q
+C-c q
 
-#KeyStr Escape
-#String xorg-remember
-#KeyStr Return
+#\e x org-remember \n
