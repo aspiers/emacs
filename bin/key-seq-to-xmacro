@@ -1,4 +1,4 @@
-#!/usr/bin/perl -040n
+#!/usr/bin/perl
 #
 # Converts STDIN sequences such as 'C-u M-e foo \n' into
 # the equivalent xmacroplay commands.
@@ -6,53 +6,48 @@
 use strict;
 use warnings;
 
-chomp;
-s/\n$//; # necessary to trim trailing newline from end of STDIN
-#print "Got: [$_]\n";
+my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
+foreach (@actions) {
+  #print "Got: [$_]\n";
 
-if (/^C-M-(.)$/) {
-  print <<EOF;
-KeyStrPress Control_L
-KeyStrPress Meta_L
-String $1
-KeyStrRelease Meta_L
-KeyStrRelease Control_L
-EOF
-  next;
+  if (/^((?:[CMSH]-){1,4})(.)$/) {
+    my ($modifiers, $key) = ($1, $2);
+    my @mods = split /-/, $modifiers;
+    foreach my $abbrev (@mods) {
+      my $keysym = $abbrev eq 'C' ? 'Control_L'
+                 : $abbrev eq 'M' ? 'Meta_L'
+                 : $abbrev eq 'S' ? 'Super_R'
+                 : $abbrev eq 'H' ? 'Hyper_R'
+                 : die "BUG";
+      print "KeyStrPress $keysym\n";
+    }
+    print "String $key\n";
+    foreach my $abbrev (reverse @mods) {
+      my $keysym = $abbrev eq 'C' ? 'Control_L'
+                 : $abbrev eq 'M' ? 'Meta_L'
+                 : $abbrev eq 'S' ? 'Super_R'
+                 : $abbrev eq 'H' ? 'Hyper_R'
+                 : die "BUG";
+      print "KeyStrRelease $keysym\n";
+    }
+    next;
+  }
+
+  if (/^\\n$/) {
+    print "KeyStr Return\n";
+    next;
+  }
+  
+  if (/^\\e$/) {
+    print "KeyStr Escape\n";
+    next;
+  }
+  
+  if (/^\\t$/) {
+    print "KeyStr Tab\n";
+    next;
+  }
+  
+  # We assume anything else is a normal string.
+  print "String $_\n";
 }
-
-if (/^M-(.)$/) {
-  print <<EOF;
-KeyStrPress Meta_L
-String $1
-KeyStrRelease Meta_L
-EOF
-  next;
-}
-
-if (/^C-(.)$/) {
-  print <<EOF;
-KeyStrPress Control_L
-String $1
-KeyStrRelease Control_L
-EOF
-  next;
-}
-
-if (/^\\n$/) {
-  print "KeyStr Return\n";
-  next;
-}
-
-if (/^\\e$/) {
-  print "KeyStr Escape\n";
-  next;
-}
-
-if (/^\\t$/) {
-  print "KeyStr Tab\n";
-  next;
-}
-
-# We assume anything else is a normal string.
-print "String $_\n";
