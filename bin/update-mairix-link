@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# find next direct link to a message
+echo 'C-s <mairix://m: \n' | switch-feed-emacs
+
+# select it
+echo '\n' | feed-X11
+
+sleep 2
+# assume new mutt window now has focus
+
+# capture new link and quit mutt
+echo 'M-m' | feed-X11
+sleep 0.5
+echo 'M-m \n q q q' | feed-X11
+sleep 0.5
+
+switch-feed-emacs <<EOF
+# go to beginning of <mairix://...> link
+C-r < \n
+
+# Zap to > at end of link
+M-z >
+
+# Yank new link
+C-c M y
+
+# Try to indent right
+\t
+EOF
+
+# switch back to xterm
+wmctrl -a 'adam@atlantic'
+
+echo 'KeyStr Up' | xmacroplay $DISPLAY >/dev/null
