@@ -1,0 +1,58 @@
+#!/usr/bin/perl -040n
+#
+# Converts STDIN sequences such as 'C-u M-e foo \n' into
+# the equivalent xmacroplay commands.
+
+use strict;
+use warnings;
+
+chomp;
+s/\n$//; # necessary to trim trailing newline from end of STDIN
+#print "Got: [$_]\n";
+
+if (/^C-M-(.)$/) {
+  print <<EOF;
+KeyStrPress Control_L
+KeyStrPress Meta_L
+String $1
+KeyStrRelease Meta_L
+KeyStrRelease Control_L
+EOF
+  next;
+}
+
+if (/^M-(.)$/) {
+  print <<EOF;
+KeyStrPress Meta_L
+String $1
+KeyStrRelease Meta_L
+EOF
+  next;
+}
+
+if (/^C-(.)$/) {
+  print <<EOF;
+KeyStrPress Control_L
+String $1
+KeyStrRelease Control_L
+EOF
+  next;
+}
+
+if (/^\\n$/) {
+  print "KeyStr Return\n";
+  next;
+}
+
+if (/^\\e$/) {
+  print "KeyStr Escape\n";
+  next;
+}
+
+if (/^\\t$/) {
+  print "KeyStr Tab\n";
+  next;
+}
+
+# We assume anything else is a normal string.
+print "String $_\n";
