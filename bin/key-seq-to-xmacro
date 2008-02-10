@@ -6,6 +6,14 @@
 use strict;
 use warnings;
 
+my %keysyms;
+open(KEYSYMS, "/usr/include/X11/keysymdef.h")
+  or die "Couldn't open(keysymdef.h): $!\n";
+while (<KEYSYMS>) {
+  /#define XK_(\w\S+)/ && $keysyms{$1}++;
+}
+close(KEYSYMS);
+
 my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
 foreach (@actions) {
   #print "Got: [$_]\n";
@@ -21,12 +29,11 @@ foreach (@actions) {
                  : die "BUG";
       print "KeyStrPress $keysym\n";
     }
-    if (length $key == 1) {
-      print "String $key\n";
+    if (length $key > 1 and $keysyms{$key}) {
+      print "KeyStr $key\n";
     }
     else {
-      # assume it's a keysym
-      print "KeyStr $key\n";
+      print "String $key\n";
     }
     foreach my $abbrev (reverse @mods) {
       my $keysym = $abbrev eq 'C' ? 'Control_L'
@@ -53,7 +60,17 @@ foreach (@actions) {
     print "KeyStr Tab\n";
     next;
   }
-  
+
+  if ($keysyms{$_}) {
+    print "KeyStr $_\n";
+    next;
+  }
+
+  if (/^\\(.+)$/ and $keysyms{$1}) {
+    # escaped keysym -> treat as string
+    s/^\\//;
+  }
+
   # We assume anything else is a normal string.
   print "String $_\n";
 }
