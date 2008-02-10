@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# Converts STDIN sequences such as 'C-u M-e foo \n' into
+# Converts STDIN sequences such as 'M-right C-u M-e foo \n' into
 # the equivalent xmacroplay commands.
 
 use strict;
@@ -10,7 +10,7 @@ my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
 foreach (@actions) {
   #print "Got: [$_]\n";
 
-  if (/^((?:[CMSH]-){1,4})(.)$/) {
+  if (/^((?:[CMSH]-){1,4})(.+)$/) {
     my ($modifiers, $key) = ($1, $2);
     my @mods = split /-/, $modifiers;
     foreach my $abbrev (@mods) {
@@ -21,7 +21,13 @@ foreach (@actions) {
                  : die "BUG";
       print "KeyStrPress $keysym\n";
     }
-    print "String $key\n";
+    if (length $key == 1) {
+      print "String $key\n";
+    }
+    else {
+      # assume it's a keysym
+      print "KeyStr $key\n";
+    }
     foreach my $abbrev (reverse @mods) {
       my $keysym = $abbrev eq 'C' ? 'Control_L'
                  : $abbrev eq 'M' ? 'Meta_L'
