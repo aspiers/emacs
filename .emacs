@@ -59,14 +59,22 @@ placed here.")
 If this variable is nil then `find-function' searches `load-path' by
 default.")
 
-(mapcar (lambda (x)
+;; (require 'cl)
+;; (setq org-source-paths
+;;       (remove-if-not
+;;        (lambda (dir) (file-directory-p dir))
+;;        (directory-files (concat as-emacs-dir "/major-modes") 'full-paths "org[-.]")))
+;; (mapc (lambda (dir) (add-to-list 'find-function-source-path dir))
+;;       org-source-paths)
+
+(mapc (lambda (x)
           (let ((path (concat as-emacs-dir "/" x)))
 	    (message path)
             (and (file-directory-p path)
                  (add-to-list 'find-function-source-path path))))
 	'(
 	  "major-modes"
-	  "major-modes/org-hg"
+	  "major-modes/org-mode.git"
 	  "major-modes/remember"
 	  "major-modes/xtla"
 	  "major-modes/mmm"
