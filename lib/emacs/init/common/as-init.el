@@ -217,7 +217,11 @@
 ;;{{{ python-mode
 
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(autoload 'python-mode "python-mode" "python-mode" t)
+
+(cond ((>= emacs-major-version 22)
+       (autoload 'python-mode "python" "python-mode" t))
+      (t
+       (autoload 'python-mode "python-mode" "python-mode" t)))
 
 ;;}}}
 ;;{{{ Ruby
