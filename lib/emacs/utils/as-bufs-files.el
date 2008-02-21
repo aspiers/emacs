@@ -94,11 +94,11 @@ Wraps around `rename-file'."
   (interactive
    (let ((cur-buf-fn
           (or (buffer-file-name)
-                (error "Current buffer does not have a filename"))))
+              (error "Current buffer does not have a filename"))))
      (list ;; interactive expects a list matching the defun arglist
       (expand-file-name
        (read-file-name
-        (format "Rename %s to: " cur-buf-fn)  ;; prompt
+        (format "Rename %s to: " cur-buf-fn) ;; prompt
 
         ;; Directory to complete in.  We use a nasty trick here and
         ;; include the whole original filename - seems not to matter
