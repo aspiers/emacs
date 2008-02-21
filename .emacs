@@ -121,9 +121,9 @@ default.")
    (shell-command-to-string
     (concat ". $ZDOT_FIND_HOOKS " hook-name)) "\n"))
 
-;; (mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
-;;         ;; .emacs.d already taken
-;;         (as-find-hooks ".emacs-hooks.d"))
+(mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
+        ;; .emacs.d already taken
+        (as-find-hooks ".emacs-hooks.d"))
 
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
