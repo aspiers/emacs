@@ -1,3 +1,16 @@
+# {{{ Determine emacs version
+
+ifndef EMACS
+  EMACS=emacs
+endif
+
+version=$(shell $(EMACS) --version)
+
+VERSION_NUMBER=$(shell echo "$(version)" | \
+                   perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
+
+# }}}
+
 # {{{ Tweakable parameters
 
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
@@ -45,11 +58,16 @@ THIRD_PARTY_PKG_DIRS =            \
 IGNORE_PATHS = 					\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
 	major-modes/monkey-2
-IGNORE_FILES =		    \
-	loaddefs.el	\
-	major-modes/sdf.el  \
-	major-modes/mediawiki.el \
+IGNORE_FILES =		    		\
+	loaddefs.el			\
+	major-modes/sdf.el  		\
+	major-modes/mediawiki.el 	\
 	major-modes/planner*.el
+
+ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
+# org-annotation-helper.el needs url which isn't in emacs 21
+  IGNORE_FILES += major-modes/org-annotation-helper.el
+endif
 
 # }}}
 # {{{ Directories to scan for autoload cookies
@@ -115,15 +133,8 @@ AS_INIT_ELC = init/common/as-init.elc
 
 # {{{ Determine compilation variables and parameters
 
-ifndef EMACS
-  EMACS=emacs
-endif
-
 BATCH_EVAL=$(EMACS) -q --batch --no-site-file --eval
 
-version=$(shell $(EMACS) --version)
-VERSION_NUMBER=$(shell echo "$(version)" | \
-                   perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$$2"')
 SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
 		'(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
 
