@@ -1,0 +1,4 @@
+class <field "myjoblet">(Joblet):
+
+    def joblet_started_event(self):
+        <cursor>

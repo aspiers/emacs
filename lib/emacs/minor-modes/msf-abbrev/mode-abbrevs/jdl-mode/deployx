@@ -1,0 +1,11 @@
+if __mode__ == "deploy":
+    try:
+        jobgroupname = "<field "mygroup">"
+        jobgroup = getMatrix().getGroup(TYPE_JOB, jobgroupname)
+        if jobgroup == None:
+            jobgroup = getMatrix().createGroup(TYPE_JOB, jobgroupname)
+        jobgroup.addMember(__jobname__)
+    except:
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        print "Error adding %s to %s group: %s %s" % (__jobname__, jobgroupname, exc_type, exc_value)
+
