@@ -31,7 +31,7 @@ EL_OVERRIDES = pcvs*
 # {{{ 3rd party packages
 
 DVC_DIR      = major-modes/dvc
-ORG_DIR      = major-modes/org-hg
+ORG_DIR      = major-modes/org-mode.git
 EPG_DIR      = major-modes/epg-0.0.15
 REMEMBER_DIR = major-modes/remember-1.9
 
