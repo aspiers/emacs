@@ -106,7 +106,7 @@
 ;;
 ;;   edr SPC
 ;;
-;; You may as well define a key binding for it's expansion function
+;; You may as well define a key binding for its expansion function
 ;;
 ;;   (define-key ruby-mode-map 
 ;;               (kbd "C-c e") 'msf-expand/ruby-mode/edr)
