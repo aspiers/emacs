@@ -31,6 +31,7 @@ file modes."
     (widen)
     (save-match-data
       (and
+       (>= (point-max) 3)
        (equal (buffer-substring 1 3) "#!")
        (let* ((current-mode (file-modes (buffer-file-name)))
               (add-mode (logand ?\111 (default-file-modes)))
