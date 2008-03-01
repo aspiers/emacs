@@ -445,11 +445,23 @@ consistent landing spot."
 (global-set-key "\C-cat"  'as-find-personal-todo)
 (fset 'as-find-personal-diary "\C-x\C-f~/roaming/diary.org")
 (global-set-key "\C-cad"  'as-find-personal-diary)
+;;(fset 'as-find-personal-note "\C-x\C-f~/roaming/notes/")
+(defun as-find-personal-note ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/roaming/notes/" "Find note: "))
+(global-set-key "\C-can"  'as-find-personal-note)
 
 (fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
 (global-set-key "\C-caT"  'as-find-work-todo)
 (fset 'as-find-work-diary "\C-x\C-f~/ifolder/Novell-diary.org")
 (global-set-key "\C-caD"  'as-find-work-diary)
+;;(fset 'as-find-work-note "\C-x\C-f~/ifolder/notes/")
+(defun as-find-work-note ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/ifolder/notes/" "Find note: "))
+(global-set-key "\C-caN"  'as-find-work-note)
 
 (global-set-key "\C-cA"   'as-align-to-previous-line)
 (global-set-key "\C-cb"   'bury-buffer)
