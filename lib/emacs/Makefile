@@ -66,7 +66,9 @@ IGNORE_FILES =		    		\
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
-  IGNORE_FILES += major-modes/org-annotation-helper.el
+# ditto org-irc.el which needs erc
+  IGNORE_FILES += major-modes/org-annotation-helper.el \
+		  $(ORG_DIR)/org-irc.el
 endif
 
 # }}}
@@ -352,11 +354,13 @@ clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
 .org-installed: $(ORG_DIR)/org.el
-	$(MAKE) -C $(ORG_DIR) install-lisp install-info \
+	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
-		infodir=$(infodir) \
-		lispdir=$(PRE_INSTALL_DIR) \
-	&& touch $@
+		lispdir=$(PRE_INSTALL_DIR)
+	-$(MAKE) -C $(ORG_DIR) install-info \
+		prefix=$(prefix) \
+		infodir=$(infodir)
+	touch $@
 
 # }}}
 # {{{ mmm-mode
@@ -496,7 +500,7 @@ clean-pgg:
 	rm -f .pgg-made
 	$(MAKE) -C major-modes/pgg clean
 .pgg-made: major-modes/pgg/pgg.elc
-	@cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
+	@-cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
 
 # }}}
 # {{{ dvc-mode
