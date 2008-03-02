@@ -463,6 +463,14 @@ consistent landing spot."
                      nil "~/ifolder/notes/" "Find note: "))
 (global-set-key "\C-caN"  'as-find-work-note)
 
+(defun as-find-from-home ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/" "Find file: "))
+(global-set-key [(control ~)] 'as-find-from-home)
+(global-set-key "\C-cah"      'as-find-from-home)
+
+
 (global-set-key "\C-cA"   'as-align-to-previous-line)
 (global-set-key "\C-cb"   'bury-buffer)
 (global-set-key "\C-cB"   'as-bounce-buffer)
