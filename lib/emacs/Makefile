@@ -499,6 +499,7 @@ pgg: .pgg-made
 clean-pgg:
 	rm -f .pgg-made
 	$(MAKE) -C major-modes/pgg clean
+major-modes/pgg/%.elc: LIBDIRS += major-modes/pgg
 .pgg-made: major-modes/pgg/pgg.elc
 	@-cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
 
