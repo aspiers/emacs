@@ -165,7 +165,13 @@ is already hidden."
 ;;}}}
 ;;{{{ org-mode-hook bindings
 
-(eval-when-compile (require 'org))
+(eval-when-compile
+  ;; org-default-extensions defaults to (org-irc) which causes a
+  ;; compile to require erc.el which is not in emacs 21.
+  (if (or (not (boundp 'org-default-extensions))
+          (memq 'org-irc 'org-default-extensions))
+      (defvar org-default-extensions '(org-mouse)))
+  (require 'org))
 
 (defun as-local-set-outline-expose-keys ()
   "Bind local outline expose keys the way Adam likes them."
