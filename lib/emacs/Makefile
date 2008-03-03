@@ -506,6 +506,8 @@ major-modes/pgg/%.elc: LIBDIRS += major-modes/pgg
 # }}}
 # {{{ dvc-mode
 
+utils/tree-widget-2.0/%.elc: LIBDIRS += utils/tree-widget-2.0
+
 dvc_build_dir=$(DVC_DIR)/++build
 dvc: .dvc-installed
 clean-dvc:
