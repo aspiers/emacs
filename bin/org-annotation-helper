@@ -4,6 +4,8 @@
 # Author: Geert Kloosterman <g.j.kloosterman@gmail.com>
 # Date: Sat Nov 19 22:33:18 2005
 
+me=`basename $0`
+
 if [ -z "$1" ]; then
     echo "$0: Error: no arguments given!" 1>&2
     exit 1
@@ -23,10 +25,13 @@ if emacsclient --help 2>&1 | grep -q -- --eval; then
   # As of Emacs 22 emacsclient will work too
   emacsclient --eval "$elisp"
 else
+  linkfile="~/.org-link"
   echo -n "$url" | \
     perl -MURI::Escape -0777ne \
          's!^annotation://![[!; 
           s/%1C/][/;
           print uri_unescape($_), "]]\n"' \
-  >> ~/.org-link
+  > $linkfile
+  
+  logger -t "$me[$$]" -- "new $linkfile: `cat ${linkfile/\~/$HOME}`"
 fi
