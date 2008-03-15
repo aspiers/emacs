@@ -25,13 +25,14 @@ if emacsclient --help 2>&1 | grep -q -- --eval; then
   # As of Emacs 22 emacsclient will work too
   emacsclient --eval "$elisp"
 else
-  linkfile="~/.org-link"
+  linkfile="$HOME/.org-link"
+  hlinkfile="${linkfile/$HOME/~}"
   echo -n "$url" | \
     perl -MURI::Escape -0777ne \
          's!^annotation://![[!; 
           s/%1C/][/;
-          print uri_unescape($_), "]]\n"' \
+          print uri_unescape($_), "]]"' \
   > $linkfile
   
-  logger -t "$me[$$]" -- "new $linkfile: `cat ${linkfile/\~/$HOME}`"
+  logger -t "$me[$$]" -- "new $hlinkfile: `cat $linkfile`"
 fi
