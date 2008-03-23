@@ -226,7 +226,7 @@
 ;;}}}
 ;;{{{ Ruby
 
-(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\(\\.rb\\|Rakefile\\)\\'" . ruby-mode))
 (autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
 
 ;;}}}
