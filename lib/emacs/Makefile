@@ -353,7 +353,7 @@ org: .org-installed
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(ORG_DIR)/org.el
+.org-installed: $(ORG_DIR)/lisp/org.el
 	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
