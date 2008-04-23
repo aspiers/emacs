@@ -76,25 +76,22 @@
 
 ;;;###autoload
 (defun as-join-line-with-next (&optional preserve-comment)
-  "Joins the current line with the next.  Removes any continuation
-backslash from the end of the line, and any comment prefix from the
-beginning of the next (unless a prefix argument is given) before
-joining."
+  "Joins the current line with the next.  Removes any
+continuation backslash from the end of the line, and any prefix
+matching `adaptive-fill-regexp' from the beginning of the
+next (unless a prefix argument is given) before joining."
   (interactive "*P")
 
   (save-excursion
     (end-of-line)
     (forward-char -1)
     (and (looking-at "\\\\") (delete-char 1))
-;;  (message (format "preserve-comment is %s" preserve-comment))
     (unless (or preserve-comment (not comment-start))
         (save-excursion
           (forward-line 1)
           (let ((beg (point)))
-            (forward-line 1)
-            (condition-case err
-                (uncomment-region beg (point))
-              (error nil)))))
+            (if (looking-at adaptive-fill-regexp)
+                (replace-match "")))))
     (join-line 1)))
 
 ;;}}}
