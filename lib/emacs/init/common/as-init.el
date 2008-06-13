@@ -148,6 +148,17 @@
 (add-hook 'diary-hook 'appt-make-list)
 
 ;;}}}
+;;{{{ UTF-16 support
+
+(add-to-list 'auto-coding-regexp-alist '("^\xFF\xFE.*\x0D\x00$" . utf-16-le-dos) t)
+(add-to-list 'auto-coding-regexp-alist '("^\xFE\xFF.*\x0D\x00$" . utf-16-be-dos) t)
+(add-to-list 'auto-coding-regexp-alist '("^\xFF\xFE" . utf-16-le) t)
+(add-to-list 'auto-coding-regexp-alist '("^\xFE\xFF" . utf-16-be) t)
+
+(defun utf-16-le-pre-write-conversion (start end) nil)
+(defun utf-16-be-pre-write-conversion (start end) nil)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
