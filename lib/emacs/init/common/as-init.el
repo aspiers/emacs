@@ -278,8 +278,12 @@
 ;;}}}
 ;;{{{ ecmascript-mode
 
-(add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
-(autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
+;; (add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
+;; (autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
+
+;; Steve Yegge to the rescue
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;;}}}
 
