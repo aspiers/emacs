@@ -39,3 +39,9 @@ function with `&rest' args."
          (rest      (cadr (cdr arg-types))))
     (cons mandatory (if rest 'many
                       (+ mandatory optional)))))
+
+(defun remove-all-text-properties (string)
+  "Return a copy of STRING with all text properties removed."
+  (let ((copy string))
+    (set-text-properties 0 (length copy) nil copy)
+    copy))
