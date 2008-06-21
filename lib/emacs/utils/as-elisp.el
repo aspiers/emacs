@@ -45,3 +45,5 @@ function with `&rest' args."
   (let ((copy string))
     (set-text-properties 0 (length copy) nil copy)
     copy))
+
+(provide 'as-elisp)
