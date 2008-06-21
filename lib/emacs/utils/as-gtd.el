@@ -83,4 +83,54 @@ shell command defined by `org-mairix-mutt-display-command'."
       (or show-async-buf
           (delete-windows-on (get-buffer tmpbuf))))))
 
+(require 'org)
+
+(defun as-convert-buffer-sub-to-effort ()
+  "Convert all 'sub*' tags within a buffer into 'Effort' properties."
+  (interactive)
+  (org-map-entries 'as-convert-headline-sub-to-effort nil 'file))  
+
+(defun as-convert-headline-sub-to-effort ()
+  "Convert a headline with a 'sub*' tag into an 'Effort' property."
+  (interactive)
+  (unless (org-on-heading-p)
+    (error "Not on heading"))
+  (let ((origtags (org-get-tags)))
+    (mapcar
+     (lambda (tag)
+       (when (equal (substring tag 0 3) "sub")
+         (org-set-property "Effort"
+                           (cdr (assoc (substring tag 3)
+                                       '(("10"  . "0:10")
+                                         ("30"  . "0:30")
+                                         ("60"  . "1:00")
+                                         ("120" . "2:00")
+                                         ("4"   . "4:00")
+                                         ("day" . "8:00")))))
+         (org-toggle-tag tag 'off)))
+     origtags)))
+
+(defun org-dblock-write:extract-actions (params)
+  "Dynamic block writer for extracting ACTION items from meeting minutes."
+  (insert
+   (concat
+    "| Owner | Action |\n|-\n"
+    (apply 'concat
+           (car
+            (org-map-entries 'org-dblock-write:extract-action
+                             "/ACTION" 'file)))))
+  (backward-delete-char 1) ;; not sure where the extra \n comes from
+  (org-table-align))
+
+(defun org-dblock-write:extract-action ()
+  "Generates a row in an actions table from a single ACTION headline
+at point."
+  (let ((owner (car (org-get-tags))))
+    (if (looking-at org-complex-heading-regexp)
+        (let ((item (match-string 4)))
+          (concat "| " owner " | " item " |\n"))
+      (error "Odd, '%s' didn't match '%s'"
+             (buffer-substring (point) (+ (point) 20))
+             org-complex-heading-regexp))))
+
 (provide 'as-gtd)
