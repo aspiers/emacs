@@ -74,7 +74,7 @@ default.")
                  (add-to-list 'find-function-source-path path))))
 	'(
 	  "major-modes"
-	  "major-modes/org-mode.git"
+	  "major-modes/org-mode.git/lisp"
 	  "major-modes/remember"
 	  "major-modes/xtla"
 	  "major-modes/mmm"
