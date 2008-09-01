@@ -175,6 +175,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-archive-save-context-info (quote (time file category todo priority itags olpath ltags)))
  '(org-columns-default-format "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
+ '(org-default-extensions nil)
  '(org-default-notes-file "~/roaming/TODO.org")
  '(org-directory "~/roaming")
  '(org-disputed-keys (quote (([(control shift right)] . [(control shift n)]) ([(control shift left)] . [(control shift p)]) ([(control 44)] . [(control 39)]) ([(control tab)] . [(control meta tab)]))))
