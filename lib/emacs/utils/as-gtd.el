@@ -85,6 +85,7 @@ shell command defined by `org-mairix-mutt-display-command'."
 
 (require 'org)
 
+;;;###autoload
 (defun as-convert-buffer-sub-to-effort ()
   "Convert all 'sub*' tags within a buffer into 'Effort' properties."
   (interactive)
@@ -110,11 +111,15 @@ shell command defined by `org-mairix-mutt-display-command'."
          (org-toggle-tag tag 'off)))
      origtags)))
 
+;;;###autoload
 (defun org-dblock-write:extract-actions (params)
   "Dynamic block writer for extracting ACTION items from meeting minutes."
   (insert
    (concat
-    "| Owner | Action |\n|-\n"
+    "| Owner | Action |
+| / | < |
+|-
+"
     (apply 'concat
            (car
             (org-map-entries 'org-dblock-write:extract-action
