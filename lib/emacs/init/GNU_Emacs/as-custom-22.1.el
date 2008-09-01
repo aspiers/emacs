@@ -224,6 +224,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-mutt-display-command "mairix-profile --view novell %search% &")
  '(org-mairix-open-command "mairix-profile novell %args% '%search%'")
  '(org-mairix-threaded-links nil)
+ '(org-odd-levels-only t)
  '(org-remember-default-headline "bottom")
  '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("new work NEXT action" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&
   %[~/.org-mairix-link]%&" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&
