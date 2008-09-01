@@ -40,6 +40,7 @@ function with `&rest' args."
     (cons mandatory (if rest 'many
                       (+ mandatory optional)))))
 
+;; See `org-no-properties'.
 (defun remove-all-text-properties (string)
   "Return a copy of STRING with all text properties removed."
   (let ((copy string))
