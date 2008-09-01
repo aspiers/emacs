@@ -123,7 +123,11 @@ shell command defined by `org-mairix-mutt-display-command'."
     (apply 'concat
            (car
             (org-map-entries 'org-dblock-write:extract-action
-                             "/ACTION" 'file)))))
+                             "/ACTION" 'file))))
+;;    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
+;;      (insert "Last block update at: "
+;;              (format-time-string fmt (current-time)))))
+   )
   (backward-delete-char 1) ;; not sure where the extra \n comes from
   (org-table-align))
 
