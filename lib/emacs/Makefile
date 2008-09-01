@@ -68,7 +68,7 @@ ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
 # ditto org-irc.el which needs erc
   IGNORE_FILES += major-modes/org-annotation-helper.el \
-		  $(ORG_DIR)/org-irc.el
+		  $(ORG_DIR)/lisp/org-irc.el
 endif
 
 # }}}
@@ -320,7 +320,7 @@ INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
 	major-modes 		\
 	major-modes/mmm 	\
-	$(ORG_DIR) 	\
+	$(ORG_DIR)/lisp 	\
 	minor-modes 		\
 	utils
 
@@ -338,7 +338,7 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 # {{{ Special rules for utils files
 
 utils/as-gtd.elc: utils/org-mairix.elc
-utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)
+utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/lisp
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 utils/org-crypt.elc: epg
@@ -347,7 +347,7 @@ utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 # }}}
 # {{{ org-mode
 
-major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)
+major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)/lisp
 
 org: .org-installed
 clean-org:
