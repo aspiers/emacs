@@ -21,10 +21,12 @@ done
 
 emk
 
-gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
-  -t string 'org-annotation-helper %s'
-gconftool-2 -s /desktop/gnome/url-handlers/annotation/enabled -t bool yes
+if which gconftool-2 >/dev/null 2>&1; then
+  gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
+    -t string 'org-annotation-helper %s'
+  gconftool-2 -s /desktop/gnome/url-handlers/annotation/enabled -t bool yes
 
-gconftool-2 -s /desktop/gnome/url-handlers/remember/command \
-  -t string 'org-annotation-helper %s'
-gconftool-2 -s /desktop/gnome/url-handlers/remember/enabled -t bool yes
+  gconftool-2 -s /desktop/gnome/url-handlers/remember/command \
+    -t string 'org-annotation-helper %s'
+  gconftool-2 -s /desktop/gnome/url-handlers/remember/enabled -t bool yes
+fi
