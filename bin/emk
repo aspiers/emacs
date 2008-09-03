@@ -1,4 +1,13 @@
 #!/bin/sh
 
-exec gmake -C ~/lib/emacs "$@"
+if which gmake >/dev/null 2>&1; then
+  MAKE=gmake
+elif which make >/dev/null 2>&1; then
+  MAKE=make
+else
+  echo "No make found; aborting!" >&2
+  exit 1
+fi
+
+exec $MAKE -C ~/lib/emacs "$@"
 #exec ~/lib/emacs/compile "$@"
