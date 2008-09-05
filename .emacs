@@ -73,6 +73,7 @@ default.")
             (and (file-directory-p path)
                  (add-to-list 'find-function-source-path path))))
 	'(
+	  "init/common"
 	  "major-modes"
 	  "major-modes/org-mode.git/lisp"
 	  "major-modes/remember"
