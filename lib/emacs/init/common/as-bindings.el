@@ -588,6 +588,17 @@ consistent landing spot."
 ;;}}}
 (global-set-key "\C-ctb"   'as-toggle-indent-tabs-mode)
 
+;;{{{ as-toggle-case-fold-search
+
+(defun as-toggle-case-fold-search ()
+  "Toggles the value of case-fold-search in the current buffer"
+  (interactive)
+  (setq case-fold-search (not case-fold-search))
+  (message "case-fold-search set to %s" case-fold-search))
+
+;;}}}
+(global-set-key "\C-ctc"   'as-toggle-case-fold-search)
+
 ;;{{{ as-toggle-debug-on-error
 
 (defun as-toggle-debug-on-error ()
