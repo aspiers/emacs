@@ -1,5 +1,6 @@
 (autoload 'eldoc-function-arglist "eldoc")
 
+;;;###autoload
 (defun function-arg-types (fn)
   "Returns the arguments of FN as a 3 element (MANDATORY OPTIONAL REST).
 MANDATORY and OPTIONAL are lists containing the argument symbols; REST
@@ -27,6 +28,7 @@ is the symbol which remaining arguments will be assigned to."
           arglist)
     (list mandatory optional rest)))
 
+;;;###autoload
 (defun function-arity (fn)
   "Return minimum and maximum number of args allowed for FN.
 Unlike with `subr-arity', FN does not have to be a built-in function.
@@ -41,10 +43,21 @@ function with `&rest' args."
                       (+ mandatory optional)))))
 
 ;; See `org-no-properties'.
+;;;###autoload
 (defun remove-all-text-properties (string)
   "Return a copy of STRING with all text properties removed."
   (let ((copy string))
     (set-text-properties 0 (length copy) nil copy)
     copy))
+
+;;;###autoload
+(defun string-join (list separator)
+  "Takes a list of string and joins them using delimiter."
+  (mapconcat 'identity list separator))
+
+;;;###autoload
+(defun string-concat (list)
+  "Takes a list of strings and joins them."
+  (mapconcat 'identity list ""))
 
 (provide 'as-elisp)
