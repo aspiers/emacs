@@ -118,6 +118,7 @@ generates a table with one row per headline.
 
 The `:keyword' parameter determines the tag search to use for
 selecting which headlines to extract."
+  ;; TODO: pass :delimiter param to table-row-todo-owner
   (insert
    (concat
     "| Owner | Action |
@@ -136,13 +137,15 @@ selecting which headlines to extract."
   (backward-delete-char 1) ;; not sure where the extra \n comes from
   (org-table-align))
 
-(defun org-dblock-write:table-row-todo-owner ()
+(defun org-dblock-write:table-row-todo-owner (&optional owner-delim)
   "Generates a row in an actions table from a single headline at
 point."
-  (let ((owner (car (org-get-tags))))
+  (let ((owners (mapconcat 'identity
+                           (org-get-tags)
+                           (or owner-delim ", "))))
     (if (looking-at org-complex-heading-regexp)
         (let ((item (match-string 4)))
-          (concat "| " owner " | " item " |\n"))
+          (concat "| " owners " | " item " |\n"))
       (error "Odd, '%s' didn't match '%s'"
              (buffer-substring (point) (+ (point) 20))
              org-complex-heading-regexp))))
