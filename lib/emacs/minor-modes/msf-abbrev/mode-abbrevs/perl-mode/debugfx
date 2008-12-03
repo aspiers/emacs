@@ -1,0 +1,4 @@
+sub debugf {
+  my $level = shift;
+  warn sprintf @_, "\n" if $opts{verbosity} >= $level;
+}
