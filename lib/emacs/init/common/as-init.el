@@ -878,7 +878,11 @@ then invoking this function four times would yield:
 (add-hook
  'mail-mode-hook
  (lambda ()
-   (define-key mail-mode-map [(control c) (control c)] 'server-edit)))
+   (define-key mail-mode-map [(control c) (control c)]
+     (lambda ()
+       (interactive)
+       (save-buffer)
+       (server-edit)))))
 
 ;;}}}
 ;;{{{ crm114-mode
