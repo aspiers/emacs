@@ -520,7 +520,7 @@ C-style indentation, use cssm-c-style-indenter.")
  (lambda ()
    ;; Turn on auto-fill if composing e-mail or news.
    (and
-    (string-match "mutt-\\|\\.article\\|\\.letter"
+    (string-match "mutt-\\|\\.article\\|\\.letter\\|itsalltext"
                   (or (buffer-file-name)
                       ;; For some reason I've seen mutt-invoked emacs
                       ;; instances yield nil for (buffer-file-name)
@@ -873,7 +873,7 @@ then invoking this function four times would yield:
 ;;{{{ mutt
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
-(add-to-list 'auto-mode-alist '("/mutt-" . mail-mode))
+(add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
 (add-hook 'mail-mode-hook 'turn-on-auto-fill)
 (add-hook
  'mail-mode-hook
