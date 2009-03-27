@@ -136,6 +136,12 @@
 ;;}}}
 ;;{{{ client/server mode
 
+(eval-after-load "server"
+  '(add-hook 'server-done-hook 'as-maybe-focus-to-mutt))
+
+(eval-after-load "server"
+  '(add-hook 'server-done-hook 'as-maybe-focus-to-firefox))
+
 (defun ss ()
   "Abbreviation for `server-start'."
   (interactive)
@@ -515,17 +521,24 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;{{{ Text
 
+(autoload 'server-edit "server")
 (add-hook
  'text-mode-hook
  (lambda ()
    ;; Turn on auto-fill if composing e-mail or news.
-   (and
-    (string-match "mutt-\\|\\.article\\|\\.letter\\|itsalltext"
-                  (or (buffer-file-name)
+   (if (string-match "\\.article\\|\\.letter\\|itsalltext"
+                     (or (buffer-file-name)
                       ;; For some reason I've seen mutt-invoked emacs
                       ;; instances yield nil for (buffer-file-name)
-                      (buffer-name)))
-    (turn-on-auto-fill))
+                         (buffer-name)))
+       (turn-on-auto-fill))
+
+   (if (string-match "itsalltext" (or (buffer-file-name) (buffer-name)))
+       (local-set-key [(control c) (control c)]
+                      (lambda ()
+                        (interactive)
+                        (save-buffer)
+                        (server-edit))))
 
    ;; Expand all newly inserted tabs to spaces
    (setq indent-tabs-mode nil)

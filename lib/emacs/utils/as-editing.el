@@ -399,12 +399,22 @@ levels as part of one big paragraph."
 ;;{{{ as-maybe-focus-to-mutt
 
 ;; (defadvice server-switch-buffer (after as-focus-to-mutt act)
-(add-hook 'server-done-hook 'as-maybe-focus-to-mutt)
-
+;;;###autoload
 (defun as-maybe-focus-to-mutt ()
   "Switch focus back to the mutt window after editing of the mail
 is done."
   (if (string-match "tmp.*mutt-" (buffer-file-name))
       (start-process "wmctrl-mutt-focus" nil "switch-to-mutt-term")))
+
+;;}}}
+;;{{{ as-maybe-focus-to-firefox
+
+;; (defadvice server-switch-buffer (after as-focus-to-firefox act)
+;;;###autoload
+(defun as-maybe-focus-to-firefox ()
+  "Switch focus back to the firefox window after editing via the
+It's All Text add-on is done."
+  (if (string-match "itsalltext" (buffer-file-name))
+      (start-process "wmctrl-firefox-focus" nil "wmctrl" "-a" "firefox")))
 
 ;;}}}
