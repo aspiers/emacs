@@ -396,3 +396,15 @@ levels as part of one big paragraph."
           (fill-region start end justify nosqueeze))))))
 
 ;;}}}
+;;{{{ as-maybe-focus-to-mutt
+
+;; (defadvice server-switch-buffer (after as-focus-to-mutt act)
+(add-hook 'server-done-hook 'as-maybe-focus-to-mutt)
+
+(defun as-maybe-focus-to-mutt ()
+  "Switch focus back to the mutt window after editing of the mail
+is done."
+  (if (string-match "tmp.*mutt-" (buffer-file-name))
+      (start-process "wmctrl-mutt-focus" nil "switch-to-mutt-term")))
+
+;;}}}
