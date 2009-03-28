@@ -136,12 +136,6 @@
 ;;}}}
 ;;{{{ client/server mode
 
-(eval-after-load "server"
-  '(add-hook 'server-done-hook 'as-maybe-focus-to-mutt))
-
-(eval-after-load "server"
-  '(add-hook 'server-done-hook 'as-maybe-focus-to-firefox))
-
 (defun ss ()
   "Abbreviation for `server-start'."
   (interactive)
