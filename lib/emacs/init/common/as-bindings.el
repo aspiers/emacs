@@ -401,6 +401,8 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
+(global-set-key [(meta E)]                'mark-end-of-sentence)
+
 (global-set-key [(meta o)]                'overwrite-mode)
 (autoload 'as-kill-word "as-editing" "as-kill-word" t)
 (global-set-key [(meta D)]                'as-kill-word)
