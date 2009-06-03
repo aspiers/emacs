@@ -1,22 +1,6 @@
 #!/bin/sh
 
-if [ -z "$DISPLAY" ]; then
-    echo "$0: no DISPLAY" >&2
-    exit 1
-fi
-
-if ! which wmctrl >/dev/null 2>&1; then
-    echo "$0: wmctrl not found; aborting." >&2
-    exit 1
-fi
-
-winid=$( wmctrl -lpx | awk '$4 ~ /emacs/ {id = $1} END {print id}' )
-if [ -z "$winid" ]; then
-    echo "$0: wmctrl failed to find an emacs window" >&2
-    exit 1
-fi
-
-wmctrl -i -a "$winid"
+switch-to-emacs
 
 # It seems there is some kind of timing issue which requires this
 # sleep - probably we have to ensure that wmctrl has finished
