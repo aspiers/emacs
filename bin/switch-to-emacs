@@ -1,0 +1,36 @@
+#!/bin/sh
+
+if [ -z "$DISPLAY" ]; then
+    echo "$0: no DISPLAY" >&2
+    exit 1
+fi
+
+if ! which wmctrl >/dev/null 2>&1; then
+    echo "$0: wmctrl not found; aborting." >&2
+    exit 1
+fi
+
+emacs_winids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ { print $1 }') )
+
+if [ "${#emacs_winids[*]}" -eq 1 ]; then
+    wmctrl -ia $emacs_winids[1]
+elif [ "${#emacs_winids[*]}" -gt 1 ]; then
+    current_desktop=`current-desktop`
+    debug "More than one emacs frame; will prefer one on desktop $current_desktop" >&2
+    emacs_winid=$( wmctrl -lpx | \
+                   awk '$4 ~ /emacs/ && $2 == '$current_desktop' { print $1 }' )
+    if [ -n "$emacs_winid" ]; then
+        debug "winid of emacs on current desktop is $emacs_winid"
+        wmctrl -ia $emacs_winid
+
+        # The problem here is that emacsclient doesn't tell emacs
+        # server which frame to open the new buffer in.  FIXME: tweak
+        # `server-switch-hook' to do this somehow (env variable?)
+        # http://emacs-fu.blogspot.com/2008/12/opening-emacsclient-windows-on-current.html
+    else
+        debug "No emacs on current desktop; picking any one"
+        wmctrl -xa emacs
+    fi
+else
+    echo "ERROR: no emacs windows found" >&2
+fi
