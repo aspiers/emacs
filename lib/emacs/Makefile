@@ -32,6 +32,7 @@ EL_OVERRIDES = pcvs*
 
 DVC_DIR      = major-modes/dvc
 ORG_DIR      = major-modes/org-mode.git
+#ORG_DIR      = major-modes/org-6.24b
 EPG_DIR      = major-modes/epg-0.0.15
 REMEMBER_DIR = major-modes/remember-1.9
 
@@ -124,8 +125,14 @@ ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 
 # Do a separate search for elcs since we want to include ones which were
 # built from vendor Makefiles.
+# Note that the shell expansion is deferred until needed.
 THIRD_PARTY_ELCs = $(shell \
 	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
+)
+# We also need to know which vendor-provided .el files to install
+# into the destination directory, so that find-library works.
+THIRD_PARTY_ELs = $(shell \
+	find $(THIRD_PARTY_PKG_DIRS) -name \*.el \
 )
 
 # }}}
@@ -211,6 +218,9 @@ list-els-to-compile:
 list-third-party-pkg-dirs:
 	@for elc in $(THIRD_PARTY_PKG_DIRS); do echo $$elc; done
 
+list-third-party-els:
+	@for elc in $(THIRD_PARTY_ELs); do echo $$elc; done
+
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
@@ -231,9 +241,10 @@ install: .installed
 # find-function-source-path doesn't need to be extended excessively.
 .installed: Makefile .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
 	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR)"
-	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) $(THIRD_PARTY_ELCs) 	\
-		     $(AS_INIT_ELC); do 					\
-	  cp $$file $(POST_INSTALL_DIR); 					\
+	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE)  \
+	    	    $(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
+		    $(AS_INIT_ELC); do 			   \
+	  cp $$file $(POST_INSTALL_DIR); 		   \
 	done
 	@echo "Installing overrides in $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
