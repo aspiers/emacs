@@ -98,7 +98,8 @@
 ;;{{{ find-function-source-path
 
 ;; Don't need this, as the Makefile now copys all .el files into the
-;; installdir alongside the .elc files.
+;; installdir alongside the .elc files, and `find-library' looks in
+;; `load-path'.
 
 ;; (defvar as-emacs-dir)
 
