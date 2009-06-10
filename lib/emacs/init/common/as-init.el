@@ -137,10 +137,13 @@
 ;;}}}
 ;;{{{ client/server mode
 
+(autoload 'server-start "server" "server-start" t)
 (defun ss ()
   "Abbreviation for `server-start'."
   (interactive)
   (server-start))
+
+(unless (as-quick-startup) (server-start))
 
 ;;}}}
 ;;{{{ Diary, appointments
