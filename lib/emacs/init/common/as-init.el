@@ -884,7 +884,7 @@ then invoking this function four times would yield:
 ;;{{{ mutt
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
-(add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
+(add-to-list 'auto-mode-alist '("/mutt\\|itsalltext.*mail\\.google" . mail-mode))
 (add-hook 'mail-mode-hook 'turn-on-auto-fill)
 (add-hook
  'mail-mode-hook
