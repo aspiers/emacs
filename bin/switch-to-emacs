@@ -1,5 +1,10 @@
 #!/bin/sh
 
+debug () {
+    :
+    echo "$*" >&2
+}
+
 if [ -z "$DISPLAY" ]; then
     echo "$0: no DISPLAY" >&2
     exit 1
