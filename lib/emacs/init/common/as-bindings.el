@@ -529,42 +529,7 @@ consistent landing spot."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
-;;(eval-when-compile (load "planner.el"))
-
-;; _J_ump
-(global-set-key "\C-coj" 'planner-goto-plan-page)
-
-;; _P_lan (today)
-(global-set-key "\C-coP"  'plan)
-
-;; New from _b_uffer
-(autoload 'planner-create-task-from-buffer "planner.el" nil t)
-(global-set-key "\C-cob"  'planner-create-task-from-buffer)
-
-;; New _t_ask
-(autoload 'planner-create-task "planner.el" nil t)
-(global-set-key "\C-cot"  'planner-create-task)
-
-;; New _n_ote
-(autoload 'planner-create-note "planner.el" nil t)
-(global-set-key "\C-con"  'planner-create-note)
-
-;; _R_emember
-;; use C-c q q instead
-;;(global-set-key "\C-cor"  'remember)
-
-;; Next_A_ctions
-(autoload 'planner-goto-plan-page "planner.el" nil t)
-(defun as-planner-goto-taskpool ()
-  "Jumps to TaskPool plan page using `planner-goto-plan-page'."
-  (interactive)
-  (planner-goto-plan-page "TaskPool"))
-(defun as-planner-goto-next-actions ()
-  "Jumps to NextActions plan page using `planner-goto-plan-page'."
-  (interactive)
-  (planner-goto-plan-page "NextActions"))
-(global-set-key "\C-coa" 'as-planner-goto-next-actions)
-(global-set-key "\C-cop" 'as-planner-goto-next-actions)
+(global-set-key "\C-coa" 'org-switch-to-agenda-buffer)
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
