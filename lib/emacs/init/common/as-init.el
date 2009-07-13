@@ -647,32 +647,6 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;}}}
 ;;{{{ Organisation / productivity
 
-;;{{{ planner-mode
-
-;; (autoload 'planner-mode "planner.el" nil t)
-;; (autoload 'plan "planner.el" nil t)
-
-;; (eval-when-compile (require 'planner)
-;;                    (require 'planner-accomplishments))
-
-;; (add-hook 'planner-mode-hook
-;;           (lambda ()
-;;             (define-key planner-mode-map "\C-c\C-k" 'planner-delete-task)
-;;             (planner-install-extra-task-keybindings)
-;;             (planner-install-extra-note-keybindings)
-;;             (planner-install-extra-context-keybindings)
-;;             (require 'remember-planner)
-;;             (require 'planner-id)
-;;             (require 'planner-ical)
-;;             (require 'planner-multi)
-;;             (require 'planner-accomplishments)
-;;             (require 'planner-trunk)
-;;             (require 'planner-rank)
-;;             (planner-accomplishments-insinuate)
-;;             (require 'planner-deadline)
-;;             (require 'planner-tasks-overview)))
-
-;;}}}
 ;;{{{ org-mode
 
 ;; org-mode
@@ -870,11 +844,6 @@ then invoking this function four times would yield:
 
 (defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
 (add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
-
-;;}}}
-;;{{{ etask-mode
-
-(autoload 'etask "etask" "etask project management mode" t)
 
 ;;}}}
 
