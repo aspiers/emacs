@@ -148,4 +148,9 @@ point."
              (buffer-substring (point) (+ (point) 20))
              org-complex-heading-regexp))))
 
+(defun org-switch-to-agenda-buffer ()
+  "Switch to an existing *Org Agenda* buffer."
+  (interactive)
+  (switch-to-buffer "*Org Agenda*"))
+
 (provide 'as-gtd)
