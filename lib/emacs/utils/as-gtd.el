@@ -126,12 +126,15 @@ selecting which headlines to extract."
 |-
 "
     (apply 'concat
-           (org-map-entries 'org-dblock-write:table-row-todo-owner
-                            (or (plist-get params :keyword) "/ACTION")
-                            'file))))
+           ;; need a (car ) around this next bit if I've patched
+           ;; org-map-entries to return a list per file
+            (org-map-entries 'org-dblock-write:table-row-todo-owner
+                             (or (plist-get params :keyword) "/ACTION")
+                             'file)))
 ;;    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
 ;;      (insert "Last block update at: "
 ;;              (format-time-string fmt (current-time)))))
+   )
   (backward-delete-char 1) ;; not sure where the extra \n comes from
   (org-table-align))
 
