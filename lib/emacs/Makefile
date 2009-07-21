@@ -13,28 +13,14 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 # {{{ Tweakable parameters
 
-# {{{ Where do we pick up .el files which don't have their own Makefiles?
-
-el_search_paths = 			\
-	init/common 			\
-	$(wildcard major-modes/*.el) 	\
-	major-modes/mmm 		\
-	major-modes/pcl-cvs 		\
-	major-modes/pgg 		\
-	minor-modes 			\
-	utils 				\
-	fun
-
-# }}}
-EL_OVERRIDES = pcvs*
-
 # {{{ 3rd party packages
 
-DVC_DIR      = major-modes/dvc
-ORG_DIR      = major-modes/org-mode.git
-#ORG_DIR      = major-modes/org-6.24b
-EPG_DIR      = major-modes/epg-0.0.15
-REMEMBER_DIR = major-modes/remember-1.9
+DVC_DIR        = major-modes/dvc
+ORG_DIR        = major-modes/org-mode.git
+#ORG_DIR        = major-modes/org-6.24b
+EPG_DIR        = major-modes/epg-0.0.15
+REMEMBER_DIR   = major-modes/remember-1.9
+EMACSRAILS_DIR = major-modes/emacs-rails.svn
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -53,6 +39,22 @@ THIRD_PARTY_PKG_DIRS =            \
 	$(REMEMBER_DIR)
 
 # }}}
+# {{{ Where do we pick up .el files which don't have their own Makefiles?
+
+el_search_paths = 			\
+	init/common 			\
+	$(wildcard major-modes/*.el) 	\
+	major-modes/mmm 		\
+	major-modes/pcl-cvs 		\
+	major-modes/pgg 		\
+	minor-modes 			\
+	utils 				\
+	fun   				\
+	$(EMACSRAILS_DIR)
+
+# }}}
+EL_OVERRIDES = pcvs*
+
 # {{{ ignore paths and files
 
 # Pretend these don't exist at all.
@@ -570,5 +572,16 @@ clean-epg:
 	  touch $@ )
 
 # }}}
+# {{{ dired+
 
 major-modes/dired+.elc: LIBDIRS += major-modes
+
+# }}}
+
+# {{{ emacs-rails
+
+# emacs-rails needs find-recursive
+$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils
+
+# }}}
+
