@@ -20,7 +20,7 @@ ORG_DIR        = major-modes/org-mode.git
 #ORG_DIR        = major-modes/org-6.24b
 EPG_DIR        = major-modes/epg-0.0.15
 REMEMBER_DIR   = major-modes/remember-1.9
-EMACSRAILS_DIR = major-modes/emacs-rails.svn
+EMACSRAILS_DIR = major-modes/emacs-rails.git
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -65,7 +65,8 @@ IGNORE_FILES =		    		\
 	loaddefs.el			\
 	major-modes/sdf.el  		\
 	major-modes/mediawiki.el 	\
-	major-modes/planner*.el
+	major-modes/planner*.el		\
+	$(EMACSRAILS_DIR)/behave-rails.el
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
@@ -230,7 +231,6 @@ list-third-party-elcs:
 # {{{ high-level targets
 
 .elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile $(AS_INIT_ELC)
-
 	@touch $@
 
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
@@ -315,11 +315,19 @@ $(LOADDEFS): $(LOADDEFS_DEPS) Makefile
 # {{{ General pattern-based rules for compiling .el to .elc
 
 %.elc: %.el
-	@echo "### Compiling $< with libs: $(LIBDIRS) ..."
+	@if [ -n "$(LIBDIRS)" ]; then \
+	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
+	else \
+	  echo "### Compiling $< ..."; \
+	fi
 	@$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $<
 
 %.elc.verbose: %.el
-	@echo "### Compiling $< with libs: $(LIBDIRS) ..."
+	@if [ -n "$(LIBDIRS)" ]; then \
+	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
+	else \
+	  echo "### Compiling $< ..."; \
+	fi
 	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $(<:.verbose)
 
 %.elc.debug:
@@ -580,8 +588,11 @@ major-modes/dired+.elc: LIBDIRS += major-modes
 
 # {{{ emacs-rails
 
-# emacs-rails needs find-recursive
-$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils
+# emacs-rails needs find-recursive and behave
+$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils utils/behave
+
+utils/behave/%.elc: LIBDIRS += utils/behave
+utils/behave/example.elc: utils/behave/behave.elc
 
 # }}}
 
