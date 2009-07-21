@@ -231,7 +231,7 @@ list-third-party-elcs:
 # }}}
 # {{{ high-level targets
 
-.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) Makefile $(AS_INIT_ELC)
+.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) $(AS_INIT_ELC)
 	@touch $@
 
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
@@ -242,7 +242,7 @@ install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-.installed: Makefile .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
+.installed: .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
 	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR)"
 	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE)  \
 	    	    $(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
@@ -303,7 +303,7 @@ endef
 .PHONY: loaddefs
 loaddefs: $(LOADDEFS)
 
-$(LOADDEFS): $(LOADDEFS_DEPS) Makefile
+$(LOADDEFS): $(LOADDEFS_DEPS)
 	@echo "### Generating $@"
 	@mkdir -p "$(LOADDEFS_DIR)"
 # update-directory-autoloads requires non-empty file to update.
@@ -348,7 +348,7 @@ INIT_COMMON_LIBDIRS = 	\
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-init/common/as-bindings.elc: init/common/as-progress.elc org
+init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
 $(AS_INIT_ELC): utils/smooth-scrolling.elc
 $(AS_INIT_ELC): .muse-installed
@@ -363,7 +363,7 @@ utils/as-gtd.elc: utils/org-mairix.elc
 utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/lisp
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-utils/org-crypt.elc: epg
+utils/org-crypt.elc: .epg-installed
 utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 
 # }}}
@@ -371,6 +371,7 @@ utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 
 major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)/lisp
 
+.PHONY: org
 org: .org-installed
 clean-org:
 	rm -f .org-installed
