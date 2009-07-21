@@ -97,6 +97,8 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
+TO_CLEAN = org psgml nxml muse planner emacs-w3m pgg dvc epg
+
 # }}}
 
 # {{{ Figure out which .els to compile ourselves.
@@ -259,7 +261,7 @@ install: .installed
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 .PHONY: clean
-clean: uninstall $(addprefix clean-, org psgml nxml muse planner emacs-w3m pgg dvc)
+clean: uninstall $(addprefix clean-, $(TO_CLEAN))
 	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
 	rm -f .*-made
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
@@ -423,38 +425,37 @@ clean-remember:
 	  done; \
 	)
 	$(MAKE) -C $(REMEMBER_DIR) all \
-		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
-	&& touch $@
+		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir)
+	touch $@
 
 .remember-installed: .remember-made
-	( 							\
-	  cd $(REMEMBER_DIR);					\
-	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir); \
-	) &&							\
+	cd $(REMEMBER_DIR) && \
+	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir)
 	touch $@
 
 # }}}
 # {{{ psgml-mode
+
 psgml: .psgml-made
 clean-psgml:
 	rm -f .psgml-made
 	$(MAKE) -C major-modes/psgml clean
 .psgml-made:
-	$(MAKE) -C major-modes/psgml && \
+	$(MAKE) -C major-modes/psgml
 	touch $@
+
 # }}}
 # {{{ nxml-mode
+
 nxml: .nxml-mode-20041004-made
 clean-nxml:
 	rm -f .nxml-mode-20041004-made
 	$(MAKE) -C major-modes/nxml-mode-20041004 clean
 .nxml-mode-20041004-made: $(POST_INSTALL_DIR)
-	( 					\
-	  cd major-modes/nxml-mode-20041004 && 	\
-	  $(MAKE) && 				\
-	  cp rng-auto.el $(POST_INSTALL_DIR) 	\
-	) && 					\
+	$(MAKE) -C major-modes/nxml-mode-20041004
+	cp rng-auto.el $(POST_INSTALL_DIR)
 	touch $@
+
 # }}}
 # {{{ muse-mode
 
@@ -464,8 +465,8 @@ clean-muse:
 	$(MAKE) -C major-modes/muse clean
 .muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
 	$(MAKE) -C major-modes/muse lisp \
-		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir) \
-	&& touch $@
+		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir)
+	touch $@
 
 .muse-installed: .muse-made
 	( 								\
@@ -473,7 +474,7 @@ clean-muse:
 	  $(MAKE) install-bin ELISPDIR=$(lispdir);						\
 	  $(MAKE) install-info ||						\
 	    echo "muse install-info failure ignored"			\
-	) &&								\
+	)
 	touch $@
 
 # }}}
@@ -512,7 +513,7 @@ clean-emacs-w3m:
 	  make				    && 	\
 	  $(MAKE) install			    && 	\
 	  cp w3m-load.el $(POST_INSTALL_DIR) 	\
-	) && 					\
+	)
 	touch $@
 
 # }}}
@@ -557,7 +558,7 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 	-cd $(DVC_DIR) && autoconf
 
 .dvc-made: $(wildcard $(DVC_DIR)/*.el) $(wildcard $(DVC_DIR)/*/*.el) .dvc-configured
-	make -C $(DVC_DIR)/++build && \
+	$(MAKE) -C $(DVC_DIR)/++build
 	touch $@
 
 .dvc-installed: .dvc-made
@@ -578,8 +579,10 @@ clean-epg:
 .epg-installed: $(EPG_DIR)/epg.el
 	( cd $(EPG_DIR) && \
 	  ./configure --prefix=$(prefix) infodir=$(infodir) && \
-	  $(MAKE) install && \
-	  touch $@ )
+	  $(MAKE) install \
+	)
+	echo "### epg installed"
+	touch $@
 
 # }}}
 # {{{ dired+
