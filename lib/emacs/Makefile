@@ -21,6 +21,7 @@ ORG_DIR        = major-modes/org-mode.git
 EPG_DIR        = major-modes/epg-0.0.15
 REMEMBER_DIR   = major-modes/remember-1.9
 EMACSRAILS_DIR = major-modes/emacs-rails.git
+BEHAVE_DIR     = utils/behave.git
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
@@ -589,10 +590,10 @@ major-modes/dired+.elc: LIBDIRS += major-modes
 # {{{ emacs-rails
 
 # emacs-rails needs find-recursive and behave
-$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils utils/behave
+$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils $(BEHAVE_DIR)
 
-utils/behave/%.elc: LIBDIRS += utils/behave
-utils/behave/example.elc: utils/behave/behave.elc
+$(BEHAVE_DIR)/%.elc: LIBDIRS += $(BEHAVE_DIR)
+$(BEHAVE_DIR)/example.elc: $(BEHAVE_DIR)/behave.elc
 
 # }}}
 
