@@ -67,7 +67,8 @@ IGNORE_FILES =		    		\
 	major-modes/sdf.el  		\
 	major-modes/mediawiki.el 	\
 	major-modes/planner*.el		\
-	$(EMACSRAILS_DIR)/behave-rails.el
+	$(EMACSRAILS_DIR)/behave-rails.el \
+	$(BEHAVE_DIR)/example.el
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
@@ -202,8 +203,9 @@ all: .elcs install
 # {{{ debugging targets
 
 show-compiler:
-	@echo '$(COMPILER)'
-	@echo '$(COMPILER_OPTS)'
+	@echo 'COMPILER:          $(COMPILER)'
+	@echo 'COMPILER_PRE_OPTS: $(COMPILER_PRE_OPTS)'
+	@echo 'COMPILER_OPTS:     $(COMPILER_OPTS)'
 
 list-libdirs:
 	@echo '$(LIBDIRS)'
