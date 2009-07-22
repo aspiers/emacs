@@ -43,7 +43,7 @@
 ;;     C-c C-w        hide entire tree
 
 
-;;{{{ S-{left,right} for foldout zoom/exit subtree in outline major/minor modes
+;;{{{ M-C-{<,>} for foldout zoom/exit subtree in outline major/minor modes
 
 (autoload 'foldout-exit-fold    "foldout")
 (autoload 'foldout-zoom-subtree "foldout")
@@ -51,8 +51,8 @@
         (add-hook mode
                   (lambda ()
                     ;; Quick navigation
-                    (local-set-key [(shift left)] 'foldout-exit-fold)
-                    (local-set-key [(shift right)] 'foldout-zoom-subtree)
+                    (local-set-key [(meta control <)] 'foldout-exit-fold)
+                    (local-set-key [(meta control >)] 'foldout-zoom-subtree)
                     )))
       '(outline-mode-hook outline-minor-mode-hook))
 
