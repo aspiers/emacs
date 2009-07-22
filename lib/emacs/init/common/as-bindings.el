@@ -219,6 +219,7 @@ is already hidden."
 
 ;;{{{ as-folding-{previous,next}-visible-heading
 
+(eval-when-compile (require 'folding))
 (defun as-folding-previous-visible-heading ()
   "Wrapper around `folding-previous-visible-heading' which ensures a
 consistent landing spot."
@@ -454,6 +455,8 @@ consistent landing spot."
 (fset 'as-find-personal-diary "\C-x\C-f~/roaming/diary.org")
 (global-set-key "\C-cad"  'as-find-personal-diary)
 ;;(fset 'as-find-personal-note "\C-x\C-f~/roaming/notes/")
+
+(eval-when-compile (require 'ido))
 (defun as-find-personal-note ()
   (interactive)
   (ido-file-internal ido-default-file-method
