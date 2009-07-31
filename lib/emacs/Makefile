@@ -25,11 +25,11 @@ BEHAVE_DIR     = utils/behave.git
 
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
-	psgml 			\
-	muse 			\
-	dvc			\
-	org			\
-	remember
+	.psgml-made		\
+	.muse-installed		\
+	.dvc-installed		\
+	.org-installed		\
+	.remember-installed
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS =            \
@@ -194,7 +194,7 @@ COMPILER_OPTS=$(COMPILER_BATCH)
 # executed, even if B's prerequisites don't need to be, hence the
 # parent rule will too.
 
-.PHONY: all $(THIRD_PARTY_PKGS)
+.PHONY: all #$(THIRD_PARTY_PKGS)
 
 # }}}
 
