@@ -151,6 +151,7 @@ point."
              (buffer-substring (point) (+ (point) 20))
              org-complex-heading-regexp))))
 
+;;;###autoload
 (defun org-switch-to-agenda-buffer ()
   "Switch to an existing *Org Agenda* buffer, otherwise run
 `org-agenda' with Adam's custom day view."
