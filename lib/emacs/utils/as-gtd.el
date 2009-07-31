@@ -152,8 +152,11 @@ point."
              org-complex-heading-regexp))))
 
 (defun org-switch-to-agenda-buffer ()
-  "Switch to an existing *Org Agenda* buffer."
+  "Switch to an existing *Org Agenda* buffer, otherwise run
+`org-agenda' with Adam's custom day view."
   (interactive)
-  (switch-to-buffer "*Org Agenda*"))
+  (if (get-buffer "*Org Agenda*")
+      (switch-to-buffer "*Org Agenda*")
+    (org-agenda nil "d")))
 
 (provide 'as-gtd)
