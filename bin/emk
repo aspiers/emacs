@@ -9,5 +9,7 @@ else
   exit 1
 fi
 
-exec $MAKE -C ~/lib/emacs "$@"
+# -C produces extra unwanted output
+cd ~/lib/emacs
+$MAKE "$@"
 #exec ~/lib/emacs/compile "$@"
