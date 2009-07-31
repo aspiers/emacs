@@ -283,7 +283,7 @@ LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix "$(EMACSLIB)/,$(LOADDEFS_DIRS)))
 
 # Where to put as-loaddefs.el?  We need it for both compile- and
 # run-time, but we don't want to pollute the compile-time load-path
-# with POST_INSTALL_DIR.
+# with POST_INSTALL_DIR, so we put it in a dedicated subdirectory:
 LOADDEFS_DIR=$(POST_INSTALL_DIR)/loaddefs
 LOADDEFS=$(LOADDEFS_DIR)/as-loaddefs.el
 #LOADDEFS=$(POST_INSTALL_DIR:$(EMACSLIB)/%=%)/as-loaddefs.el
