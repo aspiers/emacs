@@ -279,8 +279,6 @@ uninstall:
 # }}}
 # {{{ Autogenerate loaddefs
 
-LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix "$(EMACSLIB)/,$(LOADDEFS_DIRS)))
-
 # Where to put as-loaddefs.el?  We need it for both compile- and
 # run-time, but we don't want to pollute the compile-time load-path
 # with POST_INSTALL_DIR, so we put it in a dedicated subdirectory:
@@ -290,12 +288,14 @@ LOADDEFS=$(LOADDEFS_DIR)/as-loaddefs.el
 
 show-loaddefs:
 	@echo '$(LOADDEFS)'
-LOADDEFS_DEPS = $(addsuffix /*.el,$(LOADDEFS_DIRS))
+LOADDEFS_DEPS_CANDIDATES = $(addsuffix /*.el,$(LOADDEFS_DIRS))
+LOADDEFS_DEPS = $(shell grep -l '^;;;\#\#\#autoload' $(LOADDEFS_DEPS_CANDIDATES))
 show-loaddefs-deps:
 	@echo $(LOADDEFS_DEPS)
 
 # emacs 21 uses update-autoloads-from-directories
 # emacs 22 uses update-directory-autoloads
+LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix "$(EMACSLIB)/,$(LOADDEFS_DIRS)))
 define loaddefs_lisp
 (progn \
     (setq generated-autoload-file "$(LOADDEFS)") \
