@@ -203,9 +203,9 @@ all: .elcs install
 # {{{ debugging targets
 
 show-compiler:
-	@echo 'COMPILER:          $(COMPILER)'
-	@echo 'COMPILER_PRE_OPTS: $(COMPILER_PRE_OPTS)'
-	@echo 'COMPILER_OPTS:     $(COMPILER_OPTS)'
+	@echo 'COMPILER:          "$(COMPILER)"'
+	@echo 'COMPILER_PRE_OPTS: "$(COMPILER_PRE_OPTS)"'
+	@echo 'COMPILER_OPTS:     "$(COMPILER_OPTS)"'
 
 list-libdirs:
 	@echo '$(LIBDIRS)'
@@ -333,12 +333,16 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 	else \
 	  echo "### Compiling $< ..."; \
 	fi
-	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $(<:.verbose)
+	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $(<:.verbose=)
 
-%.elc.debug:
-	rm -f $(@:.debug=)
+# The idea behind this one is to launch an emacs in which a manual
+# byte-compile of the .el can be debugged, but it doesn't work yet.
+%.elc.debug: COMPILER_BATCH='-q -l bytecomp'
+%.elc.debug: %.elc
+	ln -sf $< $@
+# 	rm -f $(@:.debug=)
+# 	$(MAKE) $(@:.debug=) COMPILER_BATCH='-q -l bytecomp'
 
-	$(MAKE) $(@:.debug=) COMPILER_OPTS='-q -l bytecomp'
 # }}}
 # {{{ Special rules for my init files
 
@@ -597,6 +601,7 @@ major-modes/dired+.elc: LIBDIRS += major-modes
 
 # emacs-rails needs find-recursive and behave
 $(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils $(BEHAVE_DIR)
+$(EMACSRAILS_DIR)/%.elc: COMPILER_PRE_OPTS += -l rails
 
 $(BEHAVE_DIR)/%.elc: LIBDIRS += $(BEHAVE_DIR)
 $(BEHAVE_DIR)/example.elc: $(BEHAVE_DIR)/behave.elc
