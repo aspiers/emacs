@@ -20,7 +20,7 @@ ORG_DIR        = major-modes/org-mode.git
 #ORG_DIR        = major-modes/org-6.24b
 EPG_DIR        = major-modes/epg-0.0.15
 REMEMBER_DIR   = major-modes/remember-1.9
-EMACSRAILS_DIR = major-modes/emacs-rails.git
+EMACSRAILS_DIR = major-modes/emacs-rails
 BEHAVE_DIR     = utils/behave.git
 
 # This is a list of make targets which have their own Makefiles
