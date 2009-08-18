@@ -1,3 +1,4 @@
+<include "~/.msf-abbrevs/ruby-mode/mex">
 unless ARGV.length == 1
   $stderr.puts "Usage: #{ME} <logfile>\n"
   exit 1
