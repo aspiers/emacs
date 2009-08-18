@@ -1,5 +1,5 @@
 <include "~/.msf-abbrevs/ruby-mode/mex">
 unless ARGV.length == 1
-  $stderr.puts "Usage: #{ME} <logfile>\n"
+  $stderr.puts "Usage: #{ME} <field "options">"
   exit 1
 end
