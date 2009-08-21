@@ -316,8 +316,8 @@
 ;;}}}
 ;;{{{ psgml (SGML and XML)
 
-(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
-(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+;;(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
+;;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
 (setq auto-mode-alist
       (append '(
@@ -422,7 +422,7 @@
 (autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
 (add-hook 'nxml-mode-hook
           (lambda () (local-set-key [(control meta q)] 'mhj-format-xml)))
-(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xhtml\\)$" . nxml-mode))
+;;(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xhtml\\)$" . nxml-mode))
 
 ;;}}}
 ;;{{{ HTML
