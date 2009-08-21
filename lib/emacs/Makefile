@@ -445,7 +445,8 @@ clean-remember:
 psgml: .psgml-made
 clean-psgml:
 	rm -f .psgml-made
-	$(MAKE) -C major-modes/psgml clean
+# psgml Makefile is missing a 'clean' target
+	rm -f major-modes/psgml/*.elc
 .psgml-made:
 	$(MAKE) -C major-modes/psgml
 	touch $@
