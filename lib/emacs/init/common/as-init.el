@@ -641,6 +641,11 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;(autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
+;;{{{ erin (TWiki editing mode)
+
+(autoload 'erin-mode "erin" nil t)
+
+;;}}}
 
 ;; muse mode is under productivity section
 
