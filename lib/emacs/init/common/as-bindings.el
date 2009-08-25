@@ -474,6 +474,18 @@ consistent landing spot."
                      nil "~/ifolder/notes/" "Find note: "))
 (global-set-key "\C-caN"  'as-find-work-note)
 
+(defun as-find-work-PSO-git ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/ifolder/PSO/git/" "PSO/git: "))
+(global-set-key "\C-cwpg"  'as-find-work-PSO-git)
+
+(defun as-find-work-PSO-svn ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/ifolder/PSO/svn/" "PSO/svn: "))
+(global-set-key "\C-cwps"  'as-find-work-PSO-svn)
+
 (defun as-find-from-home ()
   (interactive)
   (ido-file-internal ido-default-file-method
