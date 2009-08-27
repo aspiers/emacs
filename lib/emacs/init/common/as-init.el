@@ -655,23 +655,23 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ org-mode
 
 ;; org-mode
-(autoload 'org-mode "org" "Org mode" t)
-(autoload 'org-time-stamp "org" "org-time-stamp" t)
-(autoload 'org-timestamp-up "org" "org-timestamp-up" t)
-(autoload 'org-timestamp-down "org" "org-timestamp-down" t)
+(autoload 'org-mode "org-install" "Org mode" t)
+(autoload 'org-time-stamp "org-install" "org-time-stamp" t)
+(autoload 'org-timestamp-up "org-install" "org-timestamp-up" t)
+(autoload 'org-timestamp-down "org-install" "org-timestamp-down" t)
 
 (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(autoload 'org-diary "org" "Diary entries from Org mode")
-(autoload 'org-agenda "org" "Multi-file agenda from Org mode" t)
-(autoload 'org-store-link "org" "Store a link to the current location" t)
-(autoload 'orgtbl-mode "org" "Org tables as a minor mode" t)
-(autoload 'turn-on-orgtbl "org" "Org tables as a minor mode")
+(autoload 'org-diary "org-install" "Diary entries from Org mode")
+(autoload 'org-agenda "org-install" "Multi-file agenda from Org mode" t)
+(autoload 'org-store-link "org-install" "Store a link to the current location" t)
+(autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
+(autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
 
 ;; Need to bind C-c C-a globally *and* locally, otherwise gets set to
 ;; show-all locally via outline mode.
 (global-set-key [(control c)(control a)] 'org-agenda)
-(autoload 'org-defkey "org")
+(autoload 'org-defkey "org-install")
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
