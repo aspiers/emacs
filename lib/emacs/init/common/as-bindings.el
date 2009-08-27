@@ -483,7 +483,7 @@ consistent landing spot."
 (defun as-find-work-PSO-svn ()
   (interactive)
   (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/svn/" "PSO/svn: "))
+                     nil "~/ifolder/PSO/svn/trunk/" "PSO/svn: "))
 (global-set-key "\C-cwps"  'as-find-work-PSO-svn)
 
 (defun as-find-from-home ()
