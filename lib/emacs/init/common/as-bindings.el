@@ -477,14 +477,26 @@ consistent landing spot."
 (defun as-find-work-PSO-git ()
   (interactive)
   (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/git/" "PSO/git: "))
-(global-set-key "\C-cwpg"  'as-find-work-PSO-git)
+                     nil "~/ifolder/PSO/git/" "git: "))
+(global-set-key "\C-cwc"  'as-find-work-PSO-git)
 
 (defun as-find-work-PSO-svn ()
   (interactive)
   (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/svn/trunk/" "PSO/svn: "))
-(global-set-key "\C-cwps"  'as-find-work-PSO-svn)
+                     nil "~/ifolder/PSO/svn/trunk" "svn: "))
+(global-set-key "\C-cwC"  'as-find-work-PSO-svn)
+
+(defun as-find-work-PSO-git-services-grid-modules ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/ifolder/PSO/git/services/grid/modules" "git grid/modules: "))
+(global-set-key "\C-cwg"  'as-find-work-PSO-git)
+
+(defun as-find-work-PSO-git-services-grid-modules ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/ifolder/PSO/git/services/grid/modules" "git grid/modules: "))
+(global-set-key "\C-cwG"  'as-find-work-PSO-git)
 
 (defun as-find-from-home ()
   (interactive)
