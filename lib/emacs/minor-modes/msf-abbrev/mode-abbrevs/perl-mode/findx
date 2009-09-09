@@ -1,0 +1,9 @@
+use File::Find;
+
+find(\&wanted, <field "dir">);
+
+sub wanted {
+  return unless /\.java$/;
+  return unless $File::Find::name =~ m!^(?:\./)?(.+/src/(.+\.java))$!;
+  return unless $File::Find::dir eq 'src';
+}
