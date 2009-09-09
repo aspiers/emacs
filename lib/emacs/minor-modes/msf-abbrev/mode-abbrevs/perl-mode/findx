@@ -4,8 +4,11 @@ find(\&<field link="subr" "wanted">, <field "dir">);
 
 sub <link "subr"> {
   <field "code">
+  if ($_ eq 'OLD') {
+    $File::Find::prune = 1;
+    return;
+  }
   return unless /\.java$/;
   return unless $File::Find::name =~ m!^(?:\./)?(.+/src/(.+\.java))$!;
   return unless $File::Find::dir eq 'src';
-  $File::Find::prune = 1 if $_ eq 'OLD';
 }
