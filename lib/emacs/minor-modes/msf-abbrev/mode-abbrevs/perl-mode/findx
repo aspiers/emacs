@@ -7,4 +7,5 @@ sub <link "subr"> {
   return unless /\.java$/;
   return unless $File::Find::name =~ m!^(?:\./)?(.+/src/(.+\.java))$!;
   return unless $File::Find::dir eq 'src';
+  $File::Find::prune = 1 if $_ eq 'OLD';
 }
