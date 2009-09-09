@@ -118,9 +118,17 @@ default.")
 
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
-  (split-string
-   (shell-command-to-string
-    (concat ". $ZDOT_FIND_HOOKS " hook-name)) "\n"))
+  (let ((lines (split-string
+                (shell-command-to-string (concat ". $ZDOT_FIND_HOOKS " hook-name))
+                "\n"
+                'omit-nulls)))
+    (mapcar
+     ;; trim .el from end to allow `load' to use byte-compiled form
+     (lambda (file)
+       (if (string-match "\\.el\\'" file)
+           (replace-match "" nil t file)
+         file))
+     lines)))
 
 (mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
         ;; .emacs.d already taken
