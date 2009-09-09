@@ -465,38 +465,6 @@ consistent landing spot."
 
 (fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
 (global-set-key "\C-caT"  'as-find-work-todo)
-(fset 'as-find-work-diary "\C-x\C-f~/ifolder/Novell-diary.org")
-(global-set-key "\C-caD"  'as-find-work-diary)
-;;(fset 'as-find-work-note "\C-x\C-f~/ifolder/notes/")
-(defun as-find-work-note ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/notes/" "Find note: "))
-(global-set-key "\C-caN"  'as-find-work-note)
-
-(defun as-find-work-PSO-git ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/git/" "git: "))
-(global-set-key "\C-cwc"  'as-find-work-PSO-git)
-
-(defun as-find-work-PSO-svn ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/svn/trunk" "svn: "))
-(global-set-key "\C-cwC"  'as-find-work-PSO-svn)
-
-(defun as-find-work-PSO-git-services-grid-modules ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/git/services/grid/modules" "git grid/modules: "))
-(global-set-key "\C-cwg"  'as-find-work-PSO-git)
-
-(defun as-find-work-PSO-git-services-grid-modules ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/ifolder/PSO/git/services/grid/modules" "git grid/modules: "))
-(global-set-key "\C-cwG"  'as-find-work-PSO-git)
 
 (defun as-find-from-home ()
   (interactive)
