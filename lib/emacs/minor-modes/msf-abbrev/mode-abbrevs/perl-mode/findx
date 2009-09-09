@@ -1,8 +1,9 @@
 use File::Find;
 
-find(\&wanted, <field "dir">);
+find(\&<field link="subr" "wanted">, <field "dir">);
 
-sub wanted {
+sub <link "subr"> {
+  <field "code">
   return unless /\.java$/;
   return unless $File::Find::name =~ m!^(?:\./)?(.+/src/(.+\.java))$!;
   return unless $File::Find::dir eq 'src';
