@@ -904,6 +904,12 @@ then invoking this function four times would yield:
       (delete-file filename))))
 
 ;;}}}
+;;{{{ wordpress
+
+(add-to-list 'auto-mode-alist
+             '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . html-helper-mode))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Version control
