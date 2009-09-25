@@ -420,6 +420,8 @@ consistent landing spot."
                 (if (functionp 'find-library)
                     'find-library
                   'find-library-backport))
+(autoload 'find-file-at-point "ffap" nil t)
+(global-set-key [(control meta ?')]        'find-file-at-point)
 
 (autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
 (global-set-key [(control E)]             'bn-end-of-line-but-one)
