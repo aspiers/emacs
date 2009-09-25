@@ -21,7 +21,9 @@ debug () {
 
 switch-to-emacs
 
-emacsclient -a $standalone_prog "$@"
+(
+    emacsclient -a $standalone_prog "$@"
 
-# Switch back to window from which emacsclient was invoked.
-wmctrl -ia $client_winid
+    # Switch back to window from which emacsclient was invoked.
+    wmctrl -ia $client_winid
+) & # return control to caller immediately
