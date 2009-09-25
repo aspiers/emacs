@@ -314,15 +314,16 @@
 ;;       ("\\.mod$"                               . dtd-mode)
 
 ;;}}}
-;;{{{ psgml (SGML and XML)
+;;{{{ XML / SGML
 
 ;;(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 ;;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
 (setq auto-mode-alist
       (append '(
-                ("\\.sgml$"                              . sgml-mode)
-                ("\\.dtd$"                               . sgml-mode)
+                ("\\.sgml$" . sgml-mode)
+                ("\\.dtd$"  . sgml-mode)
+                ("\\.xsd$"  . xml-mode)
                 )
               auto-mode-alist))
 
@@ -393,15 +394,11 @@
 ;;                           (shortref . font-lock-function-name-face)))
 
 ;;}}}
-
-;;}}}
-;;{{{ SGML
-
-;;{{{ Set sgml-specials
+;;{{{ sgml-specials
 
 ;; See the documentation for this.  The default is (34 45) which
 ;; includes - as a special character for comments.  The problem
-;; is that emacs doesn't allow predicates to context sensitively
+;; is that emacs doesn't allow predicates to context-sensitively
 ;; confirm the syntax of characters, so the fontifying of comments
 ;; often screws up.
 
