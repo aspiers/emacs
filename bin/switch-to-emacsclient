@@ -5,7 +5,7 @@ standalone_prog=fe
 # If we're on a remote display, don't use emacsclient.
 # There must be a better test than this...
 if [ -n "$SSH_TTY" ]; then
-    $standalone_prog "$@"
+    "$standalone_prog" "$@"
     exit $?
 fi
 
@@ -21,9 +21,24 @@ debug () {
 
 switch-to-emacs
 
-(
-    emacsclient -a $standalone_prog "$@"
+# Ideally we want to return control to the caller immediately, but at
+# the same time wait until emacsclient completes before running
+# wmctrl.  But you can't background emacsclient and then re-foreground
+# it so it's connected to the tty's STDIN upon fallback to the
+# alternative editor, since there's no way of knowing whether the
+# fallback occurred until it's too late.  So we need to know in
+# advance whether emacsclient will connect to the emacs server, and
+# only background if it will:
 
-    # Switch back to window from which emacsclient was invoked.
-    wmctrl -ia $client_winid
-) & # return control to caller immediately
+if emacsclient -e '(emacs-version)' >&/dev/null; then
+    # Looks like we found a working server
+    (
+        emacsclient "$@" >/dev/null
+
+        # Switch back to window from which emacsclient was invoked.
+        wmctrl -ia $client_winid
+    ) &
+else
+    # Fallback to tty emacs in foreground
+    "$standalone_prog" "$@"
+fi
