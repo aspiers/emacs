@@ -1,0 +1,3 @@
+#!/bin/sh
+
+switch-to-emacsclient -e "(ediff-files \"$1\" \"$2\")"
