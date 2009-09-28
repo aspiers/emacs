@@ -1,25 +1,41 @@
 #!/bin/bash
 
-standalone_prog=fe
+tty_emacs=fe
 
-# If we're on a remote display, don't use emacsclient.
-# There must be a better test than this...
-if [ -n "$SSH_TTY" ]; then
-    "$standalone_prog" "$@"
-    exit $?
+# This has to be optional since invocations from mutt must not be
+# backgrounded.  It cannot be unconditional (hence the '-if-poss'
+# bit) since backgrounding is impossible if we have to fallback
+# to tty emacs
+if [ "$1" = '--bg-if-poss' ]; then
+    bg_if_poss=y
+    shift
 fi
-
-# Save the current winid so we know what to switch back to from emacs.
-client_winid=`current-winid`
-
-# Switch to emacs and wait for editing to be completed.
 
 debug () {
     :
     echo "$*" >&2
 }
 
-switch-to-emacs
+switch_to_emacsclient () {
+    # Save the current winid so we know what to switch back to from emacs.
+    client_winid=`current-winid`
+
+    # Switch to emacs window
+    switch-to-emacs
+
+    # Wait for editing to be completed
+    emacsclient "$@" >/dev/null
+
+    # Switch back to window from which emacsclient was invoked.
+    wmctrl -ia $client_winid
+}
+
+# If we're on a remote display, don't use emacsclient.
+# There must be a better test than this...
+if [ -n "$SSH_TTY" ]; then
+    "$tty_emacs" "$@"
+    exit $?
+fi
 
 # Ideally we want to return control to the caller immediately, but at
 # the same time wait until emacsclient completes before running
@@ -32,13 +48,12 @@ switch-to-emacs
 
 if emacsclient -e '(emacs-version)' >&/dev/null; then
     # Looks like we found a working server
-    (
-        emacsclient "$@" >/dev/null
-
-        # Switch back to window from which emacsclient was invoked.
-        wmctrl -ia $client_winid
-    ) &
+    if [ -n "$bg_if_poss" ]; then
+        switch_to_emacsclient "$@" &
+    else
+        switch_to_emacsclient "$@"
+    fi
 else
     # Fallback to tty emacs in foreground
-    "$standalone_prog" "$@"
+    "$tty_emacs" "$@"
 fi
