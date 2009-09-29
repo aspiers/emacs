@@ -421,7 +421,11 @@ consistent landing spot."
                     'find-library
                   'find-library-backport))
 (autoload 'find-file-at-point "ffap" nil t)
-(global-set-key [(control meta ?')]        'find-file-at-point)
+(autoload 'ffap-other-window  "ffap" nil t)
+(autoload 'ffap-other-frame   "ffap" nil t)
+(global-set-key [(control meta ?')]       'find-file-at-point)
+(global-set-key [(control x) ?4 ?']       'ffap-other-window)
+(global-set-key [(control x) ?5 ?']       'ffap-other-frame)
 
 (autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
 (global-set-key [(control E)]             'bn-end-of-line-but-one)
