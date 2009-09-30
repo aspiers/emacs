@@ -264,7 +264,7 @@ install: .installed
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 .PHONY: clean
 clean: uninstall $(addprefix clean-, $(TO_CLEAN))
-	@-find $(EMACSLIB) -name \*.elc -print | xargs rm -f
+	@-find $(EMACSLIB) -name \*.elc -print | xargs -r rm -f
 	rm -f .*-made
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
 		( cd $$dir && make clean )     \
@@ -273,8 +273,7 @@ clean: uninstall $(addprefix clean-, $(TO_CLEAN))
 .PHONY: uninstall
 uninstall:
 	-find $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) -name \*.elc -print | \
-
-		xargs rm -f
+		xargs -r rm -f
 
 # }}}
 # {{{ Autogenerate loaddefs
