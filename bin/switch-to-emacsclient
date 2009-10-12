@@ -46,7 +46,27 @@ fi
 # advance whether emacsclient will connect to the emacs server, and
 # only background if it will:
 
-if emacsclient -e '(emacs-version)' >&/dev/null; then
+if emacs_version=$( emacsclient -e 'emacs-version' 2>&1 ); then
+    server_up=y
+    emacs_version="${emacs_version%\"}"
+    emacs_version="${emacs_version#\"}"
+else
+    server_up=
+    emacs_version=$( emacs --batch --no-site-file --eval '(message emacs-version)' 2>&1 )
+fi
+
+case "$emacs_version" in
+    23.*) emacs23=y ;;
+esac
+
+if [ -n "$server_up" ]; then
+    if [ -n "$emacs23" ]; then
+        # emacs 23.x does all the hard work for us, since its clients
+        # and servers can be tty- or Xorg-based!
+        emacsclient -c "$@"
+        exit $?
+    fi
+
     # Looks like we found a working server
     if [ -n "$bg_if_poss" ]; then
         switch_to_emacsclient "$@" &
