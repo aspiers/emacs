@@ -246,7 +246,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-subheading-todo-alist (quote (("PROJECT" . "NEXT") ("NEXT" . "NEXT"))))
  '(org-tags-column -78)
  '(org-tags-match-list-sublevels t)
- '(org-time-stamp-rounding-minutes 15)
+ '(org-time-stamp-rounding-minutes (quote (15 5)))
  '(org-todo-interpretation (quote type))
  '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("CHASE" :foreground "DarkOrange" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :weight bold) ("SOMEDAY" :foreground "gray60" :weight bold) ("MAYBE" :foreground "gray85" :weight bold) ("CANCELLED" :foreground "black" :strike-through t))))
  '(org-todo-keywords (quote ((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)") (sequence "PROJECT(p)" "PROJDONE(P)") (sequence "WAITING(w@)" "CHASE(C@)" "|") (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)"))))
