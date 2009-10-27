@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Uses wmctrl to focus an emacs window, preferring one on the
+# current desktop if it exists.
 
 debug () {
     :
