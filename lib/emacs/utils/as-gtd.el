@@ -160,4 +160,8 @@ point."
       (switch-to-buffer "*Org Agenda*")
     (org-agenda nil "d")))
 
+(defun as-org-clock-in-switch-to-state (current-state)
+  "Function for use with `org-clock-in-switch-to-state'."
+  (if (equal current-state "NEXT") "STARTED" current-state))
+
 (provide 'as-gtd)
