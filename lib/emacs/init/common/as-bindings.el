@@ -385,20 +385,6 @@ consistent landing spot."
 ;; why is this necessary?
 ;;(global-set-key "\e\C-i"     'hippie-expand)
 
-(setq hippie-expand-try-functions-list
-      '(
-        try-expand-all-abbrevs
-        try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-line
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-list
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol
-        ))
-
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
