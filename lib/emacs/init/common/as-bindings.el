@@ -438,6 +438,8 @@ consistent landing spot."
 (global-set-key [(control $)]             'ispell-complete-word)
 (global-set-key [(control meta $)]        'ispell-buffer)
 
+(global-set-key [(control c)(control x)(control j)] 'org-clock-goto)
+
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
