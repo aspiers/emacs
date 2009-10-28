@@ -16,7 +16,7 @@ debug () {
     echo "$*" >&2
 }
 
-connection-supports-X11 || DISPLAY=
+fast-X11-display || DISPLAY=
 
 # Ideally we want to return control to the caller immediately, but at
 # the same time wait until emacsclient completes before running
