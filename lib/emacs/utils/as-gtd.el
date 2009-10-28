@@ -164,4 +164,19 @@ point."
   "Function for use with `org-clock-in-switch-to-state'."
   (if (equal current-state "NEXT") "STARTED" current-state))
 
+(defun as-org-agenda-skip-select-category-function (category-to-select)
+  "Creates a function suitable for use with
+`org-agenda-skip-function' which skips all items except for those
+in the provided category.
+
+From the docs for `org-agenda-skip-function', if the returned
+function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the
+search should be continued."
+  `(lambda ()
+    (if (equal (org-get-category) ,category-to-select)
+        nil ;; don't skip
+      ;; the invisible-ok param below is crucial to avoid infinite loops
+      (org-end-of-subtree t))))
+
 (provide 'as-gtd)
