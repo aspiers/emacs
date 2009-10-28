@@ -54,19 +54,22 @@ switch_to_emacsclient () {
     wmctrl -ia $client_winid
 }
 
+maybe_bg () {
+    if [ -n "$bg_if_poss" ]; then
+        "$@" >/dev/null &
+    else
+        "$@"
+    fi
+}
+
 if [ -n "$server_up" ]; then
     if [ -n "$emacs23" ]; then
         # emacs 23.x does all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
-        emacsclient -c "$@"
-        exit $?
-    fi
-
-    # Looks like we found a working server
-    if [ -n "$bg_if_poss" ]; then
-        switch_to_emacsclient "$@" &
+        maybe_bg emacsclient -c "$@"
     else
-        switch_to_emacsclient "$@"
+        # Looks like we found a working server
+        maybe_bg switch_to_emacsclient "$@"
     fi
 else
     # Fallback to tty emacs in foreground
