@@ -1,7 +1,8 @@
 #!/bin/sh
 #
-# Uses wmctrl to focus an emacs window, preferring one on the
-# current desktop if it exists.
+# Uses wmctrl to focus an emacs frame, preferring one on the current
+# desktop if it exists.  Do not call this directly - instead use
+# switch-to-emacsclient.
 
 debug () {
     :

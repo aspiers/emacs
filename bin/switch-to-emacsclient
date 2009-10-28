@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Provide an emacs window in the quickest way possible, using wmctrl
+# to focus it if necessary.  This favours the use of emacsclient if
+# there is a running emacs server, and intelligently takes advantage
+# of emacs 23's multi-tty support where present.
+#
+# Invoke this rather than focus-emacs-frame.
 
 tty_emacs=fe
 
@@ -40,12 +47,12 @@ case "$emacs_version" in
     23.*) emacs23=y ;;
 esac
 
-switch_to_emacsclient () {
+focus_emacs_frame () {
     # Save the current winid so we know what to switch back to from emacs.
     client_winid=`current-winid`
 
-    # Switch to emacs window
-    switch-to-emacs
+    # Focus existing emacs frame
+    focus-emacs-frame
 
     # Wait for editing to be completed
     emacsclient "$@" >/dev/null
@@ -69,7 +76,7 @@ if [ -n "$server_up" ]; then
         maybe_bg emacsclient -c "$@"
     else
         # Looks like we found a working server
-        maybe_bg switch_to_emacsclient "$@"
+        maybe_bg focus_emacs_frame "$@"
     fi
 else
     if [ -n "$DISPLAY" ]; then
