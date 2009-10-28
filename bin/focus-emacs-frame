@@ -19,7 +19,9 @@ if ! which wmctrl >/dev/null 2>&1; then
     exit 1
 fi
 
-emacs_winids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ { print $1 }') )
+host="`hostname`"
+host="${host%%.*}"
+emacs_winids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
 
 if [ "${#emacs_winids[*]}" -eq 1 ]; then
     wmctrl -ia $emacs_winids[1]
@@ -27,7 +29,9 @@ elif [ "${#emacs_winids[*]}" -gt 1 ]; then
     current_desktop=`current-desktop`
     debug "More than one emacs frame; will prefer one on desktop $current_desktop" >&2
     emacs_winid=$( wmctrl -lpx | \
-                   awk '$4 ~ /emacs/ && $2 == '$current_desktop' { print $1 }' )
+                   awk '$4 ~ /emacs/ &&
+                        $5 ~ /'"$host"'/ && 
+                        $2 == '$current_desktop' { print $1 }' )
     if [ -n "$emacs_winid" ]; then
         debug "winid of emacs on current desktop is $emacs_winid"
         wmctrl -ia $emacs_winid
