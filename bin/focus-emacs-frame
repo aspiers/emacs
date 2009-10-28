@@ -2,7 +2,7 @@
 #
 # Uses wmctrl to focus an emacs frame, preferring one on the current
 # desktop if it exists.  Do not call this directly - instead use
-# switch-to-emacsclient.
+# quick-emacs.
 
 debug () {
     :
