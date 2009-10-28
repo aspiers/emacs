@@ -72,6 +72,10 @@ if [ -n "$server_up" ]; then
         maybe_bg switch_to_emacsclient "$@"
     fi
 else
-    # Fallback to tty emacs in foreground
-    emacs "$@"
+    if [ -n "$DISPLAY" ]; then
+        emacs "$@"
+    else
+        # Fallback to fast-loading tty emacs in foreground, in favour of speed
+        $tty_emacs "$@"
+    fi
 fi
