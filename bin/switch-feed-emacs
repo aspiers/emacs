@@ -1,6 +1,6 @@
 #!/bin/sh
 
-quick-emacs
+focus-emacs-frame
 
 # It seems there is some kind of timing issue which requires this
 # sleep - probably we have to ensure that wmctrl has finished
