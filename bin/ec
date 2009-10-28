@@ -1,3 +1,3 @@
 #!/bin/sh
 
-switch-to-emacsclient --bg-if-poss "$@"
+quick-emacs --bg-if-poss "$@"
