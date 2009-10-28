@@ -178,6 +178,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
  '(org-archive-save-context-info (quote (time file category todo priority itags olpath ltags)))
+ '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-clock-persist t)
