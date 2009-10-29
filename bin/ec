@@ -1,3 +1,0 @@
-#!/bin/sh
-
-quick-emacs --bg-if-poss "$@"
