@@ -62,7 +62,7 @@ focus_emacs_frame () {
 }
 
 maybe_bg () {
-    if [ -n "$bg_if_poss" ]; then
+    if [ -n "$bg_if_poss" ] && [ -n "$DISPLAY" ]; then
         "$@" >/dev/null &
     else
         "$@"
