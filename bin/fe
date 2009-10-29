@@ -1,16 +1,14 @@
 #!/bin/sh
+#
+# "fast emacs" - forces non-windowing version and
+# bypasses some init code.
 
 if which emacs >/dev/null 2>&1; then
-  QUICK_EMACS=1 
-  export QUICK_EMACS
-
-  if [ -n "$OTHER_USER" ]; then
-    exec emacs -nw -l $ZDOTDIR/.emacs "$@"
-  else
-    exec emacs -nw "$@"
-  fi
+    QUICK_EMACS=1 
+    export QUICK_EMACS
+    exec new-emacs -nw "$@"
 fi
 
 if which jmacs >/dev/null 2>&1; then
-  exec jmacs "$@"
+    exec jmacs "$@"
 fi

@@ -80,7 +80,7 @@ if [ -n "$server_up" ]; then
     fi
 else
     if [ -n "$DISPLAY" ]; then
-        maybe_bg emacs "$@"
+        maybe_bg new-emacs "$@"
     else
         # Fallback to fast-loading tty emacs in foreground, in favour of speed
         $tty_emacs "$@"

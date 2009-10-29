@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# For the times when a new emacs instance is required (vs.
+# quick-emacs et al. which try their best to reuse an
+# existing one).
+
+which detect_ssh_agent >&/dev/null && detect_ssh_agent
+which detect_gpg_agent >&/dev/null && detect_gpg_agent
+
+if [ -n "$OTHER_USER" ]; then
+    exec emacs -l $ZDOTDIR/.emacs "$@"
+else
+    exec emacs "$@"
+fi
