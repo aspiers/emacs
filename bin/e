@@ -2,4 +2,4 @@
 
 #new-emacs "$@" &!
 
-qe "$@"
+qe --bg-if-poss "$@"
