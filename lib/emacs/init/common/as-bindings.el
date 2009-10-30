@@ -388,6 +388,9 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
+(global-set-key [(control N)] 'next-logical-line)
+(global-set-key [(control P)] 'previous-logical-line)
+
 (global-set-key [(meta E)]                'mark-end-of-sentence)
 
 (global-set-key [(meta o)]                'overwrite-mode)
