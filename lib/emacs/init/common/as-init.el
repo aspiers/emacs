@@ -816,38 +816,6 @@ then invoking this function four times would yield:
                 (org-ctrl-c-ctrl-c)))))
 
 ;;}}}
-;;{{{ muse-mode
-
-(autoload 'muse-mode "muse" "muse-mode autoload" t)
-(eval-after-load "muse"
-  '(progn
-     (require 'muse-mode)
-     (require 'muse-html)
-     (require 'muse-docbook)
-     (require 'muse-latex)
-     (require 'muse-texinfo)
-     (require 'muse-wiki)
-     (require 'muse-project)
-;;      (defun muse-wiki-backlink ()
-;;        "Grep for the current pagename in all the Wiki directories."
-;;        (interactive)
-;;        (emacs-wiki-grep (muse-page-name)))
-;;      (define-key muse-mode-map "\C-c\C-b" 'muse-wiki-backlink)
-     ))
-(eval-when-compile (require 'muse-mode))
-(eval-when-compile (require 'org))
-
-(autoload 'orgstruct-mode "org" t)
-(add-hook 'muse-mode-hook
-          (lambda ()
-            (require 'org)
-            (orgstruct-mode)
-            (outline-minor-mode)))
-
-(defun mm () "Abbreviation for `muse-mode'." (interactive) (muse-mode))
-(add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
-
-;;}}}
 
 ;;}}}
 ;;{{{ Interaction with other people
