@@ -370,7 +370,11 @@ utils/as-gtd.elc: utils/org-mairix.elc
 utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/lisp
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-utils/org-crypt.elc: .epg-installed
+utils/org-crypt.elc: $(if $(wildcard $(EPG_DIR)/epg.el),.epg-installed,)
+ifeq (,$(wildcard $(EPG_DIR)/epg.el))
+	-@echo "epg.el not found, ignoring failure making $@"
+endif
+
 utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 
 # }}}
@@ -581,13 +585,13 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 epg: .epg-installed
 clean-epg:
 	rm -f .epg-installed
-	$(MAKE) -C $(EPG_DIR) clean
+	-$(MAKE) -C $(EPG_DIR) clean
 .epg-installed: $(EPG_DIR)/epg.el
-	( cd $(EPG_DIR) && \
+	-( cd $(EPG_DIR) && \
 	  ./configure --prefix=$(prefix) infodir=$(infodir) && \
 	  $(MAKE) install \
-	)
-	echo "### epg installed"
+	) && \
+	echo "### epg installed" && \
 	touch $@
 
 # }}}
