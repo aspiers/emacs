@@ -19,8 +19,6 @@ done
 [ -e lib/emacs/major-modes/muse ] || \
   ln -s muse--main--1.0 lib/emacs/major-modes/muse
 
-emk
-
 if which gconftool-2 >/dev/null 2>&1; then
   gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
     -t string 'org-annotation-helper %s'
@@ -30,3 +28,7 @@ if which gconftool-2 >/dev/null 2>&1; then
     -t string 'org-annotation-helper %s'
   gconftool-2 -s /desktop/gnome/url-handlers/remember/enabled -t bool yes
 fi
+
+# Put this last as it's most likely to fail.
+
+emk
