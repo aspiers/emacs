@@ -532,7 +532,7 @@ consistent landing spot."
   (let ((effort (org-entry-get (point) org-effort-property)))
     (message (if effort (format "Effort is %s" effort)
                "No effort defined"))))
-(global-set-key "\eo." 'org-show-effort)
+(global-set-key "\eo\eo" 'org-show-effort)
 
 ;; Zero effort is last (10th) element of global Effort_ALL property
 ;; so that we get zero effort when pressing '0' in the Effort column
