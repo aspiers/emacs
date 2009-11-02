@@ -524,7 +524,7 @@ consistent landing spot."
 
 (global-set-key "\C-co" 'overwrite-mode)
 (global-unset-key "\eo")
-(global-set-key "\eob" 'org-switch-to-agenda-buffer)
+(global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
 
 ;; Zero effort is last (10th) element of global Effort_ALL property
 ;; so that we get zero effort when pressing '0' in the Effort column
