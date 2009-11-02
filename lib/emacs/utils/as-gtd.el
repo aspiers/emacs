@@ -86,12 +86,12 @@ shell command defined by `org-mairix-mutt-display-command'."
 (require 'org)
 
 ;;;###autoload
-(defun as-convert-buffer-sub-to-effort ()
+(defun as-org-convert-buffer-sub-to-effort ()
   "Convert all 'sub*' tags within a buffer into 'Effort' properties."
   (interactive)
-  (org-map-entries 'as-convert-headline-sub-to-effort nil 'file))  
+  (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))  
 
-(defun as-convert-headline-sub-to-effort ()
+(defun as-org-convert-headline-sub-to-effort ()
   "Convert a headline with a 'sub*' tag into an 'Effort' property."
   (interactive)
   (unless (org-on-heading-p)
@@ -152,7 +152,7 @@ point."
              org-complex-heading-regexp))))
 
 ;;;###autoload
-(defun org-switch-to-agenda-buffer ()
+(defun as-org-switch-to-agenda-buffer ()
   "Switch to an existing *Org Agenda* buffer, otherwise run
 `org-agenda' with Adam's custom day view."
   (interactive)
