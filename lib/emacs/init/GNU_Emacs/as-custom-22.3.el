@@ -135,7 +135,9 @@
  '(gnus-use-trees t)
  '(hippie-expand-try-functions-list (quote (try-expand-dabbrev try-expand-dabbrev-all-buffers try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-expand-dabbrev-from-kill try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-case-fold nil)
+ '(ido-everywhere nil)
  '(ido-max-prompt-path 0.8)
+ '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-program-name "aspell")
@@ -177,6 +179,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-time-grid (quote (nil "----------------" (800 1000 1200 1400 1600 1800 2000))))
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
+ '(org-archive-mark-done t)
  '(org-archive-save-context-info (quote (time file category todo priority itags olpath ltags)))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
@@ -242,7 +245,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
  '(org-remember-default-headline "bottom")
- '(org-remember-templates (quote (("new personal NEXT action" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("new work NEXT action" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("new personal diary entry" 100 "* %^t %!%?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&%!" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%!%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%!%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&%!" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
+ '(org-remember-templates (quote (("immediate personal NEXT" 105 "* NEXT %?%&
+  SCHEDULED: %T" "~/roaming/TODO.org" top nil) ("immediate work NEXT" 73 "* NEXT %?%&
+  SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 100 "* %^t %!%?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&%!" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%!%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%!%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&%!" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
 ***** me
 ******* %?%&" "~/ifolder/notes/PSO.org" "stand-up calls and sprint planning" nil) ("project" 112 "* PROJECT %^{project title}
 *** why
@@ -258,7 +263,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** When?
 ***** Where?
 ***** Why?
-***** How?" nil top nil))))
+***** How?" nil top nil) ("Procrastination" 80 "* [#B] %T %^{activity}
+  :PROPERTIES:
+  :thoughts/feelings: %^{thoughts/feelings}
+  :justification: %^{justification}
+  :attempted solution: %^{attempted solution}
+  :resultant thoughts/feelings: %^{resultant thoughts/feelings}
+  :END:" "~/roaming/notes/Procrastination.log" bottom nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
