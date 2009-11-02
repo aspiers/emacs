@@ -15,11 +15,11 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 # {{{ 3rd party packages
 
+# These should be symlinked to the correct versions.
 DVC_DIR        = major-modes/dvc
 ORG_DIR        = major-modes/org-mode.git
-#ORG_DIR        = major-modes/org-6.24b
-EPG_DIR        = major-modes/epg-0.0.15
-REMEMBER_DIR   = major-modes/remember-1.9
+EPG_DIR        = major-modes/epg
+REMEMBER_DIR   = major-modes/remember
 EMACSRAILS_DIR = major-modes/emacs-rails
 BEHAVE_DIR     = utils/behave.git
 
