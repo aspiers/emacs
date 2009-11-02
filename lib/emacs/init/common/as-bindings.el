@@ -526,6 +526,14 @@ consistent landing spot."
 (global-unset-key "\eo")
 (global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
 
+(defun org-show-effort ()
+  "Shows the effort of the entry at the current point."
+  (interactive)
+  (let ((effort (org-entry-get (point) org-effort-property)))
+    (message (if effort (format "Effort is %s" effort)
+               "No effort defined"))))
+(global-set-key "\eo." 'org-show-effort)
+
 ;; Zero effort is last (10th) element of global Effort_ALL property
 ;; so that we get zero effort when pressing '0' in the Effort column
 ;; in Column view, since this invokes `org-set-effort' with arg 0,
@@ -544,7 +552,7 @@ consistent landing spot."
       (fset fn `(lambda ()
                   ,(format "Sets effort to %s." effort)
                   (interactive)
-                  (org-set-effort ,effort-index)))
+                  (org-set-effort ,(1+ effort-index))))
       (global-set-key (concat "\eo" key-suffix) fn))))
 
 ;;}}}
