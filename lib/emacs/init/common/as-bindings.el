@@ -522,7 +522,30 @@ consistent landing spot."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 ;;{{{ _O_rganisation/productivity (C-c o)
 
-(global-set-key "\C-coa" 'org-switch-to-agenda-buffer)
+(global-set-key "\C-co" 'overwrite-mode)
+(global-unset-key "\eo")
+(global-set-key "\eob" 'org-switch-to-agenda-buffer)
+
+;; Zero effort is last (10th) element of global Effort_ALL property
+;; so that we get zero effort when pressing '0' in the Effort column
+;; in Column view, since this invokes `org-set-effort' with arg 0,
+;; which stands for the 10th allowed value.
+(let ((effort-values
+       (org-property-get-allowed-values nil org-effort-property)))
+  (dotimes (effort-index 10)
+    (let* ((effort (nth effort-index effort-values))
+           (key-suffix (number-to-string
+                 (if (= effort-index 9) 0 (1+ effort-index))))
+           (fn-name (concat "org-set-effort-"
+                            (number-to-string effort-index)))
+           (fn (intern fn-name)))
+      (message "Binding M-o %s to %s which sets effort to %s"
+               key-suffix fn-name effort)
+      (fset fn `(lambda ()
+                  ,(format "Sets effort to %s." effort)
+                  (interactive)
+                  (org-set-effort ,effort-index)))
+      (global-set-key (concat "\eo" key-suffix) fn))))
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
@@ -531,6 +554,7 @@ consistent landing spot."
 
 (autoload 'org-remember "org-remember" nil t)
 (global-set-key "\C-cq" 'org-remember)
+(global-set-key "\eoq" 'org-remember)
 
 ;;}}}
 (global-set-key "\C-cr"   'revert-buffer)
