@@ -173,12 +173,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-ndays 31)
  '(org-agenda-prefix-format (quote ((agenda . "  %-9:c%?-12t% s") (timeline . "  % s") (todo . "  %-9:c") (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
+ '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy (quote ((agenda time-up priority-down category-keep) (todo priority-down category-keep) (tags priority-down category-keep))))
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-time-grid (quote (nil "----------------" (800 1000 1200 1400 1600 1800 2000))))
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
+ '(org-agenda-window-setup (quote current-window))
  '(org-archive-mark-done t)
  '(org-archive-save-context-info (quote (time file category todo priority itags olpath ltags)))
  '(org-clock-idle-time 5)
@@ -186,7 +188,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-clock-persist t)
  '(org-clock-persist-query-save t)
- '(org-clock-sound "/usr/share/sounds/KDE_Error_3.ogg")
+ '(org-clock-sound "~/lib/emacs/utils/org-clock-sound.wav")
  '(org-columns-default-format "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
  '(org-default-extensions nil)
@@ -227,7 +229,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 </style>")
  '(org-export-with-sub-superscripts (quote {}))
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
- '(org-global-properties (quote (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00"))))
+ '(org-global-properties (quote (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0"))))
  '(org-goto-max-level 7)
  '(org-hide-leading-stars t)
  '(org-icalendar-store-UID t)
@@ -245,9 +247,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
  '(org-remember-default-headline "bottom")
- '(org-remember-templates (quote (("immediate personal NEXT" 105 "* NEXT %?%&
+ '(org-remember-templates (quote (("property test" 122 "%^{Effort}p" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
   SCHEDULED: %T" "~/roaming/TODO.org" top nil) ("immediate work NEXT" 73 "* NEXT %?%&
-  SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 100 "* %^t %!%?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&%!" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%!%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%!%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&%!" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
+  SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 97 "* %^t %!%?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&%!" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%!%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%!%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&%!" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
 ***** me
 ******* %?%&" "~/ifolder/notes/PSO.org" "stand-up calls and sprint planning" nil) ("project" 112 "* PROJECT %^{project title}
 *** why
@@ -263,13 +265,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** When?
 ***** Where?
 ***** Why?
-***** How?" nil top nil) ("Procrastination" 80 "* [#B] %T %^{activity}
+***** How?" nil top nil) ("Procrastination" 80 "%&* [#B] %T %^{activity}
   :PROPERTIES:
   :thoughts/feelings: %^{thoughts/feelings}
   :justification: %^{justification}
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:" "~/roaming/notes/Procrastination.log" bottom nil))))
+  :END:" "~/roaming/notes/ProcrastinationLog.org" bottom nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
