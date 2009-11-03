@@ -577,7 +577,8 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;   (define-key mode-specific-map [(control l)] 'rst-shift-region-left)
 
   ;; Bind the rst commands on the C-c p prefix.
-  (local-set-key [(control c) (control p)] rst-prefix-map)
+;; FIXME: I can't find rst-prefix-map in rst.el any more, was it removed?
+;;  (local-set-key [(control c) (control p)] rst-prefix-map)
   ;;(define-key mode-specific-map [(p)] 'rst-prefix-map)
   )
 
@@ -825,6 +826,7 @@ then invoking this function four times would yield:
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
 (add-to-list 'auto-mode-alist '("/mutt\\|itsalltext.*mail\\.google" . mail-mode))
 (add-hook 'mail-mode-hook 'turn-on-auto-fill)
+(eval-when-compile (require 'sendmail))
 (add-hook
  'mail-mode-hook
  (lambda ()
