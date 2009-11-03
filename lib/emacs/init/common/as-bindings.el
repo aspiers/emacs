@@ -535,26 +535,29 @@ consistent landing spot."
                "No effort defined"))))
 (global-set-key "\eo\eo" 'org-show-effort)
 
-;; Zero effort is last (10th) element of global Effort_ALL property
-;; so that we get zero effort when pressing '0' in the Effort column
-;; in Column view, since this invokes `org-set-effort' with arg 0,
-;; which stands for the 10th allowed value.
-(let ((effort-values
-       (org-property-get-allowed-values nil org-effort-property)))
-  (dotimes (effort-index 10)
-    (let* ((effort (nth effort-index effort-values))
-           (key-suffix (number-to-string
-                 (if (= effort-index 9) 0 (1+ effort-index))))
-           (fn-name (concat "org-set-effort-"
-                            (number-to-string effort-index)))
-           (fn (intern fn-name)))
-      ;; (message "Binding M-o %s to %s which sets effort to %s"
-      ;;          key-suffix fn-name effort)
-      (fset fn `(lambda ()
-                  ,(format "Sets effort to %s." effort)
-                  (interactive)
-                  (org-set-effort ,(1+ effort-index))))
-      (global-set-key (concat "\eo" key-suffix) fn))))
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   ;; Zero effort is last (10th) element of global Effort_ALL property
+   ;; so that we get zero effort when pressing '0' in the Effort column
+   ;; in Column view, since this invokes `org-set-effort' with arg 0,
+   ;; which stands for the 10th allowed value.
+   (let ((effort-values
+          (org-property-get-allowed-values nil org-effort-property)))
+     (dotimes (effort-index 10)
+       (let* ((effort (nth effort-index effort-values))
+              (key-suffix (number-to-string
+                           (if (= effort-index 9) 0 (1+ effort-index))))
+              (fn-name (concat "org-set-effort-"
+                               (number-to-string effort-index)))
+              (fn (intern fn-name)))
+         ;; (message "Binding M-o %s to %s which sets effort to %s"
+         ;;          key-suffix fn-name effort)
+         (fset fn `(lambda ()
+                     ,(format "Sets effort to %s." effort)
+                     (interactive)
+                     (org-set-effort ,(1+ effort-index))))
+         (global-set-key (concat "\eo" key-suffix) fn))))))
 
 ;;}}}
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
