@@ -246,20 +246,23 @@ install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-.installed: .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
-	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR)"
-	@for file in $(ELs_TO_COMPILE) $(ELCs_TO_COMPILE)  \
-	    	    $(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
-		    $(AS_INIT_ELC); do 			   \
-	  cp $$file $(POST_INSTALL_DIR); 		   \
-	done
-	@echo "Installing overrides in $(PRE_INSTALL_DIR)"
-	@cd $(POST_INSTALL_DIR) && \
-	mv $(addsuffix .el,  $(EL_OVERRIDES)) \
-	   $(addsuffix .elc, $(EL_OVERRIDES)) \
-		$(PRE_INSTALL_DIR)
-	@touch $@
+INSTALL_FILES = \
+	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
+	$(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
+	$(AS_INIT_ELC)
+ALL_OVERRIDES = \
+	$(addsuffix .el,  $(EL_OVERRIDES)) \
+	$(addsuffix .elc, $(EL_OVERRIDES))
 
+.installed: .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
+	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
+	@cp $(INSTALL_FILES) $(POST_INSTALL_DIR)
+	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
+	@cd $(POST_INSTALL_DIR) && \
+	mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR)
+	@echo "Making files in $(PRE_INSTALL_DIR) and $(POST_INSTALL_DIR) read-only ..."
+	@chmod -R a-w $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+	@touch $@
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 .PHONY: clean
