@@ -256,7 +256,8 @@ ALL_OVERRIDES = \
 
 .installed: .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
 	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
-	@cp $(INSTALL_FILES) $(POST_INSTALL_DIR)
+	@chmod -R u+w $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+	@cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
 	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
 	mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR)
