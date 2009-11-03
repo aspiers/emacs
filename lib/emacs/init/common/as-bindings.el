@@ -449,9 +449,9 @@ consistent landing spot."
 ;;{{{ C-c -
 
 (fset 'as-find-personal-todo "\C-x\C-f~/roaming/TODO.org")
-(global-set-key "\C-cat"  'as-find-personal-todo)
+(global-set-key "\C-cjt"  'as-find-personal-todo)
 (fset 'as-find-personal-diary "\C-x\C-f~/roaming/diary.org")
-(global-set-key "\C-cad"  'as-find-personal-diary)
+(global-set-key "\C-cjd"  'as-find-personal-diary)
 ;;(fset 'as-find-personal-note "\C-x\C-f~/roaming/notes/")
 
 (eval-when-compile (require 'ido))
@@ -459,17 +459,17 @@ consistent landing spot."
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/roaming/notes/" "Find note: "))
-(global-set-key "\C-can"  'as-find-personal-note)
+(global-set-key "\C-cjn"  'as-find-personal-note)
 
 (fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
-(global-set-key "\C-caT"  'as-find-work-todo)
+(global-set-key "\C-cjT"  'as-find-work-todo)
 
 (defun as-find-from-home ()
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/" "Find file: "))
 (global-set-key [(control ~)] 'as-find-from-home)
-(global-set-key "\C-cah"      'as-find-from-home)
+(global-set-key "\C-cjh"      'as-find-from-home)
 
 
 (global-set-key "\C-cA"   'as-align-to-previous-line)
@@ -526,6 +526,7 @@ consistent landing spot."
 (global-unset-key "\eo")
 (global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
 
+(require 'org)
 (defun org-show-effort ()
   "Shows the effort of the entry at the current point."
   (interactive)
@@ -547,8 +548,8 @@ consistent landing spot."
            (fn-name (concat "org-set-effort-"
                             (number-to-string effort-index)))
            (fn (intern fn-name)))
-      (message "Binding M-o %s to %s which sets effort to %s"
-               key-suffix fn-name effort)
+      ;; (message "Binding M-o %s to %s which sets effort to %s"
+      ;;          key-suffix fn-name effort)
       (fset fn `(lambda ()
                   ,(format "Sets effort to %s." effort)
                   (interactive)
