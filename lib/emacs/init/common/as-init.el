@@ -666,10 +666,6 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
 
-;; Need to bind C-c C-a globally *and* locally, otherwise gets set to
-;; show-all locally via outline mode.
-(global-set-key [(control c)(control a)] 'org-agenda)
-(autoload 'org-defkey "org-install")
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
@@ -677,7 +673,6 @@ C-style indentation, use cssm-c-style-indenter.")
    (require 'org-mairix)
    (require 'org-crypt)
    (require 'as-gtd)
-   (org-defkey org-mode-map [(control c)(control a)] 'org-agenda)
    (imenu-add-to-menubar "Imenu")))
 
 ;;{{{ org keyword switching
