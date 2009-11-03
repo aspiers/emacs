@@ -177,10 +177,10 @@
 
 ;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
 ;; with "indented-text-mode".
-(mapcar (function
-         (lambda (x)
-           (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
-        auto-mode-alist)
+(mapc (function
+       (lambda (x)
+         (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
+      auto-mode-alist)
 
 ;; Each mode has its own block of elisp which will usually modify
 ;; auto-mode-alist, but here we add in some misc modes.
