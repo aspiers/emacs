@@ -666,12 +666,14 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
 (autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
 
+(eval-when-compile (require 'org-crypt))
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
  (lambda ()
    (require 'org-mairix)
    (require 'org-crypt)
+   (org-crypt-use-before-save-magic)
    (require 'as-gtd)
    (imenu-add-to-menubar "Imenu")))
 
