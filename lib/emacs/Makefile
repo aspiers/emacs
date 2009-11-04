@@ -382,21 +382,13 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 # }}}
 # {{{ Special rules for utils files
 
-utils/as-gtd.elc: utils/org-mairix.elc
 utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/lisp
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
-
-utils/org-crypt.elc: $(if $(wildcard $(EPG_DIR)/epg.el),.epg-installed,)
-ifeq (,$(wildcard $(EPG_DIR)/epg.el))
-	-@echo "epg.el not found, ignoring failure making $@"
-endif
-
-utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 
 # }}}
 # {{{ org-mode
 
-major-modes/org-action-verbs.elc major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)/lisp
+major-modes/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
 
 .PHONY: org
 org: .org-installed
