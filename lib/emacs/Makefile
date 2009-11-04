@@ -248,10 +248,11 @@ install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
-INSTALL_FILES = \
+INSTALL_FILES_TMP = \
 	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
 	$(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
 	$(AS_INIT_ELC)
+INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_TMP))
 ALL_OVERRIDES = \
 	$(addsuffix .el,  $(EL_OVERRIDES)) \
 	$(addsuffix .elc, $(EL_OVERRIDES))
