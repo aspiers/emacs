@@ -136,12 +136,12 @@ ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
 # built from vendor Makefiles.
 # Note that the shell expansion is deferred until needed.
 THIRD_PARTY_ELCs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -name \*.elc \
+	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.elc \
 )
 # We also need to know which vendor-provided .el files to install
 # into the destination directory, so that find-library works.
 THIRD_PARTY_ELs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -name \*.el \
+	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.el \
 )
 
 # }}}
@@ -269,7 +269,7 @@ lock-install-dirs:
 .installed: .elcs
 	@$(UNLOCK_INSTALL_DIRS)
 	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
-	@cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
+	cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
 	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
 	mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR)
@@ -279,7 +279,7 @@ lock-install-dirs:
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
 .PHONY: clean
 clean: uninstall $(addprefix clean-, $(TO_CLEAN))
-	@-find $(EMACSLIB) -name \*.elc -print | xargs -r rm -f
+	@-find $(EMACSLIB) -follow -name \*.elc -print | xargs -r rm -f
 	rm -f .*-made
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
 		( cd $$dir && make clean )     \
