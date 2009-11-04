@@ -31,7 +31,6 @@ BEHAVE_DIR     = utils/behave.git
 # This is a list of make targets which have their own Makefiles
 THIRD_PARTY_PKGS = 		\
 	.psgml-made		\
-	.muse-installed		\
 	.dvc-installed		\
 	.org-installed		\
 	.remember-installed
@@ -39,7 +38,6 @@ THIRD_PARTY_PKGS = 		\
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS =            \
 	major-modes/psgml 	  \
-	major-modes/muse 	  \
 	$(DVC_DIR) 	  \
 	$(ORG_DIR) 	  \
 	$(REMEMBER_DIR)
@@ -71,7 +69,6 @@ IGNORE_FILES =		    		\
 	loaddefs.el			\
 	major-modes/sdf.el  		\
 	major-modes/mediawiki.el 	\
-	major-modes/planner*.el		\
 	$(EMACSRAILS_DIR)/behave-rails.el \
 	$(BEHAVE_DIR)/example.el
 
@@ -103,7 +100,7 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
-TO_CLEAN = org psgml nxml muse planner emacs-w3m pgg dvc epg
+TO_CLEAN = org psgml nxml emacs-w3m pgg dvc epg
 
 # }}}
 
@@ -376,7 +373,6 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
 $(AS_INIT_ELC): utils/smooth-scrolling.elc
-$(AS_INIT_ELC): .muse-installed
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
@@ -487,52 +483,6 @@ clean-nxml:
 	$(MAKE) -C major-modes/nxml-mode-20041004
 	cp rng-auto.el $(POST_INSTALL_DIR)
 	touch $@
-
-# }}}
-# {{{ muse-mode
-
-muse: .muse-installed
-clean-muse:
-	rm -f .muse-made .muse-installed
-	$(MAKE) -C major-modes/muse clean
-.muse-made: $(wildcard major-modes/muse/*.el) major-modes/muse/Makefile.defs
-	$(MAKE) -C major-modes/muse lisp \
-		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir)
-	touch $@
-
-.muse-installed: .muse-made
-	@$(UNLOCK_INSTALL_DIRS)
-	( 								\
-	  cd major-modes/muse;						\
-	  $(MAKE) install-bin ELISPDIR=$(lispdir);			\
-	  $(MAKE) install-info ||					\
-	    echo "muse install-info failure ignored"			\
-	)
-	@$(LOCK_INSTALL_DIRS)
-	touch $@
-
-# }}}
-# {{{ planner-mode
-
-planner: .planner-installed
-clean-planner:
-	rm -f .planner-installed
-	$(MAKE) -C major-modes/planner clean
-.planner-installed: .planner-made
-	@$(UNLOCK_INSTALL_DIRS)
-	@$(MAKE) -C major-modes/planner install
-	@$(LOCK_INSTALL_DIRS)
-	@touch $@
-# FIXME need separate targets
-# 	  $(MAKE) install-lisp;						\
-# 	  $(MAKE) install-info ||						\
-# 	    echo "planner install-info failure ignored"			\
-
-.planner-made: $(wildcard major-modes/planner/*.el) major-modes/planner/Makefile.defs .muse-installed
-	$(MAKE) -C major-modes/planner lisp PREFIX=$(prefix) INFODIR=$(infodir) \
-	&& touch $@
-
-#major-modes/remember/remember-experimental.elc: .planner-made
 
 # }}}
 # {{{ emacs-w3m-mode
