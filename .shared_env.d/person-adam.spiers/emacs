@@ -1,4 +1,5 @@
 LE=$ZDOTDIR/lib/emacs
   LEI=$LE/init
   MAJ=$LE/major-modes
+    ORG=$MAJ/org-mode.git
   MIN=$LE/minor-modes
