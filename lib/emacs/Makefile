@@ -1,3 +1,5 @@
+# Adam's emacs Makefile
+
 # {{{ Determine emacs version
 
 ifndef EMACS
@@ -257,15 +259,24 @@ ALL_OVERRIDES = \
 	$(addsuffix .el,  $(EL_OVERRIDES)) \
 	$(addsuffix .elc, $(EL_OVERRIDES))
 
-.installed: .elcs $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) #uninstall
-	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
+.PHONY: unlock-install-dirs lock-install-dirs
+UNLOCK_INSTALL_DIRS = $(MAKE) -s unlock-install-dirs
+LOCK_INSTALL_DIRS   = $(MAKE) -s lock-install-dirs
+unlock-install-dirs: $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+	@echo "Making files in $(PRE_INSTALL_DIR) and $(POST_INSTALL_DIR) read/write ..."
 	@chmod -R u+w $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+lock-install-dirs:
+	@echo "Making files in $(PRE_INSTALL_DIR) and $(POST_INSTALL_DIR) read-only ..."
+	@chmod -R a-w $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+
+.installed: .elcs
+	@$(UNLOCK_INSTALL_DIRS)
+	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
 	@cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
 	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
 	mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR)
-	@echo "Making files in $(PRE_INSTALL_DIR) and $(POST_INSTALL_DIR) read-only ..."
-	@chmod -R a-w $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR)
+	@$(LOCK_INSTALL_DIRS)
 	@touch $@
 
 # Some shitty Solaris makes have broken $(wildcard foo/*.bar)
@@ -394,10 +405,12 @@ org: .org-installed
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(ORG_DIR)/lisp/org.el
+.org-installed: $(wildcard $(ORG_DIR)/*)
+	@$(UNLOCK_INSTALL_DIRS)
 	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
+	@$(LOCK_INSTALL_DIRS)
 	-$(MAKE) -C $(ORG_DIR) install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir)
@@ -445,8 +458,10 @@ clean-remember:
 	touch $@
 
 .remember-installed: .remember-made
+	@$(UNLOCK_INSTALL_DIRS)
 	cd $(REMEMBER_DIR) && \
 	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir)
+	@$(LOCK_INSTALL_DIRS)
 	touch $@
 
 # }}}
@@ -486,12 +501,14 @@ clean-muse:
 	touch $@
 
 .muse-installed: .muse-made
+	@$(UNLOCK_INSTALL_DIRS)
 	( 								\
 	  cd major-modes/muse;						\
-	  $(MAKE) install-bin ELISPDIR=$(lispdir);						\
-	  $(MAKE) install-info ||						\
+	  $(MAKE) install-bin ELISPDIR=$(lispdir);			\
+	  $(MAKE) install-info ||					\
 	    echo "muse install-info failure ignored"			\
 	)
+	@$(LOCK_INSTALL_DIRS)
 	touch $@
 
 # }}}
@@ -502,8 +519,10 @@ clean-planner:
 	rm -f .planner-installed
 	$(MAKE) -C major-modes/planner clean
 .planner-installed: .planner-made
-	-$(MAKE) -C major-modes/planner install \
-	&& touch $@
+	@$(UNLOCK_INSTALL_DIRS)
+	@$(MAKE) -C major-modes/planner install
+	@$(LOCK_INSTALL_DIRS)
+	@touch $@
 # FIXME need separate targets
 # 	  $(MAKE) install-lisp;						\
 # 	  $(MAKE) install-info ||						\
@@ -523,6 +542,7 @@ clean-emacs-w3m:
 	rm -f .emacs-w3m-made
 	$(MAKE) -C major-modes/emacs-w3m-1.4.4 clean
 .emacs-w3m-made:
+	@$(UNLOCK_INSTALL_DIRS)
 	( 					\
 	  cd major-modes/emacs-w3m-1.4.4    && 	\
 	  ./configure --prefix=$(prefix)	\
@@ -531,6 +551,7 @@ clean-emacs-w3m:
 	  $(MAKE) install			    && 	\
 	  cp w3m-load.el $(POST_INSTALL_DIR) 	\
 	)
+	@$(LOCK_INSTALL_DIRS)
 	touch $@
 
 # }}}
@@ -579,11 +600,13 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 	touch $@
 
 .dvc-installed: .dvc-made
-	-( 								\
+	@$(UNLOCK_INSTALL_DIRS)
+	@-( 								\
 	  cd $(DVC_DIR)/++build && 				\
 	  $(MAKE) install &&						\
 	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
 	) &&								\
+	$(LOCK_INSTALL_DIRS) &&					\
 	touch $@
 
 # }}}
@@ -594,10 +617,12 @@ clean-epg:
 	rm -f .epg-installed
 	-$(MAKE) -C $(EPG_DIR) clean
 .epg-installed: $(EPG_DIR)/epg.el
-	-( cd $(EPG_DIR) && \
+	@$(UNLOCK_INSTALL_DIRS)
+	@-( cd $(EPG_DIR) && \
 	  ./configure --prefix=$(prefix) infodir=$(infodir) && \
 	  $(MAKE) install \
 	) && \
+	$(LOCK_INSTALL_DIRS) && \
 	echo "### epg installed" && \
 	touch $@
 
