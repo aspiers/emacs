@@ -21,6 +21,9 @@ ORG_DIR        = major-modes/org-mode.git
 EPG_DIR        = major-modes/epg
 REMEMBER_DIR   = major-modes/remember
 EMACSRAILS_DIR = major-modes/emacs-rails
+ifeq (,$(wildcard $(EMACSRAILS_DIR)))
+	EMACSRAILS_DIR=
+endif
 BEHAVE_DIR     = utils/behave.git
 
 # This is a list of make targets which have their own Makefiles
@@ -384,7 +387,7 @@ utils/org-crypt.elc: LIBDIRS += $(EPG_DIR)
 # }}}
 # {{{ org-mode
 
-major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)/lisp
+major-modes/org-action-verbs.elc major-modes/org-elisp-symbol.elc utils/org-mairix.elc: LIBDIRS += $(ORG_DIR)/lisp
 
 .PHONY: org
 org: .org-installed
