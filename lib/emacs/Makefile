@@ -69,6 +69,7 @@ IGNORE_FILES =		    		\
 	loaddefs.el			\
 	major-modes/sdf.el  		\
 	major-modes/mediawiki.el 	\
+	$(DVC_DIR)/lisp/contrib/ewoc.el \
 	$(EMACSRAILS_DIR)/behave-rails.el \
 	$(BEHAVE_DIR)/example.el
 
