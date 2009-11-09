@@ -142,7 +142,7 @@ THIRD_PARTY_ELCs = $(shell \
 # We also need to know which vendor-provided .el files to install
 # into the destination directory, so that find-library works.
 THIRD_PARTY_ELs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.el \
+	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.el | so \
 )
 
 # }}}
