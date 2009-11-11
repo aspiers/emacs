@@ -135,6 +135,8 @@
  '(gnus-use-trees t)
  '(hippie-expand-try-functions-list (quote (try-expand-dabbrev try-expand-dabbrev-all-buffers try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-expand-dabbrev-from-kill try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-case-fold nil)
+ '(ido-default-buffer-method (quote selected-window))
+ '(ido-default-file-method (quote selected-window))
  '(ido-everywhere nil)
  '(ido-max-prompt-path 0.8)
  '(ido-mode (quote both) nil (ido))
@@ -151,6 +153,8 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(mail-envelope-from (quote header))
+ '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
  '(message-default-news-headers "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
@@ -191,6 +195,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound.wav")
  '(org-columns-default-format "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/ifolder/org.ics")
+ '(org-crypt-key "7A2F2DDC")
  '(org-default-extensions nil)
  '(org-default-notes-file "~/roaming/TODO.org")
  '(org-directory "~/roaming")
@@ -308,6 +313,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(scroll-margin 20)
  '(scroll-preserve-screen-position t)
  '(search-upper-case t)
+ '(sendmail-program "msmtp-personal")
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
