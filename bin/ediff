@@ -1,3 +1,21 @@
 #!/bin/sh
 
+me=`basename $0`
+
+usage () {
+    if [ -n "$1" ]; then
+        echo "$*" >&2
+        echo
+    fi
+
+    cat <<EOF >&2
+Usage: $me FILE1 FILE2
+EOF
+    exit 1
+}
+
+if [ "$1" == '-h' ] || [ "$1" == '--help' ] || [ $# -ne 2 ]; then
+    usage
+fi
+
 quick-emacs -e "(ediff-files \"$1\" \"$2\")"
