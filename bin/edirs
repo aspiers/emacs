@@ -1,3 +1,27 @@
 #!/bin/sh
 
-quick-emacs -e "(ediff-directories \"$1\" \"$2\")"
+me=`basename $0`
+
+usage () {
+    if [ -n "$1" ]; then
+        echo "$*" >&2
+        echo
+    fi
+
+    cat <<EOF >&2
+Usage: $me DIR1 DIR2 [REGEXP]
+EOF
+    exit 1
+}
+
+if [ "$1" == '-h' ] || [ "$1" == '--help' ] || [ $# -lt 2 ] || [ $# -gt 3 ]; then
+    usage
+fi
+
+if [ -n "$3" ]; then
+    regexp="\"$3\""
+else
+    regexp=nil
+fi
+
+quick-emacs -e "(ediff-directories \"$1\" \"$2\" $regexp)"
