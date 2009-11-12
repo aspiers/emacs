@@ -1,0 +1,3 @@
+#!/bin/sh
+
+quick-emacs -e "(ediff-directories \"$1\" \"$2\")"
