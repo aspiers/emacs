@@ -685,7 +685,8 @@ C-style indentation, use cssm-c-style-indenter.")
    (require 'org-crypt)
    (org-crypt-use-before-save-magic)
    (require 'as-gtd)
-   (imenu-add-to-menubar "Imenu")))
+   (imenu-add-to-menubar "Imenu")
+   (setq comment-start nil)))
 
 ;;{{{ org keyword switching
 
