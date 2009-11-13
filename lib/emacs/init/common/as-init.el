@@ -225,6 +225,7 @@
 (add-hook 'cperl-mode-hook 'as-cperl-setup)
 (add-hook 'cperl-mode-hook 'turn-on-auto-fill)
 (defun cp () "Abbreviation for `cperl-mode'." (interactive) (cperl-mode))
+(add-hook 'cperl-mode-hook (lambda () (setq comment-start "#")))
 
 (add-to-list 'auto-mode-alist '("\\.\\(pod\\|t\\)\\'" . cperl-mode))
 
@@ -261,6 +262,8 @@
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
 
+(add-hook 'shell-script-mode-hook (lambda () (setq comment-start "#")))
+
 (defun sm () "Abbreviation for `sm-mode'." (interactive) (sh-mode))
 
 ;;}}}
@@ -270,6 +273,8 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
 
 ;;{{{ local-unset-key M-tab for hippie-expand
 
@@ -509,6 +514,9 @@ C-style indentation, use cssm-c-style-indenter.")
                 )
               auto-mode-alist))
 
+(defvar as-find-file-matching-regexp-alist
+  '(("\*\.rdb$" . (lambda () (setq comment-start "! ")))))
+
 ;;}}}
 
 ;;}}}
@@ -544,6 +552,8 @@ C-style indentation, use cssm-c-style-indenter.")
    ;; Treat single quoted ("> > ") lines the same as multiple
    ;; w.r.t. filling.
    (setq adaptive-fill-first-line-regexp adaptive-fill-regexp)
+
+   (setq comment-start "> ")
  )
 
 (defun itm () "Shortcut to indented-text-mode."
@@ -652,19 +662,19 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;{{{ org-mode
 
-;; org-mode
-(autoload 'org-mode "org-install" "Org mode" t)
-(autoload 'org-time-stamp "org-install" "org-time-stamp" t)
-(autoload 'org-timestamp-up "org-install" "org-timestamp-up" t)
-(autoload 'org-timestamp-down "org-install" "org-timestamp-down" t)
+(require 'org-install)
+;; (autoload 'org-mode "org-install" "Org mode" t)
+;; (autoload 'org-time-stamp "org-install" "org-time-stamp" t)
+;; (autoload 'org-timestamp-up "org-install" "org-timestamp-up" t)
+;; (autoload 'org-timestamp-down "org-install" "org-timestamp-down" t)
 
 (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(autoload 'org-diary "org-install" "Diary entries from Org mode")
-(autoload 'org-agenda "org-install" "Multi-file agenda from Org mode" t)
-(autoload 'org-store-link "org-install" "Store a link to the current location" t)
-(autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
-(autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (autoload 'org-diary "org-install" "Diary entries from Org mode")
+;; (autoload 'org-agenda "org-install" "Multi-file agenda from Org mode" t)
+;; (autoload 'org-store-link "org-install" "Store a link to the current location" t)
+;; (autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
+;; (autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
 
 (eval-when-compile (require 'org-crypt))
 (defvar org-mode-map)
@@ -1250,21 +1260,6 @@ then invoking this function four times would yield:
       '(outline-mode-hook outline-minor-mode-hook))
 
 ;;}}}
-
-;;}}}
-
-;;{{{ Per-mode commenting
-
-(as-progress "Per-mode commenting...")
-
-(add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
-(add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
-(add-hook 'text-mode-hook (lambda () (setq comment-start "> ")))
-(add-hook 'cperl-mode-hook (lambda () (setq comment-start "#")))
-(add-hook 'shell-script-mode-hook (lambda () (setq comment-start "#")))
-
-(defvar as-find-file-matching-regexp-alist
-  '(("\*\.rdb$" . (lambda () (setq comment-start "! ")))))
 
 ;;}}}
 
