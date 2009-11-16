@@ -45,5 +45,6 @@ elif [ "${#emacs_winids[*]}" -gt 1 ]; then
         wmctrl -xa emacs
     fi
 else
-    echo "ERROR: no emacs windows found" >&2
+    echo "ERROR: no emacs windows found on $DISPLAY" >&2
+    exit 1
 fi
