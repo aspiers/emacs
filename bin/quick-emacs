@@ -52,8 +52,12 @@ focus_emacs_frame () {
     client_winid=`current-winid`
 
     # Focus existing emacs frame
-    focus-emacs-frame
+    if ! focus-emacs-frame; then
+        echo "focus-emacs-frame failed: is the emacs server running on a different X11 display?" >&2
+    fi
+}
 
+do_editing () {
     # Wait for editing to be completed
     emacsclient "$@" >/dev/null
 
@@ -76,7 +80,8 @@ if [ -n "$server_up" ]; then
         maybe_bg emacsclient -c "$@"
     else
         # Looks like we found a working server
-        maybe_bg focus_emacs_frame "$@"
+        focus_emacs_frame "$@"
+        maybe_bg do_editing "$@"
     fi
 else
     if [ -n "$DISPLAY" ]; then
