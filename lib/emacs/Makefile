@@ -343,7 +343,10 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # }}}
 # {{{ General pattern-based rules for compiling .el to .elc
 
-%.elc: %.el
+$(lispdir):
+	@mkdir -p $(lispdir)
+
+%.elc: %.el $(lispdir)
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
@@ -351,7 +354,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 	fi
 	@$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $<
 
-%.elc.verbose: %.el
+%.elc.verbose: %.el $(lispdir)
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
