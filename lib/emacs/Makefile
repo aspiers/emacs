@@ -97,6 +97,10 @@ XINSTALL_DIR = $(EMACSLIB)/XEmacs
 prefix   = $(HOME)/local
 infodir = $(prefix)/share/info
 
+# This is where some third-party stuff like epg gets installed,
+# although any third-party packages whose Makefiles are flexible
+# enough to get installed to $(POST_INSTALL_DIR) should probably
+# be installed there for simplicity.
 lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
@@ -171,8 +175,8 @@ ifeq (, $(findstring XEmacs,$(version)))
 		   (cd \"$(lispdir)\") 				\
 		   (normal-top-level-add-subdirs-to-load-path) 	\
 		   (cd orig-dir))"				\
-	--eval "(message (princ-list load-path))" \
-	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))" \
+	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
+#	--eval "(message (princ-list load-path))" \
 
   INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 else
