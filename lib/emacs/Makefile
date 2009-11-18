@@ -164,13 +164,15 @@ ifeq (, $(findstring XEmacs,$(version)))
   LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 
   # Really ugly hack to add all subdirs of lispdir to the load-path.
-#  LOADPATH_OPTS += \
-#	--eval "(let ((orig-dir default-directory)) 		\
-#		   (cd \"$(lispdir)\") 				\
-#		   (normal-top-level-add-subdirs-to-load-path) 	\
-#		   (cd orig-dir))"				\
-#	--eval "(message (princ-list load-path))" \
-#	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))" \
+  # This is required for instance so that org-crypt can compile against
+  # ~/local/share/emacs/site-lisp/epg/
+  LOADPATH_OPTS += \
+	--eval "(let ((orig-dir default-directory)) 		\
+		   (cd \"$(lispdir)\") 				\
+		   (normal-top-level-add-subdirs-to-load-path) 	\
+		   (cd orig-dir))"				\
+	--eval "(message (princ-list load-path))" \
+	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))" \
 
   INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 else
@@ -397,13 +399,14 @@ org: .org-installed
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(wildcard $(ORG_DIR)/*)
+.org-installed: $(wildcard $(ORG_DIR)/*) .epg-installed
 	@$(UNLOCK_INSTALL_DIRS)
+#	EMACS="$(EMACS) -L $(lispdir)/epg" \
 	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
 	@$(LOCK_INSTALL_DIRS)
-	-$(MAKE) -C $(ORG_DIR) install-info \
+	$(MAKE) -C $(ORG_DIR) install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir)
 	touch $@
@@ -565,7 +568,8 @@ clean-epg:
 .epg-installed: $(EPG_DIR)/epg.el
 	@$(UNLOCK_INSTALL_DIRS)
 	@-( cd $(EPG_DIR) && \
-	  ./configure --prefix=$(prefix) infodir=$(infodir) && \
+	  ./configure --prefix=$(prefix) \
+	  	      --infodir=$(infodir) && \
 	  $(MAKE) install \
 	) && \
 	$(LOCK_INSTALL_DIRS) && \
