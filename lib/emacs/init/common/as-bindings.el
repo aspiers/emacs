@@ -341,7 +341,6 @@ consistent landing spot."
 (global-set-key "\C-co" 'overwrite-mode)
 (global-unset-key [(meta o)])
 ;(global-unset-key "\eo")
-(global-set-key "\eO"  'org-agenda) ;; X11 only
 (global-set-key "\eoa" 'org-agenda)
 (global-set-key "\eA"  'as-org-switch-to-agenda-buffer) ;; X11 only
 (global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
