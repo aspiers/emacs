@@ -80,8 +80,14 @@ if [ -n "$server_up" ]; then
         maybe_bg emacsclient -c "$@"
     else
         # Looks like we found a working server
-        focus_emacs_frame "$@"
-        maybe_bg do_editing "$@"
+        if [ -n "$DISPLAY" ]; then
+            focus_emacs_frame "$@"
+            maybe_bg do_editing "$@"
+        else
+            # But we can't reach it, so fallback to fast-loading tty
+            # emacs in foreground, in favour of speed.
+            $tty_emacs "$@"
+        fi
     fi
 else
     if [ -n "$DISPLAY" ]; then
