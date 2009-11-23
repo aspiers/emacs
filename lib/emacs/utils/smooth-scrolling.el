@@ -28,8 +28,9 @@
 ;;
 ;; This only affects the behaviour of the `next-line' and
 ;; `previous-line' functions, usually bound to the cursor keys and
-;; C-n/C-p.  Other methods of moving the point will behave as normal
-;; according to the standard custom variables.
+;; C-n/C-p, and repeated isearches (`isearch-repeat').  Other methods
+;; of moving the point will behave as normal according to the standard
+;; custom variables.
 ;;
 ;; Prefix arguments to `next-line' and `previous-line' are honoured.
 ;; The minimum number of lines are scrolled in order to keep the
@@ -130,9 +131,8 @@ with 1 referring to the bottom line in the window."
       (count-screen-lines (point) (window-end))
     (count-lines (point) (window-end))))
 ;;;_ + after advice
-(defadvice previous-line (after smooth-scroll-down
-                            (&optional arg try-vscroll)
-                            activate)
+
+(defun smooth-scroll-down ()
   "Scroll down smoothly if cursor is within `smooth-scroll-margin'
 lines of the top of the window."
   (and
@@ -155,9 +155,7 @@ lines of the top of the window."
         (scroll-down
               (1+ (- smooth-scroll-margin lines-from-window-top))))))))
                             
-(defadvice next-line (after smooth-scroll-up
-                            (&optional arg try-vscroll)
-                            activate)
+(defun smooth-scroll-up ()
   "Scroll up smoothly if cursor is within `smooth-scroll-margin'
 lines of the bottom of the window."
   (and
@@ -175,6 +173,23 @@ lines of the bottom of the window."
       (save-excursion
         (scroll-up
          (1+ (- smooth-scroll-margin lines-from-window-bottom))))))))
+
+(defadvice previous-line (after smooth-scroll-down
+                            (&optional arg try-vscroll)
+                            activate)
+  (smooth-scroll-down))
+(defadvice next-line (after smooth-scroll-up
+                            (&optional arg try-vscroll)
+                            activate)
+  (smooth-scroll-up))
+
+(defadvice isearch-repeat (after isearch-smooth-scroll
+                                 (direction)
+                                 activate)
+  (if (eq direction 'forward)
+      (smooth-scroll-up)
+    (smooth-scroll-down)))
+
 ;;;_ + provide
 (provide 'smooth-scrolling)
 
