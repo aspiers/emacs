@@ -663,13 +663,14 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ org-mode
 
 (require 'org-install)
+
+(defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
 ;; (autoload 'org-mode "org-install" "Org mode" t)
 ;; (autoload 'org-time-stamp "org-install" "org-time-stamp" t)
 ;; (autoload 'org-timestamp-up "org-install" "org-timestamp-up" t)
 ;; (autoload 'org-timestamp-down "org-install" "org-timestamp-down" t)
-
-(defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 ;; (autoload 'org-diary "org-install" "Diary entries from Org mode")
 ;; (autoload 'org-agenda "org-install" "Multi-file agenda from Org mode" t)
 ;; (autoload 'org-store-link "org-install" "Store a link to the current location" t)
