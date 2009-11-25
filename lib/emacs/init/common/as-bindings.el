@@ -71,19 +71,23 @@
 (defun as-folding-hide-current ()
   "Hides the current fold, ensuring a consistent landing spot."
   (interactive)
-  (if (eq (folding-mark-look-at) 0)
-      (message "Fold already closed")
-    (folding-hide-current-entry)
-    (folding-mark-look-at 'mark)))
+  (if (stringp (car (folding-get-mode-marks)))
+      (if (eq (folding-mark-look-at) 0)
+          (message "Fold already closed")
+        (folding-hide-current-entry)
+        (folding-mark-look-at 'mark))
+    (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
 (defun as-folding-show-current ()
   "Shows the current fold, ensuring a consistent landing spot."
   (interactive)
-  (if (folding-mark-look-at-top-mark-p)
-      (and (folding-show-current-entry)
-           ;; ensure consistent landing spot
-           (folding-mark-look-at 'mark))
-    (message "Not on top fold mark")))
+  (if (stringp (car (folding-get-mode-marks)))
+      (if (folding-mark-look-at-top-mark-p)
+          (and (folding-show-current-entry)
+               ;; ensure consistent landing spot
+               (folding-mark-look-at 'mark))
+        (message "Not on top fold mark"))
+    (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
 ;;}}}
 ;;{{{ as-allout-{show,hide}-current
