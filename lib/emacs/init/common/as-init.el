@@ -546,15 +546,20 @@ C-style indentation, use cssm-c-style-indenter.")
    ;; Expand all newly inserted tabs to spaces
    (setq indent-tabs-mode nil)
 
+   (as-setup-mode-for-discussion)))
+
+(defun as-setup-mode-for-discussion ()
+  "Sets up a text mode in the way Adam likes for discussion with
+other people."
+
    ;; Nicer version of fill-paragraph
-   (local-set-key [(control meta q)] 'fill-common-prefix-region))
+   (local-set-key [(control meta q)] 'fill-common-prefix-region)
 
    ;; Treat single quoted ("> > ") lines the same as multiple
    ;; w.r.t. filling.
    (setq adaptive-fill-first-line-regexp adaptive-fill-regexp)
 
-   (setq comment-start "> ")
- )
+   (setq comment-start "> "))
 
 (defun itm () "Shortcut to indented-text-mode."
   (interactive)
@@ -834,11 +839,12 @@ then invoking this function four times would yield:
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
 (add-to-list 'auto-mode-alist '("/mutt\\|itsalltext.*mail\\.google" . mail-mode))
-(add-hook 'mail-mode-hook 'turn-on-auto-fill)
 (eval-when-compile (require 'sendmail))
 (add-hook
  'mail-mode-hook
  (lambda ()
+   (turn-on-auto-fill)
+   (as-setup-mode-for-discussion)
    (define-key mail-mode-map [(control c) (control c)]
      (lambda ()
        (interactive)
