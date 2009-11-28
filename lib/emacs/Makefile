@@ -418,7 +418,7 @@ org: .org-installed
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(wildcard $(ORG_DIR)/*) .epg-installed
+.org-installed: $(wildcard $(ORG_DIR)/*.el) $(wildcard $(ORG_DIR)/*/*.el) $(wildcard $(ORG_DIR)/*/*/*.el) .epg-installed
 	@$(UNLOCK_INSTALL_DIRS)
 #	EMACS="$(EMACS) -L $(lispdir)/epg"
 	$(MAKE) -C $(ORG_DIR) install-lisp \
