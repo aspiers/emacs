@@ -57,7 +57,7 @@ el_search_paths = 			\
 	$(EMACSRAILS_DIR)
 
 # }}}
-EL_OVERRIDES = pcvs*
+EL_OVERRIDES = org*
 
 # {{{ ignore paths and files
 
@@ -250,8 +250,14 @@ list-third-party-elcs:
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
 	@[ -d $@ ] || mkdir -p $@
 
-.PHONY: install
-install: .installed 
+.PHONY: install force-install
+force-install: clean-installed install
+
+.PHONY: clean-installed
+clean-installed:
+	@rm -f .installed
+
+install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
@@ -280,7 +286,13 @@ lock-install-dirs:
 	@cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
 	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
-	mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR)
+	   mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR) && \
+	   for f in $(ALL_OVERRIDES); do \
+	     if [ -e "$$f" ]; then \
+	       echo "$$f still in $(POST_INSTALL_DIR) - WHY??"; \
+	       exit 1; \
+	     fi; \
+	   done
 	@$(LOCK_INSTALL_DIRS)
 	@touch $@
 
@@ -408,7 +420,7 @@ clean-org:
 	$(MAKE) -C $(ORG_DIR) clean
 .org-installed: $(wildcard $(ORG_DIR)/*) .epg-installed
 	@$(UNLOCK_INSTALL_DIRS)
-#	EMACS="$(EMACS) -L $(lispdir)/epg" \
+#	EMACS="$(EMACS) -L $(lispdir)/epg"
 	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
