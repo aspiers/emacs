@@ -169,13 +169,14 @@ is already hidden."
 ;;}}}
 ;;{{{ org-mode-hook bindings
 
+(require 'org nil 'noerror)
+
 (eval-when-compile
   ;; org-default-extensions defaults to (org-irc) which causes a
   ;; compile to require erc.el which is not in emacs 21.
   (if (or (not (boundp 'org-default-extensions))
           (memq 'org-irc 'org-default-extensions))
-      (defvar org-default-extensions '(org-mouse)))
-  (require 'org nil 'noerror))
+      (defvar org-default-extensions '(org-mouse))))
 
 (defun as-local-set-outline-expose-keys ()
   "Bind local outline expose keys the way Adam likes them."
@@ -260,7 +261,6 @@ consistent landing spot."
             (local-set-key [(control shift up  )] 'allout-backward-current-level)
             (local-set-key [(control shift down)] 'allout-forward-current-level)))
 
-(eval-when-compile (require 'org nil 'noerror))
 (defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
   (local-set-key [(control U         )] 'outline-up-heading)
@@ -356,7 +356,6 @@ consistent landing spot."
 (global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
 (global-set-key "\eoq" 'org-remember)
 
-(require 'org)
 (defun org-show-effort ()
   "Shows the effort of the entry at the current point."
   (interactive)
