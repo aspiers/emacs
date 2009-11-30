@@ -268,10 +268,16 @@ consistent landing spot."
   (local-set-key [(control down      )] 'outline-next-visible-heading)
   (local-set-key [(control shift down)] 'outline-forward-same-level)
   (local-set-key [(control shift up  )] 'outline-backward-same-level))
-
-(add-hook 'org-mode-hook  'as-local-set-outline-nav-keys)
 (add-hook 'muse-mode-hook 'as-local-set-outline-nav-keys)
 (add-hook 'outline-mode-hook 'as-local-set-outline-nav-keys)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key [(control U         )] 'org-up-heading-safe)
+            (local-set-key [(control up        )] 'outline-previous-visible-heading)
+            (local-set-key [(control down      )] 'outline-next-visible-heading)
+            (local-set-key [(control shift up  )] 'org-backward-same-level)
+            (local-set-key [(control shift down)] 'org-forward-same-level)))
 
 ;;}}}
 ;;{{{ for editing structure:
