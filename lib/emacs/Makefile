@@ -37,10 +37,17 @@ THIRD_PARTY_PKGS = 		\
 
 # Don't automatically compile *.el in these directories:
 THIRD_PARTY_PKG_DIRS =            \
-	major-modes/psgml 	  \
-	$(DVC_DIR) 	  \
-	$(ORG_DIR) 	  \
-	$(REMEMBER_DIR)
+	major-modes/psgml
+
+ifeq (,$(wildcard $(DVC_DIR)))
+	THIRD_PARTY_PKG_DIRS += $(DVC_DIR)
+endif
+ifeq (,$(wildcard $(ORG_DIR)))
+	THIRD_PARTY_PKG_DIRS += $(ORG_DIR)
+endif
+ifeq (,$(wildcard $(REMEMBER_DIR)))
+	THIRD_PARTY_PKG_DIRS += $(REMEMBER_DIR)
+endif
 
 # }}}
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
