@@ -690,8 +690,6 @@ other people."
 
 ;;{{{ org keyword switching
 
-(eval-when-compile (require 'org))
-
 (defun org-todo-previous-keyword ()
   "Move to previous TODO keyword in all sets."
   (interactive)
