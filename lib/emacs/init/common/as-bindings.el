@@ -175,7 +175,7 @@ is already hidden."
   (if (or (not (boundp 'org-default-extensions))
           (memq 'org-irc 'org-default-extensions))
       (defvar org-default-extensions '(org-mouse)))
-  (require 'org nil t))
+  (require 'org nil 'noerror))
 
 (defun as-local-set-outline-expose-keys ()
   "Bind local outline expose keys the way Adam likes them."
@@ -260,7 +260,7 @@ consistent landing spot."
             (local-set-key [(control shift up  )] 'allout-backward-current-level)
             (local-set-key [(control shift down)] 'allout-forward-current-level)))
 
-(eval-when-compile (require 'org))
+(eval-when-compile (require 'org nil 'noerror))
 (defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
   (local-set-key [(control U         )] 'outline-up-heading)
