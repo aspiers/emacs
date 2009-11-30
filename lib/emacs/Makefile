@@ -415,6 +415,12 @@ major-modes/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
 
 .PHONY: org
 org: .org-installed
+ifeq (,$(wildcard $(ORG_DIR)))
+clean-org:
+	@echo "Won't clean non-existent $(ORG_DIR)"
+.org-installed:
+	@echo "Won't install from non-existent $(ORG_DIR)"
+else
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
@@ -429,6 +435,7 @@ clean-org:
 		prefix=$(prefix) \
 		infodir=$(infodir)
 	touch $@
+endif
 
 # }}}
 # {{{ mmm-mode
@@ -581,6 +588,12 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 # {{{ epg-mode
 
 epg: .epg-installed
+ifeq (,$(wildcard $(EPG_DIR)))
+clean-epg:
+	@echo "Won't clean non-existent $(EPG_DIR)"
+.epg-installed:
+	@echo "Won't install from non-existent $(EPG_DIR)"
+else
 clean-epg:
 	rm -f .epg-installed
 	-$(MAKE) -C $(EPG_DIR) clean
@@ -594,6 +607,7 @@ clean-epg:
 	$(LOCK_INSTALL_DIRS) && \
 	echo "### epg installed" && \
 	touch $@
+endif
 
 # }}}
 # {{{ dired+
