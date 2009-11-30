@@ -65,7 +65,7 @@ el_search_paths = 			\
 
 # }}}
 
-ifeq (,$(wildcard $(ORG_DIR)))
+ifneq (,$(wildcard $(ORG_DIR)))
   EL_OVERRIDES = org*
 endif
 
