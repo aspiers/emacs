@@ -64,7 +64,10 @@ el_search_paths = 			\
 	$(EMACSRAILS_DIR)
 
 # }}}
-EL_OVERRIDES = org*
+
+ifneq $(,$(wildcard $(ORG_DIR)))
+  EL_OVERRIDES = org*
+endif
 
 # {{{ ignore paths and files
 
@@ -116,7 +119,17 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
-TO_CLEAN = org psgml nxml emacs-w3m pgg dvc epg
+TO_CLEAN = psgml nxml emacs-w3m pgg
+
+ifneq $(,$(wildcard $(ORG_DIR)))
+  TO_CLEAN += org
+endif
+ifneq $(,$(wildcard $(DVC_DIR)))
+  TO_CLEAN += dvc
+endif
+ifneq $(,$(wildcard $(EPG_DIR)))
+  TO_CLEAN += epg
+endif
 
 # }}}
 
