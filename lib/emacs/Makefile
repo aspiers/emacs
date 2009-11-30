@@ -74,7 +74,7 @@ IGNORE_FILES =		    		\
 	$(BEHAVE_DIR)/example.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
-  IGNORE_FILES += major-modes/org-*.el
+  IGNORE_FILES += major-modes/org-*.el utils/as-gtd.el
 endif
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
