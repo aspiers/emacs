@@ -175,7 +175,7 @@ is already hidden."
   (if (or (not (boundp 'org-default-extensions))
           (memq 'org-irc 'org-default-extensions))
       (defvar org-default-extensions '(org-mouse)))
-  (require 'org))
+  (require 'org nil t))
 
 (defun as-local-set-outline-expose-keys ()
   "Bind local outline expose keys the way Adam likes them."
