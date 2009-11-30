@@ -39,13 +39,13 @@ THIRD_PARTY_PKGS = 		\
 THIRD_PARTY_PKG_DIRS =            \
 	major-modes/psgml
 
-ifeq (,$(wildcard $(DVC_DIR)))
+ifneq (,$(wildcard $(DVC_DIR)))
 	THIRD_PARTY_PKG_DIRS += $(DVC_DIR)
 endif
-ifeq (,$(wildcard $(ORG_DIR)))
+ifneq (,$(wildcard $(ORG_DIR)))
 	THIRD_PARTY_PKG_DIRS += $(ORG_DIR)
 endif
-ifeq (,$(wildcard $(REMEMBER_DIR)))
+ifneq (,$(wildcard $(REMEMBER_DIR)))
 	THIRD_PARTY_PKG_DIRS += $(REMEMBER_DIR)
 endif
 
@@ -65,7 +65,7 @@ el_search_paths = 			\
 
 # }}}
 
-ifneq $(,$(wildcard $(ORG_DIR)))
+ifeq (,$(wildcard $(ORG_DIR)))
   EL_OVERRIDES = org*
 endif
 
@@ -121,13 +121,13 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 TO_CLEAN = psgml nxml emacs-w3m pgg
 
-ifneq $(,$(wildcard $(ORG_DIR)))
+ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
 endif
-ifneq $(,$(wildcard $(DVC_DIR)))
+ifneq (,$(wildcard $(DVC_DIR)))
   TO_CLEAN += dvc
 endif
-ifneq $(,$(wildcard $(EPG_DIR)))
+ifneq (,$(wildcard $(EPG_DIR)))
   TO_CLEAN += epg
 endif
 
@@ -290,9 +290,11 @@ INSTALL_FILES_TMP = \
 	$(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
 	$(AS_INIT_ELC)
 INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_TMP))
+ifneq (,$(EL_OVERRIDES))
 ALL_OVERRIDES = \
 	$(addsuffix .el,  $(EL_OVERRIDES)) \
 	$(addsuffix .elc, $(EL_OVERRIDES))
+endif
 
 .PHONY: unlock-install-dirs lock-install-dirs
 UNLOCK_INSTALL_DIRS = $(MAKE) -s unlock-install-dirs
@@ -308,8 +310,9 @@ lock-install-dirs:
 	@$(UNLOCK_INSTALL_DIRS)
 	@echo "Installing .el and .elc files in $(POST_INSTALL_DIR) ..."
 	@cp -f $(INSTALL_FILES) $(POST_INSTALL_DIR)
-	@echo "Moving overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)"
 	@cd $(POST_INSTALL_DIR) && \
+	   [ -n "$(ALL_OVERRIDES)" ] && \
+	   echo "Moving [$(ALL_OVERRIDES)] overrides from $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR)" && \
 	   mv $(ALL_OVERRIDES) $(PRE_INSTALL_DIR) && \
 	   for f in $(ALL_OVERRIDES); do \
 	     if [ -e "$$f" ]; then \
