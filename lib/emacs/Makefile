@@ -73,6 +73,10 @@ IGNORE_FILES =		    		\
 	$(EMACSRAILS_DIR)/behave-rails.el \
 	$(BEHAVE_DIR)/example.el
 
+ifeq (,$(wildcard $(ORG_DIR)))
+  IGNORE_FILES += major-modes/org-*.el
+endif
+
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
 # ditto org-irc.el which needs erc
