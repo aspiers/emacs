@@ -549,6 +549,12 @@ major-modes/pgg/%.elc: LIBDIRS += major-modes/pgg
 
 utils/tree-widget-2.0/%.elc: LIBDIRS += utils/tree-widget-2.0
 
+ifeq (,$(wildcard $(DVC_DIR)))
+clean-dvc:
+	@echo "Won't clean non-existent $(DVC_DIR)"
+.dvc-configured .dvc-made .dvc-installed:
+	@echo "Won't install from non-existent $(DVC_DIR)"
+else
 dvc_build_dir=$(DVC_DIR)/++build
 dvc: .dvc-installed
 clean-dvc:
@@ -587,6 +593,7 @@ $(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
 	) &&								\
 	$(LOCK_INSTALL_DIRS) &&					\
 	touch $@
+endif
 
 # }}}
 # {{{ epg-mode
