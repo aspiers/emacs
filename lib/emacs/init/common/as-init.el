@@ -667,32 +667,26 @@ other people."
 
 ;;{{{ org-mode
 
-(require 'org-install)
+(when (require 'org-install nil 'noerror)
+  (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)))
 
-(defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-;; (autoload 'org-mode "org-install" "Org mode" t)
-;; (autoload 'org-time-stamp "org-install" "org-time-stamp" t)
-;; (autoload 'org-timestamp-up "org-install" "org-timestamp-up" t)
-;; (autoload 'org-timestamp-down "org-install" "org-timestamp-down" t)
-;; (autoload 'org-diary "org-install" "Diary entries from Org mode")
-;; (autoload 'org-agenda "org-install" "Multi-file agenda from Org mode" t)
-;; (autoload 'org-store-link "org-install" "Store a link to the current location" t)
-;; (autoload 'orgtbl-mode "org-install" "Org tables as a minor mode" t)
-;; (autoload 'turn-on-orgtbl "org-install" "Org tables as a minor mode")
-
-(eval-when-compile (require 'org-crypt))
 (defvar org-mode-map)
 (add-hook
  'org-mode-hook
  (lambda ()
    (require 'org-mairix)
-   (require 'org-crypt)
-   (org-crypt-use-before-save-magic)
    (require 'as-gtd)
    (imenu-add-to-menubar "Imenu")
    (setq comment-start nil)))
+
+(eval-when-compile (require 'org-crypt nil 'noerror))
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   (and (require 'org-crypt nil 'noerror)
+        (org-crypt-use-before-save-magic))))
+
 
 ;;{{{ org keyword switching
 
