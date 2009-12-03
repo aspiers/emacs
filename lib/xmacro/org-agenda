@@ -2,6 +2,6 @@
 # buffer.  Also Escape should be more portable than Meta_L etc.
 \e x org-agenda \n a
 
-# Another way of doing it since I bind C-c C-a to `org-agenda'
+# Another way of doing it since I bind M-o a to `org-agenda'
 # both in org-mode and globally.
-#C-c C-a a
+#\e o a
