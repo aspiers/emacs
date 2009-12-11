@@ -6,7 +6,7 @@
 if which emacs >/dev/null 2>&1; then
     QUICK_EMACS=1 
     export QUICK_EMACS
-    exec new-emacs -nw "$@"
+    exec new-emacs -nw --no-site-file "$@"
 fi
 
 if which jmacs >/dev/null 2>&1; then
