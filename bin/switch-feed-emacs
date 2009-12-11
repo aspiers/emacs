@@ -5,6 +5,6 @@ focus-emacs-frame
 # It seems there is some kind of timing issue which requires this
 # sleep - probably we have to ensure that wmctrl has finished
 # switching before feeding the command to emacs.
-sleep 0.2
+sleep 0.4
 
 feed-X11
