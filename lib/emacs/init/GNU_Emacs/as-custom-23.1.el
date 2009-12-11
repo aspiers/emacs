@@ -79,6 +79,7 @@
  '(case-fold-search t)
  '(color-theme-is-cumulative t)
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
+ '(column-number-mode t)
  '(cperl-auto-newline nil)
  '(cperl-auto-newline-after-colon t)
  '(cperl-autoindent-on-semi t)
@@ -239,7 +240,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-hide-leading-stars t)
  '(org-icalendar-store-UID t)
  '(org-icalendar-timezone "Europe/London")
- '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id="))))
+ '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
@@ -252,9 +253,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
  '(org-remember-default-headline "bottom")
- '(org-remember-templates (quote (("property test" 122 "%^{Effort}p" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
+ '(org-remember-templates (quote (("property test" 122 "%^{Effort}p%&" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
   SCHEDULED: %T" "~/roaming/TODO.org" top nil) ("immediate work NEXT" 73 "* NEXT %?%&
-  SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 97 "* %^t %!%?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&%!" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%!%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%!%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&%!" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
+  SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 97 "* %^t %?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
 ***** me
 ******* %?%&" "~/ifolder/notes/PSO.org" "stand-up calls and sprint planning" nil) ("project" 112 "* PROJECT %^{project title}
 *** why
@@ -288,7 +289,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-time-stamp-rounding-minutes (quote (15 5)))
  '(org-todo-interpretation (quote type))
- '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("ONGOING" :foreground "DarkOrange" :weight bold) ("CHASE" :background "orange red" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :weight bold) ("SOMEDAY" :foreground "gray60" :weight bold) ("MAYBE" :foreground "gray85" :weight bold) ("CANCELLED" :foreground "black" :strike-through t))))
+ '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("ONGOING" :foreground "DarkOrange" :weight bold) ("CHASE" :background "orange red" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :weight bold) ("SOMEDAY" :foreground "gray60" :weight bold) ("MAYBE" :foreground "gray85" :weight bold) ("CANCELLED" :foreground "black" :strike-through t) ("BUG" :foreground "red" :weight bold) ("WORKAROUND" :foreground "dark magenta" :weight bold) ("USABILITY" :foreground "medium sea green" :weight bold) ("HOWTO" :foreground "slate blue" :weight bold) ("IGNORE" :foreground "slate grey" :strike-through t))))
  '(org-todo-keywords (quote ((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)") (sequence "PROJECT(p)" "PROJDONE(P)") (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|") (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)"))))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
@@ -330,6 +331,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
