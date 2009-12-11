@@ -298,8 +298,11 @@ install: .installed
 
 # N.B. Must install .el files as well as .elc files so that
 # find-function-source-path doesn't need to be extended excessively.
+# Note that THIRD_PARTY_ELCs already get installed by third party
+# Makefiles, so we only install the THIRD_PARTY_ELs.
 INSTALL_FILES_TMP = \
 	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
+	$(THIRD_PARTY_ELs) \
 	$(AS_INIT_ELC)
 INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_TMP))
 
@@ -677,7 +680,7 @@ clean-color-theme:
 	@echo "Won't install from non-existent $(COLOR_THEME_DIR)"
 else
 clean-color-theme:
-	rm -f .color-theme-installed $(lispdir)/color-theme*
+	rm -rf .color-theme-installed $(lispdir)/color-theme* $(lispdir)/themes
 	$(MAKE) -C $(COLOR_THEME_DIR) clean
 .color-theme-installed: $(wildcard $(COLOR_THEME_DIR)/*.el)
 	$(MAKE) -C $(COLOR_THEME_DIR) autoloads install-bin \
