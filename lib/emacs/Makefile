@@ -692,6 +692,9 @@ clean-color-theme:
 	rm -f $(POST_INSTALL_DIR)/color-theme*
 	@$(LOCK_INSTALL_DIRS)
 	$(MAKE) -C $(COLOR_THEME_DIR) clean
+
+fun/pastels-on-dark-theme.el: .color-theme-installed
+
 .color-theme-installed: $(wildcard $(COLOR_THEME_DIR)/*.el)
 	$(MAKE) -C $(COLOR_THEME_DIR) autoloads install-bin \
 		PREFIX=$(prefix) \
