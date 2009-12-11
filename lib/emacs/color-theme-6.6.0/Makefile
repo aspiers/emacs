@@ -4,15 +4,14 @@
 
 include Makefile.defs
 
-SPECIAL = 
-UNCOMPILED = 
 AUTOLOADFILE = color-theme-autoloads
-TESTING = 
+SPECIAL = $(AUTOLOADFILE).el
 THEMES_DIRECTORY = themes
-THEMES_FILES := $(wildcard $(THEMES_DIRECTORY)/*.el)
-ALLSOURCE := $(wildcard *.el) $(THEMES_FILES)
-SOURCE	= $(filter-out $(SPECIAL) $(UNCOMPILED) $(TESTING),$(ALLSOURCE))
-TARGET	= $(patsubst %.el,%.elc,$(SPECIAL) $(SOURCE))
+THEMES_FILES = $(wildcard $(THEMES_DIRECTORY)/*.el)
+SOURCE	= $(filter-out $(SPECIAL) ,$(wildcard *.el))
+SOURCE_TARGETS = $(patsubst %.el,%.elc,$(SPECIAL) $(SOURCE))
+THEMES_TARGETS = $(patsubst %.el,%.elc,$(THEMES_FILES))
+ALL_TARGETS = $(SOURCE_TARGETS) $(THEMES_TARGETS)
 MANUAL  = color-theme
 MISC	= AUTHORS COPYING ChangeLog Makefile.defs Makefile $(AUTOLOADFILE).in
 #AUTHORS CREDITS HISTORY NEWS README Makefile ChangeLog \
@@ -23,11 +22,11 @@ here = $(shell pwd)
 
 all: lisp autoloads #$(MANUAL).info
 
-lisp: $(TARGET) 
+lisp: $(ALL_TARGETS)
 
 autoloads: $(AUTOLOADFILE).elc
 
-$(AUTOLOADFILE).el: $(AUTOLOADFILE).in #$(TARGET)
+$(AUTOLOADFILE).el: $(AUTOLOADFILE).in #$(ALL_TARGETS)
 	cp $(AUTOLOADFILE).in $(AUTOLOADFILE).el
 	@$(EMACS) -q $(SITEFLAG) -batch \
 		-l $(shell pwd | sed -e 's|^/cygdrive/\([a-z]\)|\1:|')/$(AUTOLOADFILE) \
@@ -67,7 +66,7 @@ clean:
 	-rm -f *~ *.elc $(AUTOLOADFILE).el
 
 realclean: clean
-	-rm -f $(MANUAL).info $(MANUAL).html $(TARGET) $(SPECIAL)
+	-rm -f $(MANUAL).info $(MANUAL).html $(ALL_TARGETS) $(SPECIAL)
 
 install-info: $(MANUAL).info
 	[ -d $(INFODIR) ] || install -d $(INFODIR)
@@ -76,9 +75,9 @@ install-info: $(MANUAL).info
 
 install-bin: lisp
 	install -d $(ELISPDIR)
-	install -d $(ELISPDIR)/themes
-	install -m 0644 $(ALLSOURCE) $(TARGET) $(ELISPDIR)
-	install -m 0644 $(THEMES_FILES) $(TARGET) $(ELISPDIR)/themes
+	install -d $(ELISPDIR)/$(THEMES_DIRECTORY)
+	install -m 0644 $(SOURCE_TARGETS) $(ELISPDIR)
+	install -m 0644 $(THEMES_TARGETS) $(ELISPDIR)/$(THEMES_DIRECTORY)
 
 install: install-bin #install-info
 
