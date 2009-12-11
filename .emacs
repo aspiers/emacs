@@ -86,14 +86,15 @@ default.")
 	  "fun"))
 
 (add-to-list 'load-path as-version-pre-lib-dir)
-(add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append)
-(add-to-list 'load-path as-version-post-lib-dir 'append)
+(add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
+(add-to-list 'load-path as-version-post-lib-dir 'append-at-end)
 
 ;; Add $ZDOTDIR/local/share/emacs/site-lisp and subdirs to load-path
 (let ((dir (format "%s/local/share/emacs/site-lisp" edotdir))
       (orig-dir default-directory))
   (when (file-accessible-directory-p dir)
-      (add-to-list 'load-path dir 'append)
+      (add-to-list 'load-path                 dir 'append-at-end)
+      (add-to-list 'find-function-source-path dir 'append-at-end)
       (cd dir)
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
