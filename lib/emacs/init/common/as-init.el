@@ -163,6 +163,13 @@
 (defun utf-16-be-pre-write-conversion (start end) nil)
 
 ;;}}}
+;;{{{ Color themes
+
+(when (require 'color-theme-autoloads nil 'noerror)
+  (load "pastels-on-dark-theme" 'noerror)
+  (color-theme-pastels-on-dark))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Mode-related settings
