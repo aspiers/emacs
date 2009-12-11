@@ -27,26 +27,33 @@ ifeq (,$(wildcard $(EMACSRAILS_DIR)))
 	EMACSRAILS_DIR=
 endif
 BEHAVE_DIR     = utils/behave.git
+COLOR_THEME_DIR = color-theme
 
 # This is a list of make targets which have their own Makefiles
+# and are responsible for compiling *and* installing themselves.
 THIRD_PARTY_PKGS = 		\
-	.psgml-made		\
-	.dvc-installed		\
-	.org-installed		\
-	.remember-installed
+	.psgml-made
 
-# Don't automatically compile *.el in these directories:
-THIRD_PARTY_PKG_DIRS =            \
+# Don't automatically compile *.el in or install *.elc from these
+# directories:
+THIRD_PARTY_PKG_DIRS =          \
 	major-modes/psgml
 
 ifneq (,$(wildcard $(DVC_DIR)))
+	THIRD_PARTY_PKGS     += .dvc-installed
 	THIRD_PARTY_PKG_DIRS += $(DVC_DIR)
 endif
 ifneq (,$(wildcard $(ORG_DIR)))
+	THIRD_PARTY_PKGS     += .org-installed
 	THIRD_PARTY_PKG_DIRS += $(ORG_DIR)
 endif
 ifneq (,$(wildcard $(REMEMBER_DIR)))
+	THIRD_PARTY_PKGS     += .remember-installed
 	THIRD_PARTY_PKG_DIRS += $(REMEMBER_DIR)
+endif
+ifneq (,$(wildcard $(COLOR_THEME_DIR)))
+	THIRD_PARTY_PKGS     += .color-theme-installed
+	THIRD_PARTY_PKG_DIRS += $(COLOR_THEME_DIR)
 endif
 
 # }}}
@@ -129,6 +136,9 @@ ifneq (,$(wildcard $(DVC_DIR)))
 endif
 ifneq (,$(wildcard $(EPG_DIR)))
   TO_CLEAN += epg
+endif
+ifneq (,$(wildcard $(COLOR_THEME_DIR)))
+  TO_CLEAN += color-theme
 endif
 
 # }}}
@@ -265,6 +275,9 @@ list-third-party-els:
 list-third-party-elcs:
 	@for elc in $(THIRD_PARTY_ELCs); do echo $$elc; done
 
+list-install-files:
+	@for file in $(INSTALL_FILES); do echo $$file; done
+
 # }}}
 # {{{ high-level targets
 
@@ -287,9 +300,9 @@ install: .installed
 # find-function-source-path doesn't need to be extended excessively.
 INSTALL_FILES_TMP = \
 	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
-	$(THIRD_PARTY_ELs) $(THIRD_PARTY_ELCs) \
 	$(AS_INIT_ELC)
 INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_TMP))
+
 ifneq (,$(EL_OVERRIDES))
 ALL_OVERRIDES = \
 	$(addsuffix .el,  $(EL_OVERRIDES)) \
@@ -386,7 +399,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 $(lispdir):
 	@mkdir -p $(lispdir)
 
-%.elc: %.el $(lispdir)
+%.elc: %.el
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
@@ -394,7 +407,7 @@ $(lispdir):
 	fi
 	@$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $<
 
-%.elc.verbose: %.el $(lispdir)
+%.elc.verbose: %.el
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
@@ -433,7 +446,10 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 # }}}
 # {{{ Special rules for utils files
 
-utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/lisp
+# as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
+utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/contrib/lisp
+utils/as-gtd.elc: .org-installed
+
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 # }}}
@@ -648,6 +664,28 @@ endif
 # {{{ dired+
 
 major-modes/dired+.elc: LIBDIRS += major-modes
+
+# }}}
+# {{{ color-theme
+
+.PHONY: color-theme
+color-theme: .color-theme-installed
+ifeq (,$(wildcard $(COLOR_THEME_DIR)))
+clean-color-theme:
+	@echo "Won't clean non-existent $(COLOR_THEME_DIR)"
+.color-theme-installed:
+	@echo "Won't install from non-existent $(COLOR_THEME_DIR)"
+else
+clean-color-theme:
+	rm -f .color-theme-installed $(lispdir)/color-theme*
+	$(MAKE) -C $(COLOR_THEME_DIR) clean
+.color-theme-installed: $(wildcard $(COLOR_THEME_DIR)/*.el)
+	$(MAKE) -C $(COLOR_THEME_DIR) autoloads install-bin \
+		PREFIX=$(prefix) \
+		ELISPDIR=$(lispdir) \
+		INFODIR=$(infodir)
+	touch $@
+endif
 
 # }}}
 
