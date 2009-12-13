@@ -392,6 +392,12 @@ consistent landing spot."
                      (org-set-effort ,(1+ effort-index))))
          (global-set-key (concat "\eo" key-suffix) fn))))))
 
+(defun org-unset-effort ()
+  "Unsets the Effort property for the current headline."
+  (interactive)
+  (org-delete-property org-effort-property))
+(global-set-key "\eo " 'org-unset-effort)
+
 ;;}}}
 
 (global-set-key [(meta "\\")]   'fixup-whitespace)
