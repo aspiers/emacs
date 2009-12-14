@@ -253,7 +253,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
  '(org-remember-default-headline "bottom")
- '(org-remember-templates (quote (("property test" 122 "%^{Effort}p%&" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
+ '(org-remember-templates (quote (("org mailing list item" 111 "* NEXT [#B] %?%&" "~/roaming/TODO.org" "to list" nil) ("property test" 122 "%^{Effort}p%&" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
   SCHEDULED: %T" "~/roaming/TODO.org" top nil) ("immediate work NEXT" 73 "* NEXT %?%&
   SCHEDULED: %T" "~/ifolder/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/roaming/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/ifolder/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/roaming/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/ifolder/TODO.org" top nil) ("personal diary entry" 97 "* %^t %?%&%[~/.org-mairix-link]" "~/roaming/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/ifolder/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&" "~/roaming/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%&" "~/ifolder/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%&" "~/roaming/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&" "~/ifolder/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
 ***** me
@@ -289,7 +289,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-tags-match-list-sublevels t)
  '(org-time-stamp-rounding-minutes (quote (15 5)))
  '(org-todo-interpretation (quote type))
- '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("ONGOING" :foreground "DarkOrange" :weight bold) ("CHASE" :background "orange red" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :background "AntiqueWhite1" :weight bold) ("SOMEDAY" :foreground "gray60" :weight bold) ("MAYBE" :foreground "gray85" :weight bold) ("CANCELLED" :foreground "black" :strike-through t) ("BUG" :foreground "red" :weight bold) ("WORKAROUND" :foreground "dark magenta" :weight bold) ("USABILITY" :foreground "medium sea green" :weight bold) ("HOWTO" :foreground "slate blue" :weight bold) ("IGNORE" :foreground "slate grey" :strike-through t))))
+ '(org-todo-keyword-faces (quote (("STARTED" :foreground "LimeGreen" :weight bold) ("ONGOING" :foreground "DarkOrange" :weight bold) ("CHASE" :background "orange red" :weight bold) ("WAITING" :foreground "#ffe000" :weight bold) ("PROJECT" :foreground "purple1" :weight bold) ("SOMEDAY" :foreground "gray70" :weight bold) ("MAYBE" :foreground "gray55" :weight bold) ("CANCELLED" :foreground "gray35" :strike-through t) ("BUG" :foreground "red" :weight bold) ("WORKAROUND" :foreground "dark magenta" :weight bold) ("USABILITY" :foreground "medium sea green" :weight bold) ("HOWTO" :foreground "slate blue" :weight bold) ("IGNORE" :foreground "slate grey" :strike-through t))))
  '(org-todo-keywords (quote ((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)") (sequence "PROJECT(p)" "PROJDONE(P)") (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|") (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)"))))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
@@ -332,7 +332,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
- '(custom-button ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style released-button)))))
+ '(custom-button ((t (:background "lightgrey" :foreground "gray20" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
@@ -341,4 +341,5 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))))
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
+ '(org-hide ((((background dark)) (:foreground "#211E1E"))))
  '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab")))))
