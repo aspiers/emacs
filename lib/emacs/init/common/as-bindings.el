@@ -273,7 +273,8 @@ consistent landing spot."
 
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key [(control U         )] 'org-up-heading-safe)
+            (local-set-key [(control U         )] 'outline-up-heading)
+                                                  ;; org-up-heading-safe is not interactive
             (local-set-key [(control up        )] 'outline-previous-visible-heading)
             (local-set-key [(control down      )] 'outline-next-visible-heading)
             (local-set-key [(control shift up  )] 'org-backward-same-level)
