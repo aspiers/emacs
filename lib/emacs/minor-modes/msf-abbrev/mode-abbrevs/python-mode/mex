@@ -1,0 +1,2 @@
+def <field "function_name">(self, <field "args">):
+    <endpoint>
