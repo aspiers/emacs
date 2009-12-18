@@ -1,2 +1,2 @@
-def job_cancelled_event(self, <field "args">):
-    <endpoint>
+    def job_cancelled_event(self):
+        <endpoint>
