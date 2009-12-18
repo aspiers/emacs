@@ -1,2 +1,2 @@
-def <field "function_name">(self, <field "args">):
-    <endpoint>
+    def <field "function_name">(self, <field "args">):
+        <endpoint>
