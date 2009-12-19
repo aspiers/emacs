@@ -137,7 +137,7 @@ with 1 referring to the bottom line in the window."
 lines of the top of the window."
   (and
    ;; Only scroll down if there is buffer above the start of the window.
-   (> (window-start) (buffer-end -1))
+   (> (line-number-at-pos (window-start)) 1)
    (let ((lines-from-window-top
           (smooth-scroll-lines-from-window-top)))
      (and
