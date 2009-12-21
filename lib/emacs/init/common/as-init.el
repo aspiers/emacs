@@ -532,28 +532,37 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;{{{ Text
 
 (autoload 'server-edit "server")
-(add-hook
- 'text-mode-hook
- (lambda ()
-   ;; Turn on auto-fill if composing e-mail or news.
-   (if (string-match "\\.article\\|\\.letter\\|itsalltext"
-                     (or (buffer-file-name)
-                      ;; For some reason I've seen mutt-invoked emacs
-                      ;; instances yield nil for (buffer-file-name)
-                         (buffer-name)))
-       (turn-on-auto-fill))
+(defun as-save-server-buffer ()
+  "Save server buffer and quit editing."
+  (interactive)
+  (save-buffer)
+  (server-edit))
 
-   (if (string-match "itsalltext" (or (buffer-file-name) (buffer-name)))
-       (local-set-key [(control c) (control c)]
-                      (lambda ()
-                        (interactive)
-                        (save-buffer)
-                        (server-edit))))
+(defun as-set-local-itsalltext-keys ()
+  "Set key bindings in local mode for editing via firefox It's
+All Text add-on."
+  (interactive)
+  (local-set-key [(control c) (control c)] 'as-save-server-buffer))
 
-   ;; Expand all newly inserted tabs to spaces
-   (setq indent-tabs-mode nil)
+(defun as-setup-text-mode ()
+  "Set up `text-mode' how Adam likes it."
+  ;; Turn on auto-fill if composing e-mail or news.
+  (let ((bn (or (buffer-file-name)
+                ;; For some reason I've seen mutt-invoked emacs
+                ;; instances yield nil for (buffer-file-name)
+                (buffer-name))))
+    (if (string-match "\\.article\\|\\.letter\\|itsalltext" bn)
+        (turn-on-auto-fill))
 
-   (as-setup-mode-for-discussion)))
+    (if (string-match "itsalltext\\|/git-rebase" bn)
+        (as-set-local-itsalltext-keys)))
+
+  ;; Expand all newly inserted tabs to spaces
+  (setq indent-tabs-mode nil)
+
+  (as-setup-mode-for-discussion))  
+
+(add-hook 'text-mode-hook 'as-setup-text-mode)
 
 (defun as-setup-mode-for-discussion ()
   "Sets up a text mode in the way Adam likes for discussion with
@@ -844,11 +853,7 @@ then invoking this function four times would yield:
  (lambda ()
    (turn-on-auto-fill)
    (as-setup-mode-for-discussion)
-   (define-key mail-mode-map [(control c) (control c)]
-     (lambda ()
-       (interactive)
-       (save-buffer)
-       (server-edit)))))
+   (as-set-local-itsalltext-keys)))
 
 ;;}}}
 ;;{{{ crm114-mode
