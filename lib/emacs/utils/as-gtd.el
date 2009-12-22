@@ -179,4 +179,11 @@ search should be continued."
       ;; the invisible-ok param below is crucial to avoid infinite loops
       (org-end-of-subtree t))))
 
+(defun as-org-jump-clock-or-agenda ()
+  "Jump to an active clock or to the agenda buffer if no clock is active."
+  (interactive)
+  (if (marker-buffer org-clock-marker)
+      (org-clock-goto)
+    (as-org-switch-to-agenda-buffer)))
+
 (provide 'as-gtd)
