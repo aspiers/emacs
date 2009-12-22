@@ -356,6 +356,7 @@ consistent landing spot."
 (global-set-key "\eA"  'as-org-switch-to-agenda-buffer) ;; X11 only
 (global-set-key "\eob" 'as-org-switch-to-agenda-buffer)
 (global-set-key "\eoq" 'org-remember)
+(global-set-key "\eo\eo" 'as-org-jump-clock-or-agenda)
 
 (defun org-show-effort ()
   "Shows the effort of the entry at the current point."
@@ -363,7 +364,6 @@ consistent landing spot."
   (let ((effort (org-entry-get (point) org-effort-property)))
     (message (if effort (format "Effort is %s" effort)
                "No effort defined"))))
-(global-set-key "\eo\eo" 'org-show-effort)
 
 (add-hook
  'org-mode-hook
@@ -391,7 +391,8 @@ consistent landing spot."
                      ,(format "Sets effort to %s." effort)
                      (interactive)
                      (org-set-effort ,(1+ effort-index))))
-         (global-set-key (concat "\eo" key-suffix) fn))))))
+         (local-set-key (concat "\eo" key-suffix) fn)
+         (local-set-key "\eo\eo" 'org-show-effort))))))
 
 (defun org-unset-effort ()
   "Unsets the Effort property for the current headline."
