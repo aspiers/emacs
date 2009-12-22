@@ -13,6 +13,11 @@
 ;; prevent conflicts.  Otherwise I would have preferred to group the
 ;; code logically, e.g. a section for each mode, and have it all
 ;; within as-init.el.
+;;
+;; Update: I think the above approach is flawed, since it's easy to
+;; figure out what bindings are available without that grouping,
+;; and grouping logically is easier to maintain.  Having said that,
+;; a clear strategy on use of keymaps is useful.
 
 ;;}}}
 
