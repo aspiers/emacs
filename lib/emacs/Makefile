@@ -406,10 +406,12 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # }}}
 # {{{ General pattern-based rules for compiling .el to .elc
 
-$(lispdir):
-	@mkdir -p $(lispdir)
+# hack to ensure that $(lispdir) exists, but does not force remake
+# of targets which depend on it, when its timestamp is updated.
+.lispdir:
+	@mkdir -p $(lispdir) && touch $@
 
-%.elc: %.el
+%.elc: %.el .lispdir
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
@@ -417,7 +419,7 @@ $(lispdir):
 	fi
 	@$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $<
 
-%.elc.verbose: %.el
+%.elc.verbose: %.el .lispdir
 	@if [ -n "$(LIBDIRS)" ]; then \
 	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
 	else \
