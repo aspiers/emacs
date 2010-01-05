@@ -148,7 +148,6 @@
 ;;}}}
 ;;{{{ Diary, appointments
 
-(display-time) ;; this is required
 (add-hook 'diary-hook 'appt-make-list)
 
 ;;}}}
