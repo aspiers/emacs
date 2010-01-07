@@ -1,0 +1,1 @@
+    jobUtils.assign_policy(__jobname__, "<field "policyname">")
