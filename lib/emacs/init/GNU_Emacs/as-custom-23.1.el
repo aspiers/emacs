@@ -327,6 +327,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(speedbar-tag-split-minimum-length 30)
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
+ '(tramp-shell-prompt-pattern "\\(^\\|\\)[^#$%>
+]*[#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
+ '(tramp-verbose 4)
  '(transient-mark-mode 1)
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
@@ -343,7 +346,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
- '(cvs-msg-face ((t (:slant italic))))
+ '(cvs-msg-face ((t (:slant italic))) t)
  '(erc-current-nick-face ((t (:background "green yellow" :weight bold))))
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))))
