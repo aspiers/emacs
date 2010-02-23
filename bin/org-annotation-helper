@@ -22,6 +22,7 @@ fi
 #
 
 url="$1"
+url="${url//%u2013/-}"
 # dtemacs -batch -eval "(progn (gjk/planner-annotation-helper \"$url\" ) \"\")"
 
 elisp="(progn (bzg/org-annotation-helper \"$url\" ) nil)"
