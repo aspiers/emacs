@@ -1,3 +1,5 @@
+FIXME: needs to work in XML (policy) mode not jdl-mode
+
           <fact name="<field "name">"
                 type="<field "String">"
                 value="<field "value">"
