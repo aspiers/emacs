@@ -1,0 +1,16 @@
+<policy>
+
+     <constraint type="resource">
+         <contains fact="resource.id" value="vmh*"  match="regexp"
+                   reason="Require a resource with /auto/home mounted." />
+     </constraint>
+
+     <jobargs>
+
+     </jobargs>
+
+     <job>
+
+     </job>
+
+</policy>
