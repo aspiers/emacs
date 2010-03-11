@@ -135,6 +135,11 @@
 (autoload 'desktop-save "desktop" "Saves desktop session state." t)
 
 ;;}}}
+;;{{{ midnight-mode - automatically kill unused buffers
+
+(unless (as-quick-startup) (require 'midnight))
+
+;;}}}
 ;;{{{ client/server mode
 
 (autoload 'server-start "server" "server-start" t)
@@ -939,7 +944,7 @@ then invoking this function four times would yield:
 
 (autoload 'dvc-browse "dvc" nil t)
 (autoload 'dvc        "dvc" nil t)
-(cond ((as-quick-startup))       
+(cond ((as-quick-startup))
       (t
        ;; This appends a shitload of very costly stuff to `find-file-hook'.
        ;; Just about OK after startup, but not during fast startup.
