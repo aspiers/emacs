@@ -1,10 +1,38 @@
-#!/bin/sh
+#!/bin/bash
 
-focus-emacs-frame
+me=`basename $0`
 
-# It seems there is some kind of timing issue which requires this
-# sleep - probably we have to ensure that wmctrl has finished
-# switching before feeding the command to emacs.
-sleep 0.4
+if [ -z "$DISPLAY" ]; then
+    echo "$me: Need \$DISPLAY set for feed-X11 to work; aborting." >&2
+    sleep 1 # ensure we see the message if we're in mutt
+    exit 1
+fi
 
-feed-X11
+if fast-X11-display; then
+    # Assume we already have an emacs running.  We could alternatively
+    # use quick-emacs at this point.
+    focus-emacs-frame
+
+    # It seems there is some kind of timing issue which requires this
+    # sleep - probably we have to ensure that wmctrl has finished
+    # switching before feeding the command to emacs.
+    sleep 0.4
+
+    feed-X11
+else
+    # The bash manual says:
+    #
+    #   If a command is followed by a & and job control is not active,
+    #   the default standard input for the command is the empty file
+    #   /dev/null.
+    #
+    # So we first save the current STDIN which is connected to the
+    # output end of the pipe which will receive the key macro to feed
+    # to feed-X11.
+    exec 3<&0
+    ( sleep 2; feed-X11 <&3 ) &
+
+    # For some reason we don't need STDIN to be a tty for
+    # interactive emacs to run happily in the foreground?!
+    quick-emacs "$@"
+fi
