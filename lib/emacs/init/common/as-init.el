@@ -256,6 +256,7 @@
   :type '(repeat symbol)
   :group 'align)
 
+(defvar align-rules-list)
 (defun as-tweak-align-rules ()
   "Replace occurrences of `python-mode' in `align-rules-list'
 with references to `align-python-modes'.
@@ -302,20 +303,21 @@ FIXME: needs to tweak align-*-modes too."
        ))
    align-rules-list))
 
-(progn
-  (as-tweak-align-rules)
-  (add-to-list 'align-rules-list
-               '(python-dictionary-braces
-                 (regexp   . "^\\(.*?{\\)?\\(\\s-*\\)\\S-")
-                 (group    . (2))
-                 (modes    . align-python-modes)
-                 (tab-stop . nil)))
-  (add-to-list 'align-rules-list
-               '(python-dictionary-pairs
-                 (regexp   . "^\\(.*?{\\)?\\(\\s-*\\)\\([^:]+\\)\\(\\s-*\\):\\(\\s-*\\)")
-                 (group    . (4 5))
-                 (modes    . align-python-modes)
-                 (tab-stop . nil))))
+(eval-after-load "align"
+  '(progn
+     (as-tweak-align-rules)
+     (add-to-list 'align-rules-list
+                  '(python-dictionary-braces
+                    (regexp   . "^\\(.*?{\\)?\\(\\s-*\\)\\S-")
+                    (group    . (2))
+                    (modes    . align-python-modes)
+                    (tab-stop . nil)))
+     (add-to-list 'align-rules-list
+                  '(python-dictionary-pairs
+                    (regexp   . "^\\(.*?{\\)?\\(\\s-*\\)\\([^:]+\\)\\(\\s-*\\):\\(\\s-*\\)")
+                    (group    . (4 5))
+                    (modes    . align-python-modes)
+                    (tab-stop . nil)))))
 
 ;;}}}
 ;;{{{ Ruby
