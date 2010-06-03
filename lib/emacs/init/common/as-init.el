@@ -148,7 +148,10 @@
   (interactive)
   (server-start))
 
-(unless (as-quick-startup) (server-start))
+(autoload 'edit-server-start "edit-server" "edit-server" t)
+(unless (as-quick-startup)
+  (server-start)
+  (edit-server-start))
 
 ;;}}}
 ;;{{{ Diary, appointments
