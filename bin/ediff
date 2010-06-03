@@ -18,4 +18,4 @@ if [ "$1" == '-h' ] || [ "$1" == '--help' ] || [ $# -ne 2 ]; then
     usage
 fi
 
-quick-emacs -e "(ediff-files \"$1\" \"$2\")"
+quick-emacs --eval "(ediff-files \"$1\" \"$2\")"
