@@ -29,6 +29,12 @@ endif
 BEHAVE_DIR     = utils/behave.git
 COLOR_THEME_DIR = color-theme
 
+# Pros of symlinking foo -> foo-1.2.3 approach:
+#  - allows different versions per machine
+#
+# Cons:
+#  - need to set up manually?
+
 # This is a list of make targets which have their own Makefiles
 # and are responsible for compiling *and* installing themselves.
 THIRD_PARTY_PKGS = 		\
