@@ -614,11 +614,19 @@ C-style indentation, use cssm-c-style-indenter.")
   (save-buffer)
   (server-edit))
 
-(defun as-set-local-itsalltext-keys ()
+(defun as-set-local-server-edit-keys ()
   "Set key bindings in local mode for editing via firefox It's
 All Text add-on."
   (interactive)
   (local-set-key [(control c) (control c)] 'as-save-server-buffer))
+
+;; (defun as-set-local-edit-server-keys ()
+;;   "Set key bindings in local mode for editing via
+;; `edit-server-text-mode', which is used by the Chrome 'Edit with
+;; Emacs' add-on."
+;;   (interactive)
+;;   ;; C-c C-c already set up by edit-server
+;;   (local-set-key [foo bar] 'as-.....))
 
 (defun as-setup-text-mode ()
   "Set up `text-mode' how Adam likes it."
@@ -631,7 +639,7 @@ All Text add-on."
         (turn-on-auto-fill))
 
     (if (string-match "itsalltext\\|/git-rebase\\|COMMIT_EDITMSG" bn)
-        (as-set-local-itsalltext-keys)))
+        (as-set-local-server-edit-keys)))
 
   ;; Expand all newly inserted tabs to spaces
   (setq indent-tabs-mode nil)
@@ -929,7 +937,7 @@ then invoking this function four times would yield:
  (lambda ()
    (turn-on-auto-fill)
    (as-setup-mode-for-discussion)
-   (as-set-local-itsalltext-keys)))
+   (as-set-local-server-edit-keys)))
 
 ;;}}}
 ;;{{{ crm114-mode
