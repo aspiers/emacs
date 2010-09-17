@@ -10,6 +10,14 @@ if [ -z "$DISPLAY" ]; then
     exit 1
 fi
 
+# For use by cron jobs which might take longer to focus the emacs
+# frame on account of having to swap stuff back in to core which
+# hasn't been used for a while.
+if [ "$1" = -l ]; then
+    long_sleep=y
+    shift
+fi
+
 if fast-X11-display; then
     # Assume we already have an emacs running.  We could alternatively
     # use quick-emacs at this point.
@@ -18,7 +26,11 @@ if fast-X11-display; then
     # It seems there is some kind of timing issue which requires this
     # sleep - probably we have to ensure that wmctrl has finished
     # switching before feeding the command to emacs.
-    sleep 0.4
+    if [ -n "$long_sleep" ]; then
+        sleep 3
+    else
+        sleep 0.4
+    fi
 
     feed-X11
 else
