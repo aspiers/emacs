@@ -27,7 +27,7 @@ if fast-X11-display; then
     # sleep - probably we have to ensure that wmctrl has finished
     # switching before feeding the command to emacs.
     if [ -n "$long_sleep" ]; then
-        sleep 3
+        sleep 10
     else
         sleep 0.4
     fi
