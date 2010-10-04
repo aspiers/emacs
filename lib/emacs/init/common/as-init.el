@@ -325,7 +325,7 @@ FIXME: needs to tweak align-*-modes too."
 ;;}}}
 ;;{{{ Ruby
 
-(add-to-list 'auto-mode-alist '("\\(\\.rb\\|Rakefile\\)\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\(\\.rb\\|\\.erb\\|\\.rjs\\|Rakefile\\)\\'" . ruby-mode))
 (autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
 
 ;;}}}
