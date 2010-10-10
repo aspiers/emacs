@@ -17,6 +17,9 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 # {{{ 3rd party packages
 
+# 3rd party packages are those which have their own Makefiles
+# and are responsible for compiling *and* installing themselves.
+
 # These should be symlinked to the correct versions.
 DVC_DIR        = major-modes/dvc
 ORG_DIR        = major-modes/org-mode.git
@@ -78,9 +81,16 @@ el_search_paths = 			\
 
 # }}}
 
+# {{{ Which .el files should override ones from the emacs distribution?
+
+# N.B. The override is performed by moving these .el files from
+# $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR).
+
 ifneq (,$(wildcard $(ORG_DIR)))
   EL_OVERRIDES = org*
 endif
+
+# }}}
 
 # {{{ ignore paths and files
 
