@@ -13,6 +13,11 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 # }}}
 
+# {{{ Un-tweakable parameters
+
+MAJOR_MODES = major-modes
+
+# }}}
 # {{{ Tweakable parameters
 
 # {{{ 3rd party packages
@@ -21,11 +26,11 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 # and are responsible for compiling *and* installing themselves.
 
 # These should be symlinked to the correct versions.
-DVC_DIR        = major-modes/dvc
-ORG_DIR        = major-modes/org-mode.git
-EPG_DIR        = major-modes/epg
-REMEMBER_DIR   = major-modes/remember
-EMACSRAILS_DIR = major-modes/emacs-rails
+DVC_DIR        = $(MAJOR_MODES)/dvc
+ORG_DIR        = $(MAJOR_MODES)/org-mode.git
+EPG_DIR        = $(MAJOR_MODES)/epg
+REMEMBER_DIR   = $(MAJOR_MODES)/remember
+EMACSRAILS_DIR = $(MAJOR_MODES)/emacs-rails
 ifeq (,$(wildcard $(EMACSRAILS_DIR)))
 	EMACSRAILS_DIR=
 endif
@@ -46,7 +51,7 @@ THIRD_PARTY_PKGS = 		\
 # Don't automatically compile *.el in or install *.elc from these
 # directories:
 THIRD_PARTY_PKG_DIRS =          \
-	major-modes/psgml
+	$(MAJOR_MODES)/psgml
 
 ifneq (,$(wildcard $(DVC_DIR)))
 	THIRD_PARTY_PKGS     += .dvc-installed
@@ -68,17 +73,17 @@ endif
 # }}}
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
-CUCUMBER_DIR = major-modes/cucumber
+CUCUMBER_DIR = $(MAJOR_MODES)/cucumber
 ifeq (,$(wildcard $(CUCUMBER_DIR)))
 	CUCUMBER_DIR=
 endif
 
 el_search_paths = 			\
 	init/common 			\
-	$(wildcard major-modes/*.el) 	\
-	major-modes/mmm 		\
-	major-modes/pcl-cvs 		\
-	major-modes/pgg 		\
+	$(wildcard $(MAJOR_MODES)/*.el) 	\
+	$(MAJOR_MODES)/mmm 		\
+	$(MAJOR_MODES)/pcl-cvs 		\
+	$(MAJOR_MODES)/pgg 		\
 	$(CUCUMBER_DIR) 		\
 	minor-modes 			\
 	utils 				\
@@ -103,23 +108,23 @@ endif
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
 	minor-modes/msf-abbrev/mode-abbrevs 	\
-	major-modes/monkey-2
+	$(MAJOR_MODES)/monkey-2
 IGNORE_FILES =		    		\
 	loaddefs.el			\
-	major-modes/sdf.el  		\
-	major-modes/mediawiki.el 	\
+	$(MAJOR_MODES)/sdf.el  		\
+	$(MAJOR_MODES)/mediawiki.el 	\
 	$(DVC_DIR)/lisp/contrib/ewoc.el \
 	$(EMACSRAILS_DIR)/behave-rails.el \
 	$(BEHAVE_DIR)/example.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
-  IGNORE_FILES += major-modes/org-*.el utils/as-gtd.el
+  IGNORE_FILES += $(MAJOR_MODES)/org-*.el utils/as-gtd.el
 endif
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
 # ditto org-irc.el which needs erc
-  IGNORE_FILES += major-modes/org-annotation-helper.el \
+  IGNORE_FILES += $(MAJOR_MODES)/org-annotation-helper.el \
 		  $(ORG_DIR)/lisp/org-irc.el
 endif
 
@@ -468,8 +473,8 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 
 INIT_COMMON_LIBDIRS = 	\
 	init/common 		\
-	major-modes 		\
-	major-modes/mmm 	\
+	$(MAJOR_MODES) 		\
+	$(MAJOR_MODES)/mmm 	\
 	$(ORG_DIR)/lisp 	\
 	minor-modes 		\
 	utils
@@ -495,7 +500,7 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 # }}}
 # {{{ org-mode
 
-major-modes/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
+$(MAJOR_MODES)/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
 
 .PHONY: org
 org: .org-installed
@@ -524,15 +529,15 @@ endif
 # }}}
 # {{{ mmm-mode
 
-major-modes/mmm/%.elc: major-modes/mmm/%.el
+$(MAJOR_MODES)/mmm/%.elc: $(MAJOR_MODES)/mmm/%.el
 
-major-modes/mmm/%.elc: LIBDIRS += major-modes/mmm
+$(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
 
 # }}}
 # {{{ remember-mode
 
-#major-modes/remember/%.elc: major-modes/remember/%.el
-#major-modes/remember/%.elc: LIBDIRS += major-modes/remember
+#$(MAJOR_MODES)/remember/%.elc: $(MAJOR_MODES)/remember/%.el
+#$(MAJOR_MODES)/remember/%.elc: LIBDIRS += $(MAJOR_MODES)/remember
 
 REMEMBER_DISABLE=$(addprefix remember-,bbdb bibl blosxom emacs-wiki-journal planner experimental)
 
@@ -576,9 +581,9 @@ psgml: .psgml-made
 clean-psgml:
 	rm -f .psgml-made
 # psgml Makefile is missing a 'clean' target
-	rm -f major-modes/psgml/*.elc
+	rm -f $(MAJOR_MODES)/psgml/*.elc
 .psgml-made:
-	$(MAKE) -C major-modes/psgml
+	$(MAKE) -C $(MAJOR_MODES)/psgml
 	touch $@
 
 # }}}
@@ -587,9 +592,9 @@ clean-psgml:
 nxml: .nxml-mode-20041004-made
 clean-nxml:
 	rm -f .nxml-mode-20041004-made
-	$(MAKE) -C major-modes/nxml-mode-20041004 clean
+	$(MAKE) -C $(MAJOR_MODES)/nxml-mode-20041004 clean
 .nxml-mode-20041004-made: $(POST_INSTALL_DIR)
-	$(MAKE) -C major-modes/nxml-mode-20041004
+	$(MAKE) -C $(MAJOR_MODES)/nxml-mode-20041004
 	cp rng-auto.el $(POST_INSTALL_DIR)
 	touch $@
 
@@ -599,11 +604,11 @@ clean-nxml:
 emacs-w3m: .emacs-w3m-made
 clean-emacs-w3m:
 	rm -f .emacs-w3m-made
-	$(MAKE) -C major-modes/emacs-w3m-1.4.4 clean
+	$(MAKE) -C $(MAJOR_MODES)/emacs-w3m-1.4.4 clean
 .emacs-w3m-made:
 	@$(UNLOCK_INSTALL_DIRS)
 	( 					\
-	  cd major-modes/emacs-w3m-1.4.4    && 	\
+	  cd $(MAJOR_MODES)/emacs-w3m-1.4.4    && 	\
 	  ./configure --prefix=$(prefix)	\
 		      --infodir=$(infodir) && 	\
 	  make				    && 	\
@@ -619,10 +624,10 @@ clean-emacs-w3m:
 pgg: .pgg-made
 clean-pgg:
 	rm -f .pgg-made
-	$(MAKE) -C major-modes/pgg clean
-major-modes/pgg/%.elc: LIBDIRS += major-modes/pgg
-.pgg-made: major-modes/pgg/pgg.elc
-	@-cp major-modes/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
+	$(MAKE) -C $(MAJOR_MODES)/pgg clean
+$(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
+.pgg-made: $(MAJOR_MODES)/pgg/pgg.elc
+	@-cp $(MAJOR_MODES)/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
 
 # }}}
 # {{{ dvc-mode
@@ -703,7 +708,7 @@ endif
 # }}}
 # {{{ dired+
 
-major-modes/dired+.elc: LIBDIRS += major-modes
+$(MAJOR_MODES)/dired+.elc: LIBDIRS += $(MAJOR_MODES)
 
 # }}}
 # {{{ color-theme
