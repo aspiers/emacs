@@ -68,12 +68,18 @@ endif
 # }}}
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
+CUCUMBER_DIR = major-modes/cucumber
+ifeq (,$(wildcard $(CUCUMBER_DIR)))
+	CUCUMBER_DIR=
+endif
+
 el_search_paths = 			\
 	init/common 			\
 	$(wildcard major-modes/*.el) 	\
 	major-modes/mmm 		\
 	major-modes/pcl-cvs 		\
 	major-modes/pgg 		\
+	$(CUCUMBER_DIR) 		\
 	minor-modes 			\
 	utils 				\
 	fun   				\
@@ -282,6 +288,9 @@ list-els-to-compile-cmd:
 list-els-to-compile:
 	@for el in $(ELs_TO_COMPILE); do echo $$el; done
 
+list-elcs-to-compile:
+	@for elc in $(ELCs_TO_COMPILE); do echo $$elc; done
+
 list-third-party-pkg-dirs:
 	@for elc in $(THIRD_PARTY_PKG_DIRS); do echo $$elc; done
 
@@ -293,6 +302,9 @@ list-third-party-elcs:
 
 list-install-files:
 	@for file in $(INSTALL_FILES); do echo $$file; done
+
+list-install-files-unfiltered:
+	@for file in $(INSTALL_FILES_UNFILTERED); do echo $$file; done
 
 # }}}
 # {{{ high-level targets
@@ -324,10 +336,10 @@ install: .installed
 #                                   (concat 
 #                                    (file-name-directory (locate-library "color-theme"))
 #                                    "/themes") t "^color-theme")
-INSTALL_FILES_TMP = \
+INSTALL_FILES_UNFILTERED = \
 	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
 	$(AS_INIT_ELC)
-INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_TMP))
+INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_UNFILTERED))
 
 ifneq (,$(EL_OVERRIDES))
 ALL_OVERRIDES = \
@@ -468,7 +480,7 @@ init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
 $(AS_INIT_ELC): utils/smooth-scrolling.elc
 $(AS_INIT_ELC): $(LOADDEFS)
-$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
+$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 # }}}
