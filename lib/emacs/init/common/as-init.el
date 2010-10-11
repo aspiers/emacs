@@ -325,7 +325,7 @@ FIXME: needs to tweak align-*-modes too."
 ;;}}}
 ;;{{{ Ruby
 
-(add-to-list 'auto-mode-alist '("\\(\\.rb\\|\\.erb\\|\\.rjs\\|Rakefile\\)\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\(\\.rb\\|\\.erb\\|\\.rjs\\|\\.rake\\|Rakefile\\)\\'" . ruby-mode))
 (autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
 
 ;;{{{ rcov.el
@@ -581,9 +581,9 @@ C-style indentation, use cssm-c-style-indenter.")
 
 ;;}}}
 
-;;{{{ Gherkin (Cucumber)
+;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
-(add-to-list 'load-path "~/lib/emacs/major-modes/cucumber")
+;;(add-to-list 'load-path "~/lib/emacs/major-modes/cucumber")
 ;(setq feature-default-language "en")
 ;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
 (require 'feature-mode)
