@@ -3,7 +3,7 @@
        (if (< (point-max) 3)
            (let ((pos))
                (goto-char (point-min))
-               (insert "#!/bin/sh\n\n")
+               (insert "#!/bin/bash\n\n")
 ;;                        "# Compile by: /bin/sh -ex $* \n"
 ;;                        "# --------------------------------------------------\n")
 ;;                (setq pos (point))
