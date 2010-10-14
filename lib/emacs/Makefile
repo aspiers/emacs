@@ -35,6 +35,10 @@ EMACSRAILS_DIR = $(MAJOR_MODES)/emacs-rails
 ifeq (,$(wildcard $(EMACSRAILS_DIR)))
 	EMACSRAILS_DIR=
 endif
+YASNIPPET_DIR = $(MINOR_MODES)/yasnippet-svn
+ifeq (,$(wildcard $(YASNIPPET_DIR)))
+	YASNIPPET_DIR=
+endif
 BEHAVE_DIR     = utils/behave.git
 COLOR_THEME_DIR = color-theme
 
@@ -110,7 +114,7 @@ endif
 # and consequently installed.
 NO_COMPILE_EL_PATTERNS = \
 	$(DVC_DIR)/lisp/contrib/ewoc.el \
-	$(MINOR_MODES)/yasnippet%
+	$(YASNIPPET_DIR)%
 
 # This will prevent matching .el files from being installed.
 NO_INSTALL_PATTERNS = \
@@ -119,6 +123,8 @@ NO_INSTALL_PATTERNS = \
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
 	$(MINOR_MODES)/msf-abbrev/mode-abbrevs 	\
+	$(YASNIPPET_DIR)/snippets		\
+	$(YASNIPPET_DIR)/extras  		\
 	$(MAJOR_MODES)/monkey-2
 IGNORE_FILES =		    		\
 	loaddefs.el			\
@@ -192,7 +198,7 @@ PRUNE_DIRS = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe
 PRUNE_FILES = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
 # We exclude as-init.el here because it has to be compiled after everything else.
-ELs_TO_INSTALL_cmd =   				        \
+EL_INSTALLATION_CANDIDATES_cmd =   				        \
 	find $(el_search_paths)				\
 	        -follow					\
 		-name \*.el 				\
@@ -201,10 +207,10 @@ ELs_TO_INSTALL_cmd =   				        \
 	      ! -name as-init.el			\
 	      ! -path '*/attic/*'			\
 	      ! -path '*/shimbun/*'
-ELs_TO_INSTALL = $(shell $(ELs_TO_INSTALL_cmd)) 
+EL_INSTALLATION_CANDIDATES = $(shell $(EL_INSTALLATION_CANDIDATES_cmd)) 
 
 # These are the .elcs we want to build ourselves
-ELCs_TO_BE_COMPILED = $(addsuffix c,$(filter-out $(NO_COMPILE_EL_PATTERNS),$(ELs_TO_INSTALL)))
+ELCs_TO_BE_COMPILED = $(addsuffix c,$(filter-out $(NO_COMPILE_EL_PATTERNS),$(EL_INSTALLATION_CANDIDATES)))
 
 # }}}
 # {{{ THIRD_PARTY_ELCs
@@ -298,11 +304,11 @@ list-prune:
 	@echo "$(PRUNE_DIRS)"
 	@echo "$(PRUNE_FILES)"
 
-list-els-to-install-cmd:
-	@echo "$(ELs_TO_INSTALL_cmd)"
+list-el-installation-candidates-cmd:
+	@echo "$(EL_INSTALLATION_CANDIDATES_cmd)"
 
-list-els-to-install:
-	@for el in $(ELs_TO_INSTALL); do echo $$el; done
+list-el-installation-candidates:
+	@for el in $(EL_INSTALLATION_CANDIDATES); do echo $$el; done
 
 list-elcs-to-be-compiled:
 	@for elc in $(ELCs_TO_BE_COMPILED); do echo $$elc; done
@@ -353,7 +359,7 @@ install: .installed
 #                                    (file-name-directory (locate-library "color-theme"))
 #                                    "/themes") t "^color-theme")
 INSTALL_FILES_UNFILTERED = \
-	$(ELs_TO_INSTALL) $(ELCs_TO_BE_COMPILED) \
+	$(EL_INSTALLATION_CANDIDATES) $(ELCs_TO_BE_COMPILED) \
 	$(AS_INIT_ELC)
 INSTALL_FILES = $(filter-out $(NO_INSTALL_PATTERNS),$(INSTALL_FILES_UNFILTERED))
 
