@@ -16,6 +16,7 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 # {{{ Un-tweakable parameters
 
 MAJOR_MODES = major-modes
+MINOR_MODES = minor-modes
 
 # }}}
 # {{{ Tweakable parameters
@@ -85,7 +86,7 @@ el_search_paths = 			\
 	$(MAJOR_MODES)/pcl-cvs 		\
 	$(MAJOR_MODES)/pgg 		\
 	$(CUCUMBER_DIR) 		\
-	minor-modes 			\
+	$(MINOR_MODES) 			\
 	utils 				\
 	fun   				\
 	$(EMACSRAILS_DIR)
@@ -105,9 +106,19 @@ endif
 
 # {{{ ignore paths and files
 
+# This will prevent any resulting .elc files from being compiled
+# and consequently installed.
+NO_COMPILE_EL_PATTERNS = \
+	$(DVC_DIR)/lisp/contrib/ewoc.el \
+	$(MINOR_MODES)/yasnippet%
+
+# This will prevent matching .el files from being installed.
+NO_INSTALL_PATTERNS = \
+	$(DVC_DIR)/lisp/contrib/ewoc.el
+
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
-	minor-modes/msf-abbrev/mode-abbrevs 	\
+	$(MINOR_MODES)/msf-abbrev/mode-abbrevs 	\
 	$(MAJOR_MODES)/monkey-2
 IGNORE_FILES =		    		\
 	loaddefs.el			\
@@ -181,7 +192,7 @@ PRUNE_DIRS = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe
 PRUNE_FILES = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
 # We exclude as-init.el here because it has to be compiled after everything else.
-ELs_TO_COMPILE_cmd =   				        \
+ELs_TO_INSTALL_cmd =   				        \
 	find $(el_search_paths)				\
 	        -follow					\
 		-name \*.el 				\
@@ -190,10 +201,10 @@ ELs_TO_COMPILE_cmd =   				        \
 	      ! -name as-init.el			\
 	      ! -path '*/attic/*'			\
 	      ! -path '*/shimbun/*'
-ELs_TO_COMPILE = $(shell $(ELs_TO_COMPILE_cmd)) 
+ELs_TO_INSTALL = $(shell $(ELs_TO_INSTALL_cmd)) 
 
 # These are the .elcs we want to build ourselves
-ELCs_TO_COMPILE = $(addsuffix c,$(ELs_TO_COMPILE))
+ELCs_TO_BE_COMPILED = $(addsuffix c,$(filter-out $(NO_COMPILE_EL_PATTERNS),$(ELs_TO_INSTALL)))
 
 # }}}
 # {{{ THIRD_PARTY_ELCs
@@ -287,14 +298,14 @@ list-prune:
 	@echo "$(PRUNE_DIRS)"
 	@echo "$(PRUNE_FILES)"
 
-list-els-to-compile-cmd:
-	@echo "$(ELs_TO_COMPILE_cmd)"
+list-els-to-install-cmd:
+	@echo "$(ELs_TO_INSTALL_cmd)"
 
-list-els-to-compile:
-	@for el in $(ELs_TO_COMPILE); do echo $$el; done
+list-els-to-install:
+	@for el in $(ELs_TO_INSTALL); do echo $$el; done
 
-list-elcs-to-compile:
-	@for elc in $(ELCs_TO_COMPILE); do echo $$elc; done
+list-elcs-to-be-compiled:
+	@for elc in $(ELCs_TO_BE_COMPILED); do echo $$elc; done
 
 list-third-party-pkg-dirs:
 	@for elc in $(THIRD_PARTY_PKG_DIRS); do echo $$elc; done
@@ -314,7 +325,7 @@ list-install-files-unfiltered:
 # }}}
 # {{{ high-level targets
 
-.elcs: $(ELCs_TO_COMPILE) $(THIRD_PARTY_PKGS) $(AS_INIT_ELC)
+.elcs: $(ELCs_TO_BE_COMPILED) $(THIRD_PARTY_PKGS) $(AS_INIT_ELC)
 	@touch $@
 
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
@@ -342,9 +353,9 @@ install: .installed
 #                                    (file-name-directory (locate-library "color-theme"))
 #                                    "/themes") t "^color-theme")
 INSTALL_FILES_UNFILTERED = \
-	$(ELs_TO_COMPILE) $(ELCs_TO_COMPILE) \
+	$(ELs_TO_INSTALL) $(ELCs_TO_BE_COMPILED) \
 	$(AS_INIT_ELC)
-INSTALL_FILES = $(filter-out $(DVC_DIR)/lisp/contrib/ewoc.el,$(INSTALL_FILES_UNFILTERED))
+INSTALL_FILES = $(filter-out $(NO_INSTALL_PATTERNS),$(INSTALL_FILES_UNFILTERED))
 
 ifneq (,$(EL_OVERRIDES))
 ALL_OVERRIDES = \
@@ -476,7 +487,7 @@ INIT_COMMON_LIBDIRS = 	\
 	$(MAJOR_MODES) 		\
 	$(MAJOR_MODES)/mmm 	\
 	$(ORG_DIR)/lisp 	\
-	minor-modes 		\
+	$(MINOR_MODES) 		\
 	utils
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
