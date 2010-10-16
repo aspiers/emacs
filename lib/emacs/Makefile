@@ -17,6 +17,7 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 MAJOR_MODES = major-modes
 MINOR_MODES = minor-modes
+UTILS	    = utils
 
 # }}}
 # {{{ Tweakable parameters
@@ -39,7 +40,7 @@ YASNIPPET_DIR = $(MINOR_MODES)/yasnippet-svn
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
 	YASNIPPET_DIR=
 endif
-BEHAVE_DIR     = utils/behave.git
+BEHAVE_DIR     = $(UTILS)/behave.git
 COLOR_THEME_DIR = color-theme
 
 # Pros of symlinking foo -> foo-1.2.3 approach:
@@ -91,7 +92,7 @@ el_search_paths = 			\
 	$(MAJOR_MODES)/pgg 		\
 	$(CUCUMBER_DIR) 		\
 	$(MINOR_MODES) 			\
-	utils 				\
+	$(UTILS) 				\
 	fun   				\
 	$(EMACSRAILS_DIR)
 
@@ -135,7 +136,7 @@ IGNORE_FILES =		    		\
 	$(BEHAVE_DIR)/example.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
-  IGNORE_FILES += $(MAJOR_MODES)/org-*.el utils/as-gtd.el
+  IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el
 endif
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
@@ -149,7 +150,7 @@ endif
 # {{{ Directories to scan for autoload cookies
 
 LOADDEFS_DIRS=	\
-	utils
+	$(UTILS)
 
 # }}}
 # {{{ global paths
@@ -494,13 +495,13 @@ INIT_COMMON_LIBDIRS = 	\
 	$(MAJOR_MODES)/mmm 	\
 	$(ORG_DIR)/lisp 	\
 	$(MINOR_MODES) 		\
-	utils
+	$(UTILS)
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
 $(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
-$(AS_INIT_ELC): utils/smooth-scrolling.elc
+$(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR)
 #$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
@@ -509,8 +510,8 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR)
 # {{{ Special rules for utils files
 
 # as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
-utils/as-gtd.elc: LIBDIRS += utils $(ORG_DIR)/contrib/lisp
-utils/as-gtd.elc: .org-installed
+$(UTILS)/as-gtd.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
+$(UTILS)/as-gtd.elc: .org-installed
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
@@ -649,7 +650,7 @@ $(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
 # }}}
 # {{{ dvc-mode
 
-utils/tree-widget-2.0/%.elc: LIBDIRS += utils/tree-widget-2.0
+$(UTILS)/tree-widget-2.0/%.elc: LIBDIRS += $(UTILS)/tree-widget-2.0
 
 ifeq (,$(wildcard $(DVC_DIR)))
 clean-dvc:
@@ -674,7 +675,7 @@ clean-dvc:
 	  cd $(dvc_build_dir) &&	 				\
 	  ../configure 							\
 	    --prefix=$(prefix)	 					\
-	    --with-other-dirs=$(HOME)/lib/emacs/utils/tree-widget-2.0 	\
+	    --with-other-dirs=$(HOME)/lib/emacs/$(UTILS)/tree-widget-2.0 	\
 	    $$with_arch							\
 	) && 								\
 	touch $@
@@ -760,7 +761,7 @@ endif
 # {{{ emacs-rails
 
 # emacs-rails needs find-recursive and behave
-$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) utils $(BEHAVE_DIR)
+$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) $(UTILS) $(BEHAVE_DIR)
 $(EMACSRAILS_DIR)/%.elc: COMPILER_PRE_OPTS += -l rails
 
 $(BEHAVE_DIR)/%.elc: LIBDIRS += $(BEHAVE_DIR)
