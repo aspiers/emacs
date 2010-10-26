@@ -30,6 +30,10 @@ debug () {
 
 fast-X11-display || DISPLAY=
 
+if [ -n "$SSH_CONNECTION" ] || [[ "$DISPLAY" == localhost:* ]]; then
+    xauth-emacs
+fi
+
 # Ideally we want to return control to the caller immediately, but at
 # the same time wait until emacsclient completes before running
 # wmctrl.  But you can't background emacsclient and then re-foreground
