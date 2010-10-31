@@ -586,7 +586,7 @@ C-style indentation, use cssm-c-style-indenter.")
 ;;(add-to-list 'load-path "~/lib/emacs/major-modes/cucumber")
 ;(setq feature-default-language "en")
 ;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
-(require 'feature-mode)
+(autoload 'feature-mode "feature-mode" nil t)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 ;;}}}
