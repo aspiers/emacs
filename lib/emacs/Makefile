@@ -104,7 +104,10 @@ el_search_paths = 			\
 # $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR).
 
 ifneq (,$(wildcard $(ORG_DIR)))
-  EL_OVERRIDES = org*
+  EL_OVERRIDES =
+# This one no longer necessary since we install org-mode directly
+# into $(PRE_INSTALL_DIR)
+#   EL_OVERRIDES = org*
 endif
 
 # }}}
