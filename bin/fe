@@ -12,3 +12,6 @@ fi
 if which jmacs >/dev/null 2>&1; then
     exec jmacs "$@"
 fi
+
+echo "ERROR: neither emacs nor jmacs found; aborting." >&2
+exit 1
