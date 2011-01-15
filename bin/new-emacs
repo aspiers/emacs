@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # For the times when a new emacs instance is required (vs.
 # quick-emacs et al. which try their best to reuse an
