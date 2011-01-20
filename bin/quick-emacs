@@ -28,11 +28,17 @@ debug () {
     echo "$*" >&2
 }
 
-fast-X11-display || DISPLAY=
-
-if [ -n "$SSH_CONNECTION" ] || [[ "$DISPLAY" == localhost:* ]]; then
-    xauth-emacs
+if fast-X11-display; then
+    if [ -n "$SSH_CONNECTION" ] || [[ "$DISPLAY" == localhost:* ]]; then
+        xauth-emacs
+    fi
+else
+    DISPLAY=
 fi
+
+# If we're root, we don't want emacsclient to fall back to using
+# a server socket for an emacs running non-root .
+LOGNAME=
 
 # Ideally we want to return control to the caller immediately, but at
 # the same time wait until emacsclient completes before running
