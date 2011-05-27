@@ -151,7 +151,9 @@
 (autoload 'edit-server-start "edit-server" "edit-server" t)
 (unless (as-quick-startup)
   (server-start)
-  (edit-server-start))
+  (condition-case err
+      (edit-server-start)
+    (file-error (message "%s" (error-message-string err)))))
 
 ;;}}}
 ;;{{{ Diary, appointments
