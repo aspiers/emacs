@@ -68,8 +68,10 @@
           (setq line-to-copy (buffer-substring bol (point)))
           (insert "\n" line-to-copy))
         (setq i (1+ i)))))
-  (next-line count) ;; sorry FSF
-  )
+  (let ((line-move-visual nil))
+    ;; Deliberately not using forward-line in order to preserve
+    ;; column of cursor
+    (next-line count)))
 
 ;;}}}
 ;;{{{ as-join-line-with-next
