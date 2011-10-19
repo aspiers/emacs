@@ -15,9 +15,9 @@
 ;; within as-init.el.
 ;;
 ;; Update: I think the above approach is flawed, since it's easy to
-;; figure out what bindings are available without that grouping,
-;; and grouping logically is easier to maintain.  Having said that,
-;; a clear strategy on use of keymaps is useful.
+;; figure out what bindings are available without that grouping (using
+;; <prefix> C-h), and grouping logically is easier to maintain.
+;; Having said that, a clear strategy on use of keymaps is useful.
 
 ;;}}}
 
@@ -52,26 +52,34 @@
 
 (autoload 'foldout-exit-fold    "foldout")
 (autoload 'foldout-zoom-subtree "foldout")
-(mapc (lambda (mode)
-        (add-hook mode
-                  (lambda ()
-                    ;; Quick navigation
-                    (local-set-key [(meta control <)] 'foldout-exit-fold)
-                    (local-set-key [(meta control >)] 'foldout-zoom-subtree)
-                    )))
-      '(outline-mode-hook outline-minor-mode-hook))
+(dolist (hook '(outline-mode-hook outline-minor-mode-hook))
+  (add-hook hook
+            (lambda ()
+              ;; Quick navigation
+              (local-set-key [(meta control <)] 'foldout-exit-fold)
+              (local-set-key [(meta control >)] 'foldout-zoom-subtree)
+              )))
 
 ;;}}}
 
 ;;{{{ as-folding-{hide,show}-current
 
+;; (eval-when-compile (require 'folding))
 (eval-and-compile
-  (mapc (lambda (fn) (autoload fn "folding"))
-        '(folding-mark-look-at
-          folding-hide-current-entry
-          folding-mark-look-at-top-mark-p
-          folding-show-current-entry
-          )))
+  (dolist (fn
+           '(folding-mark-look-at
+             folding-hide-current-entry
+             folding-mark-look-at-top-mark-p
+             folding-show-current-entry
+             folding-get-mode-marks
+             folding-shift-in
+             folding-narrow-to-region
+             folding-show-all
+             folding-point-folded-p
+             folding-open-buffer
+             folding-use-overlays-p
+             ))
+    (autoload fn "folding")))
 
 (defun as-folding-hide-current ()
   "Hides the current fold, ensuring a consistent landing spot."
@@ -140,16 +148,6 @@ is already hidden."
 
 ;;{{{ folding-mode-hook bindings
 
-(mapc (lambda (fn) (autoload fn "folding"))
-      '(folding-narrow-to-region
-        folding-next-visible-heading
-        folding-open-buffer
-        folding-point-folded-p
-        folding-previous-visible-heading
-        folding-shift-in
-        folding-show-all
-        folding-use-overlays-p
-        ))
 ;;(eval-when (compile) (require 'folding))
 
 (add-hook 'folding-mode-hook
@@ -490,7 +488,7 @@ consistent landing spot."
 (global-set-key [(control E)]             'bn-end-of-line-but-one)
 (global-set-key [(control ?')]            'speedbar-get-focus)
 (global-set-key [(control !)]             'ido-switch-buffer)
-(global-set-key [(control ,)]             'delete-other-windows)
+(global-set-key [(control \,)]            'delete-other-windows)
 (global-set-key [(control .)]             'delete-window)
 (global-set-key [(control \;)]            'bury-buffer)
 (global-set-key [(control tab)]           'other-window)
