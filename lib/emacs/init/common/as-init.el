@@ -21,6 +21,7 @@
 
 (load-library "as-loaddefs")
 (require 'as-progress)
+(require 'as-require)
 
 (as-progress "functions...")
 
@@ -82,7 +83,7 @@
 (column-number-mode 1)
 
 ;; Default right margin
-(setq default-fill-column 70)
+(setq fill-column 70)
 
 ;; Stop down cursor adding newlines to end of buffer.
 (setq next-line-add-newlines nil)
@@ -137,7 +138,7 @@
 ;;}}}
 ;;{{{ midnight-mode - automatically kill unused buffers
 
-(unless (as-quick-startup) (require 'midnight))
+(unless (as-quick-startup) (as-soft-require 'midnight))
 
 ;;}}}
 ;;{{{ client/server mode
@@ -174,9 +175,10 @@
 ;;}}}
 ;;{{{ Color themes
 
-(when (require 'color-theme-autoloads nil 'noerror)
-  (load "pastels-on-dark-theme" 'noerror)
-  (color-theme-pastels-on-dark))
+(require 'color-theme-autoloads nil 'noerror)
+(require 'pastels-on-dark-theme nil 'noerror)
+(if (as-check-feature-loaded 'pastels-on-dark-theme)
+    (color-theme-pastels-on-dark))
 
 ;;}}}
 
@@ -189,7 +191,7 @@
 
 (as-progress "Startup mode selection...")
 
-(setq default-major-mode 'indented-text-mode)
+(setq major-mode 'indented-text-mode)
 
 ;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
 ;; with "indented-text-mode".
@@ -267,46 +269,42 @@
 with references to `align-python-modes'.
 
 FIXME: needs to tweak align-*-modes too."
-  (mapc
-   (lambda (rule)
-     (let* ((title (car rule))
-            (pairs (cdr rule))
-            (modespair (assq 'modes pairs))
-            (modes (cdr modespair))
-            (search 'python-mode)
-            (replacement 'align-python-modes)
-            (result nil
-                    ;(format "no change for %s" title)
-                    ))
-       ;(if (eq title 'basic-comma-delimiter) (edebug))
-       (if modes
-           (cond
-            ;; modes could have form: align-foo-modes
-            ((equal modes `(quote (,search)))
-             ;(edebug)
-             (setcdr modespair replacement)
-             (setq result (format "single change for %s" title)))
+  (dolist (rule align-rules-list)
+    (let* ((title (car rule))
+           (pairs (cdr rule))
+           (modespair (assq 'modes pairs))
+           (modes (cdr modespair))
+           (search 'python-mode)
+           (replacement 'align-python-modes)
+           (result nil
+                   ;(format "no change for %s" title)
+                   ))
+      ;(if (eq title 'basic-comma-delimiter) (edebug))
+      (if modes
+          (cond
+           ;; modes could have form: align-foo-modes
+           ((equal modes `(quote (,search)))
+            (setcdr modespair replacement)
+            (setq result (format "single change for %s" title)))
 
-            ;; FIXME: handle modes like
-            ;;   (append align-perl-modes '(python-mode))
-            ;; as seen in basic-comma-delimiter
+           ;; FIXME: handle modes like
+           ;;   (append align-perl-modes '(python-mode))
+           ;; as seen in basic-comma-delimiter
 
-            ;; handle modes with form: '(mode1 mode2 ...)
-            ;; i.e. (quote (mode1 mode2 ...))
-            ((and (listp modes)
-                  (eq 'quote (car modes))
-                  (listp (cadr modes)))
-             (let ((to-replace (memq search (cadr modes))))
-               (when to-replace
-                 ;(edebug)
-                 ;; remove this element from the list
-                 (setcar to-replace (cadr to-replace))
-                 (setcdr to-replace (cddr to-replace))
-                 (setcdr modespair `(append ,replacement ,modes))
-                 (setq result (format "list change for %s" title)))))))
+           ;; handle modes with form: '(mode1 mode2 ...)
+           ;; i.e. (quote (mode1 mode2 ...))
+           ((and (listp modes)
+                 (eq 'quote (car modes))
+                 (listp (cadr modes)))
+            (let ((to-replace (memq search (cadr modes))))
+              (when to-replace
+                ;; remove this element from the list
+                (setcar to-replace (cadr to-replace))
+                (setcdr to-replace (cddr to-replace))
+                (setcdr modespair `(append ,replacement ,modes))
+                (setq result (format "list change for %s" title)))))))
        ;(message result)
-       ))
-   align-rules-list))
+       )))
 
 (eval-after-load "align"
   '(progn
@@ -801,7 +799,8 @@ other people."
 
 ;;{{{ org-mode
 
-(when (require 'org-install nil 'noerror)
+(require 'org-install nil 'noerror)
+(when (as-check-feature-loaded 'org-install)
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)))
 
@@ -809,16 +808,15 @@ other people."
 (add-hook
  'org-mode-hook
  (lambda ()
-   (require 'org-mairix)
-   (require 'as-gtd)
+   (as-soft-require 'as-gtd)
    (imenu-add-to-menubar "Imenu")
    (setq comment-start nil)))
 
-(eval-when-compile (require 'org-crypt nil 'noerror))
+(declare-function org-crypt-use-before-save-magic "org-crypt")
 (add-hook
  'org-mode-hook
  (lambda ()
-   (and (require 'org-crypt nil 'noerror)
+   (and (as-soft-require 'org-crypt)
         (org-crypt-use-before-save-magic))))
 
 
@@ -928,7 +926,8 @@ then invoking this function four times would yield:
 ;; http://orgmode.org/worg/org-gtd-etc.php
 
 (add-to-list 'org-modules 'org-timer)
-(setq org-timer-default-timer 25)
+;; FIXME: something changed here, but I use Pomodroido now anyway.
+;;(setq org-timer-default-timer 25)
 
 ;; Modify the org-clock-in so that a timer is started with the default
 ;; value except if a timer is already started :
