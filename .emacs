@@ -67,23 +67,25 @@ default.")
 ;; (mapc (lambda (dir) (add-to-list 'find-function-source-path dir))
 ;;       org-source-paths)
 
-(mapc (lambda (x)
-          (let ((path (concat as-emacs-dir "/" x)))
-	    (message path)
-            (and (file-directory-p path)
-                 (add-to-list 'find-function-source-path path))))
-	'(
-	  "init/common"
-	  "major-modes"
-	  "major-modes/org-mode.git/lisp"
-	  "major-modes/remember"
-	  "major-modes/xtla"
-	  "major-modes/mmm"
-	  "major-modes/psgml"
-	  "major-modes/muse"
-	  "minor-modes"
-	  "utils"
-	  "fun"))
+(defvar as-source-paths
+  '(
+    "init/common"
+    "major-modes"
+    "major-modes/org-mode.git/lisp"
+    "major-modes/org-mode.git/contrib/lisp"
+    "major-modes/remember"
+    "major-modes/xtla"
+    "major-modes/mmm"
+    "major-modes/psgml"
+    "major-modes/muse"
+    "minor-modes"
+    "utils"
+    "fun"))
+(dolist (x as-source-paths)
+  (let ((path (concat as-emacs-dir "/" x)))
+    (message path)
+    (and (file-directory-p path)
+         (add-to-list 'find-function-source-path path))))
 
 (add-to-list 'load-path as-version-pre-lib-dir)
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
