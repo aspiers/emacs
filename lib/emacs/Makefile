@@ -51,7 +51,7 @@ COLOR_THEME_DIR = color-theme
 
 # This is a list of make targets which have their own Makefiles
 # and are responsible for compiling *and* installing themselves.
-THIRD_PARTY_PKGS = 		\
+THIRD_PARTY_PKG_TARGETS = 		\
 	.psgml-made
 
 # Don't automatically compile *.el in or install *.elc from these
@@ -60,20 +60,20 @@ THIRD_PARTY_PKG_DIRS =          \
 	$(MAJOR_MODES)/psgml
 
 ifneq (,$(wildcard $(DVC_DIR)))
-	THIRD_PARTY_PKGS     += .dvc-installed
-	THIRD_PARTY_PKG_DIRS += $(DVC_DIR)
+	THIRD_PARTY_PKG_TARGETS += .dvc-installed
+	THIRD_PARTY_PKG_DIRS    += $(DVC_DIR)
 endif
 ifneq (,$(wildcard $(ORG_DIR)))
-	THIRD_PARTY_PKGS     += .org-installed
-	THIRD_PARTY_PKG_DIRS += $(ORG_DIR)
+	THIRD_PARTY_PKG_TARGETS += .org-installed
+	THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
 endif
 ifneq (,$(wildcard $(REMEMBER_DIR)))
-	THIRD_PARTY_PKGS     += .remember-installed
-	THIRD_PARTY_PKG_DIRS += $(REMEMBER_DIR)
+	THIRD_PARTY_PKG_TARGETS += .remember-installed
+	THIRD_PARTY_PKG_DIRS    += $(REMEMBER_DIR)
 endif
 ifneq (,$(wildcard $(COLOR_THEME_DIR)))
-	THIRD_PARTY_PKGS     += .color-theme-installed
-	THIRD_PARTY_PKG_DIRS += $(COLOR_THEME_DIR)
+	THIRD_PARTY_PKG_TARGETS += .color-theme-installed
+	THIRD_PARTY_PKG_DIRS    += $(COLOR_THEME_DIR)
 endif
 
 # }}}
@@ -86,14 +86,15 @@ endif
 
 el_search_paths = 			\
 	init/common 			\
-	$(wildcard $(MAJOR_MODES)/*.el) 	\
+	$(wildcard $(MAJOR_MODES)/*.el) \
 	$(MAJOR_MODES)/mmm 		\
 	$(MAJOR_MODES)/pcl-cvs 		\
 	$(MAJOR_MODES)/pgg 		\
+	$(ORG_DIR)/contrib/lisp		\
 	$(CUCUMBER_DIR) 		\
 	$(MINOR_MODES) 			\
-	$(UTILS) 				\
-	fun   				\
+	$(UTILS) 			\
+	fun  				\
 	$(EMACSRAILS_DIR)
 
 # }}}
@@ -117,8 +118,11 @@ endif
 # This will prevent any resulting .elc files from being compiled
 # and consequently installed.
 NO_COMPILE_EL_PATTERNS = \
-	$(DVC_DIR)/lisp/contrib/ewoc.el \
-	$(YASNIPPET_DIR)%
+	$(DVC_DIR)/lisp/contrib/ewoc.el
+
+ifneq (,$(YASNIPPET_DIR))
+  NO_COMPILE_EL_PATTERNS += $(YASNIPPET_DIR)%
+endif
 
 # This will prevent matching .el files from being installed.
 NO_INSTALL_PATTERNS = \
@@ -234,8 +238,14 @@ THIRD_PARTY_ELs = $(shell \
 
 # }}}
 
-AS_INIT_EL  = init/common/as-init.el
-AS_INIT_ELC = init/common/as-init.elc
+AS_INIT_EL    	    = init/common/as-init.el
+AS_BINDINGS_EL	    = init/common/as-bindings.el
+AS_PROGRESS_EL	    = init/common/as-progress.el
+AS_SOFT_REQUIRE_EL  = init/common/as-soft-require.el
+AS_INIT_ELC         = $(AS_INIT_EL)c
+AS_BINDINGS_ELC     = $(AS_BINDINGS_EL)c
+AS_PROGRESS_ELC     = $(AS_PROGRESS_EL)c
+AS_SOFT_REQUIRE_ELC = $(AS_SOFT_REQUIRE_EL)c
 
 # {{{ Determine compilation variables and parameters
 
@@ -286,7 +296,7 @@ COMPILER_OPTS=$(COMPILER_BATCH)
 # executed, even if B's prerequisites don't need to be, hence the
 # parent rule will too.
 
-.PHONY: all #$(THIRD_PARTY_PKGS)
+.PHONY: all #$(THIRD_PARTY_PKG_TARGETS)
 
 # }}}
 
@@ -336,7 +346,8 @@ list-install-files-unfiltered:
 # }}}
 # {{{ high-level targets
 
-.elcs: $(ELCs_TO_BE_COMPILED) $(THIRD_PARTY_PKGS) $(AS_INIT_ELC)
+# as-init.el has to be compiled after everything else.
+.elcs: $(ELCs_TO_BE_COMPILED) $(THIRD_PARTY_PKG_TARGETS) $(AS_INIT_ELC)
 	@touch $@
 
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
@@ -355,7 +366,7 @@ install: .installed
 # find-function-source-path doesn't need to be extended excessively.
 # Note that THIRD_PARTY_ELCs already get installed by third party
 # Makefiles into $(lispdir). It would be nice to install the
-# THIRD_PARTY_ELs too, although to be safe we would have to install
+# THIRD_PARTY_ELs too, although to be soft we would have to install
 # them also into $(lispdir) not $(POST_INSTALL_DIR), since e.g. color-theme
 # does:
 #
@@ -493,18 +504,19 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # }}}
 # {{{ Special rules for my init files
 
-INIT_COMMON_LIBDIRS = 	\
-	init/common 		\
-	$(MAJOR_MODES) 		\
+INIT_COMMON_LIBDIRS = 		\
+	init/common		\
+	$(MAJOR_MODES)		\
 	$(MAJOR_MODES)/mmm 	\
-	$(ORG_DIR)/lisp 	\
-	$(MINOR_MODES) 		\
-	$(UTILS)
+	$(ORG_DIR)/lisp		\
+	$(MINOR_MODES)		\
+	$(UTILS)		\
+	fun
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
-init/common/as-bindings.elc: init/common/as-progress.elc .org-installed
-$(AS_INIT_ELC): init/common/as-progress.elc init/common/as-bindings.elc
+$(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
+$(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_SOFT_REQUIRE_ELC) $(AS_BINDINGS_ELC)
 $(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
@@ -514,8 +526,8 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPE
 # {{{ Special rules for utils files
 
 # as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
-$(UTILS)/as-gtd.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
-$(UTILS)/as-gtd.elc: .org-installed
+$(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
+$(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
@@ -535,12 +547,13 @@ else
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(wildcard $(ORG_DIR)/*.el) $(wildcard $(ORG_DIR)/*/*.el) $(wildcard $(ORG_DIR)/*/*/*.el) .epg-installed
+.org-installed: $(wildcard $(ORG_DIR)/lisp/*.el) .epg-installed
 	@$(UNLOCK_INSTALL_DIRS)
 #	EMACS="$(EMACS) -L $(lispdir)/epg"
 	$(MAKE) -C $(ORG_DIR) install-lisp \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
+	cp $(ORG_DIR)/contrib/lisp/*.el $(PRE_INSTALL_DIR)
 	@$(LOCK_INSTALL_DIRS)
 	$(MAKE) -C $(ORG_DIR) install-info \
 		prefix=$(prefix) \
