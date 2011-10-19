@@ -269,3 +269,5 @@
      (woman-italic-face ((t (:foreground "deep sky blue"))))
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (zmacs-region ((t (:background "DarkSlateBlue")))))))
+
+(provide 'pastels-on-dark-theme)
