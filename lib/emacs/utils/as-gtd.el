@@ -92,10 +92,12 @@ function returns nil, the current match should not be skipped.
 Otherwise, the function must return a position from where the
 search should be continued."
   `(lambda ()
-    (if (equal (org-get-category) ,category-to-select)
-        nil ;; don't skip
-      ;; the invisible-ok param below is crucial to avoid infinite loops
-      (org-end-of-subtree t))))
+     (let ((cat (org-get-category)))
+       (message "Is '%s' '%s' ?" cat ,category-to-select)
+       (if (equal cat ,category-to-select)
+           nil ;; don't skip
+         ;; the invisible-ok param below is crucial to avoid infinite loops
+         (org-end-of-subtree t)))))
 
 (defun as-org-jump-clock-or-agenda ()
   "Jump to an active clock or to the agenda buffer if no clock is active."
