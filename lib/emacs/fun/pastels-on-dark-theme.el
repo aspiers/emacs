@@ -2,7 +2,8 @@
   (require 'color-theme))
 
 (defun color-theme-pastels-on-dark ()
-  "Color theme ported from TextMate by Shane Celis on 2007-01-10."
+  "Color theme ported from TextMate by Shane Celis on 2007-01-10.
+Tweaked by Adam Spiers in December 2009."
   (interactive)
   (color-theme-install
    '(color-theme-pastels-on-dark
@@ -12,6 +13,7 @@
       (cursor-color . "#FFFFFF")
       (foreground-color . "#DADADA")
       (mouse-color . "Grey"))
+     (org-hide-face ((t (:foreground "#211E1E"))))
      (help-highlight-face ((t (:underline t))))
      (list-matching-lines-face ((t (:bold t))))
      (mime-button-face ((t (:bold t))))
@@ -49,7 +51,7 @@
      (cperl-hash-face ((t (:italic t :bold t :foreground "beige" :slant italic :weight bold))))
      (cperl-nonoverridable-face ((t (:foreground "aquamarine"))))
      (cursor ((t (:background "Grey"))))
-     (custom-button-face ((t (:foreground "gainsboro"))))
+     ;;(custom-button-face ((t (:foreground "gainsboro"))))
      (custom-button-pressed-face ((t (:background "lightgrey" :foreground "black" :box (:line-width 2 :style pressed-button)))))
      (custom-changed-face ((t (:background "blue" :foreground "white"))))
      (custom-comment-face ((t (:background "dim gray"))))
