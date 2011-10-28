@@ -154,7 +154,11 @@
   (server-start)
   (condition-case err
       (edit-server-start)
-    (file-error (message "%s" (error-message-string err)))))
+    (file-error (message "%s" (error-message-string err))))
+  (defun edit-server-restart (interactive)
+    "Equivalent to `edit-server-stop' followed by `edit-server-start'."
+    (edit-server-stop)
+    (edit-server-start)))
 
 ;;}}}
 ;;{{{ Diary, appointments
