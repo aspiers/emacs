@@ -523,6 +523,31 @@ consistent landing spot."
 ;;(fset 'as-find-personal-note "\C-x\C-f~/roaming/notes/")
 
 (eval-when-compile (require 'ido))
+
+(defun as-find-CVS-repo ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/.CVS/" "Find CVS repo: "))
+(global-set-key "\C-cjc"  'as-find-CVS-repo)
+
+(defun as-find-my-git-repo ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: "))
+(global-set-key "\C-cjg"  'as-find-my-git-repo)
+
+(defun as-find-upstream-git-repo ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/.GIT/3rd-party/" "Find 3rd-party git repo: "))
+(global-set-key "\C-cjG"  'as-find-upstream-git-repo)
+
+(defun as-find-stow-package ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/.STOW/" "Find stow package: "))
+(global-set-key "\C-cjs"  'as-find-stow-package)
+
 (defun as-find-personal-note ()
   (interactive)
   (ido-file-internal ido-default-file-method
