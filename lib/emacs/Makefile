@@ -241,11 +241,11 @@ THIRD_PARTY_ELs = $(shell \
 AS_INIT_EL    	    = init/common/as-init.el
 AS_BINDINGS_EL	    = init/common/as-bindings.el
 AS_PROGRESS_EL	    = init/common/as-progress.el
-AS_SOFT_REQUIRE_EL  = init/common/as-soft-require.el
+AS_REQUIRE_EL  	    = init/common/as-require.el
 AS_INIT_ELC         = $(AS_INIT_EL)c
 AS_BINDINGS_ELC     = $(AS_BINDINGS_EL)c
 AS_PROGRESS_ELC     = $(AS_PROGRESS_EL)c
-AS_SOFT_REQUIRE_ELC = $(AS_SOFT_REQUIRE_EL)c
+AS_REQUIRE_ELC 	    = $(AS_REQUIRE_EL)c
 
 # {{{ Determine compilation variables and parameters
 
@@ -516,7 +516,7 @@ INIT_COMMON_LIBDIRS = 		\
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
-$(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_SOFT_REQUIRE_ELC) $(AS_BINDINGS_ELC)
+$(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
 $(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
 $(AS_INIT_ELC): $(LOADDEFS)
 $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
