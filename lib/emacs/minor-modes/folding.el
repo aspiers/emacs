@@ -1692,7 +1692,7 @@ with XEmacs.")
   "Internal. A list of marker pairs representing folds entered so far.")
 
 
-(defvar folding-version  (substring "$Revision$" 11 15)
+(defvar folding-version  "2.107"
   "Version number of folding.el.")
 
 ;;}}}
