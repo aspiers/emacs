@@ -555,7 +555,7 @@ clean-org:
 		lispdir=$(PRE_INSTALL_DIR)
 	cp $(ORG_DIR)/contrib/lisp/*.el $(PRE_INSTALL_DIR)
 	@$(LOCK_INSTALL_DIRS)
-	$(MAKE) -C $(ORG_DIR) install-info \
+	-$(MAKE) -C $(ORG_DIR) install-info \
 		prefix=$(prefix) \
 		infodir=$(infodir)
 	touch $@
