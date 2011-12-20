@@ -516,11 +516,11 @@ consistent landing spot."
 
 ;;{{{ C-c [a-z][A-z]
 
-(fset 'as-find-personal-todo "\C-x\C-f~/roaming/TODO.org")
+(fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
 (global-set-key "\C-cjt"  'as-find-personal-todo)
-(fset 'as-find-personal-diary "\C-x\C-f~/roaming/diary.org")
+(fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
 (global-set-key "\C-cjd"  'as-find-personal-diary)
-;;(fset 'as-find-personal-note "\C-x\C-f~/roaming/notes/")
+;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
 
 (eval-when-compile (require 'ido))
 
@@ -551,7 +551,7 @@ consistent landing spot."
 (defun as-find-personal-note ()
   (interactive)
   (ido-file-internal ido-default-file-method
-                     nil "~/roaming/notes/" "Find note: "))
+                     nil "~/org/notes/" "Find note: "))
 (global-set-key "\C-cjn"  'as-find-personal-note)
 
 (fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
