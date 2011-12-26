@@ -110,8 +110,6 @@ default.")
 
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))
-;; This load is required, according to the info pages:
-(load custom-file)
 
 ;; (when (getenv "EMACS_PROFILE_INIT")
 ;;   (load "elp")
@@ -139,5 +137,8 @@ default.")
 
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
+
+;; This load is required, according to the info pages:
+(load custom-file)
 
 (as-progress "end of ~/.emacs")
