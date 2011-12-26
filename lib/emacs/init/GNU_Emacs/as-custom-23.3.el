@@ -340,7 +340,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
- '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil (yasnippet)))
+ '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")))
+)
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
