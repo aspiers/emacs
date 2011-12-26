@@ -32,10 +32,6 @@ DVC_DIR        = $(MAJOR_MODES)/dvc
 ORG_DIR        = $(MAJOR_MODES)/org-mode.git
 EPG_DIR        = $(MAJOR_MODES)/epg
 REMEMBER_DIR   = $(MAJOR_MODES)/remember
-EMACSRAILS_DIR = $(MAJOR_MODES)/emacs-rails
-ifeq (,$(wildcard $(EMACSRAILS_DIR)))
-	EMACSRAILS_DIR=
-endif
 YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
 	YASNIPPET_DIR=
@@ -94,8 +90,7 @@ el_search_paths = 			\
 	$(CUCUMBER_DIR) 		\
 	$(MINOR_MODES) 			\
 	$(UTILS) 			\
-	fun  				\
-	$(EMACSRAILS_DIR)
+	fun
 
 # }}}
 
@@ -140,7 +135,6 @@ IGNORE_FILES =		    		\
 	$(MAJOR_MODES)/sdf.el  		\
 	$(MAJOR_MODES)/mediawiki.el 	\
 	$(DVC_DIR)/lisp/contrib/ewoc.el \
-	$(EMACSRAILS_DIR)/behave-rails.el \
 	$(BEHAVE_DIR)/example.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
@@ -776,14 +770,4 @@ endif
 
 # }}}
 
-# {{{ emacs-rails
-
-# emacs-rails needs find-recursive and behave
-$(EMACSRAILS_DIR)/%.elc: LIBDIRS += $(EMACSRAILS_DIR) $(UTILS) $(BEHAVE_DIR)
-$(EMACSRAILS_DIR)/%.elc: COMPILER_PRE_OPTS += -l rails
-
-$(BEHAVE_DIR)/%.elc: LIBDIRS += $(BEHAVE_DIR)
-$(BEHAVE_DIR)/example.elc: $(BEHAVE_DIR)/behave.elc
-
-# }}}
 
