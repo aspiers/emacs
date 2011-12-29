@@ -530,6 +530,12 @@ consistent landing spot."
                      nil "~/.CVS/" "Find CVS repo: "))
 (global-set-key "\C-cjc"  'as-find-CVS-repo)
 
+(defun as-find-my-mrconfig ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/.config/mr/" "Find mr config: "))
+(global-set-key "\C-cjm"  'as-find-my-mrconfig)
+
 (defun as-find-my-git-repo ()
   (interactive)
   (ido-file-internal ido-default-file-method
