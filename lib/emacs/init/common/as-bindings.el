@@ -546,6 +546,7 @@ consistent landing spot."
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/.GIT/3rd-party/" "Find 3rd-party git repo: "))
+(global-set-key "\C-cj3"  'as-find-upstream-git-repo)
 (global-set-key "\C-cjG"  'as-find-upstream-git-repo)
 
 (defun as-find-stow-package ()
