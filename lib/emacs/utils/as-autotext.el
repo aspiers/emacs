@@ -193,7 +193,7 @@ line before and after the text."
     ;; straight away.
     (or prefix (goto-char p))))
 
-(defvar as-work-email-address "aspiers@novell.com"
+(defvar as-work-email-address "aspiers@suse.com"
   "Adam's work email address.")
 
 ;;;###autoload
