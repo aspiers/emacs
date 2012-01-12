@@ -561,7 +561,7 @@ consistent landing spot."
                      nil "~/org/notes/" "Find note: "))
 (global-set-key "\C-cjn"  'as-find-personal-note)
 
-(fset 'as-find-work-todo "\C-x\C-f~/ifolder/TODO.org")
+(fset 'as-find-work-todo "\C-x\C-f~/SUSE/TODO.org")
 (global-set-key "\C-cjT"  'as-find-work-todo)
 
 (defun as-find-from-home ()
