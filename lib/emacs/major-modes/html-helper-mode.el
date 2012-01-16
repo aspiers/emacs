@@ -117,7 +117,7 @@
 
 (defconst html-helper-mode-version 
   (progn
-    (let ((revs "$Revision$")
+    (let ((revs "3.0.4jolly")
 	  (lastchar 0)) 
       ; revs is a string of single byte characters
       (set 'lastchar (1- (string-width revs)))
