@@ -5,11 +5,11 @@ version=$( emacs --version | \
 
 cd
 [ -e .as-init.el ] || \
-  ln -s lib/emacs/init/common/as-init.el .as-init.el
+  ln -sf lib/emacs/init/common/as-init.el .as-init.el
 [ -e .as-bindings.el ] || \
-  ln -s lib/emacs/init/common/as-bindings.el .as-bindings.el
+  ln -sf lib/emacs/init/common/as-bindings.el .as-bindings.el
 [ -e .as-gtd.el ] || \
-  ln -s lib/emacs/utils/as-gtd.el .as-gtd.el
+  ln -sf lib/emacs/utils/as-gtd.el .as-gtd.el
 
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do
@@ -17,9 +17,9 @@ for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do
 done
 
 [ -e .msf-abbrevs ] || \
-  ln -s lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
+  ln -sf lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 [ -e lib/emacs/major-modes/muse ] || \
-  ln -s muse--main--1.0 lib/emacs/major-modes/muse
+  ln -sf muse--main--1.0 lib/emacs/major-modes/muse
 
 if which gconftool-2 >/dev/null 2>&1; then
   gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
