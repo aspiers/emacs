@@ -101,7 +101,7 @@
  '(cvs-reuse-cvs-buffer (quote subdir))
  '(cvs-use-fileinfo-caches t)
  '(delete-old-versions t)
- '(delete-selection-mode nil nil (delsel))
+ '(delete-selection-mode nil)
  '(diff-switches "-u")
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
@@ -240,7 +240,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 	<!--border: 1pt solid #ADB9CC;-->
   }
 </style>")
- '(org-export-with-sub-superscripts (quote {}))
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
  '(org-global-properties (quote (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0"))))
  '(org-goto-max-level 7)
@@ -306,6 +305,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
+ '(org-use-sub-superscripts (quote {}))
  '(org-yank-adjusted-subtrees t)
  '(outline-auto-activation t)
  '(planner-use-day-pages t)
@@ -340,8 +340,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
- '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")))
-)
+ '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
