@@ -1,0 +1,13 @@
+getopts () {
+    while [ -n "$1" ]; do
+        case "$1" in
+            -h|--help)
+                usage 0
+                ;;
+            *)
+                usage "Unrecognised option: $1"
+                ;;
+        esac        
+    done
+}
+
