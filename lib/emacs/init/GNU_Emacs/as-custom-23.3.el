@@ -316,7 +316,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(remember-mode-hook (quote (org-remember-apply-template)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
- '(ruby-deep-arglist nil)
+ '(ruby-deep-arglist t)
  '(ruby-deep-indent-paren t)
  '(safe-local-variable-values (quote ((org-drawers quote ("PROPERTIES" "HIDE")) (byte-compile-warnings redefine callargs free-vars unresolved obsolete noruntime) (auto-recompile))))
  '(save-abbrevs (quote silently))
