@@ -581,7 +581,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (defvar cssm-indent-function 'cssm-c-style-indenter
   "Which function to use when deciding which column to indent to. To get
 C-style indentation, use cssm-c-style-indenter.")
-(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.s?css\\'" . css-mode))
 
 ;;}}}
 
