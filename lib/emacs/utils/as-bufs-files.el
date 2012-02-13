@@ -218,27 +218,6 @@ Shamelessly ripped out of `make-backup-file-name-1' in `files.el'."
        backup-directory))))
 
 ;;}}}
-;;{{{ find-library-backport
-
-;; emacs 22 introduced find-library and find-library-name which do the same thing.
-;;;###autoload
-(defun find-library-backport (library)
-  "Find the elisp source of LIBRARY by searching through
-`find-function-source-path'."
-  (interactive "sFind library: ")
-  (if (string-match "\\.el\\(c\\(\\..*\\)?\\)\\'" library)
-      (setq library (replace-match "" t t library)))
-  (let ((file (locate-library (concat library ".el")
-                              'nosuffix
-                              find-function-source-path
-                              'echo-file)))
-    (or file (error (format "Could not locate library %s" library)))
-    (find-file file)))
-
-;;   (let ((buf (find-file-noselect (find-library-name-backport library))))
-;;     (condition-case nil (switch-to-buffer buf) (error (pop-to-buffer buf)))))
-
-;;}}}
 
 ;;{{{ bury-and-close-buffer
 

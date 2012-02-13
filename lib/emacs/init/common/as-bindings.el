@@ -473,10 +473,8 @@ consistent landing spot."
 (global-set-key [(control x) K]           'as-destroy-buffer)
 (global-set-key [(control x) (I)]         'insert-buffer)
 (global-set-key [(control x) (control y)] 'vim-yy)
-(global-set-key [(control x) (meta f)]
-                (if (functionp 'find-library)
-                    'find-library
-                  'find-library-backport))
+(global-set-key [(control x) (meta f)]    'find-library)
+
 (autoload 'find-file-at-point "ffap" nil t)
 (autoload 'ffap-other-window  "ffap" nil t)
 (autoload 'ffap-other-frame   "ffap" nil t)
