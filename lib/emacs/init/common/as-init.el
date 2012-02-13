@@ -150,6 +150,7 @@
   (server-start))
 
 (autoload 'edit-server-start "edit-server" "edit-server" t)
+(autoload 'edit-server-stop  "edit-server" "edit-server" t)
 (unless (as-quick-startup)
   (server-start)
   (condition-case err
