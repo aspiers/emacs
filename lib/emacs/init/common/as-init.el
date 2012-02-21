@@ -180,9 +180,11 @@
 ;;{{{ Color themes
 
 (require 'color-theme-autoloads nil 'noerror)
-(require 'pastels-on-dark-theme nil 'noerror)
-(if (as-check-feature-loaded 'pastels-on-dark-theme)
-    (color-theme-pastels-on-dark))
+(autoload 'color-theme-pastels-on-dark "color-theme-pastels-on-dark" "pastels-on-dark-theme" t)
+(when (as-check-feature-loaded 'color-theme)
+  (require 'pastels-on-dark-theme nil 'noerror)
+  (if (as-check-feature-loaded 'pastels-on-dark-theme)
+      (color-theme-pastels-on-dark)))
 
 ;;}}}
 
