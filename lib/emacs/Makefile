@@ -28,7 +28,6 @@ UTILS	    = utils
 # and are responsible for compiling *and* installing themselves.
 
 # These should be symlinked to the correct versions.
-DVC_DIR        = $(MAJOR_MODES)/dvc
 ORG_DIR        = $(MAJOR_MODES)/org-mode.git
 EPG_DIR        = $(MAJOR_MODES)/epg
 REMEMBER_DIR   = $(MAJOR_MODES)/remember
@@ -55,10 +54,6 @@ THIRD_PARTY_PKG_TARGETS = 		\
 THIRD_PARTY_PKG_DIRS =          \
 	$(MAJOR_MODES)/psgml
 
-ifneq (,$(wildcard $(DVC_DIR)))
-	THIRD_PARTY_PKG_TARGETS += .dvc-installed
-	THIRD_PARTY_PKG_DIRS    += $(DVC_DIR)
-endif
 ifneq (,$(wildcard $(ORG_DIR)))
 	THIRD_PARTY_PKG_TARGETS += .org-installed
 	THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
@@ -112,8 +107,7 @@ endif
 
 # This will prevent any resulting .elc files from being compiled
 # and consequently installed.
-NO_COMPILE_EL_PATTERNS = \
-	$(DVC_DIR)/lisp/contrib/ewoc.el
+NO_COMPILE_EL_PATTERNS = 
 
 ifneq (,$(YASNIPPET_DIR))
   NO_COMPILE_EL_PATTERNS += $(YASNIPPET_DIR)%
@@ -123,8 +117,7 @@ ifneq (,$(COLOR_THEME_DIR))
 endif
 
 # This will prevent matching .el files from being installed.
-NO_INSTALL_PATTERNS = \
-	$(DVC_DIR)/lisp/contrib/ewoc.el
+NO_INSTALL_PATTERNS =
 
 # Pretend these don't exist at all.
 IGNORE_PATHS = 					\
@@ -137,7 +130,6 @@ IGNORE_FILES =		    		\
 	loaddefs.el			\
 	$(MAJOR_MODES)/sdf.el  		\
 	$(MAJOR_MODES)/mediawiki.el 	\
-	$(DVC_DIR)/lisp/contrib/ewoc.el \
 	$(BEHAVE_DIR)/example.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
@@ -180,9 +172,6 @@ TO_CLEAN = psgml nxml emacs-w3m pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
-endif
-ifneq (,$(wildcard $(DVC_DIR)))
-  TO_CLEAN += dvc
 endif
 ifneq (,$(wildcard $(EPG_DIR)))
   TO_CLEAN += epg
@@ -660,57 +649,6 @@ clean-pgg:
 $(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
 .pgg-made: $(MAJOR_MODES)/pgg/pgg.elc
 	@-cp $(MAJOR_MODES)/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
-
-# }}}
-# {{{ dvc-mode
-
-$(UTILS)/tree-widget-2.0/%.elc: LIBDIRS += $(UTILS)/tree-widget-2.0
-
-ifeq (,$(wildcard $(DVC_DIR)))
-clean-dvc:
-	@echo "Won't clean non-existent $(DVC_DIR)"
-.dvc-configured .dvc-made .dvc-installed:
-	@echo "Won't install from non-existent $(DVC_DIR)"
-else
-dvc_build_dir=$(DVC_DIR)/++build
-dvc: .dvc-installed
-clean-dvc:
-	rm -f .dvc-configured .dvc-installed
-	$(MAKE) -C $(DVC_DIR) clean
-.dvc-configured: $(DVC_DIR)/configure
-	@-( 								\
-	  if which baz >/dev/null 2>&1; then 				\
-	    with_arch=--with-arch=baz; 					\
-	    echo "Found baz; using that in preference to tla";		\
-	  else								\
-	    with_arch= ; 	 					\
-	  fi; 								\
-	  [ -d $(dvc_build_dir) ] || mkdir $(dvc_build_dir);		\
-	  cd $(dvc_build_dir) &&	 				\
-	  ../configure 							\
-	    --prefix=$(prefix)	 					\
-	    --with-other-dirs=$(HOME)/lib/emacs/$(UTILS)/tree-widget-2.0 	\
-	    $$with_arch							\
-	) && 								\
-	touch $@
-
-$(DVC_DIR)/configure: $(DVC_DIR)/configure.ac
-	-cd $(DVC_DIR) && autoconf
-
-.dvc-made: $(wildcard $(DVC_DIR)/*.el) $(wildcard $(DVC_DIR)/*/*.el) .dvc-configured
-	$(MAKE) -C $(DVC_DIR)/++build
-	touch $@
-
-.dvc-installed: .dvc-made
-	@$(UNLOCK_INSTALL_DIRS)
-	@-( 								\
-	  cd $(DVC_DIR)/++build && 				\
-	  $(MAKE) install &&						\
-	  install-info --info-dir=$(infodir) $(infodir)/dvc.info	\
-	) &&								\
-	$(LOCK_INSTALL_DIRS) &&					\
-	touch $@
-endif
 
 # }}}
 # {{{ epg-mode
