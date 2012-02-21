@@ -758,12 +758,6 @@ other people."
 (setq Man-notify-method 'pushy)
 
 ;;}}}
-;;{{{ SDF
-
-(add-to-list 'auto-mode-alist '("\\.sdf\\'" . sdf-mode))
-(autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
-
-;;}}}
 ;;{{{ lilypond
 
 ;; included in site-start.d now
