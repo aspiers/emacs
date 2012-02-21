@@ -115,13 +115,7 @@
 
 ;;{{{ Code:
 
-(defconst html-helper-mode-version 
-  (progn
-    (let ((revs "$Revision$")
-	  (lastchar 0)) 
-      ; revs is a string of single byte characters
-      (set 'lastchar (1- (string-width revs)))
-      (substring revs 11 lastchar))))
+(defconst html-helper-mode-version "3.0.4jolly")
 
 ;;{{{ user variables
 
@@ -1482,7 +1476,7 @@ Uses :`visual-basic-mode'  for ASP e VBSCript
       `cc-mode'  for javascript support
       `tempo'    for templates
 Supports server (actually ASP & PHP, JSP) and client
-(JavaScript, VBScript) scripting
+\(JavaScript, VBScript) scripting
 
 Customizable flags you would like to alter
 
@@ -1538,7 +1532,7 @@ Uses :`visual-basic-mode'  for ASP e VBSCript
       `cc-mode'  for javascript support
       `tempo'    for templates
 Supports server (actually ASP & PHP, JSP) and client
-(JavaScript, VBScript) scripting
+\(JavaScript, VBScript) scripting
 
 Customizable flags you would like to alter
 
@@ -1584,7 +1578,7 @@ Uses :`visual-basic-mode' (optional - see below ) for ASP and VBScript
       `tempo'    for templates
 
 Supports server (actually ASP & PHP, JSP) and client
-(JavaScript, VBScript) scripting
+\(JavaScript, VBScript) scripting
 
 Customizable flags you would like to alter
 

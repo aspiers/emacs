@@ -110,7 +110,6 @@
 ;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
 ;;               (list
 ;;                "fun"
-;;                "major-modes/monkey-2"
 ;; [snipped]
 ;;                "utils"
 ;;                )))))
@@ -150,6 +149,7 @@
   (server-start))
 
 (autoload 'edit-server-start "edit-server" "edit-server" t)
+(autoload 'edit-server-stop  "edit-server" "edit-server" t)
 (unless (as-quick-startup)
   (server-start)
   (condition-case err
@@ -180,9 +180,11 @@
 ;;{{{ Color themes
 
 (require 'color-theme-autoloads nil 'noerror)
-(require 'pastels-on-dark-theme nil 'noerror)
-(if (as-check-feature-loaded 'pastels-on-dark-theme)
-    (color-theme-pastels-on-dark))
+(autoload 'color-theme-pastels-on-dark "color-theme-pastels-on-dark" "pastels-on-dark-theme" t)
+(when (as-check-feature-loaded 'color-theme)
+  (require 'pastels-on-dark-theme nil 'noerror)
+  (if (as-check-feature-loaded 'pastels-on-dark-theme)
+      (color-theme-pastels-on-dark)))
 
 ;;}}}
 
@@ -575,15 +577,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
-;;{{{ CSS
-
-(autoload 'css-mode "css-mode" "mode for editing CSS files" t)
-(defvar cssm-indent-function 'cssm-c-style-indenter
-  "Which function to use when deciding which column to indent to. To get
-C-style indentation, use cssm-c-style-indenter.")
-(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
-
-;;}}}
 
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
@@ -603,16 +596,6 @@ C-style indentation, use cssm-c-style-indenter.")
 
 (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
 (autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
-
-;;}}}
-;;{{{ sawfish
-
-(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
-;;(add-hook 'sawfish-mode-hook
-;;          (lambda () (turn-on-font-lock)))
-;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
-(add-to-list 'auto-mode-alist
-             '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
 
 ;;}}}
 ;;{{{ Apache
@@ -704,9 +687,9 @@ other people."
 ;;}}}
 ;;{{{ ReStructuredText mode
 
-(autoload 'rst-mode "rst")
-(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
-(autoload 'rst-text-mode-bindings "rst")
+;; (autoload 'rst-mode "rst")
+;; (add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
+;; (autoload 'rst-text-mode-bindings "rst")
 
 ;; This stomps over everything :-(
 ;;(add-hook 'text-mode-hook 'rst-text-mode-bindings)
@@ -748,14 +731,6 @@ other people."
 
 ;;}}}
 
-;;{{{ gnus
-
-(defvar gnus-face-1 'gnus-cite-face-1)
-(defvar gnus-face-2 'italic)
-(defvar gnus-face-3 'gnus-cite-face-4)
-(defvar gnus-sum-thread-tree-root "")
-
-;;}}}
 ;;{{{ TeX
 
 ;;{{{ Set up tex-dvi-view (C-c C-v)
@@ -775,12 +750,6 @@ other people."
 (eval-when-compile
   (defvar Man-notify-method))
 (setq Man-notify-method 'pushy)
-
-;;}}}
-;;{{{ SDF
-
-(add-to-list 'auto-mode-alist '("\\.sdf\\'" . sdf-mode))
-(autoload 'sdf-mode "sdf-mode" "Mode for editing SDF files" t)
 
 ;;}}}
 ;;{{{ lilypond
@@ -1056,36 +1025,6 @@ then invoking this function four times would yield:
 (fset 'as-next-svn-buffer "\C-xb*svn-status*")
 (global-set-key "\C-csb"   'as-next-svn-buffer)
 ;; (require 'psvn)
-
-;;}}}
-;;{{{ xtla
-
-;; Used to build xtla with:
-;;
-;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
-;; make
-;; make install
-;; emk
-
-;; now integrated into lib/emacs/Makefile
-
-;;(load "xtla-load" 'noerror)
-
-;;}}}
-;;{{{ dvc
-
-(autoload 'dvc-browse "dvc" nil t)
-(autoload 'dvc        "dvc" nil t)
-(cond ((as-quick-startup))
-      (t
-       ;; This appends a shitload of very costly stuff to `find-file-hook'.
-       ;; Just about OK after startup, but not during fast startup.
-       (require 'dvc-autoloads nil t)))
-
-;;(load "dvc-load" 'noerror)
-
-(global-set-key "\C-xTA"    'dvc-browse)
-(global-set-key "\C-xT\C-m" 'dvc)
 
 ;;}}}
 
