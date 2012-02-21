@@ -676,11 +676,6 @@ clean-epg:
 endif
 
 # }}}
-# {{{ dired+
-
-$(MAJOR_MODES)/dired+.elc: LIBDIRS += $(MAJOR_MODES)
-
-# }}}
 # {{{ color-theme
 
 .PHONY: color-theme
