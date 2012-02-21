@@ -35,7 +35,6 @@ YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
 	YASNIPPET_DIR=
 endif
-BEHAVE_DIR     = $(UTILS)/behave.git
 COLOR_THEME_DIR = color-theme
 
 # Pros of symlinking foo -> foo-1.2.3 approach:
@@ -129,8 +128,7 @@ IGNORE_PATHS = 					\
 IGNORE_FILES =		    		\
 	loaddefs.el			\
 	$(MAJOR_MODES)/sdf.el  		\
-	$(MAJOR_MODES)/mediawiki.el 	\
-	$(BEHAVE_DIR)/example.el
+	$(MAJOR_MODES)/mediawiki.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
   IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el
