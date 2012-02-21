@@ -685,9 +685,9 @@ other people."
 ;;}}}
 ;;{{{ ReStructuredText mode
 
-(autoload 'rst-mode "rst")
-(add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
-(autoload 'rst-text-mode-bindings "rst")
+;; (autoload 'rst-mode "rst")
+;; (add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
+;; (autoload 'rst-text-mode-bindings "rst")
 
 ;; This stomps over everything :-(
 ;;(add-hook 'text-mode-hook 'rst-text-mode-bindings)
