@@ -731,14 +731,6 @@ other people."
 
 ;;}}}
 
-;;{{{ gnus
-
-(defvar gnus-face-1 'gnus-cite-face-1)
-(defvar gnus-face-2 'italic)
-(defvar gnus-face-3 'gnus-cite-face-4)
-(defvar gnus-sum-thread-tree-root "")
-
-;;}}}
 ;;{{{ TeX
 
 ;;{{{ Set up tex-dvi-view (C-c C-v)
