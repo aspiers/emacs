@@ -78,7 +78,6 @@ el_search_paths = 			\
 	init/common 			\
 	$(wildcard $(MAJOR_MODES)/*.el) \
 	$(MAJOR_MODES)/mmm 		\
-	$(MAJOR_MODES)/pcl-cvs 		\
 	$(MAJOR_MODES)/pgg 		\
 	$(ORG_DIR)/contrib/lisp		\
 	$(CUCUMBER_DIR) 		\
