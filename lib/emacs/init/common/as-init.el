@@ -605,16 +605,6 @@ C-style indentation, use cssm-c-style-indenter.")
 (autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
 
 ;;}}}
-;;{{{ sawfish
-
-(autoload 'sawfish-mode "sawfish" "Mode for editing sawfish rep (lisp) files" t)
-;;(add-hook 'sawfish-mode-hook
-;;          (lambda () (turn-on-font-lock)))
-;;(add-hook 'sawfish-mode-hook 'as-font-lock-mode-if-window-system)
-(add-to-list 'auto-mode-alist
-             '(".saw\\(mill\\|fish\\)rc\\'\\|\\.jl\\'" . sawfish-mode))
-
-;;}}}
 ;;{{{ Apache
 
 (autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
