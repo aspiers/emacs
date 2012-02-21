@@ -118,6 +118,9 @@ NO_COMPILE_EL_PATTERNS = \
 ifneq (,$(YASNIPPET_DIR))
   NO_COMPILE_EL_PATTERNS += $(YASNIPPET_DIR)%
 endif
+ifneq (,$(COLOR_THEME_DIR))
+  NO_COMPILE_EL_PATTERNS += fun/pastels-on-dark-theme.el
+endif
 
 # This will prevent matching .el files from being installed.
 NO_INSTALL_PATTERNS = \
