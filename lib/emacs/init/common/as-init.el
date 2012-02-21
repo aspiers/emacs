@@ -1039,36 +1039,6 @@ then invoking this function four times would yield:
 ;; (require 'psvn)
 
 ;;}}}
-;;{{{ xtla
-
-;; Used to build xtla with:
-;;
-;; ./configure --with-lispdir=~/lib/emacs/major-modes/xtla --infodir=~/local/info --with-other-dirs=~/lib/emacs/utils/tree-widget-2.0
-;; make
-;; make install
-;; emk
-
-;; now integrated into lib/emacs/Makefile
-
-;;(load "xtla-load" 'noerror)
-
-;;}}}
-;;{{{ dvc
-
-(autoload 'dvc-browse "dvc" nil t)
-(autoload 'dvc        "dvc" nil t)
-(cond ((as-quick-startup))
-      (t
-       ;; This appends a shitload of very costly stuff to `find-file-hook'.
-       ;; Just about OK after startup, but not during fast startup.
-       (require 'dvc-autoloads nil t)))
-
-;;(load "dvc-load" 'noerror)
-
-(global-set-key "\C-xTA"    'dvc-browse)
-(global-set-key "\C-xT\C-m" 'dvc)
-
-;;}}}
 
 ;;}}}
 ;;{{{ Miscellaneous
