@@ -553,6 +553,7 @@ $(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
 # }}}
 # {{{ remember-mode
 
+ifneq (,$(wildcard $(REMEMBER_DIR)))
 #$(MAJOR_MODES)/remember/%.elc: $(MAJOR_MODES)/remember/%.el
 #$(MAJOR_MODES)/remember/%.elc: LIBDIRS += $(MAJOR_MODES)/remember
 
@@ -590,6 +591,7 @@ clean-remember:
 	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir)
 	@$(LOCK_INSTALL_DIRS)
 	touch $@
+endif
 
 # }}}
 # {{{ psgml-mode
