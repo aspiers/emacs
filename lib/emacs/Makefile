@@ -553,7 +553,12 @@ $(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
 # }}}
 # {{{ remember-mode
 
-ifneq (,$(wildcard $(REMEMBER_DIR)))
+ifeq (,$(wildcard $(REMEMBER_DIR)))
+clean-remember:
+	@echo "Won't clean non-existent $(REMEMBER_DIR)"
+.remember-installed:
+	@echo "Won't install from non-existent $(REMEMBER_DIR)"
+else
 #$(MAJOR_MODES)/remember/%.elc: $(MAJOR_MODES)/remember/%.el
 #$(MAJOR_MODES)/remember/%.elc: LIBDIRS += $(MAJOR_MODES)/remember
 
