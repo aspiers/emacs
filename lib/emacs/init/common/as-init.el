@@ -575,15 +575,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
-;;{{{ CSS
-
-(autoload 'css-mode "css-mode" "mode for editing CSS files" t)
-(defvar cssm-indent-function 'cssm-c-style-indenter
-  "Which function to use when deciding which column to indent to. To get
-C-style indentation, use cssm-c-style-indenter.")
-(add-to-list 'auto-mode-alist '("\\.s?css\\'" . css-mode))
-
-;;}}}
 
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
