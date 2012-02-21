@@ -110,7 +110,6 @@
 ;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
 ;;               (list
 ;;                "fun"
-;;                "major-modes/monkey-2"
 ;; [snipped]
 ;;                "utils"
 ;;                )))))

@@ -123,8 +123,7 @@ IGNORE_PATHS = 					\
 	$(MINOR_MODES)/msf-abbrev/mode-abbrevs 	\
 	$(YASNIPPET_DIR)-*		\
 	$(YASNIPPET_DIR)/snippets		\
-	$(YASNIPPET_DIR)/extras  		\
-	$(MAJOR_MODES)/monkey-2
+	$(YASNIPPET_DIR)/extras
 IGNORE_FILES =		    		\
 	loaddefs.el			\
 	$(MAJOR_MODES)/sdf.el  		\
