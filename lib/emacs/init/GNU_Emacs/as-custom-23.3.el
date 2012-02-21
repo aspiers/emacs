@@ -1,12 +1,12 @@
 ;; If you're using color-theme.el, this background should match the
 ;; background of your chosen theme
-(setq as-default-background
+;; (setq as-default-background
 ;;    "seashell1"
 ;;    "wheat"
 ;;    "blanched almond"
-      "antique white"
+;;    "antique white"
 ;;    "gray90"
-      )
+;;    )
 
 ;; (setq frame-background-mode
 ;;       (cond ((and (= emacs-major-version 21) window-system) 'light)
@@ -346,7 +346,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
  '(custom-button ((t (:background "lightgrey" :foreground "gray20" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
