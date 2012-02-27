@@ -18,8 +18,6 @@ done
 
 [ -e .msf-abbrevs ] || \
   ln -sf lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
-[ -e lib/emacs/major-modes/muse ] || \
-  ln -sf muse--main--1.0 lib/emacs/major-modes/muse
 
 if which gconftool-2 >/dev/null 2>&1; then
   gconftool-2 -s /desktop/gnome/url-handlers/annotation/command \
