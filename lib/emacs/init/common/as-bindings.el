@@ -599,6 +599,7 @@ consistent landing spot."
 (global-set-key "\C-ciL" 'as-insert-log-datestamp)
 (global-set-key "\C-ciN" 'as-insert-name-and-email)
 (global-set-key "\C-cin" 'as-insert-name)
+(global-set-key "\C-cir" 'as-insert-rpm-changelog-datestamp)
 (global-set-key "\C-cis" 'as-insert-scissors)
 (global-set-key "\C-ciS" 'as-snip-region)
 (global-set-key "\C-cit" 'as-insert-time)
