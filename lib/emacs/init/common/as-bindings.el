@@ -509,6 +509,9 @@ consistent landing spot."
 
 (global-set-key [(control c)(control x)(control j)] 'org-clock-goto)
 
+(global-set-key [(control c)(meta q)]      'fill-common-prefix-region)
+
+
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
