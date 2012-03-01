@@ -509,7 +509,10 @@ consistent landing spot."
 
 (global-set-key [(control c)(control x)(control j)] 'org-clock-goto)
 
-(global-set-key [(control c)(meta q)]      'fill-common-prefix-region)
+;; This one might get overridden by per-mode bindings:
+(global-set-key [(control meta q)]        'fill-common-prefix-region)
+;; but this one won't, so serves as a backup:
+(global-set-key [(control c)(meta q)]     'fill-common-prefix-region)
 
 
 ;;}}}
