@@ -181,10 +181,13 @@
 
 (require 'color-theme-autoloads nil 'noerror)
 (autoload 'color-theme-pastels-on-dark "color-theme-pastels-on-dark" "pastels-on-dark-theme" t)
-(when (as-check-feature-loaded 'color-theme)
-  (require 'pastels-on-dark-theme nil 'noerror)
-  (if (as-check-feature-loaded 'pastels-on-dark-theme)
-      (color-theme-pastels-on-dark)))
+(if (as-check-feature-loaded 'color-theme-autoloads)
+    (progn
+      (require 'pastels-on-dark-theme nil 'noerror)
+      (if (as-check-feature-loaded 'pastels-on-dark-theme)
+          (color-theme-pastels-on-dark)
+        (message "Couldn't load pastels-on-dark-theme")))
+  (message "Couldn't load color-theme"))
 
 ;;}}}
 
