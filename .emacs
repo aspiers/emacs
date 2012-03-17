@@ -141,4 +141,14 @@ default.")
 ;; This load is required, according to the info pages:
 (load custom-file)
 
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/")))
+
 (as-progress "end of ~/.emacs")
