@@ -93,7 +93,7 @@ Otherwise, the function must return a position from where the
 search should be continued."
   `(lambda ()
      (let ((cat (org-get-category)))
-       (message "Is '%s' '%s' ?" cat ,category-to-select)
+       ;;(message "Is '%s' '%s' ?" cat ,category-to-select)
        (if (equal cat ,category-to-select)
            nil ;; don't skip
          ;; the invisible-ok param below is crucial to avoid infinite loops
