@@ -224,6 +224,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 </style>")
  '(org-from-is-user-regexp "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@novell\\.com\\)\\>")
  '(org-global-properties (quote (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0"))))
+ '(org-goto-interface (quote outline))
  '(org-goto-max-level 7)
  '(org-hide-leading-stars t)
  '(org-icalendar-store-UID t)
