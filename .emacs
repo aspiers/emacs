@@ -87,6 +87,7 @@ default.")
     (and (file-directory-p path)
          (add-to-list 'find-function-source-path path))))
 
+(add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path as-version-pre-lib-dir)
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
 (add-to-list 'load-path as-version-post-lib-dir 'append-at-end)
