@@ -101,6 +101,10 @@ default.")
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
 
+(require 'as-progress)
+
+(as-progress "load-path set up")
+
 (cond 
  ((boundp 'running-xemacs)
   ;; XEmacs automatically saved settings go here:
@@ -114,8 +118,12 @@ default.")
 ;; (when (getenv "EMACS_PROFILE_INIT")
 ;;   (load "elp")
 ;;   (elp-instrument-package "blah")
-       
+
+(as-progress "loading as-init ...")
+
 (load (concat as-version-post-lib-dir "/as-init"))
+
+(as-progress "loaded as-init")
 
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
@@ -131,15 +139,21 @@ default.")
          file))
      lines)))
 
+(as-progress "running .emacs-hooks.d ...")
+
 (mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
         ;; .emacs.d already taken
         (as-find-hooks ".emacs-hooks.d"))
 
+(as-progress "ran .emacs-hooks.d")
+
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
 
+(as-progress (format "loading %s ..." custom-file))
 ;; This load is required, according to the info pages:
 (load custom-file)
+(as-progress (format "loaded %s" custom-file))
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
