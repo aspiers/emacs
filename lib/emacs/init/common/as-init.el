@@ -1358,6 +1358,14 @@ then invoking this function four times would yield:
   (yas/minor-mode (or prefix 1)))
 
 ;;}}}
+;;{{{ auto-complete-mode
+
+(require 'auto-complete-config nil t)
+(when (as-check-feature-loaded 'auto-complete-config)
+  (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
+  (ac-config-default))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Dual major/minor modes
