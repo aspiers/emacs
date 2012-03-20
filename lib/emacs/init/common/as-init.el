@@ -355,6 +355,14 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;; (global-set-key (kbd "C-c C-r")   'rcov-buffer)
 (autoload 'autotest "autotest" "autotest" t)
 
+;;{{{ rsense
+
+(setq rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
+(add-to-list 'load-path (concat rsense-home "/etc"))
+;;(require 'rsense nil t)
+
+;;}}}
+
 ;;}}}
 ;;{{{ Shell-script
 
