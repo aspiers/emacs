@@ -177,7 +177,345 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
- '(org-agenda-custom-commands (quote (("e" "eventbook TODOs" alltodo "" ((org-agenda-files (quote ("~/eventbook/design.org"))))) ("d" "daily review" ((tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #A TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]" (quote scheduled)))))) (tags-todo "officehrs" ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#[AB]\\]" (quote scheduled)))))) (agenda "" ((org-agenda-ndays 3))) (tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t) (org-agenda-skip-function (lambda nil (and nil (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))))) ("pd" "personal daily review" ((tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #A TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]" (quote scheduled)))))) (tags-todo "officehrs+CATEGORY=\"personal\"" ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#[AB]\\]" (quote scheduled)))))) (agenda "" ((org-agenda-ndays 3) (org-agenda-skip-function (as-org-agenda-skip-select-category-function "personal")))) (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t) (org-agenda-skip-function (lambda nil (and nil (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))) (org-agenda-prefix-format " %?-12t% s"))) ("wd" "SUSE daily review" ((tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #A TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]" (quote scheduled)))))) (tags-todo "officehrs+CATEGORY=\"SUSE\"" ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#[AB]\\]" (quote scheduled)))))) (agenda "" ((org-agenda-ndays 3) (org-agenda-skip-function (as-org-agenda-skip-select-category-function "SUSE")))) (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t) (org-agenda-skip-function (lambda nil (and nil (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))) (org-agenda-prefix-format " %?-12t% s"))) ("7" "weekly review" ((todo "CHASE" ((org-agenda-overriding-header "Items to CHASE"))) (todo "WAITING" ((org-agenda-overriding-header "Items still WAITING on somebody"))) (stuck "" nil) (tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled)))))) (tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #C TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t)) nil) ("p7" "personal weekly review" ((tags-todo "+CATEGORY=\"personal\"/CHASE" ((org-agenda-overriding-header "Items to CHASE"))) (tags-todo "+CATEGORY=\"personal\"/WAITING" ((org-agenda-overriding-header "Items still WAITING on somebody"))) (stuck "" ((org-agenda-overriding-header "Stuck personal projects:") (org-stuck-projects (quote ("+CATEGORY=\"personal\"/PROJECT" ("TODO" "NEXT" "NEXTACTION" "STARTED") nil ""))))) (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled)))))) (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #C TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t) (org-agenda-skip-function (as-org-agenda-skip-select-category-function "personal")) (org-agenda-prefix-format " %?-12t% s")) nil) ("w7" "SUSE weekly review" ((tags-todo "+CATEGORY=\"SUSE\"/CHASE" ((org-agenda-overriding-header "Items to CHASE"))) (tags-todo "+CATEGORY=\"SUSE\"/WAITING" ((org-agenda-overriding-header "Items still WAITING on somebody"))) (stuck "" ((org-agenda-overriding-header "Stuck work projects") (org-stuck-projects (quote ("+CATEGORY=\"SUSE\"/PROJECT" ("TODO" "NEXT" "NEXTACTION" "STARTED") nil ""))))) (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]" (quote scheduled)))))) (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED" ((org-agenda-overriding-header "Unscheduled #C TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]" (quote scheduled))))))) ((org-agenda-compact-blocks t) (org-agenda-prefix-format " %?-12t% s")) nil) ("w" . "work TODOs") ("p" . "personal TODOs") ("@" . "TODOs by context") ("t" . "TODOs by time constraint") ("s" . "TODOs by ETC") ("#" . "TODOs by priority") ("P" "stuck projects" stuck "" nil) ("# " "missing priorities" tags-todo "/-PROJECT-SOMEDAY-MAYBE" ((org-agenda-overriding-header "TODOs missing priorities") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote regexp) "\\=.*\\[#[A-Z]\\]"))))) ("s " "missing time estimates" tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "TODOs missing time estimate") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote regexp) ":sub"))))) ("@ " "missing contexts" tags-todo "/NEXT|STARTED" ((org-agenda-overriding-header "TODOs missing context") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote regexp) ":@[a-zA-Z]"))))) ("#a" "priority #A tasks" tags "" ((org-agenda-overriding-header "priority #A TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#A" "priority #A NEXT actions" tags "/PROJECT|NEXT|STARTED" ((org-agenda-overriding-header "priority #A TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("#b" "priority #B tasks" tags "" ((org-agenda-overriding-header "priority #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#B" "priority #B NEXT actions" tags "/PROJECT|NEXT" ((org-agenda-overriding-header "priority #B TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#B\\]"))))) ("#c" "priority #C tasks" tags "" ((org-agenda-overriding-header "priority #C TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("#C" "priority #C NEXT actions" tags "/PROJECT|NEXT|STARTED" ((org-agenda-overriding-header "priority #C TODOs") (org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#C\\]"))))) ("s1" "" tags "sub10" nil) ("s2" "" tags "sub120" nil) ("s3" "" tags "sub30" nil) ("s4" "" tags "sub4" nil) ("s6" "" tags "sub60" nil) ("sd" "" tags "subday" nil) ("tO" "within office hours" tags-todo "officehrs" nil) ("tS" "Saturday" tags-todo "Saturday" nil) ("@h" "at home" tags-todo "@home|@internet|@offline|@phone" ((org-agenda-overriding-header "at home"))) ("@B" "in Bracknell office" tags-todo "@Bracknell" nil) ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil) ("@L" "in London" tags-todo "@London" nil) ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline" ((org-agenda-overriding-header "elsewhere"))) ("@i" "internet (online)" tags-todo "@internet" nil) ("@0" "offline (but at a computer)" tags-todo "@offline" nil) ("@p" "can make phone calls" tags-todo "@phone" nil) ("@." "current context" (lambda (a) (error "Not implemented yet")) "" nil) ("-" "easy" tags-todo "easy" nil) ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\"" ((org-agenda-prefix-format ""))) ("pa" "personal admin" tags-todo "+admin+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("po" "personal organisation" tags-todo "+admin+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pc" "personal computer" tags-todo "+computer+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pF" "personal F/OSS" tags-todo "+FOSS+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("p$" "personal finance" tags-todo "+finance+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pH" "personal homeimprovement" tags-todo "+homeimprovement+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pf" "personal fun" tags-todo "+fun+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pm" "personal music" tags-todo "+music+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pR" "personal OWRA" tags-todo "+OWRA" ((org-agenda-prefix-format ""))) ("ps" "personal social" tags-todo "+social+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pt" "personal training" tags-todo "+training+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("pw" "personal welfare" tags-todo "+welfare+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\"" ((org-agenda-prefix-format ""))) ("wa" "SUSE admin" tags-todo "+admin+CATEGORY=\"SUSE\"" ((org-agenda-prefix-format ""))) ("wo" "SUSE org" tags-todo "+org+CATEGORY=\"SUSE\"" ((org-agenda-prefix-format ""))) ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\"" ((org-agenda-prefix-format ""))) ("wl" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\"" ((org-agenda-prefix-format ""))) ("c" "CHASE" todo "CHASE" nil) ("W" "WAITING" todo "WAITING" nil) ("A" "admin" tags-todo "admin" nil) ("z" "personal agenda" agenda "CATEGORY=\"personal\"" nil) ("o" "org" tags-todo "org" nil))))
+ '(org-agenda-custom-commands
+   (quote
+    (("e" "eventbook TODOs" alltodo ""
+      ((org-agenda-files
+        (quote
+         ("~/eventbook/design.org")))))
+     ("d" "daily review"
+      ((tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #A TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#A\\]"
+                       (quote scheduled))))))
+       (tags-todo "officehrs"
+                  ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#[AB]\\]"
+                       (quote scheduled))))))
+       (agenda ""
+               ((org-agenda-ndays 3)))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-skip-function
+        (lambda nil
+          (and nil
+               (org-agenda-skip-entry-if
+                (quote deadline)
+                (quote scheduled)))))))
+     ("pd" "personal daily review"
+      ((tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #A TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#A\\]"
+                       (quote scheduled))))))
+       (tags-todo "officehrs+CATEGORY=\"personal\""
+                  ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#[AB]\\]"
+                       (quote scheduled))))))
+       (agenda ""
+               ((org-agenda-ndays 3)
+                (org-agenda-skip-function
+                 (as-org-agenda-skip-select-category-function "personal"))))
+       (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-skip-function
+        (lambda nil
+          (and nil
+               (org-agenda-skip-entry-if
+                (quote deadline)
+                (quote scheduled)))))
+       (org-agenda-prefix-format " %?-12t% s")))
+     ("wd" "SUSE daily review"
+      ((tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #A TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#A\\]"
+                       (quote scheduled))))))
+       (tags-todo "officehrs+CATEGORY=\"SUSE\""
+                  ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#[AB]\\]"
+                       (quote scheduled))))))
+       (agenda ""
+               ((org-agenda-ndays 3)
+                (org-agenda-skip-function
+                 (as-org-agenda-skip-select-category-function "SUSE"))))
+       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-skip-function
+        (lambda nil
+          (and nil
+               (org-agenda-skip-entry-if
+                (quote deadline)
+                (quote scheduled)))))
+       (org-agenda-prefix-format " %?-12t% s")))
+     ("7" "weekly review"
+      ((todo "CHASE"
+             ((org-agenda-overriding-header "Items to CHASE")))
+       (todo "WAITING"
+             ((org-agenda-overriding-header "Items still WAITING on somebody")))
+       (stuck "" nil)
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled))))))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #C TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#C\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t))
+      nil)
+     ("p7" "personal weekly review"
+      ((tags-todo "+CATEGORY=\"personal\"/CHASE"
+                  ((org-agenda-overriding-header "Items to CHASE")))
+       (tags-todo "+CATEGORY=\"personal\"/WAITING"
+                  ((org-agenda-overriding-header "Items still WAITING on somebody")))
+       (stuck ""
+              ((org-agenda-overriding-header "Stuck personal projects:")
+               (org-stuck-projects
+                (quote
+                 ("+CATEGORY=\"personal\"/PROJECT"
+                  ("TODO" "NEXT" "NEXTACTION" "STARTED")
+                  nil "")))))
+       (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled))))))
+       (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #C TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#C\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-skip-function
+        (as-org-agenda-skip-select-category-function "personal"))
+       (org-agenda-prefix-format " %?-12t% s"))
+      nil)
+     ("w7" "SUSE weekly review"
+      ((tags-todo "+CATEGORY=\"SUSE\"/CHASE"
+                  ((org-agenda-overriding-header "Items to CHASE")))
+       (tags-todo "+CATEGORY=\"SUSE\"/WAITING"
+                  ((org-agenda-overriding-header "Items still WAITING on somebody")))
+       (stuck ""
+              ((org-agenda-overriding-header "Stuck work projects")
+               (org-stuck-projects
+                (quote
+                 ("+CATEGORY=\"SUSE\"/PROJECT"
+                  ("TODO" "NEXT" "NEXTACTION" "STARTED")
+                  nil "")))))
+       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled))))))
+       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #C TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#C\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-prefix-format " %?-12t% s"))
+      nil)
+     ("w" . "work TODOs")
+     ("p" . "personal TODOs")
+     ("@" . "TODOs by context")
+     ("t" . "TODOs by time constraint")
+     ("s" . "TODOs by ETC")
+     ("#" . "TODOs by priority")
+     ("P" "stuck projects" stuck "" nil)
+     ("# " "missing priorities" tags-todo "/-PROJECT-SOMEDAY-MAYBE"
+      ((org-agenda-overriding-header "TODOs missing priorities")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote regexp)
+           "\\=.*\\[#[A-Z]\\]")))))
+     ("s " "missing time estimates" tags-todo "/NEXT|STARTED"
+      ((org-agenda-overriding-header "TODOs missing time estimate")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote regexp)
+           ":sub")))))
+     ("@ " "missing contexts" tags-todo "/NEXT|STARTED"
+      ((org-agenda-overriding-header "TODOs missing context")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote regexp)
+           ":@[a-zA-Z]")))))
+     ("#a" "priority #A tasks" tags ""
+      ((org-agenda-overriding-header "priority #A TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#A\\]")))))
+     ("#A" "priority #A NEXT actions" tags "/PROJECT|NEXT|STARTED"
+      ((org-agenda-overriding-header "priority #A TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#A\\]")))))
+     ("#b" "priority #B tasks" tags ""
+      ((org-agenda-overriding-header "priority #B TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#B\\]")))))
+     ("#B" "priority #B NEXT actions" tags "/PROJECT|NEXT"
+      ((org-agenda-overriding-header "priority #B TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#B\\]")))))
+     ("#c" "priority #C tasks" tags ""
+      ((org-agenda-overriding-header "priority #C TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#C\\]")))))
+     ("#C" "priority #C NEXT actions" tags "/PROJECT|NEXT|STARTED"
+      ((org-agenda-overriding-header "priority #C TODOs")
+       (org-agenda-skip-function
+        (lambda nil
+          (org-agenda-skip-entry-if
+           (quote notregexp)
+           "\\=.*\\[#C\\]")))))
+     ("s1" "" tags "sub10" nil)
+     ("s2" "" tags "sub120" nil)
+     ("s3" "" tags "sub30" nil)
+     ("s4" "" tags "sub4" nil)
+     ("s6" "" tags "sub60" nil)
+     ("sd" "" tags "subday" nil)
+     ("tO" "within office hours" tags-todo "officehrs" nil)
+     ("tS" "Saturday" tags-todo "Saturday" nil)
+     ("@h" "at home" tags-todo "@home|@internet|@offline|@phone"
+      ((org-agenda-overriding-header "at home")))
+     ("@B" "in Bracknell office" tags-todo "@Bracknell" nil)
+     ("@C" "in Canary Wharf" tags-todo "@CanaryWharf" nil)
+     ("@L" "in London" tags-todo "@London" nil)
+     ("@?" "elsewhere" tags-todo "-@Bracknell-@London-@CanaryWharf-@phone-@internet-@offline"
+      ((org-agenda-overriding-header "elsewhere")))
+     ("@i" "internet (online)" tags-todo "@internet" nil)
+     ("@0" "offline (but at a computer)" tags-todo "@offline" nil)
+     ("@p" "can make phone calls" tags-todo "@phone" nil)
+     ("@." "current context"
+      (lambda
+        (a)
+        (error "Not implemented yet"))
+      "" nil)
+     ("-" "easy" tags-todo "easy" nil)
+     ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
+      ((org-agenda-prefix-format "")))
+     ("pa" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("po" "personal organisation" tags-todo "+admin+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pc" "personal computer" tags-todo "+computer+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pF" "personal F/OSS" tags-todo "+FOSS+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("p$" "personal finance" tags-todo "+finance+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pH" "personal homeimprovement" tags-todo "+homeimprovement+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pf" "personal fun" tags-todo "+fun+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pm" "personal music" tags-todo "+music+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pR" "personal OWRA" tags-todo "+OWRA"
+      ((org-agenda-prefix-format "")))
+     ("ps" "personal social" tags-todo "+social+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pt" "personal training" tags-todo "+training+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("pw" "personal welfare" tags-todo "+welfare+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\""
+      ((org-agenda-prefix-format "")))
+     ("wa" "SUSE admin" tags-todo "+admin+CATEGORY=\"SUSE\""
+      ((org-agenda-prefix-format "")))
+     ("wo" "SUSE org" tags-todo "+org+CATEGORY=\"SUSE\""
+      ((org-agenda-prefix-format "")))
+     ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\""
+      ((org-agenda-prefix-format "")))
+     ("wl" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
+      ((org-agenda-prefix-format "")))
+     ("c" "CHASE" todo "CHASE" nil)
+     ("W" "WAITING" todo "WAITING" nil)
+     ("A" "admin" tags-todo "admin" nil)
+     ("z" "personal agenda" agenda "CATEGORY=\"personal\"" nil)
+     ("o" "org" tags-todo "org" nil))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
