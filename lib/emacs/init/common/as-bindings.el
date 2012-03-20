@@ -172,6 +172,18 @@ is already hidden."
 ;;}}}
 ;;{{{ org-mode-hook bindings
 
+;; As documented in `org-replace-disputed-keys', these options must be
+;; set before org.el is loaded, but we load this file before
+;; `custom-file', so we need to set these earlier than all the other
+;; custom variables.
+(custom-set-variables
+ '(org-replace-disputed-keys t)
+ '(org-disputed-keys
+   '(([(control shift right)] . [(control shift n)])
+     ([(control shift left)]  . [(control shift p)])
+     ([(control ?,)]          . [(control ?')])
+     ([(control tab)]         . [(control meta tab)]))))
+
 (require 'org nil 'noerror)
 
 (eval-when-compile
