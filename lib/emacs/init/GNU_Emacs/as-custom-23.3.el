@@ -287,6 +287,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
+ '(org-use-speed-commands t)
  '(org-use-sub-superscripts (quote {}))
  '(org-yank-adjusted-subtrees t)
  '(outline-auto-activation t)
