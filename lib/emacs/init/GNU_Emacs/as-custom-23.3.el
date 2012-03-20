@@ -147,6 +147,7 @@
  '(message-default-news-headers "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
+ '(message-sendmail-f-is-evil t)
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
