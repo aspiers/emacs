@@ -76,6 +76,7 @@
  '(bs-max-window-height 24)
  '(bs-maximal-buffer-name-column 22)
  '(bs-minimal-buffer-name-column 5)
+ '(c-default-style (quote ((c-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
  '(case-fold-search t)
  '(color-theme-is-cumulative t)
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
