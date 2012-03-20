@@ -50,6 +50,8 @@ alternative date to use."
   "Filename-friendly date format suitable for passing to `format-time-string'.")
 (defvar as-filename-time-format "%H%Mh%Ss"
   "Filename-friendly time format suitable for passing to `format-time-string'.")
+(defvar as-rpm-changelog-format "%a %b %e %H:%M:%S %Z %Y"
+  "rpm changelog date format suitable for passing to `format-time-string'.")
 
 ;;;###autoload
 (defun as-insert-date-interactive (&optional prefix)
@@ -121,6 +123,17 @@ version if a prefix argument is given."
   (as-insert-date-interactive prefix)
   (insert "  Adam Spiers <>")
   (backward-char 1))
+
+;;;###autoload
+(defun as-insert-rpm-changelog-datestamp (&optional prefix)
+  "Inserts an rpm changelog header containing the current date,
+time, and work email, into the current buffer at the point.
+Designed to be run from the top of a .changes file."
+  (interactive)
+  (insert "-------------------------------------------------------------------\n")
+  (as-insert-date as-rpm-changelog-format)
+  (insert " - " as-work-email-address "\n\n- \n\n")
+  (backward-char 2))
 
 ;;}}}
 ;;{{{ as-insert-local-mode

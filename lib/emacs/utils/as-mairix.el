@@ -1,4 +1,4 @@
-(require 'org-mairix)
+(require 'org-mairix nil t)
 
 (defvar as-mairix-links-clipboard "~/.org-mairix-link"
   "[Deprecated] Pseudo-clipboard file where mairix URLs get copied to.")
