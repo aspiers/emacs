@@ -229,7 +229,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-hide-leading-stars t)
  '(org-icalendar-store-UID t)
  '(org-icalendar-timezone "Europe/London")
- '(org-link-abbrev-alist (quote (("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
+ '(org-link-abbrev-alist (quote (("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
