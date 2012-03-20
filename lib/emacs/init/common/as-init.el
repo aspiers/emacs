@@ -360,7 +360,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 ;;{{{ rsense
 
-(setq rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
+(defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
 ;;(require 'rsense nil t)
 
@@ -1364,6 +1364,7 @@ then invoking this function four times would yield:
 ;;{{{ auto-complete-mode
 
 (require 'auto-complete-config nil t)
+(defun ac-config-default)
 (when (as-check-feature-loaded 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
   (ac-config-default))
