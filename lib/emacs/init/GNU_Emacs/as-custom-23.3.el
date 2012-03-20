@@ -184,6 +184,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound.wav")
  '(org-columns-default-format "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
+ '(org-completion-use-ido t)
  '(org-crypt-key "7A2F2DDC")
  '(org-deadline-warning-days 3)
  '(org-default-extensions nil)
