@@ -540,6 +540,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-persist t)
  '(org-clock-persist-query-save t)
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound.wav")
+ '(org-clone-delete-id t)
  '(org-columns-default-format "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
