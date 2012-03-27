@@ -87,7 +87,10 @@ default.")
     (and (file-directory-p path)
          (add-to-list 'find-function-source-path path))))
 
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path (concat edotdir "/.emacs.d"))
+(let ((home (getenv "HOME")))
+  (or (equal edotdir home)
+      (add-to-list 'load-path (concat home "~/.emacs.d"))))
 (add-to-list 'load-path as-version-pre-lib-dir)
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
 (add-to-list 'load-path as-version-post-lib-dir 'append-at-end)
@@ -161,7 +164,7 @@ default.")
 ;;; interfacing with ELPA, the package archive.
 (when
     (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
+     (expand-file-name (concat edotdir "/.emacs.d/elpa/package.el")))
   (package-initialize)
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/")))
