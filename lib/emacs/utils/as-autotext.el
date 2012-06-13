@@ -37,8 +37,7 @@ alternative date to use."
   (insert
    (format-time-string format
                        (if date (as-epoch-to-high-low (as-date-to-epoch date))
-                         nil)
-                       'utc)))
+                         nil))))
 
 (defvar as-iso8601-date-format "%F %a"
   "ISO8601 date format suitable for passing to `format-time-string'.")
