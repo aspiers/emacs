@@ -782,8 +782,10 @@ other people."
 
 ;;{{{ org-mode
 
+(as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
 (when (as-check-feature-loaded 'org-install)
+  (as-progress "org-install loaded")
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)))
 
