@@ -9,5 +9,9 @@ getopts () {
                 ;;
         esac        
     done
+
+    if [ $# -lt 2 ]; then
+        usage
+    fi
 }
 
