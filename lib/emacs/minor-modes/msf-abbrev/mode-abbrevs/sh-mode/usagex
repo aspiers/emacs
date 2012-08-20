@@ -14,7 +14,7 @@ usage () {
 
     cat <<EOF >&2
 Usage: $me <field "[options]"> <field "ARGS">
-Options (must be in order specified above!)
+Options:
 <field "options">
 EOF
     exit "$exit_code"
