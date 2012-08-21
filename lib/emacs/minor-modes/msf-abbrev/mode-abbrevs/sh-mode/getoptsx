@@ -4,8 +4,11 @@ parse_opts () {
             -h|--help)
                 usage 0
                 ;;
-            *)
+            -*)
                 usage "Unrecognised option: $1"
+                ;;
+            *)
+                break
                 ;;
         esac        
     done
