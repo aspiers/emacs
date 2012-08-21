@@ -1,4 +1,4 @@
-getopts () {
+parse_opts () {
     while [ -n "$1" ]; do
         case "$1" in
             -h|--help)
