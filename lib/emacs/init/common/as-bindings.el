@@ -502,7 +502,8 @@ consistent landing spot."
 (global-set-key [(control .)]             'delete-window)
 (global-set-key [(control \;)]            'bury-buffer)
 (global-set-key [(control tab)]           'other-window)
-(global-set-key [(control tab)]           'other-window)
+(global-set-key [(control shift tab)]     'previous-multiframe-window)
+(global-set-key [C-S-iso-lefttab]         'previous-multiframe-window)
 
 (global-set-key [(control meta y)]        'as-join-line-with-next)
 (global-set-key [(control meta return)]   'repeat-complex-command)
