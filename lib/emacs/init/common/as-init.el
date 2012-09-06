@@ -336,6 +336,7 @@ FIXME: needs to tweak align-*-modes too."
 
 (add-to-list 'auto-mode-alist '("\\(\\.rb\\|\\.erb\\|\\.rjs\\|\\.rake\\|Rakefile\\|Guardfile\\)\\'" . ruby-mode))
 (autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
+(add-to-list 'auto-mode-alist '("\\.gem\\'" . tar-mode))
 
 ;;{{{ rcov.el
 
