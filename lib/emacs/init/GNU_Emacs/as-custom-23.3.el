@@ -699,7 +699,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
- '(vc-handled-backends (quote (RCS CVS SVN SCCS Bzr Git Hg Mtn Arch osc)))
  '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil (yasnippet)))
 
 (custom-set-faces
