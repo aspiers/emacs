@@ -1,1 +1,0 @@
-/home/adam/.GIT/adamspiers.org/emacs_chrome/servers/edit-server.el
