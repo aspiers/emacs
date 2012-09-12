@@ -24,7 +24,10 @@
 (defun make-buffer-file-executable-if-script-p ()
   "Make file executable according to umask if not already executable.
 If file already has any execute bits set at all, do not change existing
-file modes."
+file modes.
+
+If buffer's filename does not exist on the filesystem (e.g. file within
+a tar archive), do nothing."
   ;; FIXME: ange-ftp API has changed
   ;;(and (not (ange-ftp-get-hash-entry  (buffer-file-name) ange-ftp-inodes-hashtable))
   (save-restriction
@@ -33,11 +36,12 @@ file modes."
       (and
        (>= (point-max) 3)
        (equal (buffer-substring 1 3) "#!")
-       (let* ((current-mode (file-modes (buffer-file-name)))
-              (add-mode (logand ?\111 (default-file-modes)))
-              (new-mode (logior current-mode add-mode)))
-         (or (/= (logand current-mode ?\111) 0)
-             (= add-mode 0)
-             (set-file-modes (buffer-file-name) new-mode)))))))
+       (let* ((current-mode (file-modes (buffer-file-name))))
+         (when current-mode
+           (let* ((add-mode (logand ?\111 (default-file-modes)))
+                  (new-mode (logior current-mode add-mode)))
+             (or (/= (logand current-mode ?\111) 0)
+                 (= add-mode 0)
+                 (set-file-modes (buffer-file-name) new-mode)))))))))
 ;;)
 
