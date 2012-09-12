@@ -1077,6 +1077,10 @@ then invoking this function four times would yield:
 
 (require 'vc)
 
+(require 'vc-osc nil t)
+(if (featurep 'vc-osc)
+    (setq vc-handled-backends (append vc-handled-backends '(vc-osc))))
+
 ;;}}}
 ;;{{{ iswitchb - better buffer switching
 
