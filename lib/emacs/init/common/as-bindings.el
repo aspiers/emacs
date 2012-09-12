@@ -502,7 +502,12 @@ consistent landing spot."
 (global-set-key [(control .)]             'delete-window)
 (global-set-key [(control \;)]            'bury-buffer)
 (global-set-key [(control tab)]           'other-window)
-(global-set-key [(control tab)]           'other-window)
+(defun previous-window-interactive ()
+  "Interactive wrapper around (other-window -1) for key binding purposes."
+  (interactive)
+  (other-window -1))
+(global-set-key [(control shift tab)]     'previous-window-interactive)
+(global-set-key [C-S-iso-lefttab]         'previous-window-interactive)
 
 (global-set-key [(control meta y)]        'as-join-line-with-next)
 (global-set-key [(control meta return)]   'repeat-complex-command)

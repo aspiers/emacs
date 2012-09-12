@@ -541,7 +541,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;; FIXME: this fucks up load-path somewhat - superfluous trailing slashes
 ;;(when (string-match "/\"" (prin1-to-string load-path)) (error 'fucked))
 
-(autoload 'nxml-mode "rng-auto" "Major mode to edit XML files." t)
 (defun nx () "Loads nxml-mode." (interactive) (nxml-mode))
 (autoload 'mhj-format-xml "mhj-xml" "Mark's nxml hacks." t)
 (add-hook 'nxml-mode-hook
@@ -784,8 +783,10 @@ other people."
 
 ;;{{{ org-mode
 
+(as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
 (when (as-check-feature-loaded 'org-install)
+  (as-progress "org-install loaded")
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
   (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)))
 
