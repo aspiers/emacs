@@ -202,7 +202,7 @@
 
 (setq major-mode 'indented-text-mode)
 
-;; Iterate over a copy of auto-mode-alist, replacing "text-mode"
+;; Iterate over auto-mode-alist, replacing "text-mode"
 ;; with "indented-text-mode".
 (mapc (function
        (lambda (x)
@@ -211,22 +211,20 @@
 
 ;; Each mode has its own block of elisp which will usually modify
 ;; auto-mode-alist, but here we add in some misc modes.
-(setq auto-mode-alist
-      (append '(
-                ("\\.po[tx]?\\'\\|\\.po\\."              . po-mode)
-                ("\\.htaccess$"                          . apache-mode)
-                ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
-                ("\\.dump$"                              . tar-mode)
-                ("/\\.zsh\\(env\\|rc\\)"                 . sh-mode)
-                ("/\\.zsh/functions/"                    . sh-mode)
-                ("\\.stp$"                               . sh-mode)
-                ("\\.make$"                              . makefile-mode)
+(dolist (elt '(("\\.po[tx]?\\'\\|\\.po\\."              . po-mode)
+               ("\\.htaccess$"                          . apache-mode)
+               ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
+               ("\\.dump$"                              . tar-mode)
+               ("/\\.zsh\\(env\\|rc\\)"                 . sh-mode)
+               ("/\\.zsh/functions/"                    . sh-mode)
+               ("\\.stp$"                               . sh-mode)
+               ("\\.make$"                              . makefile-mode)
 
-                ;; TWiki
-                ("\\.tmpl$"                              . html-helper-mode)
-                ("TWiki\\.cfg$"                          . cperl-mode)
-                )
-              auto-mode-alist))
+               ;; TWiki
+               ("\\.tmpl$"                              . html-helper-mode)
+               ("TWiki\\.cfg$"                          . cperl-mode)
+               ))
+  (add-to-list 'auto-mode-alist elt))
 
 ;;}}}
 ;;{{{ Major modes
@@ -446,13 +444,10 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
 ;;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
 
-(setq auto-mode-alist
-      (append '(
-                ("\\.sgml$" . sgml-mode)
-                ("\\.dtd$"  . sgml-mode)
-                ("\\.xsd$"  . xml-mode)
-                )
-              auto-mode-alist))
+(dolist (elt '(("\\.sgml$" . sgml-mode)
+               ("\\.dtd$"  . sgml-mode)
+               ("\\.xsd$"  . xml-mode)))
+  (add-to-list 'auto-mode-alist elt))
 
 (setq-default sgml-indent-data t)
 
@@ -559,14 +554,12 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
             ))
 (defvar tempo-interactive t)
 
-(setq auto-mode-alist
-      (append '(
-                ("\\.prehtml\\'"                         . html-mode)
-                ("\\.php3\\'"                            . html-mode)
-                ("\\.\\(mason\\|m[cd]\\)\\'"             . html-mode)
-                ("\\(auto\\|d\\)handler\\'"              . html-mode)
-                )
-              auto-mode-alist))
+(dolist (re '("\\.prehtml\\'"
+              "\\.php3\\'"
+              "\\.\\(mason\\|m[cd]\\)\\'"
+              "\\(auto\\|d\\)handler\\'"
+              ))
+  (add-to-list 'auto-mode-alist (cons re 'html-mode)))
 
 ;; htmltidy support
 (autoload 'tidy-buffer "htmltidy" "Run Tidy HTML parser on current buffer" t)
@@ -618,17 +611,16 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 (autoload 'xrdb-mode "xrdb-mode" "Mode for editing X resource files" t)
 
-(setq auto-mode-alist
-      (append '(("\\.Xdefaults$"    . xrdb-mode)
-                ("\\.Xenvironment$" . xrdb-mode)
-                ("\\.Xresources$"   . xrdb-mode)
-                (".*\\.ad$"         . xrdb-mode)
-                (".*\\.x?rdb$"      . xrdb-mode)
-                )
-              auto-mode-alist))
+(dolist (re '("\\.Xdefaults$"
+              "\\.Xenvironment$"
+              "\\.Xresources$"
+              ".*\\.ad$"
+              ".*\\.x?rdb$"))
+  (add-to-list 'auto-mode-alist (cons re 'xrdb-mode)))
 
-(defvar as-find-file-matching-regexp-alist
-  '(("\*\.rdb$" . (lambda () (setq comment-start "! ")))))
+(defvar as-find-file-matching-regexp-alist '())
+(add-to-list 'as-find-file-matching-regexp-alist
+             '("\*\.rdb$" . (lambda () (setq comment-start "! "))))
 
 ;;}}}
 
