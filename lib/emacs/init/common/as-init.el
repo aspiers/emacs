@@ -377,7 +377,11 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (autoload 'make-buffer-file-executable-if-script-p "as-sh-mode-exts"
   "Make shell scripts executable" t)
 (add-hook 'sh-mode-hook 'sh-ins-template)
-(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
+
+;; This can accidentally change permissions in git repos, for instance.
+;;(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
+
+(global-set-key "\C-cmx" 'make-buffer-file-executable-if-script-p)
 
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)

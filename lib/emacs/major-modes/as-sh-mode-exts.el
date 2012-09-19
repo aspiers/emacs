@@ -28,6 +28,7 @@ file modes.
 
 If buffer's filename does not exist on the filesystem (e.g. file within
 a tar archive), do nothing."
+  (interactive)
   ;; FIXME: ange-ftp API has changed
   ;;(and (not (ange-ftp-get-hash-entry  (buffer-file-name) ange-ftp-inodes-hashtable))
   (save-restriction
