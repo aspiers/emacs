@@ -164,7 +164,7 @@
  '(imenu-auto-rescan t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(ispell-program-name "aspell")
+ '(ispell-program-name "aspell" t)
  '(iswitchb-case nil)
  '(iswitchb-default-method (quote samewindow))
  '(jit-lock-stealth-nice 0.1)
