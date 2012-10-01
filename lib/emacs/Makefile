@@ -662,7 +662,10 @@ ifeq (,$(wildcard $(EPG_DIR)))
 clean-epg:
 	@echo "Won't clean non-existent $(EPG_DIR)"
 .epg-installed:
-	@echo "Won't install from non-existent $(EPG_DIR)"
+	@echo "Won't install from non-existent $(EPG_DIR)" && \
+	touch $@
+# need to touch to avoid targets depending on .epg-installed
+# (e.g. .org-installed) always being remade :-/
 else
 clean-epg:
 	rm -f .epg-installed
