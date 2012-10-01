@@ -533,7 +533,7 @@ clean-org:
 	@$(UNLOCK_INSTALL_DIRS)
 #	EMACS="$(EMACS) -L $(lispdir)/epg"
 #	http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
-	$(MAKE) -C $(ORG_DIR) autoloads install-lisp \
+	$(MAKE) -C $(ORG_DIR) all install \
 		prefix=$(prefix) \
 		lispdir=$(PRE_INSTALL_DIR)
 	cp $(ORG_DIR)/contrib/lisp/*.el $(PRE_INSTALL_DIR)
