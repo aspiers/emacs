@@ -473,7 +473,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 	else \
 	  echo "### Compiling $< ..."; \
 	fi
-	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) $(COMPILER_OPTS) $(<:.verbose=)
+	$(COMPILER) $(LOADPATH_OPTS) $(COMPILER_PRE_OPTS) --eval '(setq debug-on-error t)' $(COMPILER_OPTS) $(<:.verbose=)
 
 # The idea behind this one is to launch an emacs in which a manual
 # byte-compile of the .el can be debugged, but it doesn't work yet.
