@@ -573,16 +573,19 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (autoload 'tidy-save-settings "htmltidy" "Save settings to `tidy-config-file'" t)
 (autoload 'tidy-build-menu  "htmltidy" "Install an options menu for HTML Tidy." t)
 
-(eval-when-compile
-  (defvar html-helper-mode-map)
-  (defvar sgml-validate-command))
+;; (eval-when-compile
+;;   (defvar html-helper-mode-map)
+;;   (defvar sgml-validate-command))
 
-(defun as-html-mode-tidy-hook () "Add htmltidy support to an HTML mode."
-  (tidy-build-menu html-helper-mode-map)
-  (local-set-key [(control c) (control c)] 'tidy-buffer)
-  (setq sgml-validate-command "htmltidy"))
+;; This broke with:
+;;   File mode specification error: (void-variable html-helper-mode-map)
+;;
+;; (defun as-html-mode-tidy-hook () "Add htmltidy support to an HTML mode."
+;;   (tidy-build-menu html-helper-mode-map)
+;;   (local-set-key [(control c) (control c)] 'tidy-buffer)
+;;   (setq sgml-validate-command "htmltidy"))
 
-(add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
+;;(add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
 
 (defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
