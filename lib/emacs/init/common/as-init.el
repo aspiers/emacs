@@ -163,6 +163,8 @@
 ;;}}}
 ;;{{{ Diary, appointments
 
+;; suspect I don't need this any more
+(autoload 'appt-make-list "appt")
 (add-hook 'diary-hook 'appt-make-list)
 
 ;;}}}
