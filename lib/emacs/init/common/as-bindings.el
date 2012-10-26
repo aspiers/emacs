@@ -538,9 +538,10 @@ consistent landing spot."
 ;;{{{ C-c [a-z][A-z]
 
 (fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
-(global-set-key "\C-cjt"  'as-find-personal-todo)
+(global-set-key "\C-cjt" 'as-find-personal-todo)
+(global-set-key [(control \")] 'as-find-personal-todo)
 (fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
-(global-set-key "\C-cjd"  'as-find-personal-diary)
+(global-set-key "\C-cjd" 'as-find-personal-diary)
 ;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
 
 (eval-when-compile (require 'ido))
