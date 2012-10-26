@@ -585,6 +585,7 @@ consistent landing spot."
 
 (fset 'as-find-work-todo "\C-x\C-f~/SUSE/TODO.org")
 (global-set-key "\C-cjT"  'as-find-work-todo)
+(global-set-key [(control \%)] 'as-find-work-todo)
 
 (defun as-find-from-home ()
   (interactive)
