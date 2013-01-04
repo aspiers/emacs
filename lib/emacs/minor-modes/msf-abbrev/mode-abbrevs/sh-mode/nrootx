@@ -1,4 +1,4 @@
 if [ "$USER" == root ]; then
-  echo "Must not be root" >&2
+  echo >&2 "Must not be root"
   exit 1
 fi

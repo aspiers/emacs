@@ -1,2 +1,2 @@
-echo "ERROR: <cursor>"
+echo >&2 "ERROR: <cursor>"
 exit 1

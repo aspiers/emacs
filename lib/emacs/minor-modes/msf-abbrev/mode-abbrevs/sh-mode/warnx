@@ -1,1 +1,1 @@
-echo "<field "WARNING">" >&2
+echo >&2 "<field "WARNING">"

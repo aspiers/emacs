@@ -1,4 +1,4 @@
 if <field "expression">; then
-echo "<field "ERROR">" >&2
+echo >&2 "<field "ERROR">"
 exit 1
 fi
