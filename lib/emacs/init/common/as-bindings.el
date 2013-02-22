@@ -598,16 +598,7 @@ consistent landing spot."
 (global-set-key "\C-cA"   'as-align-to-previous-line)
 (global-set-key "\C-cb"   'bury-buffer)
 (global-set-key "\C-cB"   'as-bounce-buffer)
-;;{{{ PCL-_C_VS (C-c c)
-
-(fset 'as-next-cvs-buffer "\C-xb*cvs*")
-(global-set-key "\C-ccb"   'as-next-cvs-buffer)
-(global-set-key "\C-cce"  'cvs-examine)
-(global-set-key "\C-ccq"  'cvs-quickdir)
-(global-set-key "\C-ccs"  'cvs-status)
-(global-set-key "\C-ccu"  'cvs-update)
-
-;;}}}
+(global-set-key "\C-cc"   'org-capture)
 (global-set-key "\C-cd"   'as-duplicate-line)
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ _I_nsert auto-text (C-c i)
