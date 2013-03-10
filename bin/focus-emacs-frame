@@ -12,18 +12,20 @@ debug () {
 check_prereqs () {
     if [ -z "$DISPLAY" ]; then
         echo "$0: no DISPLAY" >&2
-        exit 1
+        return 1
     fi
 
     if ! which wmctrl >/dev/null 2>&1; then
         echo "$0: wmctrl not found; aborting." >&2
-        exit 1
+        return 1
     fi
 
     # if ! which xdotool >/dev/null 2>&1; then
     #     echo "$0: xdotool not found; aborting." >&2
     #     exit 1
     # fi
+
+    return 0
 }
 
 choose_window_to_focus() {
@@ -63,7 +65,7 @@ main () {
     host="`hostname`"
     host="${host%%.*}"
 
-    check_prereqs
+    check_prereqs || exit 1
 
     choose_window_to_focus || exit 1
     if ! desktop=$( xdotool get_desktop_for_window $window_id ); then
