@@ -32,7 +32,7 @@ choose_window_to_focus() {
     emacs_winids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
 
     if [ "${#emacs_winids[*]}" -eq 1 ]; then
-        window_id="${emacs_winids[1]}"
+        window_id="${emacs_winids[0]}"
         return 0
     elif [ "${#emacs_winids[*]}" -gt 1 ]; then
         current_desktop=`current-desktop`
@@ -51,8 +51,8 @@ choose_window_to_focus() {
             # `server-switch-hook' to do this somehow (env variable?)
             # http://emacs-fu.blogspot.com/2008/12/opening-emacsclient-windows-on-current.html
         else
-            debug "No emacs on current desktop; picking any one"
-            window_id="${emacs_winids[1]}"
+            debug "No emacs on current desktop; picking any one from ${emacs_winids[*]}"
+            window_id="${emacs_winids[0]}"
             return 0
         fi
     else
