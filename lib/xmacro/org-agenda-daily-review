@@ -1,2 +1,2 @@
 # See org-agenda
-C-g C-g \e x org-agenda \n d
+C-g \e x org-agenda \n d
