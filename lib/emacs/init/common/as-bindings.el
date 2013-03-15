@@ -535,7 +535,7 @@ consistent landing spot."
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
-;;{{{ C-c [a-z][A-z]
+;;{{{ C-c [a-z][A-Z]
 
 (fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
 (global-set-key "\C-cjt" 'as-find-personal-todo)
