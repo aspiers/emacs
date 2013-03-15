@@ -8,7 +8,7 @@
  '(variable-pitch ((t (:family "helv"))))
  '(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  '(minibuffer-prompt ((t (:foreground "light blue"))))
- '(highlight ((t (:foreground "light blue" :background "dark slate blue"))))
+ '(highlight ((t (:background "dark slate blue"))))
  '(region ((t (:background "DarkSlateBlue"))))
  '(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
  '(secondary-selection ((t (:background "steel blue"))))
