@@ -537,6 +537,40 @@ consistent landing spot."
 
 ;;{{{ C-c [a-z][A-Z]
 
+(global-set-key "\C-cA"   'as-align-to-previous-line)
+(global-set-key "\C-cb"   'bury-buffer)
+(global-set-key "\C-cB"   'as-bounce-buffer)
+(global-set-key "\C-cc"   'org-capture)
+(global-set-key "\C-cd"   'as-duplicate-line)
+(global-set-key "\C-cF"   'font-lock-fontify-buffer)
+;;{{{ C-c g for git operations
+
+(global-set-key "\C-cgg"  'magit-run-git-gui)
+(global-set-key "\C-cgk"  'magit-run-gitk)
+(global-set-key "\C-cgs"  'magit-status)
+(global-set-key [(control shift g)] 'magit-status)
+
+;;}}}
+;;{{{ _I_nsert auto-text (C-c i)
+
+(global-set-key "\C-cid" 'as-insert-date-and-time)
+(global-set-key "\C-ciD" 'as-insert-date-interactive)
+(global-set-key "\C-cie" 'as-insert-email-address)
+(global-set-key "\C-cim" 'as-insert-local-mode)
+(global-set-key "\C-ciw" 'as-insert-work-email-address)
+(global-set-key "\C-ciW" 'as-insert-name-and-work-email)
+(global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
+(global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
+(global-set-key "\C-cil" 'as-insert-log-timestamp)
+(global-set-key "\C-ciL" 'as-insert-log-datestamp)
+(global-set-key "\C-ciN" 'as-insert-name-and-email)
+(global-set-key "\C-cin" 'as-insert-name)
+(global-set-key "\C-cir" 'as-insert-rpm-changelog-datestamp)
+(global-set-key "\C-cis" 'as-insert-scissors)
+(global-set-key "\C-ciS" 'as-snip-region)
+(global-set-key "\C-cit" 'as-insert-time)
+
+;;}}}
 ;;{{{ C-c j for quick jumping
 
 (fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
@@ -595,41 +629,6 @@ consistent landing spot."
                      nil "~/" "Find file: "))
 (global-set-key [(control ~)] 'as-find-from-home)
 (global-set-key "\C-cjh"      'as-find-from-home)
-
-;;}}}
-
-(global-set-key "\C-cA"   'as-align-to-previous-line)
-(global-set-key "\C-cb"   'bury-buffer)
-(global-set-key "\C-cB"   'as-bounce-buffer)
-(global-set-key "\C-cc"   'org-capture)
-(global-set-key "\C-cd"   'as-duplicate-line)
-(global-set-key "\C-cF"   'font-lock-fontify-buffer)
-;;{{{ C-c g for git operations
-
-(global-set-key "\C-cgg"  'magit-run-git-gui)
-(global-set-key "\C-cgk"  'magit-run-gitk)
-(global-set-key "\C-cgs"  'magit-status)
-(global-set-key [(control shift g)] 'magit-status)
-
-;;}}}
-;;{{{ _I_nsert auto-text (C-c i)
-
-(global-set-key "\C-cid" 'as-insert-date-and-time)
-(global-set-key "\C-ciD" 'as-insert-date-interactive)
-(global-set-key "\C-cie" 'as-insert-email-address)
-(global-set-key "\C-cim" 'as-insert-local-mode)
-(global-set-key "\C-ciw" 'as-insert-work-email-address)
-(global-set-key "\C-ciW" 'as-insert-name-and-work-email)
-(global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
-(global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
-(global-set-key "\C-cil" 'as-insert-log-timestamp)
-(global-set-key "\C-ciL" 'as-insert-log-datestamp)
-(global-set-key "\C-ciN" 'as-insert-name-and-email)
-(global-set-key "\C-cin" 'as-insert-name)
-(global-set-key "\C-cir" 'as-insert-rpm-changelog-datestamp)
-(global-set-key "\C-cis" 'as-insert-scissors)
-(global-set-key "\C-ciS" 'as-snip-region)
-(global-set-key "\C-cit" 'as-insert-time)
 
 ;;}}}
 (global-set-key "\C-ck"   'delete-file)
