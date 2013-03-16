@@ -180,6 +180,7 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(mail-envelope-from (quote header))
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
