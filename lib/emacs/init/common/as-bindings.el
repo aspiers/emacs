@@ -601,6 +601,7 @@ consistent landing spot."
 (global-set-key "\C-cc"   'org-capture)
 (global-set-key "\C-cd"   'as-duplicate-line)
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
+(global-set-key "\C-cgk"  'magit-run-gitk)
 (global-set-key "\C-cgs"  'magit-status)
 (global-set-key [(control shift g)] 'magit-status)
 ;;{{{ _I_nsert auto-text (C-c i)
