@@ -537,6 +537,8 @@ consistent landing spot."
 
 ;;{{{ C-c [a-z][A-Z]
 
+;;{{{ C-c j for quick jumping
+
 (fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
 (global-set-key "\C-cjt" 'as-find-personal-todo)
 (global-set-key [(control \")] 'as-find-personal-todo)
@@ -594,6 +596,7 @@ consistent landing spot."
 (global-set-key [(control ~)] 'as-find-from-home)
 (global-set-key "\C-cjh"      'as-find-from-home)
 
+;;}}}
 
 (global-set-key "\C-cA"   'as-align-to-previous-line)
 (global-set-key "\C-cb"   'bury-buffer)
@@ -601,10 +604,14 @@ consistent landing spot."
 (global-set-key "\C-cc"   'org-capture)
 (global-set-key "\C-cd"   'as-duplicate-line)
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
+;;{{{ C-c g for git operations
+
 (global-set-key "\C-cgg"  'magit-run-git-gui)
 (global-set-key "\C-cgk"  'magit-run-gitk)
 (global-set-key "\C-cgs"  'magit-status)
 (global-set-key [(control shift g)] 'magit-status)
+
+;;}}}
 ;;{{{ _I_nsert auto-text (C-c i)
 
 (global-set-key "\C-cid" 'as-insert-date-and-time)
@@ -631,6 +638,7 @@ consistent landing spot."
 (autoload 'org-store-link "org" "org-store-link" t)
 (global-set-key "\C-cL"   'org-store-link)
 ;; I reserve C-c m for mode-specific user bindings
+;;{{{ C-c M for mairix
 
 (autoload 'as-mairix-yank-links "as-gtd" "as-mairix-yank-links" t)
 (autoload 'as-mairix-view-link-at-point "as-gtd" "as-mairix-view-link-at-point" t)
@@ -638,6 +646,7 @@ consistent landing spot."
 (global-set-key [(control c) (M) (control y)] 'as-mairix-yank-links)
 (global-set-key [(control c) (M) (return)]    'as-mairix-view-link-at-point)
 
+;;}}}
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cP"   'as-align-to-previous-line)
