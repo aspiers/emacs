@@ -501,6 +501,8 @@ consistent landing spot."
 (global-set-key [(control \,)]            'delete-other-windows)
 (global-set-key [(control .)]             'delete-window)
 (global-set-key [(control \;)]            'bury-buffer)
+(global-set-key [(control =)]             'switch-to-prev-buffer)
+(global-set-key [(control +)]             'switch-to-next-buffer)
 (global-set-key [(control tab)]           'other-window)
 (defun previous-window-interactive ()
   "Interactive wrapper around (other-window -1) for key binding purposes."
