@@ -584,6 +584,9 @@ consistent landing spot."
 
 (eval-when-compile (require 'ido))
 
+(autoload 'bundle-open "bundler" nil t)
+(global-set-key "\C-cjb" 'bundle-open)
+
 (defun as-find-CVS-repo ()
   (interactive)
   (ido-file-internal ido-default-file-method
