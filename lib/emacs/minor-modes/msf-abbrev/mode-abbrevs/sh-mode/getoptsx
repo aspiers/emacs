@@ -19,5 +19,7 @@ parse_opts () {
     if [ $# -lt 2 ]; then
         usage
     fi
+
+    ARGV=( "$@" )
 }
 
