@@ -513,6 +513,8 @@ $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPE
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
 
+$(UTILS)/bundler.elc: LIBDIRS += $(wildcard $(ELPA)/inf-ruby*)
+
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 # }}}
