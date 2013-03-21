@@ -149,6 +149,8 @@ LOADDEFS_DIRS=	\
 # {{{ global paths
 
 EMACSLIB = $(HOME)/lib/emacs
+EMACS_D  = $(HOME)/.emacs.d
+ELPA     = $(EMACS_D)/elpa
 
 GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
 XINSTALL_DIR = $(EMACSLIB)/XEmacs
