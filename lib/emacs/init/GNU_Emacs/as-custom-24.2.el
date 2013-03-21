@@ -396,7 +396,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(info-title-2 ((t (:inherit info-title-3 :height 1.2 :foundry "Inconsolata"))))
  '(magit-branch ((t (:foreground "yellow"))))
  '(magit-header ((t (:inherit header-line))))
- '(magit-item-highlight ((t (:inherit highlight))))
+ '(magit-item-highlight ((t (:background "#2e2732"))))
  '(magit-section-title ((t (:foreground "VioletRed1" :weight bold))))
  '(minibuffer-prompt ((t (:foreground "light blue"))))
  '(org-agenda-column-dateline ((t nil)))
