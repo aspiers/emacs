@@ -335,6 +335,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-use-speed-commands t)
  '(org-use-sub-superscripts (quote {}))
  '(org-yank-adjusted-subtrees t)
+ '(org2blog/wp-blog-alist (quote (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(outline-auto-activation t)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
