@@ -498,6 +498,7 @@ consistent landing spot."
 (global-set-key [(control E)]             'bn-end-of-line-but-one)
 (global-set-key [(control ?')]            'speedbar-get-focus)
 (global-set-key [(control !)]             'ido-switch-buffer)
+(global-set-key [(control meta !)]        'idomenu)
 (global-set-key [(control \,)]            'delete-other-windows)
 (global-set-key [(control .)]             'delete-window)
 (global-set-key [(control \;)]            'bury-buffer)
