@@ -274,6 +274,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-icalendar-timezone "Europe/London")
  '(org-link-abbrev-alist (quote (("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=") ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (gnus . gnus-other-frame) (file . find-file))))
+ '(org-log-done (quote time))
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
