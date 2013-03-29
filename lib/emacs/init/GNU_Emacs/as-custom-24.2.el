@@ -200,7 +200,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-custom-commands
    (quote
-    (("e" "eventbook TODOs" alltodo ""
+    (("b" "bandhand TODOs" alltodo ""
       ((org-agenda-files
         (quote
          ("~/eventbook/design.org")))))
