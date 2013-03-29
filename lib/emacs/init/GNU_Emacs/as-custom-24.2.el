@@ -530,13 +530,24 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\""
       ((org-agenda-prefix-format "")))
-     ("wl" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
+     ("wL" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
       ((org-agenda-prefix-format "")))
      ("c" "CHASE" todo "CHASE" nil)
      ("W" "WAITING" todo "WAITING" nil)
      ("A" "admin" tags-todo "admin" nil)
      ("z" "personal agenda" agenda "CATEGORY=\"personal\"" nil)
-     ("o" "org" tags-todo "org" nil))))
+     ("o" "org" tags-todo "org" nil)
+     ("wl" "work log" agenda ""
+      ((org-agenda-files
+        (quote
+         ("~/SUSE/TODO.org" "~/SUSE/DONE.org")))
+       (org-agenda-span
+        (quote week))
+       (org-agenda-start-on-weekday 1)
+       (org-agenda-include-diary t)
+       (org-agenda-entry-types
+        (quote
+         (:timestamp :sexp))))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
