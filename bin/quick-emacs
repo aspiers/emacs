@@ -63,8 +63,8 @@ case "$emacs_version" in
 esac
 
 focus_emacs_frame () {
-    # Save the current winid so we know what to switch back to from emacs.
-    client_winid=`current-winid`
+    # Save the current window id so we know what to switch back to from emacs.
+    client_winid=`current-window-id`
 
     # Focus existing emacs frame
     if ! focus-emacs-frame; then
