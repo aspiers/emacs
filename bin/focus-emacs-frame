@@ -29,21 +29,21 @@ check_prereqs () {
 }
 
 choose_window_to_focus() {
-    emacs_winids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
+    emacs_window_ids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
 
-    if [ "${#emacs_winids[*]}" -eq 1 ]; then
-        window_id="${emacs_winids[0]}"
+    if [ "${#emacs_window_ids[*]}" -eq 1 ]; then
+        target_window_id="${emacs_window_ids[0]}"
         return 0
-    elif [ "${#emacs_winids[*]}" -gt 1 ]; then
+    elif [ "${#emacs_window_ids[*]}" -gt 1 ]; then
         current_desktop=`current-desktop`
         debug "More than one emacs frame" >&2
-        emacs_winid=$( wmctrl -lpx | \
+        emacs_window_id=$( wmctrl -lpx | \
                        awk '$4 ~ /emacs/ &&
                             $5 ~ /'"$host"'/ &&
                             $2 == '$current_desktop' { print $1; exit 0 }' )
-        if [ -n "$emacs_winid" ]; then
-            debug "winid of emacs on current desktop is $emacs_winid"
-            window_id="$emacs_winid"
+        if [ -n "$emacs_window_id" ]; then
+            debug "window_id of emacs on current desktop is $emacs_window_id"
+            target_window_id="$emacs_window_id"
             return 0
 
             # The problem here is that emacsclient doesn't tell emacs
@@ -51,8 +51,8 @@ choose_window_to_focus() {
             # `server-switch-hook' to do this somehow (env variable?)
             # http://emacs-fu.blogspot.com/2008/12/opening-emacsclient-windows-on-current.html
         else
-            debug "No emacs on current desktop; picking any one from ${emacs_winids[*]}"
-            window_id="${emacs_winids[0]}"
+            debug "No emacs on current desktop; picking any one from ${emacs_window_ids[*]}"
+            target_window_id="${emacs_window_ids[0]}"
             return 0
         fi
     else
@@ -68,8 +68,8 @@ main () {
     check_prereqs || exit 1
 
     choose_window_to_focus || exit 1
-    if ! desktop=$( xdotool get_desktop_for_window $window_id ); then
-        echo "Failed to get desktop number for emacs window $window_id" >&2
+    if ! desktop=$( xdotool get_desktop_for_window $target_window_id ); then
+        echo "Failed to get desktop number for emacs window $target_window_id" >&2
         exit 1
     fi
 
@@ -78,8 +78,22 @@ main () {
         exit 1
     fi
 
-    #xdotool windowfocus --sync $window_id windowraise $window_id
-    wmctrl -ia $window_id
+    sleep=0.1
+    while [ $( echo "$sleep < 30" | bc ) = 1 ]; do
+        #xdotool windowfocus --sync $target_window_id windowraise "$target_window_id"
+        wmctrl -ia "$target_window_id"
+
+        if [ $(current-window-id) = "$target_window_id" ]; then
+            #echo "Successfully focused $target_window_id"
+            exit 0
+        fi
+        #echo "sleeping $sleep"
+        sleep $sleep
+        sleep=$( echo "$sleep * 2" | bc )
+    done
+
+    echo "Failed to focus emacs window $target_window_id" >&2
+    exit 1
 }
 
 main
