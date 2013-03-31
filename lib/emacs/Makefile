@@ -517,6 +517,9 @@ $(UTILS)/bundler.elc: LIBDIRS += $(wildcard $(ELPA)/inf-ruby*)
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
+# edit-server-htmlize needs edit-server
+$(UTILS)/edit-server-htmlize.elc: LIBDIRS += $(UTILS)
+
 # }}}
 # {{{ org-mode
 
