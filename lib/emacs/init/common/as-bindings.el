@@ -679,10 +679,11 @@ consistent landing spot."
 (global-set-key "\C-cn"   'as-display-buffer-filename)
 (global-set-key "\C-cp"   'as-copy-previous-line-suffix)
 (global-set-key "\C-cP"   'as-align-to-previous-line)
-;;{{{ remember (C-c q for _q_uick)
+;;{{{ org-capture (C-c q for _q_uick)
 
-(autoload 'org-remember "org-remember" nil t)
-(global-set-key "\C-cq" 'org-remember)
+;; Try to use C-c c but keeping this for backwards compatability with
+;; my brain.
+(global-set-key "\C-cq" 'org-capture)
 
 ;;}}}
 (global-set-key "\C-cr"   'revert-buffer)
