@@ -580,22 +580,26 @@ With a double prefix argument C-u C-u, the filename is also
 prompted for."
   (interactive "p")
   (let* ((default-directory (magit-get-top-dir default-directory))
-         (revision
-          (if (>= prefix 4)
-              (magit-read-rev "Retrieve file from revision")
-            "HEAD"))
-         (filename
-          (if (> prefix 4)
-              (magit-read-file-from-rev revision)
-            (buffer-file-name))))
-    (magit-run-git-gui-blame filename revision)))
+         (revision (if (>= prefix 4)
+                       (magit-read-rev "Retrieve file from revision")
+                     "HEAD"))
+         (filename (if (> prefix 4)
+                       (magit-read-file-from-rev revision)
+                     (buffer-file-name)))
+         (linenum (if (eq filename (buffer-file-name))
+                      (line-number-at-pos))))
+    (magit-run-git-gui-blame filename revision linenum)))
 
-(defun magit-run-git-gui-blame (filename &optional revision)
+(defun magit-run-git-gui-blame (filename &optional revision linenum)
   "Run `git gui blame' on the given filename and revision.
 REVISION defaults to \"HEAD\"."
-  (let ((default-directory (magit-get-top-dir default-directory)))
-    (magit-start-process "Git Blame" nil magit-git-executable
-                         "gui" "blame" (or revision "HEAD") (magit-filename filename))))
+  (let ((default-directory (magit-get-top-dir default-directory))
+        (args (append '("gui" "blame")
+                      (if linenum (list (format "--line=%d" linenum)))
+                      (list (or revision "HEAD"))
+                      (list (magit-filename filename)))))
+    (message "Running: %s" (combine-and-quote-strings (cons magit-git-executable args)))
+    (apply 'magit-start-process "Git Blame" nil magit-git-executable args)))
 
 (global-set-key "\C-cgb"  'magit-run-git-gui-blame-interactively)
 (global-set-key "\C-cgg"  'magit-run-git-gui)
