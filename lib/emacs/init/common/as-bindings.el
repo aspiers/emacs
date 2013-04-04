@@ -572,6 +572,32 @@ consistent landing spot."
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ C-c g for git operations
 
+;; FIXME: move upstream
+(defun magit-run-git-gui-blame-interactively (prefix)
+  "Run `git gui blame' on the current buffer's filename.
+If a prefix argument is given, the revision is prompted for.
+With a double prefix argument C-u C-u, the filename is also
+prompted for."
+  (interactive "p")
+  (let* ((default-directory (magit-get-top-dir default-directory))
+         (revision
+          (if (>= prefix 4)
+              (magit-read-rev "Retrieve file from revision")
+            "HEAD"))
+         (filename
+          (if (> prefix 4)
+              (magit-read-file-from-rev revision)
+            (buffer-file-name))))
+    (magit-run-git-gui-blame filename revision)))
+
+(defun magit-run-git-gui-blame (filename &optional revision)
+  "Run `git gui blame' on the given filename and revision.
+REVISION defaults to \"HEAD\"."
+  (let ((default-directory (magit-get-top-dir default-directory)))
+    (magit-start-process "Git Blame" nil magit-git-executable
+                         "gui" "blame" (or revision "HEAD") (magit-filename filename))))
+
+(global-set-key "\C-cgb"  'magit-run-git-gui-blame-interactively)
 (global-set-key "\C-cgg"  'magit-run-git-gui)
 (global-set-key "\C-cgk"  'magit-run-gitk)
 (global-set-key "\C-cgs"  'magit-status)
