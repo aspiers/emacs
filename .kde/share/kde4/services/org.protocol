@@ -1,0 +1,14 @@
+# -*- conf -*-
+[Protocol]
+protocol=org-protocol
+exec=/usr/bin/emacsclient '%u'
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false
+Icon=emacs
+Description=A protocol for org-mode
