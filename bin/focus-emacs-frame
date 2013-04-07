@@ -4,39 +4,39 @@
 # desktop if it exists.  Do not call this directly - instead use
 # quick-emacs.
 
-debug () {
-    :
-    echo "$*" >&2
-}
+LOGFILE=$HOME/.log/focus-emacs-frame.log
+me=`basename $0`
+
+_dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
+debug    () { _dlog "$*";                                           }
+progress () { _dlog "$*";        echo     "$me: $*";                }
+warn     () { _dlog "$*";        echo >&2 "$me: $*";                }
+error    () { _dlog "ERROR: $*"; echo >&2 "$me: ERROR: $*";         }
+fatal    () { _dlog "FATAL: $*"; echo >&2 "$me: FATAL: $*"; exit 1; }
 
 check_prereqs () {
     if [ -z "$DISPLAY" ]; then
-        echo "$0: no DISPLAY" >&2
-        return 1
+        fatal "DISPLAY environment variable was not set"
     fi
 
     if ! which wmctrl >/dev/null 2>&1; then
-        echo "$0: wmctrl not found; aborting." >&2
-        return 1
+        fatal "wmctrl not found; aborting."
     fi
 
     # if ! which xdotool >/dev/null 2>&1; then
-    #     echo "$0: xdotool not found; aborting." >&2
-    #     exit 1
+    #     fatal "xdotool not found; aborting."
     # fi
-
-    return 0
 }
 
 choose_window_to_focus() {
     emacs_window_ids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
+    debug "emacs_window_ids ${emacs_window_ids[@]}"
 
     if [ "${#emacs_window_ids[*]}" -eq 1 ]; then
         target_window_id="${emacs_window_ids[0]}"
-        return 0
     elif [ "${#emacs_window_ids[*]}" -gt 1 ]; then
         current_desktop=`current-desktop`
-        debug "More than one emacs frame" >&2
+        debug "More than one emacs frame"
         emacs_window_id=$( wmctrl -lpx | \
                        awk '$4 ~ /emacs/ &&
                             $5 ~ /'"$host"'/ &&
@@ -44,7 +44,6 @@ choose_window_to_focus() {
         if [ -n "$emacs_window_id" ]; then
             debug "window_id of emacs on current desktop is $emacs_window_id"
             target_window_id="$emacs_window_id"
-            return 0
 
             # The problem here is that emacsclient doesn't tell emacs
             # server which frame to open the new buffer in.  FIXME: tweak
@@ -53,11 +52,9 @@ choose_window_to_focus() {
         else
             debug "No emacs on current desktop; picking any one from ${emacs_window_ids[*]}"
             target_window_id="${emacs_window_ids[0]}"
-            return 0
         fi
     else
-        echo "ERROR: no emacs windows found on $DISPLAY" >&2
-        return 1
+        fatal "No emacs windows found on $DISPLAY"
     fi
 }
 
@@ -65,35 +62,38 @@ main () {
     host="`hostname`"
     host="${host%%.*}"
 
-    check_prereqs || exit 1
+    check_prereqs
+    choose_window_to_focus
 
-    choose_window_to_focus || exit 1
+    debug "Window name at start: $(current-window-name)"
+
     if ! desktop=$( xdotool get_desktop_for_window $target_window_id ); then
-        echo "Failed to get desktop number for emacs window $target_window_id" >&2
-        exit 1
+        fatal "Failed to get desktop number for emacs window $target_window_id"
     fi
 
     if ! xdotool set_desktop $desktop; then
-        echo "Failed to switch to desktop $desktop" >&2
-        exit 1
+        fatal "Failed to switch to desktop $desktop"
     fi
 
     sleep=0.1
     while [ $( echo "$sleep < 30" | bc ) = 1 ]; do
         #xdotool windowfocus --sync $target_window_id windowraise "$target_window_id"
+        debug "Switching to $target_window_id"
         wmctrl -ia "$target_window_id"
 
-        if [ $(current-window-id) = "$target_window_id" ]; then
-            #echo "Successfully focused $target_window_id"
+        current_window_id="$(current-window-id)"
+        debug "Current window id is $current_window_id"
+        if [ "$current_window_id" = "$target_window_id" ]; then
+            debug "Successfully focused $target_window_id"
+            debug "Window name at end: $(current-window-name)"
             exit 0
         fi
-        #echo "sleeping $sleep"
+        debug "sleeping $sleep"
         sleep $sleep
         sleep=$( echo "$sleep * 2" | bc )
     done
 
-    echo "Failed to focus emacs window $target_window_id" >&2
-    exit 1
+    fatal "Failed to focus emacs window $target_window_id"
 }
 
-main
+main "$@"
