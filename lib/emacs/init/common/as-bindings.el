@@ -558,7 +558,6 @@ consistent landing spot."
 ;; but this one won't, so serves as a backup:
 (global-set-key [(control c)(meta q)]     'fill-common-prefix-region)
 
-
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
@@ -779,6 +778,9 @@ REVISION defaults to \"HEAD\"."
 (global-set-key "\C-ctw"   'as-set-tab-width)
 
 ;;}}}
+
+(global-set-key "\C-cwl"  'org2blog/wp-login)
+(global-set-key "\C-cwn"  'org2blog/wp-new-entry)
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
