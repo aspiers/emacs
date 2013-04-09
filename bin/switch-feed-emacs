@@ -20,7 +20,8 @@ if fast-X11-display; then
     # use quick-emacs at this point.
     xdotool set_desktop 0 # prefer first desktop
     focus-emacs-frame || exit $?
-
+    echo "`date` $me: `current-window-id` / `current-window-name`" \
+        >> ~/.log/switch-feed-emacs.log 2>&1
     feed-X11
 else
     # The bash manual says:
