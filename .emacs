@@ -172,15 +172,19 @@ default.")
 (el-get 'sync)
 
 (defvar as-el-get-packages
-  '(ruby-mode
+  '(
+    el-get
+
     coffee-mode
     expand-region
     gist
     inf-ruby
     ;;magit
+    ruby-mode
     switch-window
     yaml-mode
-    yasnippet)
+    yasnippet
+    )
   "Adam's list of packages to install with el-get.")
 
 ;; Remove packages not in the above list
