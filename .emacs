@@ -188,8 +188,11 @@ default.")
     )
   "Adam's list of packages to install with el-get.")
 
-;; Remove packages not in the above list
-;;(el-get-cleanup as-el-get-packages)
+;; Remove packages not in the above list.  If I absent-mindedly
+;; install something via `el-get-list-packages', this reduces the
+;; chance I'll get used to it being there on one machine and then get
+;; surprised when it isn't on another machine I switch to.
+(el-get-cleanup as-el-get-packages)
 
 (defvar el-get-install-sync nil
   "Non-nil means install packages synchronously")
