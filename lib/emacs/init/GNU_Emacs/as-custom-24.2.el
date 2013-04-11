@@ -183,6 +183,8 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(magit-log-auto-more t)
+ '(magit-rewrite-inclusive nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(mail-envelope-from (quote header))
  '(mail-self-blind t)
