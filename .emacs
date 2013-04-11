@@ -165,11 +165,31 @@ default.")
   (with-current-buffer
       (url-retrieve-synchronously
        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
+    (let (el-get-master-branch) ;; ditch this `let' to get stable branch
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
 (el-get 'sync)
+
+(defvar as-el-get-packages
+  '(ruby-mode
+    coffee-mode
+    expand-region
+    gist
+    inf-ruby
+    ;;magit
+    switch-window
+    yaml-mode
+    yasnippet)
+  "Adam's list of packages to install with el-get.")
+
+;; Remove packages not in the above list
+;;(el-get-cleanup as-el-get-packages)
+
+(defvar el-get-install-sync nil
+  "Non-nil means install packages synchronously")
+
+(el-get (if el-get-install-sync 'sync) as-el-get-packages)
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
