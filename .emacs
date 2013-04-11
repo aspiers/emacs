@@ -180,6 +180,7 @@ default.")
     gist
     inf-ruby
     ;;magit
+    multiple-cursors
     ruby-mode
     switch-window
     yaml-mode
