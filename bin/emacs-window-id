@@ -1,0 +1,46 @@
+#!/bin/bash
+
+LOGFILE=$HOME/.log/emacs-window-id.log
+me=`basename $0`
+
+_dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
+debug    () { _dlog "$*";                                           }
+fatal    () { _dlog "FATAL: $*"; echo >&2 "$me: FATAL: $*"; exit 1; }
+
+check_prereqs () {
+    if [ -z "$DISPLAY" ]; then
+        fatal "DISPLAY environment variable was not set"
+    fi
+
+    if ! which wmctrl >/dev/null 2>&1; then
+        fatal "wmctrl not found; aborting."
+    fi
+}
+
+emacs_window_ids=( $(wmctrl -lpx | awk '$4 ~ /emacs/ && $5 ~ /'"$host"'/ { print $1 }') )
+debug "emacs_window_ids ${emacs_window_ids[@]}"
+
+if [ "${#emacs_window_ids[*]}" -eq 1 ]; then
+    echo "${emacs_window_ids[0]}"
+elif [ "${#emacs_window_ids[*]}" -gt 1 ]; then
+    current_desktop=`current-desktop`
+    debug "More than one emacs frame"
+    emacs_window_id=$( wmctrl -lpx | \
+        awk '$4 ~ /emacs/ &&
+             $5 ~ /'"$host"'/ &&
+             $2 == '$current_desktop' { print $1; exit 0 }' )
+    if [ -n "$emacs_window_id" ]; then
+        debug "window_id of emacs on current desktop is $emacs_window_id"
+        echo "$emacs_window_id"
+
+        # The problem here is that emacsclient doesn't tell emacs
+        # server which frame to open the new buffer in.  FIXME: tweak
+        # `server-switch-hook' to do this somehow (env variable?)
+        # http://emacs-fu.blogspot.com/2008/12/opening-emacsclient-windows-on-current.html
+    else
+        debug "No emacs on current desktop; picking any one from ${emacs_window_ids[*]}"
+        echo "${emacs_window_ids[0]}"
+    fi
+else
+    fatal "No emacs windows found on $DISPLAY"
+fi
