@@ -171,14 +171,36 @@ placed here.")
   '(
     el-get
 
+    ace-jump-mode
+    ;; artbollocks-mode ;; way too aggressive
+    asciidoc
+    auto-complete-css
+    auto-complete-emacs-lisp
+    auto-complete-ruby
+    auto-complete-yasnippet
+    bundler
     coffee-mode
     expand-region
+    flymake-css
+    flymake-ruby
+    flymake-sass
+    flymake-shell
+    folding
     gist
+    ;;git-gutter
+    git-gutter-fringe
+    goto-chg
+    haml-mode
+    idomenu
+    ido-ubiquitous
     inf-ruby
-    ;;magit
+    magit
+    magithub
     multiple-cursors
+    org2blog
     ruby-mode
     switch-window
+    xml-rpc
     yaml-mode
     yasnippet
     )
