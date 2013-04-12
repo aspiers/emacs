@@ -164,7 +164,7 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
-TO_CLEAN = emacs-w3m pgg
+TO_CLEAN = pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
@@ -603,26 +603,6 @@ clean-remember:
 	@$(LOCK_INSTALL_DIRS)
 	touch $@
 endif
-
-# }}}
-# {{{ emacs-w3m-mode
-
-emacs-w3m: .emacs-w3m-made
-clean-emacs-w3m:
-	rm -f .emacs-w3m-made
-	$(MAKE) -C $(MAJOR_MODES)/emacs-w3m-1.4.4 clean
-.emacs-w3m-made:
-	@$(UNLOCK_INSTALL_DIRS)
-	( 					\
-	  cd $(MAJOR_MODES)/emacs-w3m-1.4.4    && 	\
-	  ./configure --prefix=$(prefix)	\
-		      --infodir=$(infodir) && 	\
-	  make				    && 	\
-	  $(MAKE) install			    && 	\
-	  cp w3m-load.el $(POST_INSTALL_DIR) 	\
-	)
-	@$(LOCK_INSTALL_DIRS)
-	touch $@
 
 # }}}
 # {{{ pgg-mode
