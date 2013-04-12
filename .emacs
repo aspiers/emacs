@@ -53,11 +53,7 @@ placed here.")
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
-(defvar find-function-source-path load-path
-  "The default list of directories where `find-function' searches.
-
-If this variable is nil then `find-function' searches `load-path' by
-default.")
+(defvar find-function-source-path load-path)
 
 ;; (require 'cl)
 ;; (setq org-source-paths
