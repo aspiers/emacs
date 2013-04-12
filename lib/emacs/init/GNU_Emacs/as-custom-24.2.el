@@ -717,6 +717,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-yank-adjusted-subtrees t)
  '(org2blog/wp-blog-alist (quote (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(outline-auto-activation t)
+ '(passive-voice nil)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
