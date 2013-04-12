@@ -29,7 +29,6 @@ UTILS	    = utils
 
 # These should be symlinked to the correct versions.
 ORG_DIR        = $(MAJOR_MODES)/org-mode.git
-REMEMBER_DIR   = $(MAJOR_MODES)/remember
 YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
 	YASNIPPET_DIR=
@@ -53,10 +52,6 @@ THIRD_PARTY_PKG_DIRS =
 ifneq (,$(wildcard $(ORG_DIR)))
 	THIRD_PARTY_PKG_TARGETS += .org-installed
 	THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
-endif
-ifneq (,$(wildcard $(REMEMBER_DIR)))
-	THIRD_PARTY_PKG_TARGETS += .remember-installed
-	THIRD_PARTY_PKG_DIRS    += $(REMEMBER_DIR)
 endif
 ifneq (,$(wildcard $(COLOR_THEME_DIR)))
 	THIRD_PARTY_PKG_TARGETS += .color-theme-installed
@@ -551,54 +546,6 @@ endif
 $(MAJOR_MODES)/mmm/%.elc: $(MAJOR_MODES)/mmm/%.el
 
 $(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
-
-# }}}
-# {{{ remember-mode
-
-ifeq (,$(wildcard $(REMEMBER_DIR)))
-clean-remember:
-	@echo "Won't clean non-existent $(REMEMBER_DIR)"
-.remember-installed:
-	@echo "Won't install from non-existent $(REMEMBER_DIR)"
-else
-#$(MAJOR_MODES)/remember/%.elc: $(MAJOR_MODES)/remember/%.el
-#$(MAJOR_MODES)/remember/%.elc: LIBDIRS += $(MAJOR_MODES)/remember
-
-REMEMBER_DISABLE=$(addprefix remember-,bbdb bibl blosxom emacs-wiki-journal planner experimental)
-
-remember: .remember-installed
-clean-remember:
-	rm -f .remember-made .remember-installed
-	$(MAKE) -C $(REMEMBER_DIR) clean
-.remember-made: $(wildcard $(REMEMBER_DIR)/*.el) $(REMEMBER_DIR)/Makefile.defs
-	@( \
-	  cd $(REMEMBER_DIR); \
-	  echo "Disabling $(REMEMBER_DISABLE)"; \
-	  for d in $(REMEMBER_DISABLE); do \
-	    el=$$d.el; \
-	    if [ -e "$$el" ]; then \
-	      if mv "$$el" "$$el.disabled"; then \
-	        echo "mv $$el $$el.disabled"; \
-	      else \
-	        echo "FAILED: mv $$el $$el.disabled"; \
-		exit 1; \
-	      fi; \
-	    else \
-	      echo "$$el not there"; \
-	    fi; \
-	  done; \
-	)
-	$(MAKE) -C $(REMEMBER_DIR) all \
-		EMACS=$(EMACS) PREFIX=$(prefix) INFODIR=$(infodir)
-	touch $@
-
-.remember-installed: .remember-made
-	@$(UNLOCK_INSTALL_DIRS)
-	cd $(REMEMBER_DIR) && \
-	  $(MAKE) install ELISPDIR=$(lispdir) INFODIR=$(infodir)
-	@$(LOCK_INSTALL_DIRS)
-	touch $@
-endif
 
 # }}}
 # {{{ pgg-mode
