@@ -72,7 +72,6 @@ placed here.")
     "major-modes/remember"
     "major-modes/xtla"
     "major-modes/mmm"
-    "major-modes/psgml"
     "major-modes/muse"
     "minor-modes"
     "utils"

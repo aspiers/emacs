@@ -45,13 +45,11 @@ COLOR_THEME_DIR = color-theme
 
 # This is a list of make targets which have their own Makefiles
 # and are responsible for compiling *and* installing themselves.
-THIRD_PARTY_PKG_TARGETS = 		\
-	.psgml-made
+THIRD_PARTY_PKG_TARGETS =
 
 # Don't automatically compile *.el in or install *.elc from these
 # directories:
-THIRD_PARTY_PKG_DIRS =          \
-	$(MAJOR_MODES)/psgml
+THIRD_PARTY_PKG_DIRS =
 
 ifneq (,$(wildcard $(ORG_DIR)))
 	THIRD_PARTY_PKG_TARGETS += .org-installed
@@ -166,7 +164,7 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
-TO_CLEAN = psgml nxml emacs-w3m pgg
+TO_CLEAN = nxml emacs-w3m pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
@@ -605,18 +603,6 @@ clean-remember:
 	@$(LOCK_INSTALL_DIRS)
 	touch $@
 endif
-
-# }}}
-# {{{ psgml-mode
-
-psgml: .psgml-made
-clean-psgml:
-	rm -f .psgml-made
-# psgml Makefile is missing a 'clean' target
-	rm -f $(MAJOR_MODES)/psgml/*.elc
-.psgml-made:
-	$(MAKE) -C $(MAJOR_MODES)/psgml
-	touch $@
 
 # }}}
 # {{{ nxml-mode
