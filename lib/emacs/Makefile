@@ -29,7 +29,6 @@ UTILS	    = utils
 
 # These should be symlinked to the correct versions.
 ORG_DIR        = $(MAJOR_MODES)/org-mode.git
-EPG_DIR        = $(MAJOR_MODES)/epg
 REMEMBER_DIR   = $(MAJOR_MODES)/remember
 YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
@@ -156,7 +155,7 @@ XINSTALL_DIR = $(EMACSLIB)/XEmacs
 prefix   = $(HOME)/local
 infodir = $(prefix)/share/info
 
-# This is where some third-party stuff like epg gets installed,
+# This is where third-party stuff like epg used to get installed,
 # although any third-party packages whose Makefiles are flexible
 # enough to get installed to $(POST_INSTALL_DIR) should probably
 # be installed there for simplicity.
@@ -168,9 +167,6 @@ TO_CLEAN = pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
-endif
-ifneq (,$(wildcard $(EPG_DIR)))
-  TO_CLEAN += epg
 endif
 ifneq (,$(wildcard $(COLOR_THEME_DIR)))
   TO_CLEAN += color-theme
@@ -243,7 +239,7 @@ ifeq (, $(findstring XEmacs,$(version)))
   LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 
   # Really ugly hack to add all subdirs of lispdir to the load-path.
-  # This is required for instance so that org-crypt can compile against
+  # This used to be required so that org-crypt could compile against
   # ~/local/share/emacs/site-lisp/epg/
   LOADPATH_OPTS += \
 	--eval "(let ((orig-dir default-directory)) 		\
@@ -534,7 +530,7 @@ else
 clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(wildcard $(ORG_DIR)/lisp/*.el) .epg-installed
+.org-installed: $(wildcard $(ORG_DIR)/lisp/*.el)
 	@$(UNLOCK_INSTALL_DIRS)
 #	EMACS="$(EMACS) -L $(lispdir)/epg"
 #	http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
@@ -614,34 +610,6 @@ clean-pgg:
 $(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
 .pgg-made: $(MAJOR_MODES)/pgg/pgg.elc
 	@-cp $(MAJOR_MODES)/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
-
-# }}}
-# {{{ epg-mode
-
-epg: .epg-installed
-ifeq (,$(wildcard $(EPG_DIR)))
-clean-epg:
-	@echo "Won't clean non-existent $(EPG_DIR)"
-.epg-installed:
-	@echo "Won't install from non-existent $(EPG_DIR)" && \
-	touch $@
-# need to touch to avoid targets depending on .epg-installed
-# (e.g. .org-installed) always being remade :-/
-else
-clean-epg:
-	rm -f .epg-installed
-	-$(MAKE) -C $(EPG_DIR) clean
-.epg-installed: $(EPG_DIR)/epg.el
-	@$(UNLOCK_INSTALL_DIRS)
-	@-( cd $(EPG_DIR) && \
-	  ./configure --prefix=$(prefix) \
-	  	      --infodir=$(infodir) && \
-	  $(MAKE) install \
-	) && \
-	$(LOCK_INSTALL_DIRS) && \
-	echo "### epg installed" && \
-	touch $@
-endif
 
 # }}}
 # {{{ color-theme
