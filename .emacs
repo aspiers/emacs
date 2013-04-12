@@ -192,6 +192,7 @@ placed here.")
     idomenu
     ido-ubiquitous
     inf-ruby
+    keywiz
     magit
     magithub
     multiple-cursors
