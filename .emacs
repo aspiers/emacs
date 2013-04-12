@@ -195,6 +195,7 @@ placed here.")
     magithub
     multiple-cursors
     org2blog
+    rinari
     ruby-mode
     switch-window
     xml-rpc
