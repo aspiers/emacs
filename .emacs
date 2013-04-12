@@ -69,7 +69,6 @@ placed here.")
     "major-modes"
     "major-modes/org-mode.git/lisp"
     "major-modes/org-mode.git/contrib/lisp"
-    "major-modes/xtla"
     "major-modes/mmm"
     "major-modes/muse"
     "minor-modes"
