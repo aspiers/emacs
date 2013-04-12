@@ -164,7 +164,7 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
-TO_CLEAN = nxml emacs-w3m pgg
+TO_CLEAN = emacs-w3m pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
   TO_CLEAN += org
@@ -603,18 +603,6 @@ clean-remember:
 	@$(LOCK_INSTALL_DIRS)
 	touch $@
 endif
-
-# }}}
-# {{{ nxml-mode
-
-nxml: .nxml-mode-20041004-made
-clean-nxml:
-	rm -f .nxml-mode-20041004-made
-	$(MAKE) -C $(MAJOR_MODES)/nxml-mode-20041004 clean
-.nxml-mode-20041004-made: $(POST_INSTALL_DIR)
-	$(MAKE) -C $(MAJOR_MODES)/nxml-mode-20041004
-	cp rng-auto.el $(POST_INSTALL_DIR)
-	touch $@
 
 # }}}
 # {{{ emacs-w3m-mode
