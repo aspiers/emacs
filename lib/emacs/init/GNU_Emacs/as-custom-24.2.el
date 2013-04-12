@@ -669,33 +669,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-publish-project-alist (quote (("OWRA" :components ("OWRA-2008" "OWRA-2009" "OWRA-2010" "OWRA-2011" "OWRA-2012" "OWRA-2013")) ("OWRA-2008" :base-directory "~/OWRA/meetings/2008" :publishing-directory "~/OWRA/meetings/2008") ("OWRA-2009" :base-directory "~/OWRA/meetings/2009" :publishing-directory "~/OWRA/meetings/2009") ("OWRA-2010" :base-directory "~/OWRA/meetings/2010" :publishing-directory "~/OWRA/meetings/2010") ("OWRA-2011" :base-directory "~/OWRA/meetings/2011" :publishing-directory "~/OWRA/meetings/2011") ("OWRA-2012" :base-directory "~/OWRA/meetings/2012" :publishing-directory "~/OWRA/meetings/2012") ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013"))))
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
- '(org-remember-default-headline "bottom")
- '(org-remember-templates (quote (("Invisalign" 116 "*** %t
-***** %?%&" "~/org/notes/Invisalign.org" "journal" nil) ("org mailing list item" 111 "* NEXT [#B] %?%&" "~/org/TODO.org" "to list" nil) ("property test" 122 "%^{Effort}p%&" nil top nil) ("immediate personal NEXT" 105 "* NEXT %?%&
-  SCHEDULED: %T" "~/org/TODO.org" top nil) ("immediate work NEXT" 73 "* NEXT %?%&
-  SCHEDULED: %T" "~/SUSE/TODO.org" top nil) ("personal NEXT" 110 "* NEXT %?%&" "~/org/TODO.org" top nil) ("work NEXT" 78 "* NEXT %?%&" "~/SUSE/TODO.org" top nil) ("NEXT from personal mail" 109 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/org/TODO.org" top nil) ("NEXT from work mail" 77 "* NEXT [#B] %?%&%[~/.org-mairix-link]" "~/SUSE/TODO.org" top nil) ("personal diary entry" 97 "* %^t %?%&%[~/.org-mairix-link]" "~/org/diary.org" top nil) ("work learning material" 76 "* SOMEDAY %?%&%[~/.org-mairix-link]	:learning:" "~/SUSE/TODO.org" top nil) ("personal task DONE" 100 "* DONE %?%&" "~/org/DONE.org" bottom nil) ("work task DONE" 68 "* DONE %?%&" "~/SUSE/DONE.org" bottom nil) ("nuisance phone call" 88 "* %T %?%&" "~/org/notes/NuisanceCalls.org" bottom nil) ("Wipfel learning" 119 "* SOMEDAY %[~/.org-mairix-link]%&" "~/SUSE/TODO.org" "PROJECT rwipfel" nil) ("PSO standup calls etc." 83 "*** %t
-***** me
-******* %?%&" "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning" nil) ("project" 112 "* PROJECT %^{project title}
-*** why
-    - %?%&
-    - 
-    - 
-    - 
-    - 
-*** outcome
-*** brainstorming
-***** Who?
-***** What?
-***** When?
-***** Where?
-***** Why?
-***** How?" nil top nil) ("Procrastination" 80 "%&* [#B] %T %^{activity}
-  :PROPERTIES:
-  :thoughts/feelings: %^{thoughts/feelings}
-  :justification: %^{justification}
-  :attempted solution: %^{attempted solution}
-  :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:" "~/org/notes/ProcrastinationLog.org" bottom nil))))
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
@@ -722,9 +695,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
- '(remember-annotation-functions (quote (org-remember-annotation)))
- '(remember-handler-functions (quote (org-remember-handler)))
- '(remember-mode-hook (quote (org-remember-apply-template)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist t)
