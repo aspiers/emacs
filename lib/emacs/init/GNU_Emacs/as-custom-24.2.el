@@ -690,6 +690,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-yank-adjusted-subtrees t)
  '(org2blog/wp-blog-alist (quote (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(outline-auto-activation t)
+ '(package-archives (quote (("ELPA" . "http://tromey.com/elpa/") ("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/") ("MELPA" . "http://melpa.milkbox.net/packages/") ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(ps-lpr-command "kprinter")
