@@ -606,6 +606,13 @@ REVISION defaults to \"HEAD\"."
 (global-set-key "\C-cgs"  'magit-status)
 (global-set-key [(control shift g)] 'magit-status)
 
+(defun ido-switch-magit-buffer ()
+  "Switch to a magit status buffer via `ido'."
+  (interactive)
+  (ido-buffer-internal ido-default-buffer-method
+                       nil "magit status: " nil "*magit: "))
+(global-set-key [(control meta g)] 'ido-switch-magit-buffer)
+
 ;;}}}
 ;;{{{ _I_nsert auto-text (C-c i)
 
