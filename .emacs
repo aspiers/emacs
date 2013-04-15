@@ -195,6 +195,8 @@ placed here.")
     magithub
     multiple-cursors
     org2blog
+    org-magit
+    org-sync
     rinari
     ruby-mode
     smooth-scrolling
