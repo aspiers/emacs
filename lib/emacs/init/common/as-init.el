@@ -76,8 +76,6 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
-(require 'smooth-scrolling)
-
 ;; Show position in modeline
 (line-number-mode 1)
 (column-number-mode 1)

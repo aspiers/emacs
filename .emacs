@@ -197,6 +197,7 @@ placed here.")
     org2blog
     rinari
     ruby-mode
+    smooth-scrolling
     switch-window
     xml-rpc
     yaml-mode
