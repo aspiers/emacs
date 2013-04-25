@@ -151,7 +151,9 @@ placed here.")
 (load custom-file)
 (as-progress (format "loaded %s" custom-file))
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(defvar el-get-dir)
+(setq el-get-dir (concat edotdir "/.emacs.d/el-get/"))
+(add-to-list 'load-path (concat el-get-dir "el-get"))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
