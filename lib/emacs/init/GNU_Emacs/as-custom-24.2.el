@@ -115,6 +115,7 @@
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(edit-server-port 9293)
+ '(el-get-sources (quote ((:name magit :pkgname "aspiers/magit"))))
  '(eldoc-minor-mode-string "")
  '(eldoc-mode t t)
  '(enable-local-eval t)
