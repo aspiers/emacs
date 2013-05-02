@@ -1,5 +1,3 @@
-me=`basename $0`
-
 usage () {
     # Call as: usage [EXITCODE] [USAGE MESSAGE]
     exit_code=1
@@ -12,6 +10,8 @@ usage () {
       echo
     fi
 
+    me=`basename $0`
+
     cat <<EOF >&2
 Usage: $me <field "[options]"> <field "ARGS">
 Options:
@@ -22,7 +22,9 @@ EOF
     exit "$exit_code"
 }
 
-if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
-  usage 0
-fi
-# or use getoptsx
+main () {
+    if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
+        usage 0
+    fi
+    # or use getoptsx
+}
