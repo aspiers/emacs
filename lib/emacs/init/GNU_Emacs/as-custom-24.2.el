@@ -592,12 +592,66 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-archive-mark-done t)
  '(org-archive-save-context-info (quote (time file category todo priority itags olpath ltags)))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
- '(org-capture-templates (quote (("t" "Invisalign" entry (file+headline "~/org/notes/Invisalign.org" "journal") "*** %t
-***** %?" :prepend t :immediate-finish t) ("o" "org mailing list item" entry (file+headline "~/org/TODO.org" "to list") "* NEXT [#B] %?" :prepend t) ("z" "property test" entry (file "~/org/TODO.org") "%^{Effort}p" :prepend t) ("i" "immediate personal NEXT" entry (file "~/org/TODO.org") "* NEXT %?
-  SCHEDULED: %T" :prepend t) ("I" "immediate work NEXT" entry (file "~/SUSE/TODO.org") "* NEXT %?
-  SCHEDULED: %T" :prepend t) ("n" "personal NEXT" entry (file "~/org/TODO.org") "* NEXT %?" :prepend t) ("N" "work NEXT" entry (file "~/SUSE/TODO.org") "* NEXT %?" :prepend t) ("m" "NEXT from personal mail" entry (file "~/org/TODO.org") "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t) ("M" "NEXT from work mail" entry (file "~/SUSE/TODO.org") "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t) ("a" "personal diary entry" entry (file "~/org/diary.org") "* %^t %?%[~/.org-mairix-link]" :prepend t) ("L" "work learning material" entry (file "~/SUSE/TODO.org") "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t) ("d" "personal task DONE" entry (file "~/org/DONE.org") "* DONE %?") ("D" "work task DONE" entry (file "~/SUSE/DONE.org") "* DONE %?") ("X" "nuisance phone call" entry (file "~/org/notes/NuisanceCalls.org") "* %T %?") ("w" "Wipfel learning" entry (file+headline "~/SUSE/TODO.org" "PROJECT rwipfel") "* SOMEDAY %[~/.org-mairix-link]" :prepend t) ("S" "PSO standup calls etc." entry (file+headline "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning") "*** %t
+ '(org-capture-templates
+   (quote
+    (("t" "Invisalign" entry
+      (file+headline "~/org/notes/Invisalign.org" "journal")
+      "*** %t
+***** %?" :prepend t :immediate-finish t)
+     ("o" "org mailing list item" entry
+      (file+headline "~/org/TODO.org" "to list")
+      "* NEXT [#B] %?" :prepend t)
+     ("z" "property test" entry
+      (file "~/org/TODO.org")
+      "%^{Effort}p" :prepend t)
+     ("i" "immediate personal NEXT" entry
+      (file "~/org/TODO.org")
+      "* NEXT %?
+  SCHEDULED: %T" :prepend t)
+     ("I" "immediate work NEXT" entry
+      (file "~/SUSE/TODO.org")
+      "* NEXT %?
+  SCHEDULED: %T" :prepend t)
+     ("n" "personal NEXT" entry
+      (file "~/org/TODO.org")
+      "* NEXT %?" :prepend t)
+     ("N" "work NEXT" entry
+      (file "~/SUSE/TODO.org")
+      "* NEXT %?" :prepend t)
+     ("m" "NEXT from personal mail" entry
+      (file "~/org/TODO.org")
+      "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t)
+     ("M" "NEXT from work mail" entry
+      (file "~/SUSE/TODO.org")
+      "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t)
+     ("a" "personal diary entry" entry
+      (file "~/org/diary.org")
+      "* %^t %?%[~/.org-mairix-link]" :prepend t)
+     ("L" "work learning material" entry
+      (file "~/SUSE/TODO.org")
+      "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
+     ("d" "personal task DONE" entry
+      (file "~/org/DONE.org")
+      "* DONE %?
+  CLOSED: %U")
+     ("D" "work task DONE" entry
+      (file "~/SUSE/DONE.org")
+      "* DONE %?
+  CLOSED: %U")
+     ("X" "nuisance phone call" entry
+      (file "~/org/notes/NuisanceCalls.org")
+      "* %T %?")
+     ("w" "Wipfel learning" entry
+      (file+headline "~/SUSE/TODO.org" "PROJECT rwipfel")
+      "* SOMEDAY %[~/.org-mairix-link]" :prepend t)
+     ("S" "PSO standup calls etc." entry
+      (file+headline "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning")
+      "*** %t
 ***** me
-******* %?" :prepend t) ("p" "project" entry (file "~/org/TODO.org") "* PROJECT %^{project title}
+******* %?" :prepend t)
+     ("p" "project" entry
+      (file "~/org/TODO.org")
+      "* PROJECT %^{project title}
 *** why
     - %?
     - 
@@ -611,7 +665,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** When?
 ***** Where?
 ***** Why?
-***** How?" :prepend t) ("P" "Procrastination" entry (file "~/org/notes/ProcrastinationLog.org") "* [#B] %T %^{activity}
+***** How?" :prepend t)
+     ("P" "Procrastination" entry
+      (file "~/org/notes/ProcrastinationLog.org")
+      "* [#B] %T %^{activity}
   :PROPERTIES:
   :thoughts/feelings: %^{thoughts/feelings}
   :justification: %^{justification}
