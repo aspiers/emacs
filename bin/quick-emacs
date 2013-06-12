@@ -64,7 +64,9 @@ esac
 
 focus_emacs_frame () {
     # Save the current window id so we know what to switch back to from emacs.
-    client_winid=`current-window-id`
+    if ! client_winid=`current-window-id`; then
+        echo "WARNING: couldn't establish current window; will not be able to switch back" >&2
+    fi
 
     # Focus existing emacs frame
     if ! focus-emacs-frame; then
@@ -76,8 +78,10 @@ do_editing () {
     # Wait for editing to be completed
     emacsclient "$@" >/dev/null
 
-    # Switch back to window from which emacsclient was invoked.
-    wmctrl -ia $client_winid
+    if [ -n "$client_winid" ]; then
+    # If we can, switch back to window from which emacsclient was invoked.
+        wmctrl -ia "$client_winid"
+    fi
 }
 
 maybe_bg () {
