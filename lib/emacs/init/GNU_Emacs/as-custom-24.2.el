@@ -693,7 +693,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-drawers (quote ("PROPERTIES" "CLOCK" "HIDE" "STATE")))
  '(org-email-link-description-format "mail %c: %.30s")
  '(org-emphasis-regexp-components (quote (" 	('\"" "- 	.,:?;'\")" " 	
-,\"'" "." 5)))
+,\"'" "." 5)) t)
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
  '(org-export-html-style "<style type=\"text/css\">
