@@ -543,7 +543,23 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("A" "admin" tags-todo "admin" nil)
      ("z" "personal agenda" agenda "CATEGORY=\"personal\"" nil)
      ("o" "org" tags-todo "org" nil)
-     ("wl" "work log" agenda ""
+     ("pl" "personal log" agenda "DONE"
+      ((org-agenda-files
+        (quote
+         ("~/org/TODO.org" "~/org/DONE.org" "~/eventbook/design.org")))
+       (org-agenda-span
+        (quote week))
+       (org-agenda-start-on-weekday 1)
+       (org-agenda-include-diary t)
+       (org-agenda-overriding-header "")
+       (org-agenda-start-with-log-mode
+        (quote
+         (closed clock)))
+       (org-agenda-entry-types
+        (quote
+         (:timestamp :sexp)))
+       (org-agenda-overriding-header "")))
+     ("wl" "work log" agenda "DONE"
       ((org-agenda-files
         (quote
          ("~/SUSE/TODO.org" "~/SUSE/DONE.org")))
@@ -551,9 +567,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
         (quote week))
        (org-agenda-start-on-weekday 1)
        (org-agenda-include-diary t)
+       (org-agenda-overriding-header "")
+       (org-agenda-start-with-log-mode
+        (quote
+         (closed clock)))
        (org-agenda-entry-types
         (quote
-         (:timestamp :sexp))))))))
+         (:timestamp :sexp)))
+       (org-agenda-overriding-header ""))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
