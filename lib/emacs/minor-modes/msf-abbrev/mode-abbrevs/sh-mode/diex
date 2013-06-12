@@ -1,2 +1,4 @@
-echo >&2 "<field "ERROR">"
-exit 1
+die () {
+    echo >&2 "*"
+    exit 1
+}
