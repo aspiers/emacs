@@ -187,6 +187,7 @@ placed here.")
     gist
     ;;git-gutter
     git-gutter-fringe
+    git-modes
     goto-chg
     haml-mode
     idomenu
@@ -194,7 +195,9 @@ placed here.")
     inf-ruby
     keywiz
     magit
-    magithub
+    ;; https://github.com/nex3/magithub/pull/11
+    ;; https://github.com/nex3/magithub/pull/12
+    ;;magithub
     multiple-cursors
     org2blog
     org-magit
