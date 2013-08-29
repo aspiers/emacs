@@ -493,6 +493,11 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
+(global-set-key [(control x) ?8 ?e]
+                (lambda ()
+                  (interactive)
+                  (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
+
 (global-set-key [(control N)] 'next-logical-line)
 (global-set-key [(control P)] 'previous-logical-line)
 
