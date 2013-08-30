@@ -3,7 +3,7 @@
 # Provide an emacs window in the quickest way possible, using wmctrl
 # to focus it if necessary.  This favours the use of emacsclient if
 # there is a running emacs server, and intelligently takes advantage
-# of emacs 23's multi-tty support where present.
+# of newer emacs multi-tty support where present.
 #
 # Invoke this rather than focus-emacs-frame.
 
@@ -58,8 +58,13 @@ else
     emacs_version=$( emacs --batch --no-site-file --eval '(message emacs-version)' 2>&1 )
 fi
 
+multi_tty_support=
 case "$emacs_version" in
-    23.*) emacs23=y ;;
+    1[0-9].*|2[012].*)
+        ;;
+    *)
+        multi_tty_support=y
+        ;;
 esac
 
 focus_emacs_frame () {
@@ -93,8 +98,8 @@ maybe_bg () {
 }
 
 if [ -n "$server_up" ]; then
-    if [ -n "$emacs23" ]; then
-        # emacs 23.x does all the hard work for us, since its clients
+    if [ -n "$multi_tty_support" ]; then
+        # newer emacsen do all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
         maybe_bg emacsclient -c "$@"
     else
