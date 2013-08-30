@@ -441,6 +441,9 @@ consistent landing spot."
 
 ;;}}}
 
+(global-set-key [(meta x)]   'smex)
+(global-set-key [(meta X)]   'smex-major-mode-commands)
+
 (global-set-key [(meta "\\")]   'fixup-whitespace)
                                 ;; was delete-horizontal-space
 (global-set-key [(meta g)]      'goto-line)          ;; was set-face

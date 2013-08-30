@@ -204,6 +204,7 @@ placed here.")
     org-sync
     rinari
     ruby-mode
+    smex
     smooth-scrolling
     switch-window
     xml-rpc
