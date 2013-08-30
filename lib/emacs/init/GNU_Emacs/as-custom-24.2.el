@@ -168,6 +168,7 @@
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere nil)
+ '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
  '(ido-mode (quote both) nil (ido))
  '(imenu-auto-rescan t)
