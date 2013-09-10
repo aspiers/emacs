@@ -154,7 +154,8 @@
  '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
  '(gnus-novice-user nil)
  '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
- '(gnus-select-method (quote (nntp "news.pipex.net")))
+;; This one has a 'standard-value property which causes gnus to be loaded immediately
+;; '(gnus-select-method (quote (nntp "news.pipex.net")))
  '(gnus-startup-hook (quote ((lambda nil (if (<= (frame-width) 80) (gnus-add-configuration (quote (article (vertical 1.0 (horizontal 0.25 (summary 0.75 point) (tree 1.0)) (article 1.0))))))))))
  '(gnus-summary-exit-hook (quote (gnus-summary-bubble-group)))
  '(gnus-summary-line-format "%U%R%z%4L:%([%1{%-15,15n%}]%) %2t %3{%B%}%2{%s%}
