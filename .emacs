@@ -207,7 +207,6 @@ placed here.")
     smex
     smooth-scrolling
     switch-window
-    xml-rpc
     yaml-mode
     yasnippet
     )
