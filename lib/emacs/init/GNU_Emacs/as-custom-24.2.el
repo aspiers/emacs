@@ -611,11 +611,11 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("i" "immediate personal NEXT" entry
       (file "~/org/TODO.org")
       "* NEXT %?
-  SCHEDULED: %T" :prepend t)
+  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
      ("I" "immediate work NEXT" entry
       (file "~/SUSE/TODO.org")
       "* NEXT %?
-  SCHEDULED: %T" :prepend t)
+  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
       "* NEXT %?" :prepend t)
