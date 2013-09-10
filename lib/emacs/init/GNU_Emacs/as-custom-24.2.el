@@ -79,6 +79,7 @@
  '(bs-minimal-buffer-name-column 5)
  '(c-default-style (quote ((c-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
  '(case-fold-search t)
+ '(coffee-tab-width 4)
  '(color-theme-is-cumulative t)
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
  '(column-number-mode t)
