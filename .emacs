@@ -232,6 +232,8 @@ placed here.")
      (expand-file-name (concat edotdir "/.emacs.d/elpa/package.el")))
   (package-initialize)
   (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/")))
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (as-progress "end of ~/.emacs")
