@@ -114,7 +114,7 @@ if [ -n "$server_up" ]; then
         fi
     fi
 else
-    if [ -n "$DISPLAY" ]; then
+    if [ -n "$DISPLAY" ] && [ "$USER" != root ]; then
         maybe_bg new-emacs "$@"
     else
         # Fallback to fast-loading tty emacs in foreground, in favour of speed
