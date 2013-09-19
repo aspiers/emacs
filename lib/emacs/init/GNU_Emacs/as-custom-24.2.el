@@ -575,7 +575,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-entry-types
         (quote
          (:timestamp :sexp)))
-       (org-agenda-overriding-header ""))))))
+       (org-agenda-overriding-header "")
+       (org-agenda-prefix-format "  - "))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
