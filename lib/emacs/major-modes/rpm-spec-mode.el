@@ -33,6 +33,8 @@
 ;;     Tim Powers <timp@redhat.com> and Trond Eivind Glomsrød
 ;;          <teg@redhat.com> for Red Hat adaptions and some fixes.
 ;;     Chmouel Boudjnah <chmouel@mandrakesoft.com> for Mandrake fixes.
+;;     Adam Spiers <elisp@adamspiers.org> for GNU emacs compilation
+;;          and other misc fixes.
 
 ;;; ToDo:
 
