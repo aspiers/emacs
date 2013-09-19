@@ -1,8 +1,8 @@
 ;;; rpm-spec-mode.el --- RPM spec file editing commands for Emacs/XEmacs
 
-;; Copyright (C) 1997-2002 Stig Bjørlykke, <stigb@tihlde.org>
+;; Copyright (C) 1997-2002 Stig BjÃ¸rlykke, <stigb@tihlde.org>
 
-;; Author:   Stig Bjørlykke, <stigb@tihlde.org>
+;; Author:   Stig BjÃ¸rlykke, <stigb@tihlde.org>
 ;; Keywords: unix, languages
 ;; Version:  0.12
 
@@ -30,7 +30,7 @@
 ;;     Tore Olsen <toreo@tihlde.org> for some general fixes.
 ;;     Steve Sanbeg <sanbeg@dset.com> for navigation functions and
 ;;          some Emacs fixes.
-;;     Tim Powers <timp@redhat.com> and Trond Eivind Glomsrød
+;;     Tim Powers <timp@redhat.com> and Trond Eivind GlomsrÃ¸d
 ;;          <teg@redhat.com> for Red Hat adaptions and some fixes.
 ;;     Chmouel Boudjnah <chmouel@mandrakesoft.com> for Mandrake fixes.
 
@@ -1232,7 +1232,7 @@ if one is present in the file."
   (message
    (concat "rpm-spec-mode version "
            rpm-spec-mode-version
-           " by Stig Bjørlykke, <stigb@tihlde.org>")))
+           " by Stig Bjï¿½rlykke, <stigb@tihlde.org>")))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
