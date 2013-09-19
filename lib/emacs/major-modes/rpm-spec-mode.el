@@ -197,7 +197,7 @@ value returned by function `user-mail-address'."
   "Partial list of section names.")
 (defconst rpm-scripts
   '("pre" "post" "preun" "postun"
-    "trigger" "triggerin" "triggerun" "triggerpostun")
+    "trigger" "triggerin" "triggerun" "triggerpostun" "verifyscript")
   "List of rpm scripts.")
 (defconst rpm-section-seperate "^%\\(\\w+\\)\\s-")
 (defconst rpm-section-regexp
