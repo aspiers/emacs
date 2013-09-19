@@ -674,22 +674,23 @@ controls whether case is significant."
   (beginning-of-line)
   (if (not what)
       (setq what (rpm-completing-read "Tag: " rpm-tags-list)))
-  (if (string-match "^%" what)
-      (setq read-text (concat "Packagename for " what ": ")
-            insert-text (concat what " "))
-    (setq read-text (concat what ": ")
-          insert-text (concat what ": ")))
-  (cond
-   ((string-equal what "Group")
-    (rpm-insert-group))
-   ((string-equal what "Source")
-    (rpm-insert-n "Source"))
-   ((string-equal what "Patch")
-    (rpm-insert-n "Patch"))
-   (t
-    (if file-completion
-        (insert insert-text (read-file-name (concat read-text) "" "" nil) "\n")
-      (insert insert-text (read-from-minibuffer (concat read-text)) "\n")))))
+  (let (read-text insert-text)
+    (if (string-match "^%" what)
+        (setq read-text (concat "Packagename for " what ": ")
+              insert-text (concat what " "))
+      (setq read-text (concat what ": ")
+            insert-text (concat what ": "))
+      (cond
+       ((string-equal what "Group")
+        (rpm-insert-group))
+       ((string-equal what "Source")
+        (rpm-insert-n "Source"))
+       ((string-equal what "Patch")
+        (rpm-insert-n "Patch"))
+       (t
+        (if file-completion
+            (insert insert-text (read-file-name (concat read-text) "" "" nil) "\n")
+          (insert insert-text (read-from-minibuffer (concat read-text)) "\n")))))))
 
 (defun rpm-topdir ()
   (or
@@ -878,50 +879,50 @@ leave point at previous location."
 
 (defun rpm-build (buildoptions)
   "Build this RPM package."
-  (setq rpm-buffer-name
-        (concat "*" rpm-spec-build-command " " buildoptions " "
-                (file-name-nondirectory buffer-file-name) "*"))
-  (rpm-process-check rpm-buffer-name)
-  (if (get-buffer rpm-buffer-name)
-      (kill-buffer rpm-buffer-name))
-  (create-file-buffer rpm-buffer-name)
-  (display-buffer rpm-buffer-name)
-  (setq buildoptions (list buildoptions buffer-file-name))
-  (if (or rpm-spec-short-circuit rpm-spec-nobuild)
-      (setq rpm-no-gpg t))
-  (if rpm-spec-rmsource
-      (setq buildoptions (cons "--rmsource" buildoptions)))
-  (if rpm-spec-clean
-      (setq buildoptions (cons "--clean" buildoptions)))
-  (if rpm-spec-short-circuit
-      (setq buildoptions (cons "--short-circuit" buildoptions)))
-  (if (and (not (equal rpm-spec-timecheck "0"))
-           (not (equal rpm-spec-timecheck "")))
-      (setq buildoptions (cons "--timecheck" (cons rpm-spec-timecheck
-                                                   buildoptions))))
-  (if (not (equal rpm-spec-buildroot ""))
-      (setq buildoptions (cons "--buildroot" (cons rpm-spec-buildroot
-                                                   buildoptions))))
-  (if (not (equal rpm-spec-target ""))
-      (setq buildoptions (cons "--target" (cons rpm-spec-target
-                                                buildoptions))))
-  (if rpm-spec-nobuild
-      (setq buildoptions (cons (if rpm-spec-old-rpm "--test" "--nobuild")
-			       buildoptions)))
-  (if rpm-spec-nodeps
-      (setq buildoptions (cons "--nodeps" buildoptions)))
-  (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
-      (setq buildoptions (cons "--sign" buildoptions)))
-  (save-excursion
-    (set-buffer (get-buffer rpm-buffer-name))
-    (goto-char (point-max)))
-  (let ((process
-         (apply 'start-process rpm-spec-build-command rpm-buffer-name
-		rpm-spec-build-command buildoptions)))
+  (let ((rpm-buffer-name
+         (concat "*" rpm-spec-build-command " " buildoptions " "
+                 (file-name-nondirectory buffer-file-name) "*")))
+    (rpm-process-check rpm-buffer-name)
+    (if (get-buffer rpm-buffer-name)
+        (kill-buffer rpm-buffer-name))
+    (create-file-buffer rpm-buffer-name)
+    (display-buffer rpm-buffer-name)
+    (setq buildoptions (list buildoptions buffer-file-name))
+    (if (or rpm-spec-short-circuit rpm-spec-nobuild)
+        (setq rpm-no-gpg t))
+    (if rpm-spec-rmsource
+        (setq buildoptions (cons "--rmsource" buildoptions)))
+    (if rpm-spec-clean
+        (setq buildoptions (cons "--clean" buildoptions)))
+    (if rpm-spec-short-circuit
+        (setq buildoptions (cons "--short-circuit" buildoptions)))
+    (if (and (not (equal rpm-spec-timecheck "0"))
+             (not (equal rpm-spec-timecheck "")))
+        (setq buildoptions (cons "--timecheck" (cons rpm-spec-timecheck
+                                                     buildoptions))))
+    (if (not (equal rpm-spec-buildroot ""))
+        (setq buildoptions (cons "--buildroot" (cons rpm-spec-buildroot
+                                                     buildoptions))))
+    (if (not (equal rpm-spec-target ""))
+        (setq buildoptions (cons "--target" (cons rpm-spec-target
+                                                  buildoptions))))
+    (if rpm-spec-nobuild
+        (setq buildoptions (cons (if rpm-spec-old-rpm "--test" "--nobuild")
+                                 buildoptions)))
+    (if rpm-spec-nodeps
+        (setq buildoptions (cons "--nodeps" buildoptions)))
     (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
-        (let ((rpm-passwd-cache (read-passwd "GPG passphrase: ")))
-          (process-send-string process (concat rpm-passwd-cache "\n"))))
-    (set-process-filter process 'rpm-command-filter)))
+        (setq buildoptions (cons "--sign" buildoptions)))
+    (save-excursion
+      (set-buffer (get-buffer rpm-buffer-name))
+      (goto-char (point-max)))
+    (let ((process
+           (apply 'start-process rpm-spec-build-command rpm-buffer-name
+                  rpm-spec-build-command buildoptions)))
+      (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
+          (let ((rpm-passwd-cache (read-passwd "GPG passphrase: ")))
+            (process-send-string process (concat rpm-passwd-cache "\n"))))
+      (set-process-filter process 'rpm-command-filter))))
 
 (defun rpm-build-prepare (&optional arg)
   "Run a `rpmbuild -bp'."
@@ -1052,16 +1053,16 @@ command."
 (defun rpm-update-mode-name ()
   "Update `mode-name' according to values set."
   (setq mode-name "RPM-SPEC")
-  (setq modes (concat (if rpm-spec-add-attr      "A")
-                      (if rpm-spec-clean         "C")
-                      (if rpm-spec-nodeps        "D")
-                      (if rpm-spec-sign-gpg      "G")
-                      (if rpm-spec-nobuild       "N")
-                      (if rpm-spec-rmsource      "R")
-                      (if rpm-spec-short-circuit "S")
-                      ))
-  (if (not (equal modes ""))
-      (setq mode-name (concat mode-name ":" modes))))
+  (let ((modes (concat (if rpm-spec-add-attr      "A")
+                       (if rpm-spec-clean         "C")
+                       (if rpm-spec-nodeps        "D")
+                       (if rpm-spec-sign-gpg      "G")
+                       (if rpm-spec-nobuild       "N")
+                       (if rpm-spec-rmsource      "R")
+                       (if rpm-spec-short-circuit "S")
+                       )))
+    (if (not (equal modes ""))
+        (setq mode-name (concat mode-name ":" modes)))))
 
 ;;------------------------------------------------------------
 
@@ -1161,20 +1162,21 @@ if one is present in the file."
              (goto-char (point-min))
              (search-forward-regexp (concat "Release:[ \t]*\\(.+\\).*$") nil)
              (match-string 1))))
-      (let ((inrel
-             (if (string-match "%{?\\([^}]*\\)}?$" str)
-                 (progn
-                   (goto-char (point-min))
-                   (setq macros (substring str (match-beginning 1)
-                                           (match-end 1)))
-                   (search-forward-regexp
-                    (concat "%define[ \t]+" macros
-                            "[ \t]+\\(\\([0-9]\\|\\.\\)+\\)\\(.*\\)"))
-                   (concat macros " " (int-to-string (1+ (string-to-number
-                                                          (match-string 1))))
-                           (match-string 3)))
-               str)))
-        (setq dinrel inrel)
+      (let* (macros
+             (inrel
+              (if (string-match "%{?\\([^}]*\\)}?$" str)
+                  (progn
+                    (goto-char (point-min))
+                    (setq macros (substring str (match-beginning 1)
+                                            (match-end 1)))
+                    (search-forward-regexp
+                     (concat "%define[ \t]+" macros
+                             "[ \t]+\\(\\([0-9]\\|\\.\\)+\\)\\(.*\\)"))
+                    (concat macros " " (int-to-string (1+ (string-to-number
+                                                           (match-string 1))))
+                            (match-string 3)))
+                str))
+             (dinrel inrel))
         (replace-match (concat "%define " dinrel))
         (message (concat "Release tag changed to " dinrel "."))))))
 
