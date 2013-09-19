@@ -684,7 +684,7 @@ controls whether case is significant."
             insert-text (concat what ": "))
       (cond
        ((string-equal what "Group")
-        (rpm-insert-group))
+        (call-interactively 'rpm-insert-group))
        ((string-equal what "Source")
         (rpm-insert-n "Source"))
        ((string-equal what "Patch")
