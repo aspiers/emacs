@@ -602,7 +602,7 @@ with no args, if that value is non-nil."
   (interactive "sChange log entry: ")
   (save-excursion
     (rpm-goto-section "changelog")
-    (let* ((address (or rpm-spec-user-mail-address (user-mail-address)))
+    (let* ((address (or rpm-spec-user-mail-address user-mail-address))
            (fullname (or rpm-spec-user-full-name (user-full-name)))
            (string (concat "* " (substring (current-time-string) 0 11)
                            (substring (current-time-string) -4) " "
@@ -784,7 +784,7 @@ controls whether case is significant."
   (interactive "p")
   (beginning-of-line)
   (insert "Packager: " (or rpm-spec-user-full-name (user-full-name))
-          " <" (or rpm-spec-user-mail-address (user-mail-address)) ">\n"))
+          " <" (or rpm-spec-user-mail-address user-mail-address) ">\n"))
 
 (defun rpm-change-packager (&optional arg)
   "Update Packager tag."
