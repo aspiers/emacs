@@ -705,7 +705,7 @@ controls whether case is significant."
   (save-excursion
     (goto-char (point-max))
     (if (search-backward-regexp (concat "^" what "\\([0-9]*\\):") nil t)
-        (let ((release (1+ (string-to-int (match-string 1)))))
+        (let ((release (1+ (string-to-number (match-string 1)))))
           (forward-line 1)
           (let ((default-directory (concat (rpm-topdir) "/SOURCES/")))
             (insert what (int-to-string release) ": "
@@ -1107,7 +1107,7 @@ command."
   (save-excursion
     (goto-char (point-min))
     (if (search-forward-regexp "^Release:[ \t]*\\([0-9]+\\)\\(.*\\)" nil t)
-        (let ((release (1+ (string-to-int (match-string 1)))))
+        (let ((release (1+ (string-to-number (match-string 1)))))
           (setq release (concat (int-to-string release) (match-string 2)))
           (replace-match (concat "Release: " release))
           (message (concat "Release tag changed to " release ".")))
@@ -1170,7 +1170,7 @@ if one is present in the file."
                    (search-forward-regexp
                     (concat "%define[ \t]+" macros
                             "[ \t]+\\(\\([0-9]\\|\\.\\)+\\)\\(.*\\)"))
-                   (concat macros " " (int-to-string (1+ (string-to-int
+                   (concat macros " " (int-to-string (1+ (string-to-number
                                                           (match-string 1))))
                            (match-string 3)))
                str)))
