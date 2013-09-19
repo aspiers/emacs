@@ -588,8 +588,7 @@ with no args, if that value is non-nil."
 
 (defun rpm-command-filter (process string)
   "Filter to process normal output."
-  (save-excursion
-    (set-buffer (process-buffer process))
+  (with-current-buffer (process-buffer process)
     (save-excursion
       (goto-char (process-mark process))
       (insert-before-markers string)
@@ -913,8 +912,7 @@ leave point at previous location."
         (setq buildoptions (cons "--nodeps" buildoptions)))
     (if (and rpm-spec-sign-gpg (not rpm-no-gpg))
         (setq buildoptions (cons "--sign" buildoptions)))
-    (save-excursion
-      (set-buffer (get-buffer rpm-buffer-name))
+    (with-current-buffer (get-buffer rpm-buffer-name)
       (goto-char (point-max)))
     (let ((process
            (apply 'start-process rpm-spec-build-command rpm-buffer-name
