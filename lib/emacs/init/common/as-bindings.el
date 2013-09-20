@@ -569,6 +569,8 @@ consistent landing spot."
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
+;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
+
 ;;{{{ C-c [a-z][A-Z]
 
 (global-set-key "\C-cA"   'as-align-to-previous-line)
