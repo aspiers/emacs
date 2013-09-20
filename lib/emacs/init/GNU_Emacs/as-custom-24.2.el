@@ -809,6 +809,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(transient-mark-mode 1)
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
  '(yas/snippet-dirs (quote ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
