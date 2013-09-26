@@ -441,6 +441,11 @@ consistent landing spot."
 
 ;;}}}
 
+(autoload 'ace-jump-mode "ace-jump-mode" nil t)
+(global-set-key [(control ?0)] 'ace-jump-mode)
+(autoload 'idomenu "idomenu" nil t)
+(global-set-key [(control ?1)] 'idomenu)
+
 (global-set-key [(meta x)]   'smex)
 (global-set-key [(meta X)]   'smex-major-mode-commands)
 

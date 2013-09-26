@@ -169,7 +169,8 @@ placed here.")
   '(
     el-get
 
-    ace-jump-mode
+    ace-jump-mode ;; http://emacsrocks.com/e10.html
+
     ;; artbollocks-mode ;; way too aggressive
     asciidoc
     auto-complete-css
@@ -190,7 +191,7 @@ placed here.")
     git-modes
     goto-chg
     haml-mode
-    idomenu
+    idomenu ;; http://emacsrocks.com/e10.html
     ido-ubiquitous
     inf-ruby
     keywiz
