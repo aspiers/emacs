@@ -2042,7 +2042,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(org2blog/wp-sourcecode-default-params "")
- '(org2blog/wp-use-sourcecode-shortcode t)
+ '(org2blog/wp-use-sourcecode-shortcode nil)
  '(outline-auto-activation t)
  '(package-archives
    (quote
