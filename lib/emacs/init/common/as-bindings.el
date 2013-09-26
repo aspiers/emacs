@@ -501,6 +501,11 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
+(autoload 'key-chord-mode "key-chord")
+(autoload 'key-chord-define-global "key-chord")
+(key-chord-mode 1)
+(key-chord-define-global "zf" 'iy-go-to-char)
+
 (global-set-key [(control x) ?8 ?e]
                 (lambda ()
                   (interactive)

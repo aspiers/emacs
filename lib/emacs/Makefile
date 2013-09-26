@@ -485,6 +485,7 @@ INIT_COMMON_LIBDIRS = 		\
 	$(ORG_DIR)/lisp		\
 	$(MINOR_MODES)		\
 	$(UTILS)		\
+	$(EL_GET)/key-chord	\
 	fun
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)

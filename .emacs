@@ -194,6 +194,8 @@ placed here.")
     idomenu ;; http://emacsrocks.com/e10.html
     ido-ubiquitous
     inf-ruby
+    iy-go-to-char ;; http://emacsrocks.com/e04.html
+    key-chord ;; http://emacsrocks.com/e07.html
     keywiz
     magit
     ;; https://github.com/nex3/magithub/pull/11
