@@ -203,7 +203,7 @@ placed here.")
     ;;magithub
     multiple-cursors
     ;org2blog
-    org-magit
+    org-magit ;; support for magit: links in org buffers
     org-sync
     rinari
     ruby-mode
