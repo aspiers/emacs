@@ -581,7 +581,7 @@ consistent landing spot."
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ C-c g for git operations
 
-(global-set-key "\C-cgb"  'magit-run-git-gui-blame-interactively)
+(global-set-key "\C-cgb"  'magit-run-git-gui-blame)
 (global-set-key "\C-cgg"  'magit-run-git-gui)
 (global-set-key "\C-cgk"  'magit-run-gitk)
 (global-set-key "\C-cgs"  'magit-status)
