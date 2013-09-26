@@ -1382,6 +1382,9 @@
  '(lazy-lock-stealth-verbose t)
  '(magit-log-auto-more t)
  '(magit-remote-ref-format (quote remote-slash-branch))
+ '(magit-repo-dirs
+   (quote
+    ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
  '(magit-rewrite-inclusive nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(mail-envelope-from (quote header))
