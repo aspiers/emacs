@@ -600,6 +600,8 @@ consistent landing spot."
 (global-set-key "\C-cgs"  'magit-status)
 (global-set-key [(control shift g)] 'magit-status)
 
+(autoload 'ido-buffer-internal "ido")
+(defvar ido-default-buffer-method)
 (defun ido-switch-magit-buffer ()
   "Switch to a magit status buffer via `ido'."
   (interactive)
