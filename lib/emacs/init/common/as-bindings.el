@@ -102,6 +102,9 @@
         (message "Not on top fold mark"))
     (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
+(autoload 'folding-find-folding-mark "folding")
+(autoload 'folding-hide-current-subtree "folding")
+(autoload 'folding-show-current-subtree "folding")
 (defun as-folding-hide-subtree ()
   "Hides the current subtree, ensuring a consistent landing spot."
   (interactive)
