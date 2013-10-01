@@ -1347,6 +1347,12 @@ then invoking this function four times would yield:
   (ac-config-default))
 
 ;;}}}
+;;{{{ git-gutter
+
+(require 'git-gutter)
+(global-git-gutter-mode t)
+
+;;}}}
 
 ;;}}}
 ;;{{{ Dual major/minor modes

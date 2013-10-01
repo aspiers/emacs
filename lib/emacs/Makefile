@@ -486,6 +486,7 @@ INIT_COMMON_LIBDIRS = 		\
 	$(MINOR_MODES)		\
 	$(UTILS)		\
 	$(EL_GET)/key-chord	\
+	$(EL_GET)/git-gutter	\
 	fun
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)

@@ -186,8 +186,8 @@ placed here.")
     flymake-shell
     folding
     gist
-    ;;git-gutter
-    git-gutter-fringe
+    git-gutter
+    ;;git-gutter-fringe
     git-modes
     goto-chg
     haml-mode
