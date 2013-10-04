@@ -18,10 +18,6 @@
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))
 
-;; (when (getenv "EMACS_PROFILE_INIT")
-;;   (load "elp")
-;;   (elp-instrument-package "blah")
-
 (as-progress "loading as-init ...")
 
 (load (concat as-version-post-lib-dir "/as-init"))
