@@ -8,12 +8,6 @@
   (or (getenv "ZDOTDIR") "~")
   "Home directory to be used to retrieve emacs init files.")
 
-(as-progress "loading as-init ...")
-
-(load (concat as-version-post-lib-dir "/as-init"))
-
-(as-progress "loaded as-init")
-
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
   (let ((lines (split-string
