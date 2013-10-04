@@ -49,7 +49,7 @@
     ;; https://github.com/nex3/magithub/pull/12
     ;;magithub
     multiple-cursors
-    ;org2blog
+    org2blog
     org-magit ;; support for magit: links in org buffers
     org-sync
     rinari
