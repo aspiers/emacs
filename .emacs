@@ -4,9 +4,15 @@
 ;; Adam Spiers
 ;;
 
+;; Stop Red Hat trampling over my nice config :-(
+(setq inhibit-default-init t)
+
 (defvar edotdir
   (or (getenv "ZDOTDIR") "~")
   "Home directory to be used to retrieve emacs init files.")
+
+(add-to-list 'load-path (concat edotdir "/lib/emacs/init/common"))
+(require 'as-progress)
 
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
@@ -22,16 +28,13 @@
          file))
      lines)))
 
-(as-progress "running .emacs-hooks.d ...")
+(defun as-load-hooks (hook-name)
+  "Load hooks found by `as-find-hooks'."
+  (dolist (hook (as-find-hooks hook-name))
+    (as-progress "loading %s... " (abbreviate-file-name hook))
+    (load hook)
+    (as-progress "loading %s... done" (abbreviate-file-name hook))))
 
-(mapcar (lambda (hook) (if (> (length hook) 0) (load hook)))
-        ;; .emacs.d already taken
-        (as-find-hooks ".emacs-hooks.d"))
-
-(as-progress "ran .emacs-hooks.d")
-
-;; Stop Red Hat trampling over my nice config :-(
-(setq inhibit-default-init t)
-
+(as-load-hooks ".emacs.d/init.d")
 
 (as-progress "end of ~/.emacs")
