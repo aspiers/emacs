@@ -73,11 +73,17 @@ placed here.")
     "minor-modes"
     "utils"
     "fun"))
-(dolist (x as-source-paths)
-  (let ((path (concat as-emacs-dir "/" x)))
-    (message path)
-    (and (file-directory-p path)
-         (add-to-list 'find-function-source-path path))))
+
+(defun as-add-to-find-function-source-path (paths)
+  "Adds paths to `find-function-source-path'."
+  (message "Adding to find-function-source-path:")
+  (dolist (x as-source-paths)
+    (let ((path (concat as-emacs-dir "/" x)))
+      (message "  %s" path)
+      (and (file-directory-p path)
+           (add-to-list 'find-function-source-path path)))))
+
+(as-add-to-find-function-source-path as-source-paths)
 
 (add-to-list 'load-path (concat edotdir "/.emacs.d"))
 (let ((home (getenv "HOME")))
