@@ -55,14 +55,6 @@ placed here.")
 
 (defvar find-function-source-path load-path)
 
-;; (require 'cl)
-;; (setq org-source-paths
-;;       (remove-if-not
-;;        (lambda (dir) (file-directory-p dir))
-;;        (directory-files (concat as-emacs-dir "/major-modes") 'full-paths "org[-.]")))
-;; (mapc (lambda (dir) (add-to-list 'find-function-source-path dir))
-;;       org-source-paths)
-
 (defvar as-source-paths
   '(
     "init/common"
