@@ -22,6 +22,6 @@ as an extremely primitive profiler.")
        (as-progress-clock now)
        )
     (message "[+%.3f] %s: %s" delta caller-filename
-             (format msg args))))
+             (if args (format msg args) msg))))
 
 (provide 'as-progress)
