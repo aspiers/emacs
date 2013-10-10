@@ -1323,6 +1323,7 @@
  '(gdb-many-windows t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
+ '(global-whitespace-mode t)
  '(gnus-asynchronous t)
  '(gnus-cache-active-file "~/.gnus/cache/active")
  '(gnus-cache-directory "~/.gnus/cache/")
@@ -2090,6 +2091,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
+ '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
+\\)+\\)\\{2\\}\\)")
+ '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
+\\)+\\)\\{2\\}\\)")
+ '(whitespace-line-column 80)
+ '(whitespace-style
+   (quote
+    (face trailing lines-tail space-before-tab newline empty tab-mark)))
  '(yas/snippet-dirs
    (quote
     ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
@@ -2129,4 +2138,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
  '(org-hide ((nil (:foreground "black"))))
  '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
- '(scroll-bar ((t (:background "grey45")))))
+ '(scroll-bar ((t (:background "grey45"))))
+ '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
+ '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
+ '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick")))))
