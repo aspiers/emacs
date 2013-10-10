@@ -1319,6 +1319,8 @@
  '(erc-user-full-name "Adam Spiers")
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
+ '(fci-rule-color "gray32")
+ '(fci-rule-column 80)
  '(folding-mode-prefix-key "")
  '(gdb-many-windows t)
  '(global-font-lock-mode t nil (font-lock))
