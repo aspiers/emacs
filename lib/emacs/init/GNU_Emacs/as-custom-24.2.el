@@ -185,6 +185,7 @@
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
  '(magit-log-auto-more t)
+ '(magit-remote-ref-format (quote remote-slash-branch))
  '(magit-rewrite-inclusive nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(mail-envelope-from (quote header))
