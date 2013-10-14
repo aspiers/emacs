@@ -10,6 +10,8 @@ cd
   ln -sf lib/emacs/init/common/as-bindings.el .as-bindings.el
 [ -e .as-gtd.el ] || \
   ln -sf lib/emacs/utils/as-gtd.el .as-gtd.el
+[ -e .el-get ] || \
+  ln -sf .emacs.d/el-get .el-get
 
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do

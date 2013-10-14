@@ -102,6 +102,9 @@
         (message "Not on top fold mark"))
     (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
+(autoload 'folding-find-folding-mark "folding")
+(autoload 'folding-hide-current-subtree "folding")
+(autoload 'folding-show-current-subtree "folding")
 (defun as-folding-hide-subtree ()
   "Hides the current subtree, ensuring a consistent landing spot."
   (interactive)
@@ -441,6 +444,14 @@ consistent landing spot."
 
 ;;}}}
 
+(autoload 'ace-jump-mode "ace-jump-mode" nil t)
+(global-set-key [(control ?0)] 'ace-jump-mode)
+(autoload 'idomenu "idomenu" nil t)
+(global-set-key [(control ?1)] 'idomenu)
+
+(global-set-key [(meta x)]   'smex)
+(global-set-key [(meta X)]   'smex-major-mode-commands)
+
 (global-set-key [(meta "\\")]   'fixup-whitespace)
                                 ;; was delete-horizontal-space
 (global-set-key [(meta g)]      'goto-line)          ;; was set-face
@@ -492,6 +503,16 @@ consistent landing spot."
 
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
+
+(autoload 'key-chord-mode "key-chord")
+(autoload 'key-chord-define-global "key-chord")
+(key-chord-mode 1)
+(key-chord-define-global "zf" 'iy-go-to-char)
+
+(global-set-key [(control x) ?8 ?e]
+                (lambda ()
+                  (interactive)
+                  (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
 
 (global-set-key [(control N)] 'next-logical-line)
 (global-set-key [(control P)] 'previous-logical-line)
@@ -561,6 +582,8 @@ consistent landing spot."
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
+;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html
+
 ;;{{{ C-c [a-z][A-Z]
 
 (global-set-key "\C-cA"   'as-align-to-previous-line)
@@ -571,41 +594,14 @@ consistent landing spot."
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 ;;{{{ C-c g for git operations
 
-;; FIXME: move upstream
-(defun magit-run-git-gui-blame-interactively (prefix)
-  "Run `git gui blame' on the current buffer's filename.
-If a prefix argument is given, the revision is prompted for.
-With a double prefix argument C-u C-u, the filename is also
-prompted for."
-  (interactive "p")
-  (let* ((default-directory (magit-get-top-dir default-directory))
-         (revision (if (>= prefix 4)
-                       (magit-read-rev "Retrieve file from revision")
-                     "HEAD"))
-         (filename (if (> prefix 4)
-                       (magit-read-file-from-rev revision)
-                     (buffer-file-name)))
-         (linenum (if (eq filename (buffer-file-name))
-                      (line-number-at-pos))))
-    (magit-run-git-gui-blame filename revision linenum)))
-
-(defun magit-run-git-gui-blame (filename &optional revision linenum)
-  "Run `git gui blame' on the given filename and revision.
-REVISION defaults to \"HEAD\"."
-  (let ((default-directory (magit-get-top-dir default-directory))
-        (args (append '("gui" "blame")
-                      (if linenum (list (format "--line=%d" linenum)))
-                      (list (or revision "HEAD"))
-                      (list (magit-filename filename)))))
-    (message "Running: %s" (combine-and-quote-strings (cons magit-git-executable args)))
-    (apply 'magit-start-process "Git Blame" nil magit-git-executable args)))
-
-(global-set-key "\C-cgb"  'magit-run-git-gui-blame-interactively)
+(global-set-key "\C-cgb"  'magit-run-git-gui-blame)
 (global-set-key "\C-cgg"  'magit-run-git-gui)
 (global-set-key "\C-cgk"  'magit-run-gitk)
 (global-set-key "\C-cgs"  'magit-status)
 (global-set-key [(control shift g)] 'magit-status)
 
+(autoload 'ido-buffer-internal "ido")
+(defvar ido-default-buffer-method)
 (defun ido-switch-magit-buffer ()
   "Switch to a magit status buffer via `ido'."
   (interactive)

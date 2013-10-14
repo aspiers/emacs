@@ -3,7 +3,7 @@
 # Provide an emacs window in the quickest way possible, using wmctrl
 # to focus it if necessary.  This favours the use of emacsclient if
 # there is a running emacs server, and intelligently takes advantage
-# of emacs 23's multi-tty support where present.
+# of newer emacs multi-tty support where present.
 #
 # Invoke this rather than focus-emacs-frame.
 
@@ -58,13 +58,20 @@ else
     emacs_version=$( emacs --batch --no-site-file --eval '(message emacs-version)' 2>&1 )
 fi
 
+multi_tty_support=
 case "$emacs_version" in
-    23.*) emacs23=y ;;
+    1[0-9].*|2[012].*)
+        ;;
+    *)
+        multi_tty_support=y
+        ;;
 esac
 
 focus_emacs_frame () {
     # Save the current window id so we know what to switch back to from emacs.
-    client_winid=`current-window-id`
+    if ! client_winid=`current-window-id`; then
+        echo "WARNING: couldn't establish current window; will not be able to switch back" >&2
+    fi
 
     # Focus existing emacs frame
     if ! focus-emacs-frame; then
@@ -76,8 +83,10 @@ do_editing () {
     # Wait for editing to be completed
     emacsclient "$@" >/dev/null
 
-    # Switch back to window from which emacsclient was invoked.
-    wmctrl -ia $client_winid
+    if [ -n "$client_winid" ]; then
+    # If we can, switch back to window from which emacsclient was invoked.
+        wmctrl -ia "$client_winid"
+    fi
 }
 
 maybe_bg () {
@@ -89,8 +98,8 @@ maybe_bg () {
 }
 
 if [ -n "$server_up" ]; then
-    if [ -n "$emacs23" ]; then
-        # emacs 23.x does all the hard work for us, since its clients
+    if [ -n "$multi_tty_support" ]; then
+        # newer emacsen do all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
         maybe_bg emacsclient -c "$@"
     else
@@ -105,7 +114,7 @@ if [ -n "$server_up" ]; then
         fi
     fi
 else
-    if [ -n "$DISPLAY" ]; then
+    if [ -n "$DISPLAY" ] && [ "$USER" != root ]; then
         maybe_bg new-emacs "$@"
     else
         # Fallback to fast-loading tty emacs in foreground, in favour of speed

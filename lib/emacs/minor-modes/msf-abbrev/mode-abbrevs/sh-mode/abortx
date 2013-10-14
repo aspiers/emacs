@@ -1,0 +1,4 @@
+abort () {
+    echo >&2 "$*; aborting."
+    exit 1
+}

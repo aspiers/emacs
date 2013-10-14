@@ -935,7 +935,7 @@ then invoking this function four times would yield:
 ;;{{{ mutt
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
-(add-to-list 'auto-mode-alist '("/mutt\\|itsalltext.*mail\\.google" . mail-mode))
+(add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
 (eval-when-compile (require 'sendmail))
 (add-hook
  'mail-mode-hook
@@ -1345,6 +1345,12 @@ then invoking this function four times would yield:
 (when (as-check-feature-loaded 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
   (ac-config-default))
+
+;;}}}
+;;{{{ git-gutter
+
+(require 'git-gutter)
+(global-git-gutter-mode t)
 
 ;;}}}
 

@@ -22,6 +22,26 @@ UTILS	    = utils
 # }}}
 # {{{ Tweakable parameters
 
+# {{{ global paths
+
+EMACSLIB = $(HOME)/lib/emacs
+EMACS_D  = $(HOME)/.emacs.d
+ELPA     = $(EMACS_D)/elpa
+EL_GET	 = $(EMACS_D)/el-get
+
+GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
+XINSTALL_DIR = $(EMACSLIB)/XEmacs
+
+prefix   = $(HOME)/local
+infodir = $(prefix)/share/info
+
+# This is where third-party stuff like epg used to get installed,
+# although any third-party packages whose Makefiles are flexible
+# enough to get installed to $(POST_INSTALL_DIR) should probably
+# be installed there for simplicity.
+lispdir = $(prefix)/share/emacs/site-lisp
+
+# }}}
 # {{{ 3rd party packages
 
 # 3rd party packages are those which have their own Makefiles
@@ -136,25 +156,6 @@ endif
 
 LOADDEFS_DIRS=	\
 	$(UTILS)
-
-# }}}
-# {{{ global paths
-
-EMACSLIB = $(HOME)/lib/emacs
-EMACS_D  = $(HOME)/.emacs.d
-ELPA     = $(EMACS_D)/elpa
-
-GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
-XINSTALL_DIR = $(EMACSLIB)/XEmacs
-
-prefix   = $(HOME)/local
-infodir = $(prefix)/share/info
-
-# This is where third-party stuff like epg used to get installed,
-# although any third-party packages whose Makefiles are flexible
-# enough to get installed to $(POST_INSTALL_DIR) should probably
-# be installed there for simplicity.
-lispdir = $(prefix)/share/emacs/site-lisp
 
 # }}}
 
@@ -484,6 +485,8 @@ INIT_COMMON_LIBDIRS = 		\
 	$(ORG_DIR)/lisp		\
 	$(MINOR_MODES)		\
 	$(UTILS)		\
+	$(EL_GET)/key-chord	\
+	$(EL_GET)/git-gutter	\
 	fun
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)

@@ -2,7 +2,7 @@
   "Internal wallclock for `as-progress' so that it can function
 as an extremely primitive profiler.")
 
-(defun as-progress (message)
+(defun as-progress (msg &rest args)
   "Display progress of loading of init files."
   (let*
       ;; Can't find a way of auto-detecting source file :-(
@@ -21,6 +21,7 @@ as an extremely primitive profiler.")
        (delta (- now as-progress-clock))
        (as-progress-clock now)
        )
-    (message "[+%.3f] %s: %s" delta caller-filename message)))
+    (message "[+%.3f] %s: %s" delta caller-filename
+             (if args (format msg args) msg))))
 
 (provide 'as-progress)
