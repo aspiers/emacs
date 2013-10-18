@@ -1390,7 +1390,9 @@
    (quote
     ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
  '(magit-rewrite-inclusive nil)
+ '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(magit-unstage-all-confirm nil)
  '(mail-envelope-from (quote header))
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
