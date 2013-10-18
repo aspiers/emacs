@@ -1353,6 +1353,14 @@ then invoking this function four times would yield:
 (global-git-gutter-mode t)
 
 ;;}}}
+;;{{{ fill-column-indicator
+
+(if (featurep 'fill-column-indicator)
+    (dolist (hook '(c-mode-hook ruby-mode-hook shell-script-mode-hook
+                    emacs-lisp-mode-hook python-mode-hook))
+      (add-hook hook 'fci-mode)))
+
+;;}}}
 
 ;;}}}
 ;;{{{ Dual major/minor modes
