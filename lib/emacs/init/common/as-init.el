@@ -962,9 +962,10 @@ then invoking this function four times would yield:
           (lambda ()
             (define-key dired-mode-map "\C-xm" 'dired-w3m-find-file)))
 
+(autoload 'w3m-find-file "w3m")
+(autoload 'dired-get-filename "dired")
 (defun dired-w3m-find-file ()
   (interactive)
-  (require 'w3m)
   (let ((file (dired-get-filename)))
     (if (y-or-n-p (format "Open 'w3m' %s " (file-name-nondirectory file)))
         (w3m-find-file file))))
@@ -1341,7 +1342,8 @@ then invoking this function four times would yield:
 ;;{{{ auto-complete-mode
 
 (require 'auto-complete-config nil t)
-(defun ac-config-default)
+(defun ac-config-default ())
+(defvar ac-dictionary-directories)
 (when (as-check-feature-loaded 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
   (ac-config-default))
