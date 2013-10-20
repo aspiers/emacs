@@ -14,7 +14,7 @@ cd
   ln -sf .emacs.d/el-get .el-get
 
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
-for c in lib/emacs/init/GNU_Emacs/as-custom-*.el; do
+for c in lib/emacs/init/GNU_Emacs/as-custom-$version.el; do
   ln -sf $c .${c##*/}
 done
 
