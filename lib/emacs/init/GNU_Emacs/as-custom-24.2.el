@@ -2103,7 +2103,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-line-column 80)
  '(whitespace-style
    (quote
-    (face trailing lines-tail space-before-tab newline empty tab-mark)))
+    (face trailing space-before-tab newline empty tab-mark)))
  '(yas/snippet-dirs
    (quote
     ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
