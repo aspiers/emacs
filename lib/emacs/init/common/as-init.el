@@ -228,6 +228,8 @@
                ;; TWiki
                ("\\.tmpl$"                              . html-helper-mode)
                ("TWiki\\.cfg$"                          . cperl-mode)
+
+               ("\\.o2b$"                               . org-mode)
                ))
   (add-to-list 'auto-mode-alist elt))
 
@@ -1361,6 +1363,15 @@ then invoking this function four times would yield:
     (dolist (hook '(c-mode-hook ruby-mode-hook shell-script-mode-hook
                     emacs-lisp-mode-hook python-mode-hook))
       (add-hook hook 'fci-mode)))
+
+;;}}}
+;;{{{ org2blog
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (and (buffer-file-name)
+                 (string-match "\\.o2b$" (buffer-file-name))
+                 (org2blog/wp-mode))))
 
 ;;}}}
 
