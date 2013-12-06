@@ -674,7 +674,7 @@ All Text add-on."
     (if (string-match "\\.article\\|\\.letter\\|itsalltext" bn)
         (turn-on-auto-fill))
 
-    (if (string-match "itsalltext\\|/git-rebase\\|COMMIT_EDITMSG" bn)
+    (if (string-match "itsalltext" bn)
         (as-set-local-server-edit-keys)))
 
   ;; Expand all newly inserted tabs to spaces
