@@ -2104,6 +2104,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-style
    (quote
     (face trailing space-before-tab newline empty tab-mark)))
+ '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
  '(yas/snippet-dirs
    (quote
     ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
