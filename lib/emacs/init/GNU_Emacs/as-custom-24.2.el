@@ -2146,4 +2146,5 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(scroll-bar ((t (:background "grey45"))))
  '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
- '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick")))))
+ '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick"))))
+ '(whitespace-trailing ((t (:background "dark red" :foreground "yellow" :weight bold)))))
