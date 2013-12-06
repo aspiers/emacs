@@ -55,7 +55,7 @@
     rinari
     ruby-mode
     smex
-    smooth-scrolling
+    ;;smooth-scrolling
     switch-window
     yaml-mode
     yasnippet
