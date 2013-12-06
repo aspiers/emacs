@@ -2105,9 +2105,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (face trailing space-before-tab newline empty tab-mark)))
  '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
- '(yas/snippet-dirs
+ '(yas-snippet-dirs
    (quote
-    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
+    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil (yasnippet)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
