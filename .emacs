@@ -14,19 +14,21 @@
 (add-to-list 'load-path (concat edotdir "/lib/emacs/init/common"))
 (require 'as-progress)
 
+(require 'cl)
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
-  (let ((lines (split-string
-                (shell-command-to-string (concat ". $ZDOT_FIND_HOOKS " hook-name))
-                "\n"
-                'omit-nulls)))
+  (let* ((lines (split-string
+                 (shell-command-to-string (concat ". $ZDOT_FIND_HOOKS " hook-name))
+                 "\n"
+                 'omit-nulls))
+         (files (remove-if-not (lambda (file) (string-match "\\.el\\'" file)) lines)))
     (mapcar
      ;; trim .el from end to allow `load' to use byte-compiled form
      (lambda (file)
        (if (string-match "\\.el\\'" file)
            (replace-match "" nil t file)
          file))
-     lines)))
+         files)))
 
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."
