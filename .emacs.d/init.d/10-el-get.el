@@ -57,6 +57,7 @@
     smex
     ;;smooth-scrolling
     switch-window
+    versions
     yaml-mode
     yasnippet
     )
