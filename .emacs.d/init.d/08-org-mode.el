@@ -1,5 +1,14 @@
 ;; org-mode needs to be loaded before el-get packages which depend on it,
-;; otherwise we get 
+;; otherwise the version of org-mode distributed
+
+(custom-set-variables
+ '(org-disputed-keys
+   (quote
+    (([(control shift right)] . [(control shift n)])
+     ([(control shift left)]  . [(control shift p)])
+     ([(control ?,)]          . [(control ?')])
+     ([(control tab)]         . [(control meta tab)]))))
+ '(org-replace-disputed-keys t))
 
 (as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
