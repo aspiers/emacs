@@ -490,7 +490,6 @@ $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
 # If we ever compile ~/.emacs.d/init.d/*, we'll need to reintroduce these
 # rules.
 # $(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
-# $(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
 # $(AS_INIT_ELC): $(LOADDEFS)
 # $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
 # $(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
