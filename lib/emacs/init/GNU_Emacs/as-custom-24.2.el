@@ -1324,6 +1324,7 @@
  '(folding-mode-prefix-key "")
  '(gdb-many-windows t)
  '(git-gutter:lighter "")
+ '(git-rebase-auto-advance t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-whitespace-mode t)
