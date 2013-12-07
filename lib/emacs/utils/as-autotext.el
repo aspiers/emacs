@@ -1,5 +1,51 @@
 ;; Adam's auto-text utilities
 
+;;{{{ Information about me
+
+;;;###autoload
+(defun as-insert-email-address (&optional prefix)
+  "Inserts Adam's e-mail address."
+  (interactive)
+  (let ((p (point)))
+    (if prefix (insert prefix))
+    (insert "@adamspiers.org")
+    ;; If no prefix provided, leave point where we can type it
+    ;; straight away.
+    (or prefix (goto-char p))))
+
+(defvar as-work-email-address "aspiers@suse.com"
+  "Adam's work email address.")
+
+;;;###autoload
+(defun as-insert-work-email-address ()
+  "Inserts Adam's e-mail address"
+  (interactive)
+  (insert as-work-email-address))
+
+;;;###autoload
+(defun as-insert-name ()
+  "Inserts Adam's name"
+  (interactive)
+  (insert "Adam Spiers"))
+
+;;;###autoload
+(defun as-insert-name-and-email (&optional email)
+  "Inserts Adam's name and e-mail address"
+  (interactive "MPrefix for '@adamspiers.org' ? ")
+  (as-insert-name)
+  (insert " <")
+  (cond (email (insert email "@adamspiers.org"))
+        (t (as-insert-email-address)))
+  (insert ">"))
+
+;;;###autoload
+(defun as-insert-name-and-work-email ()
+  "Inserts Adam's name and work e-mail address"
+  (interactive)
+  (as-insert-name)
+  (insert " <" as-work-email-address ">"))
+
+;;}}}
 ;;{{{ Date/time stamps
 
 ;; Functions I used to use for this:
@@ -140,7 +186,7 @@ Designed to be run from the top of a .changes file."
   ()
   "Inserts an emacs local variables line which will set the local major mode."
   (interactive)
-  (beginning-of-buffer)
+  (goto-char (point-min))
   (insert "# -*- mode:  -*-\n\n")
   (backward-char 6))
 
@@ -151,13 +197,13 @@ Designed to be run from the top of a .changes file."
 (defun as-insert-japh-indirect-sig ()
   "Inserts Adam's cool japh_indirect .sig"
   (interactive)
-  (insert-file "~/.sig/perl/japh_indirect"))
+  (insert-file-contents "~/.sig/perl/japh_indirect"))
 
 ;;;###autoload
 (defun as-insert-japh-method-chain-sig ()
   "Inserts Adam's cool japh_method_chain .sig"
   (interactive)
-  (insert-file "~/.sig/perl/japh_method_chain"))
+  (insert-file-contents "~/.sig/perl/japh_method_chain"))
 
 ;;}}}
 ;;{{{ Scissors
@@ -188,51 +234,5 @@ line before and after the text."
   (if (re-search-forward "\n*" nil t)
     (replace-match "\n\n" nil nil))
   (re-search-forward "\\[snipped\\]\n\n" nil t))
-
-;;}}}
-;;{{{ Information about me
-
-;;;###autoload
-(defun as-insert-email-address (&optional prefix)
-  "Inserts Adam's e-mail address."
-  (interactive)
-  (let ((p (point)))
-    (if prefix (insert prefix))
-    (insert "@adamspiers.org")
-    ;; If no prefix provided, leave point where we can type it
-    ;; straight away.
-    (or prefix (goto-char p))))
-
-(defvar as-work-email-address "aspiers@suse.com"
-  "Adam's work email address.")
-
-;;;###autoload
-(defun as-insert-work-email-address ()
-  "Inserts Adam's e-mail address"
-  (interactive)
-  (insert as-work-email-address))
-
-;;;###autoload
-(defun as-insert-name ()
-  "Inserts Adam's name"
-  (interactive)
-  (insert "Adam Spiers"))
-
-;;;###autoload
-(defun as-insert-name-and-email (&optional email)
-  "Inserts Adam's name and e-mail address"
-  (interactive "MPrefix for '@adamspiers.org' ? ")
-  (as-insert-name)
-  (insert " <")
-  (cond (email (insert email "@adamspiers.org"))
-        (t (as-insert-email-address)))
-  (insert ">"))
-
-;;;###autoload
-(defun as-insert-name-and-work-email ()
-  "Inserts Adam's name and work e-mail address"
-  (interactive)
-  (as-insert-name)
-  (insert " <" as-work-email-address ">"))
 
 ;;}}}
