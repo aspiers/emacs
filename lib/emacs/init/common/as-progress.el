@@ -19,8 +19,7 @@ as an extremely primitive profiler.")
       ((caller-filename "as-init")
        (now (float-time))
        (delta (- now as-progress-clock))
-       (as-progress-clock now)
-       )
+       (as-progress-clock now))
     (message "[+%.3f] %s: %s" delta caller-filename
              (if args (format msg args) msg))))
 
