@@ -69,7 +69,16 @@
 ;; surprised when it isn't on another machine I switch to.
 (el-get-cleanup as-el-get-packages)
 
-(defvar el-get-install-sync nil
+;; Reasons pro installing synchronously:
+;;
+;;   * code loaded after this file which depends on packages loaded
+;;     by this file are guaranteed to work
+;;   * stricter, more deterministic approach makes debugging easier
+;;
+;; Reasons against:
+;;
+;;   * have to wait longer during bootstrap
+(defvar el-get-install-sync t
   "Non-nil means install packages synchronously")
 
 (el-get (if el-get-install-sync 'sync) as-el-get-packages)
