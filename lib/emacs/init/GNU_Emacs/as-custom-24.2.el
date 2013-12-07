@@ -1384,12 +1384,13 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(magit-diff-refine-hunk t)
  '(magit-log-auto-more t)
  '(magit-remote-ref-format (quote remote-slash-branch))
  '(magit-repo-dirs
    (quote
     ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
- '(magit-rewrite-inclusive nil)
+ '(magit-rewrite-inclusive t)
  '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-unstage-all-confirm nil)
