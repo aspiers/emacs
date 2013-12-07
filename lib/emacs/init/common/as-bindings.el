@@ -12,7 +12,7 @@
 ;; "Universal Keymap", so that I can coordinate bindings globally and
 ;; prevent conflicts.  Otherwise I would have preferred to group the
 ;; code logically, e.g. a section for each mode, and have it all
-;; within as-init.el.
+;; within the relevant files in ~/.emacs.d/init.d.
 ;;
 ;; Update: I think the above approach is flawed, since it's easy to
 ;; figure out what bindings are available without that grouping (using
@@ -387,7 +387,7 @@ consistent landing spot."
 ;;{{{ Rebinding for improvement - naughty but nice
 
 ;; Non-mode-specific rebindings here.  Mode-specific rebindings should
-;; go in the mode-specific section of as-init.el.
+;; go within the relevant files in ~/.emacs.d/init.d.
 
 ;;{{{ _O_rganisation/productivity (M-o)
 

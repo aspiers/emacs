@@ -1,241 +1,3 @@
-;; emacs startup file
-;; Adam Spiers
-
-;;{{{ To do list
-
-;;
-;;  - Start using same-window-regexps?
-;;
-
-;;}}}
-
-;;{{{ Compiler declarations
-
-(defun as-quick-startup nil
-  "Non-nil if the current emacs was required to start up quickly."
-  (getenv "QUICK_EMACS"))
-
-;;}}}
-
-;;{{{ Functions
-
-(load-library "as-loaddefs")
-(require 'as-progress)
-(require 'as-require)
-
-(as-progress "functions...")
-
-;;{{{ Appearance
-
-;;{{{ as-font-lock-mode-if-window-system
-
-(defun as-font-lock-mode-if-window-system
-  ()
-  "Turns on font-lock mode if X windows is active."
-  (interactive)
-  (if window-system (font-lock-mode)))
-
-;;}}}
-
-;;}}}
-;;{{{ elisp helper functions
-
-(autoload 'function-arg-types "as-elisp")
-(autoload 'function-arity "as-elisp")
-
-;;}}}
-;;{{{ ll => load-library
-
-(defun ll (library)
-  "Shortcut to `load-library'."
-  (interactive "sLoad library: ")
-  (load-library library))
-
-;;}}}
-;;{{{ Enable disabled functions
-
-(put 'eval-expression 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region   'disabled nil)
-(put 'set-goal-column 'disabled nil)
-(put 'scroll-left     'disabled nil)
-
-;;}}}
-
-(as-progress "functions...done")
-
-;;}}}
-;;{{{ Key bindings
-
-(require 'as-bindings)
-
-;;}}}
-;;{{{ Point movement
-
-;; Scrolling
-(setq scroll-preserve-screen-position t)
-(setq scroll-conservatively 2)
-
-;; Show position in modeline
-(line-number-mode 1)
-(column-number-mode 1)
-
-;; Default right margin
-(setq fill-column 70)
-
-;; Stop down cursor adding newlines to end of buffer.
-(setq next-line-add-newlines nil)
-
-;; IntelliMouse
-(cond ((and (< emacs-major-version 22) window-system)
-       (load "mwheel" t)
-       (mwheel-install)))
-
-;;}}}
-;;{{{ Little odds and ends
-
-;;{{{ find-function-source-path
-
-;; Don't need this, as the Makefile now copys all .el files into the
-;; installdir alongside the .elc files, and `find-library' looks in
-;; `load-path'.
-
-;; (defvar as-emacs-dir)
-
-;; (custom-set-variables
-;;  '(find-function-source-path
-;;    (append load-path
-;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
-;;               (list
-;;                "fun"
-;; [snipped]
-;;                "utils"
-;;                )))))
-
-;;}}}
-;;{{{ e-mail address
-
-(setq user-mail-address "adam@spiers.net")
-
-;;}}}
-;;{{{ kill-line kill whole line if at beginning of line
-
-(setq kill-whole-line t)
-
-;;}}}
-;;{{{ Visible bell
-
-(setq-default visible-bell t)
-
-;;}}}
-;;{{{ Saving sessions
-
-(autoload 'desktop-save "desktop" "Saves desktop session state." t)
-
-;;}}}
-;;{{{ midnight-mode - automatically kill unused buffers
-
-(unless (as-quick-startup) (as-soft-require 'midnight))
-
-;;}}}
-;;{{{ client/server mode
-
-(autoload 'server-start "server" "server-start" t)
-(defun ss ()
-  "Abbreviation for `server-start'."
-  (interactive)
-  (server-start))
-
-(autoload 'edit-server-start "edit-server" "edit-server" t)
-(autoload 'edit-server-stop  "edit-server" "edit-server" t)
-(unless (as-quick-startup)
-  (server-start)
-  (condition-case err
-      (edit-server-start)
-    (file-error (message "%s" (error-message-string err))))
-  (defun edit-server-restart (interactive)
-    "Equivalent to `edit-server-stop' followed by `edit-server-start'."
-    (edit-server-stop)
-    (edit-server-start)))
-
-(autoload 'edit-server-maybe-dehtmlize-buffer "edit-server-htmlize" "edit-server-htmlize" t)
-(autoload 'edit-server-maybe-htmlize-buffer   "edit-server-htmlize" "edit-server-htmlize" t)
-(add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
-(add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)
-
-;;}}}
-;;{{{ Diary, appointments
-
-;; suspect I don't need this any more
-(autoload 'appt-make-list "appt")
-(add-hook 'diary-hook 'appt-make-list)
-
-;;}}}
-;;{{{ UTF-16 support
-
-(add-to-list 'auto-coding-regexp-alist '("^\xFF\xFE.*\x0D\x00$" . utf-16-le-dos) t)
-(add-to-list 'auto-coding-regexp-alist '("^\xFE\xFF.*\x0D\x00$" . utf-16-be-dos) t)
-(add-to-list 'auto-coding-regexp-alist '("^\xFF\xFE" . utf-16-le) t)
-(add-to-list 'auto-coding-regexp-alist '("^\xFE\xFF" . utf-16-be) t)
-
-(defun utf-16-le-pre-write-conversion (start end) nil)
-(defun utf-16-be-pre-write-conversion (start end) nil)
-
-;;}}}
-;;{{{ Color themes
-
-(require 'color-theme-autoloads nil 'noerror)
-(autoload 'color-theme-pastels-on-dark "color-theme-pastels-on-dark" "pastels-on-dark-theme" t)
-(if (as-check-feature-loaded 'color-theme-autoloads)
-    (progn
-      (require 'pastels-on-dark-theme nil 'noerror)
-      (if (as-check-feature-loaded 'pastels-on-dark-theme)
-          (color-theme-pastels-on-dark)
-        (message "Couldn't load pastels-on-dark-theme")))
-  (message "Couldn't load color-theme"))
-
-;;}}}
-
-;;}}}
-;;{{{ Mode-related settings
-
-(as-progress "mode settings...")
-
-;;{{{ Startup mode selection
-
-(as-progress "Startup mode selection...")
-
-(setq major-mode 'indented-text-mode)
-
-;; Iterate over auto-mode-alist, replacing "text-mode"
-;; with "indented-text-mode".
-(mapc (function
-       (lambda (x)
-         (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
-      auto-mode-alist)
-
-;; Each mode has its own block of elisp which will usually modify
-;; auto-mode-alist, but here we add in some misc modes.
-(dolist (elt '(("\\.po[tx]?\\'\\|\\.po\\."              . po-mode)
-               ("\\.htaccess$"                          . apache-mode)
-               ("\\(httpd\\|srm\\|access\\)\\.conf$"    . apache-mode)
-               ("\\.dump$"                              . tar-mode)
-               ("/\\.zsh\\(env\\|rc\\)"                 . sh-mode)
-               ("/\\.zsh/functions/"                    . sh-mode)
-               ("\\.stp$"                               . sh-mode)
-               ("\\.make$"                              . makefile-mode)
-
-               ;; TWiki
-               ("\\.tmpl$"                              . html-helper-mode)
-               ("TWiki\\.cfg$"                          . cperl-mode)
-
-               ("\\.o2b$"                               . org-mode)
-               ))
-  (add-to-list 'auto-mode-alist elt))
-
-;;}}}
-;;{{{ Major modes
-
 (as-progress "Major modes...")
 
 ;;{{{ Programming languages
@@ -389,6 +151,9 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
 
 (global-set-key "\C-cmx" 'make-buffer-file-executable)
+
+(add-to-list 'auto-mode-alist
+             '("/\\.zsh\\(env\\|rc\\|/functions/\\)\\|\\.stp$" . sh-mode))
 
 ;; This doesn't work for some strange reason.
 (add-hook 'shell-script-mode-hook 'as-font-lock-mode-if-window-system)
@@ -606,7 +371,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 ;;}}}
 
-
 ;;}}}
 ;;{{{ Configuration languages
 
@@ -619,6 +383,10 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;{{{ Apache
 
 (autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
+
+(add-to-list 'auto-mode-alist
+             '("\\.htaccess$\\|\\(httpd\\|srm\\|access\\)\\.conf$"
+               . apache-mode))
 
 ;;}}}
 ;;{{{ xrdb
@@ -642,6 +410,15 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;{{{ Semi-natural languages / documentation
 
 ;;{{{ Text
+
+;;(setq major-mode 'indented-text-mode)
+
+;; Iterate over auto-mode-alist, replacing "text-mode"
+;; with "indented-text-mode".
+(mapc (function
+       (lambda (x)
+         (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
+      auto-mode-alist)
 
 (autoload 'server-edit "server")
 (defun as-save-server-buffer ()
@@ -776,160 +553,15 @@ other people."
 ;;(autoload 'lilypond-mode "lilypond" "Mode for editing lilypond files" t)
 
 ;;}}}
-;;{{{ erin (TWiki editing mode)
+;;{{{ TWiki
 
 (autoload 'erin-mode "erin" nil t)
+
+(add-to-list 'auto-mode-alist '("\\.tmpl$" . html-helper-mode))
 
 ;;}}}
 
 ;; muse mode is under productivity section
-
-;;}}}
-;;{{{ Organisation / productivity
-
-;;{{{ org-mode
-
-(as-progress "loading org-install ...")
-(require 'org-install nil 'noerror)
-(when (as-check-feature-loaded 'org-install)
-  (as-progress "org-install loaded")
-  (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)))
-
-(defvar org-mode-map)
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (as-soft-require 'as-gtd)
-   (imenu-add-to-menubar "Imenu")
-   (setq comment-start nil)))
-
-(declare-function org-crypt-use-before-save-magic "org-crypt")
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (and (as-soft-require 'org-crypt)
-        (org-crypt-use-before-save-magic))))
-
-
-;;{{{ org keyword switching
-
-(defun org-todo-previous-keyword ()
-  "Move to previous TODO keyword in all sets."
-  (interactive)
-  (org-todo 'left))
-
-(defun org-todo-next-keyword ()
-  "Move to next TODO keyword in all sets."
-  (interactive)
-  (org-todo 'right))
-
-(defun org-todo-previous-set ()
-  "Move to previous TODO keyword set."
-  (interactive)
-  (org-todo 'previousset))
-
-(defun org-todo-next-set ()
-  "Move to next TODO keyword set."
-  (interactive)
-  (org-todo 'nextset))
-
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (define-key org-mode-map [(control shift f)] 'org-todo-next-keyword)
-   (define-key org-mode-map [(control shift b)] 'org-todo-previous-keyword)
-   (define-key org-mode-map [(control shift p)] 'org-todo-previous-set)
-   (define-key org-mode-map [(control shift n)] 'org-todo-next-set)
-   ))
-
-;;}}}
-;;{{{ org-new-subheading*
-
-(defun org-new-subheading ()
-  "Add a new heading, demoted from the current heading level."
-  (interactive)
-  (org-insert-heading)
-  (org-do-demote))
-
-(defcustom org-subheading-todo-alist nil
-  "An associative map to help define which TODO keyword should be
-used for new subheadings, depending on the current heading's TODO
-keyword.  See the documentation for `org-new-subheading-todo' for
-an example."
-  :group 'org-todo
-  :type '(alist :key-type   (string :tag "Current heading keyword")
-                :value-type (string :tag "New sub-heading keyword")))
-
-(defun org-new-subheading-todo (&optional arg)
-  "Add a new TODO item, demoted from the current heading level.
-
-The TODO keyword for the new item can be specified by a numeric
-prefix argument, as with `org-todo'.
-
-Otherwise, if `org-subheading-todo-alist' is non-nil, it is used
-to map the new keyword from the current one, and if it is nil,
-the next TODO keyword in the sequence is used, or the first one
-if the current heading does not have one.
-
-This allows a TODO keyword hierarchy to be imposed, e.g.
-if org-subheading-todo-alist is
-
-  '((\"MASTERPLAN\" . \"PROJECT\")
-    (\"PROJECT\"    . \"NEXTACTION\")
-    (\"NEXTACTION\" . \"NEXTACTION\"))
-
-then invoking this function four times would yield:
-
-* MASTERPLAN
-** PROJECT
-*** NEXTACTION
-**** NEXTACTION"
-  (interactive "P")
-  (save-excursion
-    (org-back-to-heading)
-    (looking-at org-todo-line-regexp))
-  (let* ((current-keyword (match-string 2))
-         (new-keyword
-          (if arg
-              (nth (1- (prefix-numeric-value arg))
-                   org-todo-keywords-1)
-            (or
-             (and current-keyword
-                  (or (cdr (assoc current-keyword org-subheading-todo-alist))
-                      (cadr (member current-keyword org-todo-keywords-1))))
-             (car org-todo-keywords-1)))))
-    (org-new-subheading)
-    (insert new-keyword " ")))
-
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (define-key org-mode-map [(meta j)]       'org-new-subheading)
-   (define-key org-mode-map [(shift meta j)] 'org-new-subheading-todo)
-   ))
-
-;;}}}
-
-(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
-
-;;{{{ pomodoro
-
-;; http://orgmode.org/worg/org-gtd-etc.php
-
-(add-to-list 'org-modules 'org-timer)
-;; FIXME: something changed here, but I use Pomodroido now anyway.
-;;(setq org-timer-default-timer 25)
-
-;; Modify the org-clock-in so that a timer is started with the default
-;; value except if a timer is already started :
-(add-hook 'org-clock-in-hook '(lambda () 
-      (if (not org-timer-current-timer) 
-      (org-timer-set-timer '(16)))))
-
-;;}}}
-
-;;}}}
 
 ;;}}}
 ;;{{{ Interaction with other people
@@ -990,6 +622,12 @@ then invoking this function four times would yield:
 ;;}}}
 
 ;;}}}
+;;{{{ File handling
+
+(add-to-list 'auto-mode-alist '("\\.dump$" . tar-mode))
+
+;;}}}
+
 ;;{{{ Version control
 
 ;;{{{ cvs helper modes
@@ -1039,365 +677,5 @@ then invoking this function four times would yield:
 (autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
 
 ;;}}}
-
-;;}}}
-
-;;}}}
-;;{{{ Minor modes
-
-(as-progress "Minor modes...")
-
-;;{{{ vc
-
-(require 'vc)
-
-(require 'vc-osc nil t)
-(if (featurep 'vc-osc)
-    (setq vc-handled-backends (append vc-handled-backends '(osc))))
-
-;;}}}
-;;{{{ iswitchb - better buffer switching
-
-;; (eval-when-compile (require 'iswitchb))
-;; (iswitchb-default-keybindings)
-;; (add-hook 'iswitchb-define-mode-map-hook 'as-iswitchb-keys)
-
-;; (defun iswitchb-bury-buffer ()
-;;   "Bury the buffer at the head of `iswitchb-matches'."
-;;   (interactive)
-;;   (let ((enable-recursive-minibuffers t) buf)
-;;     (setq buf (car iswitchb-matches))
-;;     (if buf
-;; 	(progn
-;; 	  (bury-buffer buf)
-;;           (iswitchb-next-match)
-;;           (setq iswitchb-rescan t)))))
-
-;; (defun as-iswitchb-keys ()
-;;  "Adam's keybindings for iswitchb."
-;;  (define-key iswitchb-mode-map "\C-z" 'iswitchb-bury-buffer)
-;;  )
-
-;;}}}
-;;{{{ ido - superior replacement for iswitchb
-
-(require 'ido)
-(ido-mode t)
-
-;;}}}
-(as-progress "Minor modes... 10%")
-;;{{{ Folding mode
-
-;;{{{ Set marks for individual modes
-
-(autoload 'folding-add-to-marks-list "folding" "folding mode")
-
-(eval-after-load "folding"
-  '(progn
-    (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-    (folding-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'makefile-gmake-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-    (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-    (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
-    (folding-add-to-marks-list 'lilypond-mode "% {{{ " "% }}}")
-    (folding-add-to-marks-list 'LilyPond-mode "% {{{ " "% }}}")
-    ))
-
-;;}}}
-;;{{{ Autoload mode via local variables
-
-(autoload 'folding-mode "folding" "folding mode")
-(autoload 'folding-mode-find-file "folding" "folding mode")
-(autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
-(autoload 'folding-set-marks "folding" "folding mode")
-
-(defun fm () "Loads folding-mode." (interactive) (folding-mode))
-(defun as-folding-init ()
-  "Sets up folding-mode for use."
-  (require 'folding)
-  (folding-mode-add-find-file-hook))
-
-;; FIXME - preactivation?
-(eval-after-load "find-func" '(as-folding-init))
-;; (defadvice find-function-search-for-symbol (before as-folding act)
-;;     "blah"
-;;     (require 'folding))
-;; (defadvice find-function (before as-folding act)
-;;     "blah"
-;;     (require 'folding))
-
-(or (as-quick-startup) (as-folding-init))
-
-;;}}}
-;;{{{ Key bindings
-
-(defvar folding-mode-map) ;; avoid compile warnings
-(autoload 'fold-show "folding")
-
-(add-hook 'folding-mode-hook
-          (lambda ()
-            ;; Quick navigation
-            (local-set-key [(control meta <)] 'folding-shift-out)
-            (local-set-key [(control meta >)] 'folding-shift-in)
-            (local-set-key [(shift left)] 'folding-shift-out)
-            (local-set-key [(shift right)] 'folding-shift-in)
-            ))
-
-(eval-when-compile
-  (defvar folding-default-keys-function))
-(setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
-
-;;}}}
-
-;;}}}
-(as-progress "Minor modes... 25%")
-;;{{{ Transient Mark mode
-
-(eval-when-compile (defun transient-mark-mode (arg1) nil))
-(if (not (boundp 'running-xemacs)) (transient-mark-mode 1))
-
-;;}}}
-;;{{{ Font-Lock mode
-
-;;(global-font-lock-mode t)
-
-;; Do this via customisation since it's different for xemacs
-;;(and window-system (not (boundp 'running-xemacs)) (global-font-lock-mode t))
-
-;;}}}
-;;{{{ Load paren library
-
-(require 'paren)
-
-;;}}}
-;;{{{ Time-stamp mode
-
-(autoload 'time-stamp "time-stamp")
-;;(time-stamp)
-;;(setq time-stamp-format "------ %02d %03b %4y %2H%2M %2H%2M  : %u")
-
-;;}}}
-(as-progress "Minor modes... 50%")
-;;{{{ Time
-
-;;(display-time)
-
-;;}}}
-;;{{{ Auto-compression mode
-
-(cond ((as-quick-startup)
-       (defun lac () "Load auto-compression-mode."
-         (interactive)
-         (auto-compression-mode 1)))
-      (t
-       (auto-compression-mode 1)))
-
-;;}}}
-;;{{{ blinking-cursor
-
-(eval-when-compile (defun blinking-cursor-mode (&optional arg)))
-(and window-system
-     (not (boundp 'running-xemacs))
-     (= emacs-major-version 20)
-     (load "blinking-cursor" t)
-     (blinking-cursor-mode 1))
-
-;;}}}
-;;{{{ recentf
-
-(and window-system
-     (load "recentf" 'noerror)
-     (recentf-mode t))
-
-;;}}}
-;;{{{ no toolbar
-
-;; This is best done with X resources, otherwise you get funny
-;; frame-resizing problems.  See ~/.Xresources/emacs.rdb.
-
-;; (and window-system
-;;      (not (boundp 'running-xemacs))
-;;      (>= emacs-major-version 21)
-;;      (tool-bar-mode -1))
-
-;; (setq default-frame-alist
-;;       '((tool-bar-lines . 0)))
-
-;;}}}
-(as-progress "Minor modes... 75%")
-;;{{{ Visible whitespace mode
-
-(autoload 'visible-whitespace-mode "visws" "Visible whitespace mode" t)
-
-;;}}}
-;;{{{ tempo
-
-(defvar tempo-initial-pos nil
-  "Initial position in template after expansion")
-
-;; FIXME: this should be done using tempo-user-elements, not defadvice.
-(defadvice tempo-insert (around tempo-insert-pos act)
-  "Define initial position."
-  (if (eq element '~)
-      (setq tempo-initial-pos (point-marker))
-    ad-do-it))
-
-(defadvice tempo-insert-template (around tempo-insert-template-pos act)
-  "Set initial position when defined.  ChristophConrad"
-  (setq tempo-initial-pos nil)
-  ad-do-it
-  (if tempo-initial-pos
-      (progn
-        (put template 'no-self-insert t)
-        (goto-char tempo-initial-pos))
-    (put template 'no-self-insert nil)))
-
-(defadvice tempo-define-template (after no-self-insert-in-abbrevs activate)
-  "Skip self-insert if template function is called by an abbrev."
-  (put (intern (concat "tempo-template-" (ad-get-arg 0))) 'no-self-insert t))
-
-;;}}}
-;;{{{ allout
-
-;; (defun as-allout-init ()
-;;   "Initialize allout-mode the way Adam likes it."
-;;   (interactive)
-;;   (when (not (featurep 'allout))
-;;     (load "allout.el") ;; Loading .elc causes problems?
-;;     (if (boundp 'outline-init)
-;;         ;; Old versions init in a different way
-;;         (outline-init t)
-;;       (allout-init t))
-;;     (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
-;;     (substitute-key-definition 'end-of-line 'move-end-of-line global-map)))
-
-;; (eval-after-load "outline" '(as-allout-init))
-;; (eval-after-load "muse" '(as-allout-init))
-
-;; (defun as-allout-maybe-init ()
-;;   "Hook for use within `find-file-hooks' to check whether a file needs
-;; allout mode initialized."
-;;   (interactive)
-;;   (when (boundp 'allout-layout)
-;;     (as-allout-init)))
-
-;; (add-hook 'find-file-hooks 'as-allout-maybe-init)
-
-(defvar allout-mode-leaders '((emacs-lisp-mode . ";;;_")
-                              (muse-mode       . "*")))
-
-;;}}}
-;;{{{ msf-abbrev
-
-(autoload 'msf-abbrev-mode "msf-abbrev" nil t)
-
-(eval-after-load "msf-abbrev"
-  '(setq msf-abbrev-root
-         (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
-
-(global-set-key [(control <)] 'msf-cmd-previous-real)
-(global-set-key [(control >)] 'msf-cmd-next-real)
-
-;; Has indent-region changed arity?  Do we need a compatability wrapper?
-;; (eval-after-load "msf-abbrev"
-;;   (let ((arity (function-arity 'indent-region)))
-;;     (if (eq (car arity) 2)
-;;         (defun indent-region ...
-
-;; This goes into an infinite loop :-(
-;; (defadvice abbrev-mode (before abbrev-mode-msf-advice act)
-;;   "Always use `msf-abbrev-mode' when `abbrev-mode' is enabled."
-;;   (msf-abbrev-mode 1))
-
-;; custom-set-variables takes care of this:
-;;(eval-after-load "abbrev" '(require 'msf-abbrev))
-
-(defun msf (&optional prefix)
-  "Alias for msf-abbrev-mode."
-  (interactive "p")
-  (msf-abbrev-mode (or prefix 1)))
-
-;;}}}
-;;{{{ yasnippet
-
-(autoload 'yas/minor-mode "yasnippet" nil nil)
-
-;; Customize yas/snippet-dirs variables for snippet search path
-;; (eval-after-load "yasnippet" '(yas/load-directory ...
-
-(global-set-key [(control <)] 'yasnippet-cmd-previous-real)
-(global-set-key [(control >)] 'yasnippet-cmd-next-real)
-
-(defun yasm (&optional prefix)
-  "Alias for yasnippet-mode."
-  (interactive "p")
-  (yas/minor-mode (or prefix 1)))
-
-;;}}}
-;;{{{ auto-complete-mode
-
-(require 'auto-complete-config nil t)
-(defun ac-config-default ())
-(defvar ac-dictionary-directories)
-(when (as-check-feature-loaded 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
-  (ac-config-default))
-
-;;}}}
-;;{{{ git-gutter
-
-(require 'git-gutter)
-(global-git-gutter-mode t)
-
-;;}}}
-;;{{{ fill-column-indicator
-
-(if (featurep 'fill-column-indicator)
-    (dolist (hook '(c-mode-hook ruby-mode-hook shell-script-mode-hook
-                    emacs-lisp-mode-hook python-mode-hook))
-      (add-hook hook 'fci-mode)))
-
-;;}}}
-;;{{{ org2blog
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (and (buffer-file-name)
-                 (string-match "\\.o2b$" (buffer-file-name))
-                 (org2blog/wp-mode))))
-
-;;}}}
-
-;;}}}
-;;{{{ Dual major/minor modes
-
-(as-progress "Dual major/minor modes...")
-
-;;{{{ outline-mode
-
-(mapc (lambda (x)
-        (add-hook x 'turn-on-auto-fill))
-      '(outline-mode-hook outline-minor-mode-hook))
-
-;;}}}
-
-;;}}}
-
-(as-progress "mode settings...done")
-
-;;}}}
-
-;;{{{ local variables
-
-;;; Local Variables:
-;;; auto-recompile: nil
-;;; End:
 
 ;;}}}

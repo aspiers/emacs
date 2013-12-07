@@ -1,7 +1,5 @@
 ;; Adam's auto-text utilities
 
-;; Should be autoloaded by as-init.el
-
 ;;{{{ Date/time stamps
 
 ;; Functions I used to use for this:

@@ -180,14 +180,12 @@ endif
 PRUNE_DIRS = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
 PRUNE_FILES = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
-# We exclude as-init.el here because it has to be compiled after everything else.
 EL_INSTALLATION_CANDIDATES_cmd =   				        \
 	find $(el_search_paths)				\
 	        -follow					\
 		-name \*.el 				\
 	      $(PRUNE_DIRS)				\
 	      $(PRUNE_FILES)				\
-	      ! -name as-init.el			\
 	      ! -path '*/attic/*'			\
 	      ! -path '*/shimbun/*'
 EL_INSTALLATION_CANDIDATES = $(shell $(EL_INSTALLATION_CANDIDATES_cmd)) 
@@ -212,11 +210,9 @@ THIRD_PARTY_ELs = $(shell \
 
 # }}}
 
-AS_INIT_EL    	    = init/common/as-init.el
 AS_BINDINGS_EL	    = init/common/as-bindings.el
 AS_PROGRESS_EL	    = init/common/as-progress.el
 AS_REQUIRE_EL  	    = init/common/as-require.el
-AS_INIT_ELC         = $(AS_INIT_EL)c
 AS_BINDINGS_ELC     = $(AS_BINDINGS_EL)c
 AS_PROGRESS_ELC     = $(AS_PROGRESS_EL)c
 AS_REQUIRE_ELC 	    = $(AS_REQUIRE_EL)c
@@ -320,8 +316,7 @@ list-install-files-unfiltered:
 # }}}
 # {{{ high-level targets
 
-# as-init.el has to be compiled after everything else.
-.elcs: $(ELCs_TO_BE_COMPILED) $(THIRD_PARTY_PKG_TARGETS) $(AS_INIT_ELC)
+.elcs: $(ELCs_TO_BE_COMPILED) $(THIRD_PARTY_PKG_TARGETS)
 	@touch $@
 
 $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR):
@@ -349,8 +344,7 @@ install: .installed
 #                                    (file-name-directory (locate-library "color-theme"))
 #                                    "/themes") t "^color-theme")
 INSTALL_FILES_UNFILTERED = \
-	$(EL_INSTALLATION_CANDIDATES) $(ELCs_TO_BE_COMPILED) \
-	$(AS_INIT_ELC)
+	$(EL_INSTALLATION_CANDIDATES) $(ELCs_TO_BE_COMPILED)
 INSTALL_FILES = $(filter-out $(NO_INSTALL_PATTERNS),$(INSTALL_FILES_UNFILTERED))
 
 ifneq (,$(EL_OVERRIDES))
@@ -492,11 +486,14 @@ INIT_COMMON_LIBDIRS = 		\
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
-$(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
-$(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
-$(AS_INIT_ELC): $(LOADDEFS)
-$(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
-#$(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
+
+# If we ever compile ~/.emacs.d/init.d/*, we'll need to reintroduce these
+# rules.
+# $(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
+# $(AS_INIT_ELC): $(UTILS)/smooth-scrolling.elc
+# $(AS_INIT_ELC): $(LOADDEFS)
+# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
+# $(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 # }}}
 # {{{ Special rules for utils files
