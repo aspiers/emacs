@@ -2135,4 +2135,5 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick"))))
- '(whitespace-trailing ((t (:background "dark red" :foreground "yellow" :weight bold)))))
+ '(whitespace-tab ((t (:foreground "dim gray"))))
+ '(whitespace-trailing ((t (:background "#451a00" :foreground "yellow" :weight bold)))))
