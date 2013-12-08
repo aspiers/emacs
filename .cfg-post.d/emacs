@@ -4,6 +4,8 @@ version=$( emacs --version | \
              perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$2"' )
 
 cd
+[ -e .eid ] || \
+  ln -sf .emacs.d/init.d .eid
 [ -e .as-bindings.el ] || \
   ln -sf lib/emacs/init/common/as-bindings.el .as-bindings.el
 [ -e .as-gtd.el ] || \
