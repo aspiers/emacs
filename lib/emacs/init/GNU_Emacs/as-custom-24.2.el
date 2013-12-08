@@ -1403,6 +1403,7 @@
    "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
+ '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
@@ -1914,6 +1915,20 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-default-extensions nil)
  '(org-default-notes-file "~/org/TODO.org")
  '(org-directory "~/org")
+ '(org-disputed-keys
+   (quote
+    (([(control shift right)]
+      .
+      [(control shift n)])
+     ([(control shift left)]
+      .
+      [(control shift p)])
+     ([(control 44)]
+      .
+      [(control 39)])
+     ([(control tab)]
+      .
+      [(control meta tab)]))))
  '(org-drawers (quote ("PROPERTIES" "CLOCK" "HIDE" "STATE")))
  '(org-email-link-description-format "mail %c: %.30s")
  '(org-emphasis-regexp-components (quote (" 	('\"" "- 	.,:?;'\")" " 	
@@ -1993,6 +2008,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html))))
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
+ '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
  '(org-reverse-note-order t)
  '(org-special-ctrl-a/e (quote reversed))
