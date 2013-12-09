@@ -75,7 +75,7 @@
 (add-hook 'diary-hook 'appt-make-list)
 
 ;;}}}
-;;{{{ UTF-16 support
+;;{{{ UTF support
 
 (add-to-list 'auto-coding-regexp-alist '("^\xFF\xFE.*\x0D\x00$" . utf-16-le-dos) t)
 (add-to-list 'auto-coding-regexp-alist '("^\xFE\xFF.*\x0D\x00$" . utf-16-be-dos) t)
@@ -84,6 +84,8 @@
 
 (defun utf-16-le-pre-write-conversion (start end) nil)
 (defun utf-16-be-pre-write-conversion (start end) nil)
+
+(define-coding-system-alias 'UTF-8 'utf-8)
 
 ;;}}}
 ;;{{{ Color themes
