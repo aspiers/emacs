@@ -1900,6 +1900,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
   :END:"))))
+ '(org-catch-invisible-edits (quote smart))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
  '(org-clock-out-remove-zero-time-clocks t)
