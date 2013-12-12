@@ -68,6 +68,10 @@
     ruby-mode
     smex
     ;;smooth-scrolling
+
+    ;; useless until https://github.com/Fuco1/smartparens/issues/259 fixed :-(
+    smartparens
+
     switch-window
     versions
     yaml-mode

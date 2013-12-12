@@ -2100,6 +2100,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
+ '(smartparens-global-mode nil)
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
  '(tidy-shell-command "htmltidy")
