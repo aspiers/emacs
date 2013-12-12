@@ -1323,6 +1323,7 @@
  '(fci-rule-column 80)
  '(flx-ido-mode t)
  '(folding-mode-prefix-key "")
+ '(gc-cons-threshold 2000000)
  '(gdb-many-windows t)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
