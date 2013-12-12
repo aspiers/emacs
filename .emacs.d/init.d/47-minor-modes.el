@@ -1,5 +1,3 @@
-(as-progress "Minor modes...")
-
 ;;{{{ vc
 
 (require 'vc)
@@ -38,7 +36,6 @@
 (ido-mode t)
 
 ;;}}}
-(as-progress "Minor modes... 10%")
 ;;{{{ Folding mode
 
 ;;{{{ Set marks for individual modes
@@ -110,7 +107,6 @@
 ;;}}}
 
 ;;}}}
-(as-progress "Minor modes... 25%")
 ;;{{{ Transient Mark mode
 
 (eval-when-compile (defun transient-mark-mode (arg1) nil))
@@ -137,7 +133,6 @@
 ;;(setq time-stamp-format "------ %02d %03b %4y %2H%2M %2H%2M  : %u")
 
 ;;}}}
-(as-progress "Minor modes... 50%")
 ;;{{{ Time
 
 ;;(display-time)
@@ -184,7 +179,6 @@
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
-(as-progress "Minor modes... 75%")
 ;;{{{ Visible whitespace mode
 
 (autoload 'visible-whitespace-mode "visws" "Visible whitespace mode" t)
