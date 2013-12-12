@@ -20,12 +20,11 @@
   (add-to-list 'auto-mode-alist '("\\.\\(org\\|o2b\\)$" . org-mode)))
 
 (defvar org-mode-map)
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (as-soft-require 'as-gtd)
-   (imenu-add-to-menubar "Imenu")
-   (setq comment-start nil)))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (as-soft-require 'as-gtd)
+            (imenu-add-to-menubar "Imenu")
+            (setq comment-start nil)))
 
 (declare-function org-crypt-use-before-save-magic "org-crypt")
 (add-hook 'org-mode-hook
