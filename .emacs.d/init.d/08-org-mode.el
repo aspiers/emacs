@@ -133,6 +133,16 @@ then invoking this function four times would yield:
 
 ;;}}}
 
+;;{{{ guide-key integration
+
+(defun guide-key/my-hook-function-for-org-mode ()
+  (guide-key/add-local-guide-key-sequence "C-c")
+  (guide-key/add-local-guide-key-sequence "C-c C-x")
+  (guide-key/add-local-highlight-command-regexp "org-"))
+(add-hook 'org-mode-hook 'guide-key/my-hook-function-for-org-mode)
+
+;;}}}
+
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
 ;;{{{ pomodoro

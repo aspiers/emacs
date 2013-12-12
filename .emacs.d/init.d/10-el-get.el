@@ -37,6 +37,7 @@
     ;;git-gutter-fringe
     git-modes
     goto-chg
+    guide-key ;; comes from MELPA
     haml-mode
     idomenu ;; http://emacsrocks.com/e10.html
     ido-ubiquitous

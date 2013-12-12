@@ -6,3 +6,4 @@
 
 (hbin-remove-mm-lighter 'global-whitespace-mode)
 (hbin-remove-mm-lighter 'whitespace-mode)
+(hbin-remove-mm-lighter 'guide-key-mode)
