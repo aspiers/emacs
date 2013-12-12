@@ -31,6 +31,7 @@
     flymake-ruby
     flymake-sass
     flymake-shell
+    flx-ido ;; flx is flex with better ordering
     folding
     gist
     git-gutter
@@ -40,7 +41,9 @@
     guide-key ;; comes from MELPA
     haml-mode
     idomenu ;; http://emacsrocks.com/e10.html
+    ;; ido-hacks ;; ido-everywhere
     ido-ubiquitous
+    ido-vertical-mode
     inf-ruby
     iy-go-to-char ;; http://emacsrocks.com/e04.html
     key-chord ;; http://emacsrocks.com/e07.html
