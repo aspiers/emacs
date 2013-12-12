@@ -56,6 +56,14 @@
     org2blog
     org-magit ;; support for magit: links in org buffers
     org-sync
+
+    ;; https://github.com/dimitri/el-get/issues/1471
+    ;; https://github.com/dimitri/el-get/issues/1472
+    ;; https://github.com/dimitri/el-get/issues/1473
+    ;; Finally managed to install by fixing dependencies manually
+    ;; (#1471), #1472, #1473
+    projectile
+
     rinari
     ruby-mode
     smex
