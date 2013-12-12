@@ -46,7 +46,7 @@
 
 ;;;###autoload
 (defun as-kill-sexp ()
-  "Kills forward to where as-forward-sexp-start would land."
+  "Kills forward to where `as-forward-sexp-start' would land."
   (interactive)
   (kill-region (point)
                (save-excursion (as-forward-sexp-start) (point))))
