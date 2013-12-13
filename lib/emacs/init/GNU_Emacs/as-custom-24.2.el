@@ -1380,6 +1380,7 @@
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
  '(ido-mode (quote both) nil (ido))
+ '(ido-ubiquitous-mode t)
  '(ido-use-faces nil)
  '(ido-vertical-mode t)
  '(imenu-auto-rescan t)
