@@ -74,6 +74,7 @@
 
     switch-window
     versions
+    undo-tree
     use-package
     yaml-mode
     yasnippet

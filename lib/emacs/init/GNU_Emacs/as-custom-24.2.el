@@ -2116,6 +2116,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tla-non-recursive-inventory nil)
  '(tramp-verbose 13)
  '(transient-mark-mode 1)
+ '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-mail-address "adam@spiers.net")
