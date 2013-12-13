@@ -1326,6 +1326,10 @@
  '(folding-mode-prefix-key "")
  '(gc-cons-threshold 2000000)
  '(gdb-many-windows t)
+ '(git-commit-mode-hook
+   (quote
+    (turn-on-auto-fill flyspell-mode git-commit-save-message)))
+ '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
  '(global-font-lock-mode t nil (font-lock))
