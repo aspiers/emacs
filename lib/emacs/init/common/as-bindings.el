@@ -508,6 +508,14 @@ consistent landing spot."
 (autoload 'key-chord-define-global "key-chord")
 (key-chord-mode 1)
 (key-chord-define-global "zf" 'iy-go-to-char)
+(defvar projectile-prefix-map
+  (lookup-key projectile-mode-map projectile-keymap-prefix)
+  "The keymap which Projectile typically binds to C-c p.")
+(global-set-key "\C-xp" projectile-prefix-map)
+(key-chord-define-global "zp" projectile-prefix-map)
+(key-chord-define-global "zm" 'projectile-commander)
+(key-chord-define-global "pf" 'projectile-find-file)
+(key-chord-define-global "pb" 'projectile-switch-to-buffer)
 
 (global-set-key [(control x) ?8 ?e]
                 (lambda ()

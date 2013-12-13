@@ -1364,7 +1364,7 @@
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
-    ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-c i" "C-c g" "C-c m" "C-c t" "C-c w" "C-c j")))
+    ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c i" "C-c g" "C-c m" "C-c t" "C-c w" "C-c j" "zp" "pz")))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
  '(hippie-expand-try-functions-list
