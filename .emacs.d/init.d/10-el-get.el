@@ -50,9 +50,11 @@
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
     magit
+
     ;; https://github.com/nex3/magithub/pull/11
     ;; https://github.com/nex3/magithub/pull/12
     ;;magithub
+
     multiple-cursors
     org2blog
     org-magit ;; support for magit: links in org buffers
