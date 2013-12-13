@@ -501,6 +501,10 @@ consistent landing spot."
 ;; why is this necessary?
 ;;(global-set-key "\e\C-i"     'hippie-expand)
 
+;; I don't visit the FAQ very often; find-function-at-point way more useful.
+(global-set-key [(control h) (control f)] 'find-function-at-point)
+(global-set-key [(control h) (control F)] 'view-emacs-FAQ)
+
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
