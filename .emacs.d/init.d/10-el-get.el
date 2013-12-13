@@ -40,6 +40,7 @@
     goto-chg
     guide-key ;; comes from MELPA
     haml-mode
+    hideshow-org
     idomenu ;; http://emacsrocks.com/e10.html
     ;; ido-hacks ;; ido-everywhere
     ido-ubiquitous
