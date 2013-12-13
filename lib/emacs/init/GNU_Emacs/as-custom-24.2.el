@@ -1372,6 +1372,7 @@
     ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c i" "C-c g" "C-c m" "C-c t" "C-c w" "C-c j" "zp" "pz")))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
+ '(help-window-select t)
  '(hippie-expand-try-functions-list
    (quote
     (try-expand-dabbrev try-expand-dabbrev-all-buffers try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-expand-dabbrev-from-kill try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
