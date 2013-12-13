@@ -2077,6 +2077,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))
  '(passive-voice nil)
  '(planner-use-day-pages t)
+ '(projectile-enable-caching t)
+ '(projectile-global-mode t)
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
