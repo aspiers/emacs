@@ -74,6 +74,7 @@
 
     switch-window
     versions
+    use-package
     yaml-mode
     yasnippet
     )
@@ -96,5 +97,8 @@
 ;;   * have to wait longer during bootstrap
 (defvar el-get-install-sync t
   "Non-nil means install packages synchronously")
+
+(el-get 'sync 'use-package)
+(require 'use-package)
 
 (el-get (if el-get-install-sync 'sync) as-el-get-packages)
