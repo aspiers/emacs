@@ -587,6 +587,8 @@ consistent landing spot."
 ;; but this one won't, so serves as a backup:
 (global-set-key [(control c)(meta q)]     'fill-common-prefix-region)
 
+(global-set-key [(control h) (control k)] 'find-function-on-key)
+
 ;;}}}
 ;;{{{ FSF-compliant user bindings
 
