@@ -801,6 +801,7 @@ consistent landing spot."
 
 (autoload 'set-any-variable "set-any-var" "set-any-variable" t)
 (global-set-key "\C-cv"   'set-any-variable)
+(global-set-key "\C-cV"   'customize-variable)
 (global-set-key "\C-c+"   'make-directory)
 (autoload 'org-occur-in-agenda-files "org" nil t)
 (global-set-key [(control c) (control \?)] 'org-occur-in-agenda-files)
