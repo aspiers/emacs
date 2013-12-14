@@ -1,0 +1,12 @@
+All init files have an `NN-' numeric prefix.  This allows us to ensure
+that certain files (e.g. the ones responsible for loading
+`use-package' or setting `message-log-max') get loaded before others,
+without having to remember to make every single other file depend on
+them.  Ideally I'll eventually figure out a better way of doing this
+which would allow the numeric prefix to be dropped.
+
+All init files also have an `as-' prefix after the `NN-'.  This
+clarifies that they are opinionated, designed only for my usage, and
+typically not instantly reusable.  It also makes it safer to put this
+directory on `load-path', which will aid mapping of dependencies
+between these files.
