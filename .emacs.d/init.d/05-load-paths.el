@@ -1,5 +1,3 @@
-(require 'as-progress)
-
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
@@ -7,10 +5,8 @@
 
 (defun as-add-to-find-function-source-path (paths)
   "Adds paths to `find-function-source-path'."
-  (as-progress "Adding to find-function-source-path:")
   (dolist (x as-source-paths)
     (let ((path (concat as-emacs-dir "/" x)))
-      (as-progress "  %s" path)
       (and (file-directory-p path)
            (add-to-list 'find-function-source-path path)))))
 
@@ -33,7 +29,3 @@
       (cd dir)
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
-
-(require 'as-progress)
-
-(as-progress "load-path set up")
