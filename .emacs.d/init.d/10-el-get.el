@@ -69,6 +69,7 @@
 
     rinari
     ruby-mode
+    smart-mode-line
     smex
     ;;smooth-scrolling
 
