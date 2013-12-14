@@ -17,7 +17,7 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 MAJOR_MODES = major-modes
 MINOR_MODES = minor-modes
-UTILS	    = utils
+UTILS       = utils
 
 # }}}
 # {{{ Tweakable parameters
@@ -27,7 +27,7 @@ UTILS	    = utils
 EMACSLIB = $(HOME)/lib/emacs
 EMACS_D  = $(HOME)/.emacs.d
 ELPA     = $(EMACS_D)/elpa
-EL_GET	 = $(EMACS_D)/el-get
+EL_GET   = $(EMACS_D)/el-get
 
 GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
 XINSTALL_DIR = $(EMACSLIB)/XEmacs
@@ -70,12 +70,12 @@ THIRD_PARTY_PKG_TARGETS =
 THIRD_PARTY_PKG_DIRS =
 
 ifneq (,$(wildcard $(ORG_DIR)))
-	THIRD_PARTY_PKG_TARGETS += .org-installed
-	THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
+        THIRD_PARTY_PKG_TARGETS += .org-installed
+        THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
 endif
 ifneq (,$(wildcard $(COLOR_THEME_DIR)))
-	THIRD_PARTY_PKG_TARGETS += .color-theme-installed
-	THIRD_PARTY_PKG_DIRS    += $(COLOR_THEME_DIR)
+        THIRD_PARTY_PKG_TARGETS += .color-theme-installed
+        THIRD_PARTY_PKG_DIRS    += $(COLOR_THEME_DIR)
 endif
 
 # }}}
@@ -83,19 +83,19 @@ endif
 
 CUCUMBER_DIR = $(MAJOR_MODES)/cucumber
 ifeq (,$(wildcard $(CUCUMBER_DIR)))
-	CUCUMBER_DIR=
+        CUCUMBER_DIR=
 endif
 
-el_search_paths = 			\
-	init/common 			\
-	$(wildcard $(MAJOR_MODES)/*.el) \
-	$(MAJOR_MODES)/mmm 		\
-	$(MAJOR_MODES)/pgg 		\
-	$(ORG_DIR)/contrib/lisp		\
-	$(CUCUMBER_DIR) 		\
-	$(MINOR_MODES) 			\
-	$(UTILS) 			\
-	fun
+el_search_paths =                       \
+        init/common                     \
+        $(wildcard $(MAJOR_MODES)/*.el) \
+        $(MAJOR_MODES)/mmm              \
+        $(MAJOR_MODES)/pgg              \
+        $(ORG_DIR)/contrib/lisp         \
+        $(CUCUMBER_DIR)                 \
+        $(MINOR_MODES)                  \
+        $(UTILS)                        \
+        fun
 
 # }}}
 
@@ -130,42 +130,42 @@ endif
 NO_INSTALL_PATTERNS =
 
 # Pretend these don't exist at all.
-IGNORE_PATHS = 					\
-	$(MINOR_MODES)/msf-abbrev/mode-abbrevs 	\
-	$(YASNIPPET_DIR)-*		\
-	$(YASNIPPET_DIR)/snippets		\
-	$(YASNIPPET_DIR)/extras
-IGNORE_FILES =		    		\
-	loaddefs.el			\
-	$(MAJOR_MODES)/sdf.el  		\
-	$(MAJOR_MODES)/mediawiki.el
+IGNORE_PATHS =                                          \
+        $(MINOR_MODES)/msf-abbrev/mode-abbrevs          \
+        $(YASNIPPET_DIR)-*                              \
+        $(YASNIPPET_DIR)/snippets                       \
+        $(YASNIPPET_DIR)/extras
+IGNORE_FILES =                                          \
+        loaddefs.el                                     \
+        $(MAJOR_MODES)/sdf.el                           \
+        $(MAJOR_MODES)/mediawiki.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
-  IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el
+        IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el
 endif
 
 ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
 # org-annotation-helper.el needs url which isn't in emacs 21
 # ditto org-irc.el which needs erc
-  IGNORE_FILES += $(MAJOR_MODES)/org-annotation-helper.el \
-		  $(ORG_DIR)/lisp/org-irc.el
+        IGNORE_FILES += $(MAJOR_MODES)/org-annotation-helper.el \
+                        $(ORG_DIR)/lisp/org-irc.el
 endif
 
 # }}}
 # {{{ Directories to scan for autoload cookies
 
-LOADDEFS_DIRS=	\
-	$(UTILS)
+LOADDEFS_DIRS=  \
+        $(UTILS)
 
 # }}}
 
 TO_CLEAN = pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
-  TO_CLEAN += org
+        TO_CLEAN += org
 endif
 ifneq (,$(wildcard $(COLOR_THEME_DIR)))
-  TO_CLEAN += color-theme
+        TO_CLEAN += color-theme
 endif
 
 # }}}
@@ -180,15 +180,15 @@ endif
 PRUNE_DIRS = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_PATHS) | perl -040lpe 's|(.+)|! -path "$$1/*" |g')
 PRUNE_FILES = $(shell echo $(THIRD_PARTY_PKG_DIRS) $(IGNORE_FILES) | perl -040lpe 's|(.+)|! -path "$$1" |g')
 
-EL_INSTALLATION_CANDIDATES_cmd =   				        \
-	find $(el_search_paths)				\
-	        -follow					\
-		-name \*.el 				\
-	      $(PRUNE_DIRS)				\
-	      $(PRUNE_FILES)				\
-	      ! -path '*/attic/*'			\
-	      ! -path '*/shimbun/*'
-EL_INSTALLATION_CANDIDATES = $(shell $(EL_INSTALLATION_CANDIDATES_cmd)) 
+EL_INSTALLATION_CANDIDATES_cmd =                        \
+        find $(el_search_paths)                         \
+                -follow                                 \
+                -name \*.el                             \
+              $(PRUNE_DIRS)                             \
+              $(PRUNE_FILES)                            \
+              ! -path '*/attic/*'                       \
+              ! -path '*/shimbun/*'
+EL_INSTALLATION_CANDIDATES = $(shell $(EL_INSTALLATION_CANDIDATES_cmd))
 
 # These are the .elcs we want to build ourselves
 ELCs_TO_BE_COMPILED = $(addsuffix c,$(filter-out $(NO_COMPILE_EL_PATTERNS),$(EL_INSTALLATION_CANDIDATES)))
@@ -200,29 +200,29 @@ ELCs_TO_BE_COMPILED = $(addsuffix c,$(filter-out $(NO_COMPILE_EL_PATTERNS),$(EL_
 # built from vendor Makefiles.
 # Note that the shell expansion is deferred until needed.
 THIRD_PARTY_ELCs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.elc \
+        find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.elc \
 )
 # We also need to know which vendor-provided .el files to install
 # into the destination directory, so that find-library works.
 THIRD_PARTY_ELs = $(shell \
-	find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.el | so \
+        find $(THIRD_PARTY_PKG_DIRS) -follow -name \*.el | so \
 )
 
 # }}}
 
-AS_BINDINGS_EL	    = init/common/as-bindings.el
-AS_PROGRESS_EL	    = init/common/as-progress.el
-AS_REQUIRE_EL  	    = init/common/as-require.el
+AS_BINDINGS_EL      = init/common/as-bindings.el
+AS_PROGRESS_EL      = init/common/as-progress.el
+AS_REQUIRE_EL       = init/common/as-require.el
 AS_BINDINGS_ELC     = $(AS_BINDINGS_EL)c
 AS_PROGRESS_ELC     = $(AS_PROGRESS_EL)c
-AS_REQUIRE_ELC 	    = $(AS_REQUIRE_EL)c
+AS_REQUIRE_ELC      = $(AS_REQUIRE_EL)c
 
 # {{{ Determine compilation variables and parameters
 
 BATCH_EVAL=$(EMACS) -q --batch --no-site-file --eval
 
 SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
-		'(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
+                '(message (format "%s" system-type))' 2>&1 | grep -v '^Loading ')
 
 SITE_INSTALL_DIR=$(shell $(BATCH_EVAL) '(princ (car load-path))')
 
@@ -234,12 +234,12 @@ ifeq (, $(findstring XEmacs,$(version)))
   # This used to be required so that org-crypt could compile against
   # ~/local/share/emacs/site-lisp/epg/
   LOADPATH_OPTS += \
-	--eval "(let ((orig-dir default-directory)) 		\
-		   (cd \"$(lispdir)\") 				\
-		   (normal-top-level-add-subdirs-to-load-path) 	\
-		   (cd orig-dir))"				\
-	--eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
-#	--eval "(message (princ-list load-path))" \
+        --eval "(let ((orig-dir default-directory))             \
+                   (cd \"$(lispdir)\")                          \
+                   (normal-top-level-add-subdirs-to-load-path)  \
+                   (cd orig-dir))"                              \
+        --eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
+#       --eval "(message (princ-list load-path))" \
 
   INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 else
@@ -344,13 +344,13 @@ install: .installed
 #                                    (file-name-directory (locate-library "color-theme"))
 #                                    "/themes") t "^color-theme")
 INSTALL_FILES_UNFILTERED = \
-	$(EL_INSTALLATION_CANDIDATES) $(ELCs_TO_BE_COMPILED)
+        $(EL_INSTALLATION_CANDIDATES) $(ELCs_TO_BE_COMPILED)
 INSTALL_FILES = $(filter-out $(NO_INSTALL_PATTERNS),$(INSTALL_FILES_UNFILTERED))
 
 ifneq (,$(EL_OVERRIDES))
 ALL_OVERRIDES = \
-	$(addsuffix .el,  $(EL_OVERRIDES)) \
-	$(addsuffix .elc, $(EL_OVERRIDES))
+        $(addsuffix .el,  $(EL_OVERRIDES)) \
+        $(addsuffix .elc, $(EL_OVERRIDES))
 endif
 
 .PHONY: unlock-install-dirs lock-install-dirs
@@ -387,13 +387,13 @@ clean: uninstall $(addprefix clean-, $(TO_CLEAN))
 	@-find $(EMACSLIB) -follow -name \*.elc -print | xargs -r rm -f
 	rm -f .*-made
 	for dir in $(THIRD_PARTY_PKG_DIRS); do \
-		( cd $$dir && make clean )     \
+	        ( cd $$dir && make clean )     \
 	done
 
 .PHONY: uninstall
 uninstall:
 	-find $(PRE_INSTALL_DIR) $(POST_INSTALL_DIR) -name \*.elc -print | \
-		xargs -r rm -f
+	        xargs -r rm -f
 
 # }}}
 # {{{ Autogenerate loaddefs
@@ -466,22 +466,22 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 %.elc.debug: COMPILER_BATCH='-q -l bytecomp'
 %.elc.debug: %.elc
 	ln -sf $< $@
-# 	rm -f $(@:.debug=)
-# 	$(MAKE) $(@:.debug=) COMPILER_BATCH='-q -l bytecomp'
+#       rm -f $(@:.debug=)
+#       $(MAKE) $(@:.debug=) COMPILER_BATCH='-q -l bytecomp'
 
 # }}}
 # {{{ Special rules for my init files
 
-INIT_COMMON_LIBDIRS = 		\
-	init/common		\
-	$(MAJOR_MODES)		\
-	$(MAJOR_MODES)/mmm 	\
-	$(ORG_DIR)/lisp		\
-	$(MINOR_MODES)		\
-	$(UTILS)		\
-	$(EL_GET)/key-chord	\
-	$(EL_GET)/git-gutter	\
-	fun
+INIT_COMMON_LIBDIRS =           \
+        init/common             \
+        $(MAJOR_MODES)          \
+        $(MAJOR_MODES)/mmm      \
+        $(ORG_DIR)/lisp         \
+        $(MINOR_MODES)          \
+        $(UTILS)                \
+        $(EL_GET)/key-chord     \
+        $(EL_GET)/git-gutter    \
+        fun
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
@@ -526,16 +526,16 @@ clean-org:
 	$(MAKE) -C $(ORG_DIR) clean
 .org-installed: $(wildcard $(ORG_DIR)/lisp/*.el)
 	@$(UNLOCK_INSTALL_DIRS)
-#	EMACS="$(EMACS) -L $(lispdir)/epg"
-#	http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
+#       EMACS="$(EMACS) -L $(lispdir)/epg"
+#       http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
 	$(MAKE) -C $(ORG_DIR) all install \
-		prefix=$(prefix) \
-		lispdir=$(PRE_INSTALL_DIR)
+	        prefix=$(prefix) \
+	        lispdir=$(PRE_INSTALL_DIR)
 	cp $(ORG_DIR)/contrib/lisp/*.el $(PRE_INSTALL_DIR)
 	@$(LOCK_INSTALL_DIRS)
 	-$(MAKE) -C $(ORG_DIR) install-info \
-		prefix=$(prefix) \
-		infodir=$(infodir)
+	        prefix=$(prefix) \
+	        infodir=$(infodir)
 	touch $@
 endif
 
@@ -580,12 +580,10 @@ fun/pastels-on-dark-theme.el: .color-theme-installed
 
 .color-theme-installed: $(wildcard $(COLOR_THEME_DIR)/*.el)
 	$(MAKE) -C $(COLOR_THEME_DIR) autoloads install-bin \
-		PREFIX=$(prefix) \
-		ELISPDIR=$(lispdir) \
-		INFODIR=$(infodir)
+	        PREFIX=$(prefix) \
+	        ELISPDIR=$(lispdir) \
+	        INFODIR=$(infodir)
 	touch $@
 endif
 
 # }}}
-
-
