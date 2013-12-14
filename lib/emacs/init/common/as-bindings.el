@@ -152,13 +152,10 @@ is already hidden."
          (allout-hide-current-subtree))
         (t (allout-hide-current-subtree))))
 
-(add-hook 'allout-mode-hook
-          (lambda ()
-            (local-set-key [(control left )] 'as-allout-hide-current)
-            (local-set-key [(control right)] 'as-allout-show-current)
-            (local-set-key [(control shift left)]  'allout-hide-current-subtree)
-            (local-set-key [(control shift right)] 'allout-show-current-subtree)
-            ))
+(define-key allout-mode-map [(control left )] 'as-allout-hide-current)
+(define-key allout-mode-map [(control right)] 'as-allout-show-current)
+(define-key allout-mode-map [(control shift left)]  'allout-hide-current-subtree)
+(define-key allout-mode-map [(control shift right)] 'allout-show-current-subtree)
 
 ;;}}}
 ;;{{{ as-show-current (outline-mode)
