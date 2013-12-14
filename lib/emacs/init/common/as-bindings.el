@@ -518,6 +518,10 @@ consistent landing spot."
 (key-chord-define-global "pf" 'projectile-find-file)
 (key-chord-define-global "pb" 'projectile-switch-to-buffer)
 
+;; Not needed since guide-key/recursive-key-sequence-flag is set:
+;; (setq guide-key/guide-key-sequence
+;;       '("<key-chord> z p" "<key-chord> p z"))
+
 (global-set-key [(control x) ?8 ?e]
                 (lambda ()
                   (interactive)
