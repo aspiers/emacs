@@ -14,7 +14,7 @@
 (add-to-list 'load-path (concat edotdir "/lib/emacs/init/common"))
 (require 'as-progress)
 
-(require 'cl)
+(require 'cl) ;; for remove-if-not
 (defun as-find-hooks (hook-name)
   "Uses $ZDOT_FIND_HOOKS to return a list of hooks for `hook-name'."
   (let* ((lines (split-string
