@@ -26,6 +26,8 @@
          file))
          files)))
 
+(require 'as-progress)
+
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."
   (dolist (hook (as-find-hooks hook-name))

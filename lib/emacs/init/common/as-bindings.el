@@ -1,10 +1,9 @@
 (load-library "as-loaddefs")
 (require 'as-progress)
-
 ;; For faster compilation
 (eval-when-compile (require 'cl))
 
-(as-progress "key bindings...")
+(eval-and-compile (as-loading-progress))
 
 ;;{{{ Why is this a separate file?
 
