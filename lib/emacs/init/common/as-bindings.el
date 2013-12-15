@@ -152,7 +152,7 @@ is already hidden."
          (allout-hide-current-subtree))
         (t (allout-hide-current-subtree))))
 
-(require 'use-package)
+(require 'as-use-package)
 (use-package allout
   :commands allout-mode
   :config

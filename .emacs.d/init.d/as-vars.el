@@ -1,3 +1,9 @@
+(eval-and-compile (as-loading-progress))
+
+(defvar edotdir
+  (or (getenv "ZDOTDIR") "~")
+  "Home directory to be used to retrieve emacs init files.")
+
 ;; XEmacs adds crap to emacs-version
 (defvar emacs-version-number
   (format "%d.%d" emacs-major-version emacs-minor-version)
@@ -39,22 +45,5 @@ appearing earlier on `load-path'.
 Libraries which do not appear in older emacs installs can be
 placed here.")
 
-;; (require 'cl)
-;; (setq org-source-paths
-;;       (remove-if-not
-;;        (lambda (dir) (file-directory-p dir))
-;;        (directory-files (concat as-emacs-dir "/major-modes") 'full-paths "org[-.]")))
-;; (mapc (lambda (dir) (add-to-list 'find-function-source-path dir))
-;;       org-source-paths)
-
-(defvar as-source-paths
-  '(
-    "init/common"
-    "major-modes"
-    "major-modes/org-mode.git/lisp"
-    "major-modes/org-mode.git/contrib/lisp"
-    "major-modes/mmm"
-    "minor-modes"
-    "utils"
-    "fun"))
-
+(as-progress "loaded %s" load-file-name)
+(provide 'as-vars)

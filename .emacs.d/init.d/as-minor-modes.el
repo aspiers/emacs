@@ -1,3 +1,5 @@
+(require 'as-vars)
+
 ;;{{{ vc
 
 (require 'vc)
@@ -241,6 +243,11 @@
                               (muse-mode       . "*")))
 
 ;;}}}
+;;{{{ outline-minor-mode
+
+(add-hook 'outline-minor-mode-hook 'turn-on-auto-fill)
+
+;;}}}
 ;;{{{ msf-abbrev
 
 (autoload 'msf-abbrev-mode "msf-abbrev" nil t)
@@ -321,3 +328,5 @@
                  (org2blog/wp-mode))))
 
 ;;}}}
+
+(provide 'as-minor-modes)

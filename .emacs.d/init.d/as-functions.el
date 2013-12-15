@@ -42,3 +42,4 @@
 
 (as-progress "functions...done")
 
+(provide 'as-functions)

@@ -13,3 +13,5 @@
 ;; (hbin-remove-mm-lighter 'guide-key-mode)
 ;; (hbin-remove-mm-lighter 'smartparens-mode)
 ;; (hbin-remove-mm-lighter 'projectile-mode)
+;;
+;; (provide 'as-mode-lighters)

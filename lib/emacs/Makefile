@@ -26,6 +26,7 @@ UTILS       = utils
 
 EMACSLIB = $(HOME)/lib/emacs
 EMACS_D  = $(HOME)/.emacs.d
+INIT_D   = $(EMACS_D)/init.d
 ELPA     = $(EMACS_D)/elpa
 EL_GET   = $(EMACS_D)/el-get
 
@@ -473,6 +474,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # {{{ Special rules for my init files
 
 INIT_COMMON_LIBDIRS =           \
+        $(INIT_D)               \
         init/common             \
         $(MAJOR_MODES)          \
         $(MAJOR_MODES)/mmm      \

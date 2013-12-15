@@ -1,3 +1,5 @@
+(require 'as-vars)
+
 ;;{{{ find-function-source-path
 
 ;; Don't need this, as the Makefile now copys all .el files into the
@@ -101,3 +103,5 @@
   (message "Couldn't load color-theme"))
 
 ;;}}}
+
+(provide 'as-misc)

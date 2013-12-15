@@ -679,3 +679,5 @@ other people."
 ;;}}}
 
 ;;}}}
+
+(provide 'as-major-modes)

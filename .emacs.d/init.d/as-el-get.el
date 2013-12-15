@@ -1,5 +1,15 @@
-(defvar el-get-dir)
-(setq el-get-dir (concat edotdir "/.emacs.d/el-get/"))
+(eval-and-compile (as-loading-progress))
+
+;; org-mode needs to be loaded before el-get packages which depend on
+;; it, otherwise the version of org-mode distributed with emacs will
+;; automatically get pulled in when el-get packages which depend on
+;; org-mode are initialized, and that would result in the default
+;; values for `org-disputed-keys' taking effect and sticking as long
+;; as emacs stays running.
+(require 'as-org-mode)
+
+(require 'as-vars)
+(defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
 (add-to-list 'load-path (concat el-get-dir "el-get"))
 
 (unless (require 'el-get nil 'noerror)
@@ -105,7 +115,13 @@
 (defvar el-get-install-sync t
   "Non-nil means install packages synchronously")
 
+;; We want to encourage use of use-package when consuming el-get
+;; packages, so automatically provide it in order to save files which
+;; depend on both el-get and use-package from having to require both
+;; separately.
 (el-get 'sync 'use-package)
 (require 'use-package)
 
 (el-get (if el-get-install-sync 'sync) as-el-get-packages)
+
+(provide 'as-el-get)

@@ -1,3 +1,4 @@
+(require 'as-el-get)
 (require 'versions)
 
 (if (version<= emacs-version "24.3.1")
@@ -82,3 +83,5 @@
           (princ ")")
           (unless (looking-at-p "\n")
             (princ "\n"))))))
+
+(provide 'as-cus-edit)

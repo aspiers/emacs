@@ -1,6 +1,3 @@
-;; org-mode needs to be loaded before el-get packages which depend on it,
-;; otherwise the version of org-mode distributed
-
 (custom-set-variables
  '(org-disputed-keys
    (quote
@@ -158,3 +155,5 @@ then invoking this function four times would yield:
       (org-timer-set-timer '(16)))))
 
 ;;}}}
+
+(provide 'as-org-mode)

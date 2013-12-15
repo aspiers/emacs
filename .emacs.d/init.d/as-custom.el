@@ -2,9 +2,8 @@
 ;;
 ;;   * org-disputed-keys and org-replace-disputed-keys won't work
 ;;     unless set before org.el is loaded for the first time
-;;
-;; Reasons for loading this before el-get packages:
-;;
+(require 'as-el-get)
+(require 'as-vars)
 
 (cond
  ((boundp 'running-xemacs)
@@ -20,3 +19,5 @@
 ;; This load is required, according to the info pages:
 (load custom-file)
 (as-progress (format "loaded %s" custom-file))
+
+(provide 'as-custom)

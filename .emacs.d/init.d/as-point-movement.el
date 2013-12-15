@@ -17,3 +17,5 @@
        (load "mwheel" t)
        (mwheel-install)))
 
+
+(provide 'as-point-movement)

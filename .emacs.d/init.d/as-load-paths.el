@@ -1,7 +1,30 @@
+(eval-and-compile (as-loading-progress))
+
+(require 'as-vars)
+
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
 
 (defvar find-function-source-path load-path)
+
+;; (require 'cl)
+;; (setq org-source-paths
+;;       (remove-if-not
+;;        (lambda (dir) (file-directory-p dir))
+;;        (directory-files (concat as-emacs-dir "/major-modes") 'full-paths "org[-.]")))
+;; (mapc (lambda (dir) (add-to-list 'find-function-source-path dir))
+;;       org-source-paths)
+
+(defvar as-source-paths
+  '(
+    "init/common"
+    "major-modes"
+    "major-modes/org-mode.git/lisp"
+    "major-modes/org-mode.git/contrib/lisp"
+    "major-modes/mmm"
+    "minor-modes"
+    "utils"
+    "fun"))
 
 (defun as-add-to-find-function-source-path (paths)
   "Adds paths to `find-function-source-path'."
@@ -29,3 +52,5 @@
       (cd dir)
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
+
+(provide 'as-load-paths)
