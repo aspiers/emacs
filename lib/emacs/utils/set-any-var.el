@@ -57,8 +57,8 @@ as a starting point for convenient editing."
       (require 'wid-edit)
       (setq type (widget-convert type))
       (unless (widget-apply type :match val)
-	(error "Value `%S' does not match type %S of %S"
-	       val (car type) var))))
+        (error "Value `%S' does not match type %S of %S"
+               val (car type) var))))
   (set var val)
 
   ;; Force a thorough redisplay for the case that the variable
