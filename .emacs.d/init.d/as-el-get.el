@@ -27,6 +27,7 @@
     ace-jump-mode ;; http://emacsrocks.com/e10.html
 
     ;; artbollocks-mode ;; way too aggressive
+    apache-mode
     asciidoc
     auto-complete-css
     auto-complete-emacs-lisp

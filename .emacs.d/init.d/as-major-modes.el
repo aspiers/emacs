@@ -374,11 +374,8 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;}}}
 ;;{{{ Apache
 
-(autoload 'apache-mode "apache-mode" "mode for editing Apache config files")
-
-(add-to-list 'auto-mode-alist
-             '("\\.htaccess$\\|\\(httpd\\|srm\\|access\\)\\.conf$"
-               . apache-mode))
+(use-package apache-mode
+  :mode ("\\.htaccess$\\|\\(httpd\\|srm\\|access\\)\\.conf$" . apache-mode))
 
 ;;}}}
 ;;{{{ xrdb
