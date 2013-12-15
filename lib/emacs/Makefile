@@ -72,16 +72,10 @@ endif
 # }}}
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
-CUCUMBER_DIR = $(MAJOR_MODES)/cucumber
-ifeq (,$(wildcard $(CUCUMBER_DIR)))
-        CUCUMBER_DIR=
-endif
-
 el_search_paths =                       \
         init/common                     \
         $(wildcard $(MAJOR_MODES)/*.el) \
         $(ORG_DIR)/contrib/lisp         \
-        $(CUCUMBER_DIR)                 \
         $(MINOR_MODES)                  \
         $(UTILS)
 
@@ -458,7 +452,7 @@ $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
 # rules.
 # $(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
 # $(AS_INIT_ELC): $(LOADDEFS)
-# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR)
+# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
 # $(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 # }}}

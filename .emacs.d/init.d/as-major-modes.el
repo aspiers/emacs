@@ -347,14 +347,10 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
-
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
-;;(add-to-list 'load-path "~/lib/emacs/major-modes/cucumber")
-;(setq feature-default-language "en")
-;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
-(autoload 'feature-mode "feature-mode" nil t)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+(use-package feature-mode
+  :mode ("\.feature$" . feature-mode))
 
 ;;}}}
 

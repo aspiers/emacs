@@ -44,6 +44,7 @@
     erin
     expand-region
     faith
+    feature-mode
     folding
     flymake-css
     flymake-ruby
