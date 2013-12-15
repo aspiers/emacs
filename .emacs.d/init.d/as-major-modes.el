@@ -639,18 +639,8 @@ other people."
 ;;}}}
 ;;{{{ Miscellaneous
 
-;;{{{ MMM mode
-
 (use-package mmm-mode
   :commands mmm-mode)
-
-;;}}}
-;;{{{ gtypist-mode
-
-(add-to-list 'auto-mode-alist '("\\.typ\\'" . gtypist-mode))
-(autoload 'gtypist-mode "gtypist-mode" "gtypist-mode" t)
-
-;;}}}
 
 ;;}}}
 
