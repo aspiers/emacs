@@ -26,7 +26,7 @@
          file))
          files)))
 
-(require 'as-progress)
+(require 'as-pre-init-d)
 
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."

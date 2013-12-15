@@ -19,15 +19,15 @@
          (error "Neither `load-file-name' nor `as-init-d-suffix' set")))
   "Directory containing Adam's emacs startup files.")
 
-(message "as-init-d is %s" as-init-d)
-
 (add-to-list 'load-path as-init-d)
 
 (require 'as-load-paths)
 (require 'as-progress)
 
-(as-progress "as-init-d is %s" as-init-d)
+;; use-package is common enough that we don't want to have to require
+;; it in each file which uses it.
+(require 'as-use-package)
 
-(as-progress "loaded %s" load-file-name)
+(as-loading-done)
 
 (provide 'as-pre-init-d)

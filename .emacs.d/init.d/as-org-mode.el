@@ -1,12 +1,3 @@
-(custom-set-variables
- '(org-disputed-keys
-   (quote
-    (([(control shift right)] . [(control shift n)])
-     ([(control shift left)]  . [(control shift p)])
-     ([(control ?,)]          . [(control ?')])
-     ([(control tab)]         . [(control meta tab)]))))
- '(org-replace-disputed-keys t))
-
 (as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
 

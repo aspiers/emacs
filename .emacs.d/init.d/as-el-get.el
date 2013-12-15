@@ -1,12 +1,6 @@
 (eval-and-compile (as-loading-started))
 
-;; org-mode needs to be loaded before el-get packages which depend on
-;; it, otherwise the version of org-mode distributed with emacs will
-;; automatically get pulled in when el-get packages which depend on
-;; org-mode are initialized, and that would result in the default
-;; values for `org-disputed-keys' taking effect and sticking as long
-;; as emacs stays running.
-(require 'as-org-mode)
+(require 'as-org-mode-early)
 
 (require 'as-vars)
 (defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
