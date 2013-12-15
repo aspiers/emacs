@@ -29,7 +29,7 @@ as an extremely primitive profiler.")
       ;; immediately after compilation?
 
       ;; Anyway, for now, we cop out.
-      ((caller-filename load-file-name))
+      ((caller-filename (abbreviate-file-name load-file-name)))
     (as-progress-message
      (concat caller-filename ": " (if args (format msg args) msg)))))
 
