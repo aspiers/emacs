@@ -448,13 +448,6 @@ init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
 
-# If we ever compile ~/.emacs.d/init.d/*, we'll need to reintroduce these
-# rules.
-# $(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
-# $(AS_INIT_ELC): $(LOADDEFS)
-# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir)
-# $(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
-
 # }}}
 # {{{ Special rules for utils files
 
