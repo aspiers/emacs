@@ -254,22 +254,6 @@
   (msf-abbrev-mode (or prefix 1)))
 
 ;;}}}
-;;{{{ yasnippet
-
-(autoload 'yas/minor-mode "yasnippet" nil nil)
-
-;; Customize yas/snippet-dirs variables for snippet search path
-;; (eval-after-load "yasnippet" '(yas/load-directory ...
-
-(global-set-key [(control <)] 'yasnippet-cmd-previous-real)
-(global-set-key [(control >)] 'yasnippet-cmd-next-real)
-
-(defun yasm (&optional prefix)
-  "Alias for yasnippet-mode."
-  (interactive "p")
-  (yas/minor-mode (or prefix 1)))
-
-;;}}}
 ;;{{{ auto-complete-mode
 
 (require 'auto-complete-config nil t)

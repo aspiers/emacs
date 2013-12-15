@@ -49,10 +49,6 @@ lispdir = $(prefix)/share/emacs/site-lisp
 
 # These should be symlinked to the correct versions.
 ORG_DIR        = $(MAJOR_MODES)/org-mode.git
-YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
-ifeq (,$(wildcard $(YASNIPPET_DIR)))
-	YASNIPPET_DIR=
-endif
 
 # Pros of symlinking foo -> foo-1.2.3 approach:
 #  - allows different versions per machine
@@ -114,9 +110,6 @@ endif
 # and consequently installed.
 NO_COMPILE_EL_PATTERNS = 
 
-ifneq (,$(YASNIPPET_DIR))
-  NO_COMPILE_EL_PATTERNS += $(YASNIPPET_DIR)%
-endif
 NO_COMPILE_EL_PATTERNS += fun/pastels-on-dark-theme.el
 
 # This will prevent matching .el files from being installed.
@@ -125,9 +118,6 @@ NO_INSTALL_PATTERNS =
 # Pretend these don't exist at all.
 IGNORE_PATHS =                                          \
         $(MINOR_MODES)/msf-abbrev/mode-abbrevs          \
-        $(YASNIPPET_DIR)-*                              \
-        $(YASNIPPET_DIR)/snippets                       \
-        $(YASNIPPET_DIR)/extras
 IGNORE_FILES =                                          \
         loaddefs.el                                     \
         $(MAJOR_MODES)/sdf.el                           \
@@ -478,7 +468,7 @@ $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
 # rules.
 # $(AS_INIT_ELC): $(AS_PROGRESS_ELC) $(AS_REQUIRE_ELC) $(AS_BINDINGS_ELC)
 # $(AS_INIT_ELC): $(LOADDEFS)
-# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR) $(YASNIPPET_DIR)
+# $(AS_INIT_ELC): LIBDIRS += $(LOADDEFS_DIR) $(lispdir) $(CUCUMBER_DIR)
 # $(AS_INIT_ELC): COMPILER_PRE_OPTS = --eval '(load-file "$(LOADDEFS)")'
 
 # }}}
