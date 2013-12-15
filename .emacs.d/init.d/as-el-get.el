@@ -59,6 +59,7 @@
     ido-vertical-mode
     inf-ruby
     iy-go-to-char ;; http://emacsrocks.com/e04.html
+    js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
     magit
