@@ -36,6 +36,7 @@
     coffee-mode
     color-theme
     expand-region
+    faith
     folding
     flymake-css
     flymake-ruby
