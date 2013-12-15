@@ -644,17 +644,8 @@ other people."
 
 ;;{{{ MMM mode
 
-(defvar mmm-mode-ext-classes-alist)
-(defvar mmm-global-mode)
-(setq mmm-global-mode 'maybe)
-
-(defvar mmm-mode-ext-classes-alist)
-(setq mmm-mode-ext-classes-alist
-      '((nil "\\.\\(mason\\|m[dc]\\)\\'" mason)))
-
-(defun mmm-add-mode-ext-class (a b c))
-(mmm-add-mode-ext-class 'html-mode "\\(auto\\|d\\)handler\\'" 'mason)
-(autoload 'mmm-mode "mmm-auto" "mmm mode" t)
+(use-package mmm-mode
+  :commands mmm-mode)
 
 ;;}}}
 ;;{{{ gtypist-mode

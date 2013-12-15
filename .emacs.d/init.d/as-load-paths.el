@@ -25,7 +25,6 @@
     "major-modes"
     "major-modes/org-mode.git/lisp"
     "major-modes/org-mode.git/contrib/lisp"
-    "major-modes/mmm"
     "minor-modes"
     "utils"
     "fun"))

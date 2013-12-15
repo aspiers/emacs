@@ -80,7 +80,6 @@ endif
 el_search_paths =                       \
         init/common                     \
         $(wildcard $(MAJOR_MODES)/*.el) \
-        $(MAJOR_MODES)/mmm              \
         $(ORG_DIR)/contrib/lisp         \
         $(CUCUMBER_DIR)                 \
         $(MINOR_MODES)                  \
@@ -447,7 +446,6 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 INIT_COMMON_LIBDIRS =           \
         init/common             \
         $(MAJOR_MODES)          \
-        $(MAJOR_MODES)/mmm      \
         $(ORG_DIR)/lisp         \
         $(MINOR_MODES)          \
         $(UTILS)                \
@@ -508,12 +506,5 @@ clean-org:
 	        infodir=$(infodir)
 	touch $@
 endif
-
-# }}}
-# {{{ mmm-mode
-
-$(MAJOR_MODES)/mmm/%.elc: $(MAJOR_MODES)/mmm/%.el
-
-$(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
 
 # }}}
