@@ -20,8 +20,6 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
-(el-get 'sync)
-
 (defvar as-el-get-packages
   '(
     el-get
