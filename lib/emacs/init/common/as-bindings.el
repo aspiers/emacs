@@ -86,10 +86,6 @@
 ;; why is this necessary?
 ;;(global-set-key "\e\C-i"     'hippie-expand)
 
-;; I don't visit the FAQ very often; find-function way more useful.
-(global-set-key [(control h) (control f)] 'find-function)
-(global-set-key [(control h) (control F)] 'view-emacs-FAQ)
-
 ;;}}}
 ;;{{{ Additions (hope for no conflicts)
 
@@ -179,8 +175,6 @@
 (global-set-key [(control meta q)]        'fill-common-prefix-region)
 ;; but this one won't, so serves as a backup:
 (global-set-key [(control c)(meta q)]     'fill-common-prefix-region)
-
-(global-set-key [(control h) (control k)] 'find-function-on-key)
 
 ;;}}}
 ;;{{{ FSF-compliant user bindings

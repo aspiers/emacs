@@ -188,6 +188,11 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 ;;}}}
 
+;; I don't visit the FAQ very often; find-function way more useful.
+(global-set-key [(control h) (control f)] 'find-function)
+(global-set-key [(control h) (control F)] 'view-emacs-FAQ)
+(global-set-key [(control h) (control k)] 'find-function-on-key)
+
 ;;}}}
 ;;{{{ Javascript
 
