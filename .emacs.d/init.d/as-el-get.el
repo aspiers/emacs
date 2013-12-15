@@ -35,6 +35,7 @@
     bundler
     coffee-mode
     expand-region
+    folding
     flymake-css
     flymake-ruby
     flymake-sass
