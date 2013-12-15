@@ -231,13 +231,13 @@ LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 # Really ugly hack to add all subdirs of lispdir to the load-path.
 # This used to be required so that org-crypt could compile against
 # ~/local/share/emacs/site-lisp/epg/
-LOADPATH_OPTS += \
-      --eval "(let ((orig-dir default-directory))             \
-                 (cd \"$(lispdir)\")                          \
-                 (normal-top-level-add-subdirs-to-load-path)  \
-                 (cd orig-dir))"                              \
-      --eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
-      --eval "(message (princ-list load-path))" \
+# LOADPATH_OPTS += \
+#       --eval "(let ((orig-dir default-directory))             \
+#                  (cd \"$(lispdir)\")                          \
+#                  (normal-top-level-add-subdirs-to-load-path)  \
+#                  (cd orig-dir))"                              \
+#       --eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))" \
+#       --eval "(message (princ-list load-path))"
 
 INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 
