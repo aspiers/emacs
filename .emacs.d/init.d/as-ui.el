@@ -47,3 +47,4 @@
 (require 'paren)
 
 ;;}}}
+(global-set-key [(control ?')]            'speedbar-get-focus)

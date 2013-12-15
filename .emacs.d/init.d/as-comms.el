@@ -61,5 +61,13 @@
             (and (buffer-file-name)
                  (string-match "\\.o2b$" (buffer-file-name))
                  (org2blog/wp-mode))))
+(global-set-key "\C-cwl"  'org2blog/wp-login)
+(global-set-key "\C-cwn"  'org2blog/wp-new-entry)
+
+;;}}}
+;;{{{ ispell
+
+(global-set-key [(control $)]             'ispell-complete-word)
+(global-set-key [(control meta $)]        'ispell-buffer)
 
 ;;}}}

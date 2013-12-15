@@ -24,12 +24,8 @@
 ;;}}}
 ;;{{{ python-mode
 
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-
-(cond ((>= emacs-major-version 22)
-       (autoload 'python-mode "python" "python-mode" t))
-      (t
-       (autoload 'python-mode "python-mode" "python-mode" t)))
+(use-package python-mode
+  :mode ("\\.py\\'" . python-mode))
 
 ;; Allow modes such as jdl-mode to be given Python alignment rules
 (defcustom align-python-modes '(python-mode)
@@ -131,6 +127,9 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;(require 'rsense nil t)
 
 ;;}}}
+
+(autoload 'bundle-open "bundler" nil t)
+(global-set-key "\C-cjb" 'bundle-open)
 
 ;;}}}
 ;;{{{ Shell-script

@@ -200,6 +200,56 @@ then invoking this function four times would yield:
   (org-delete-property org-effort-property))
 (global-set-key "\eo " 'org-unset-effort)
 
+(global-set-key [(control c)(control x)(control j)] 'org-clock-goto)
+(global-set-key "\C-cc"   'org-capture)
+
+(require 'ido)
+
+(fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
+(global-set-key "\C-cjt" 'as-find-personal-todo)
+(global-set-key [(control \")] 'as-find-personal-todo)
+(fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
+(global-set-key "\C-cjd" 'as-find-personal-diary)
+;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
+
+(autoload 'org-store-link "org" "org-store-link" t)
+(global-set-key "\C-cL"   'org-store-link)
+;; I reserve C-c m for mode-specific user bindings
+;;{{{ C-c M for mairix
+
+(autoload 'as-mairix-yank-links "as-gtd" "as-mairix-yank-links" t)
+(autoload 'as-mairix-view-link-at-point "as-gtd" "as-mairix-view-link-at-point" t)
+(global-set-key [(control c) (M) (y)]         'as-mairix-yank-links)
+(global-set-key [(control c) (M) (control y)] 'as-mairix-yank-links)
+(global-set-key [(control c) (M) (return)]    'as-mairix-view-link-at-point)
+
+;;}}}
+;;{{{ org-capture (C-c q for _q_uick)
+
+;; Try to use C-c c but keeping this for backwards compatability with
+;; my brain.
+(global-set-key "\C-cq" 'org-capture)
+
+;;}}}
+
+(autoload 'org-occur-in-agenda-files "org" nil t)
+(global-set-key [(control c) (control \?)] 'org-occur-in-agenda-files)
+
+;;{{{ C-c j for quick jumping
+
+(defun as-find-personal-note ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "~/org/notes/" "Find note: "))
+(global-set-key "\C-cjn"  'as-find-personal-note)
+
+(fset 'as-find-work-todo "\C-x\C-f~/SUSE/TODO.org")
+(global-set-key "\C-cjT"  'as-find-work-todo)
+(global-set-key [(control \%)] 'as-find-work-todo)
+
+
+;;}}}
+
 ;;}}}
 
 (provide 'as-org-mode)

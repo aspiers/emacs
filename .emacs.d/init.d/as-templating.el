@@ -67,5 +67,25 @@
   (msf-abbrev-mode (or prefix 1)))
 
 ;;}}}
+;;{{{ _I_nsert auto-text (C-c i)
+
+(global-set-key "\C-cid" 'as-insert-date-and-time)
+(global-set-key "\C-ciD" 'as-insert-date-interactive)
+(global-set-key "\C-cie" 'as-insert-email-address)
+(global-set-key "\C-cim" 'as-insert-local-mode)
+(global-set-key "\C-ciw" 'as-insert-work-email-address)
+(global-set-key "\C-ciW" 'as-insert-name-and-work-email)
+(global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
+(global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
+(global-set-key "\C-cil" 'as-insert-log-timestamp)
+(global-set-key "\C-ciL" 'as-insert-log-datestamp)
+(global-set-key "\C-ciN" 'as-insert-name-and-email)
+(global-set-key "\C-cin" 'as-insert-name)
+(global-set-key "\C-cir" 'as-insert-rpm-changelog-datestamp)
+(global-set-key "\C-cis" 'as-insert-scissors)
+(global-set-key "\C-ciS" 'as-snip-region)
+(global-set-key "\C-cit" 'as-insert-time)
+
+;;}}}
 
 (provide 'as-templating)
