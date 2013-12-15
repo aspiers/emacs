@@ -1,4 +1,4 @@
-(eval-and-compile (as-loading-progress))
+(eval-and-compile (as-loading-started))
 
 ;; org-mode needs to be loaded before el-get packages which depend on
 ;; it, otherwise the version of org-mode distributed with emacs will
@@ -101,7 +101,9 @@
 ;; install something via `el-get-list-packages', this reduces the
 ;; chance I'll get used to it being there on one machine and then get
 ;; surprised when it isn't on another machine I switch to.
+(as-progress (format "cleaning up unwanted el-get packages ..."))
 (el-get-cleanup as-el-get-packages)
+(as-progress (format "cleaning up unwanted el-get packages ... done"))
 
 ;; Reasons pro installing synchronously:
 ;;
@@ -120,8 +122,13 @@
 ;; depend on both el-get and use-package from having to require both
 ;; separately.
 (el-get 'sync 'use-package)
+(as-progress (format "loading use-package ... done"))
+
 (require 'use-package)
 
+(as-progress (format "loading packages via `el-get' ..."))
 (el-get (if el-get-install-sync 'sync) as-el-get-packages)
+(as-progress (format "loading packages via `el-get' ...  done"))
 
 (provide 'as-el-get)
+(eval-and-compile (as-loading-done))

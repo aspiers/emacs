@@ -6,7 +6,7 @@
 ;; this file, rather than removing (require 'as-el-get) from all packages
 ;; which need use-package but not el-get.
 
-(eval-and-compile (as-loading-progress))
+(eval-and-compile (as-loading-started))
 
 (require 'as-el-get)
 
@@ -15,3 +15,4 @@
 (require 'use-package)
 
 (provide 'as-use-package)
+(eval-and-compile (as-loading-done))

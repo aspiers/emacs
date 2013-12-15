@@ -1,4 +1,4 @@
-(eval-and-compile (as-loading-progress))
+(eval-and-compile (as-loading-started))
 
 (defvar edotdir
   (or (getenv "ZDOTDIR") "~")
@@ -45,5 +45,5 @@ appearing earlier on `load-path'.
 Libraries which do not appear in older emacs installs can be
 placed here.")
 
-(as-progress "loaded %s" load-file-name)
 (provide 'as-vars)
+(eval-and-compile (as-loading-done))

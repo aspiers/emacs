@@ -3,7 +3,7 @@
 ;; For faster compilation
 (eval-when-compile (require 'cl))
 
-(eval-and-compile (as-loading-progress))
+(eval-and-compile (as-loading-started))
 
 ;;{{{ Why is this a separate file?
 

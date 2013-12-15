@@ -1,4 +1,4 @@
-(eval-and-compile (as-loading-progress))
+(eval-and-compile (as-loading-started))
 
 (require 'as-vars)
 
@@ -54,3 +54,4 @@
       (cd orig-dir)))
 
 (provide 'as-load-paths)
+(eval-and-compile (as-loading-done))

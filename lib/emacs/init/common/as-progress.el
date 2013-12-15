@@ -33,8 +33,12 @@ as an extremely primitive profiler.")
     (as-progress-message
      (concat caller-filename ": " (if args (format msg args) msg)))))
 
-(defun as-loading-progress ()
+(defun as-loading-started ()
   "Display progress of loading of init files."
-  (as-progress-message "loading %s ..." load-file-name))
+  (as-progress-message "loading %s ..." (abbreviate-file-name (or load-file-name "unknown"))))
+
+(defun as-loading-done ()
+  "Display progress of loading of init files."
+  (as-progress-message "loading %s ... done" (abbreviate-file-name load-file-name)))
 
 (provide 'as-progress)
