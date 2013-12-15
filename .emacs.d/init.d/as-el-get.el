@@ -94,6 +94,7 @@
     versions
     undo-tree
     use-package
+    xrdb-mode
     yaml-mode
     yasnippet
     )

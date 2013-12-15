@@ -380,18 +380,14 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;}}}
 ;;{{{ xrdb
 
-(autoload 'xrdb-mode "xrdb-mode" "Mode for editing X resource files" t)
-
-(dolist (re '("\\.Xdefaults$"
-              "\\.Xenvironment$"
-              "\\.Xresources$"
-              ".*\\.ad$"
-              ".*\\.x?rdb$"))
-  (add-to-list 'auto-mode-alist (cons re 'xrdb-mode)))
-
-(defvar as-find-file-matching-regexp-alist '())
-(add-to-list 'as-find-file-matching-regexp-alist
-             '("\*\.rdb$" . (lambda () (setq comment-start "! "))))
+(use-package xrdb-mode
+  :mode ("\\.Xdefaults$"    . xrdb-mode)
+  :mode ("\\.Xenvironment$" . xrdb-mode)
+  :mode ("\\.Xresources$"   . xrdb-mode)
+  :mode (".*\\.ad$"         . xrdb-mode)
+  :mode (".*\\.x?rdb$"      . xrdb-mode)
+  :config
+  (add-hook 'xrdb-mode-hook (lambda () (setq comment-start "! "))))
 
 ;;}}}
 
