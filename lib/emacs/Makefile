@@ -448,7 +448,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 
 %.elc: %.el .lispdir
 	@if [ -n "$(LIBDIRS)" ]; then \
-	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
+	  echo "### Compiling $< with libdirs: $(LIBDIRS) ..."; \
 	else \
 	  echo "### Compiling $< ..."; \
 	fi
@@ -456,7 +456,7 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 
 %.elc.verbose: %.el .lispdir
 	@if [ -n "$(LIBDIRS)" ]; then \
-	  echo "### Compiling $< with libs: $(LIBDIRS) ..."; \
+	  echo "### Compiling $< with libdirs: $(LIBDIRS) ..."; \
 	else \
 	  echo "### Compiling $< ..."; \
 	fi
