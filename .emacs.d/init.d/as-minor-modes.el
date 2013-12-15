@@ -9,29 +9,6 @@
     (setq vc-handled-backends (append vc-handled-backends '(osc))))
 
 ;;}}}
-;;{{{ iswitchb - better buffer switching
-
-;; (eval-when-compile (require 'iswitchb))
-;; (iswitchb-default-keybindings)
-;; (add-hook 'iswitchb-define-mode-map-hook 'as-iswitchb-keys)
-
-;; (defun iswitchb-bury-buffer ()
-;;   "Bury the buffer at the head of `iswitchb-matches'."
-;;   (interactive)
-;;   (let ((enable-recursive-minibuffers t) buf)
-;;     (setq buf (car iswitchb-matches))
-;;     (if buf
-;; 	(progn
-;; 	  (bury-buffer buf)
-;;           (iswitchb-next-match)
-;;           (setq iswitchb-rescan t)))))
-
-;; (defun as-iswitchb-keys ()
-;;  "Adam's keybindings for iswitchb."
-;;  (define-key iswitchb-mode-map "\C-z" 'iswitchb-bury-buffer)
-;;  )
-
-;;}}}
 ;;{{{ ido - superior replacement for iswitchb
 
 (require 'ido)
