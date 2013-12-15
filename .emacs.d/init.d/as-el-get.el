@@ -45,7 +45,6 @@
     flymake-sass
     flymake-shell
     flx-ido ;; flx is flex with better ordering
-    folding
     gist
     git-gutter
     ;;git-gutter-fringe
