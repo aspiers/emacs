@@ -46,28 +46,42 @@
 ;;}}}
 ;;{{{ client/server mode
 
-(autoload 'server-start "server" "server-start" t)
-(defun ss ()
-  "Abbreviation for `server-start'."
-  (interactive)
-  (server-start))
+(use-package server
+  :commands (server-start server-force-delete)
+  :init
+  (progn
+    (defun ss ()
+      "Abbreviation for `server-start'."
+      (interactive)
+      (server-start))
+    (defun server-restart (interactive)
+      "Equivalent to `server-force-delete' followed by `server-start'."
+      (server-force-delete)
+      (server-start))
+    (unless (as-quick-startup)
+      (condition-case err
+          (server-start)
+        (file-error (message "%s" (error-message-string err)))))))
 
-(autoload 'edit-server-start "edit-server" "edit-server" t)
-(autoload 'edit-server-stop  "edit-server" "edit-server" t)
-(unless (as-quick-startup)
-  (server-start)
-  (condition-case err
-      (edit-server-start)
-    (file-error (message "%s" (error-message-string err))))
-  (defun edit-server-restart (interactive)
-    "Equivalent to `edit-server-stop' followed by `edit-server-start'."
-    (edit-server-stop)
-    (edit-server-start)))
+(use-package edit-server
+  :commands (edit-server-start edit-server-stop)
+  :init
+  (unless (as-quick-startup)
+    (condition-case err
+        (edit-server-start)
+      (file-error (message "%s" (error-message-string err))))
+    (defun edit-server-restart (interactive)
+      "Equivalent to `edit-server-stop' followed by `edit-server-start'."
+      (edit-server-stop)
+      (edit-server-start))))
 
-(autoload 'edit-server-maybe-dehtmlize-buffer "edit-server-htmlize" "edit-server-htmlize" t)
-(autoload 'edit-server-maybe-htmlize-buffer   "edit-server-htmlize" "edit-server-htmlize" t)
-(add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
-(add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)
+(use-package edit-server-htmlize
+  :commands (edit-server-maybe-dehtmlize-buffer
+             edit-server-maybe-htmlize-buffer)
+  :init
+  (when (featurep 'edit-server)
+    (add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
+    (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)))
 
 ;;}}}
 ;;{{{ Diary, appointments

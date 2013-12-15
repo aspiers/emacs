@@ -39,6 +39,8 @@
     color-theme
     darcsum
     ediff-trees
+    edit-server
+    edit-server-htmlize
     erin
     expand-region
     faith
