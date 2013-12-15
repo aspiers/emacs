@@ -2115,7 +2115,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/mode-width (quote \'full))
  '(sml/replacer-regexp-list
    (quote
-    (("^~/\\.STOW/emacs/\\.emacs\\.d/" "~/.emacs.d/")
+    (("^~/.GIT/adamspiers.org/" ":GG:")
+     ("^~/.GIT/3rd-part/" ":G3:")
+     ("^~/\\.STOW/emacs/\\.emacs\\.d/" "~/.emacs.d/")
      ("^~/\\.STOW/emacs/lib/emacs/" "~/lib/emacs/")
      ("~/lib/emacs/" ":LE:")
      ("^~/\\.emacs\\.d/" ":ED:")
