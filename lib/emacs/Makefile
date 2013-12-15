@@ -120,8 +120,7 @@ IGNORE_PATHS =                                          \
         $(MINOR_MODES)/msf-abbrev/mode-abbrevs          \
 IGNORE_FILES =                                          \
         loaddefs.el                                     \
-        $(MAJOR_MODES)/sdf.el                           \
-        $(MAJOR_MODES)/mediawiki.el
+        $(MAJOR_MODES)/sdf.el
 
 ifeq (,$(wildcard $(ORG_DIR)))
         IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el

@@ -70,6 +70,7 @@
 
     markdown-mode
     markdown-mode+
+    mediawiki
     multiple-cursors
     org2blog
     org-magit ;; support for magit: links in org buffers
