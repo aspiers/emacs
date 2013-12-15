@@ -14,13 +14,11 @@
   "Path to root of emacs libraries, regardless of emacs vendor.")
 
 (defvar as-lib-dir
-  (concat as-emacs-dir "/"
-          (cond ((boundp 'running-xemacs) "XEmacs") (t "GNU_Emacs")))
+  (concat as-emacs-dir "/GNU_Emacs")
   "Path to emacs libraries for a specific emacs vendor.")
 
 (defvar as-init-dir
-  (concat as-emacs-dir "/init/"
-          (cond ((boundp 'running-xemacs) "XEmacs") (t "GNU_Emacs")))
+  (concat as-emacs-dir "/init/GNU_Emacs")
   "Path to emacs init libraries for a specific emacs vendor.")
 
 (defvar as-version-pre-lib-dir

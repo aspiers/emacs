@@ -2145,7 +2145,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
  '(tramp-verbose 13)
- '(transient-mark-mode 1)
+ '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))

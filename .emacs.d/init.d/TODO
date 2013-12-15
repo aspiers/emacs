@@ -1,3 +1,2 @@
 - Get rid of as-misc.el and as-functions.el
 - Start using same-window-regexps?
-- remove XEmacs stuff

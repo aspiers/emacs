@@ -172,14 +172,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
 
-;;{{{ local-unset-key M-tab for hippie-expand
-
-(if (eq (boundp 'running-xemacs) t)
-    (add-hook 'emacs-lisp-mode-hook
-              (lambda () (local-unset-key [(meta tab)]))))
-
-;;}}}
-
 ;;}}}
 ;;{{{ ecmascript-mode
 

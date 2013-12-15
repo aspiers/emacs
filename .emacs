@@ -1,6 +1,6 @@
 ;; -*- Mode: Emacs-Lisp -*-
 ;;
-;; emacs and Xemacs startup file
+;; GNU emacs startup file
 ;; Adam Spiers
 ;;
 

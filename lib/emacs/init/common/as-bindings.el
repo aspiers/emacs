@@ -824,7 +824,7 @@ consistent landing spot."
 ;;}}}
 ;;{{{ Mouse
 
-(and window-system (not (boundp 'running-xemacs))
+(and window-system
      (global-set-key [(M-mouse-4)] 'raise-frame)
      (global-set-key [(M-mouse-5)] 'lower-frame))
 

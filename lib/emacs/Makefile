@@ -31,7 +31,6 @@ ELPA     = $(EMACS_D)/elpa
 EL_GET   = $(EMACS_D)/el-get
 
 GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
-XINSTALL_DIR = $(EMACSLIB)/XEmacs
 
 prefix   = $(HOME)/local
 infodir = $(prefix)/share/info
@@ -227,34 +226,27 @@ SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
 
 SITE_INSTALL_DIR=$(shell $(BATCH_EVAL) '(princ (car load-path))')
 
-ifeq (, $(findstring XEmacs,$(version)))
-  # GNU Emacs
-  LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
+LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 
-  # Really ugly hack to add all subdirs of lispdir to the load-path.
-  # This used to be required so that org-crypt could compile against
-  # ~/local/share/emacs/site-lisp/epg/
-  LOADPATH_OPTS += \
-        --eval "(let ((orig-dir default-directory))             \
-                   (cd \"$(lispdir)\")                          \
-                   (normal-top-level-add-subdirs-to-load-path)  \
-                   (cd orig-dir))"                              \
-        --eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
-#       --eval "(message (princ-list load-path))" \
+# Really ugly hack to add all subdirs of lispdir to the load-path.
+# This used to be required so that org-crypt could compile against
+# ~/local/share/emacs/site-lisp/epg/
+LOADPATH_OPTS += \
+      --eval "(let ((orig-dir default-directory))             \
+                 (cd \"$(lispdir)\")                          \
+                 (normal-top-level-add-subdirs-to-load-path)  \
+                 (cd orig-dir))"                              \
+      --eval "(normal-top-level-add-to-load-path '(\"$(lispdir)\"))"
+      --eval "(message (princ-list load-path))" \
 
-  INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
-else
-  # X Emacs.  Blegh!
-  LOADPATH_OPTS=$(addsuffix \" ,$(addprefix \",$(LIBDIRS)))
-#  LOADPATH_OPTS=--eval "(setq load-path (append '($(LOADPATH_OPTS)) load-path))"
-  INSTALL_DIR=$(XINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
-endif
+INSTALL_DIR=$(GNUINSTALL_DIR)/$(VERSION_NUMBER)/$(SYSTEM_TYPE)
 
 PRE_INSTALL_DIR  = $(INSTALL_DIR)/pre
 POST_INSTALL_DIR = $(INSTALL_DIR)/post
 
 COMPILER=$(EMACS) --no-site-file
-#COMPILER += --eval '(setq debug-on-error t)'
+COMPILER += --eval '(setq debug-on-error t)'
+#COMPILER_OPTS += --eval '(setq el-get-verbose t)'
 COMPILER_BATCH=-batch -f batch-byte-compile
 COMPILER_OPTS=$(COMPILER_BATCH)
 

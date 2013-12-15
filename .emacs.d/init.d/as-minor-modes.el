@@ -109,20 +109,6 @@
 ;;}}}
 
 ;;}}}
-;;{{{ Transient Mark mode
-
-(eval-when-compile (defun transient-mark-mode (arg1) nil))
-(if (not (boundp 'running-xemacs)) (transient-mark-mode 1))
-
-;;}}}
-;;{{{ Font-Lock mode
-
-;;(global-font-lock-mode t)
-
-;; Do this via customisation since it's different for xemacs
-;;(and window-system (not (boundp 'running-xemacs)) (global-font-lock-mode t))
-
-;;}}}
 ;;{{{ Load paren library
 
 (require 'paren)
@@ -150,16 +136,6 @@
        (auto-compression-mode 1)))
 
 ;;}}}
-;;{{{ blinking-cursor
-
-(eval-when-compile (defun blinking-cursor-mode (&optional arg)))
-(and window-system
-     (not (boundp 'running-xemacs))
-     (= emacs-major-version 20)
-     (load "blinking-cursor" t)
-     (blinking-cursor-mode 1))
-
-;;}}}
 ;;{{{ recentf
 
 (and window-system
@@ -173,7 +149,6 @@
 ;; frame-resizing problems.  See ~/.Xresources/emacs.rdb.
 
 ;; (and window-system
-;;      (not (boundp 'running-xemacs))
 ;;      (>= emacs-major-version 21)
 ;;      (tool-bar-mode -1))
 
