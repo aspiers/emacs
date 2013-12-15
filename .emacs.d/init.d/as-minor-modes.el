@@ -2,11 +2,9 @@
 
 ;;{{{ vc
 
-(require 'vc)
-
-(require 'vc-osc nil t)
-(if (featurep 'vc-osc)
-    (setq vc-handled-backends (append vc-handled-backends '(osc))))
+(use-package vc-osc
+  :config
+  (add-to-list 'vc-handled-backends 'osc 'append))
 
 ;;}}}
 ;;{{{ ido - superior replacement for iswitchb

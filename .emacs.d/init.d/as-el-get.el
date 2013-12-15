@@ -100,6 +100,7 @@
     versions
     undo-tree
     use-package
+    vc-osc
     xrdb-mode
     yaml-mode
     yasnippet
