@@ -53,7 +53,6 @@ YASNIPPET_DIR = $(MINOR_MODES)/yasnippet
 ifeq (,$(wildcard $(YASNIPPET_DIR)))
 	YASNIPPET_DIR=
 endif
-COLOR_THEME_DIR = color-theme
 
 # Pros of symlinking foo -> foo-1.2.3 approach:
 #  - allows different versions per machine
@@ -72,10 +71,6 @@ THIRD_PARTY_PKG_DIRS =
 ifneq (,$(wildcard $(ORG_DIR)))
         THIRD_PARTY_PKG_TARGETS += .org-installed
         THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
-endif
-ifneq (,$(wildcard $(COLOR_THEME_DIR)))
-        THIRD_PARTY_PKG_TARGETS += .color-theme-installed
-        THIRD_PARTY_PKG_DIRS    += $(COLOR_THEME_DIR)
 endif
 
 # }}}
@@ -122,9 +117,7 @@ NO_COMPILE_EL_PATTERNS =
 ifneq (,$(YASNIPPET_DIR))
   NO_COMPILE_EL_PATTERNS += $(YASNIPPET_DIR)%
 endif
-ifneq (,$(COLOR_THEME_DIR))
-  NO_COMPILE_EL_PATTERNS += fun/pastels-on-dark-theme.el
-endif
+NO_COMPILE_EL_PATTERNS += fun/pastels-on-dark-theme.el
 
 # This will prevent matching .el files from being installed.
 NO_INSTALL_PATTERNS =
@@ -163,9 +156,6 @@ TO_CLEAN = pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
         TO_CLEAN += org
-endif
-ifneq (,$(wildcard $(COLOR_THEME_DIR)))
-        TO_CLEAN += color-theme
 endif
 
 # }}}
@@ -227,6 +217,8 @@ SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
 SITE_INSTALL_DIR=$(shell $(BATCH_EVAL) '(princ (car load-path))')
 
 LIBS=as-pre-init-d
+LIBDIRS=$(INIT_D)
+
 LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
 LOADPATH_OPTS+=$(addprefix -l ,$(LIBS))
 
@@ -468,7 +460,6 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # {{{ Special rules for my init files
 
 INIT_COMMON_LIBDIRS =           \
-        $(INIT_D)               \
         init/common             \
         $(MAJOR_MODES)          \
         $(MAJOR_MODES)/mmm      \
@@ -496,8 +487,6 @@ $(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
 # as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
-
-$(UTILS)/bundler.elc: LIBDIRS += $(wildcard $(ELPA)/inf-ruby*)
 
 init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
@@ -552,34 +541,5 @@ clean-pgg:
 $(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
 .pgg-made: $(MAJOR_MODES)/pgg/pgg.elc
 	@-cp $(MAJOR_MODES)/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
-
-# }}}
-# {{{ color-theme
-
-.PHONY: color-theme
-color-theme: .color-theme-installed
-ifeq (,$(wildcard $(COLOR_THEME_DIR)))
-clean-color-theme:
-	@echo "Won't clean non-existent $(COLOR_THEME_DIR)"
-.color-theme-installed:
-	@echo "Won't install from non-existent $(COLOR_THEME_DIR)"
-else
-clean-color-theme:
-	rm -rf .color-theme-installed $(lispdir)/color-theme* $(lispdir)/themes
-	@$(UNLOCK_INSTALL_DIRS)
-	rm -f $(POST_INSTALL_DIR)/color-theme*
-	@$(LOCK_INSTALL_DIRS)
-	$(MAKE) -C $(COLOR_THEME_DIR) clean
-
-# FIXME: handle case where color-theme not available
-fun/pastels-on-dark-theme.el: .color-theme-installed
-
-.color-theme-installed: $(wildcard $(COLOR_THEME_DIR)/*.el)
-	$(MAKE) -C $(COLOR_THEME_DIR) autoloads install-bin \
-	        PREFIX=$(prefix) \
-	        ELISPDIR=$(lispdir) \
-	        INFODIR=$(infodir)
-	touch $@
-endif
 
 # }}}

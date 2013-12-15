@@ -34,6 +34,7 @@
     auto-complete-yasnippet
     bundler
     coffee-mode
+    color-theme
     expand-region
     folding
     flymake-css

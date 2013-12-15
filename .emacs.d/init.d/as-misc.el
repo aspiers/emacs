@@ -92,15 +92,13 @@
 ;;}}}
 ;;{{{ Color themes
 
-(require 'color-theme-autoloads nil 'noerror)
-(autoload 'color-theme-pastels-on-dark "color-theme-pastels-on-dark" "pastels-on-dark-theme" t)
-(if (as-check-feature-loaded 'color-theme-autoloads)
-    (progn
-      (require 'pastels-on-dark-theme nil 'noerror)
-      (if (as-check-feature-loaded 'pastels-on-dark-theme)
-          (color-theme-pastels-on-dark)
-        (message "Couldn't load pastels-on-dark-theme")))
-  (message "Couldn't load color-theme"))
+(require 'as-use-package)
+
+(use-package color-theme)
+(use-package color-theme-pastels-on-dark
+  :if (featurep 'color-theme)
+  :init
+  (color-theme-pastels-on-dark))
 
 ;;}}}
 

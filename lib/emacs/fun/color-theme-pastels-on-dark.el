@@ -1,5 +1,4 @@
-(eval-when-compile
-  (require 'color-theme))
+(require 'color-theme)
 
 (defun color-theme-pastels-on-dark ()
   "Color theme ported from TextMate by Shane Celis on 2007-01-10.
@@ -272,4 +271,4 @@ Tweaked by Adam Spiers in December 2009."
      (woman-unknown-face ((t (:foreground "LightSalmon"))))
      (zmacs-region ((t (:background "DarkSlateBlue")))))))
 
-(provide 'pastels-on-dark-theme)
+(provide 'color-theme-pastels-on-dark)
