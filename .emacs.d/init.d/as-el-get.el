@@ -36,6 +36,7 @@
     bundler
     coffee-mode
     color-theme
+    darcsum
     ediff-trees
     erin
     expand-region
