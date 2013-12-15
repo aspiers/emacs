@@ -83,8 +83,7 @@ el_search_paths =                       \
         $(ORG_DIR)/contrib/lisp         \
         $(CUCUMBER_DIR)                 \
         $(MINOR_MODES)                  \
-        $(UTILS)                        \
-        fun
+        $(UTILS)
 
 # }}}
 
@@ -106,9 +105,7 @@ endif
 
 # This will prevent any resulting .elc files from being compiled
 # and consequently installed.
-NO_COMPILE_EL_PATTERNS = 
-
-NO_COMPILE_EL_PATTERNS += fun/pastels-on-dark-theme.el
+NO_COMPILE_EL_PATTERNS =
 
 # This will prevent matching .el files from being installed.
 NO_INSTALL_PATTERNS =
