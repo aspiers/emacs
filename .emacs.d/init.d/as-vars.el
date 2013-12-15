@@ -1,8 +1,6 @@
-(eval-and-compile (as-loading-started))
-
-(defvar edotdir
-  (or (getenv "ZDOTDIR") "~")
-  "Home directory to be used to retrieve emacs init files.")
+;; as-load-paths depends on this, so at this point emacs doesn't
+;; know where to find as-progress.
+(eval-and-compile (message "Loading as-vars ..."))
 
 ;; XEmacs adds crap to emacs-version
 (defvar emacs-version-number
@@ -44,4 +42,4 @@ Libraries which do not appear in older emacs installs can be
 placed here.")
 
 (provide 'as-vars)
-(eval-and-compile (as-loading-done))
+(eval-and-compile (message "Loading as-vars ... done"))

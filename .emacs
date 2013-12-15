@@ -7,8 +7,8 @@
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
 
-(defvar as-init-d ".emacs.d/init.d")
-(load (concat (directory-file-name load-file-name) "/" as-init-d "/as-pre-init-d"))
+(defvar as-init-d-suffix ".emacs.d/init.d")
+(load (concat (file-name-directory load-file-name) as-init-d-suffix "/as-pre-init-d"))
 
 (require 'cl) ;; for remove-if-not
 (defun as-find-hooks (hook-name)
@@ -35,6 +35,6 @@
     (load hook)
     (as-progress "loading %s... done" (abbreviate-file-name hook))))
 
-(as-load-hooks as-init-d)
+(as-load-hooks as-init-d-suffix)
 
 (as-progress "end of ~/.emacs")

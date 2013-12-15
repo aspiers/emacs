@@ -226,7 +226,9 @@ SYSTEM_TYPE=$(shell $(BATCH_EVAL) \
 
 SITE_INSTALL_DIR=$(shell $(BATCH_EVAL) '(princ (car load-path))')
 
+LIBS=as-pre-init-d
 LOADPATH_OPTS=$(addprefix -L ,$(LIBDIRS))
+LOADPATH_OPTS+=$(addprefix -l ,$(LIBS))
 
 # Really ugly hack to add all subdirs of lispdir to the load-path.
 # This used to be required so that org-crypt could compile against

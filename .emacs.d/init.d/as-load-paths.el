@@ -1,9 +1,13 @@
-(eval-and-compile (as-loading-started))
+;; At this point emacs doesn't
+;; know where to find as-progress.
+(eval-and-compile (message "Loading as-load-paths ..."))
 
 (require 'as-vars)
 
 ;; save original load-path - e.g. useful for finding site-lisp directory
 (setq orig-load-path load-path)
+
+(add-to-list 'load-path as-init-d)
 
 (defvar find-function-source-path load-path)
 
@@ -52,6 +56,8 @@
       (cd dir)
       (normal-top-level-add-subdirs-to-load-path)
       (cd orig-dir)))
+
+(require 'as-progress)
 
 (provide 'as-load-paths)
 (eval-and-compile (as-loading-done))
