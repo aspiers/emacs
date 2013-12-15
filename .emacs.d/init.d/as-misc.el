@@ -106,8 +106,6 @@
 ;;}}}
 ;;{{{ Color themes
 
-(require 'as-use-package)
-
 (use-package color-theme)
 (use-package color-theme-pastels-on-dark
   :if (featurep 'color-theme)
