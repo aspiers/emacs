@@ -21,8 +21,7 @@ my $X_install_dir   = "$lib/XEmacs";
 
 my $ELs = `find @srcdirs -name \\*.el \\
 			    ! -name psgml\\* \\
-			    ! -name tdtd\\* \\
-			    ! -name sdf.el`;
+			    ! -name tdtd\\*`;
 my @ELs = split /\n/, $ELs;
 my @ELCs = map { $_ . 'c' } @ELs;
 
