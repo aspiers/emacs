@@ -33,6 +33,7 @@
     auto-complete-emacs-lisp
     auto-complete-ruby
     auto-complete-yasnippet
+    auto-recomp
     bundler
     coffee-mode
     color-theme
