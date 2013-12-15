@@ -1324,7 +1324,7 @@
  '(fci-rule-column 80)
  '(flx-ido-mode t)
  '(folding-mode-prefix-key "")
- '(gc-cons-threshold 2000000)
+ '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
  '(git-commit-mode-hook
    (quote
