@@ -1323,6 +1323,7 @@
  '(fci-rule-color "gray32")
  '(fci-rule-column 80)
  '(flx-ido-mode t)
+ '(flx-ido-threshhold 60000)
  '(folding-mode-prefix-key "")
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
