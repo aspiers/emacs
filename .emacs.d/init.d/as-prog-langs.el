@@ -169,6 +169,12 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-mode-hook (lambda () (setq comment-start ";; ")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
+(use-package paredit
+  :commands enable-paredit-mode
+  :init
+  (progn
+    (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook       'enable-paredit-mode)))
 
 ;;{{{ macrostep
 

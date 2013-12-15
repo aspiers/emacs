@@ -83,6 +83,7 @@
     org2blog
     org-magit ;; support for magit: links in org buffers
     org-sync
+    paredit
 
     ;; https://github.com/dimitri/el-get/issues/1471
     ;; https://github.com/dimitri/el-get/issues/1472
