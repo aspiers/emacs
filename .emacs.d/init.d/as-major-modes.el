@@ -175,9 +175,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;}}}
 ;;{{{ Javascript
 
-;; (add-to-list 'auto-mode-alist '("\\.js$" . ecmascript-mode))
-;; (autoload 'ecmascript-mode "ecmascript-mode" "ecmascript-mode" t)
-
 ;; Steve Yegge to the rescue
 (use-package js2-mode
   :commands nil
