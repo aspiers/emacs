@@ -81,7 +81,6 @@ el_search_paths =                       \
         init/common                     \
         $(wildcard $(MAJOR_MODES)/*.el) \
         $(MAJOR_MODES)/mmm              \
-        $(MAJOR_MODES)/pgg              \
         $(ORG_DIR)/contrib/lisp         \
         $(CUCUMBER_DIR)                 \
         $(MINOR_MODES)                  \
@@ -139,8 +138,6 @@ LOADDEFS_DIRS=  \
         $(UTILS)
 
 # }}}
-
-TO_CLEAN = pgg
 
 ifneq (,$(wildcard $(ORG_DIR)))
         TO_CLEAN += org
@@ -518,16 +515,5 @@ endif
 $(MAJOR_MODES)/mmm/%.elc: $(MAJOR_MODES)/mmm/%.el
 
 $(MAJOR_MODES)/mmm/%.elc: LIBDIRS += $(MAJOR_MODES)/mmm
-
-# }}}
-# {{{ pgg-mode
-
-pgg: .pgg-made
-clean-pgg:
-	rm -f .pgg-made
-	$(MAKE) -C $(MAJOR_MODES)/pgg clean
-$(MAJOR_MODES)/pgg/%.elc: LIBDIRS += $(MAJOR_MODES)/pgg
-.pgg-made: $(MAJOR_MODES)/pgg/pgg.elc
-	@-cp $(MAJOR_MODES)/pgg/pgg.{el,elc} $(POST_INSTALL_DIR) && touch $@
 
 # }}}
