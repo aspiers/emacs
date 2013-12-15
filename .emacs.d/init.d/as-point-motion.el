@@ -1,0 +1,3 @@
+
+
+(provide 'as-point-motion)
