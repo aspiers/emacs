@@ -359,8 +359,8 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 ;;{{{ rpm-spec-mode
 
-(add-to-list 'auto-mode-alist '("\\.spec$" . rpm-spec-mode))
-(autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode." t)
+(use-package rpm-spec-mode
+  :mode ("\\.spec$" . rpm-spec-mode))
 
 ;;}}}
 ;;{{{ Apache
