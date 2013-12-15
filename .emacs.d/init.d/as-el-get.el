@@ -36,6 +36,7 @@
     bundler
     coffee-mode
     color-theme
+    ediff-trees
     erin
     expand-region
     faith
