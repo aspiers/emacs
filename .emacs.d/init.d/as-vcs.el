@@ -22,3 +22,16 @@
 ;; (require 'psvn)
 
 ;;}}}
+;;{{{ vc-osc
+
+(use-package vc-osc
+  :config
+  (add-to-list 'vc-handled-backends 'osc 'append))
+
+;;}}}
+;;{{{ git-gutter
+
+(require 'git-gutter)
+(global-git-gutter-mode t)
+
+;;}}}

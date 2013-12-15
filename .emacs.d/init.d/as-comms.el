@@ -54,3 +54,12 @@
              '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . html-helper-mode))
 
 ;;}}}
+;;{{{ org2blog
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (and (buffer-file-name)
+                 (string-match "\\.o2b$" (buffer-file-name))
+                 (org2blog/wp-mode))))
+
+;;}}}
