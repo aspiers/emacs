@@ -538,9 +538,8 @@ other people."
 ;;}}}
 ;;{{{ TWiki
 
-(autoload 'erin-mode "erin" nil t)
-
-(add-to-list 'auto-mode-alist '("\\.tmpl$" . html-helper-mode))
+(use-package erin-mode
+  :mode ("\\.twiki\\'" . erin-mode))
 
 ;;}}}
 

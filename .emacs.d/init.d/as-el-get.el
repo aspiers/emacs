@@ -36,6 +36,7 @@
     bundler
     coffee-mode
     color-theme
+    erin
     expand-region
     faith
     folding
