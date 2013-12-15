@@ -264,5 +264,16 @@
                  (org2blog/wp-mode))))
 
 ;;}}}
+;;{{{ macrostep
+
+(use-package macrostep
+  :defer t
+  :init
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (define-key emacs-lisp-mode-map
+                (kbd "C-c e") 'macrostep-expand))))
+
+;;}}}
 
 (provide 'as-minor-modes)

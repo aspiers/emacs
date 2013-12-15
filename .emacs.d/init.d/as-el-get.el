@@ -62,6 +62,7 @@
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
+    macrostep
     magit
 
     ;; https://github.com/nex3/magithub/pull/11
