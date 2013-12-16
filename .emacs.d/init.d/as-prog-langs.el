@@ -24,8 +24,9 @@
 ;;}}}
 ;;{{{ python-mode
 
-(use-package python-mode
-  :mode ("\\.py\\'" . python-mode))
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode))
 
 ;; Allow modes such as jdl-mode to be given Python alignment rules
 (defcustom align-python-modes '(python-mode)
@@ -95,8 +96,10 @@ FIXME: needs to tweak align-*-modes too."
 ;;}}}
 ;;{{{ Ruby
 
-(add-to-list 'auto-mode-alist '("\\(\\.rb\\|\\.erb\\|\\.rjs\\|\\.rake\\|Rakefile\\|Guardfile\\)\\'" . ruby-mode))
-(autoload 'ruby-mode "ruby-mode" "ruby-mode" t)
+(use-package ruby-mode
+  :mode "\\(\\.\\(e?rb\\|rjs\\|rake\\)\\|Rakefile\\|Guardfile\\)\\'"
+  :interpreter "ruby\\|ruby[12]\.[0-9]\\|jruby\\|rbx")
+
 (add-to-list 'auto-mode-alist '("\\.gem\\'" . tar-mode))
 
 ;;{{{ rcov.el
