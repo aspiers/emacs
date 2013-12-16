@@ -121,13 +121,14 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 (autoload 'rcov-buffer "rcov-overlay" "rcov-overlay" t)
 ;; (global-set-key (kbd "C-c C-r")   'rcov-buffer)
-(autoload 'autotest "autotest" "autotest" t)
 
-;;{{{ rsense
+(use-package autotest :commands autotest)
 
-(defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
-(add-to-list 'load-path (concat rsense-home "/etc"))
-;;(require 'rsense nil t)
+(use-package rsense
+  :config
+  (progn
+   (defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
+   (add-to-list 'load-path (concat rsense-home "/etc"))))
 
 ;;}}}
 
