@@ -7,8 +7,12 @@
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
 
+(defvar edotdir
+  (or (getenv "ZDOTDIR") "~")
+  "Home directory to be used to retrieve emacs init files.")
+
 (defvar as-init-d-suffix ".emacs.d/init.d")
-(load (concat (file-name-directory load-file-name) as-init-d-suffix "/as-pre-init-d"))
+(load (concat edotdir "/" as-init-d-suffix "/as-pre-init-d"))
 
 (require 'cl) ;; for remove-if-not
 (defun as-find-hooks (hook-name)
