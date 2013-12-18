@@ -1,4 +1,4 @@
-;; Stuff relating to use of emacs
+;; Stuff relating to generic use of emacs in any context
 
 (bind-key "M-x"   'smex)
 (bind-key "M-X"   'smex-major-mode-commands)
