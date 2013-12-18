@@ -14,5 +14,7 @@
 ;; automatically.
 (require 'use-package)
 
+(require 'bind-key)
+
 (provide 'as-use-package)
 (eval-and-compile (as-loading-done))
