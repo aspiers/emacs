@@ -2110,7 +2110,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/active-foreground-color "black")
  '(sml/hidden-modes
    (quote
-    (" hl-p" " WS" " ws" " Guide" " SP" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
+    (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
  '(sml/inactive-background-color "gray20")
  '(sml/line-number-format "%4l")
  '(sml/mode-width (quote full))
