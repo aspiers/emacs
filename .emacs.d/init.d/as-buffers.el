@@ -19,5 +19,6 @@
 (bind-key "C-x I" 'insert-buffer)
 (bind-key "<F6>"  'as-bounce-buffer)
 (bind-key "C-c n" 'as-display-buffer-filename)
+(bind-key "C-c N" 'as-display-buffer-name)
 
 (provide 'as-buffers)

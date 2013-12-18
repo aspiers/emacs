@@ -30,8 +30,8 @@ from the replace is visited via `find-file'."
 ;;}}}
 ;;{{{ as-display-buffer-filename
 
-(eval-when-compile
-  (autoload 'x-select-text "term/x-win" nil t))
+;; (eval-when-compile
+;;   (autoload 'x-select-text "term/x-win" nil t))
 
 ;;;###autoload
 (defun as-display-buffer-filename (&optional save-to-clipboard)
@@ -53,6 +53,22 @@ the filename to an absolute one with all symlinks resolved."
 ;; No need for x-select-text since kill-new calls function set
 ;; in interprogram-cut-function, which is x-select-text anyway.
 ;;         (x-select-text buffer-file-name)
+           (setq fn (concat fn " (stored in kill ring and X selection)"))))
+    (message fn)))
+
+;;}}}
+;;{{{ as-display-buffer-name
+
+;;;###autoload
+(defun as-display-buffer-name (&optional prefix)
+  "Displays the current buffer's name in the minibuffer.
+
+If a prefix argument is given, stores the result in the kill ring
+and in the X selection for other programs."
+  (interactive "P")
+  (let ((fn (buffer-name)))
+    (cond (prefix
+           (kill-new fn)
            (setq fn (concat fn " (stored in kill ring and X selection)"))))
     (message fn)))
 
