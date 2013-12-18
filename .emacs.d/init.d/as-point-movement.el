@@ -2,10 +2,6 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
-;; Show position in modeline
-(line-number-mode 1)
-(column-number-mode 1)
-
 ;; Default right margin
 (setq fill-column 70)
 
