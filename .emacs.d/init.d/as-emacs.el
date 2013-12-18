@@ -1,16 +1,18 @@
 ;; Stuff relating to use of emacs
 
-(global-set-key [(meta x)]   'smex)
-(global-set-key [(meta X)]   'smex-major-mode-commands)
-(global-set-key [(control h) a] 'apropos)            ;; was apropos-command
+(bind-key "M-x"   'smex)
+(bind-key "M-X"   'smex-major-mode-commands)
+(bind-key "C-h a" 'apropos)
 
-(autoload 'set-any-variable "set-any-var" "set-any-variable" t)
-(global-set-key "\C-cv"   'set-any-variable)
-(global-set-key "\C-cV"   'customize-variable)
-(global-set-key [(control meta return)]   'repeat-complex-command)
-(global-set-key [(control c) .]           'repeat)
-(global-set-key "\C-cF"   'font-lock-fontify-buffer)
-(global-set-key [(control g)]             'bn-keyboard-quit)
+(use-package set-any-var
+  :commands set-any-variable
+  :bind ("C-c v" . set-any-variable))
+
+(bind-key "C-c V"    'customize-variable)
+(bind-key "C-M-RET"  'repeat-complex-command)
+(bind-key "C-c ."    'repeat)
+(bind-key "C-c F"    'font-lock-fontify-buffer)
+(bind-key "C-g"      'bn-keyboard-quit)
 
 (defun as-find-emacs-init-d ()
   (interactive)
