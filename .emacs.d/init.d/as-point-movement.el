@@ -8,10 +8,4 @@
 ;; Stop down cursor adding newlines to end of buffer.
 (setq next-line-add-newlines nil)
 
-;; IntelliMouse
-(cond ((and (< emacs-major-version 22) window-system)
-       (load "mwheel" t)
-       (mwheel-install)))
-
-
 (provide 'as-point-movement)
