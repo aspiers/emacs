@@ -26,4 +26,6 @@
           nil "~/.el-get" "Find emacs init.d file: "))
 (bind-key "C-c j l" 'as-find-el-get-package)
 
+(bind-key "C-h B" 'describe-personal-keybindings)
+
 (provide 'as-emacs)
