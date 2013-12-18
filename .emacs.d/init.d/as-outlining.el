@@ -281,26 +281,7 @@ is already hidden."
 ;;}}}
 ;;{{{ org-mode-hook bindings
 
-;; As documented in `org-replace-disputed-keys', these options must be
-;; set before org.el is loaded, but we load this file before
-;; `custom-file', so we need to set these earlier than all the other
-;; custom variables.
-(custom-set-variables
- '(org-replace-disputed-keys t)
- '(org-disputed-keys
-   '(([(control shift right)] . [(control shift n)])
-     ([(control shift left)]  . [(control shift p)])
-     ([(control ?,)]          . [(control ?')])
-     ([(control tab)]         . [(control meta tab)]))))
-
-(require 'org nil 'noerror)
-
-(eval-when-compile
-  ;; org-default-extensions defaults to (org-irc) which causes a
-  ;; compile to require erc.el which is not in emacs 21.
-  (if (or (not (boundp 'org-default-extensions))
-          (memq 'org-irc 'org-default-extensions))
-      (defvar org-default-extensions '(org-mouse))))
+(require 'as-org-mode)
 
 (defun as-local-set-outline-expose-keys ()
   "Bind local outline expose keys the way Adam likes them."

@@ -1,3 +1,10 @@
+(eval-when-compile
+  ;; org-default-extensions defaults to (org-irc) which causes a
+  ;; compile to require erc.el which is not in emacs 21.
+  (if (or (not (boundp 'org-default-extensions))
+          (memq 'org-irc org-default-extensions))
+      (defvar org-default-extensions '(org-mouse))))
+
 (as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
 

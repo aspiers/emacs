@@ -1927,7 +1927,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
  '(org-deadline-warning-days 3)
- '(org-default-extensions nil)
+ '(org-default-extensions nil t)
  '(org-default-notes-file "~/org/TODO.org")
  '(org-directory "~/org")
  '(org-disputed-keys
