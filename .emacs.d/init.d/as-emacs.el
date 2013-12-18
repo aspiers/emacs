@@ -12,4 +12,18 @@
 (global-set-key "\C-cF"   'font-lock-fontify-buffer)
 (global-set-key [(control g)]             'bn-keyboard-quit)
 
+(defun as-find-emacs-init-d ()
+  (interactive)
+  "Load file in ~/.emacs.d/init.d"
+  (ido-file-internal ido-default-file-method
+          nil "~/.emacs.d/init.d" "Find emacs init.d file: "))
+(bind-key "C-c j e" 'as-find-emacs-init-d)
+
+(defun as-find-el-get-package ()
+  (interactive)
+  "Load file in ~/.el-get"
+  (ido-file-internal ido-default-file-method
+          nil "~/.el-get" "Find emacs init.d file: "))
+(bind-key "C-c j l" 'as-find-el-get-package)
+
 (provide 'as-emacs)
