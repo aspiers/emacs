@@ -2110,13 +2110,16 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/active-foreground-color "black")
  '(sml/hidden-modes
    (quote
-    ("hl-p" "WS" "ws" "Guide" "SP" "Projectile" "Projectile[lisp]" "Projectile\\(\\[[^]]+\\]\\)?" "All")))
+    (" hl-p" " WS" " ws" " Guide" " SP" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
  '(sml/inactive-background-color "gray20")
- '(sml/mode-width (quote \'full))
+ '(sml/line-number-format "%4l")
+ '(sml/mode-width (quote full))
+ '(sml/outside-modified-char "M")
+ '(sml/read-only-char "%")
  '(sml/replacer-regexp-list
    (quote
     (("^~/.GIT/adamspiers.org/" ":GG:")
-     ("^~/.GIT/3rd-part/" ":G3:")
+     ("^~/.GIT/3rd-party/" ":G3:")
      ("^~/\\.STOW/emacs/\\.emacs\\.d/" "~/.emacs.d/")
      ("^~/\\.STOW/emacs/lib/emacs/" "~/lib/emacs/")
      ("~/lib/emacs/" ":LE:")
@@ -2137,6 +2140,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("^\\(.+:\\)crowbar-barclamp-" "\\1bc-"))))
  '(sml/show-battery nil)
  '(sml/show-client t)
+ '(sml/vc-mode-show-backend t)
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
  '(tidy-shell-command "htmltidy")
