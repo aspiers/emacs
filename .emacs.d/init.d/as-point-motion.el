@@ -1,3 +1,13 @@
+;; Scrolling
+(setq scroll-preserve-screen-position t)
+(setq scroll-conservatively 2)
+
+;; Default right margin
+(setq fill-column 70)
+
+;; Stop down cursor adding newlines to end of buffer.
+(setq next-line-add-newlines nil)
+
 (autoload 'key-chord-mode "key-chord")
 (autoload 'key-chord-define-global "key-chord")
 (key-chord-mode 1)
