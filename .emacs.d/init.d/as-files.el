@@ -15,22 +15,21 @@
   :init
   (recentf-mode t))
 
-(global-set-key "\C-c+"   'make-directory)
-(global-set-key "\C-cR"   'as-rename-current-buffer-file)
-(global-set-key "\C-ck"   'delete-file)
-(global-set-key "\C-cK"   'as-destroy-buffer-delete-file)
-(global-set-key [(control x) (meta f)]    'find-library)
+(bind-key "C-c +"   'make-directory)
+(bind-key "C-c R"   'as-rename-current-buffer-file)
+(bind-key "C-c k"   'delete-file)
+(bind-key "C-c K"   'as-destroy-buffer-delete-file)
+(bind-key "C-x M-f" 'find-library)
 
-(autoload 'find-file-at-point "ffap" nil t)
-(autoload 'ffap-other-window  "ffap" nil t)
-(autoload 'ffap-other-frame   "ffap" nil t)
-(global-set-key [(control meta ?')]       'find-file-at-point)
-(global-set-key [(control x) ?4 ?']       'ffap-other-window)
-(global-set-key [(control x) ?5 ?']       'ffap-other-frame)
+(use-package ffap
+  :bind
+  (("C-M-'"   . find-file-at-point)
+   ("C-x 4 '" . ffap-other-window)
+   ("C-x 5 '" . ffap-other-frame)))
 
 (defun as-find-from-home ()
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/" "Find file: "))
-(global-set-key [(control ~)] 'as-find-from-home)
-(global-set-key "\C-cjh"      'as-find-from-home)
+(bind-key "C-~"     'as-find-from-home)
+(bind-key "C-c j h" 'as-find-from-home)
