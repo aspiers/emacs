@@ -146,6 +146,27 @@ Wraps around `rename-file'."
   (message (format "Renamed to %s" new-file-name)))
 
 ;;}}}
+;;{{{ as-rename-current-buffer
+
+(defvar as-buffer-name-history nil
+  "List containing history of values used by `as-rename-current-buffer'.")
+
+;;;###autoload
+(defun as-rename-current-buffer (new-name)
+  "Renames the current buffer.  Wraps around `rename-buffer'."
+  (interactive
+   (let ((current-name (buffer-name)))
+       (list ;; interactive expects a list matching the defun arglist
+        (read-string
+         (format "Rename %s to: " current-name) ;; prompt
+         current-name  ;; initial value
+         'as-buffer-name-history ;; no history
+         nil           ;; no default
+         nil           ;; don't inherit input method from previous buffer
+         ))))
+  (rename-buffer new-name t))
+
+;;}}}
 ;;{{{ as-make-backup-file-name
 
 ;; Need this in as-custom:
