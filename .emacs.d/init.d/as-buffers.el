@@ -22,4 +22,7 @@
 (bind-key "C-c N" 'as-display-buffer-name)
 (bind-key "C-c C-S-r" 'as-rename-current-buffer)
 
+(use-package switch-window
+  :bind ("C-x o" . switch-window))
+
 (provide 'as-buffers)
