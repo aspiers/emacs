@@ -1,0 +1,18 @@
+#!/bin/bash
+
+create_frame=
+while [ $# != 0 ]; do
+    case "$1" in
+        -c|--create-frame)
+            create_frame=$1
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+for file in "$@"; do
+    quick-emacs --bg-if-poss $create_frame --eval "(find-file \"$file\")"
+done

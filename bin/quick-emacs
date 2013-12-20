@@ -13,10 +13,22 @@ tty_emacs=fe
 # backgrounded.  It cannot be unconditional (hence the '-if-poss'
 # bit) since backgrounding is impossible if we have to fallback
 # to tty emacs
-if [ "$1" = '--bg-if-poss' ]; then
-    bg_if_poss=y
-    shift
-fi
+create_frame=
+while [ $# != 0 ]; do
+    case "$1" in
+        --bg-if-poss)
+            bg_if_poss=y
+            shift
+            ;;
+        -c|--create-frame)
+            create_frame=$1
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
 
 if echo "$*" | egrep -q '(^| )-e( |$)'; then
     echo "-e would only work with emacsclient, not with new-emacs; aborting." >&2
@@ -101,7 +113,7 @@ if [ -n "$server_up" ]; then
     if [ -n "$multi_tty_support" ]; then
         # newer emacsen do all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
-        maybe_bg emacsclient -c "$@"
+        maybe_bg emacsclient $create_frame "$@"
     else
         # Looks like we found a working server
         if [ -n "$DISPLAY" ]; then
