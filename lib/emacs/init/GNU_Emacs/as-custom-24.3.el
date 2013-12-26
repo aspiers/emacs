@@ -2102,9 +2102,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-style
    (quote
     (face trailing lines-tail space-before-tab newline empty tab-mark)))
- '(yas/snippet-dirs
+ '(yas-snippet-dirs
    (quote
-    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
+    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil (yasnippet)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
