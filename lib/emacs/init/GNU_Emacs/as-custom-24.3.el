@@ -2079,6 +2079,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(scroll-margin 20)
  '(scroll-preserve-screen-position t)
  '(search-upper-case t)
+ '(send-mail-function (quote sendmail-send-it))
  '(sendmail-program "msmtp-personal")
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
