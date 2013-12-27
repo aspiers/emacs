@@ -6,6 +6,7 @@
   "Non-nil if the current emacs was required to start up quickly."
   (getenv "QUICK_EMACS"))
 
+;; Duplicated in .emacs in order to be able to load this file
 (defvar edotdir
   (or (getenv "ZDOTDIR") "~")
   "Home directory to be used to retrieve emacs init files.")

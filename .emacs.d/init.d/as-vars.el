@@ -1,3 +1,6 @@
+;; Bootstrap variables don't go here - they go in as-pre-init-d.el,
+;; which as-load-paths depends on in order to set up `load-path'.
+
 ;; as-load-paths depends on this, so at this point emacs doesn't
 ;; know where to find as-progress.
 (eval-and-compile (message "Loading as-vars ..."))

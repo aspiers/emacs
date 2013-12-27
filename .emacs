@@ -7,6 +7,7 @@
 ;; Stop Red Hat trampling over my nice config :-(
 (setq inhibit-default-init t)
 
+;; Duplicated in as-pre-init-d to allow standalone byte-compilation
 (defvar edotdir
   (or (getenv "ZDOTDIR") "~")
   "Home directory to be used to retrieve emacs init files.")
