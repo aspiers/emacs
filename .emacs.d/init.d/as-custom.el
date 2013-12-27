@@ -4,7 +4,7 @@
 ;;     unless set before org.el is loaded for the first time
 (require 'as-el-get)
 (require 'as-vars)
-(require 'as-bufs-files nil 'noerror) ;; need as-make-backup-file-name
+(require 'as-make-backup-file-name nil 'noerror) ;; need as-make-backup-file-name
 
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))

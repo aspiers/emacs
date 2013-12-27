@@ -2,6 +2,17 @@
 
 ;;{{{ cvs helper modes
 
+;;;###autoload
+(defun bury-and-close-buffer ()
+  (interactive)
+  (bury-buffer)
+  (when (not (one-window-p))
+    (delete-window)))
+
+;;;###autoload
+(defun mhj-set-q-to-close ()
+  (local-set-key "q" 'bury-and-close-buffer))
+
 ;; diff mode
 (add-hook 'diff-mode-hook 'mhj-set-q-to-close)
 
