@@ -51,7 +51,7 @@
 ;;{{{ wordpress
 
 (add-to-list 'auto-mode-alist
-             '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . html-helper-mode))
+             '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . web-mode))
 
 ;;}}}
 ;;{{{ org2blog

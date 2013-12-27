@@ -123,31 +123,11 @@
 ;;}}}
 ;;{{{ HTML
 
-(defalias 'html-mode 'html-helper-mode)
-(autoload 'html-helper-mode "html-helper-mode" t)
-(add-hook 'html-mode-hook
-          (lambda ()
-            (auto-fill-mode -1)
-            ;; (setq truncate-lines t)
-            ))
-(defvar tempo-interactive t)
-
-(dolist (re '("\\.prehtml\\'"
-              "\\.php3\\'"
-              "\\.\\(mason\\|m[cd]\\)\\'"
-              "\\(auto\\|d\\)handler\\'"
-              ))
-  (add-to-list 'auto-mode-alist (cons re 'html-mode)))
-
 ;; htmltidy support
 (autoload 'tidy-buffer "htmltidy" "Run Tidy HTML parser on current buffer" t)
 (autoload 'tidy-parse-config-file "htmltidy" "Parse the `tidy-config-file'" t)
 (autoload 'tidy-save-settings "htmltidy" "Save settings to `tidy-config-file'" t)
 (autoload 'tidy-build-menu  "htmltidy" "Install an options menu for HTML Tidy." t)
-
-;; (eval-when-compile
-;;   (defvar html-helper-mode-map)
-;;   (defvar sgml-validate-command))
 
 ;; This broke with:
 ;;   File mode specification error: (void-variable html-helper-mode-map)
@@ -159,7 +139,6 @@
 
 ;;(add-hook 'html-mode-hook 'as-html-mode-tidy-hook)
 
-(defun hhm () "Loads `html-helper-mode'." (interactive) (html-helper-mode))
 
 ;;}}}
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")

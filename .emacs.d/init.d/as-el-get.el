@@ -107,6 +107,7 @@
     undo-tree
     use-package
     vc-osc
+    web-mode
     xrdb-mode
     yaml-mode
     yasnippet
