@@ -8,6 +8,7 @@
 (setq orig-load-path load-path)
 
 (add-to-list 'load-path as-init-d)
+(add-to-list 'load-path as-lib-dir)
 
 (defvar find-function-source-path load-path)
 

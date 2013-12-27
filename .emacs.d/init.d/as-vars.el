@@ -14,6 +14,14 @@
   (concat edotdir "/lib/emacs")
   "Path to root of emacs libraries, regardless of emacs vendor.")
 
+(defvar as-emacs-d
+  (concat edotdir "/.emacs.d")
+  "Path to emacs.d configuration hierarchy.")
+
+(defvar as-lib-dir
+  (concat as-emacs-d "/lib")
+  "Path to my emacs libraries which could/should eventually be published.")
+
 (defvar as-old-lib-dir
   (concat as-emacs-dir "/GNU_Emacs")
   "Path to deprecated location for emacs libraries for a specific emacs vendor.")
