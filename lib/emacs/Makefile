@@ -27,7 +27,7 @@ UTILS       = utils
 EMACSLIB = $(HOME)/lib/emacs
 EMACS_D  = $(HOME)/.emacs.d
 INIT_D   = $(EMACS_D)/init.d
-ELPA     = $(EMACS_D)/elpa
+LIB_DIR  = $(EMACS_D)/lib
 EL_GET   = $(EMACS_D)/el-get
 
 GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
@@ -123,8 +123,7 @@ endif
 # }}}
 # {{{ Directories to scan for autoload cookies
 
-LOADDEFS_DIRS=  \
-        $(UTILS)
+LOADDEFS_DIRS = $(UTILS) $(LIB_DIR)
 
 # }}}
 
@@ -355,7 +354,7 @@ uninstall:
 # Where to put as-loaddefs.el?  We need it for both compile- and
 # run-time, but we don't want to pollute the compile-time load-path
 # with POST_INSTALL_DIR, so we put it in a dedicated subdirectory:
-LOADDEFS_DIR=$(POST_INSTALL_DIR)/loaddefs
+LOADDEFS_DIR=$(LIB_DIR)
 LOADDEFS=$(LOADDEFS_DIR)/as-loaddefs.el
 #LOADDEFS=$(POST_INSTALL_DIR:$(EMACSLIB)/%=%)/as-loaddefs.el
 
@@ -368,7 +367,7 @@ show-loaddefs-deps:
 
 # emacs 21 uses update-autoloads-from-directories
 # emacs 22 uses update-directory-autoloads
-LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix "$(EMACSLIB)/,$(LOADDEFS_DIRS)))
+LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix ",$(LOADDEFS_DIRS)))
 define loaddefs_lisp
 (progn \
     (setq generated-autoload-file "$(LOADDEFS)") \
