@@ -14,16 +14,16 @@
   (concat edotdir "/lib/emacs")
   "Path to root of emacs libraries, regardless of emacs vendor.")
 
-(defvar as-lib-dir
+(defvar as-old-lib-dir
   (concat as-emacs-dir "/GNU_Emacs")
-  "Path to emacs libraries for a specific emacs vendor.")
+  "Path to deprecated location for emacs libraries for a specific emacs vendor.")
 
 (defvar as-init-dir
   (concat as-emacs-dir "/init/GNU_Emacs")
   "Path to emacs init libraries for a specific emacs vendor.")
 
 (defvar as-version-pre-lib-dir
-  (format "%s/%s/%s/pre" as-lib-dir emacs-version-number system-type)
+  (format "%s/%s/%s/pre" as-old-lib-dir emacs-version-number system-type)
   "Path to personal emacs libraries which supplement those of a
 particular system's emacs install.  They will be loaded in
 preference to those from the system's emacs install, due to
@@ -35,7 +35,7 @@ directory, and that the contents be reviewed every time the
 system-wide emacs install is upgraded.")
 
 (defvar as-version-post-lib-dir
-  (format "%s/%s/%s/post" as-lib-dir emacs-version-number system-type)
+  (format "%s/%s/%s/post" as-old-lib-dir emacs-version-number system-type)
   "Path to personal emacs libraries which supplement those of a
 particular system's emacs install.  Libraries in the system's
 emacs install will be loaded in preference to these, due to
