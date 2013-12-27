@@ -92,6 +92,7 @@
     ;; (#1471), #1472, #1473
     projectile
 
+    rcov-overlay
     rinari
     ruby-mode
     smart-mode-line
