@@ -41,7 +41,8 @@
 ;;}}}
 ;;{{{ midnight-mode - automatically kill unused buffers
 
-(unless (as-quick-startup) (as-soft-require 'midnight))
+(use-package midnight
+  :if (not (as-quick-startup)))
 
 ;;}}}
 ;;{{{ client/server mode
