@@ -21,7 +21,6 @@
 
 (defvar as-source-paths
   '(
-    "init/common"
     "major-modes"
     "major-modes/org-mode.git/lisp"
     "major-modes/org-mode.git/contrib/lisp"

@@ -1,5 +1,6 @@
 (load-library "as-loaddefs")
 (require 'as-progress)
+
 ;; For faster compilation
 (eval-when-compile (require 'cl))
 

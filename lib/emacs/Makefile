@@ -73,7 +73,6 @@ endif
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
 el_search_paths =                       \
-        init/common                     \
         $(wildcard $(MAJOR_MODES)/*.el) \
         $(ORG_DIR)/contrib/lisp         \
         $(MINOR_MODES)                  \
@@ -174,13 +173,6 @@ THIRD_PARTY_ELs = $(shell \
 )
 
 # }}}
-
-AS_BINDINGS_EL      = init/common/as-bindings.el
-AS_PROGRESS_EL      = init/common/as-progress.el
-AS_REQUIRE_EL       = init/common/as-require.el
-AS_BINDINGS_ELC     = $(AS_BINDINGS_EL)c
-AS_PROGRESS_ELC     = $(AS_PROGRESS_EL)c
-AS_REQUIRE_ELC      = $(AS_REQUIRE_EL)c
 
 # {{{ Determine compilation variables and parameters
 
@@ -432,30 +424,12 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 #       $(MAKE) $(@:.debug=) COMPILER_BATCH='-q -l bytecomp'
 
 # }}}
-# {{{ Special rules for my init files
-
-INIT_COMMON_LIBDIRS =           \
-        init/common             \
-        $(MAJOR_MODES)          \
-        $(ORG_DIR)/lisp         \
-        $(MINOR_MODES)          \
-        $(UTILS)                \
-        $(EL_GET)/key-chord     \
-        $(EL_GET)/git-gutter    \
-        fun
-
-init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
-
-$(AS_BINDINGS_ELC): $(AS_PROGRESS_ELC) .org-installed
-
-# }}}
 # {{{ Special rules for utils files
 
 # as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
 
-init/common/as-%.elc: LIBDIRS += $(INIT_COMMON_LIBDIRS)
 
 # }}}
 # {{{ org-mode
