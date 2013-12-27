@@ -3,8 +3,10 @@
 (require 'as-org-mode-early)
 
 (require 'as-vars)
+
 (defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
-(add-to-list 'load-path (concat el-get-dir "el-get"))
+(defvar el-get-el-get-dir (concat el-get-dir "el-get"))
+(add-to-list 'load-path el-get-el-get-dir)
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -13,6 +15,11 @@
     (let (el-get-master-branch) ;; ditch this `let' to get stable branch
       (goto-char (point-max))
       (eval-print-last-sexp))))
+
+;; Ensure we have ELPA recipes available
+(require 'as-elpa)
+(unless (file-exists-p (concat el-get-el-get-dir "/recipes/elpa"))
+  (el-get-elpa-build-local-recipes))
 
 (defvar as-el-get-packages
   '(
