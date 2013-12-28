@@ -352,9 +352,7 @@ the region is active, then deactivate it.  If not, then do
 ;;}}}
 ;;{{{ fill-common-prefix-region
 
-(autoload 'flet "cl"
-  "flet is an analogue of `let' that operates on the function cell of
-FUNC rather than its value cell."
+(autoload 'cl-flet "cl"
   nil ;; not interactive
   'macro)
 
@@ -381,7 +379,7 @@ levels as part of one big paragraph."
     (let* ((common-prefix (match-string 0))
            (common-prefix-nw (concat (regexp-quote common-prefix)
                                      "[^\n]*[^[:space:]\n]")))
-      (flet ((find-limit (result-fn buffer-limit-fn line-step)
+      (cl-flet ((find-limit (result-fn buffer-limit-fn line-step)
                (save-excursion
                  (let (result)
                    ;; Keep looking while we see the same fill-prefix
