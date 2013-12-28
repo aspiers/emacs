@@ -4,10 +4,13 @@
 (when
     (or (load "package")
         (load (expand-file-name (concat edotdir "/.emacs.d/elpa/package.el"))))
-  (package-initialize)
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/")))
+               '("melpa" . "http://melpa.milkbox.net/packages/"))
+  (package-initialize)
+
+  (or (assq 'edit-server-htmlize package-archive-contents)
+      (package-refresh-contents)))
 
 (provide 'as-elpa)
