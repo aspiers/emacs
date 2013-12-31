@@ -34,6 +34,9 @@
 (bind-key "C-h C-f" 'find-function)
 (bind-key "C-h C-F" 'view-emacs-FAQ)
 
+;; Similar pattern for variables
+(bind-key "C-h C-v" 'find-variable)
+
 (bind-key "C-h C-k" 'find-function-on-key)
 
 (provide 'as-emacs)
