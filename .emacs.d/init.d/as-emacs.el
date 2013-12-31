@@ -28,6 +28,12 @@
           nil "~/.el-get" "Find emacs init.d file: "))
 (bind-key "C-c j l" 'as-find-el-get-package)
 
-(bind-key "C-h B" 'describe-personal-keybindings)
+(bind-key "C-h B"   'describe-personal-keybindings)
+
+;; I don't visit the FAQ very often; find-function way more useful.
+(bind-key "C-h C-f" 'find-function)
+(bind-key "C-h C-F" 'view-emacs-FAQ)
+
+(bind-key "C-h C-k" 'find-function-on-key)
 
 (provide 'as-emacs)
