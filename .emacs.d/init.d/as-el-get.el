@@ -21,7 +21,16 @@
 (unless (file-exists-p (concat el-get-el-get-dir "/recipes/elpa"))
   (el-get-elpa-build-local-recipes))
 
-(defvar as-el-get-packages
+(defvar as-el-get-emacswiki-packages
+  '(
+    auto-recomp
+    ediff-trees
+    faith
+    rcov-overlay
+    versions
+    ))
+
+(defvar as-el-get-builtin-packages
   '(
     el-get
 
@@ -34,14 +43,11 @@
     auto-complete-emacs-lisp
     auto-complete-ruby
     auto-complete-yasnippet
-    auto-recomp
     bundler
     coffee-mode
     color-theme
     darcsum
-    ediff-trees
     edit-server
-    edit-server-htmlize
     erin
     expand-region
     faith
@@ -51,13 +57,12 @@
     flymake-ruby
     flymake-sass
     flymake-shell
-    flx-ido ;; flx is flex with better ordering
     gist
     git-gutter
     ;;git-gutter-fringe
     git-modes
     goto-chg
-    guide-key ;; comes from MELPA
+    
     haml-mode
     hideshow-org
     idomenu ;; http://emacsrocks.com/e10.html
@@ -65,7 +70,7 @@
     ido-ubiquitous
     ido-vertical-mode
     inf-ruby
-    iy-go-to-char ;; http://emacsrocks.com/e04.html
+    
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
@@ -77,7 +82,6 @@
     ;;magithub
 
     markdown-mode
-    markdown-mode+
     mediawiki
     multiple-cursors
     org2blog
@@ -92,7 +96,6 @@
     ;; (#1471), #1472, #1473
     projectile
 
-    rcov-overlay
     rinari
     ruby-mode
     smart-mode-line
@@ -103,7 +106,6 @@
     smartparens
 
     switch-window
-    versions
     undo-tree
     use-package
     vc-osc
@@ -112,14 +114,19 @@
     yaml-mode
     yasnippet
     )
-  "Adam's list of packages to install with el-get.")
+  "Adam's list of packages to install via el-get's built-in
+recipes, i.e. those not installed from automatically generated
+ELPA recipes.")
+
+(defun as-el-get-packages ()
+  (append as-el-get-builtin-packages as-elpa-packages as-el-get-emacswiki-packages))
 
 ;; Remove packages not in the above list.  If I absent-mindedly
 ;; install something via `el-get-list-packages', this reduces the
 ;; chance I'll get used to it being there on one machine and then get
 ;; surprised when it isn't on another machine I switch to.
 (as-progress (format "cleaning up unwanted el-get packages ..."))
-(el-get-cleanup as-el-get-packages)
+(el-get-cleanup (as-el-get-packages))
 (as-progress (format "cleaning up unwanted el-get packages ... done"))
 
 ;; Reasons pro installing synchronously:
@@ -144,7 +151,7 @@
 (require 'use-package)
 
 (as-progress (format "loading packages via `el-get' ..."))
-(el-get (if el-get-install-sync 'sync) as-el-get-packages)
+(el-get (if el-get-install-sync 'sync) (as-el-get-packages))
 (as-progress (format "loading packages via `el-get' ...  done"))
 
 (provide 'as-el-get)
