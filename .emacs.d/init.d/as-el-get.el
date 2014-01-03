@@ -69,7 +69,10 @@
     ;; ido-hacks ;; ido-everywhere
     ido-ubiquitous
     ido-vertical-mode
-    inf-ruby
+
+    ;; I don't use this and it seems to have bugs with autoloading
+    ;; and maybe also leaving processes running within emacs.
+    ;; inf-ruby
     
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
