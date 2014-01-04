@@ -157,13 +157,12 @@ then invoking this function four times would yield:
 ;;{{{ stuff from as-bindings (FIXME - rearrange)
 
 (bind-key "C-c o" 'overwrite-mode)
-(global-unset-key [(meta o)])
-;(global-unset-key "\eo")
-(bind-key "\eoa" 'org-agenda)
-(bind-key "\eA"  'as-org-switch-to-agenda-buffer) ;; X11 only
-(bind-key "\eob" 'as-org-switch-to-agenda-buffer)
-(bind-key "\eoq" 'org-remember)
-(bind-key "\eo\eo" 'as-org-jump-clock-or-agenda)
+(global-unset-key "M-o")
+(bind-key "M-o a" 'org-agenda)
+(bind-key "M-S-a"  'as-org-switch-to-agenda-buffer) ;; X11 only
+(bind-key "M-o b" 'as-org-switch-to-agenda-buffer)
+(bind-key "M-o q" 'org-remember)
+(bind-key "M-o M-o" 'as-org-jump-clock-or-agenda)
 
 (defun org-show-effort ()
   "Shows the effort of the entry at the current point."
@@ -205,7 +204,7 @@ then invoking this function four times would yield:
   "Unsets the Effort property for the current headline."
   (interactive)
   (org-delete-property org-effort-property))
-(bind-key "\eo " 'org-unset-effort)
+(bind-key "M-o SPC" 'org-unset-effort)
 
 (bind-key "C-c C-x C-j" 'org-clock-goto)
 (bind-key "C-c c"   'org-capture)
@@ -214,7 +213,7 @@ then invoking this function four times would yield:
 
 (fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
 (bind-key "C-c j t" 'as-find-personal-todo)
-(bind-key "C-S-2"   'as-find-personal-todo)
+(bind-key "C-\""    'as-find-personal-todo)
 (fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
 (bind-key "C-c j d" 'as-find-personal-diary)
 ;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
