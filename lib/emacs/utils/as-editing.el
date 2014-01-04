@@ -153,8 +153,7 @@ The list marked is the one that contains point or follows point."
   (interactive)
   (forward-list)
   (push-mark (point) t t)
-  (backward-list)
-)
+  (backward-list))
 
 ;;}}}
 ;;{{{ vim-yy
