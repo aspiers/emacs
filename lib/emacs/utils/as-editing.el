@@ -325,11 +325,7 @@ secondary selection overlap."
       (error "The secondary selection is not active now"))
   (let ((sec-start (overlay-start mouse-secondary-overlay))
         (sec-end (overlay-end mouse-secondary-overlay)))
-    (let ((transpose-subr-start1 start)
-          (transpose-subr-end1 end)
-          (transpose-subr-start2 sec-start)
-          (transpose-subr-end2 sec-end))
-      (transpose-subr-1))
+    (transpose-regions start end sec-start sec-end)
     (delete-overlay mouse-secondary-overlay)
     (setq mouse-secondary-overlay nil)))
 
