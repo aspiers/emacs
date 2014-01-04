@@ -11,7 +11,7 @@
 ;; This can accidentally change permissions in git repos, for instance.
 ;;(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
 
-(global-set-key "\C-cmx" 'make-buffer-file-executable)
+(bind-key "C-c m x" 'make-buffer-file-executable)
 
 (add-to-list 'auto-mode-alist
              '("/\\.zsh\\(env\\|rc\\|/functions/\\)\\|\\.stp$" . sh-mode))

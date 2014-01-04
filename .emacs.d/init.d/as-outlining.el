@@ -316,16 +316,11 @@ is already hidden."
 ;;    C-up      prev heading
 ;;    C-down    next heading
 
-(global-set-key [(shift meta f)] 'as-forward-word-start)
-(global-set-key [(shift meta b)] 'as-backward-before-word)
-(global-set-key [(control meta F)] 'as-forward-sexp-start)
-(global-set-key [(control meta B)] 'as-backward-before-sexp)
-
 ;; Define fast scroll keys, may be overridden per mode.
 (defun as-fast-up   () "Move up two lines."   (interactive) (forward-line -2))
 (defun as-fast-down () "Move down two lines." (interactive) (forward-line  2))
-(global-set-key [(shift down)] 'as-fast-down)
-(global-set-key [(shift up)]   'as-fast-up)
+;; (bind-key "S-<down>" 'as-fast-down)
+;; (bind-key "S-<up>"   'as-fast-up)
 
 ;;{{{ as-folding-{previous,next}-visible-heading
 

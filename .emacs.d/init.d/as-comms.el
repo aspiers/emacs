@@ -61,13 +61,13 @@
             (and (buffer-file-name)
                  (string-match "\\.o2b$" (buffer-file-name))
                  (org2blog/wp-mode))))
-(global-set-key "\C-cwl"  'org2blog/wp-login)
-(global-set-key "\C-cwn"  'org2blog/wp-new-entry)
+(bind-key "C-c w l"  'org2blog/wp-login)
+(bind-key "C-c w n"  'org2blog/wp-new-entry)
 
 ;;}}}
 ;;{{{ ispell
 
-(global-set-key [(control $)]             'ispell-complete-word)
-(global-set-key [(control meta $)]        'ispell-buffer)
+(bind-key "C-$"   'ispell-complete-word)
+(bind-key "C-M-$" 'ispell-buffer)
 
 ;;}}}

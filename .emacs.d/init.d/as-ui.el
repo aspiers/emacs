@@ -47,4 +47,4 @@
 (require 'paren)
 
 ;;}}}
-(global-set-key [(control ?')]            'speedbar-get-focus)
+(bind-key "C-'" 'speedbar-get-focus)

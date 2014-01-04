@@ -22,7 +22,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;;}}}
 
 (autoload 'rcov-buffer "rcov-overlay" "rcov-overlay" t)
-;; (global-set-key (kbd "C-c C-r")   'rcov-buffer)
+;; (bind-key "C-c C-r"   'rcov-buffer)
 
 (use-package autotest :commands autotest)
 
@@ -33,6 +33,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
 (autoload 'bundle-open "bundler" nil t)
-(global-set-key "\C-cjb" 'bundle-open)
+(bind-key "C-c j b" 'bundle-open)
 
 (provide 'as-ruby)

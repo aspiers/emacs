@@ -9,7 +9,7 @@
   (message "indent-tabs-mode set to %s" indent-tabs-mode))
 
 ;;}}}
-(global-set-key "\C-ctb"   'as-toggle-indent-tabs-mode)
+(bind-key "C-c t b"   'as-toggle-indent-tabs-mode)
 
 ;;{{{ as-toggle-case-fold-search
 
@@ -20,7 +20,7 @@
   (message "case-fold-search set to %s" case-fold-search))
 
 ;;}}}
-(global-set-key "\C-ctc"   'as-toggle-case-fold-search)
+(bind-key "C-c t c"   'as-toggle-case-fold-search)
 
 ;;{{{ as-toggle-debug-on-error
 
@@ -31,9 +31,9 @@
   (message "debug-on-error set to %s" debug-on-error))
 
 ;;}}}
-(global-set-key "\C-cte"   'as-toggle-debug-on-error)
+(bind-key "C-c t e"   'as-toggle-debug-on-error)
 
-(global-set-key "\C-ctf"   'auto-fill-mode)
+(bind-key "C-c t f"   'auto-fill-mode)
 
 ;;{{{ as-toggle-truncate-lines
 
@@ -46,7 +46,7 @@
   (message "truncate-lines set to %s" truncate-lines))
 
 ;;}}}
-(global-set-key "\C-cts"   'as-toggle-truncate-lines) ;; mnemonic: less -S
+(bind-key "C-c t s"   'as-toggle-truncate-lines) ;; mnemonic: less -S
 
 ;;{{{ as-set-tab-width
 
@@ -56,6 +56,6 @@
   (setq tab-width width))
 
 ;;}}}
-(global-set-key "\C-ctw"   'as-set-tab-width)
+(bind-key "C-c t w"   'as-set-tab-width)
 
 (provide 'as-toggles)

@@ -6,8 +6,8 @@
 ;; This is presumably only useful when my normal window manager
 ;; mouse bindings and/or Meta key binding are not in effect.
 (when window-system
-  (bind-key "M-mouse-4" 'lower-frame)
-  (bind-key "M-mouse-5" 'raise-frame))
+  (bind-key "M-<mouse-4>" 'lower-frame)
+  (bind-key "M-<mouse-5>" 'raise-frame))
 
 (bind-key "C-S-<mouse-1>"      'mouse-start-secondary)
 (bind-key "C-S-<drag-mouse-1>" 'mouse-set-secondary)

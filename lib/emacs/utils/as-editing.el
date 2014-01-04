@@ -171,20 +171,6 @@ The list marked is the one that contains point or follows point."
     (kill-ring-save (mark) (point))))
 
 ;;}}}
-;;{{{ bn-end-of-line-but-one
-
-;;;###autoload
-(defun bn-end-of-line-but-one (arg)
-  "Move point to one character before the end of current line.
-With argument ARG not nil or 1, move forward ARG - 1 lines first.
-If scan reaches end of buffer, stop there without error.
-If the line is empty, doesn't do anything."
-  (interactive "*p")
-  (end-of-line arg)
-  (unless (bolp)
-    (backward-char)))
-
-;;}}}
 ;;{{{ bn-strip-parentheses
 
 ;;;###autoload
@@ -394,56 +380,51 @@ levels as part of one big paragraph."
 
 ;; FIXME - stuff from as-binding
 
-(global-set-key [(delete)]     'delete-char)        ;; to make sure
-(global-set-key [(insert)]     'overwrite-mode)     ;; to make sure
+(bind-key "M-S-f"   'as-forward-word-start)
+(bind-key "M-S-b"   'as-backward-before-word)
+(bind-key "C-M-S-f" 'as-forward-sexp-start)
+(bind-key "C-M-S-b" 'as-backward-before-sexp)
 
-(global-set-key [(meta "\\")]   'fixup-whitespace)
-                                ;; was delete-horizontal-space
-(autoload 'bn-kill-region-or-backword-word
-          "as-editing" "bn-kill-region-or-backword-word" t)
-(global-set-key [(control w)]  'bn-kill-region-or-backword-word)
-                               ;; was kill-region
-(global-set-key [(meta w)]     'bn-kill-line-or-region-save)
-                               ;; kill-ring-save
-(autoload 'as-transpose-lines
-          "as-editing" "as-transpose-lines" t)
-(global-set-key [(control x)(control t)] 'as-transpose-lines) ;; was transpose-lines
-(autoload 'as-kill-word "as-editing" "as-kill-word" t)
-(global-set-key [(meta D)]                'as-kill-word)
+(bind-key "M-\\"    'fixup-whitespace)
+(bind-key "C-w"     'bn-kill-region-or-backword-word)
+(bind-key "M-w"     'bn-kill-line-or-region-save)
+(bind-key "C-x C-t" 'as-transpose-lines)
+(bind-key "S-M-d"   'as-kill-word)
 
-(autoload 'bn-zap-nearly-to-char "as-editing" "bn-zap-nearly-to-char" t)
-(global-set-key [(meta Z)]                'bn-zap-nearly-to-char)
+(bind-key "S-M-z"   'bn-zap-nearly-to-char)
 
-(global-set-key [(control meta K)]        'as-kill-sexp)
+(bind-key "C-M-k"   'kill-sexp)
+(bind-key "C-M-S-k" 'as-kill-sexp)
 
-(global-set-key [(control x) (control y)] 'vim-yy)
+(bind-key "C-x C-y" 'vim-yy)
+
 ;;{{{ C-c [a-z][A-Z]
 
-(global-set-key "\C-cA"   'as-align-to-previous-line)
-(global-set-key "\C-cd"   'as-duplicate-line)
-(global-set-key "\C-cl"   'align)                      ;; new in emacs 21
-(global-set-key "\C-cp"   'as-copy-previous-line-suffix)
-(global-set-key "\C-cP"   'as-align-to-previous-line)
+(bind-key "C-c A"   'as-align-to-previous-line)
+(bind-key "C-c d"   'as-duplicate-line)
+(bind-key "C-c l"   'align)
+(bind-key "C-c p"   'as-copy-previous-line-suffix) ;; FIXME: conflict!
+(bind-key "C-c P"   'as-align-to-previous-line)
 
 ;;}}}
 ;;{{{ Function keys f5--f9 (no modifiers)
 
-(global-set-key [(f5)] 'as-duplicate-line)
-(global-set-key [(f7)] 'as-align-to-previous-line)
-(global-set-key [(f8)] 'as-copy-previous-line-suffix)
+(bind-key "<F5>" 'as-duplicate-line)
+(bind-key "<F7>" 'as-align-to-previous-line)
+(bind-key "<F8>" 'as-copy-previous-line-suffix)
 
 ;;}}}
 
-(global-set-key [(control meta y)]        'as-join-line-with-next)
-(global-set-key [(control meta \()]       'bn-strip-parentheses)
-(global-set-key [(control c) tab]         'indent-region)
+(bind-key "C-M-y" 'as-join-line-with-next)
+(bind-key "C-M-(" 'bn-strip-parentheses)
+(bind-key "C-c TAB" 'indent-region)
 
 ;; This one might get overridden by per-mode bindings:
-(global-set-key [(control meta q)]        'fill-common-prefix-region)
+(bind-key "C-M-q" 'fill-common-prefix-region)
 ;; but this one won't, so serves as a backup:
-(global-set-key [(control c)(meta q)]     'fill-common-prefix-region)
+(bind-key "C-c M-q" 'fill-common-prefix-region)
 
-(global-set-key [(control x) ?8 ?e]
-                (lambda ()
-                  (interactive)
-                  (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
+(bind-key "C-x 8 e"
+          (lambda ()
+            (interactive)
+            (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
