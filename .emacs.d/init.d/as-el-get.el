@@ -24,6 +24,7 @@
 (defvar as-el-get-emacswiki-packages
   '(
     auto-recomp
+    buff-menu+
     ediff-trees
     faith
     rcov-overlay
