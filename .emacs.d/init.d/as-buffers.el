@@ -5,7 +5,7 @@
 (bind-key "C-x C-b" 'buffer-menu)
 
 ;; But if bs-show is available, choose that cos it's much nicer.
-(use-package bs-show
+(use-package bs
   :bind ("C-x C-b" . bs-show))
 
 (bind-key "C-x K" 'as-destroy-buffer)
