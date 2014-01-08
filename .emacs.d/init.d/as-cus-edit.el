@@ -1,8 +1,5 @@
 (require 'as-el-get)
-
-(load "subr")
-(use-package versions
-  :if (not (fboundp 'version<=)))
+(require 'as-versions)
 
 (if (version<= emacs-version "24.3.1")
     (defun custom-save-variables ()
