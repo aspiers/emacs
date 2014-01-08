@@ -360,21 +360,22 @@ levels as part of one big paragraph."
     (let* ((common-prefix (match-string 0))
            (common-prefix-nw (concat (regexp-quote common-prefix)
                                      "[^\n]*[^[:space:]\n]")))
-      (cl-flet ((find-limit (result-fn buffer-limit-fn line-step)
-               (save-excursion
-                 (let (result)
-                   ;; Keep looking while we see the same fill-prefix
-                   ;; followed by some non-whitespace.
-                   (while (and (setq result (funcall result-fn))
-                               (not (funcall buffer-limit-fn))
-                               (forward-line line-step)
-                               (looking-at adaptive-fill-regexp)
-                               (equal common-prefix (match-string 0))
-                               (looking-at common-prefix-nw)))
-                   result))))
-        (let ((start (find-limit #'point #'bobp -1))
-              (end (find-limit #'line-end-position #'eobp 1)))
-          (fill-region start end justify nosqueeze))))))
+      (cl-flet
+       ((find-limit (result-fn buffer-limit-fn line-step)
+                    (save-excursion
+                      (let (result)
+                        ;; Keep looking while we see the same fill-prefix
+                        ;; followed by some non-whitespace.
+                        (while (and (setq result (funcall result-fn))
+                                    (not (funcall buffer-limit-fn))
+                                    (forward-line line-step)
+                                    (looking-at adaptive-fill-regexp)
+                                    (equal common-prefix (match-string 0))
+                                    (looking-at common-prefix-nw)))
+                        result))))
+       (let ((start (find-limit #'point #'bobp -1))
+             (end (find-limit #'line-end-position #'eobp 1)))
+         (fill-region start end justify nosqueeze))))))
 
 ;;}}}
 
