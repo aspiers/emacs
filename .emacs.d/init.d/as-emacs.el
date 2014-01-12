@@ -9,10 +9,12 @@
   :bind ("C-c v" . set-any-variable))
 
 (bind-key "C-c V"    'customize-variable)
-(bind-key "C-M-RET"  'repeat-complex-command)
-(bind-key "C-c ."    'repeat)
-(bind-key "C-c F"    'font-lock-fontify-buffer)
-(bind-key "C-g"      'bn-keyboard-quit)
+
+(bind-key "C-M-<return>" 'repeat-complex-command)
+(bind-key "C-c ."        'repeat)
+
+(bind-key "C-c F"        'font-lock-fontify-buffer)
+(bind-key "C-g" 'bn-keyboard-quit)
 
 (defun as-find-emacs-init-d ()
   (interactive)
