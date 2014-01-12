@@ -34,7 +34,7 @@
 
 ;; I don't visit the FAQ very often; find-function way more useful.
 (bind-key "C-h C-f" 'find-function)
-(bind-key "C-h C-F" 'view-emacs-FAQ)
+(bind-key "C-h C-S-f" 'view-emacs-FAQ)
 
 ;; Similar pattern for variables
 (bind-key "C-h C-v" 'find-variable)
