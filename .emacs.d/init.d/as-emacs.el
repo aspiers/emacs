@@ -41,4 +41,13 @@
 
 (bind-key "C-h C-k" 'find-function-on-key)
 
+(defun as-kbd-to-string ()
+  "Prompt to enter a key sequence, and display the string
+required to bind that sequence via `bind-key', `global-set-key'
+etc."
+  (interactive)
+  (message (key-description (read-key-sequence "Enter key chord: "))))
+
+(bind-key "C-h C-c" 'as-kbd-to-string)
+
 (provide 'as-emacs)
