@@ -109,6 +109,7 @@
     ;; useless until https://github.com/Fuco1/smartparens/issues/259 fixed :-(
     smartparens
 
+    smartrep
     switch-window
     undo-tree
     use-package
