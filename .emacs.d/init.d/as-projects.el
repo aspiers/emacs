@@ -9,6 +9,7 @@
 (key-chord-define-global "zp" projectile-prefix-map)
 
 (key-chord-define-global "zm" 'projectile-commander)
+(key-chord-define-global "zs" 'projectile-switch-project)
 (key-chord-define-global "pf" 'projectile-find-file)
 (key-chord-define-global "pb" 'projectile-switch-to-buffer)
 
