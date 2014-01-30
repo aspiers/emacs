@@ -37,6 +37,9 @@ If the line is empty, doesn't do anything."
 
 (bind-key "C-S-e" 'bn-end-of-line-but-one)
 
+(use-package expand-region
+  :bind ("C-M-S-SPC" . er/expand-region))
+
 ;; emacs < 22 doesn't have x-clipboard-yank
 (bind-key "S-<insert>"
           (if (boundp 'x-clipboard-yank)
