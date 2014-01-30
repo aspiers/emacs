@@ -44,4 +44,35 @@
     (bind-key "C-S-SPC 1"         'mc/insert-numbers)
     (bind-key "C-S-SPC +"         'mc/sort-regions)
     (bind-key "C-S-SPC -"         'mc/reverse-regions)
-    (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair)))
+    (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair)
+
+    ;; FIXME: https://github.com/jwiegley/use-package/issues/71
+    (require 'region-bindings-mode)
+    (dolist (hook '(c-mode-hook shell-script-mode-hook
+                    emacs-lisp-mode-hook
+                    ruby-mode-hook python-mode-hook))
+      (add-hook hook 'region-bindings-mode 1))
+    (define-key region-bindings-mode-map "q"   'region-bindings-mode-off)
+
+    (define-key region-bindings-mode-map "m"   'mc/mark-more-like-this-extended)
+
+    (define-key region-bindings-mode-map "n"   'mc/mark-next-like-this)
+    (define-key region-bindings-mode-map "p"   'mc/mark-previous-like-this)
+
+    (define-key region-bindings-mode-map "f"   'mc/mark-next-word-like-this)
+    (define-key region-bindings-mode-map "b"   'mc/mark-previous-word-like-this)
+
+    (define-key region-bindings-mode-map "s"   'mc/mark-next-symbol-like-this)
+    (define-key region-bindings-mode-map "t"   'mc/mark-previous-symbol-like-this)
+
+    (define-key region-bindings-mode-map "<delete>" 'mc/unmark-next-like-this)
+    (define-key region-bindings-mode-map "C-d" 'mc/unmark-previous-like-this)
+
+    (define-key region-bindings-mode-map "C-n" 'mc/skip-to-next-like-this)
+    (define-key region-bindings-mode-map "C-p" 'mc/skip-to-previous-like-this)
+
+    (define-key region-bindings-mode-map "A"   'mc/mark-all-like-this)
+    (define-key region-bindings-mode-map "R"   'mc/mark-all-in-region)
+    (define-key region-bindings-mode-map "W"   'mc/mark-all-words-like-this)
+    (define-key region-bindings-mode-map "S"   'mc/mark-all-symbols-like-this)
+    (define-key region-bindings-mode-map "D"   'mc/mark-all-dwim)))

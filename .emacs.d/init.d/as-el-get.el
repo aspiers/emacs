@@ -100,6 +100,7 @@
     ;; (#1471), #1472, #1473
     projectile
 
+    region-bindings-mode
     rinari
     ruby-mode
     smart-mode-line
