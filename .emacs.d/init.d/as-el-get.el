@@ -53,6 +53,7 @@
     expand-region
     faith
     feature-mode
+    fill-column-indicator
     folding
     flymake-css
     flymake-ruby
