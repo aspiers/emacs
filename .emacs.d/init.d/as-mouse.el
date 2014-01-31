@@ -14,5 +14,8 @@
 (bind-key "C-S-<down-mouse-1>" 'mouse-drag-secondary)
 (bind-key "C-S-<mouse-3>"      'mouse-secondary-save-then-kill)
 (bind-key "C-S-<mouse-2>"      'mouse-yank-secondary)
-(bind-key "C-M-?"              'bn-make-region-into-secondary)
-(bind-key "C-M-T"              'bn-exchange-region-and-secondary)
+
+(use-package bn-secondary-region
+  :bind (("C-M-?" . bn-make-region-into-secondary)
+         ("C-M-T" . bn-exchange-region-and-secondary)
+         ("C-g"   . bn-keyboard-quit)))

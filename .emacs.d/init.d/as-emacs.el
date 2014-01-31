@@ -14,7 +14,6 @@
 (bind-key "C-c ."        'repeat)
 
 (bind-key "C-c F"        'font-lock-fontify-buffer)
-(bind-key "C-g" 'bn-keyboard-quit)
 
 (defun as-find-emacs-init-d ()
   (interactive)
