@@ -2107,6 +2107,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
+ '(show-trailing-whitespace t)
  '(smartparens-global-mode nil)
  '(sml/active-background-color "grey39")
  '(sml/active-foreground-color "black")
