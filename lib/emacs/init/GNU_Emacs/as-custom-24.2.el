@@ -2188,7 +2188,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))) t)
- '(font-lock-preprocessor-face ((t (:foreground "DeepSkyBlue4"))))
+ '(font-lock-preprocessor-face ((t (:foreground "light sea green"))))
  '(header-line ((t (:background "grey20" :foreground "VioletRed1" :box nil))))
  '(highlight ((t (:background "dark slate blue"))))
  '(info-title-1 ((t (:inherit info-title-2 :height 1.2 :foundry "Inconsolata"))))
