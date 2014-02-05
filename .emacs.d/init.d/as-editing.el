@@ -19,6 +19,7 @@ The list marked is the one that contains point or follows point."
 
 (bind-key "C-M-k"   'kill-sexp)
 (bind-key "M-\\"    'fixup-whitespace)
+(bind-key "M-s M-k" 'delete-trailing-whitespace)
 
 (use-package bn-kill-stuff
   :bind (("C-M-(" . bn-strip-parentheses)
