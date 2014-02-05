@@ -2089,6 +2089,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
+ '(region-bindings-mode-enabled-modes
+   (quote
+    (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist t)

@@ -48,10 +48,12 @@
 
     ;; FIXME: https://github.com/jwiegley/use-package/issues/71
     (require 'region-bindings-mode)
-    (dolist (hook '(c-mode-hook shell-script-mode-hook
-                    emacs-lisp-mode-hook
-                    ruby-mode-hook python-mode-hook))
-      (add-hook hook 'region-bindings-mode 1))
+    ;; I added region-bindings-mode-enabled-modes to obsolete this:
+    ;;
+    ;; (dolist (hook '(c-mode-hook shell-script-mode-hook
+    ;;                 emacs-lisp-mode-hook
+    ;;                 ruby-mode-hook python-mode-hook))
+    ;;   (add-hook hook 'region-bindings-mode-enable))
     (define-key region-bindings-mode-map "q"   'region-bindings-mode-off)
 
     (define-key region-bindings-mode-map "m"   'mc/mark-more-like-this-extended)
