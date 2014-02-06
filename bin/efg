@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# Emacs Find Grep
+
+usage () {
+    # Call as: usage [EXITCODE] [USAGE MESSAGE]
+    exit_code=1
+    if [[ "$1" == [0-9] ]]; then
+        exit_code="$1"
+        shift
+    fi
+    if [ -n "$1" ]; then
+        echo >&2 "$*"
+        echo
+    fi
+
+    me=`basename $0`
+
+    cat <<EOF >&2
+Usage: $me [-c] GREP-ARGS ...
+Options:
+  -h, --help          Show this help and exit
+  -c, --create-frame  Open in a new emacs frame
+options
+EOF
+    exit "$exit_code"
+}
+
+create_frame=
+while [ $# != 0 ]; do
+    case "$1" in
+        -h|--help)
+            usage 0
+            ;;
+        -c|--create-frame)
+            create_frame=$1
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+args=()
+for arg in "$@"; do
+    #echo "processing arg [$arg]"
+    case "$arg" in
+        *\'*)
+            arg="${arg//\\/\\\\}"
+            # bash doesn't allow interpolation of single quotes
+            # inside single quotes, so we have to close the single
+            # quoting, add a raw single quote, and then re-open
+            # the single quoting.  And bash's ${foo//PAT/REPL}
+            # requires single quotes to be escaped in PAT and REPL.
+            arg="'${arg//\'/\'\\\'\'}'"
+            ;;
+        *\ *|*\"*|*\\*)
+            arg="${arg//\\/\\\\}"
+            arg="'$arg'"
+            ;;
+    esac
+    #echo "adding arg [$arg]"
+    args+=("$arg")
+done
+
+# emacs' grep-find will run this inside: bash -c "..."
+cmd="find . -type f -print0 | xargs -0 grep -nH -E ${args[*]}"
+
+# Quote the double-quotes and wrap in double quotes to allow
+# interpolation by emacs:
+elisp="(grep-find \"${cmd//\"/\\\"}\")"
+
+quick-emacs --bg-if-poss $create_frame --eval "$elisp"
