@@ -358,7 +358,7 @@
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
- '(edit-server-port 9293)
+ '(edit-server-port 9292)
  '(el-get-sources
    (quote
     ((:name magit :pkgname "aspiers/magit")
