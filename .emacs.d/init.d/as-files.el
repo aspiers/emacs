@@ -33,3 +33,5 @@
                      nil "~/" "Find file: "))
 (bind-key "C-~"     'as-find-from-home)
 (bind-key "C-c j h" 'as-find-from-home)
+
+(use-package as-find-file-matching-regexp-hook)
