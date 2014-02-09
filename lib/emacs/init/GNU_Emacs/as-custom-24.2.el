@@ -1818,9 +1818,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
    (quote
-    ((agenda time-up priority-down category-keep)
-     (todo priority-down category-keep)
-     (tags priority-down category-keep))))
+    ((agenda habit-down time-up priority-down category-keep effort-up)
+     (todo priority-down category-keep effort-up)
+     (tags priority-down category-keep effort-up)
+     (search category-keep))))
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-time-grid
    (quote
