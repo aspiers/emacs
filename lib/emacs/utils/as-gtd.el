@@ -106,4 +106,7 @@ search should be continued."
       (org-clock-goto)
     (as-org-switch-to-agenda-buffer)))
 
+(bind-key "i" 'org-agenda-clock-in  org-agenda-mode-map)
+(bind-key "o" 'org-agenda-clock-out org-agenda-mode-map)
+
 (provide 'as-gtd)
