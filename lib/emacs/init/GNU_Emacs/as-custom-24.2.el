@@ -1804,6 +1804,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
+ '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
  '(org-agenda-prefix-format
    (quote
@@ -1812,6 +1813,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
+ '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
