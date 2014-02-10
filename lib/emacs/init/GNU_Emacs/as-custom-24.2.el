@@ -1823,6 +1823,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (tags priority-down category-keep effort-up)
      (search category-keep))))
  '(org-agenda-start-with-follow-mode nil)
+ '(org-agenda-sticky t)
  '(org-agenda-time-grid
    (quote
     (nil "----------------"
