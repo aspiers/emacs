@@ -1984,6 +1984,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 	<!--border: 1pt solid #ADB9CC;-->
   }
 </style>")
+ '(org-extend-today-until 3)
  '(org-from-is-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-global-properties
