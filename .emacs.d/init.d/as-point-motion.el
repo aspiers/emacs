@@ -13,30 +13,40 @@
 (key-chord-mode 1)
 (key-chord-define-global "zf" 'iy-go-to-char)
 
-(global-set-key [(control N)] 'next-logical-line)
-(global-set-key [(control P)] 'previous-logical-line)
+(bind-key "C-S-n" 'next-logical-line)
+(bind-key "C-S-p" 'previous-logical-line)
 
-(autoload 'ace-jump-mode "ace-jump-mode" nil t)
-(global-set-key [(control ?0)] 'ace-jump-mode)
-(autoload 'idomenu "idomenu" nil t)
-(global-set-key [(control ?1)] 'idomenu)
-(global-set-key [(control meta !)]        'idomenu)
+(use-package ace-jump-mode
+  :bind ("C-0" . ace-jump-mode))
+(use-package idomenu
+  :bind ("C-1" . idomenu))
 
+(bind-key "M-g"   'goto-line)
+(bind-key "M-S-e" 'mark-end-of-sentence)
 
-(global-set-key [(meta g)]      'goto-line)          ;; was set-face
-(global-set-key [(meta E)]                'mark-end-of-sentence)
-(global-set-key [(control E)]             'bn-end-of-line-but-one)
+;;;###autoload
+(defun bn-end-of-line-but-one (arg)
+  "Move point to one character before the end of current line.
+With argument ARG not nil or 1, move forward ARG - 1 lines first.
+If scan reaches end of buffer, stop there without error.
+If the line is empty, doesn't do anything."
+  (interactive "*p")
+  (end-of-line arg)
+  (unless (bolp)
+    (backward-char)))
 
+(bind-key "C-S-e" 'bn-end-of-line-but-one)
 
-(autoload 'bn-end-of-line-but-one "as-editing" "bn-end-of-line-but-one" t)
-
+(use-package expand-region
+  :bind ("C-M-S-SPC" . er/expand-region))
 
 ;; emacs < 22 doesn't have x-clipboard-yank
-(if (boundp 'x-clipboard-yank)
-    (global-set-key [(shift insert)] 'x-clipboard-yank)
-  (global-set-key [(shift insert)] 'clipboard-yank))
+(bind-key "S-<insert>"
+          (if (boundp 'x-clipboard-yank)
+              'x-clipboard-yank
+            'clipboard-yank))
 
-(global-set-key [(meta i)]     'indent-relative)    ;; was tab-to-tab-stop
+(bind-key "M-i" 'indent-relative)
 
 
 (provide 'as-point-motion)

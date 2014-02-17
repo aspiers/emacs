@@ -1,3 +1,8 @@
+#!/bin/sh
+
+ED=$ZDOTDIR/.emacs.d
+  EID=$ZDOTDIR/.emacs.d/init.d
+  ELG=$ZDOTDIR/.emacs.d/el-get
 LE=$ZDOTDIR/lib/emacs
   LEI=$LE/init
     LEC=$LEI/common

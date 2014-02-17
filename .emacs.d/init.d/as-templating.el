@@ -2,10 +2,8 @@
   :commands yas-minor-mode
   :init
   (defalias 'yasm 'yas-minor-mode)
-  :config
-  (progn
-    (global-set-key [(control <)] 'yasnippet-cmd-previous-real)
-    (global-set-key [(control >)] 'yasnippet-cmd-next-real)))
+  :bind (("C-<" . yasnippet-cmd-previous-real)
+         ("C->" . yasnippet-cmd-next-real)))
 
 (provide 'as-yasnippet)
 
@@ -44,8 +42,8 @@
   '(setq msf-abbrev-root
          (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
 
-(global-set-key [(control <)] 'msf-cmd-previous-real)
-(global-set-key [(control >)] 'msf-cmd-next-real)
+(bind-key "C-<" 'msf-cmd-previous-real)
+(bind-key "C->" 'msf-cmd-next-real)
 
 ;; Has indent-region changed arity?  Do we need a compatability wrapper?
 ;; (eval-after-load "msf-abbrev"
@@ -69,22 +67,22 @@
 ;;}}}
 ;;{{{ _I_nsert auto-text (C-c i)
 
-(global-set-key "\C-cid" 'as-insert-date-and-time)
-(global-set-key "\C-ciD" 'as-insert-date-interactive)
-(global-set-key "\C-cie" 'as-insert-email-address)
-(global-set-key "\C-cim" 'as-insert-local-mode)
-(global-set-key "\C-ciw" 'as-insert-work-email-address)
-(global-set-key "\C-ciW" 'as-insert-name-and-work-email)
-(global-set-key "\C-cij" 'as-insert-japh-method-chain-sig)
-(global-set-key "\C-ciJ" 'as-insert-japh-indirect-sig)
-(global-set-key "\C-cil" 'as-insert-log-timestamp)
-(global-set-key "\C-ciL" 'as-insert-log-datestamp)
-(global-set-key "\C-ciN" 'as-insert-name-and-email)
-(global-set-key "\C-cin" 'as-insert-name)
-(global-set-key "\C-cir" 'as-insert-rpm-changelog-datestamp)
-(global-set-key "\C-cis" 'as-insert-scissors)
-(global-set-key "\C-ciS" 'as-snip-region)
-(global-set-key "\C-cit" 'as-insert-time)
+(bind-key "C-c i d" 'as-insert-date-and-time)
+(bind-key "C-c i D" 'as-insert-date-interactive)
+(bind-key "C-c i e" 'as-insert-email-address)
+(bind-key "C-c i m" 'as-insert-local-mode)
+(bind-key "C-c i w" 'as-insert-work-email-address)
+(bind-key "C-c i W" 'as-insert-name-and-work-email)
+(bind-key "C-c i j" 'as-insert-japh-method-chain-sig)
+(bind-key "C-c i J" 'as-insert-japh-indirect-sig)
+(bind-key "C-c i l" 'as-insert-log-timestamp)
+(bind-key "C-c i L" 'as-insert-log-datestamp)
+(bind-key "C-c i N" 'as-insert-name-and-email)
+(bind-key "C-c i n" 'as-insert-name)
+(bind-key "C-c i r" 'as-insert-rpm-changelog-datestamp)
+(bind-key "C-c i s" 'as-insert-scissors)
+(bind-key "C-c i S" 'as-snip-region)
+(bind-key "C-c i t" 'as-insert-time)
 
 ;;}}}
 

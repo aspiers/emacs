@@ -13,6 +13,7 @@
   "Home directory to be used to retrieve emacs init files.")
 
 (defvar as-init-d-suffix ".emacs.d/init.d")
+(message "Using emacs config from %s" edotdir)
 (load (concat edotdir "/" as-init-d-suffix "/as-pre-init-d"))
 
 (require 'cl) ;; for remove-if-not

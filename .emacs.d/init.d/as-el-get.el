@@ -24,6 +24,7 @@
 (defvar as-el-get-emacswiki-packages
   '(
     auto-recomp
+    buff-menu+
     ediff-trees
     faith
     rcov-overlay
@@ -62,6 +63,7 @@
     expand-region
     faith
     feature-mode
+    fill-column-indicator
     folding
     flymake-css
     flymake-ruby
@@ -79,7 +81,10 @@
     ;; ido-hacks ;; ido-everywhere
     ido-ubiquitous
     ido-vertical-mode
-    inf-ruby
+
+    ;; I don't use this and it seems to have bugs with autoloading
+    ;; and maybe also leaving processes running within emacs.
+    ;; inf-ruby
     
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
@@ -106,6 +111,7 @@
     ;; (#1471), #1472, #1473
     projectile
 
+    region-bindings-mode
     rinari
     ruby-mode
     smart-mode-line
@@ -115,6 +121,7 @@
     ;; useless until https://github.com/Fuco1/smartparens/issues/259 fixed :-(
     smartparens
 
+    smartrep
     switch-window
     undo-tree
     use-package

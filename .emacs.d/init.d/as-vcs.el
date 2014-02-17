@@ -26,10 +26,10 @@
 ;;{{{ psvn
 
 (autoload 'svn-status "psvn" "svn-status" t)
-(global-set-key "\C-css" 'svn-status)
-(global-set-key "\C-csu" 'svn-status-update-cmd)
-(fset 'as-next-svn-buffer "\C-xb*svn-status*")
-(global-set-key "\C-csb"   'as-next-svn-buffer)
+(bind-key "C-c s s" 'svn-status)
+(bind-key "C-c s u" 'svn-status-update-cmd)
+(fset 'as-next-svn-buffer "C-xb*svn-status*")
+(bind-key "C-c s b"   'as-next-svn-buffer)
 ;; (require 'psvn)
 
 ;;}}}
@@ -48,11 +48,11 @@
 ;;}}}
 ;;{{{ C-c g for git operations
 
-(global-set-key "\C-cgb"  'magit-run-git-gui-blame)
-(global-set-key "\C-cgg"  'magit-run-git-gui)
-(global-set-key "\C-cgk"  'magit-run-gitk)
-(global-set-key "\C-cgs"  'magit-status)
-(global-set-key [(control shift g)] 'magit-status)
+(bind-key "C-c g b"  'magit-run-git-gui-blame)
+(bind-key "C-c g g"  'magit-run-git-gui)
+(bind-key "C-c g k"  'magit-run-gitk)
+(bind-key "C-c g s"  'magit-status)
+(bind-key "C-S-g"    'magit-status)
 
 (autoload 'ido-buffer-internal "ido")
 (defvar ido-default-buffer-method)
@@ -61,7 +61,7 @@
   (interactive)
   (ido-buffer-internal ido-default-buffer-method
                        nil "magit status: " nil "*magit: "))
-(global-set-key [(control meta g)] 'ido-switch-magit-buffer)
+(bind-key "C-M-g" 'ido-switch-magit-buffer)
 
 ;;}}}
 
@@ -69,18 +69,18 @@
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/.CVS/" "Find CVS repo: "))
-(global-set-key "\C-cjc"  'as-find-CVS-repo)
+(bind-key "C-c j c"  'as-find-CVS-repo)
 
 (defun as-find-my-git-repo ()
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: "))
-(global-set-key "\C-cjg"  'as-find-my-git-repo)
+(bind-key "C-c j g"  'as-find-my-git-repo)
 
 (defun as-find-upstream-git-repo ()
   (interactive)
   (ido-file-internal ido-default-file-method
                      nil "~/.GIT/3rd-party/" "Find 3rd-party git repo: "))
-(global-set-key "\C-cj3"  'as-find-upstream-git-repo)
-(global-set-key "\C-cjG"  'as-find-upstream-git-repo)
+(bind-key "C-c j 3"  'as-find-upstream-git-repo)
+(bind-key "C-c j G"  'as-find-upstream-git-repo)
 

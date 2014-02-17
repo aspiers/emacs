@@ -2,6 +2,9 @@
 
 (use-package smart-mode-line
   :config
-  (sml/setup))
+  (progn
+    (sml/setup)
+    (unless (member mode-line-front-space mode-line-format)
+      (setq-default mode-line-format (cons mode-line-front-space mode-line-format)))))
 
 (provide 'as-smart-mode-line)

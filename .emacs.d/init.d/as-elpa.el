@@ -8,6 +8,7 @@
     edit-server-htmlize
     flx-ido       ;; flx is flex with better ordering
     guide-key
+    kmacro-decision
     iy-go-to-char ;; http://emacsrocks.com/e04.html
     markdown-mode+
     )

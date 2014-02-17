@@ -4,9 +4,11 @@
 ;; point automatically gets put in the buffer menu.
 (bind-key "C-x C-b" 'buffer-menu)
 
-;; But if bs-show is available, choose that cos it's much nicer.
-(use-package bs-show
-  :bind ("C-x C-b" . bs-show))
+(require 'as-versions)
+(if (version< emacs-version "24.3")
+    (use-package buff-menu+)
+  (use-package bs
+    :bind ("C-x C-b" . bs-show)))
 
 (bind-key "C-x K" 'as-destroy-buffer)
 (bind-key "C-!"   'ido-switch-buffer)

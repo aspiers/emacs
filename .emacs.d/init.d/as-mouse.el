@@ -3,9 +3,19 @@
        (load "mwheel" t)
        (mwheel-install)))
 
-(and window-system
-     (global-set-key [(M-mouse-4)] 'raise-frame)
-     (global-set-key [(M-mouse-5)] 'lower-frame))
+;; This is presumably only useful when my normal window manager
+;; mouse bindings and/or Meta key binding are not in effect.
+(when window-system
+  (bind-key "M-<mouse-4>" 'lower-frame)
+  (bind-key "M-<mouse-5>" 'raise-frame))
 
-(global-set-key [(control meta ??)]       'bn-make-region-into-secondary)
-(global-set-key [(control meta T)]        'bn-exchange-region-and-secondary)
+(bind-key "C-S-<mouse-1>"      'mouse-start-secondary)
+(bind-key "C-S-<drag-mouse-1>" 'mouse-set-secondary)
+(bind-key "C-S-<down-mouse-1>" 'mouse-drag-secondary)
+(bind-key "C-S-<mouse-3>"      'mouse-secondary-save-then-kill)
+(bind-key "C-S-<mouse-2>"      'mouse-yank-secondary)
+
+(use-package bn-secondary-region
+  :bind (("C-M-?" . bn-make-region-into-secondary)
+         ("C-M-T" . bn-exchange-region-and-secondary)
+         ("C-g"   . bn-keyboard-quit)))

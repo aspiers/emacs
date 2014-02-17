@@ -358,7 +358,7 @@
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
- '(edit-server-port 9293)
+ '(edit-server-port 9292)
  '(el-get-sources
    (quote
     ((:name magit :pkgname "aspiers/magit")
@@ -1365,7 +1365,7 @@
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
-    ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c i" "C-c g" "C-c m" "C-c t" "C-c w" "C-c j" "zp" "pz" "<key-chord>"
+    ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c i" "C-c g" "C-c m" "C-c t" "C-c w" "C-c j" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
      (dired-mode "%" "*" "C-t"))))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
@@ -1804,6 +1804,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: ")))
  '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
+ '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
  '(org-agenda-prefix-format
    (quote
@@ -1812,14 +1813,17 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
+ '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
    (quote
-    ((agenda time-up priority-down category-keep)
-     (todo priority-down category-keep)
-     (tags priority-down category-keep))))
+    ((agenda habit-down time-up priority-down category-keep effort-up)
+     (todo priority-down category-keep effort-up)
+     (tags priority-down category-keep effort-up)
+     (search category-keep))))
  '(org-agenda-start-with-follow-mode nil)
+ '(org-agenda-sticky t)
  '(org-agenda-time-grid
    (quote
     (nil "----------------"
@@ -1980,6 +1984,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 	<!--border: 1pt solid #ADB9CC;-->
   }
 </style>")
+ '(org-extend-today-until 3)
  '(org-from-is-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-global-properties
@@ -2010,6 +2015,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-agendas (quote ("d" "pd" "wd" "7" "p7" "w7" "c" "W" "e")))
  '(org-mobile-directory "/scpx:adamspiers.org:org/")
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
+ '(org-modules (quote (org-habit org-info org-w3m org-timer org-docview)))
  '(org-odd-levels-only t)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
@@ -2021,7 +2027,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("OWRA-2010" :base-directory "~/OWRA/meetings/2010" :publishing-directory "~/OWRA/meetings/2010" :publishing-function org-html-publish-to-html)
      ("OWRA-2011" :base-directory "~/OWRA/meetings/2011" :publishing-directory "~/OWRA/meetings/2011" :publishing-function org-html-publish-to-html)
      ("OWRA-2012" :base-directory "~/OWRA/meetings/2012" :publishing-directory "~/OWRA/meetings/2012" :publishing-function org-html-publish-to-html)
-     ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html))))
+     ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html)
+     ("OWRA-2014" :base-directory "~/OWRA/meetings/2014" :publishing-directory "~/OWRA/meetings/2014" :publishing-function org-html-publish-to-html))))
  '(org-refile-targets (quote ((nil :maxlevel . 3))))
  '(org-refile-use-outline-path t)
  '(org-replace-disputed-keys t)
@@ -2083,9 +2090,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
+ '(projectile-remember-window-configs t)
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
+ '(region-bindings-mode-enabled-modes
+   (quote
+    (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist t)
@@ -2106,6 +2118,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
+ '(show-trailing-whitespace t)
  '(smartparens-global-mode nil)
  '(sml/active-background-color "grey39")
  '(sml/active-foreground-color "black")
@@ -2184,7 +2197,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))) t)
- '(font-lock-preprocessor-face ((t (:foreground "DeepSkyBlue4"))))
+ '(font-lock-preprocessor-face ((t (:foreground "medium purple"))))
  '(header-line ((t (:background "grey20" :foreground "VioletRed1" :box nil))))
  '(highlight ((t (:background "dark slate blue"))))
  '(info-title-1 ((t (:inherit info-title-2 :height 1.2 :foundry "Inconsolata"))))
