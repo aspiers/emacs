@@ -30,6 +30,16 @@
     versions
     ))
 
+(if (or (not (file-exists-p (concat el-get-el-get-dir "/recipes/emacswiki")))
+	(let ((missing-recipes
+	       (remove-if (lambda (pkg)
+			    (el-get-recipe-filename pkg))
+			  as-el-get-emacswiki-packages)))
+	  (when missing-recipes
+	    (message "emacswiki recipes missing: %s" missing-recipes))
+	  missing-recipes))
+    (el-get-emacswiki-build-local-recipes))
+
 (defvar as-el-get-builtin-packages
   '(
     el-get
