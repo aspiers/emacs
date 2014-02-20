@@ -2192,6 +2192,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(diff-added ((t (:inherit diff-changed :foreground "green3"))))
  '(diff-file-header ((t (:foreground "dark orange" :weight bold))))
  '(diff-header ((t (:foreground "dark orange"))))
+ '(diff-refine-added ((t (:inherit diff-refine-change :background "#168816"))))
  '(diff-refine-change ((t (:background "grey30"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red3"))))
  '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
