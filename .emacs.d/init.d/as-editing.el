@@ -25,7 +25,7 @@ The list marked is the one that contains point or follows point."
   :bind (("C-M-(" . bn-strip-parentheses)
          ("C-w"   . bn-kill-region-or-backword-word)
          ("M-w"   . bn-kill-line-or-region-save)
-         ("S-M-z" . bn-zap-nearly-to-char)))
+         ("M-Z" . bn-zap-nearly-to-char)))
 
 (use-package as-line-ops
   :bind (("C-x C-t" . as-transpose-lines)
