@@ -10,8 +10,8 @@
 
 (key-chord-define-global "zm" 'projectile-commander)
 (key-chord-define-global "zs" 'projectile-switch-project)
-(key-chord-define-global "pf" 'projectile-find-file)
-(key-chord-define-global "pb" 'projectile-switch-to-buffer)
+(key-chord-define-global "zf" 'projectile-find-file)
+(key-chord-define-global "zb" 'projectile-switch-to-buffer)
 
 (defun as-find-my-mrconfig ()
   (interactive)

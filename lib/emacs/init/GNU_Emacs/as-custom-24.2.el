@@ -1806,6 +1806,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
+ '(org-agenda-log-mode-items (quote (closed)))
  '(org-agenda-prefix-format
    (quote
     ((agenda . "  %-9:c%?-12t% s")

@@ -11,6 +11,9 @@
     kmacro-decision
     iy-go-to-char ;; http://emacsrocks.com/e04.html
     markdown-mode+
+
+    ;; marmalade
+    gerrit-download
     )
   "Adam's list of packages to install from ELPA-like archives,
 either with el-get or `package-install'.")
