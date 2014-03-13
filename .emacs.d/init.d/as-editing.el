@@ -10,8 +10,8 @@ The list marked is the one that contains point or follows point."
   (backward-list))
 
 (use-package as-word-motion
-  :bind (("M-S-f"   . as-forward-word-start)
-         ("M-S-b"   . as-backward-before-word)
+  :bind (("M-F"   . as-forward-word-start)
+         ("M-B"   . as-backward-before-word)
          ("C-M-S-f" . as-forward-sexp-start)
          ("C-M-S-b" . as-backward-before-sexp)
          ("S-M-d"   . as-kill-word)
