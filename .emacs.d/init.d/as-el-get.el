@@ -16,10 +16,21 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+(defun as-el-get-owner-p ()
+  "Returns `t' if the current effective uid matches the owner of
+the directory pointed to by `el-get-el-get-dir'."
+  (eq (nth 2 (file-attributes el-get-el-get-dir 'integer))
+      (user-real-uid)))
+
+(unless (as-el-get-owner-p)
+  (message "Don't own %s; will skip various installation steps."
+           el-get-el-get-dir))
+
 ;; Ensure we have ELPA recipes available
 (require 'as-elpa)
-(unless (file-exists-p (concat el-get-el-get-dir "/recipes/elpa"))
-  (el-get-elpa-build-local-recipes))
+(if (and (as-el-get-owner-p)
+         (not (file-exists-p (concat el-get-el-get-dir "/recipes/elpa"))))
+    (el-get-elpa-build-local-recipes))
 
 (defvar as-el-get-emacswiki-packages
   '(
@@ -31,14 +42,15 @@
     versions
     ))
 
-(if (or (not (file-exists-p (concat el-get-el-get-dir "/recipes/emacswiki")))
-        (let ((missing-recipes
-               (remove-if (lambda (pkg)
-                            (el-get-recipe-filename pkg))
-                          as-el-get-emacswiki-packages)))
-          (when missing-recipes
-            (message "emacswiki recipes missing: %s" missing-recipes))
-          missing-recipes))
+(if (and (as-el-get-owner-p)
+         (or (not (file-exists-p (concat el-get-el-get-dir "/recipes/emacswiki")))
+             (let ((missing-recipes
+                    (remove-if (lambda (pkg)
+                                 (el-get-recipe-filename pkg))
+                               as-el-get-emacswiki-packages)))
+               (when missing-recipes
+                 (message "emacswiki recipes missing: %s" missing-recipes))
+               missing-recipes)))
     (el-get-emacswiki-build-local-recipes))
 
 (defvar as-el-get-builtin-packages
@@ -142,9 +154,10 @@ ELPA recipes.")
 ;; install something via `el-get-list-packages', this reduces the
 ;; chance I'll get used to it being there on one machine and then get
 ;; surprised when it isn't on another machine I switch to.
-(as-progress (format "cleaning up unwanted el-get packages ..."))
-(el-get-cleanup (as-el-get-packages))
-(as-progress (format "cleaning up unwanted el-get packages ... done"))
+(when (as-el-get-owner-p)
+  (as-progress (format "cleaning up unwanted el-get packages ..."))
+  (el-get-cleanup (as-el-get-packages))
+  (as-progress (format "cleaning up unwanted el-get packages ... done")))
 
 ;; Reasons pro installing synchronously:
 ;;
@@ -162,14 +175,23 @@ ELPA recipes.")
 ;; packages, so automatically provide it in order to save files which
 ;; depend on both el-get and use-package from having to require both
 ;; separately.
-(el-get 'sync 'use-package)
-(as-progress (format "loading use-package ... done"))
+(if (as-el-get-owner-p)
+    (el-get 'sync 'use-package)
+  (el-get-init 'use-package))
 
+(as-progress (format "loading use-package ... done"))
 (require 'use-package)
 
-(as-progress (format "loading packages via `el-get' ..."))
-(el-get (if el-get-install-sync 'sync) (as-el-get-packages))
-(as-progress (format "loading packages via `el-get' ...  done"))
+(cond
+ ((as-el-get-owner-p)
+  (as-progress (format "loading packages via `el-get' ..."))
+  (el-get (if el-get-install-sync 'sync) (as-el-get-packages))
+  (as-progress (format "loading packages via `el-get' ... done")))
+ (t
+  (as-progress (format "initialising packages via `el-get-init' ..."))
+  (dolist (pkg (as-el-get-packages))
+    (el-get-init pkg))
+  (as-progress (format "initialising packages via `el-get-init' ... done"))))
 
 (provide 'as-el-get)
 (eval-and-compile (as-loading-done))
