@@ -2077,6 +2077,18 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org2blog/wp-blog-alist
    (quote
     (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
+ '(org2blog/wp-buffer-template
+   "#+BLOG: blog.adamspiers.org
+#+DATE: %s
+#+OPTIONS: toc:nil num:nil todo:nil pri:nil tags:nil ^:nil TeX:nil
+#+CATEGORY: %s
+#+TAGS:
+#+PERMALINK:
+#+TITLE: %s
+#+DESCRIPTION:
+
+#+HTML: <!--more--> <!--break-->
+")
  '(org2blog/wp-sourcecode-default-params "")
  '(org2blog/wp-use-sourcecode-shortcode nil)
  '(outline-auto-activation t)
