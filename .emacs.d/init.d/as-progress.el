@@ -15,6 +15,13 @@ as an extremely primitive profiler.")
          (as-progress-clock now))
     (message "[+%.3f] %s" delta (if args (format msg args) msg))))
 
+(defun as-abbreviated-load-file-name ()
+  "Returns an abbreviated version of `load-file-name', if non-nil, otherwise
+the string \"unknown\"."
+  (if load-file-name
+      (abbreviate-file-name load-file-name)
+    "[unknown]"))
+
 (defun as-progress (msg &rest args)
   "Display progress during loading of init files."
   (let*
@@ -29,16 +36,16 @@ as an extremely primitive profiler.")
       ;; immediately after compilation?
 
       ;; Anyway, for now, we cop out.
-      ((caller-filename (abbreviate-file-name load-file-name)))
+      ((caller-filename (as-abbreviated-load-file-name)))
     (as-progress-message
      (concat caller-filename ": " (if args (format msg args) msg)))))
 
 (defun as-loading-started ()
   "Display progress of loading of init files."
-  (as-progress-message "loading %s ..." (abbreviate-file-name (or load-file-name "unknown"))))
+  (as-progress-message "loading %s ..." (as-abbreviated-load-file-name)))
 
 (defun as-loading-done ()
   "Display progress of loading of init files."
-  (as-progress-message "loading %s ... done" (abbreviate-file-name load-file-name)))
+  (as-progress-message "loading %s ... done" (as-abbreviated-load-file-name)))
 
 (provide 'as-progress)
