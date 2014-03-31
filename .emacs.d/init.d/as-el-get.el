@@ -39,7 +39,8 @@
           (when missing-recipes
             (message "emacswiki recipes missing: %s" missing-recipes))
           missing-recipes))
-    (el-get-emacswiki-build-local-recipes))
+    (with-demoted-errors
+      (el-get-emacswiki-build-local-recipes)))
 
 (defvar as-el-get-builtin-packages
   '(
@@ -167,8 +168,18 @@ ELPA recipes.")
 
 (require 'use-package)
 
+(defvar as-el-get-missing-packages ()
+  "List of packages which `el-get' failed to load.")
+
 (as-progress (format "loading packages via `el-get' ..."))
-(el-get (if el-get-install-sync 'sync) (as-el-get-packages))
+(dolist (pkg (as-el-get-packages))
+  (with-demoted-errors
+    (el-get (if el-get-install-sync 'sync) pkg))
+  (unless (string-equal (el-get-read-package-status pkg) "installed")
+    (add-to-list as-el-get-missing-packages pkg t)))
+(as-progress (format "loading packages via `el-get' ...  done"))
+(if as-el-get-missing-packages
+    (as-progress (format "failed to load packages: %s" as-el-get-missing-packages)))
 (as-progress (format "loading packages via `el-get' ...  done"))
 
 (provide 'as-el-get)

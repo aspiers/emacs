@@ -40,6 +40,7 @@ either with el-get or `package-install'.")
 (when
     (or (load "package")
         (load (expand-file-name (concat edotdir "/.emacs.d/elpa/package.el"))))
-  (as-setup-elpa))
+  (with-demoted-errors
+    (as-setup-elpa)))
 
 (provide 'as-elpa)
