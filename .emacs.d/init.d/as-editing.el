@@ -53,3 +53,5 @@ The list marked is the one that contains point or follows point."
           (lambda ()
             (interactive)
             (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
+
+(provide 'as-editing)
