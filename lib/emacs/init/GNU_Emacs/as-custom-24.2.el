@@ -2015,6 +2015,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mairix-threaded-links nil)
  '(org-mobile-agendas (quote ("d" "pd" "wd" "7" "p7" "w7" "c" "W" "e")))
  '(org-mobile-directory "/scpx:adamspiers.org:org/")
+ '(org-mobile-files (quote ("/home/adam/org/mobile")))
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules (quote (org-habit org-info org-w3m org-timer org-docview)))
  '(org-odd-levels-only t)
