@@ -1,5 +1,5 @@
 (defvar projectile-prefix-map
-  (lookup-key projectile-mode-map projectile-keymap-prefix)
+  (lookup-key projectile-mode-map (kbd "C-c p"))
   "The keymap which Projectile typically binds to C-c p.")
 (bind-key "C-x p" projectile-prefix-map)
 
