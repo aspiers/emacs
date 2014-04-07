@@ -3,6 +3,8 @@
   "The keymap which Projectile typically binds to C-c p.")
 (bind-key "C-x p" projectile-prefix-map)
 
+(require 'as-key-chord)
+
 ;; Not needed since guide-key/recursive-key-sequence-flag is set:
 ;; (setq guide-key/guide-key-sequence
 ;;       '("<key-chord> z p" "<key-chord> p z"))
