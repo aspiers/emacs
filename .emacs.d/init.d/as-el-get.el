@@ -51,7 +51,8 @@ the directory pointed to by `el-get-el-get-dir'."
                (when missing-recipes
                  (message "emacswiki recipes missing: %s" missing-recipes))
                missing-recipes)))
-    (el-get-emacswiki-build-local-recipes))
+    (with-demoted-errors
+      (el-get-emacswiki-build-local-recipes)))
 
 (defvar as-el-get-builtin-packages
   '(
@@ -182,11 +183,20 @@ ELPA recipes.")
 (as-progress (format "loading use-package ... done"))
 (require 'use-package)
 
+(defvar as-el-get-missing-packages ()
+  "List of packages which `el-get' failed to load.")
+
 (cond
  ((as-el-get-owner-p)
   (as-progress (format "loading packages via `el-get' ..."))
-  (el-get (if el-get-install-sync 'sync) (as-el-get-packages))
-  (as-progress (format "loading packages via `el-get' ... done")))
+  (dolist (pkg (as-el-get-packages))
+    (with-demoted-errors
+      (el-get (if el-get-install-sync 'sync) pkg))
+    (unless (string-equal (el-get-read-package-status pkg) "installed")
+      (add-to-list as-el-get-missing-packages pkg t)))
+  (as-progress (format "loading packages via `el-get' ...  done"))
+  (if as-el-get-missing-packages
+      (as-progress (format "failed to load packages: %s" as-el-get-missing-packages))))
  (t
   (as-progress (format "initialising packages via `el-get-init' ..."))
   (dolist (pkg (as-el-get-packages))
