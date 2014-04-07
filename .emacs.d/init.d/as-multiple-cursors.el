@@ -1,3 +1,6 @@
+;; FIXME: https://github.com/jwiegley/use-package/issues/71
+(require 'region-bindings-mode)
+
 (use-package multiple-cursors
   ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
   :config
@@ -47,7 +50,7 @@
     (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair)
 
     ;; FIXME: https://github.com/jwiegley/use-package/issues/71
-    (require 'region-bindings-mode)
+    ;;
     ;; I added region-bindings-mode-enabled-modes to obsolete this:
     ;;
     ;; (dolist (hook '(c-mode-hook shell-script-mode-hook
