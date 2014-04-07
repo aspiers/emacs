@@ -38,6 +38,8 @@ The list marked is the one that contains point or follows point."
          ("C-c p"   . as-copy-previous-line-suffix) ;; FIXME: conflict!
          ("C-x C-y" . vim-yy)
          ("C-M-y"   . as-join-line-with-next)))
+(require 'as-key-chord)
+(key-chord-define-global "pq" 'as-copy-previous-line-suffix)
 
 (bind-key "C-c l"   'align)
 (bind-key "C-c TAB" 'indent-region)
