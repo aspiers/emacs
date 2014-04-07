@@ -8,9 +8,7 @@
 ;; Stop down cursor adding newlines to end of buffer.
 (setq next-line-add-newlines nil)
 
-(autoload 'key-chord-mode "key-chord")
-(autoload 'key-chord-define-global "key-chord")
-(key-chord-mode 1)
+(require 'as-key-chord)
 (key-chord-define-global "zf" 'iy-go-to-char)
 
 (bind-key "C-S-n" 'next-logical-line)
