@@ -1375,7 +1375,7 @@
     (try-expand-dabbrev try-expand-dabbrev-all-buffers try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-expand-dabbrev-from-kill try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
  '(ido-auto-merge-delay-time 3)
  '(ido-auto-merge-work-directories-length 0)
- '(ido-case-fold nil)
+ '(ido-case-fold t)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere t)
