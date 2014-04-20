@@ -116,6 +116,8 @@ the directory pointed to by `el-get-el-get-dir'."
     org-magit ;; support for magit: links in org buffers
     org-sync
     paredit
+    phi-search
+    phi-search-mc
 
     ;; https://github.com/dimitri/el-get/issues/1471
     ;; https://github.com/dimitri/el-get/issues/1472
