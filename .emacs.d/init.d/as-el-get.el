@@ -128,7 +128,9 @@ the directory pointed to by `el-get-el-get-dir'."
 
     region-bindings-mode
     rinari
+    rpm-spec-mode
     ruby-mode
+    rudel
     smart-mode-line
     smex
     ;;smooth-scrolling
