@@ -22,9 +22,10 @@
 ;;}}}
 ;;{{{ XML / SGML
 
-(dolist (elt '(("\\.sgml$" . sgml-mode)
-               ("\\.dtd$"  . sgml-mode)
-               ("\\.xsd$"  . xml-mode)))
+(dolist (elt '(("\\.xml$"  . nxml-mode)
+               ("\\.xsd$"  . nxml-mode)
+               ("\\.sgml$" . sgml-mode)
+               ("\\.dtd$"  . sgml-mode)))
   (add-to-list 'auto-mode-alist elt))
 
 (setq-default sgml-indent-data t)
