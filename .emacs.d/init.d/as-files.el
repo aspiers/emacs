@@ -34,4 +34,10 @@
 (bind-key "C-~"     'as-find-from-home)
 (bind-key "C-c j h" 'as-find-from-home)
 
+(defun as-find-from-root ()
+  (interactive)
+  (ido-file-internal ido-default-file-method
+                     nil "/sudo:root@localhost:/" "Find file: "))
+(bind-key "C-c j /" 'as-find-from-root)
+
 (use-package as-find-file-matching-regexp-hook)
