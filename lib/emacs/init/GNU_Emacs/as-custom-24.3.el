@@ -1844,7 +1844,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** %?" :prepend t :immediate-finish t)
      ("o" "org mailing list item" entry
       (file+headline "~/org/TODO.org" "to list")
-      "* NEXT [#B] %?" :prepend t)
+      "* NEXT %?" :prepend t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
@@ -1864,10 +1864,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       "* NEXT %?" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
-      "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t)
+      "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("M" "NEXT from work mail" entry
       (file "~/SUSE/TODO.org")
-      "* NEXT [#B] %?%[~/.org-mairix-link]" :prepend t)
+      "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
@@ -1912,7 +1912,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** How?" :prepend t)
      ("P" "Procrastination" entry
       (file "~/org/notes/ProcrastinationLog.org")
-      "* [#B] %T %^{activity}
+      "* %T %^{activity}
   :PROPERTIES:
   :thoughts/feelings: %^{thoughts/feelings}
   :justification: %^{justification}
