@@ -41,11 +41,13 @@ debug () {
 }
 
 if fast-X11-display; then
+    EMACSCLIENT_TTY=
     if [ -n "$SSH_CONNECTION" ] || [[ "$DISPLAY" == localhost:* ]]; then
         xauth-emacs
     fi
 else
     DISPLAY=
+    EMACSCLIENT_TTY=--tty
 fi
 
 # If we're root, we don't want emacsclient to fall back to using
@@ -93,7 +95,7 @@ focus_emacs_frame () {
 
 do_editing () {
     # Wait for editing to be completed
-    emacsclient "$@" >/dev/null
+    emacsclient $EMACSCLIENT_TTY "$@" >/dev/null
 
     if [ -n "$client_winid" ]; then
     # If we can, switch back to window from which emacsclient was invoked.
@@ -113,7 +115,7 @@ if [ -n "$server_up" ]; then
     if [ -n "$multi_tty_support" ]; then
         # newer emacsen do all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
-        maybe_bg emacsclient $create_frame "$@"
+        maybe_bg emacsclient $EMACSCLIENT_TTY $create_frame "$@"
     else
         # Looks like we found a working server
         if [ -n "$DISPLAY" ]; then
