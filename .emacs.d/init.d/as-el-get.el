@@ -133,7 +133,7 @@ the directory pointed to by `el-get-el-get-dir'."
     rudel
     smart-mode-line
     smex
-    ;;smooth-scrolling
+    smooth-scrolling
 
     ;; useless until https://github.com/Fuco1/smartparens/issues/259 fixed :-(
     smartparens
