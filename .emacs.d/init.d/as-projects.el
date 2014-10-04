@@ -1,19 +1,30 @@
-(defvar projectile-prefix-map
-  (lookup-key projectile-mode-map (kbd "C-c p"))
-  "The keymap which Projectile typically binds to C-c p.")
-(bind-key "C-x p" projectile-prefix-map)
+(custom-set-variables '(projectile-keymap-prefix "^Xp"))
+(use-package projectile
+  :config
+  (progn
 
-(require 'as-key-chord)
+    ;; https://github.com/bbatsov/projectile/issues/287
+    (defvar projectile-prefix-map
+      (lookup-key projectile-mode-map (kbd "C-c p"))
+      "The keymap which Projectile typically binds to C-c p.")
+    (bind-key "C-x p" projectile-prefix-map)
+    (global-set-key (kbd "C-c p") 'previous-line)
+    (local-set-key (kbd "C-c p") 'previous-line)
+    (global-set-key [(control ?c) ?p] 'previous-line)
+    (define-key mode-specific-map (kbd "p") nil)
+    (bind-key "C-c p" 'as-copy-previous-line-suffix)
+    (require 'as-key-chord)
 
-;; Not needed since guide-key/recursive-key-sequence-flag is set:
-;; (setq guide-key/guide-key-sequence
-;;       '("<key-chord> z p" "<key-chord> p z"))
-(key-chord-define-global "zp" projectile-prefix-map)
+    ;; Not needed since guide-key/recursive-key-sequence-flag is set:
+    ;; (setq guide-key/guide-key-sequence
+    ;;       '("<key-chord> z p" "<key-chord> p z"))
+    (key-chord-define-global "zp" projectile-prefix-map)
 
-(key-chord-define-global "zm" 'projectile-commander)
-(key-chord-define-global "zs" 'projectile-switch-project)
-(key-chord-define-global "zf" 'projectile-find-file)
-(key-chord-define-global "zb" 'projectile-switch-to-buffer)
+    (key-chord-define-global "ZG" 'projectile-grep)
+    (key-chord-define-global "zm" 'projectile-commander)
+    (key-chord-define-global "zs" 'projectile-switch-project)
+    (key-chord-define-global "zf" 'projectile-find-file)
+    (key-chord-define-global "zb" 'projectile-switch-to-buffer)))
 
 (defun as-find-my-mrconfig ()
   (interactive)

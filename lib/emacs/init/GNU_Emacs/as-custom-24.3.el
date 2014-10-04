@@ -2103,6 +2103,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
+ '(projectile-keymap-prefix "^Xp")
  '(projectile-remember-window-configs t)
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))

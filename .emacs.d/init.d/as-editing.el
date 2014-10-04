@@ -1,5 +1,7 @@
 ;; Adam's editing utilities
 
+(require 'as-projects) ;; C-c p overrides projectile bullshit
+
 ;;;###autoload
 (defun mark-list ()
   "Put point at end of this list, mark at beginning.
@@ -39,6 +41,8 @@ The list marked is the one that contains point or follows point."
          ("C-x C-y" . vim-yy)
          ("C-M-y"   . as-join-line-with-next)))
 (require 'as-key-chord)
+(bind-key "C-c p" 'as-copy-previous-line-suffix)
+
 (key-chord-define-global "pq" 'as-copy-previous-line-suffix)
 
 (bind-key "C-c l"   'align)
