@@ -2143,6 +2143,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/inactive-background-color "gray20")
  '(sml/line-number-format "%4l")
  '(sml/mode-width (quote full))
+ '(sml/name-width (quote (20 . 45)))
  '(sml/outside-modified-char "M")
  '(sml/read-only-char "%")
  '(sml/replacer-regexp-list
