@@ -374,7 +374,8 @@
  '(el-get-sources
    (quote
     ((:name magit :pkgname "aspiers/magit")
-     (:name org2blog :pkgname "aspiers/org2blog"))))
+     (:name org2blog :pkgname "aspiers/org2blog")
+     (:name smooth-scrolling :pkgname "DarwinAwardWinner/smooth-scrolling"))))
  '(eldoc-minor-mode-string "")
  '(eldoc-mode t t)
  '(enable-local-eval t)
