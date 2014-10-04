@@ -135,7 +135,8 @@ the directory pointed to by `el-get-el-get-dir'."
     smex
     smooth-scrolling
 
-    ;; useless until https://github.com/Fuco1/smartparens/issues/259 fixed :-(
+    ;; useless until https://github.com/Fuco1/smartparens/issues/259
+    ;; fixed or fully upgraded to emacs 24.3 :-/
     smartparens
 
     smartrep
