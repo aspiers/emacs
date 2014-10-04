@@ -38,7 +38,19 @@
  '(Info-additional-directory-list
    (quote
     ("~/share/info" "/share/usr/info" "/usr/local/info" "/usr/share/info")))
- '(LilyPond-pdf-command "kpdf")
+ '(LilyPond-command-alist
+   (quote
+    (quote
+     (("LilyPond" "lilypond %s" "%s" "%l" "View")
+      ("2PS" "lilypond -f ps %s" "%s" "%p" "ViewPS")
+      ("Book" "lilypond-book %x" "%x" "%l" "LaTeX")
+      ("LaTeX" "latex '\\nonstopmode\\input %l'" "%l" "%d" "ViewDVI")
+      ("View" "pdf %f")
+      ("ViewPDF" "pdf %f")
+      ("ViewPS" "gv --watch %p")
+      ("Midi" "")
+      ("MidiAll" "")))))
+ '(LilyPond-pdf-command "okular")
  '(adaptive-fill-regexp "[ 	]\\{,10\\}\\([-!|#%;>*·•‣⁃◦]+[ 	]*\\)*")
  '(align-dq-string-modes
    (quote
