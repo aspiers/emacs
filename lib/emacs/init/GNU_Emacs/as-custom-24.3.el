@@ -2115,6 +2115,12 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
  '(require-final-newline nil)
+ '(rm-blacklist
+   (quote
+    (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
+ '(rm-excluded-modes
+   (quote
+    (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
