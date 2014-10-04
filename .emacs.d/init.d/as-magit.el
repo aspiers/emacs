@@ -1,7 +1,6 @@
 (use-package magit
   :config
   (progn
-
     (add-hook 'ido-setup-hook 'as-magit-ido-keys)
 
     (defun as-magit-ido-keys ()
@@ -18,12 +17,4 @@
         ;; when C-d is hit during ido mode (see ido-common-completion-map).
         (setq fallback 'magit-status)
         (setq ido-exit 'fallback)
-        (exit-minibuffer)))
-
-    (defun ido-magit-status ()
-      "Call `magit-status' the ido way.
-The directory is selected interactively by typing a substring.
-For details of keybindings, see `ido-find-file'."
-      (interactive)
-      (magit-status
-       (ido-read-directory-name "magit status: " nil nil t)))))
+        (exit-minibuffer)))))
