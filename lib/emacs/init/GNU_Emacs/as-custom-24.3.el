@@ -2114,8 +2114,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
  '(require-final-newline nil)
  '(rst-toc-insert-number-separator ". ")
- '(ruby-deep-arglist t)
- '(ruby-deep-indent-paren t)
+ '(ruby-deep-arglist nil)
+ '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values
    (quote
     ((org-drawers quote
