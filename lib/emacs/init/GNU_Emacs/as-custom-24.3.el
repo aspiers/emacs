@@ -290,6 +290,8 @@
  '(allout-auto-activation t)
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
+ '(auto-revert-check-vc-info nil)
+ '(auto-revert-interval 10)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
  '(blink-cursor-delay 0.0)
@@ -1341,6 +1343,7 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
+ '(global-auto-revert-mode nil)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-whitespace-mode t)
