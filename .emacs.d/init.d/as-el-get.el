@@ -126,6 +126,8 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; (#1471), #1472, #1473
     projectile
 
+    python
+
     region-bindings-mode
     rinari
     rpm-spec-mode
