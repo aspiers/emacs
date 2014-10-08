@@ -10,11 +10,15 @@
   (use-package bs
     :bind ("C-x C-b" . bs-show)))
 
+(defun as-revert-buffer-without-confirmation ()
+  (interactive)
+  (revert-buffer t t))
+
 (bind-key "C-x K" 'as-destroy-buffer)
 (bind-key "C-!"   'ido-switch-buffer)
 (bind-key "C-="   'switch-to-prev-buffer)
 (bind-key "C-+"   'switch-to-next-buffer)
-(bind-key "C-c r" 'revert-buffer)
+(bind-key "C-c r" 'as-revert-buffer-without-confirmation)
 (bind-key "C-c b" 'bury-buffer)
 (bind-key "C-;"   'bury-buffer)
 (bind-key "C-c B" 'as-bounce-buffer)
