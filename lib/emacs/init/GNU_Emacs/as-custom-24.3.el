@@ -1418,7 +1418,6 @@
  '(lazy-lock-stealth-verbose t)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
- '(magit-diff-refine-hunk nil)
  '(magit-log-auto-more t)
  '(magit-remote-ref-format (quote remote-slash-branch))
  '(magit-repo-dirs
