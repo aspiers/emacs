@@ -12,7 +12,9 @@
 (when (as-check-feature-loaded 'org-install)
   (as-progress "org-install loaded")
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-  (add-to-list 'auto-mode-alist '("\\.\\(org\\|o2b\\)$" . org-mode)))
+  ;; Let's see if this is already taken care of
+  ;;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+  )
 
 (defvar org-mode-map)
 (add-hook 'org-mode-hook
