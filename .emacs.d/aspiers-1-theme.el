@@ -21,7 +21,7 @@
  '(font-lock-function-name-face ((t (:foreground "#A1A1FF"))))
  '(font-lock-keyword-face ((t (:foreground "#6f61ff"))))
  '(font-lock-negation-char-face ((t nil)))
- '(font-lock-preprocessor-face ((t (:foreground "DeepSkyBlue4"))))
+ '(font-lock-preprocessor-face ((t (:foreground "medium turquoise"))))
  '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
  '(font-lock-string-face ((t (:foreground "#AD9361"))))
