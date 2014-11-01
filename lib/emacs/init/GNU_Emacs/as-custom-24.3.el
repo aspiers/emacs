@@ -1343,7 +1343,6 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
- '(global-auto-revert-mode nil)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-whitespace-mode t)
