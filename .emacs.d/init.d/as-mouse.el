@@ -19,3 +19,5 @@
   :bind (("C-M-?" . bn-make-region-into-secondary)
          ("C-M-T" . bn-exchange-region-and-secondary)
          ("C-g"   . bn-keyboard-quit)))
+
+(provide 'as-mouse)
