@@ -1,3 +1,6 @@
+;; Ensure below variables are not overwritten by custom file
+(require 'as-custom)
+
 (require 'netrc)
 
 (setq blog (netrc-machine (netrc-parse "~/.netrc") "blog.adamspiers.org" t))
