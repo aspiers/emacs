@@ -1,11 +1,14 @@
+;; Ensure below variables are not overwritten by custom file
+(require 'as-custom)
+
 (require 'netrc)
 
 (setq blog (netrc-machine (netrc-parse "~/.netrc") "blog.adamspiers.org" t))
 (setq org2blog/wp-blog-alist
-      '(("my-blog"
+      `(("my-blog"
          :url "http://blog.adamspiers.org/xmlrpc.php"
-         :username (netrc-get blog "login")
-         :password (netrc-get blog "password"))))
+         :username ,(netrc-get blog "login")
+         :password ,(netrc-get blog "password"))))
 
 (require 'as-require)
 (when (as-check-feature-loaded 'org2blog)
