@@ -46,6 +46,27 @@
                           (buffer-substring contents-begin contents-end))))
           (setf (buffer-substring start end) (or desc path)))))))
 
+(defun org-refile-and-link ()
+  "Refile heading, adding a link to the new location.
+Prefix arguments are interpreted by `org-refile'."
+  (interactive)
+  (when (member current-prefix-arg '(3 (4) (16)))
+    (user-error "Linking is incompatible with that prefix argument"))
+  (let ((heading  (org-get-heading t t))
+        (orig-file (buffer-file-name)))
+    (call-interactively #'org-refile)
+    (let* ((refile-file
+            (bookmark-get-filename
+             (assoc (plist-get org-bookmark-names-plist :last-refile)
+                    bookmark-alist)))
+           (same-file (string= orig-file refile-file))
+           (link (if same-file
+                     (concat "*" heading)
+                   (concat refile-file "::*" heading)))
+           (desc heading))
+      (open-line 1)
+      (insert (org-make-link-string link desc)))))
+
 ;;{{{ org keyword switching
 
 (defun org-todo-previous-keyword ()
