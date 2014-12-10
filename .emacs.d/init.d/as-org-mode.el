@@ -30,6 +30,22 @@
                  (org-crypt-use-before-save-magic))
             (add-to-list 'org-modules 'org-timer)))
 
+(defun org-unlinkify ()
+  "Replace an org-link with the path, or description."
+  (interactive)
+  (let ((eop (org-element-context)))
+    (when (eq (org-element-type eop) 'link)
+      (save-excursion
+        (let* ((start (org-element-property :begin eop))
+               (end (org-element-property :end eop))
+               (contents-begin (org-element-property :contents-begin eop))
+               (contents-end (org-element-property :contents-end eop))
+               (path (org-element-property :path eop))
+               (desc (and contents-begin
+                          contents-end
+                          (buffer-substring contents-begin contents-end))))
+          (setf (buffer-substring start end) (or desc path)))))))
+
 ;;{{{ org keyword switching
 
 (defun org-todo-previous-keyword ()
