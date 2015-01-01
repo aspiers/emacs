@@ -129,6 +129,7 @@ the directory pointed to by `el-get-el-get-dir'."
 
     python
 
+    rainbow-delimiters
     region-bindings-mode
     rinari
     rpm-spec-mode
