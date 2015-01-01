@@ -88,6 +88,7 @@ the directory pointed to by `el-get-el-get-dir'."
     git-gutter
     ;;git-gutter-fringe
     git-modes
+    golden-ratio
     goto-chg
     
     haml-mode
