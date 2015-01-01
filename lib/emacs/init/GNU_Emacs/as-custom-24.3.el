@@ -1851,6 +1851,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-archive-save-context-info
    (quote
     (time file category todo priority itags olpath ltags)))
+ '(org-babel-load-languages
+   (quote
+    ((emacs-lisp . t)
+     (lilypond . t)
+     (ruby . t)
+     (python . t)
+     (shell . t))))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
  '(org-capture-templates
    (quote
@@ -1947,6 +1954,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
+ '(org-confirm-babel-evaluate nil)
  '(org-deadline-warning-days 3)
  '(org-default-extensions nil t)
  '(org-default-notes-file "~/org/TODO.org")
