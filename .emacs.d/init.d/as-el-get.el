@@ -63,13 +63,14 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; artbollocks-mode ;; way too aggressive
     apache-mode
     asciidoc
-    auto-complete-css
-    auto-complete-emacs-lisp
-    auto-complete-ruby
-    auto-complete-yasnippet
+    ;; auto-complete-css
+    ;; auto-complete-emacs-lisp
+    ;; auto-complete-ruby
+    ;; auto-complete-yasnippet
     bundler
     coffee-mode
     color-theme
+    company-mode
     darcsum
     edit-server
     erin
