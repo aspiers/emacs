@@ -2239,6 +2239,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(highlight ((t (:background "dark slate blue"))))
  '(info-title-1 ((t (:inherit info-title-2 :height 1.2 :foundry "Inconsolata"))))
  '(info-title-2 ((t (:inherit info-title-3 :height 1.2 :foundry "Inconsolata"))))
+ '(italic ((t (:foreground "sky blue" :slant italic))))
  '(magit-branch ((t (:foreground "yellow"))))
  '(magit-header ((t (:inherit header-line))) t)
  '(magit-item-highlight ((t (:background "#2e2732"))))
