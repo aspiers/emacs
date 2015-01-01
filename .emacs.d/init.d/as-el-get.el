@@ -90,7 +90,7 @@ the directory pointed to by `el-get-el-get-dir'."
     git-modes
     golden-ratio
     goto-chg
-    
+
     haml-mode
     hideshow-org
     idomenu ;; http://emacsrocks.com/e10.html
@@ -101,7 +101,7 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; I don't use this and it seems to have bugs with autoloading
     ;; and maybe also leaving processes running within emacs.
     ;; inf-ruby
-    
+
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
