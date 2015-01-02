@@ -79,10 +79,10 @@ the directory pointed to by `el-get-el-get-dir'."
     fill-column-indicator
     folding
     flycheck
-    ;; flymake-css
-    ;; flymake-ruby
-    ;; flymake-sass
-    ;; flymake-shell
+    flymake-css
+    flymake-ruby
+    flymake-sass
+    flymake-shell
     gist
     git-gutter
     ;;git-gutter-fringe
