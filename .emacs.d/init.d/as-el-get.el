@@ -79,6 +79,7 @@ the directory pointed to by `el-get-el-get-dir'."
     fill-column-indicator
     folding
     flycheck
+    flycheck-package
     flymake-css
     flymake-ruby
     flymake-sass
