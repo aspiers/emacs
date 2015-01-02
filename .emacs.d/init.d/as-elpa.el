@@ -5,6 +5,7 @@
 (defvar as-elpa-packages
   '(
     ;; MELPA
+    beeminder
     edit-server-htmlize
     flx-ido       ;; flx is flex with better ordering
     guide-key
