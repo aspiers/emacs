@@ -282,10 +282,9 @@ then invoking this function four times would yield:
 
 ;;{{{ C-c j for quick jumping
 
-(defun as-find-personal-note ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/org/notes/" "Find note: "))
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-personal-note
+  "~/org/notes" "Find note: ")
 (bind-key "C-c j n"  'as-find-personal-note)
 
 ;;}}}

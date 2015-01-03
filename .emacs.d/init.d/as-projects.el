@@ -26,16 +26,13 @@
     (key-chord-define-global "zf" 'projectile-find-file)
     (key-chord-define-global "zb" 'projectile-switch-to-buffer)))
 
-(defun as-find-my-mrconfig ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/.config/mr/" "Find mr config: "))
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-my-mrconfig
+  "~/.config/mr/" "Find mr config: ")
 (bind-key "C-c j m"  'as-find-my-mrconfig)
 
-(defun as-find-stow-package ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/.STOW/" "Find stow package: "))
+(define-find-file-in-dir-function as-find-stow-package
+  "~/.STOW/" "Find stow package: ")
 (bind-key "C-c j s"  'as-find-stow-package)
 
 (provide 'as-projects)

@@ -27,17 +27,12 @@
    ("C-x 4 '" . ffap-other-window)
    ("C-x 5 '" . ffap-other-frame)))
 
-(defun as-find-from-home ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/" "Find file: "))
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-from-home "~/")
 (bind-key "C-~"     'as-find-from-home)
 (bind-key "C-c j h" 'as-find-from-home)
 
-(defun as-find-from-root ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "/sudo:root@localhost:/" "Find file: "))
+(define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
 (bind-key "C-c j /" 'as-find-from-root)
 
 (use-package as-find-file-matching-regexp-hook)

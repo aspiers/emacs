@@ -15,18 +15,12 @@
 
 (bind-key "C-c F"        'font-lock-fontify-buffer)
 
-(defun as-find-emacs-init-d ()
-  (interactive)
-  "Load file in ~/.emacs.d/init.d"
-  (ido-file-internal ido-default-file-method
-          nil "~/.emacs.d/init.d" "Find emacs init.d file: "))
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-emacs-init-d
+  "~/.emacs.d/init.d" "Find emacs init.d file: ")
 (bind-key "C-c j e" 'as-find-emacs-init-d)
-
-(defun as-find-el-get-package ()
-  (interactive)
-  "Load file in ~/.el-get"
-  (ido-file-internal ido-default-file-method
-          nil "~/.el-get" "Find emacs init.d file: "))
+(define-find-file-in-dir-function as-find-el-get-package
+  "~/.el-get" "Find el-get package: ")
 (bind-key "C-c j l" 'as-find-el-get-package)
 
 (bind-key "C-h B"   'describe-personal-keybindings)

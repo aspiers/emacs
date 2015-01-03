@@ -65,22 +65,17 @@
 
 ;;}}}
 
-(defun as-find-CVS-repo ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/.CVS/" "Find CVS repo: "))
-(bind-key "C-c j c"  'as-find-CVS-repo)
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-CVS-repo
+  "~/.CVS/" "Find CVS repo: ")
+(bind-key "C-c j C"  'as-find-CVS-repo)
 
-(defun as-find-my-git-repo ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: "))
+(define-find-file-in-dir-function as-find-my-git-repo
+  "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: ")
 (bind-key "C-c j g"  'as-find-my-git-repo)
 
-(defun as-find-upstream-git-repo ()
-  (interactive)
-  (ido-file-internal ido-default-file-method
-                     nil "~/.GIT/3rd-party/" "Find 3rd-party git repo: "))
+(define-find-file-in-dir-function as-find-upstream-git-repo
+  "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
 (bind-key "C-c j 3"  'as-find-upstream-git-repo)
 (bind-key "C-c j G"  'as-find-upstream-git-repo)
 
