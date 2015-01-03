@@ -63,13 +63,14 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; artbollocks-mode ;; way too aggressive
     apache-mode
     asciidoc
-    auto-complete-css
-    auto-complete-emacs-lisp
-    auto-complete-ruby
-    auto-complete-yasnippet
+    ;; auto-complete-css
+    ;; auto-complete-emacs-lisp
+    ;; auto-complete-ruby
+    ;; auto-complete-yasnippet
     bundler
     coffee-mode
     color-theme
+    company-mode
     darcsum
     edit-server
     erin
@@ -88,8 +89,9 @@ the directory pointed to by `el-get-el-get-dir'."
     git-gutter
     ;;git-gutter-fringe
     git-modes
+    golden-ratio
     goto-chg
-    
+
     haml-mode
     hideshow-org
     idomenu ;; http://emacsrocks.com/e10.html
@@ -100,7 +102,7 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; I don't use this and it seems to have bugs with autoloading
     ;; and maybe also leaving processes running within emacs.
     ;; inf-ruby
-    
+
     js2-mode
     key-chord ;; http://emacsrocks.com/e07.html
     keywiz
