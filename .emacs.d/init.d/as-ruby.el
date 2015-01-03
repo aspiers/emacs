@@ -33,6 +33,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
 (autoload 'bundle-open "bundler" nil t)
-(bind-key "C-c j b" 'bundle-open)
+(bind-key "C-c j o" 'bundle-open)
 
 (provide 'as-ruby)
