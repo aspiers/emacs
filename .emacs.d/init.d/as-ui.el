@@ -1,3 +1,5 @@
+;; see also as-smart-mode-line.el
+
 ;;{{{ fill-column-indicator
 
 (use-package fill-column-indicator
