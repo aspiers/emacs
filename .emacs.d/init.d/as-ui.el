@@ -1,10 +1,3 @@
-;;{{{ Time-stamp mode
-
-(autoload 'time-stamp "time-stamp")
-;;(time-stamp)
-;;(setq time-stamp-format "------ %02d %03b %4y %2H%2M %2H%2M  : %u")
-
-;;}}}
 ;;{{{ fill-column-indicator
 
 (use-package fill-column-indicator
