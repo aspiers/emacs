@@ -2194,6 +2194,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tla-non-recursive-inventory nil)
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
+ '(tooltip-mode t)
  '(tramp-verbose 13)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
