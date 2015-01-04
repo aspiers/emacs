@@ -1377,6 +1377,7 @@
 ")
  '(gnus-suppress-duplicates t)
  '(gnus-use-trees t)
+ '(golden-ratio-mode t)
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
