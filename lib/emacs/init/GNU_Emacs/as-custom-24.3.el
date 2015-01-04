@@ -368,7 +368,7 @@
  '(diff-switches "-u")
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
