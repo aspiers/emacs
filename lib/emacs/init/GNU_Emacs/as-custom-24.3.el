@@ -2192,6 +2192,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(speedbar-tag-split-minimum-length 30)
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
+ '(tool-bar-mode nil)
  '(tramp-verbose 13)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
