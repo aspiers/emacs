@@ -9,11 +9,7 @@
 
 (use-package fill-column-indicator
   :config
-  (dolist (hook '(prog-mode-hook
-                  indented-text-mode
-                  c-mode-hook shell-script-mode-hook
-                  emacs-lisp-mode-hook
-                  ruby-mode-hook python-mode-hook))
+  (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook 'fci-mode)))
 
 ;;}}}
