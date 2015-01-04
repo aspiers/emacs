@@ -9,4 +9,6 @@
       (unless (member mode-line-front-space mode-line-format)
         (setq-default mode-line-format (cons mode-line-front-space mode-line-format))))))
 
+;; Note: use rich-minority to hide minor modes
+
 (provide 'as-smart-mode-line)

@@ -1,6 +1,6 @@
 ;; http://hbin.me/blog/2012/08/26/clean-the-emacs-mode-line/
 
-;; obsoleted by feature of smart-mode-line
+;; obsoleted by rich-minority which smart-mode-line honours
 
 ;; (defun hbin-remove-mm-lighter (mm)
 ;;   "Remove minor lighter from the mode line."
