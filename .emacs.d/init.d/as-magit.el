@@ -18,3 +18,5 @@
         (setq fallback 'magit-status)
         (setq ido-exit 'fallback)
         (exit-minibuffer)))))
+
+(use-package magit-topgit)
