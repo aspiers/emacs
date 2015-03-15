@@ -42,21 +42,6 @@
 
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
-;;{{{ pomodoro
-
-;; http://orgmode.org/worg/org-gtd-etc.php
-
-;; FIXME: something changed here, but I use Pomodroido now anyway.
-;;(setq org-timer-default-timer 25)
-
-;; Modify the org-clock-in so that a timer is started with the default
-;; value except if a timer is already started :
-(add-hook 'org-clock-in-hook '(lambda () 
-      (if (not org-timer-current-timer) 
-      (org-timer-set-timer '(16)))))
-
-;;}}}
-
 ;;{{{ stuff from as-bindings (FIXME - rearrange)
 
 (bind-key "M-o a" 'org-agenda)
