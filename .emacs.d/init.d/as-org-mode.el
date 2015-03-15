@@ -30,19 +30,13 @@
                  (org-crypt-use-before-save-magic))
             (add-to-list 'org-modules 'org-timer)))
 
-;;{{{ guide-key integration
-
 (defun guide-key/my-hook-function-for-org-mode ()
   (guide-key/add-local-guide-key-sequence "C-c")
   (guide-key/add-local-guide-key-sequence "C-c C-x")
   (guide-key/add-local-highlight-command-regexp "org-"))
 (add-hook 'org-mode-hook 'guide-key/my-hook-function-for-org-mode)
 
-;;}}}
-
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
-
-;;{{{ stuff from as-bindings (FIXME - rearrange)
 
 (bind-key "M-o a" 'org-agenda)
 (bind-key "M-S-a"  'as-org-switch-to-agenda-buffer) ;; X11 only
@@ -63,27 +57,16 @@
 ;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
 
 
-;;}}}
-;;{{{ org-capture (C-c q for _q_uick)
-
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
 (bind-key "C-c q" 'org-capture)
 
-;;}}}
-
 (autoload 'org-occur-in-agenda-files "org" nil t)
 (bind-key "C-c C-?" 'org-occur-in-agenda-files)
-
-;;{{{ C-c j for quick jumping
 
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-personal-note
   "~/org/notes" "Find note: ")
 (bind-key "C-c j n"  'as-find-personal-note)
-
-;;}}}
-
-;;}}}
 
 (provide 'as-org-mode)
