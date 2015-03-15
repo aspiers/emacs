@@ -46,6 +46,14 @@
 
 (bind-key "C-c C-x C-j" 'org-clock-goto)
 
+(defun org-clock-in-default-task ()
+  (interactive)
+  "Clocks in to the default task."
+  (with-current-buffer (marker-buffer org-clock-default-task)
+    (org-clock-clock-in (list org-clock-default-task))))
+
+(bind-key "C-c C-x I" 'org-clock-in-default-task)
+
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
 (bind-key "C-c c" 'org-capture)
