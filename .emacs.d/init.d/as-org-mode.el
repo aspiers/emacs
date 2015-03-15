@@ -45,7 +45,6 @@
 (bind-key "M-o M-o" 'as-org-jump-clock-or-agenda)
 
 (bind-key "C-c C-x C-j" 'org-clock-goto)
-(bind-key "C-c c"   'org-capture)
 
 (require 'ido)
 
@@ -56,9 +55,9 @@
 (bind-key "C-c j d" 'as-find-personal-diary)
 ;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
 
-
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
+(bind-key "C-c c" 'org-capture)
 (bind-key "C-c q" 'org-capture)
 
 (autoload 'org-occur-in-agenda-files "org" nil t)
