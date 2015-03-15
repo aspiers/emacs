@@ -46,15 +46,6 @@
 
 (bind-key "C-c C-x C-j" 'org-clock-goto)
 
-(require 'ido)
-
-(fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
-(bind-key "C-c j t" 'as-find-personal-todo)
-(bind-key "C-\""    'as-find-personal-todo)
-(fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
-(bind-key "C-c j d" 'as-find-personal-diary)
-;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
-
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
 (bind-key "C-c c" 'org-capture)
@@ -62,10 +53,5 @@
 
 (autoload 'org-occur-in-agenda-files "org" nil t)
 (bind-key "C-c C-?" 'org-occur-in-agenda-files)
-
-(require 'as-find-file-in-dir)
-(define-find-file-in-dir-function as-find-personal-note
-  "~/org/notes" "Find note: ")
-(bind-key "C-c j n"  'as-find-personal-note)
 
 (provide 'as-org-mode)

@@ -35,4 +35,16 @@
 (define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
 (bind-key "C-c j /" 'as-find-from-root)
 
+(fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
+(bind-key "C-c j t" 'as-find-personal-todo)
+(bind-key "C-\""    'as-find-personal-todo)
+(fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
+(bind-key "C-c j d" 'as-find-personal-diary)
+;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
+
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-personal-note
+  "~/org/notes" "Find note: ")
+(bind-key "C-c j n"  'as-find-personal-note)
+
 (use-package as-find-file-matching-regexp-hook)
