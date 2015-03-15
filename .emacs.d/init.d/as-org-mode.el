@@ -39,7 +39,7 @@
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
 (bind-key "M-o a" 'org-agenda)
-(bind-key "M-S-a"  'as-org-switch-to-agenda-buffer) ;; X11 only
+(bind-key "M-S-a" 'as-org-switch-to-agenda-buffer) ;; X11 only
 (bind-key "M-o b" 'as-org-switch-to-agenda-buffer)
 (bind-key "M-o q" 'org-remember)
 (bind-key "M-o M-o" 'as-org-jump-clock-or-agenda)
