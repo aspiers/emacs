@@ -59,8 +59,6 @@
 
 ;;{{{ stuff from as-bindings (FIXME - rearrange)
 
-(bind-key "C-c o" 'overwrite-mode)
-(global-unset-key "\M-o")
 (bind-key "M-o a" 'org-agenda)
 (bind-key "M-S-a"  'as-org-switch-to-agenda-buffer) ;; X11 only
 (bind-key "M-o b" 'as-org-switch-to-agenda-buffer)
