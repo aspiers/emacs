@@ -30,6 +30,8 @@
                  (org-crypt-use-before-save-magic))
             (add-to-list 'org-modules 'org-timer)))
 
+;; FIXME: use https://github.com/edvorg/req-package ?
+;; https://github.com/jwiegley/use-package/issues/71
 (defun guide-key/my-hook-function-for-org-mode ()
   (guide-key/add-local-guide-key-sequence "C-c")
   (guide-key/add-local-guide-key-sequence "C-c C-x")
