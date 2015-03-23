@@ -2122,6 +2122,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(quelpa-upgrade-p t)
  '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
  '(region-bindings-mode-enabled-modes
    (quote
