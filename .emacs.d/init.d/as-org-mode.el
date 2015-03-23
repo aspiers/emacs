@@ -55,6 +55,7 @@
     (org-clock-clock-in (list org-clock-default-task))))
 
 (bind-key "C-c C-x I" 'org-clock-in-default-task)
+(bind-key "M-o r"     'org-clock-in-default-task)
 
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
