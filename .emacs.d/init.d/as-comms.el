@@ -71,3 +71,5 @@
 (bind-key "C-M-$" 'ispell-buffer)
 
 ;;}}}
+
+(provide 'as-comms)

@@ -20,3 +20,5 @@
         (exit-minibuffer)))))
 
 (use-package magit-topgit)
+
+(provide 'as-magit)

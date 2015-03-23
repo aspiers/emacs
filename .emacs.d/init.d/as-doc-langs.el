@@ -143,3 +143,5 @@ other people."
   :mode ("\\.twiki\\'" . erin-mode))
 
 ;;}}}
+
+(provide 'as-doc-langs)

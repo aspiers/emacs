@@ -48,3 +48,5 @@
 (bind-key "C-c j n"  'as-find-personal-note)
 
 (use-package as-find-file-matching-regexp-hook)
+
+(provide 'as-files)

@@ -24,3 +24,4 @@
   (add-hook 'xrdb-mode-hook (lambda () (setq comment-start "! "))))
 
 ;;}}}
+(provide 'as-config-langs)

@@ -47,3 +47,5 @@
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (bind-key "C-'" 'speedbar-get-focus)
+
+(provide 'as-ui)

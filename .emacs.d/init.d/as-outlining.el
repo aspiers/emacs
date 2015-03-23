@@ -442,3 +442,5 @@ consistent landing spot."
 ;;}}}
 
 ;;}}}
+
+(provide 'as-outlining)

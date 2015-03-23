@@ -79,3 +79,4 @@
 (bind-key "C-c j 3"  'as-find-upstream-git-repo)
 (bind-key "C-c j G"  'as-find-upstream-git-repo)
 
+(provide 'as-vcs)

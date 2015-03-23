@@ -81,3 +81,5 @@
     (define-key region-bindings-mode-map "W"   'mc/mark-all-words-like-this)
     (define-key region-bindings-mode-map "S"   'mc/mark-all-symbols-like-this)
     (define-key region-bindings-mode-map "D"   'mc/mark-all-dwim)))
+
+(provide 'as-multiple-cursors)

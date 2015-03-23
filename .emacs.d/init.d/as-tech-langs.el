@@ -149,3 +149,4 @@
 
 ;;}}}
 
+(provide 'as-tech-langs)

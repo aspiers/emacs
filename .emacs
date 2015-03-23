@@ -36,10 +36,17 @@
 
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."
-  (dolist (hook (as-find-hooks hook-name))
-    (as-progress "loading %s... " (abbreviate-file-name hook))
-    (load hook)
-    (as-progress "loading %s... done" (abbreviate-file-name hook))))
+  (dolist (hook-file (as-find-hooks hook-name))
+    (as-load-hook hook-file)))
+
+(defun as-load-hook (hook-file)
+  "Load the given hook file."
+  (let ((feature (intern (file-name-nondirectory hook-file))))
+    (as-progress "loading %s... " (abbreviate-file-name hook-file))
+    (let ((loaded (require feature hook-file)))
+      (as-progress
+       (if loaded "loading %s... done" "ERROR: failed to load %s")
+       (abbreviate-file-name hook-file)))))
 
 (as-load-hooks as-init-d-suffix)
 
