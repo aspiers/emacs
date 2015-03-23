@@ -2265,7 +2265,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/prefix ((t (:inherit sml/global :foreground "#f39400"))))
  '(sml/read-only ((t (:inherit sml/global :foreground "medium blue"))))
  '(sml/time ((t (:inherit sml/global))))
- '(trailing-whitespace ((t nil)))
  '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick"))))
