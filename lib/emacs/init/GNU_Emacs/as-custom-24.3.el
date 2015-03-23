@@ -1418,6 +1418,7 @@
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(magit-log-auto-more t)
+ '(magit-mode-hook (quote (magit-topgit-mode)))
  '(magit-remote-ref-format (quote remote-slash-branch))
  '(magit-repo-dirs
    (quote
