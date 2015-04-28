@@ -48,6 +48,7 @@
        (if loaded "loading %s... done" "ERROR: failed to load %s")
        (abbreviate-file-name hook-file)))))
 
-(as-load-hooks as-init-d-suffix)
+(unless (getenv "EMACS_BATCH")
+  (as-load-hooks as-init-d-suffix))
 
 (as-progress "end of ~/.emacs")
