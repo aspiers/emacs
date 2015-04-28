@@ -25,7 +25,29 @@ either with el-get or `package-install'.")
                '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/"))
-  (package-initialize)
+
+;; el-get doesn't download dependencies for package.el packages
+;; since <https://github.com/dimitri/el-get/pull/1798> - it delegates
+;; that to package.el.
+;; However it now causes warnings like:
+;;
+;;   Warning (emacs): Unable to activate package `flycheck-package'.
+;;   Required package `flycheck-0.22' is unavailable
+;;
+;; https://github.com/dimitri/el-get/issues/1790#issuecomment-46508273
+;;
+;; and also:
+;;
+;;   Warning (el-get): The package `cl-lib' has already been loaded by
+;;   package.el, attempting to load el-get version instead. To avoid
+;;   this warning either uninstall one of the el-get or package.el
+;;   version of cl-lib, or call `el-get' before `package-initialize' to
+;;   prevent package.el from loading it.
+;;
+;; This seems to be solved by skipping the call to `package-initialize'.
+;; Presumably el-get takes care of that later, when needed.
+
+;;  (package-initialize)
 
   ;; (require 'cl)
   ;; (when (not (every (lambda (pkg) (car (assq pkg package-archive-contents)))
