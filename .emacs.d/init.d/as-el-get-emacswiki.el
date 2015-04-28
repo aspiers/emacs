@@ -10,7 +10,7 @@
 
 (defun as-el-get-missing-emacswiki-recipes ()
   "Return a list of emacswiki recipes which are required but
-  missing from el-get"
+  missing from el-get."
   (let ((missing-recipes
          (remove-if (lambda (pkg)
                       (el-get-recipe-filename pkg))
@@ -20,9 +20,9 @@
     missing-recipes))
 
 (if (and (as-el-get-owner-p)
-         (or ((not (file-exists-p
-                    (concat el-get-el-get-dir "/recipes/emacswiki")))
-              (as-el-get-missing-emacswiki-recipes))))
+         (or (not (file-exists-p
+                   (concat el-get-el-get-dir "/recipes/emacswiki")))
+             (as-el-get-missing-emacswiki-recipes)))
     (with-demoted-errors
       (el-get-emacswiki-build-local-recipes)))
 
