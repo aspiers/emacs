@@ -36,7 +36,8 @@
   (guide-key/add-local-guide-key-sequence "C-c")
   (guide-key/add-local-guide-key-sequence "C-c C-x")
   (guide-key/add-local-highlight-command-regexp "org-"))
-(add-hook 'org-mode-hook 'guide-key/my-hook-function-for-org-mode)
+(unless (getenv "EMACS_BATCH")
+  (add-hook 'org-mode-hook 'guide-key/my-hook-function-for-org-mode))
 
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
