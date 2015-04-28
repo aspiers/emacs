@@ -9,7 +9,7 @@
 (setq next-line-add-newlines nil)
 
 (require 'as-key-chord)
-(key-chord-define-global "zf" 'iy-go-to-char)
+(key-chord-define-global "zv" 'iy-go-to-char)
 
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)

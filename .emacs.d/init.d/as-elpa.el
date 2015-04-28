@@ -10,7 +10,7 @@
     flx-ido       ;; flx is flex with better ordering
     guide-key
     kmacro-decision
-    iy-go-to-char ;; http://emacsrocks.com/e04.html
+    iy-go-to-char ;; like 'f' in vim - http://emacsrocks.com/e04.html
     markdown-mode+
     muttrc-mode
 
