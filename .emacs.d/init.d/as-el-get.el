@@ -68,12 +68,12 @@ the directory pointed to by `el-get-el-get-dir'."
     gist
     git-gutter
     ;;git-gutter-fringe
-    git-modes
     ;;golden-ratio  ;; not sure I like this after all
     goto-chg
 
     haml-mode
     hideshow-org
+    ido-completing-read+
     idomenu ;; http://emacsrocks.com/e10.html
     ;; ido-hacks ;; ido-everywhere
     ido-ubiquitous
