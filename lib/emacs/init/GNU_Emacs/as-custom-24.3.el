@@ -362,7 +362,7 @@
     ("Executing ssh-askpass to query the password.*$" ".*Remote host denied X11 forwarding.*$" ".*New directory `.*' -- ignored.*$" ".*warning: directory CVS specified in argument.*$" ".*but CVS uses CVS for its own purposes; skipping CVS directory.*$")))
  '(cvs-reuse-cvs-buffer (quote subdir))
  '(cvs-use-fileinfo-caches t)
- '(debugger-batch-max-lines 100)
+ '(debugger-batch-max-lines 1000)
  '(delete-old-versions t)
  '(delete-selection-mode nil)
  '(diff-switches "-u")
