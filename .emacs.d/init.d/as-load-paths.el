@@ -38,10 +38,6 @@
 
 (as-add-to-find-function-source-path as-source-paths)
 
-(add-to-list 'load-path (concat edotdir "/.emacs.d"))
-(let ((home (getenv "HOME")))
-  (or (equal edotdir home)
-      (add-to-list 'load-path (concat home "~/.emacs.d"))))
 (add-to-list 'load-path as-version-pre-lib-dir)
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
 (add-to-list 'load-path as-version-post-lib-dir 'append-at-end)
