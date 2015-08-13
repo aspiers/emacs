@@ -1949,7 +1949,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-clock-persist t)
  '(org-clock-persist-query-save t)
- '(org-clock-sound "~/lib/emacs/utils/org-clock-sound.wav")
+ '(org-clock-sound "~/lib/emacs/utils/org-clock-sound-quiet.wav")
  '(org-clone-delete-id t)
  '(org-columns-default-format
    "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
