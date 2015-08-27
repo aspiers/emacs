@@ -117,6 +117,7 @@ the directory pointed to by `el-get-el-get-dir'."
     rinari
     rpm-spec-mode
     ruby-mode
+    rubocop
     rudel
     smart-mode-line
     smex
