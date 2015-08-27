@@ -1421,6 +1421,7 @@
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument (quote default))
+ '(magit-push-always-verify t)
  '(magit-remote-ref-format (quote remote-slash-branch))
  '(magit-repo-dirs
    (quote
