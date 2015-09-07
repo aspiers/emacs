@@ -1,3 +1,5 @@
+;; See also as-vcs.el
+
 (use-package magit
   :config
   (progn
@@ -33,7 +35,23 @@
                           (tramp-tramp-file-p project)
                           (not (file-directory-p (concat project "/.git")))))
                        (projectile-relevant-known-projects))))
-        (setq magit-repo-dirs-depth 1)))))
+        (setq magit-repo-dirs-depth 1)))
+
+    (bind-key "C-c g b"  'magit-run-git-gui-blame)
+    (bind-key "C-c g g"  'magit-run-git-gui)
+    (bind-key "C-c g k"  'magit-run-gitk)
+    (bind-key "C-c g a"  'magit-run-gitk-all)
+    (bind-key "C-c g s"  'magit-status)
+    (bind-key "C-S-g"    'magit-status)
+
+    (autoload 'ido-buffer-internal "ido")
+    (defvar ido-default-buffer-method)
+    (defun ido-switch-magit-buffer ()
+      "Switch to a magit status buffer via `ido'."
+      (interactive)
+      (ido-buffer-internal ido-default-buffer-method
+                           nil "magit status: " nil "*magit: "))
+    (bind-key "C-M-g" 'ido-switch-magit-buffer)))
 
 (use-package magit-topgit)
 
