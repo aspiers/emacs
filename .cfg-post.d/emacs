@@ -4,14 +4,10 @@ version=$( emacs --version | \
              perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$2"' )
 
 cd
-[ -e .eid ] || \
-  ln -sf .emacs.d/init.d .eid
-[ -e .as-bindings.el ] && \
-  rm .as-bindings.el
-[ -e .as-gtd.el ] || \
-  ln -sf lib/emacs/utils/as-gtd.el .as-gtd.el
-[ -e .el-get ] || \
-  ln -sf .emacs.d/el-get .el-get
+[ -e .eid ]            || ln -sf .emacs.d/init.d .eid
+[ -e .as-bindings.el ] && rm .as-bindings.el
+[ -e .as-gtd.el ]      || ln -sf lib/emacs/utils/as-gtd.el .as-gtd.el
+[ -e .el-get ]         || ln -sf .emacs.d/el-get .el-get
 
 ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 
