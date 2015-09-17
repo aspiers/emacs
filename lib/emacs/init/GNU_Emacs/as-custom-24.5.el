@@ -1382,7 +1382,7 @@
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
-    ("C-x 4" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
+    ("C-x 4" "C-x C-k" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
      (dired-mode "%" "*" "C-t"))))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
