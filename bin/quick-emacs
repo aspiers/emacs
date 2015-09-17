@@ -119,7 +119,7 @@ if [ -n "$server_up" ]; then
     else
         # Looks like we found a working server
         if [ -n "$DISPLAY" ]; then
-            focus_emacs_frame "$@"
+            focus_emacs_frame
             maybe_bg do_editing "$@"
         else
             # But we can't reach it, so fallback to fast-loading tty
