@@ -113,6 +113,10 @@ maybe_bg () {
 
 if [ -n "$server_up" ]; then
     if [ -n "$multi_tty_support" ]; then
+        if [ -z "$create_frame" ]; then
+            # useful with org-protocol
+            focus_emacs_frame
+        fi
         # newer emacsen do all the hard work for us, since its clients
         # and servers can be tty- or Xorg-based!
         maybe_bg emacsclient $EMACSCLIENT_TTY $create_frame "$@"
