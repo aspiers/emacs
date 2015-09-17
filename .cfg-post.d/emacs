@@ -34,3 +34,5 @@ fi
 
 # Put this last as it's most likely to fail.
 emk
+
+sudo update-desktop-database
