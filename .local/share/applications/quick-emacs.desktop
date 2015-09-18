@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Quick Emacs
+Exec=quick-emacs --bg-if-poss %u
+Icon=emacs-icon
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/org-protocol;

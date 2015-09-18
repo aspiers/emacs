@@ -35,4 +35,11 @@ fi
 # Put this last as it's most likely to fail.
 emk
 
-sudo update-desktop-database
+# Ensure ~/.local/share/applications/mimeapps.list has an appropriate
+# entry for handling org-protocol:// links.
+if ! xdg-mime query default x-scheme-handler/org-protocol | grep -q emacs; then
+    xdg-mime default quick-emacs.desktop x-scheme-handler/org-protocol
+fi
+
+# This isn't needed; it's for system-wide .desktop files
+#sudo update-desktop-database
