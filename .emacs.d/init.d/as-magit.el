@@ -51,7 +51,9 @@
       (interactive)
       (ido-buffer-internal ido-default-buffer-method
                            nil "magit status: " nil "*magit: "))
-    (bind-key "C-M-g" 'ido-switch-magit-buffer)))
+    (bind-key "C-M-g" 'ido-switch-magit-buffer)
+
+    (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)))
 
 (use-package magit-topgit)
 

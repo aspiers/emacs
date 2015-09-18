@@ -88,10 +88,9 @@ the directory pointed to by `el-get-el-get-dir'."
     keywiz
     macrostep
     magit
+    magit-gh-pulls
 
-    ;; https://github.com/nex3/magithub/pull/11
-    ;; https://github.com/nex3/magithub/pull/12
-    ;;magithub
+    ;;magithub is a dead project
 
     markdown-mode
     mediawiki
