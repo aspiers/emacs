@@ -3,8 +3,6 @@
 version=$( emacs --version | \
              perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$2"' )
 
-GCONFTOOL=gconftool-2
-
 cd
 [ -e .eid ]            || ln -sf .emacs.d/init.d .eid
 [ -e .as-bindings.el ] && rm .as-bindings.el
@@ -16,30 +14,5 @@ ln -sf lib/emacs/init/GNU_Emacs/as-custom-$version.el .as-custom.el
 [ -e .msf-abbrevs ] || \
     ln -sf lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
 
-if ! which $GCONFTOOL >/dev/null 2>&1; then
-    echo "WARNING: can't find $GCONFTOOL; url-handlers will not be set" >&2
-else
-    $GCONFTOOL -s /desktop/gnome/url-handlers/annotation/command \
-               -t string 'org-annotation-helper %s'
-    $GCONFTOOL -s /desktop/gnome/url-handlers/annotation/enabled -t bool yes
-
-    $GCONFTOOL -s /desktop/gnome/url-handlers/remember/command \
-               -t string 'org-annotation-helper %s'
-    $GCONFTOOL -s /desktop/gnome/url-handlers/remember/enabled -t bool yes
-
-    $GCONFTOOL -s /desktop/gnome/url-handlers/org-protocol/command \
-               -t string 'quick-emacs %s'
-    $GCONFTOOL -s /desktop/gnome/url-handlers/org-protocol/enabled -t bool yes
-fi
-
 # Put this last as it's most likely to fail.
 emk
-
-# Ensure ~/.local/share/applications/mimeapps.list has an appropriate
-# entry for handling org-protocol:// links.
-if ! xdg-mime query default x-scheme-handler/org-protocol | grep -q emacs; then
-    xdg-mime default quick-emacs.desktop x-scheme-handler/org-protocol
-fi
-
-# This isn't needed; it's for system-wide .desktop files
-#sudo update-desktop-database
