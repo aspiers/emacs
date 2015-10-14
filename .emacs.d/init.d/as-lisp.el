@@ -26,4 +26,17 @@
               (define-key emacs-lisp-mode-map
                 (kbd "C-c e") 'macrostep-expand))))
 
+;; From https://github.com/magnars/.emacs.d/blob/master/defuns/lisp-defuns.el
+(defun eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+
+(bind-key "C-x C-E" 'eval-and-replace)
+
 (provide 'as-lisp)
