@@ -47,6 +47,7 @@ the directory pointed to by `el-get-el-get-dir'."
     ;; auto-complete-emacs-lisp
     ;; auto-complete-ruby
     ;; auto-complete-yasnippet
+    beacon
     bundler
     coffee-mode
     color-theme

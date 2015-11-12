@@ -48,4 +48,7 @@
 
 (bind-key "C-'" 'speedbar-get-focus)
 
+(use-package beacon
+  :config (beacon-mode 1))
+
 (provide 'as-ui)
