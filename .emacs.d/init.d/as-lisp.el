@@ -26,11 +26,9 @@
 
 (use-package macrostep
   :defer t
-  :init
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (define-key emacs-lisp-mode-map
-                (kbd "C-c e") 'macrostep-expand))))
+  :commands macrostep-expand
+  :bind (:map emacs-lisp-mode-map
+              (("C-c e" . macrostep-expand))))
 
 ;; From https://github.com/magnars/.emacs.d/blob/master/defuns/lisp-defuns.el
 (defun eval-and-replace ()
