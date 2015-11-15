@@ -12,7 +12,7 @@
 
 (use-package recentf
   :if window-system
-  :init
+  :config
   (recentf-mode t))
 
 (bind-key "C-c +"   'make-directory)

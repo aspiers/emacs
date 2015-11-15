@@ -16,13 +16,13 @@
 (use-package paredit
   :commands enable-paredit-mode
   :init
-  (progn
-    (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
-    (add-hook 'lisp-mode-hook             'enable-paredit-mode)
-    (add-hook 'ielm-mode-hook             'enable-paredit-mode)
-    (add-hook 'scheme-mode-hook           'enable-paredit-mode)
-    (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)))
+  (dolist (mode '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  ielm-mode-hook
+                  scheme-mode-hook
+                  lisp-interaction-mode-hook
+                  eval-expression-minibuffer-setup-hook))
+    (add-hook mode 'enable-paredit-mode)))
 
 (use-package macrostep
   :defer t
