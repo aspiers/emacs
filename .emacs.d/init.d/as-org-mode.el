@@ -61,7 +61,6 @@
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
 (bind-key "C-c c" 'org-capture)
-(bind-key "C-c q" 'org-capture)
 
 (autoload 'org-occur-in-agenda-files "org" nil t)
 (bind-key "C-c C-?" 'org-occur-in-agenda-files)
