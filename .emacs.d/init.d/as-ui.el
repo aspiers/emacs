@@ -21,16 +21,6 @@
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
-;;{{{ auto-complete-mode
-
-(require 'auto-complete-config nil t)
-(defun ac-config-default ())
-(defvar ac-dictionary-directories)
-(when (as-check-feature-loaded 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "/home/adam/.emacs.d/ac-dict")
-  (ac-config-default))
-
-;;}}}
 ;;{{{ ido - superior replacement for iswitchb
 
 (require 'ido)

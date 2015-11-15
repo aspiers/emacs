@@ -2,6 +2,8 @@
 
 (require 'as-projects) ;; C-c p overrides projectile bullshit
 
+;; FIXME: set up company-mode
+
 ;;;###autoload
 (defun mark-list ()
   "Put point at end of this list, mark at beginning.
