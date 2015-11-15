@@ -66,7 +66,8 @@
 
 (use-package edit-server
   :commands (edit-server-start edit-server-stop)
-  :init
+  :defer 10
+  :config
   (unless (as-quick-startup)
     (condition-case err
         (edit-server-start)
