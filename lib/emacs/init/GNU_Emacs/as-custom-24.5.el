@@ -1414,6 +1414,7 @@
  '(jit-lock-stealth-nice 0.1)
  '(jit-lock-stealth-time 1)
  '(kept-old-versions 0)
+ '(kill-whole-line t)
  '(lazy-lock-defer-on-scrolling t)
  '(lazy-lock-defer-time 0.1)
  '(lazy-lock-minimum-size 4096)
@@ -2220,6 +2221,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
+ '(visible-bell t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*

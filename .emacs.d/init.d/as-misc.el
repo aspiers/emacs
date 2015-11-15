@@ -1,20 +1,5 @@
 (require 'as-vars)
 
-;;{{{ e-mail address
-
-(setq user-mail-address "adam@spiers.net")
-
-;;}}}
-;;{{{ kill-line kill whole line if at beginning of line
-
-(setq kill-whole-line t)
-
-;;}}}
-;;{{{ Visible bell
-
-(setq-default visible-bell t)
-
-;;}}}
 ;;{{{ Saving sessions
 
 (autoload 'desktop-save "desktop" "Saves desktop session state." t)
