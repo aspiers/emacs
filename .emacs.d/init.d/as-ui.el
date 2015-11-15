@@ -23,8 +23,10 @@
 ;;}}}
 ;;{{{ ido - superior replacement for iswitchb
 
-(require 'ido)
-(ido-mode t)
+(use-package ido
+  :commands (ido-mode)
+  :config
+  (ido-mode t))
 
 ;;}}}
 ;;{{{ Load paren library
