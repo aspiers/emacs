@@ -111,7 +111,7 @@
 (use-package color-theme)
 (use-package color-theme-pastels-on-dark
   :if (featurep 'color-theme)
-  :init
+  :config
   (color-theme-pastels-on-dark))
 
 ;;}}}
