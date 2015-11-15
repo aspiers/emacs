@@ -43,6 +43,6 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-(bind-key "C-x C-E" 'eval-and-replace)
+(bind-key "C-x C-S-e" 'eval-and-replace)
 
 (provide 'as-lisp)
