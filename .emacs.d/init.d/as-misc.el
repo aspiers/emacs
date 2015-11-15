@@ -81,6 +81,7 @@
   :commands (edit-server-maybe-dehtmlize-buffer
              edit-server-maybe-htmlize-buffer)
   :init
+  ;; FIXME: use req-package
   (when (featurep 'edit-server)
     (add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
     (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer)))
@@ -110,6 +111,7 @@
 
 (use-package color-theme)
 (use-package color-theme-pastels-on-dark
+  ;; FIXME: use req-package
   :if (featurep 'color-theme)
   :config
   (color-theme-pastels-on-dark))
