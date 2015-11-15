@@ -49,14 +49,16 @@
 
 (bind-key "C-c C-x C-j" 'org-clock-goto)
 
-(defun org-clock-in-default-task ()
+(defun org-clock-in-daily-review ()
   (interactive)
-  "Clocks in to the default task."
-  (with-current-buffer (marker-buffer org-clock-default-task)
-    (org-clock-clock-in (list org-clock-default-task))))
+  "Clocks in to the daily review task."
+  (let ((todo-buffer (find-file "~/org/TODO.org")))
+    (with-current-buffer todo-buffer
+      (goto-char
+       (org-find-exact-headline-in-buffer "daily review" todo-buffer 'pos-only))
+      (org-clock-in))))
 
-(bind-key "C-c C-x I" 'org-clock-in-default-task)
-(bind-key "M-o r"     'org-clock-in-default-task)
+(bind-key "M-o r" 'org-clock-in-daily-review)
 
 ;; Try to use C-c c but keeping this for backwards compatability with
 ;; my brain.
