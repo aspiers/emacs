@@ -4,8 +4,14 @@
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook             'turn-on-eldoc-mode)
 
-(add-hook 'lisp-mode-hook       (lambda () (setq comment-start ";; ")))
-(add-hook 'emacs-lisp-mode-hook (lambda () (setq comment-start ";; ")))
+(add-hook 'lisp-mode-hook
+          (lambda ()
+            (setq comment-start ";; ")
+            (bind-key "C-S-t" 'transpose-sexps lisp-mode-map)))
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (setq comment-start ";; ")
+            (bind-key "C-S-t" 'transpose-sexps emacs-lisp-mode-map)))
 
 (use-package paredit
   :commands enable-paredit-mode
