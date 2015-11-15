@@ -107,15 +107,5 @@
 (define-coding-system-alias 'UTF-8 'utf-8)
 
 ;;}}}
-;;{{{ Color themes
-
-(use-package color-theme)
-(use-package color-theme-pastels-on-dark
-  ;; FIXME: use req-package
-  :if (featurep 'color-theme)
-  :config
-  (color-theme-pastels-on-dark))
-
-;;}}}
 
 (provide 'as-misc)
