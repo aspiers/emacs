@@ -1,24 +1,5 @@
 (require 'as-vars)
 
-;;{{{ find-function-source-path
-
-;; Don't need this, as the Makefile now copys all .el files into the
-;; installdir alongside the .elc files, and `find-library' looks in
-;; `load-path'.
-
-;; (defvar as-emacs-dir)
-
-;; (custom-set-variables
-;;  '(find-function-source-path
-;;    (append load-path
-;;       (mapcar (lambda (p) (concat as-emacs-dir "/" p))
-;;               (list
-;;                "fun"
-;; [snipped]
-;;                "utils"
-;;                )))))
-
-;;}}}
 ;;{{{ e-mail address
 
 (setq user-mail-address "adam@spiers.net")
