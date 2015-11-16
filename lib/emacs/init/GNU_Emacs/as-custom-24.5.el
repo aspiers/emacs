@@ -2233,7 +2233,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
  '(yas-snippet-dirs
    (quote
-    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil (yasnippet)))
+    ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")) nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
