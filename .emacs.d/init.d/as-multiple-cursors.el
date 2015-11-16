@@ -1,5 +1,9 @@
 ;; FIXME: https://github.com/jwiegley/use-package/issues/71
 (require 'region-bindings-mode)
+;; multiple-cursors has rectangular-region-mode.el which does
+;; (defadvice er/expand-region ...).  This is a miserable fail
+;; since er/expand-region is an autoload
+(require 'as-point-motion)
 
 (use-package multiple-cursors
   ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
