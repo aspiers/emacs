@@ -42,8 +42,9 @@
 ;;}}}
 ;;{{{ git-gutter
 
-(require 'git-gutter)
-(global-git-gutter-mode t)
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode t))
 
 ;;}}}
 
