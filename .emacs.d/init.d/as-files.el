@@ -49,4 +49,10 @@
 
 (use-package as-find-file-matching-regexp-hook)
 
+(require 'as-vars)
+;; This is right for SUSE, at least, assuming that the
+;; emacs-debugsource package is installed.
+(setq find-function-C-source-directory
+      (format "/usr/src/debug/emacs-%s/src" emacs-version-number))
+
 (provide 'as-files)
