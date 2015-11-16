@@ -1,59 +1,32 @@
 ;;{{{ Folding mode
 
-;;{{{ Set marks for individual modes
+(use-package folding
+  :commands (folding-mode
+             folding-mode-find-file
+             folding-mode-add-find-file-hook
+             folding-set-marks
+             folding-add-to-marks-list
+             fold-show)
+  :defer (if (as-quick-startup) 30 nil)
+  :config
+  (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
+  (folding-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'makefile-gmake-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
+  (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
+  (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
+  (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
+  (folding-add-to-marks-list 'lilypond-mode "% {{{ " "% }}}")
+  (folding-add-to-marks-list 'LilyPond-mode "% {{{ " "% }}}")
 
-(autoload 'folding-add-to-marks-list "folding" "folding mode")
-
-(eval-after-load "folding"
-  '(progn
-    (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
-    (folding-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'shellscript-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'shell-script-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'Shellscript-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'Shell-script-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'makefile-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'makefile-gmake-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'sh-mode "\# {{{ " "\# }}}")
-    (folding-add-to-marks-list 'tex-mode "% {{{ " "% }}}")
-    (folding-add-to-marks-list 'ml-mode "\(* {{{ " "\(* }}} ")
-    (folding-add-to-marks-list 'sawfish-mode ";; {{{ " ";; }}}")
-    (folding-add-to-marks-list 'lilypond-mode "% {{{ " "% }}}")
-    (folding-add-to-marks-list 'LilyPond-mode "% {{{ " "% }}}")
-    ))
-
-;;}}}
-;;{{{ Autoload mode via local variables
-
-(autoload 'folding-mode "folding" "folding mode")
-(autoload 'folding-mode-find-file "folding" "folding mode")
-(autoload 'folding-mode-add-find-file-hook "folding" "folding mode")
-(autoload 'folding-set-marks "folding" "folding mode")
-
-(defun fm () "Loads folding-mode." (interactive) (folding-mode))
-(defun as-folding-init ()
-  "Sets up folding-mode for use."
-  (require 'folding)
-  (folding-mode-add-find-file-hook))
-
-;; FIXME - preactivation?
-(eval-after-load "find-func" '(as-folding-init))
-;; (defadvice find-function-search-for-symbol (before as-folding act)
-;;     "blah"
-;;     (require 'folding))
-;; (defadvice find-function (before as-folding act)
-;;     "blah"
-;;     (require 'folding))
-
-(or (as-quick-startup) (as-folding-init))
-
-;;}}}
-;;{{{ Key bindings
-
-(defvar folding-mode-map) ;; avoid compile warnings
-(autoload 'fold-show "folding")
-
-(add-hook 'folding-mode-hook
+  (setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
+  
+  (add-hook 'folding-mode-hook
           (lambda ()
             ;; Quick navigation
             (local-set-key [(control meta <)] 'folding-shift-out)
@@ -62,11 +35,31 @@
             (local-set-key [(shift right)] 'folding-shift-in)
             ))
 
-(eval-when-compile
-  (defvar folding-default-keys-function))
-(setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
+  (defun as-folding-previous-visible-heading ()
+    "Wrapper around `folding-previous-visible-heading' which ensures a
+consistent landing spot."
+    (interactive)
+    (and (folding-previous-visible-heading)
+         (folding-mark-look-at 'mark)))
 
-;;}}}
+  (defun as-folding-next-visible-heading ()
+  "Wrapper around `folding-next-visible-heading' which ensures a
+consistent landing spot."
+  (interactive)
+  (and (folding-next-visible-heading)
+       (folding-mark-look-at 'mark)))
+
+  (add-hook 'folding-mode-hook
+          (lambda ()
+            (local-set-key [(control up  )] 'as-folding-previous-visible-heading)
+            (local-set-key [(control down)] 'as-folding-next-visible-heading)
+
+            ;; FIXME: not implemented yet
+;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
+;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
+            ))
+
+  (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
 
 ;;}}}
 ;;{{{ allout
@@ -321,36 +314,6 @@ is already hidden."
 (defun as-fast-down () "Move down two lines." (interactive) (forward-line  2))
 ;; (bind-key "S-<down>" 'as-fast-down)
 ;; (bind-key "S-<up>"   'as-fast-up)
-
-;;{{{ as-folding-{previous,next}-visible-heading
-
-(eval-when-compile (require 'folding))
-(defun as-folding-previous-visible-heading ()
-  "Wrapper around `folding-previous-visible-heading' which ensures a
-consistent landing spot."
-  (interactive)
-  (and (folding-previous-visible-heading)
-       (folding-mark-look-at 'mark)))
-
-(defun as-folding-next-visible-heading ()
-  "Wrapper around `folding-next-visible-heading' which ensures a
-consistent landing spot."
-  (interactive)
-  (and (folding-next-visible-heading)
-       (folding-mark-look-at 'mark)))
-
-;;}}}
-
-(eval-when-compile (require 'folding))
-(add-hook 'folding-mode-hook
-          (lambda ()
-            (local-set-key [(control up  )] 'as-folding-previous-visible-heading)
-            (local-set-key [(control down)] 'as-folding-next-visible-heading)
-
-            ;; FIXME: not implemented yet
-;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
-;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
-            ))
 
 (eval-when-compile (require 'allout))
 (add-hook 'allout-mode-hook
