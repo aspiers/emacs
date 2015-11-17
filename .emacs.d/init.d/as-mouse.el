@@ -1,7 +1,7 @@
 ;; IntelliMouse
-(cond ((and (< emacs-major-version 22) window-system)
-       (load "mwheel" t)
-       (mwheel-install)))
+(use-package mwheel
+  :config
+  (mwheel-install))
 
 ;; This is presumably only useful when my normal window manager
 ;; mouse bindings and/or Meta key binding are not in effect.
