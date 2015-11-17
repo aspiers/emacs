@@ -2267,7 +2267,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(minibuffer-prompt ((t (:foreground "light blue"))))
  '(mode-line ((t (:background "grey45" :foreground "black" :box (:line-width -1 :style released-button)))))
  '(org-agenda-column-dateline ((t nil)))
- '(org-agenda-date ((t (:inherit org-agenda-structure :background "grey20"))) t)
+ '(org-agenda-date ((t (:inherit org-agenda-structure :background "grey20"))))
  '(org-column ((t (:background "#211E1E" :strike-through nil :underline nil :slant normal :weight normal :height 122 :family "Inconsolata"))))
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
  '(org-hide ((nil (:foreground "black"))))

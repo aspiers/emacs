@@ -2271,7 +2271,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-column ((t (:background "#211E1E" :strike-through nil :underline nil :slant normal :weight normal :height 122 :family "Inconsolata"))))
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
  '(org-hide ((nil (:foreground "black"))))
- '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))) t)
+ '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
  '(scroll-bar ((t (:background "grey45"))))
  '(sml/global ((t (:foreground "gray10"))))
  '(sml/prefix ((t (:inherit sml/global :foreground "#f39400"))))
