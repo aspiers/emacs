@@ -26,9 +26,8 @@ either with el-get or `package-install'.")
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/"))
 
-;; el-get doesn't download dependencies for package.el packages
-;; since <https://github.com/dimitri/el-get/pull/1798> - it delegates
-;; that to package.el.
+;; el-get doesn't let elpa download dependencies for package.el packages
+;; since <https://github.com/dimitri/el-get/pull/1798>.
 ;; However it now causes warnings like:
 ;;
 ;;   Warning (emacs): Unable to activate package `flycheck-package'.
