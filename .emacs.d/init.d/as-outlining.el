@@ -7,7 +7,7 @@
              folding-set-marks
              folding-add-to-marks-list
              fold-show)
-  :defer (if (as-quick-startup) 30 nil)
+  :defer 20
   :config
   (folding-add-to-marks-list 'latex-mode "%{{{ " "%}}}")
   (folding-add-to-marks-list 'Fundamental-mode "\# {{{ " "\# }}}")
