@@ -1,4 +1,4 @@
 # See org-agenda
-C-c q
+C-c c
 
 #\e x org-remember \n
