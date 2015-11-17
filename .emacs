@@ -46,7 +46,14 @@
     (let ((loaded (require feature hook-file)))
       (as-progress
        (if loaded "loading %s... done" "ERROR: failed to load %s")
-       (abbreviate-file-name hook-file)))))
+       (abbreviate-file-name hook-file)))
+    ;; Canary for forward-word weirdness
+    ;; https://gist.github.com/aspiers/775ce717bd06d43d7adb
+    ;;
+    ;; (with-current-buffer (find-file "~/.emacs")
+    ;;   (goto-char (point-min))
+    ;;   (forward-word))
+    ))
 
 (unless (getenv "EMACS_BATCH")
   (as-load-hooks as-init-d-suffix))
