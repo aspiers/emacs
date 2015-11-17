@@ -33,9 +33,17 @@ either with el-get or `package-install'.")
 ;;   Warning (emacs): Unable to activate package `flycheck-package'.
 ;;   Required package `flycheck-0.22' is unavailable
 ;;
-;; https://github.com/dimitri/el-get/issues/1790#issuecomment-46508273
+;; as per https://github.com/dimitri/el-get/issues/1790#issuecomment-46508273
 ;;
-;; and also:
+;; This is because both flycheck and flycheck-package get installed
+;; via el-get; however flycheck comes from a native el-get
+;; non-versioned recipe, whereas flycheck-package comes from MELPA and
+;; has a dependency on flycheck-0.22 which is not satisfied by el-get.
+;; In this case a solution might be to prefer the versioned flycheck
+;; from MELPA.
+;;
+;; Another problem is that we don't always want to prefer the version from
+;; *ELPA, since that would result in:
 ;;
 ;;   Warning (el-get): The package `cl-lib' has already been loaded by
 ;;   package.el, attempting to load el-get version instead. To avoid
@@ -43,10 +51,12 @@ either with el-get or `package-install'.")
 ;;   version of cl-lib, or call `el-get' before `package-initialize' to
 ;;   prevent package.el from loading it.
 ;;
-;; This seems to be solved by skipping the call to `package-initialize'.
-;; Presumably el-get takes care of that later, when needed.
+;; However we need to initialize package-archive-contents so that we
+;; can check for missing packages below.  Luckily we can do that
+;; without activating any *ELPA packages by specifying an argument to
+;; `package-initialize':
 
-;;  (package-initialize)
+  (package-initialize 'no-activate)
 
   ;; (require 'cl)
   ;; (when (not (every (lambda (pkg) (car (assq pkg package-archive-contents)))
