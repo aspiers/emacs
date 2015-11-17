@@ -294,8 +294,6 @@
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
- '(beeminder-auth-token "zimmoksH2thrnmYmVYxt" t)
- '(beeminder-username "aspiers" t)
  '(blink-cursor-blinks 0)
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.3)
