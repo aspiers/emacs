@@ -435,8 +435,6 @@ $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
 
 $(MAJOR_MODES)/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
 
-.PHONY: org
-org: .org-installed
 ifeq (,$(wildcard $(ORG_DIR)))
 clean-org:
 	@echo "Won't clean non-existent $(ORG_DIR)"
@@ -447,6 +445,8 @@ clean-org:
 	rm -f .org-installed
 	$(MAKE) -C $(ORG_DIR) clean
 .org-installed: $(wildcard $(ORG_DIR)/lisp/*.el)
+	@echo "Don't install org-mode this way any more!"
+	@false
 	@$(UNLOCK_INSTALL_DIRS)
 #       EMACS="$(EMACS) -L $(lispdir)/epg"
 #       http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
@@ -459,6 +459,13 @@ clean-org:
 	        prefix=$(prefix) \
 	        infodir=$(infodir)
 	touch $@
+org-uninstall:
+	@$(UNLOCK_INSTALL_DIRS)
+	$(MAKE) -C $(ORG_DIR) clean-install \
+	        prefix=$(prefix) \
+	        infodir=$(infodir)
+	rm -f $(PRE_INSTALL_DIR)/{{org,ob,ox,orgtbl}{,-*},htmlize}.{el,elc}
+	@$(LOCK_INSTALL_DIRS)
 endif
 
 # }}}
