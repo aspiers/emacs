@@ -114,7 +114,6 @@ the directory pointed to by `el-get-el-get-dir'."
 
     rainbow-delimiters
     region-bindings-mode
-    rinari
     rpm-spec-mode
     ruby-mode
     rubocop
