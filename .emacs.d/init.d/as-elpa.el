@@ -70,10 +70,10 @@ either with el-get or `package-install'.")
       (message "Packages missing from `package-archive-contents': %s" missing-pkgs)
       (package-refresh-contents))))
 
-(when
-    (or (load "package")
-        (load (expand-file-name (concat edotdir "/.emacs.d/elpa/package.el"))))
+;; We don't have use-package yet (because we might have to install it
+;; via el-get and/or elpa)
+(when (require 'package)
   (with-demoted-errors
-    (as-setup-elpa)))
+      (as-setup-elpa)))
 
 (provide 'as-elpa)
