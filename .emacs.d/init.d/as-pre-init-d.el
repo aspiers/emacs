@@ -13,11 +13,11 @@
 
 (defvar as-init-d
   (cond (load-file-name
-	 (let ((path (file-name-directory load-file-name)))
-	   ;; strip any trailing slash
-	   (if (eq (aref path (- (string-width path) 1)) ?/)
-	       (substring path 0 -1)
-	     path)))
+         (let ((path (file-name-directory load-file-name)))
+           ;; strip any trailing slash
+           (if (eq (aref path (- (string-width path) 1)) ?/)
+               (substring path 0 -1)
+             path)))
         (as-init-d-suffix
          (concat edotdir "/" as-init-d-suffix))
         (t
