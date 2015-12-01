@@ -98,6 +98,17 @@ Loading starts with [`.emacs`](.emacs) which effectively loads all
         *   adds all other necessary directories to `load-path`
     *   requires [`as-progress`](.emacs.d/init.d/as-progress.el)
     *   requires [`as-use-package`](.emacs.d/init.d/as-use-package.el)
+        *   requires [`as-el-get`](.emacs.d/init.d/as-el-get.el)
+            *   requires [`as-org-mode-early`](.emacs.d/init.d/as-org-mode-early.el)
+            *   requires [`as-vars`](.emacs.d/init.d/as-vars.el)
+                *   requires `el-get`
+                *   requires [`as-elpa`](.emacs.d/init.d/as-elpa.el)
+                    *   requires `package`
+                    *   `(package-initialize 'no-activate)`
+                    *   `(package-refresh-contents)`
+                *   requires [`as-el-get-emacswiki`](.emacs.d/init.d/as-el-get-emacswiki.el)
+        *   requires `use-package`
+        *   requires `bind-key`
 
 *   All other `*.el` are discovered and loaded via a custom external mechanism
     which I use for several sets of configuration files unrelated
