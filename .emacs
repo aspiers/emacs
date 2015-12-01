@@ -32,8 +32,6 @@
          file))
          files)))
 
-(require 'as-pre-init-d)
-
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."
   (dolist (hook-file (as-find-hooks hook-name))
