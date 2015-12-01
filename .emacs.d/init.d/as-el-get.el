@@ -2,7 +2,7 @@
 
 (require 'as-org-mode-early)
 
-(require 'as-vars)
+(require 'as-vars) ;; we probably already have this via as-load-paths
 
 (defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
 (defvar el-get-el-get-dir (concat el-get-dir "el-get"))
