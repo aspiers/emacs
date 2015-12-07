@@ -7,8 +7,12 @@
 
 ;; Modify the org-clock-in so that a timer is started with the default
 ;; value except if a timer is already started :
-(add-hook 'org-clock-in-hook '(lambda () 
-      (if (not org-timer-current-timer) 
-      (org-timer-set-timer '(16)))))
+
+(defun as-start-countdown-on-clock-in ()
+  "Start a countdown timer unless there's already a timer active."
+    (unless (or org-timer-start-time org-timer-countdown-timer)
+      (org-timer-set-timer)))
+
+(add-hook 'org-clock-in-hook 'as-start-countdown-on-clock-in)
 
 (provide 'as-pomodoro)
