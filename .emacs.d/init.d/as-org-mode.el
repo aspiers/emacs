@@ -56,7 +56,8 @@
     (with-current-buffer todo-buffer
       (goto-char
        (org-find-exact-headline-in-buffer "daily review" todo-buffer 'pos-only))
-      (org-clock-in))))
+      (org-clock-in)))
+  (as-org-switch-to-agenda-buffer))
 
 (bind-key "M-o r" 'org-clock-in-daily-review)
 
