@@ -19,14 +19,14 @@
 (defvar org-mode-map)
 (add-hook 'org-mode-hook
           (lambda ()
-            (as-soft-require 'as-gtd)
+            (use-package 'as-gtd)
             (imenu-add-to-menubar "Imenu")
             (setq comment-start nil)))
 
 (declare-function org-crypt-use-before-save-magic "org-crypt")
 (add-hook 'org-mode-hook
           (lambda ()
-            (and (as-soft-require 'org-crypt)
+            (and (use-package 'org-crypt)
                  (org-crypt-use-before-save-magic))
             (add-to-list 'org-modules 'org-timer)))
 
