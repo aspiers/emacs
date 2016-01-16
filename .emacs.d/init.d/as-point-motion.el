@@ -1,4 +1,5 @@
 ;; Scrolling
+(req-package smooth-scrolling)
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
@@ -8,15 +9,17 @@
 ;; Stop down cursor adding newlines to end of buffer.
 (setq next-line-add-newlines nil)
 
-(require 'as-key-chord)
-(key-chord-define-global "zv" 'iy-go-to-char)
+(req-package iy-go-to-char
+  (require 'as-key-chord)
+  :config
+  (key-chord-define-global "zv" 'iy-go-to-char))
 
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
-(use-package ace-jump-mode
+(req-package ace-jump-mode
   :bind ("C-0" . ace-jump-mode))
-(use-package idomenu
+(req-package idomenu
   :bind ("C-1" . idomenu))
 
 (bind-key "M-g"   'goto-line)
@@ -35,7 +38,7 @@ If the line is empty, doesn't do anything."
 
 (bind-key "C-S-e" 'bn-end-of-line-but-one)
 
-(use-package expand-region
+(req-package expand-region
   :bind ("C-M-S-SPC" . er/expand-region))
 
 ;; emacs < 22 doesn't have x-clipboard-yank
@@ -46,5 +49,8 @@ If the line is empty, doesn't do anything."
 
 (bind-key "M-i" 'indent-relative)
 
+(req-package goto-chg
+  :bind (("C-<" . goto-last-change)
+         ("C->" . goto-last-change-reverse)))
 
 (provide 'as-point-motion)

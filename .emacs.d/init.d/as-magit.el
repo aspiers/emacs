@@ -1,6 +1,6 @@
 ;; See also as-vcs.el
 
-(use-package magit
+(req-package magit
   :config
   (progn
     (add-hook 'ido-setup-hook 'as-magit-ido-keys)
@@ -53,8 +53,6 @@
                            nil "magit status: " nil "*magit: "))
     (bind-key "C-M-g" 'ido-switch-magit-buffer)
 
-    (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
-
     ;; Stolen from https://github.com/syl20bnr/spacemacs/pull/3319/files
     ;; See also https://github.com/magit/magit/issues/1953#issuecomment-146900842
     (defun magit-display-buffer-fullscreen (buffer)
@@ -82,6 +80,17 @@
         ;; return buffer's window
         (get-buffer-window buffer)))))
 
-(use-package magit-topgit)
+(req-package magit-topgit)
+
+(req-package magit-gh-pulls
+  :requires magit
+  :config
+  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+
+;; magithub is a dead project
+
+;; support for magit: links in org buffers
+(req-package org-magit
+  :requires (org magit))
 
 (provide 'as-magit)

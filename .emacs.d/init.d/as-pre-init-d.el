@@ -29,9 +29,9 @@
 (require 'as-load-paths)
 (require 'as-progress)
 
-;; use-package is common enough that we don't want to have to require
+;; req-package is common enough that we don't want to have to require
 ;; it in each file which uses it.
-(require 'as-use-package)
+(require 'as-req-package)
 
 (as-loading-done)
 

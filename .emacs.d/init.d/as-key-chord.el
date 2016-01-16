@@ -1,4 +1,5 @@
-(use-package key-chord
+;; http://emacsrocks.com/e07.html
+(req-package key-chord
   :commands (key-chord-mode key-chord-define-global)
   :config
   (key-chord-mode 1))

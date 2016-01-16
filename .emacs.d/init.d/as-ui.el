@@ -2,7 +2,7 @@
 
 ;;{{{ fill-column-indicator
 
-(use-package fill-column-indicator
+(req-package fill-column-indicator
   :config
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook 'fci-mode)))
@@ -23,31 +23,50 @@
 ;;}}}
 ;;{{{ ido - superior replacement for iswitchb
 
-(use-package ido
+(req-package ido
   :commands (ido-mode)
   :config
   (ido-mode t))
 
 ;;}}}
-;;{{{ Load paren library
+;;{{{ parentheses
 
 (require 'paren)
 
+(req-package smartparens)
+
 ;;}}}
 
-(use-package color-theme)
-(use-package color-theme-pastels-on-dark
+(req-package color-theme)
+(req-package color-theme-pastels-on-dark
   ;; FIXME: use req-package
   :if (featurep 'color-theme)
   :config
   (color-theme-pastels-on-dark))
 
-(use-package rainbow-delimiters
+(req-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (bind-key "C-'" 'speedbar-get-focus)
 
-(use-package beacon
+(req-package beacon
   :config (beacon-mode 1))
+
+(req-package flycheck)
+(req-package flycheck-package)
+(req-package flymake-css)
+(req-package flymake-ruby)
+(req-package flymake-sass)
+(req-package flymake-shell)
+
+(req-package hideshow-org)
+
+(req-package ido-completing-read+)
+(req-package idomenu) ;; http://emacsrocks.com/e10.html
+;; ido-hacks
+;; ido-everywhere
+(req-package ido-ubiquitous)
+(req-package ido-vertical-mode)
+
 
 (provide 'as-ui)

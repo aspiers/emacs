@@ -1,6 +1,6 @@
 (require 'as-el-get)
 
-(use-package undo-tree
+(req-package undo-tree
   :init
   (global-undo-tree-mode))
 

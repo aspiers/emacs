@@ -1,4 +1,4 @@
-(use-package yasnippet
+(req-package yasnippet
   :commands yas-minor-mode
   :init
   (defalias 'yasm 'yas-minor-mode)

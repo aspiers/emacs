@@ -7,7 +7,7 @@
 ;;}}}
 ;;{{{ midnight-mode - automatically kill unused buffers
 
-(use-package midnight
+(req-package midnight
   :if (not (as-quick-startup)))
 
 ;;}}}

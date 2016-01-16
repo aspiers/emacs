@@ -1,4 +1,4 @@
-(use-package ruby-mode
+(req-package ruby-mode
   :mode "\\(\\.\\(e?rb\\|rjs\\|rake\\)\\|Rakefile\\|Guardfile\\)\\'"
   :interpreter "ruby\\|ruby[12]\.[0-9]\\|jruby\\|rbx")
 
@@ -24,15 +24,22 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (autoload 'rcov-buffer "rcov-overlay" "rcov-overlay" t)
 ;; (bind-key "C-c C-r"   'rcov-buffer)
 
-(use-package autotest :commands autotest)
+(req-package autotest :commands autotest)
 
-(use-package rsense
+;; I don't use this and it seems to have bugs with autoloading
+;; and maybe also leaving processes running within emacs.
+;; (req-package inf-ruby)
+
+(req-package rsense
   :config
   (progn
    (defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
-(autoload 'bundle-open "bundler" nil t)
-(bind-key "C-c j o" 'bundle-open)
+(req-package bundler
+  :bind ("C-c j o" . bundle-open))
+
+(req-package rubocop)
+;;(req-package rudel)
 
 (provide 'as-ruby)

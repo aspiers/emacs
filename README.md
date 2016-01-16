@@ -11,14 +11,25 @@ packages.
 OVERVIEW
 --------
 
-I use [`el-get`](http://www.emacswiki.org/emacs/el-get) for installing
-and compiling packages (even the ones from ELPA repositories such as
-[MELPA](http://melpa.milkbox.net/) and
-[Marmalade](https://github.com/jwiegley/use-package)), John Wiegley's
-nifty [`use-package`](https://github.com/jwiegley/use-package) and
-[`bind-key`](https://github.com/jwiegley/use-package/blob/master/bind-key.el)
-utilities for setting up autoloads, key bindings, and other
-per-package configuration.
+I use:
+
+*   `package.el` for installing most packages, because:
+        *   its dependency tracking is version-aware
+	*   MELPA has tons of great packages
+	*   MELPA stable is nice when I'm feeling risk-averse
+*   [`el-get`](http://www.emacswiki.org/emacs/el-get) for installing and
+    compiling packages when I want to work with more bleeding edge code
+    (but I try to keep it to a minimum, because [it's not great at
+    dependency and version handling](https://github.com/dimitri/el-get/issues/created_by/aspiers))
+*   John Wiegley's nifty [`use-package`](https://github.com/jwiegley/use-package)
+    and [`bind-key`](https://github.com/jwiegley/use-package/blob/master/bind-key.el)
+    utilities for setting up autoloads, key bindings, and other
+    per-package configuration.
+*   [`req-package`](https://github.com/edvorg/req-package) so that
+    *   I can correctly handle dependencies and ensure packages get
+        loaded in the right order, and
+    *   I can easily control whether to install packages from *ELPA
+        or `el-get`.
 
 I generally adhere to the convention of adding an `as-` prefix to any
 files, functions, and variables which are specific to my needs.
@@ -65,13 +76,13 @@ files, functions, and variables which are specific to my needs.
 INSTALLATION
 ------------
 
-I would not recommend forking / cloning this repo and attempting to
-use it directly.  However, you will probably be able to benefit from
-reading through it and stealing at least ideas, if not code.  If you
-discover something which you think is useful enough to deserve being
-properly packaged and published, then feel free to pester me into
-doing so.  Stuff in `.emacs.d/lib` is already earmarked for publishing
-when I get free time for it.
+I would not necessarily recommend forking / cloning this repo and
+attempting to use it directly.  However, you will probably be able to
+benefit from reading through it and stealing at least ideas, if not
+code.  If you discover something which you think is useful enough to
+deserve being properly packaged and published, then feel free to
+pester me into doing so.  Stuff in `.emacs.d/lib` is already earmarked
+for publishing when I get free time for it.
 
 This repository is designed to be
 [stowed](http://www.gnu.org/software/stow/) directly into your home
@@ -97,7 +108,7 @@ Loading starts with [`.emacs`](.emacs) which effectively loads all
         *   requires [`as-vars`](.emacs.d/init.d/as-vars.el)
         *   adds all other necessary directories to `load-path`
     *   requires [`as-progress`](.emacs.d/init.d/as-progress.el)
-    *   requires [`as-use-package`](.emacs.d/init.d/as-use-package.el)
+    *   requires [`as-req-package`](.emacs.d/init.d/as-req-package.el)
         *   requires [`as-el-get`](.emacs.d/init.d/as-el-get.el)
             *   requires [`as-org-mode-early`](.emacs.d/init.d/as-org-mode-early.el)
             *   requires [`as-vars`](.emacs.d/init.d/as-vars.el)

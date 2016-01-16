@@ -1,12 +1,12 @@
 ;; Configuration languages
 
-(use-package rpm-spec-mode
+(req-package rpm-spec-mode
   :mode ("\\.spec$" . rpm-spec-mode))
 
-(use-package apache-mode
+(req-package apache-mode
   :mode ("\\.htaccess$\\|\\(httpd\\|srm\\|access\\)\\.conf$" . apache-mode))
 
-(use-package xrdb-mode
+(req-package xrdb-mode
   :mode ("\\.Xdefaults$"    . xrdb-mode)
   :mode ("\\.Xenvironment$" . xrdb-mode)
   :mode ("\\.Xresources$"   . xrdb-mode)

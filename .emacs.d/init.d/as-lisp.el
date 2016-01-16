@@ -13,7 +13,7 @@
             (setq comment-start ";; ")
             (bind-key "C-S-t" 'transpose-sexps emacs-lisp-mode-map)))
 
-(use-package paredit
+(req-package paredit
   :commands enable-paredit-mode
   :init
   (dolist (mode '(emacs-lisp-mode-hook
@@ -24,7 +24,7 @@
                   eval-expression-minibuffer-setup-hook))
     (add-hook mode 'enable-paredit-mode)))
 
-(use-package macrostep
+(req-package macrostep
   :defer t
   :commands macrostep-expand
   :bind (:map emacs-lisp-mode-map

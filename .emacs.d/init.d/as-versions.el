@@ -1,5 +1,5 @@
 (load "subr")
-(use-package versions
+(req-package versions
   :if (not (fboundp 'version<=)))
 
 (provide 'as-versions)

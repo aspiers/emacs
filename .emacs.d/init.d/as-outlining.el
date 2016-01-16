@@ -1,6 +1,6 @@
 ;;{{{ Folding mode
 
-(use-package folding
+(req-package folding
   :commands (folding-mode
              folding-mode-find-file
              folding-mode-add-find-file-hook
@@ -225,8 +225,7 @@ is already hidden."
          (allout-hide-current-subtree))
         (t (allout-hide-current-subtree))))
 
-(require 'as-use-package)
-(use-package allout
+(req-package allout
   :commands allout-mode
   :config
   (progn

@@ -144,9 +144,11 @@
 ;;}}}
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
-(use-package feature-mode
+(req-package feature-mode
   :mode ("\.feature$" . feature-mode))
 
 ;;}}}
+
+(req-package yaml-mode)
 
 (provide 'as-tech-langs)
