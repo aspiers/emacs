@@ -2,10 +2,8 @@
   :commands yas-minor-mode
   :init
   (defalias 'yasm 'yas-minor-mode)
-  :bind (("C-<" . yasnippet-cmd-previous-real)
-         ("C->" . yasnippet-cmd-next-real)))
-
-(provide 'as-yasnippet)
+  :bind (("C-M-<" . yasnippet-cmd-previous-real)
+         ("C-M->" . yasnippet-cmd-next-real)))
 
 ;;{{{ tempo
 
@@ -42,8 +40,6 @@
   '(setq msf-abbrev-root
          (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
 
-(bind-key "C-<" 'msf-cmd-previous-real)
-(bind-key "C->" 'msf-cmd-next-real)
 
 ;; Has indent-region changed arity?  Do we need a compatability wrapper?
 ;; (eval-after-load "msf-abbrev"
