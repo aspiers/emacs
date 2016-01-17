@@ -1,4 +1,6 @@
 ;; Configuration languages
+;;
+;; See also as-tech-langs.el and as-doc-langs.el
 
 (req-package rpm-spec-mode
   :mode ("\\.spec$" . rpm-spec-mode))

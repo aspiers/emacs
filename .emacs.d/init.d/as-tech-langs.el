@@ -1,4 +1,7 @@
-;; Technical languages (excluding programming languages)
+;; Technical languages, excluding programming languages.
+;;
+;; See also as-doc-langs.el and as-config-langs.el,
+;; and as-{ruby,javascript}.el etc.
 
 ;;{{{ DTD
 

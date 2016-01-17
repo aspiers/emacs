@@ -1,4 +1,6 @@
 ;; Semi-natural languages / documentation
+;;
+;; See also as-config-langs.el and as-tech-langs.el.
 
 ;;{{{ Text
 
