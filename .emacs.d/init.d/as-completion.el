@@ -8,7 +8,7 @@
 
 (req-package flx-ido)
 
-(req-package company-mode)
+(req-package company)
 
 ;; (req-package auto-complete-css)
 ;; (req-package auto-complete-emacs-lisp)
