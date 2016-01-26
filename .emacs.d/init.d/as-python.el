@@ -1,4 +1,4 @@
-(use-package python
+(req-package python
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode))
 

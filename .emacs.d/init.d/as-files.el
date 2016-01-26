@@ -1,16 +1,16 @@
 ;; File handling
 
-(use-package tar-mode
+(req-package tar-mode
   :mode ("\\.dump$" . tar-mode))
 
-(use-package auto-compression-mode
+(req-package auto-compression-mode
   :defer t
   :config
   (defun lac () "Load auto-compression-mode."
     (interactive)
     (auto-compression-mode 1)))
 
-(use-package recentf
+(req-package recentf
   :if window-system
   :config
   (recentf-mode t))
@@ -21,7 +21,7 @@
 (bind-key "C-c K"   'as-destroy-buffer-delete-file)
 (bind-key "C-x M-f" 'find-library)
 
-(use-package ffap
+(req-package ffap
   :bind
   (("C-M-'"   . find-file-at-point)
    ("C-x 4 '" . ffap-other-window)
@@ -47,7 +47,7 @@
   "~/org/notes" "Find note: ")
 (bind-key "C-c j n"  'as-find-personal-note)
 
-(use-package as-find-file-matching-regexp-hook)
+(req-package as-find-file-matching-regexp-hook)
 
 (require 'as-vars)
 ;; This is right for SUSE, at least, assuming that the

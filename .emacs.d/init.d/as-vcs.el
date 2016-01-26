@@ -35,20 +35,20 @@
 ;;}}}
 ;;{{{ vc-osc
 
-(use-package vc-osc
+(req-package vc-osc
   :config
   (add-to-list 'vc-handled-backends 'osc 'append))
 
 ;;}}}
 ;;{{{ git-gutter
 
-(use-package git-gutter
+(req-package git-gutter
   :config
   (global-git-gutter-mode t))
 
-;;}}}
+;; (req-package git-gutter-fringe)
 
-;; For magit, see as-magit.el
+;;}}}
 
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-CVS-repo
@@ -63,5 +63,9 @@
   "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
 (bind-key "C-c j 3"  'as-find-upstream-git-repo)
 (bind-key "C-c j G"  'as-find-upstream-git-repo)
+
+(require 'as-magit)
+
+(req-package gerrit-download)
 
 (provide 'as-vcs)

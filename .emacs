@@ -32,7 +32,8 @@
          file))
          files)))
 
-(require 'as-pre-init-d)
+;; Call (package-initialize) exactly when we want.
+(setq package-enable-at-startup nil)
 
 (defun as-load-hooks (hook-name)
   "Load hooks found by `as-find-hooks'."
@@ -57,5 +58,7 @@
 
 (unless (getenv "EMACS_BATCH")
   (as-load-hooks as-init-d-suffix))
+
+(req-package-finish)
 
 (as-progress "end of ~/.emacs")

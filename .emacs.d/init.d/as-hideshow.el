@@ -1,4 +1,4 @@
-(use-package hideshow)
-(use-package hideshow-org)
+(req-package hideshow)
+(req-package hideshow-org)
 
 (provide 'as-hideshow)

@@ -1,4 +1,6 @@
 ;; Semi-natural languages / documentation
+;;
+;; See also as-config-langs.el and as-tech-langs.el.
 
 ;;{{{ Text
 
@@ -70,6 +72,16 @@ other people."
   (indented-text-mode))
 
 ;;}}}
+;;{{{ Markdown mode
+
+(req-package markdown-mode+)
+
+;;}}}
+;;{{{ asciidoc mode
+
+(req-package asciidoc)
+
+;;}}}
 ;;{{{ ReStructuredText mode
 
 ;; (autoload 'rst-mode "rst")
@@ -139,9 +151,11 @@ other people."
 ;;}}}
 ;;{{{ TWiki
 
-(use-package erin-mode
+(req-package erin-mode
   :mode ("\\.twiki\\'" . erin-mode))
 
 ;;}}}
+
+(req-package mediawiki)
 
 (provide 'as-doc-langs)

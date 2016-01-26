@@ -3,32 +3,8 @@
 ;; since er/expand-region is an autoload
 (require 'as-point-motion)
 
-(use-package multiple-cursors
-  ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
+(req-package multiple-cursors
   :config
-  (require 'smartrep)
-
-  ;; Keys we want to be able to hit repeatedly
-  (smartrep-define-key global-map "C-S-SPC"
-    '(("n"   . mc/mark-next-like-this)
-      ("p"   . mc/mark-previous-like-this)
-
-      ("f"   . mc/mark-next-word-like-this)
-      ("b"   . mc/mark-previous-word-like-this)
-
-      ("s"   . mc/mark-next-symbol-like-this)
-      ("t"   . mc/mark-previous-symbol-like-this)
-
-      ("DEL" . mc/unmark-next-like-this)
-      ("C-d" . mc/unmark-previous-like-this)
-
-      ("C-n" . mc/skip-to-next-like-this)
-      ("C-p" . mc/skip-to-previous-like-this)
-
-      ("p"   . mc/pop-mark)
-
-      ("q"   . smartrep-quit)
-      ("C-g" . smartrep-quit)))
 
   ;; FIXME: One-shot keys
   (bind-key "C-S-SPC A"         'mc/mark-all-like-this)
@@ -50,7 +26,34 @@
   (bind-key "C-S-SPC -"         'mc/reverse-regions)
   (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair))
 
-(use-package region-bindings-mode
+;; found smartrep here: http://stackoverflow.com/a/17209600/179332
+(req-package smartrep
+  :requires multiple-cursors
+
+  :config
+  ;; Keys we want to be able to hit repeatedly
+  (smartrep-define-key global-map "C-S-SPC"
+    '(("n"   . mc/mark-next-like-this)
+      ("p"   . mc/mark-previous-like-this)
+
+      ("f"   . mc/mark-next-word-like-this)
+      ("b"   . mc/mark-previous-word-like-this)
+
+      ("s"   . mc/mark-next-symbol-like-this)
+      ("t"   . mc/mark-previous-symbol-like-this)
+
+      ("DEL" . mc/unmark-next-like-this)
+      ("C-d" . mc/unmark-previous-like-this)
+
+      ("C-n" . mc/skip-to-next-like-this)
+      ("C-p" . mc/skip-to-previous-like-this)
+
+      ("p"   . mc/pop-mark)
+
+      ("q"   . smartrep-quit)
+      ("C-g" . smartrep-quit))))
+
+(req-package region-bindings-mode
   ;; FIXME: https://github.com/jwiegley/use-package/issues/71
   ;;
   ;; I added region-bindings-mode-enabled-modes to obsolete this:
@@ -59,7 +62,8 @@
   ;;                 emacs-lisp-mode-hook
   ;;                 ruby-mode-hook python-mode-hook))
   ;;   (add-hook hook 'region-bindings-mode-enable))
-  :if (featurep 'multiple-cursors)
+  :requires multiple-cursors
+
   :config
   (define-key region-bindings-mode-map "q"   'region-bindings-mode-off)
 
@@ -85,5 +89,10 @@
   (define-key region-bindings-mode-map "W"   'mc/mark-all-words-like-this)
   (define-key region-bindings-mode-map "S"   'mc/mark-all-symbols-like-this)
   (define-key region-bindings-mode-map "D"   'mc/mark-all-dwim))
+
+(req-package phi-search
+  :requires multiple-cursors)
+(req-package phi-search-mc
+  :requires multiple-cursors)
 
 (provide 'as-multiple-cursors)

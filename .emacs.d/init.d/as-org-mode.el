@@ -8,6 +8,7 @@
 (as-progress "loading org-install ...")
 (require 'org-install nil 'noerror)
 
+;; FIXME: use req-package
 (require 'as-require)
 (when (as-check-feature-loaded 'org-install)
   (as-progress "org-install loaded")
@@ -19,14 +20,14 @@
 (defvar org-mode-map)
 (add-hook 'org-mode-hook
           (lambda ()
-            (as-soft-require 'as-gtd)
+            (use-package as-gtd)
             (imenu-add-to-menubar "Imenu")
             (setq comment-start nil)))
 
 (declare-function org-crypt-use-before-save-magic "org-crypt")
 (add-hook 'org-mode-hook
           (lambda ()
-            (and (as-soft-require 'org-crypt)
+            (and (use-package org-crypt)
                  (org-crypt-use-before-save-magic))
             (add-to-list 'org-modules 'org-timer)))
 
@@ -67,5 +68,8 @@
 
 (autoload 'org-occur-in-agenda-files "org" nil t)
 (bind-key "C-c C-?" 'org-occur-in-agenda-files)
+
+(req-package org-sync
+  :requires org)
 
 (provide 'as-org-mode)

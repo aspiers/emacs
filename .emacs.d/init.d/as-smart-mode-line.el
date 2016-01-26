@@ -1,6 +1,6 @@
 (require 'as-el-get)
 
-(use-package smart-mode-line
+(req-package smart-mode-line
   :config
   (progn
     (sml/setup)

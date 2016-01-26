@@ -13,11 +13,11 @@
 
 (defvar as-init-d
   (cond (load-file-name
-	 (let ((path (file-name-directory load-file-name)))
-	   ;; strip any trailing slash
-	   (if (eq (aref path (- (string-width path) 1)) ?/)
-	       (substring path 0 -1)
-	     path)))
+         (let ((path (file-name-directory load-file-name)))
+           ;; strip any trailing slash
+           (if (eq (aref path (- (string-width path) 1)) ?/)
+               (substring path 0 -1)
+             path)))
         (as-init-d-suffix
          (concat edotdir "/" as-init-d-suffix))
         (t
@@ -29,9 +29,9 @@
 (require 'as-load-paths)
 (require 'as-progress)
 
-;; use-package is common enough that we don't want to have to require
+;; req-package is common enough that we don't want to have to require
 ;; it in each file which uses it.
-(require 'as-use-package)
+(require 'as-req-package)
 
 (as-loading-done)
 

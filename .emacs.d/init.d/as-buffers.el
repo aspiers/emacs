@@ -6,8 +6,8 @@
 
 (require 'as-versions)
 (if (version< emacs-version "24.3")
-    (use-package buff-menu+)
-  (use-package bs
+    (req-package buff-menu+)
+  (req-package bs
     :bind ("C-x C-b" . bs-show)))
 
 (defun as-revert-buffer-without-confirmation ()
@@ -28,7 +28,7 @@
 (bind-key "C-c N" 'as-display-buffer-name)
 (bind-key "C-c C-S-r" 'as-rename-current-buffer)
 
-(use-package switch-window
+(req-package switch-window
   :bind ("C-x o" . switch-window))
 
 (provide 'as-buffers)

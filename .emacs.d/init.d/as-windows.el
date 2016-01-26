@@ -8,4 +8,8 @@
 (bind-key "C-S-<tab>"         'previous-window-interactive)
 (bind-key "C-S-<iso-lefttab>" 'previous-window-interactive)
 
+(req-package switch-window)
+
+;; (req-package golden-ratio)
+
 (provide 'as-windows)

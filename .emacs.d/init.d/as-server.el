@@ -1,4 +1,4 @@
-(use-package server
+(req-package server
   :commands (server-start server-force-delete)
   :defer 10
   :config
@@ -15,7 +15,7 @@
         (server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(use-package edit-server
+(req-package edit-server
   :commands (edit-server-start edit-server-stop)
   :defer 10
   :config
@@ -28,7 +28,7 @@
         (edit-server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(use-package edit-server-htmlize
+(req-package edit-server-htmlize
   :commands (edit-server-maybe-dehtmlize-buffer
              edit-server-maybe-htmlize-buffer)
   ;; FIXME: use req-package

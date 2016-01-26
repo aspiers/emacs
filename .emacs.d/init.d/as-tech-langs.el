@@ -1,4 +1,7 @@
-;; Technical languages (excluding programming languages)
+;; Technical languages, excluding programming languages.
+;;
+;; See also as-doc-langs.el and as-config-langs.el,
+;; and as-{ruby,javascript}.el etc.
 
 ;;{{{ DTD
 
@@ -144,9 +147,11 @@
 ;;}}}
 ;;{{{ feature-mode for Cucumber's feature DSL ("Gherkin")
 
-(use-package feature-mode
+(req-package feature-mode
   :mode ("\.feature$" . feature-mode))
 
 ;;}}}
+
+(req-package yaml-mode)
 
 (provide 'as-tech-langs)

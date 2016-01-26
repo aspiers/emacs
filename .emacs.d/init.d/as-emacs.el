@@ -1,10 +1,12 @@
 ;; Stuff relating to generic use of emacs in any context
 
-(bind-key "M-x"   'smex)
-(bind-key "M-X"   'smex-major-mode-commands)
+(req-package smex
+  :bind (("M-x" . smex)
+	 ("M-X" . smex-major-mode-commands)))
+
 (bind-key "C-h a" 'apropos)
 
-(use-package set-any-var
+(req-package set-any-var
   :commands set-any-variable
   :bind ("C-c v" . set-any-variable))
 
