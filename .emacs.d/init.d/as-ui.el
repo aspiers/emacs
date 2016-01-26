@@ -37,13 +37,6 @@
 
 ;;}}}
 
-(req-package color-theme)
-(req-package color-theme-pastels-on-dark
-  ;; FIXME: use req-package
-  :if (featurep 'color-theme)
-  :config
-  (color-theme-pastels-on-dark))
-
 (req-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
