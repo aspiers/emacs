@@ -2,6 +2,10 @@
 
 (bind-key "M-<tab>" 'hippie-expand)
 
+(req-package smex
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)))
+
 (req-package flx-ido)
 
 (req-package company-mode)

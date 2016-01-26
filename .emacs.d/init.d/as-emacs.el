@@ -1,9 +1,5 @@
 ;; Stuff relating to generic use of emacs in any context
 
-(req-package smex
-  :bind (("M-x" . smex)
-	 ("M-X" . smex-major-mode-commands)))
-
 (bind-key "C-h a" 'apropos)
 
 (req-package set-any-var
