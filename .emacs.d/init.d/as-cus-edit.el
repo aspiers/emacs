@@ -1,5 +1,4 @@
 (require 'as-el-get)
-(require 'as-versions)
 
 (when (version<= emacs-version "24.3.1")
   (require 'cus-edit)

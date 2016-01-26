@@ -5,7 +5,6 @@
     ediff-trees
     faith
     rcov-overlay
-    versions
     ))
 
 (defun as-el-get-missing-emacswiki-recipes ()
