@@ -59,6 +59,16 @@ The list marked is the one that contains point or follows point."
          ;; but this one won't, so serves as a backup:
          ("C-c M-q" . fill-common-prefix-region)))
 
+;;; https://www.emacswiki.org/emacs/UnfillParagraph
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+
+(bind-key "M-Q" 'unfill-paragraph)
+
 (bind-key "C-x 8 e"
           (lambda ()
             (interactive)
