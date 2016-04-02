@@ -30,6 +30,6 @@ C-c M y
 EOF
 
 # switch back to xterm
-wmctrl -a 'adam@atlantic'
+wmctrl -a 'adam@'
 
 echo 'KeyStr Up' | xmacroplay $DISPLAY >/dev/null
