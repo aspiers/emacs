@@ -10,6 +10,11 @@
 
 (require 'as-elpa)
 
+;; req-package-log-level only takes effect if defined before req-package
+;; is loaded.
+;; https://github.com/edvorg/req-package/issues/33#issuecomment-211359690
+(require 'as-custom)
+
 (require-elpa-package 'req-package)
 
 (provide 'as-req-package)
