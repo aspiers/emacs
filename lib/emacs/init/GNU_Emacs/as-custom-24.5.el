@@ -2155,6 +2155,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                   ("PROPERTIES" "HIDE"))
      (byte-compile-warnings redefine callargs free-vars unresolved obsolete noruntime)
      (auto-recompile))))
+ '(sass-indent-offset 4)
  '(save-abbrevs (quote silently))
  '(scroll-bar-mode (quote right))
  '(scroll-conservatively 10)

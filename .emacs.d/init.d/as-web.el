@@ -5,5 +5,7 @@
 
 (req-package gist)
 (req-package haml-mode)
+(req-package sass-mode
+  :mode "\\.scss\\'")
 
 (provide 'as-web)
