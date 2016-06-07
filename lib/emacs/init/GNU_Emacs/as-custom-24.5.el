@@ -2229,7 +2229,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-line-column 80)
  '(whitespace-style
    (quote
-    (face trailing space-before-tab newline empty tab-mark)))
+    (face trailing space-before-tab newline empty tab-mark tabs)))
  '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
  '(yas-snippet-dirs
    (quote
@@ -2283,5 +2283,5 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick"))))
- '(whitespace-tab ((t (:foreground "dim gray"))))
+ '(whitespace-tab ((t (:foreground "gray30"))))
  '(whitespace-trailing ((t (:background "#451a00" :foreground "yellow" :weight bold)))))
