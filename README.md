@@ -14,9 +14,9 @@ OVERVIEW
 I use:
 
 *   `package.el` for installing most packages, because:
-        *   its dependency tracking is version-aware
-	*   MELPA has tons of great packages
-	*   MELPA stable is nice when I'm feeling risk-averse
+    *   its dependency tracking is version-aware
+    *   MELPA has tons of great packages
+    *   MELPA stable is nice when I'm feeling risk-averse
 *   [`el-get`](http://www.emacswiki.org/emacs/el-get) for installing and
     compiling packages when I want to work with more bleeding edge code
     (but I try to keep it to a minimum, because [it's not great at
