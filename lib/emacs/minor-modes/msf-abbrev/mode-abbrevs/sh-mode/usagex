@@ -5,10 +5,6 @@ usage () {
         exit_code="$1"
         shift
     fi
-    if [ -n "$1" ]; then
-      echo >&2 "$*"
-      echo
-    fi
 
     me=`basename $0`
 
@@ -19,6 +15,12 @@ Options:
   -v, --version  Output version information and exit
 <field "options">
 EOF
+
+    if [ -n "$1" ]; then
+        echo >&2
+        echo >&2 "$*"
+    fi
+
     exit "$exit_code"
 }
 
