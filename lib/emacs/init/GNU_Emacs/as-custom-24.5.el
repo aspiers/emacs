@@ -380,6 +380,7 @@
      (:name smooth-scrolling :pkgname "DarwinAwardWinner/smooth-scrolling"))))
  '(eldoc-minor-mode-string "")
  '(eldoc-mode t t)
+ '(emms-player-list (quote (\"mplayer\" \"vlc\")))
  '(enable-local-eval t)
  '(enable-local-variables :all)
  '(erc-autojoin-channels-alist
