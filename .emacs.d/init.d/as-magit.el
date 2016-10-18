@@ -87,7 +87,8 @@
   :config
   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
-;; magithub is a dead project
+(req-package magithub
+  :loader :el-get)
 
 ;; support for magit: links in org buffers
 (req-package org-magit
