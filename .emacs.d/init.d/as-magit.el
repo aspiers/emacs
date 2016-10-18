@@ -36,7 +36,8 @@
                      (projectile-relevant-known-projects))))
       (setq magit-repo-dirs-depth 1)))
 
-  (bind-key "C-c g b"  'magit-run-git-gui-blame)
+  (bind-key "C-c g b"  'magit-blame)
+  (bind-key "C-c g B"  'magit-run-git-gui-blame)
   (bind-key "C-c g g"  'magit-run-git-gui)
   (bind-key "C-c g k"  'magit-run-gitk)
   (bind-key "C-c g a"  'magit-run-gitk-all)
