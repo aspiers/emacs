@@ -31,7 +31,10 @@
   (key-chord-define-global "zm" 'projectile-commander)
   (key-chord-define-global "zs" 'projectile-switch-project)
   (key-chord-define-global "zf" 'projectile-find-file)
-  (key-chord-define-global "zb" 'projectile-switch-to-buffer))
+  (key-chord-define-global "zb" 'projectile-switch-to-buffer)
+
+  ;; https://github.com/bbatsov/projectile/issues/496
+  (projectile-global-mode))
 
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-my-mrconfig
