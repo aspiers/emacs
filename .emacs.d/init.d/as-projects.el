@@ -6,7 +6,7 @@
 ;; Finally managed to install by fixing dependencies manually
 ;; (#1471), #1472, #1473
 
-(custom-set-variables '(projectile-keymap-prefix "^Xp"))
+(custom-set-variables '(projectile-keymap-prefix "p"))
 
 (req-package projectile
   :config
@@ -34,7 +34,7 @@
   (key-chord-define-global "zb" 'projectile-switch-to-buffer)
 
   ;; https://github.com/bbatsov/projectile/issues/496
-  (projectile-global-mode))
+  (projectile-mode))
 
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-my-mrconfig
