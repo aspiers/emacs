@@ -1874,7 +1874,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
  '(org-capture-templates
    (quote
-    (("t" "Invisalign" entry
+    (("s" "supportconfig madness" entry
+      (file+headline "~/SUSE/TODO.org" "individual instances")
+      "***** %u %?" :prepend t :jump-to-captured t)
+     ("t" "Invisalign" entry
       (file+headline "~/org/notes/Invisalign.org" "journal")
       "*** %t
 ***** %?" :prepend t :immediate-finish t)
