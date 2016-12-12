@@ -2135,7 +2135,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
- '(projectile-keymap-prefix "^Xp")
+ '(projectile-keymap-prefix "p")
  '(projectile-switch-project-action (quote projectile-vc))
  '(projectile-use-git-grep t)
  '(ps-lpr-command "kprinter")
