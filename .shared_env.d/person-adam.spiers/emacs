@@ -3,6 +3,7 @@
 ED=$ZDOTDIR/.emacs.d
   EID=$ZDOTDIR/.emacs.d/init.d
   ELG=$ZDOTDIR/.emacs.d/el-get
+  ELPA=$ZDOTDIR/.emacs.d/elpa
 LE=$ZDOTDIR/lib/emacs
   LEI=$LE/init
     LEC=$LEI/common
