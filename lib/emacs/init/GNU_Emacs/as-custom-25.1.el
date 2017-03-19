@@ -1876,7 +1876,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (("s" "supportconfig madness" entry
       (file+headline "~/SUSE/TODO.org" "individual instances")
-      "***** %u %?" :prepend t :jump-to-captured t)
+      "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("t" "Invisalign" entry
       (file+headline "~/org/notes/Invisalign.org" "journal")
       "*** %t
