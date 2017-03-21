@@ -13,11 +13,10 @@
 
 (bind-key "C-x K" 'as-destroy-buffer)
 (bind-key "C-!"   'ido-switch-buffer)
-(bind-key "C-="   'switch-to-prev-buffer)
-(bind-key "C-+"   'switch-to-next-buffer)
 (bind-key "C-c r" 'as-revert-buffer-without-confirmation)
 (bind-key "C-c b" 'bury-buffer)
-(bind-key "C-;"   'bury-buffer)
+(bind-key "C-;"   'switch-to-prev-buffer)
+(bind-key "C-:"   'switch-to-next-buffer)
 (bind-key "C-c B" 'as-bounce-buffer)
 (bind-key "C-x I" 'insert-buffer)
 (bind-key "<F6>"  'as-bounce-buffer)

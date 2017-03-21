@@ -47,9 +47,6 @@ lispdir = $(prefix)/share/emacs/site-lisp
 # 3rd party packages are those which have their own Makefiles
 # and are responsible for compiling *and* installing themselves.
 
-# These should be symlinked to the correct versions.
-ORG_DIR        = $(MAJOR_MODES)/org-mode.git
-
 # Pros of symlinking foo -> foo-1.2.3 approach:
 #  - allows different versions per machine
 #
@@ -64,17 +61,11 @@ THIRD_PARTY_PKG_TARGETS =
 # directories:
 THIRD_PARTY_PKG_DIRS =
 
-ifneq (,$(wildcard $(ORG_DIR)))
-        THIRD_PARTY_PKG_TARGETS += .org-installed
-        THIRD_PARTY_PKG_DIRS    += $(ORG_DIR)
-endif
-
 # }}}
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
 el_search_paths =                       \
         $(wildcard $(MAJOR_MODES)/*.el) \
-        $(ORG_DIR)/contrib/lisp         \
         $(MINOR_MODES)                  \
         $(UTILS)
 
@@ -84,13 +75,6 @@ el_search_paths =                       \
 
 # N.B. The override is performed by moving these .el files from
 # $(POST_INSTALL_DIR) to $(PRE_INSTALL_DIR).
-
-ifneq (,$(wildcard $(ORG_DIR)))
-  EL_OVERRIDES =
-# This one no longer necessary since we install org-mode directly
-# into $(PRE_INSTALL_DIR)
-#   EL_OVERRIDES = org*
-endif
 
 # }}}
 
@@ -109,27 +93,12 @@ IGNORE_PATHS =                                          \
 IGNORE_FILES =                                          \
         loaddefs.el
 
-ifeq (,$(wildcard $(ORG_DIR)))
-        IGNORE_FILES += $(MAJOR_MODES)/org-*.el $(UTILS)/as-gtd.el
-endif
-
-ifeq "$(findstring 21.,$(VERSION_NUMBER))" "21."
-# org-annotation-helper.el needs url which isn't in emacs 21
-# ditto org-irc.el which needs erc
-        IGNORE_FILES += $(MAJOR_MODES)/org-annotation-helper.el \
-                        $(ORG_DIR)/lisp/org-irc.el
-endif
-
 # }}}
 # {{{ Directories to scan for autoload cookies
 
 LOADDEFS_DIRS = $(UTILS) $(LIB_DIR)
 
 # }}}
-
-ifneq (,$(wildcard $(ORG_DIR)))
-        TO_CLEAN += org
-endif
 
 # }}}
 
@@ -427,45 +396,6 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 
 # as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
 $(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
-$(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: .org-installed
 
-
-# }}}
-# {{{ org-mode
-
-$(MAJOR_MODES)/org-action-verbs.elc: LIBDIRS += $(ORG_DIR)/lisp
-
-ifeq (,$(wildcard $(ORG_DIR)))
-clean-org:
-	@echo "Won't clean non-existent $(ORG_DIR)"
-.org-installed:
-	@echo "Won't install from non-existent $(ORG_DIR)"
-else
-clean-org:
-	rm -f .org-installed
-	$(MAKE) -C $(ORG_DIR) clean
-.org-installed: $(wildcard $(ORG_DIR)/lisp/*.el)
-	@echo "Don't install org-mode this way any more!"
-	@false
-	@$(UNLOCK_INSTALL_DIRS)
-#       EMACS="$(EMACS) -L $(lispdir)/epg"
-#       http://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg00265.html
-	$(MAKE) -C $(ORG_DIR) all install \
-	        prefix=$(prefix) \
-	        lispdir=$(PRE_INSTALL_DIR)
-	cp $(ORG_DIR)/contrib/lisp/*.el $(PRE_INSTALL_DIR)
-	@$(LOCK_INSTALL_DIRS)
-	-$(MAKE) -C $(ORG_DIR) install-info \
-	        prefix=$(prefix) \
-	        infodir=$(infodir)
-	touch $@
-org-uninstall:
-	@$(UNLOCK_INSTALL_DIRS)
-	$(MAKE) -C $(ORG_DIR) clean-install \
-	        prefix=$(prefix) \
-	        infodir=$(infodir)
-	rm -f $(PRE_INSTALL_DIR)/{{org,ob,ox,orgtbl}{,-*},htmlize}.{el,elc}
-	@$(LOCK_INSTALL_DIRS)
-endif
 
 # }}}
