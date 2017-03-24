@@ -72,4 +72,6 @@
 (req-package org-sync
   :requires org)
 
+(req-package org-plus-contrib)
+
 (provide 'as-org-mode)
