@@ -18,3 +18,5 @@ This function is a possible value for `erc-generate-log-file-name-function'."
   (let ((file (concat target ".txt")))
     ;; we need a make-safe-file-name function.
     (convert-standard-filename file)))
+
+(provide 'as-erc)

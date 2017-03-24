@@ -56,3 +56,4 @@ a tar archive), do nothing."
           (message "%s set to %0o" (buffer-file-name) new-mode)))))))
 ;;)
 
+(provide 'as-sh-mode-exts)

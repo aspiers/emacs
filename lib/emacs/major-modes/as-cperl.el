@@ -131,3 +131,5 @@ point somewhere *before* the if/unless/while/until/for/foreach modifier."
   (setq indent-tabs-mode nil)
   (make-variable-buffer-local 'cperl-indent-level)
   (set-default 'cperl-indent-level 2))
+
+(provide 'as-cperl)
