@@ -197,7 +197,7 @@ all: .elcs install
 # {{{ debugging targets
 
 show-compiler:
-	@echo 'COMPILER:          "$(COMPILER)"'
+	@echo 'COMPILER:          "'"$(COMPILER)"'"'
 	@echo 'COMPILER_PRE_OPTS: "$(COMPILER_PRE_OPTS)"'
 	@echo 'COMPILER_OPTS:     "$(COMPILER_OPTS)"'
 
