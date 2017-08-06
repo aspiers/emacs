@@ -58,7 +58,7 @@
 (req-package idomenu) ;; http://emacsrocks.com/e10.html
 ;; ido-hacks
 ;; ido-everywhere
-(req-package ido-ubiquitous)
+;; ido-ubiquitous now obsolete
 (req-package ido-vertical-mode)
 
 
