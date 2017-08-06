@@ -1423,6 +1423,7 @@
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(magit-display-buffer-function (quote magit-display-buffer-fullscreen))
+ '(magit-gitk-executable "/usr/bin/gitk")
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument (quote default))
  '(magit-prefer-remote-upstream t)
@@ -2126,7 +2127,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(outline-auto-activation t)
  '(package-archives
    (quote
-    (("ELPA" . "http://tromey.com/elpa/")
+    (("Org" . "http://orgmode.org/elpa/")
+     ("ELPA" . "http://tromey.com/elpa/")
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
      ("MELPA" . "http://melpa.milkbox.net/packages/")
@@ -2288,7 +2290,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/filename ((t (:inherit sml/global :foreground "SeaGreen4" :weight bold))))
  '(sml/global ((t (:foreground "gray10"))))
  '(sml/prefix ((t (:inherit sml/global :foreground "#d07a00"))))
- '(sml/read-only ((t (:inherit sml/global :foreground "medium blue"))))
+ '(sml/read-only ((t (:inherit sml/global :foreground "dodger blue"))))
  '(sml/time ((t (:inherit sml/global))))
  '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
  '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
