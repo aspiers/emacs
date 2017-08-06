@@ -81,6 +81,7 @@
       (get-buffer-window buffer))))
 
 (req-package magit-topgit)
+(req-package magit-annex)
 
 (req-package magit-gh-pulls
   :requires magit
