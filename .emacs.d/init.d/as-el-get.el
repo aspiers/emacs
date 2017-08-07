@@ -1,3 +1,5 @@
+(require 'as-progress)
+
 (eval-and-compile (as-loading-started))
 
 (require 'as-org-mode-early)
