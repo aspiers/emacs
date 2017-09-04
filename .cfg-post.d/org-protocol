@@ -6,7 +6,7 @@ if ! which $GCONFTOOL >/dev/null 2>&1; then
     echo "WARNING: can't find $GCONFTOOL; url-handlers will not be set" >&2
 else
     $GCONFTOOL -s /desktop/gnome/url-handlers/org-protocol/command \
-               -t string 'quick-emacs %s'
+               -t string 'quick-emacs --bg-if-poss %s'
     $GCONFTOOL -s /desktop/gnome/url-handlers/org-protocol/enabled -t bool yes
 fi
 
