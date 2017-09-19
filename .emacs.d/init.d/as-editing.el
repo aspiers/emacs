@@ -26,6 +26,19 @@ The list marked is the one that contains point or follows point."
 (bind-key "M-\\"    'fixup-whitespace)
 (bind-key "M-s M-k" 'delete-trailing-whitespace)
 
+(defun as-format-as-flowed-text ()
+  "Format the buffer as flowed text according to RFC 2646.
+This simply ensures that appropriate lines should be terminated
+with a single space.  Operates on the current region if active,
+otherwise on the whole buffer."
+  (interactive)
+  (save-excursion
+    (or (use-region-p) (goto-char (point-min)))
+    (while (re-search-forward "^\\(>+ ?\\)?\\S-.*\\S-$"
+                              (and (use-region-p) (point-max)) t)
+      (replace-match "\\& " t))))
+(bind-key "M-s M-m" 'as-format-as-flowed-text)
+
 (req-package bn-kill-stuff
   :bind (("C-M-(" . bn-strip-parentheses)
          ("C-w"   . bn-kill-region-or-backword-word)
