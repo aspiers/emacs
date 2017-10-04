@@ -2120,7 +2120,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-yank-adjusted-subtrees t)
  '(org2blog/wp-blog-alist
    (quote
-    (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
+    (("blog.adamspiers.org" :url "https://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(org2blog/wp-image-thumbnails nil)
  '(org2blog/wp-sourcecode-default-params "")
  '(org2blog/wp-use-sourcecode-shortcode t)
