@@ -2035,6 +2035,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-goto-interface (quote outline))
  '(org-goto-max-level 7)
  '(org-hide-leading-stars t)
+ '(org-html-allow-name-attribute-in-anchors t)
  '(org-icalendar-store-UID t)
  '(org-icalendar-timezone "Europe/London")
  '(org-link-abbrev-alist
