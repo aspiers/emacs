@@ -1438,6 +1438,7 @@
  '(magit-status-headers-hook
    (quote
     (magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-header magit-insert-upstream-header magit-insert-tags-header)))
+ '(magit-status-show-hashes-in-headers t)
  '(magit-unstage-all-confirm nil)
  '(mail-envelope-from (quote header))
  '(mail-self-blind t)
