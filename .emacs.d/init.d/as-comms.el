@@ -1,4 +1,5 @@
-;; Interaction / communication with other people
+;; Interaction / communication with other people.
+;; See as-mail.el for mail-specific setup.
 
 ;;{{{ mutt
 
@@ -11,12 +12,6 @@
    (turn-on-auto-fill)
    (as-setup-mode-for-discussion)
    (as-set-local-server-edit-keys)))
-
-;;}}}
-;;{{{ crm114-mode
-
-(autoload 'crm114-mode "crm114-mode" "crm114-mode" t)
-(add-to-list 'auto-mode-alist '("\\.crm$" . crm114-mode))
 
 ;;}}}
 ;;{{{ ispell
