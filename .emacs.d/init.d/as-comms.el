@@ -14,11 +14,7 @@ other people."
 
    (setq comment-start "> "))
 
-;;{{{ ispell
-
 (bind-key "C-$"   'ispell-complete-word)
 (bind-key "C-M-$" 'ispell-buffer)
-
-;;}}}
 
 (provide 'as-comms)
