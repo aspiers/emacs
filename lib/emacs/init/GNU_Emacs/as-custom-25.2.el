@@ -2178,6 +2178,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(search-upper-case t)
  '(send-mail-function (quote sendmail-send-it))
  '(sendmail-program "msmtp-personal")
+ '(sentence-end-base "\\([.?!…‽][]\"'”’)}]*\\|[;:]-?[])[(|DoO/]\\)")
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
