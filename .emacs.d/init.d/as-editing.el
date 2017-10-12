@@ -49,8 +49,8 @@ the whole buffer."
           (set-marker eolm eol)
           (goto-char (match-beginning 0))
           (while (looking-at ">")
-            (if (looking-at "> ")
-                (replace-match ">")
+            (if (looking-at "> \\([^  ]\\)")
+                (replace-match ">\\1")
               (forward-char)))
           (goto-char (marker-position eolm)))))))
 
