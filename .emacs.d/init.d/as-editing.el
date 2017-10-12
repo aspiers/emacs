@@ -38,7 +38,7 @@ the whole buffer."
     (save-excursion
       (goto-char start)
       ;; Ensure appropriate lines end with a space
-      (while (re-search-forward "^\\(>+ ?\\)?\\S-.*\\S-$" end t)
+      (while (re-search-forward "^\\(>+ ?\\)?\\S-.\\{10,\\}\\S-$" end t)
         (replace-match "\\& " t))
 
       ;; Replace "> " quoting prefixes with ">"
