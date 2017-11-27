@@ -394,8 +394,6 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 # }}}
 # {{{ Special rules for utils files
 
-# as-gtd needs $(ORG_DIR)/contrib/lisp/org-mairix.el
-$(UTILS)/as-gtd.elc $(UTILS)/as-mairix.elc: LIBDIRS += $(UTILS) $(ORG_DIR)/contrib/lisp
 
 
 # }}}
