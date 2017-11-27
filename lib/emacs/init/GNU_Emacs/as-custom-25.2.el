@@ -2133,8 +2133,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("ELPA" . "http://tromey.com/elpa/")
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
-     ("MELPA" . "http://melpa.milkbox.net/packages/")
-     ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))
+     ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
     (magit-annex org-plus-contrib yasnippet yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python projectile phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit magit-gh-pulls macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
