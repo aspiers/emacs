@@ -2289,6 +2289,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
  '(org-hide ((nil (:foreground "black"))))
  '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
+ '(rpm-spec-tag-face ((t (:foreground "deep sky blue"))))
  '(scroll-bar ((t (:background "grey45"))))
  '(sml/filename ((t (:inherit sml/global :foreground "forest green" :weight bold))))
  '(sml/folder ((t (:inherit sml/global :foreground "black" :weight normal))))
