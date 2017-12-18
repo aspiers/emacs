@@ -42,11 +42,11 @@
 ;;}}}
 ;;{{{ git-gutter
 
-(req-package git-gutter
+(req-package git-gutter+
   :config
-  (global-git-gutter-mode t))
+  (global-git-gutter+-mode t))
 
-;; (req-package git-gutter-fringe)
+(req-package git-gutter-fringe+)
 
 ;;}}}
 
