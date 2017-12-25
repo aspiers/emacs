@@ -1438,6 +1438,7 @@
  '(magit-status-headers-hook
    (quote
     (magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-header magit-insert-upstream-header magit-insert-tags-header)))
+ '(magit-status-show-hashes-in-headers t)
  '(magit-unstage-all-confirm nil)
  '(mail-envelope-from (quote header))
  '(mail-self-blind t)
@@ -2034,6 +2035,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-goto-interface (quote outline))
  '(org-goto-max-level 7)
  '(org-hide-leading-stars t)
+ '(org-html-allow-name-attribute-in-anchors t)
  '(org-icalendar-store-UID t)
  '(org-icalendar-timezone "Europe/London")
  '(org-link-abbrev-alist
@@ -2120,7 +2122,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-yank-adjusted-subtrees t)
  '(org2blog/wp-blog-alist
    (quote
-    (("blog.adamspiers.org" :url "http://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
+    (("blog.adamspiers.org" :url "https://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
  '(org2blog/wp-image-thumbnails nil)
  '(org2blog/wp-sourcecode-default-params "")
  '(org2blog/wp-use-sourcecode-shortcode t)
@@ -2134,7 +2136,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (messages-are-flowing magit org-plus-contrib yasnippet yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python projectile phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit magit-gh-pulls macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (sclang-extensions messages-are-flowing magit magit-annex org-plus-contrib yasnippet yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python projectile phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit magit-gh-pulls macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -2175,6 +2177,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(search-upper-case t)
  '(send-mail-function (quote sendmail-send-it))
  '(sendmail-program "msmtp-personal")
+ '(sentence-end-base "\\([.?!…‽][]\"'”’)}]*\\|[;:]-?[])[(|DoO/]\\)")
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
  '(show-paren-ring-bell-on-mismatch nil)
@@ -2256,15 +2259,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-button ((t (:background "lightgrey" :foreground "gray20" :box (:line-width 2 :style released-button)))))
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
- '(custom-variable-tag ((t (:foreground "blue" :weight bold :height 1.4 :family "helvetica"))))
- '(cvs-msg-face ((t (:slant italic))) t)
+ '(custom-variable-tag ((t (:foreground "deep sky blue" :weight bold :height 1.4 :family "helvetica"))))
+ '(cvs-msg-face ((t (:slant italic))))
  '(diff-added ((t (:inherit diff-changed :foreground "green3"))))
  '(diff-file-header ((t (:foreground "dark orange" :weight bold))))
  '(diff-header ((t (:foreground "dark orange"))))
  '(diff-refine-added ((t (:inherit diff-refine-change :background "#168816"))))
- '(diff-refine-change ((t (:background "grey30"))) t)
+ '(diff-refine-changed ((t (:background "grey30"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red3"))))
- '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
+ '(erc-current-nick-face ((t (:background "green yellow" :weight bold))))
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))) t)
  '(font-lock-preprocessor-face ((t (:foreground "magenta"))))
@@ -2285,6 +2288,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
  '(org-hide ((nil (:foreground "black"))))
  '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
+ '(rpm-spec-tag-face ((t (:foreground "deep sky blue"))))
  '(scroll-bar ((t (:background "grey45"))))
  '(sml/filename ((t (:inherit sml/global :foreground "forest green" :weight bold))))
  '(sml/folder ((t (:inherit sml/global :foreground "black" :weight normal))))
