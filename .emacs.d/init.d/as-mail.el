@@ -2,7 +2,7 @@
 
 (req-package messages-are-flowing
   :config
-  (add-hook 'mail-mode-hook
+  (add-hook 'message-mode-hook
             'messages-are-flowing-use-and-mark-hard-newlines))
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
