@@ -1,5 +1,10 @@
 ;; See as-comms.el for setup related to general communication
 
+(req-package messages-are-flowing
+  :config
+  (add-hook 'mail-mode-hook
+            'messages-are-flowing-use-and-mark-hard-newlines))
+
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
 (add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . message-mode))
 (eval-when-compile (require 'sendmail))
