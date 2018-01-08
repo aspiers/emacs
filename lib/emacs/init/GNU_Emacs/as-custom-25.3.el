@@ -2227,7 +2227,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
- '(tramp-verbose 13)
+ '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
