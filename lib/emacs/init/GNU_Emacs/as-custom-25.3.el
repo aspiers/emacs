@@ -2152,6 +2152,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(region-bindings-mode-enabled-modes
    (quote
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
+ '(remote-file-name-inhibit-cache 1800)
  '(require-final-newline nil)
  '(rm-blacklist
    (quote
@@ -2227,6 +2228,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
+ '(tramp-completion-reread-directory-timeout 1800)
  '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
