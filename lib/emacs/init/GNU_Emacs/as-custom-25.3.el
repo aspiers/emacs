@@ -2240,6 +2240,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
  '(visible-bell t)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
