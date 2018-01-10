@@ -91,7 +91,11 @@
 (req-package magit-gerrit)
 
 (req-package magithub
-  :loader :el-get)
+  :after magit
+  :ensure t
+  :config
+  (magithub-feature-autoinject t)
+  (setq magithub-features '((pull-request-merge . t) (other-feature . nil))))
 
 ;; support for magit: links in org buffers
 (req-package org-magit
