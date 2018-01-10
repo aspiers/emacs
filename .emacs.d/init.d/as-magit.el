@@ -83,11 +83,6 @@
 (req-package magit-topgit)
 (req-package magit-annex)
 
-(req-package magit-gh-pulls
-  :requires magit
-  :config
-  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-
 (req-package magit-gerrit)
 
 (req-package magithub

@@ -1383,7 +1383,6 @@
    (quote
     ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
      (dired-mode "%" "*" "C-t")
-     (magit-gh-pulls-mode "# g")
      (org-mode "C-c C-x"))))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
@@ -1440,7 +1439,7 @@
     (magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-header magit-insert-upstream-header magit-insert-tags-header)))
  '(magit-status-sections-hook
    (quote
-    (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes magit-gh-pulls-insert-gh-pulls magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
+    (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes  magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
  '(magit-status-show-hashes-in-headers t)
  '(magit-unstage-all-confirm nil)
  '(mail-envelope-from (quote header))
