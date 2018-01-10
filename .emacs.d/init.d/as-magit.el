@@ -90,7 +90,7 @@
   :ensure t
   :config
   (magithub-feature-autoinject t)
-  (setq magithub-features '((pull-request-merge . t) (other-feature . nil))))
+  (setq magithub-features '((pull-request-merge . t) (pull-request-checkout . nil))))
 
 ;; support for magit: links in org buffers
 (req-package org-magit
