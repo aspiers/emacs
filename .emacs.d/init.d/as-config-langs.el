@@ -11,7 +11,7 @@
 (req-package xrdb-mode
   ;; Can't get this working:
   ;; https://github.com/edvorg/req-package/issues/29
-  :loader :el-get
+  :el-get t
   :mode ("\\.Xdefaults$"    . xrdb-mode)
   :mode ("\\.Xenvironment$" . xrdb-mode)
   :mode ("\\.Xresources$"   . xrdb-mode)

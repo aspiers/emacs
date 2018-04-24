@@ -1,7 +1,7 @@
 ;; Scrolling
-(add-to-list 'load-path (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling"))
-(req-package smooth-scrolling
-  :loader :built-in)
+(use-package smooth-scrolling
+  :load-path (lambda ()
+               (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling")))
 
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)

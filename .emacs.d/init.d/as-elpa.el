@@ -23,4 +23,11 @@ installed."
                    (package-install package)))
              (require package))))
 
+(defun require-elpa-packages (&rest packages)
+  (dolist (package packages)
+    (require-elpa-package package)))
+
+(require-elpa-packages 'use-package-el-get)
+(use-package-el-get-setup)
+
 (provide 'as-elpa)

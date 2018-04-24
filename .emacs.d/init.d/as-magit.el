@@ -91,7 +91,7 @@
 (req-package magit-gerrit)
 
 (req-package magithub
-  :loader :el-get)
+  :el-get t)
 
 ;; support for magit: links in org buffers
 (req-package org-magit
