@@ -8,7 +8,19 @@
 
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
+(require 'as-key-chord)
 (req-package projectile
+
+  ;; Not needed since guide-key/recursive-key-sequence-flag is set:
+  ;; (setq guide-key/guide-key-sequence
+  ;;       '("<key-chord> z p" "<key-chord> p z"))
+  :chords (("zp" . projectile-prefix-map)
+           ("ZG" . projectile-grep)
+           ("zm" . projectile-commander)
+           ("zs" . projectile-switch-project)
+           ("zf" . projectile-find-file)
+           ("zb" . projectile-switch-to-buffer))
+
   :config
   ;; https://github.com/bbatsov/projectile/issues/287
   (defvar projectile-prefix-map
@@ -21,17 +33,6 @@
   (define-key mode-specific-map (kbd "p") nil)
   (bind-key "C-c p" 'as-copy-previous-line-suffix)
   (require 'as-key-chord)
-
-  ;; Not needed since guide-key/recursive-key-sequence-flag is set:
-  ;; (setq guide-key/guide-key-sequence
-  ;;       '("<key-chord> z p" "<key-chord> p z"))
-  (key-chord-define-global "zp" projectile-prefix-map)
-
-  (key-chord-define-global "ZG" 'projectile-grep)
-  (key-chord-define-global "zm" 'projectile-commander)
-  (key-chord-define-global "zs" 'projectile-switch-project)
-  (key-chord-define-global "zf" 'projectile-find-file)
-  (key-chord-define-global "zb" 'projectile-switch-to-buffer)
 
   ;; https://github.com/bbatsov/projectile/issues/496
   (projectile-mode))

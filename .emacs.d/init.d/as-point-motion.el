@@ -13,9 +13,8 @@
 (setq next-line-add-newlines nil)
 
 (req-package iy-go-to-char
-  (require 'as-key-chord)
-  :config
-  (key-chord-define-global "zv" 'iy-go-to-char))
+  :requires as-key-chord
+  :chords (("zv" . iy-go-to-char)))
 
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
