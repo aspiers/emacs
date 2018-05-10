@@ -7,7 +7,7 @@
 (defun as-org-convert-buffer-sub-to-effort ()
   "Convert all 'sub*' tags within a buffer into 'Effort' properties."
   (interactive)
-  (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))  
+  (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))
 
 (defun as-org-convert-headline-sub-to-effort ()
   "Convert a headline with a 'sub*' tag into an 'Effort' property."
