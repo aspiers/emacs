@@ -2152,6 +2152,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(region-bindings-mode-enabled-modes
    (quote
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
+ '(req-package-log-level (quote debug))
  '(require-final-newline nil)
  '(rm-blacklist
    (quote
