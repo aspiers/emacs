@@ -85,8 +85,8 @@
 
 (req-package magit-gerrit)
 
-(req-package magithub)
-  :after magit
+(req-package magithub
+  :require magit
   :ensure t
   :config
   (magithub-feature-autoinject t)
