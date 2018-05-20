@@ -5,9 +5,6 @@
           (memq 'org-irc org-default-extensions))
       (defvar org-default-extensions '(org-mouse))))
 
-(as-progress "loading org-install ...")
-(require 'org-install nil 'noerror)
-
 ;; FIXME: use req-package
 (require 'as-require)
 (when (as-check-feature-loaded 'org-install)
