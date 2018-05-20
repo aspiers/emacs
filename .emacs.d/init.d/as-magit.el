@@ -83,14 +83,14 @@
 (req-package magit-topgit)
 (req-package magit-annex)
 
-;; (req-package magit-gh-pulls
-;;   :require magit
-;;   :config
-;;   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-
 (req-package magit-gerrit)
 
 (req-package magithub)
+  :after magit
+  :ensure t
+  :config
+  (magithub-feature-autoinject t)
+  (setq magithub-features '((pull-request-merge . t) (pull-request-checkout . nil))))
 
 ;; support for magit: links in org buffers
 (req-package org-magit

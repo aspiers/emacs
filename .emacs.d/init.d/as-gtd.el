@@ -113,7 +113,6 @@ search should be continued."
   :bind (:map org-agenda-mode-map
          ("i" . 'org-agenda-clock-in )
          ("o" . 'org-agenda-clock-out)))
-
 (defun org-count-keywords ()
   "Count number of occurrences of TODO keywords in the current
 buffer, respecting any scope restriction."

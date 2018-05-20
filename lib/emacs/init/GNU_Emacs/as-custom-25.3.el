@@ -1383,7 +1383,6 @@
    (quote
     ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
      (dired-mode "%" "*" "C-t")
-     (magit-gh-pulls-mode "# g")
      (org-mode "C-c C-x"))))
  '(guide-key/popup-window-position (quote bottom))
  '(guide-key/recursive-key-sequence-flag t)
@@ -1438,6 +1437,9 @@
  '(magit-status-headers-hook
    (quote
     (magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-header magit-insert-upstream-header magit-insert-tags-header)))
+ '(magit-status-sections-hook
+   (quote
+    (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes  magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
  '(magit-status-show-hashes-in-headers t)
  '(magit-unstage-all-confirm nil)
  '(mail-envelope-from (quote header))
@@ -2136,7 +2138,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (org-crypt use-package-ensure-system-package use-package-chords use-package-el-get ruby-mode magit-gerrit sclang-extensions messages-are-flowing magit magit-annex org-plus-contrib yasnippet yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python projectile phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (org-crypt use-package-ensure-system-package use-package-chords use-package-el-get messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -2152,6 +2154,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(region-bindings-mode-enabled-modes
    (quote
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
+ '(remote-file-name-inhibit-cache 1800)
  '(req-package-log-level (quote debug))
  '(require-final-newline nil)
  '(rm-blacklist
@@ -2228,7 +2231,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
- '(tramp-verbose 13)
+ '(tramp-completion-reread-directory-timeout 1800)
+ '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
@@ -2238,6 +2242,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
  '(visible-bell t)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
@@ -2262,14 +2268,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
  '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
  '(custom-variable-tag ((t (:foreground "deep sky blue" :weight bold :height 1.4 :family "helvetica"))))
- '(cvs-msg-face ((t (:slant italic))))
+ '(cvs-msg-face ((t (:slant italic))) t)
  '(diff-added ((t (:inherit diff-changed :foreground "green3"))))
  '(diff-file-header ((t (:foreground "dark orange" :weight bold))))
  '(diff-header ((t (:foreground "dark orange"))))
  '(diff-refine-added ((t (:inherit diff-refine-change :background "#168816"))))
+ '(diff-refine-change ((t (:background "grey30"))) t)
  '(diff-refine-changed ((t (:background "grey30"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red3"))))
- '(erc-current-nick-face ((t (:background "green yellow" :weight bold))))
+ '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
  '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
  '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))) t)
  '(font-lock-preprocessor-face ((t (:foreground "magenta"))))

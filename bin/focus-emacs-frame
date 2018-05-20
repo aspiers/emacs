@@ -23,9 +23,15 @@ check_prereqs () {
         fatal "wmctrl not found; aborting."
     fi
 
-    # if ! which xdotool >/dev/null 2>&1; then
-    #     fatal "xdotool not found; aborting."
-    # fi
+    if ! which xdotool >/dev/null 2>&1; then
+        fatal "xdotool not found; aborting."
+    fi
+}
+
+get_desktop_for_window () {
+    win_id="$1"
+    #xdotool get_desktop_for_window $win_id
+    wmctrl -lpx | grep "$win_id" | awk '{print $2}'
 }
 
 main () {
@@ -39,12 +45,16 @@ main () {
 
     debug "Window name at start: $(current-window-name)"
 
-    if ! desktop=$( xdotool get_desktop_for_window $target_window_id ); then
+    if ! desktop=$( get_desktop_for_window $target_window_id ); then
         fatal "Failed to get desktop number for emacs window $target_window_id"
     fi
 
-    if ! xdotool set_desktop $desktop; then
-        fatal "Failed to switch to desktop $desktop"
+    if [ "$desktop" = -1 ]; then
+        debug "Window is sticky across all desktops"
+    else
+        if ! xdotool set_desktop $desktop; then
+            fatal "Failed to switch to desktop $desktop"
+        fi
     fi
 
     sleep=0.1
