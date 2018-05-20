@@ -15,18 +15,46 @@
   )
 
 (defvar org-mode-map)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (use-package as-gtd)
-            (imenu-add-to-menubar "Imenu")
-            (setq comment-start nil)))
+(use-package org
+  :bind
+  (("M-o a" . org-agenda)
+   ("M-S-a" . as-org-switch-to-agenda-buffer) ;; X11 only
+   ("M-o b" . as-org-switch-to-agenda-buffer)
+   ("M-o q" . org-remember)
+   ("M-o M-o" . as-org-jump-clock-or-agenda)
 
-(declare-function org-crypt-use-before-save-magic "org-crypt")
-(add-hook 'org-mode-hook
-          (lambda ()
-            (and (use-package org-crypt)
-                 (org-crypt-use-before-save-magic))
-            (add-to-list 'org-modules 'org-timer)))
+   ("C-c C-x C-j" . org-clock-goto)
+   ("M-o r" . org-clock-in-daily-review)
+
+   ;; Try to use C-c c but keeping this for backwards compatability with
+   ;; my brain.
+   ("C-c c" . org-capture)
+
+   ("C-c C-?" . org-occur-in-agenda-files))
+
+  :config
+  (defun org-clock-in-daily-review ()
+    (interactive)
+    "Clocks in to the daily review task."
+    (let ((todo-buffer (find-file "~/org/TODO.org")))
+      (with-current-buffer todo-buffer
+        (goto-char
+         (org-find-exact-headline-in-buffer "daily review" todo-buffer 'pos-only))
+        (org-clock-in)))
+    (as-org-switch-to-agenda-buffer))
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (imenu-add-to-menubar "Imenu")
+              (setq comment-start nil)))
+
+  (require 'org-crypt)
+  (add-to-list 'org-modules 'org-timer)
+  (org-crypt-use-before-save-magic))
+
+(req-package as-gtd
+  :require org
+  :ensure nil)
 
 ;; FIXME: use https://github.com/edvorg/req-package ?
 ;; https://github.com/jwiegley/use-package/issues/71
@@ -39,36 +67,12 @@
 
 (autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
-(bind-key "M-o a" 'org-agenda)
-(bind-key "M-S-a" 'as-org-switch-to-agenda-buffer) ;; X11 only
-(bind-key "M-o b" 'as-org-switch-to-agenda-buffer)
-(bind-key "M-o q" 'org-remember)
-(bind-key "M-o M-o" 'as-org-jump-clock-or-agenda)
-
-(bind-key "C-c C-x C-j" 'org-clock-goto)
-
-(defun org-clock-in-daily-review ()
-  (interactive)
-  "Clocks in to the daily review task."
-  (let ((todo-buffer (find-file "~/org/TODO.org")))
-    (with-current-buffer todo-buffer
-      (goto-char
-       (org-find-exact-headline-in-buffer "daily review" todo-buffer 'pos-only))
-      (org-clock-in)))
-  (as-org-switch-to-agenda-buffer))
-
-(bind-key "M-o r" 'org-clock-in-daily-review)
-
-;; Try to use C-c c but keeping this for backwards compatability with
-;; my brain.
-(bind-key "C-c c" 'org-capture)
-
-(autoload 'org-occur-in-agenda-files "org" nil t)
-(bind-key "C-c C-?" 'org-occur-in-agenda-files)
 
 (req-package org-sync
-  :requires org)
-
-(req-package org-plus-contrib)
+  :require org)
+(req-package org-plus-contrib
+  :require org)
+(req-package orgit
+  :require org)
 
 (provide 'as-org-mode)
