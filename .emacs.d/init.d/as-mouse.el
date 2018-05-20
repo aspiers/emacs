@@ -1,5 +1,6 @@
 ;; IntelliMouse
 (req-package mwheel
+  :ensure nil
   :config
   (mwheel-install))
 
@@ -16,6 +17,7 @@
 (bind-key "C-S-<mouse-2>"      'mouse-yank-secondary)
 
 (req-package bn-secondary-region
+  :ensure nil
   :bind (("C-M-?" . bn-make-region-into-secondary)
          ("C-M-T" . bn-exchange-region-and-secondary)
          ("C-g"   . bn-keyboard-quit)))

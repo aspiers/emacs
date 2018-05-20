@@ -3,6 +3,7 @@
 (bind-key "C-h a" 'apropos)
 
 (req-package set-any-var
+  :ensure nil
   :commands set-any-variable
   :bind ("C-c v" . set-any-variable))
 

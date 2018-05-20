@@ -138,8 +138,17 @@ All Text add-on."
 ;;}}}
 ;;{{{ TWiki
 
-(req-package erin-mode
+;; Needs to be loaded via the el-get recipe, since it's not in MELPA:
+;;
+;;   - http://www.neilvandyke.org/erin-twiki-emacs/
+;;   - extension at https://github.com/fitzsim/erin
+;;
+(req-package erin
+  :ensure nil
+  :el-get t
   :mode ("\\.twiki\\'" . erin-mode))
+;;
+;; See also https://github.com/christopherjwhite/emacs-twiki-mode/issues/5
 
 ;;}}}
 

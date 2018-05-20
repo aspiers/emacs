@@ -106,7 +106,10 @@ search should be continued."
       (org-clock-goto)
     (as-org-switch-to-agenda-buffer)))
 
-(req-package org-agenda
+(req-package org
+  :init
+  (require 'org-agenda)
+
   :bind (:map org-agenda-mode-map
          ("i" . 'org-agenda-clock-in )
          ("o" . 'org-agenda-clock-out)))
