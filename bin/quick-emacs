@@ -111,6 +111,14 @@ maybe_bg () {
     fi
 }
 
+# Work around loathsome exo-open URI-encoding bug.  Best to just upgrade
+# exo-tools to >= 0.12.0 though.
+# case "$1" in
+#     org-protocol://store-link%3F'*)
+#         set -- "${1/store-link%3F/store-link?}" "${@:2}"
+#         ;;
+# esac
+
 if [ -n "$server_up" ]; then
     if [ -n "$multi_tty_support" ]; then
         if [ -z "$create_frame" ]; then
