@@ -1,9 +1,19 @@
-;;; This provides support for the package system and interfacing with
-;;; ELPA package archives.
+;; Ensure that use-package, req-package, and any dependencies (such as
+;; use-package extensions) are all available and ready to use.
+;;
+;; Since req-package and its dependencies are used so commonly, we
+;; load this file up-front via as-pre-init-d, and then all the other
+;; files don't need to explicitly require it.
+
+(eval-and-compile (as-loading-started))
 
 (require 'package)
 
 ;; Make sure we have our customized value of package-archives
+;;
+;; Also req-package-log-level only takes effect if defined before
+;; req-package is loaded.
+;; https://github.com/edvorg/req-package/issues/33#issuecomment-211359690
 (require 'as-custom)
 
 (package-initialize)
@@ -27,7 +37,14 @@ installed."
   (dolist (package packages)
     (require-elpa-package package)))
 
-(require-elpa-packages 'use-package-el-get)
-(use-package-el-get-setup)
+(require-elpa-packages
+ 'use-package
+ 'req-package
+ 'use-package-ensure-system-package
+ 'use-package-chords
+ )
 
-(provide 'as-elpa)
+(require 'as-el-get)
+
+(provide 'as-package-loading)
+(eval-and-compile (as-loading-done))
