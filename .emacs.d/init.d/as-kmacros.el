@@ -2,6 +2,6 @@
 ;; available via marmalade, and it's missing a dependency on anaphora.
 ;;
 ;; (req-package kmacro-decision
-;;   :requires jb-misc-macros)
+;;   :require jb-misc-macros)
 
 (provide 'as-kmacros)

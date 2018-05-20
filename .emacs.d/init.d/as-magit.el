@@ -84,7 +84,7 @@
 (req-package magit-annex)
 
 ;; (req-package magit-gh-pulls
-;;   :requires magit
+;;   :require magit
 ;;   :config
 ;;   (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
@@ -94,6 +94,6 @@
 
 ;; support for magit: links in org buffers
 (req-package org-magit
-  :requires (org magit))
+  :require org magit)
 
 (provide 'as-magit)

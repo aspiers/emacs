@@ -13,7 +13,7 @@
 (setq next-line-add-newlines nil)
 
 (req-package iy-go-to-char
-  :requires as-key-chord
+  :require as-key-chord
   :chords (("zv" . iy-go-to-char)))
 
 (bind-key "C-S-n" 'next-logical-line)

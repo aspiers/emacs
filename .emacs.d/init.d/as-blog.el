@@ -2,7 +2,7 @@
              '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . web-mode))
 
 (req-package org2blog
-  :requires org
+  :require org
   :config
   (add-hook 'org-mode-hook
             (lambda ()
