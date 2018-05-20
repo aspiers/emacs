@@ -14,7 +14,10 @@
 
 (req-package iy-go-to-char
   :require as-key-chord
-  :chords (("zv" . iy-go-to-char)))
+  ;; Can't do this yet
+  ;; https://github.com/edvorg/req-package/issues/56
+  ;; :chords (("zv" . iy-go-to-char))
+  )
 
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
