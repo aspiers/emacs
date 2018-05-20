@@ -2233,6 +2233,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(use-package-always-ensure t)
  '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
