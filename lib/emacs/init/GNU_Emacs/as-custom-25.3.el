@@ -2061,7 +2061,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview)))
+    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview orgit)))
  '(org-odd-levels-only t)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
