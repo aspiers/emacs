@@ -1881,10 +1881,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("s" "supportconfig madness" entry
       (file+headline "~/SUSE/TODO.org" "individual instances")
       "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
-     ("t" "Invisalign" entry
-      (file+headline "~/org/notes/Invisalign.org" "journal")
-      "*** %t
-***** %?" :prepend t :immediate-finish t)
      ("o" "org mailing list item" entry
       (file+headline "~/org/TODO.org" "to list")
       "* NEXT %?" :prepend t)
