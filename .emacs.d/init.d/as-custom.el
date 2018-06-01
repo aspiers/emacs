@@ -1,8 +1,8 @@
-;; Reasons for loading this before el-get packages:
+;; Need to load this before org-mode packages:
 ;;
 ;;   * org-disputed-keys and org-replace-disputed-keys won't work
 ;;     unless set before org.el is loaded for the first time
-(require 'as-el-get)
+
 (require 'as-vars)
 (require 'as-make-backup-file-name nil 'noerror) ;; need as-make-backup-file-name
 

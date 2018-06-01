@@ -353,7 +353,7 @@
  '(cperl-under-as-char nil)
  '(custom-safe-themes
    (quote
-    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8f392c0db8c92563397d55464320b53505ece8e6066e8d30575952663787e02f" "1dd84fe8349c012731e10e39c79627841744c1d38556f22fb970de5335a44c90" "056d98129e2f4f3200b16acfdaf2cf87a9442b2ac1ed4196a109edb8f082d7da" "56cb796e4712309ede12a316d99b0a2a8c3b48a8c63bf62c257861ca103cc4d1" "e41c402084437f037d1075fe825ad9d331abe36c4c45104f01c0d14c071b46ac" "3a963acc5629c10113409c0ea5c04a8e1c2159c628bf8b0830cbd154014efe3f" default)))
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8f392c0db8c92563397d55464320b53505ece8e6066e8d30575952663787e02f" "1dd84fe8349c012731e10e39c79627841744c1d38556f22fb970de5335a44c90" "056d98129e2f4f3200b16acfdaf2cf87a9442b2ac1ed4196a109edb8f082d7da" "56cb796e4712309ede12a316d99b0a2a8c3b48a8c63bf62c257861ca103cc4d1" "e41c402084437f037d1075fe825ad9d331abe36c4c45104f01c0d14c071b46ac" "3a963acc5629c10113409c0ea5c04a8e1c2159c628bf8b0830cbd154014efe3f" default)))
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
  '(cvs-buffer-switch-list (quote ("diff" "status" "log")))
  '(cvs-find-file-and-jump t)
@@ -2059,7 +2059,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview)))
+    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview orgit)))
  '(org-odd-levels-only t)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
@@ -2134,7 +2134,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (org-crypt use-package-ensure-system-package use-package-chords use-package-el-get messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -2151,6 +2151,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (c-mode shell-script-mode emacs-lisp-mode ruby-mode python-mode org-mode)))
  '(remote-file-name-inhibit-cache 1800)
+ '(req-package-log-level (quote debug))
  '(require-final-newline nil)
  '(rm-blacklist
    (quote
@@ -2232,6 +2233,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(use-package-always-ensure t)
  '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)

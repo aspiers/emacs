@@ -54,19 +54,6 @@ All Text add-on."
 
 (add-hook 'text-mode-hook 'as-setup-text-mode)
 
-(defun as-setup-mode-for-discussion ()
-  "Sets up a text mode in the way Adam likes for discussion with
-other people."
-
-   ;; Nicer version of fill-paragraph
-   (local-set-key [(control meta q)] 'fill-common-prefix-region)
-
-   ;; Treat single quoted ("> > ") lines the same as multiple
-   ;; w.r.t. filling.
-   (setq adaptive-fill-first-line-regexp adaptive-fill-regexp)
-
-   (setq comment-start "> "))
-
 (defun itm () "Shortcut to indented-text-mode."
   (interactive)
   (indented-text-mode))
@@ -151,8 +138,17 @@ other people."
 ;;}}}
 ;;{{{ TWiki
 
-(req-package erin-mode
+;; Needs to be loaded via the el-get recipe, since it's not in MELPA:
+;;
+;;   - http://www.neilvandyke.org/erin-twiki-emacs/
+;;   - extension at https://github.com/fitzsim/erin
+;;
+(req-package erin
+  :ensure nil
+  :el-get t
   :mode ("\\.twiki\\'" . erin-mode))
+;;
+;; See also https://github.com/christopherjwhite/emacs-twiki-mode/issues/5
 
 ;;}}}
 

@@ -4,6 +4,7 @@
   :mode ("\\.dump$" . tar-mode))
 
 (req-package auto-compression-mode
+  :ensure nil
   :defer t
   :config
   (defun lac () "Load auto-compression-mode."
@@ -47,7 +48,8 @@
   "~/org/notes" "Find note: ")
 (bind-key "C-c j n"  'as-find-personal-note)
 
-(req-package as-find-file-matching-regexp-hook)
+(req-package as-find-file-matching-regexp-hook
+  :ensure nil)
 
 (require 'as-vars)
 ;; This is right for SUSE, at least, assuming that the

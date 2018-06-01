@@ -28,7 +28,7 @@
 
 ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
 (req-package smartrep
-  :requires multiple-cursors
+  :require multiple-cursors
 
   :config
   ;; Keys we want to be able to hit repeatedly
@@ -62,7 +62,7 @@
   ;;                 emacs-lisp-mode-hook
   ;;                 ruby-mode-hook python-mode-hook))
   ;;   (add-hook hook 'region-bindings-mode-enable))
-  :requires multiple-cursors
+  :require multiple-cursors
 
   :config
   (define-key region-bindings-mode-map "q"   'region-bindings-mode-off)
@@ -91,8 +91,8 @@
   (define-key region-bindings-mode-map "D"   'mc/mark-all-dwim))
 
 (req-package phi-search
-  :requires multiple-cursors)
+  :require multiple-cursors)
 (req-package phi-search-mc
-  :requires multiple-cursors)
+  :require multiple-cursors)
 
 (provide 'as-multiple-cursors)

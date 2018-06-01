@@ -30,8 +30,8 @@
 (require 'as-progress)
 
 ;; req-package is common enough that we don't want to have to require
-;; it in each file which uses it.
-(require 'as-req-package)
+;; it in each file which uses it.  This also requires as-custom.
+(require 'as-package-loading)
 
 (as-loading-done)
 

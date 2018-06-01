@@ -1,7 +1,7 @@
 ;; Scrolling
-(add-to-list 'load-path (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling"))
-(req-package smooth-scrolling
-  :loader :built-in)
+(use-package smooth-scrolling
+  :load-path (lambda ()
+               (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling")))
 
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
@@ -13,9 +13,11 @@
 (setq next-line-add-newlines nil)
 
 (req-package iy-go-to-char
-  (require 'as-key-chord)
-  :config
-  (key-chord-define-global "zv" 'iy-go-to-char))
+  :require as-key-chord
+  ;; Can't do this yet
+  ;; https://github.com/edvorg/req-package/issues/56
+  ;; :chords (("zv" . iy-go-to-char))
+  )
 
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)

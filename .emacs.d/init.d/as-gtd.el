@@ -7,7 +7,7 @@
 (defun as-org-convert-buffer-sub-to-effort ()
   "Convert all 'sub*' tags within a buffer into 'Effort' properties."
   (interactive)
-  (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))  
+  (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))
 
 (defun as-org-convert-headline-sub-to-effort ()
   "Convert a headline with a 'sub*' tag into an 'Effort' property."
@@ -106,6 +106,13 @@ search should be continued."
       (org-clock-goto)
     (as-org-switch-to-agenda-buffer)))
 
+(req-package org
+  :init
+  (require 'org-agenda)
+
+  :bind (:map org-agenda-mode-map
+         ("i" . 'org-agenda-clock-in )
+         ("o" . 'org-agenda-clock-out)))
 (defun org-count-keywords ()
   "Count number of occurrences of TODO keywords in the current
 buffer, respecting any scope restriction."

@@ -85,8 +85,9 @@
 
 (req-package magit-gerrit)
 
+;; https://github.com/vermiculus/magithub/issues/300#issuecomment-390508549
 (req-package magithub
-  :after magit
+  :require magit
   :ensure t
   :config
   (magithub-feature-autoinject t)
@@ -94,6 +95,6 @@
 
 ;; support for magit: links in org buffers
 (req-package org-magit
-  :requires (org magit))
+  :require org magit)
 
 (provide 'as-magit)
