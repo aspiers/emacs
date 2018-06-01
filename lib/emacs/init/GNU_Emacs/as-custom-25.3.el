@@ -1883,24 +1883,24 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("o" "org mailing list item" entry
       (file+headline "~/org/TODO.org" "to list")
-      "* NEXT %?" :prepend t)
+      "* NEXT %?%:annotation" :prepend t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
      ("i" "immediate personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?
-  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
+      "* NEXT %?%:annotation
+  SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("I" "immediate work NEXT" entry
       (file "~/SUSE/TODO.org")
-      "* NEXT %?
-  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
+      "* NEXT %?%:annotation
+  SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?" :prepend t)
+      "* NEXT %?%:annotation" :prepend t)
      ("N" "work NEXT" entry
       (file "~/SUSE/TODO.org")
-      "* NEXT %?" :prepend t)
+      "* NEXT %?%:annotation" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
