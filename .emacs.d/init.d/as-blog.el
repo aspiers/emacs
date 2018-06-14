@@ -1,8 +1,6 @@
-(add-to-list 'auto-mode-alist
-             '("blog\\.adamspiers\\.org\\..*\\.txt\\'" . web-mode))
-
 (req-package org2blog
   :require org
+  :mode ("\\.o2b\\'" . org-mode)
   :config
   (add-hook 'org-mode-hook
             (lambda ()
