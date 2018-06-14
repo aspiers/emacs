@@ -19,7 +19,12 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+
+;; This would install the list of already installed packages,
+;; presumably from /home/adam/.emacs.d/el-get/.status.el - however we
+;; now rely on req-package instead.
+;;
+;; (el-get 'sync)
 
 (require-elpa-packages 'use-package-el-get)
 
