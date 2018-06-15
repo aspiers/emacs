@@ -1434,9 +1434,6 @@
  '(magit-rewrite-inclusive t)
  '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
- '(magit-status-headers-hook
-   (quote
-    (magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-header magit-insert-upstream-header magit-insert-tags-header)))
  '(magit-status-sections-hook
    (quote
     (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
