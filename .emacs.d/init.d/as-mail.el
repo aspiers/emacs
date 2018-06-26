@@ -11,7 +11,7 @@
 ;;             'messages-are-flowing-use-and-mark-hard-newlines))
 
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
-(add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . message-mode))
+(add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
 (eval-when-compile (require 'sendmail))
 (add-hook
  'mail-mode-hook
