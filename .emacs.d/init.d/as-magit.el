@@ -22,19 +22,22 @@
 
   ;; Improved and updated version of this nice idea from
   ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
-  (eval-after-load 'projectile
-    (progn
-      (require 'tramp)
-      (setq magit-repository-directories
-            (mapcar (lambda (dir) (directory-file-name dir))
-                    ;; remove tramp and non-git projects
-                    (remove-if
-                     (lambda (project)
-                       (or
-                        (tramp-tramp-file-p project)
-                        (not (file-directory-p (concat project "/.git")))))
-                     (projectile-relevant-known-projects))))
-      (setq magit-repo-dirs-depth 1)))
+
+  ;; wait for
+  ;; https://gitlab.com/edvorg/req-package/issues/60
+  ;; (eval-after-load 'projectile
+  ;;   (progn
+  ;;     (require 'tramp)
+  ;;     (setq magit-repository-directories
+  ;;           (mapcar (lambda (dir) (directory-file-name dir))
+  ;;                   ;; remove tramp and non-git projects
+  ;;                   (remove-if
+  ;;                    (lambda (project)
+  ;;                      (or
+  ;;                       (tramp-tramp-file-p project)
+  ;;                       (not (file-directory-p (concat project "/.git")))))
+  ;;                    (projectile-relevant-known-projects))))
+  ;;     (setq magit-repo-dirs-depth 1)))
 
   (bind-key "C-c g b"  'magit-blame)
   (bind-key "C-c g B"  'magit-run-git-gui-blame)
