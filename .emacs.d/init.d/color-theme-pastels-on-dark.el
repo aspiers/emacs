@@ -274,7 +274,6 @@ Tweaked by Adam Spiers in December 2009."
        (woman-bold-face ((t (:bold t :foreground "sky blue" :weight bold))))
        (woman-italic-face ((t (:foreground "deep sky blue"))))
        (woman-unknown-face ((t (:foreground "LightSalmon"))))
-       (zmacs-region ((t (:background "DarkSlateBlue")))))))
-  (color-theme-pastels-on-dark))
+       (zmacs-region ((t (:background "DarkSlateBlue"))))))))
 
 (provide 'color-theme-pastels-on-dark)
