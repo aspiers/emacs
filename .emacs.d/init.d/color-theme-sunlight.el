@@ -89,6 +89,7 @@ laptops outdoors in bright sunlight."
     (modeline-mousable ((t (:background "gainsboro" :foreground "gainsboro"))))
     (modeline-mousable-minor-mode ((t (:background "gainsboro" :foreground "gainsboro"))))
     (org-link ((t (:foreground "dodger blue" :underline t))))
+    (org-hide ((t (:foreground "white smoke" :underline t))))
     (region ((t (:background "lavender"))))
     (rst-level-1 ((t (:background "grey85"))))
     (rst-level-2 ((t (:background "grey92"))))
