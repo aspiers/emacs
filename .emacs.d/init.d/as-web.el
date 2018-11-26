@@ -27,7 +27,12 @@
 (req-package web-mode
   :mode "\\.\\(phtml\\|tpl\\.php\\|jsp\\|as[cp]x\\|erb\\|mustache\\|djhtml\\|html?\\)\\'"
   :config
-  (define-key web-mode-map (kbd "C-;") nil))
+  (define-key web-mode-map (kbd "C-;") nil)
+  ;; fci-mode *still* breaks web-mode :-(
+  ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (if (string= major-mode "web-mode")
+                           (turn-off-fci-mode) (turn-on-fci-mode)))))
 
 (req-package gist)
 (req-package haml-mode)
