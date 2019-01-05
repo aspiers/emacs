@@ -45,6 +45,7 @@ installed."
  )
 
 (require 'as-el-get)
+(require 'as-quelpa)
 
 (provide 'as-package-loading)
 (eval-and-compile (as-loading-done))
