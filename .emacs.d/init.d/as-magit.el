@@ -1,6 +1,14 @@
 ;; See also as-vcs.el
 
 (req-package magit
+  :bind (("C-c g b" . magit-blame)
+         ("C-c g B" . magit-run-git-gui-blame)
+         ("C-c g g" . magit-run-git-gui)
+         ("C-c g k" . magit-run-gitk)
+         ("C-c g a" . magit-run-gitk-all)
+         ("C-c g s" . magit-status)
+         ("C-S-g" .   magit-status))
+
   :config
   (add-hook 'ido-setup-hook 'as-magit-ido-keys)
 
@@ -35,14 +43,6 @@
                         (not (file-directory-p (concat project "/.git")))))
                      (projectile-relevant-known-projects))))
       (setq magit-repo-dirs-depth 1)))
-
-  (bind-key "C-c g b"  'magit-blame)
-  (bind-key "C-c g B"  'magit-run-git-gui-blame)
-  (bind-key "C-c g g"  'magit-run-git-gui)
-  (bind-key "C-c g k"  'magit-run-gitk)
-  (bind-key "C-c g a"  'magit-run-gitk-all)
-  (bind-key "C-c g s"  'magit-status)
-  (bind-key "C-S-g"    'magit-status)
 
   (autoload 'ido-buffer-internal "ido")
   (defvar ido-default-buffer-method)
