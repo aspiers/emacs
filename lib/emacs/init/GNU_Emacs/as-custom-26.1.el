@@ -1761,7 +1761,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
       ((org-agenda-prefix-format "")))
-     ("pa" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
+     ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
+     ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
      ("po" "personal organisation" tags-todo "+admin+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
