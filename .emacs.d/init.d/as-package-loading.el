@@ -9,6 +9,15 @@
 
 (require 'package)
 
+(require 'as-find-file-in-dir)
+(define-find-file-in-dir-function as-find-elpa-package
+  "~/.emacs.d/elpa" "Find ELPA package: ")
+(bind-key "C-c j l" 'as-find-elpa-package)
+
+(define-find-file-in-dir-function as-find-el-get-package
+  "~/.el-get" "Find el-get package: ")
+(bind-key "C-c j L" 'as-find-el-get-package)
+
 ;; Make sure we have our customized value of package-archives
 ;;
 ;; Also req-package-log-level only takes effect if defined before
