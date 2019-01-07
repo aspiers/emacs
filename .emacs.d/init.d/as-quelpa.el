@@ -6,10 +6,11 @@
     (eval-buffer)))
 
 (as-progress "Setting up quelpa-use-package")
-;; install use-package and the quelpa handler
-(quelpa '(quelpa-use-package :fetcher github :repo "quelpa/quelpa-use-package"))
 
-(as-progress "Requiring quelpa-use-package")
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
 (require 'as-find-file-in-dir)
