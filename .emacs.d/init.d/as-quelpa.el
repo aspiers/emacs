@@ -13,6 +13,11 @@
    :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
+;; Make sure it works with use-package-always-ensure set to t (which
+;; is how I generally like it).  This is needed for installing stuff
+;; via quelpa, otherwise it will default to searching ELPA archives.
+(quelpa-use-package-activate-advice)
+
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-quelpa-package
   "~/.emacs.d/quelpa/build" "Find quelpa package: ")
