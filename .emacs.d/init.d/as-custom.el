@@ -9,10 +9,10 @@
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))
 
-(as-progress (format "loading %s ..." custom-file))
+(as-progress "loading %s ..." custom-file)
 ;; This load is required, according to the info pages:
 (load custom-file)
-(as-progress (format "loaded %s" custom-file))
+(as-progress "loaded %s" custom-file)
 
 (unless (fboundp 'as-make-backup-file-name)
   (if (eq 'as-make-backup-file-name make-backup-file-name-function)
