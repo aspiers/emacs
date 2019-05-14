@@ -1,7 +1,7 @@
 ;; See also as-vcs.el
 
 (req-package magit
-  :bind (("C-c g b" . magit-blame)
+  :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
          ("C-c g k" . magit-run-gitk)
