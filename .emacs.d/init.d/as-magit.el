@@ -89,12 +89,12 @@
 (req-package magit-gerrit)
 
 ;; https://github.com/vermiculus/magithub/issues/300#issuecomment-390508549
-(req-package magithub
-  :require magit
-  :ensure t
-  :config
-  (magithub-feature-autoinject t)
-  (setq magithub-features '((pull-request-merge . t) (pull-request-checkout . nil))))
+;; (req-package magithub
+;;   :require magit
+;;   :ensure t
+;;   :config
+;;   (magithub-feature-autoinject t)
+;;   (setq magithub-features '((pull-request-merge . t) (pull-request-checkout . nil))))
 
 ;; support for magit: links in org buffers
 (req-package org-magit
