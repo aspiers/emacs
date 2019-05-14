@@ -88,10 +88,14 @@
                          nil "magit status: " nil "*magit: "))
   (bind-key "C-M-g" 'ido-switch-magit-buffer))
 
-(req-package magit-topgit)
+;; https://github.com/greenrd/magit-topgit/issues/10
+;;(req-package magit-topgit)
+
 (req-package magit-annex)
 
-(req-package magit-gerrit)
+;; https://github.com/terranpro/magit-gerrit/issues/62
+;; https://github.com/somtin/magit-gerrit/issues/1
+;;(req-package magit-gerrit)
 
 (req-package forge
   :require magit
