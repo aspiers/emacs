@@ -26,7 +26,9 @@
 ;;; Code:
 
 (deftheme sunlight
-  "Color theme by Adam Spiers, created 2018-05-06.
+  "Theme for use in bright sunlight.
+
+Color theme by Adam Spiers, created 2018-05-06.
 Based on `color-theme-snow'.  Designed specifically for using
 laptops outdoors in bright sunlight.")
 
@@ -137,13 +139,13 @@ laptops outdoors in bright sunlight.")
  '(speedbar-highlight-face ((t (:background "dark turquoise" :foreground "white"))))
  '(speedbar-selected-face ((t (:underline t :foreground "red"))))
  '(speedbar-tag-face ((t (:foreground "brown"))))
- '(underline ((t (:underline t))))
+ '(underline ((t (:underline t)))))
 
 ;;;###autoload
- (when load-file-name
-   (add-to-list 'custom-theme-load-path
-                (file-name-as-directory (file-name-directory load-file-name))))
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name))))
 
- (provide-theme 'sunlight))
+(provide-theme 'sunlight)
 
 ;;; sunlight.el ends here
