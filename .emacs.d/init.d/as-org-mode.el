@@ -62,8 +62,8 @@
 
 (req-package org-sync
   :require org)
-(req-package org-plus-contrib
-  :require org)
+(req-package org
+  :ensure org-plus-contrib)
 (req-package orgit
   :require org)
 
