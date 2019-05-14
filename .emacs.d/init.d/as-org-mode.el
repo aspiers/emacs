@@ -5,16 +5,6 @@
           (memq 'org-irc org-default-extensions))
       (defvar org-default-extensions '(org-mouse))))
 
-;; FIXME: use req-package
-(require 'as-require)
-(when (as-check-feature-loaded 'org-install)
-  (as-progress "org-install loaded")
-  (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
-  ;; Let's see if this is already taken care of
-  ;;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-  )
-
-(defvar org-mode-map)
 (use-package org
   :bind
   (("M-o a" . org-agenda)
@@ -33,6 +23,8 @@
    ("C-c C-?" . org-occur-in-agenda-files))
 
   :config
+  (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
+
   (defun org-clock-in-daily-review ()
     (interactive)
     "Clocks in to the daily review task."
