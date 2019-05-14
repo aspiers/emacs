@@ -35,10 +35,11 @@ laptops outdoors in bright sunlight.")
 (custom-theme-set-faces
  'sunlight
 
- '(default ((t (:background "white" :foreground "dark slate gray"))))
+ '(default ((t (:background "white" :foreground "black"))))
  '(mouse ((t (:foreground "black"))))
  '(cursor ((t (:foreground "RoyalBlue2"))))
  '(border ((t (:foreground "black"))))
+ '(underline ((t (:underline t))))
 
  '(gnus-mouse-face ((t (:highlight t))))
  '(list-matching-lines-face ((t (:bold t))))
@@ -139,7 +140,7 @@ laptops outdoors in bright sunlight.")
  '(speedbar-highlight-face ((t (:background "dark turquoise" :foreground "white"))))
  '(speedbar-selected-face ((t (:underline t :foreground "red"))))
  '(speedbar-tag-face ((t (:foreground "brown"))))
- '(underline ((t (:underline t)))))
+ )
 
 ;;;###autoload
 (when load-file-name
