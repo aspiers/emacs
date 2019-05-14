@@ -367,6 +367,13 @@
  '(delete-old-versions t)
  '(delete-selection-mode nil)
  '(diff-switches "-u")
+ '(dired-guess-shell-alist-user
+   (quote
+    (("\\.pdf\\'" "evince")
+     ("\\.\\(docx?\\|pptx?\\|xlsx?|od[stp]\\)\\'" "libreoffice")
+     ("\\.jpg\\'" "pinta")
+     ("\\.png\\'" "pinta")
+     ("\\.java\\'" "idea"))))
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
  '(display-time-mode nil)
