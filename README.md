@@ -110,8 +110,8 @@ Loading starts with [`.emacs`](.emacs) which effectively loads all
     *   requires [`as-progress`](.emacs.d/init.d/as-progress.el)
     *   requires [`as-package-loading`](.emacs.d/init.d/as-package-loading.el)
         *   requires [`as-custom`](.emacs.d/init.d/as-custom.el)
-        *   ensures `req-package`, `use-package`, and related extensions
-            are installed
+        *   ensures `req-package`, `use-package`, `quelpa`, and
+            related extensions are installed
 *   All other `*.el` are discovered and loaded via a custom external mechanism
     which I use for several sets of configuration files unrelated
     to emacs, including my

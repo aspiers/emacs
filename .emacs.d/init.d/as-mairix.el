@@ -44,7 +44,11 @@ personal mail via mutt within an xterm.
          as-org-mairix-mutt-display-personal-command))
     (org-mairix-open search)))
 
-(org-add-link-type "mairixp" 'as-org-mairix-personal-open)
+;; org-add-link-type is deprecated and provided by org-plus-contrib
+(req-package org
+  :ensure org-compat
+  :config
+  (org-add-link-type "mairixp" 'as-org-mairix-personal-open))
 
 (defun as-mairix-search-at-point ()
   "[Deprecated] Return the start and end points of a mairix link at

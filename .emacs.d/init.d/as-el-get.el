@@ -9,9 +9,12 @@
 ;; https://github.com/dimitri/el-get/issues/2620
 ;; (require-elpa-packages 'el-get)
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
+(defvar el-get-el-get-dir (concat el-get-dir "/el-get"))
+(add-to-list 'load-path el-get-el-get-dir)
 
-(unless (require 'el-get nil 'noerror)
+(unless (and (file-exists-p el-get-el-get-dir)
+             (require 'el-get nil 'noerror))
   (with-current-buffer
       (url-retrieve-synchronously
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
@@ -29,11 +32,6 @@
 (require-elpa-packages 'use-package-el-get)
 
 (use-package-el-get-setup)
-
-(defvar el-get-dir (concat edotdir "/.emacs.d/el-get/"))
-(defvar el-get-el-get-dir (concat el-get-dir "el-get"))
-(add-to-list 'load-path el-get-el-get-dir)
-
 
 (defun as-el-get-owner-p ()
   "Returns `t' if the current effective uid matches the owner of

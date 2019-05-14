@@ -1,35 +1,3 @@
-;; If you're using color-theme.el, this background should match the
-;; background of your chosen theme
-;; (setq as-default-background
-;;    "seashell1"
-;;    "wheat"
-;;    "blanched almond"
-;;    "antique white"
-;;    "gray90"
-;;    )
-
-;; (setq frame-background-mode
-;;       (cond ((and (= emacs-major-version 21) window-system) 'light)
-;;             (t 'dark)))
-
-;; (and (eq frame-background-mode 'light)
-;;      (custom-set-variables
-;;       `(vc-annotate-background ,as-default-background)))
-
-;; (and (>= emacs-major-version 21)
-;;      (progn
-;;        (custom-set-faces
-;;         `(default
-;;            ((((class color) (background light))
-;;              (:background ,as-default-background))))
-;;         `(fringe
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background))))
-;;         `(mmm-default-submode-face
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background)))))
-;;        ))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -351,9 +319,10 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
+ '(custom-enabled-themes (quote (pastels-on-dark-aspiers)))
  '(custom-safe-themes
    (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8f392c0db8c92563397d55464320b53505ece8e6066e8d30575952663787e02f" "1dd84fe8349c012731e10e39c79627841744c1d38556f22fb970de5335a44c90" "056d98129e2f4f3200b16acfdaf2cf87a9442b2ac1ed4196a109edb8f082d7da" "56cb796e4712309ede12a316d99b0a2a8c3b48a8c63bf62c257861ca103cc4d1" "e41c402084437f037d1075fe825ad9d331abe36c4c45104f01c0d14c071b46ac" "3a963acc5629c10113409c0ea5c04a8e1c2159c628bf8b0830cbd154014efe3f" default)))
+    ("27c2b8480b65e6fd543fc6d5c36c13e4cc97a9f4a44a16725f4a9e7f36748681" "30fe7e72186c728bd7c3e1b8d67bc10b846119c45a0f35c972ed427c45bacc19" "d1f53fa37cf4cec3f0c25eb5dcec05e17a817cf650dd316e2067c33f09d4fc5d" "a455366c5cdacebd8adaa99d50e37430b0170326e7640a688e9d9ad406e2edfd" "bce1c321471d37b875f99c83cb7b451fd8386001259e1c0909d6e078ea60f00b" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8f392c0db8c92563397d55464320b53505ece8e6066e8d30575952663787e02f" "1dd84fe8349c012731e10e39c79627841744c1d38556f22fb970de5335a44c90" "056d98129e2f4f3200b16acfdaf2cf87a9442b2ac1ed4196a109edb8f082d7da" "56cb796e4712309ede12a316d99b0a2a8c3b48a8c63bf62c257861ca103cc4d1" "e41c402084437f037d1075fe825ad9d331abe36c4c45104f01c0d14c071b46ac" "3a963acc5629c10113409c0ea5c04a8e1c2159c628bf8b0830cbd154014efe3f" default)))
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
  '(cvs-buffer-switch-list (quote ("diff" "status" "log")))
  '(cvs-find-file-and-jump t)
@@ -367,6 +336,13 @@
  '(delete-old-versions t)
  '(delete-selection-mode nil)
  '(diff-switches "-u")
+ '(dired-guess-shell-alist-user
+   (quote
+    (("\\.pdf\\'" "evince")
+     ("\\.\\(docx?\\|pptx?\\|xlsx?|od[stp]\\)\\'" "libreoffice")
+     ("\\.jpg\\'" "pinta")
+     ("\\.png\\'" "pinta")
+     ("\\.java\\'" "idea"))))
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
  '(display-time-mode nil)
@@ -1432,11 +1408,12 @@
    (quote
     ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
  '(magit-rewrite-inclusive t)
+ '(magit-section-initial-visibility-alist (quote ((stashes . show))))
  '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-status-headers-hook
    (quote
-    (magit-insert-error-header magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-branch-header magit-insert-upstream-branch-header magit-insert-push-branch-header magit-insert-tags-header magithub-maybe-report-offline-mode magithub-maybe-insert-ci-status-header)))
+    (magit-insert-error-header magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-branch-header magit-insert-upstream-branch-header magit-insert-push-branch-header magit-insert-tags-header)))
  '(magit-status-sections-hook
    (quote
     (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
@@ -1761,7 +1738,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
       ((org-agenda-prefix-format "")))
-     ("pa" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
+     ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
+     ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
      ("po" "personal organisation" tags-todo "+admin+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
@@ -1995,6 +1973,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ,\"'" "." 5)) t)
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
+ '(org-export-dispatch-use-expert-ui nil)
  '(org-export-html-style
    "<style type=\"text/css\">
   html {
@@ -2134,7 +2113,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (org-crypt use-package-ensure-system-package use-package-chords use-package-el-get messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (forge org-bullets ocp-indent pastels-on-dark-theme sunlight-theme zenburn-theme color-theme-modern amx use-package orgit ghub quelpa-use-package quelpa flycheck-ocaml tuareg caml go-gopath go-mode flymake-solidity solidity-mode org-crypt use-package-ensure-system-package use-package-chords use-package-el-get messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -2145,7 +2124,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
- '(quelpa-upgrade-p t)
+ '(quelpa-update-melpa-p nil)
+ '(quelpa-upgrade-p nil)
  '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
  '(region-bindings-mode-enabled-modes
    (quote
@@ -2295,9 +2275,11 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-hide ((nil (:foreground "black"))))
  '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
  '(rpm-spec-tag-face ((t (:foreground "deep sky blue"))))
+ '(rst-level-1 ((t (:background "grey35"))))
+ '(rst-level-2 ((t (:background "grey32"))))
  '(scroll-bar ((t (:background "grey45"))))
- '(sml/filename ((t (:inherit sml/global :foreground "forest green" :weight bold))))
- '(sml/folder ((t (:inherit sml/global :foreground "black" :weight normal))))
+ '(sml/filename ((t (:inherit sml/global :foreground "green3" :weight bold))))
+ '(sml/folder ((t (:inherit sml/global :foreground "green3" :weight normal))))
  '(sml/global ((t (:foreground "gray10"))))
  '(sml/prefix ((t (:inherit sml/global :foreground "#d07a00"))))
  '(sml/read-only ((t (:inherit sml/global :foreground "dodger blue"))))

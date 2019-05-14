@@ -19,14 +19,6 @@
   "~/.emacs.d/init.d" "Find emacs init.d file: ")
 (bind-key "C-c j e" 'as-find-emacs-init-d)
 
-(define-find-file-in-dir-function as-find-elpa-package
-  "~/.emacs.d/elpa" "Find ELPA package: ")
-(bind-key "C-c j l" 'as-find-elpa-package)
-
-(define-find-file-in-dir-function as-find-el-get-package
-  "~/.el-get" "Find el-get package: ")
-(bind-key "C-c j L" 'as-find-el-get-package)
-
 (bind-key "C-h B"   'describe-personal-keybindings)
 
 ;; I don't visit the FAQ very often; find-function way more useful.

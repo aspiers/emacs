@@ -1,8 +1,15 @@
 ;; See also as-vcs.el
 
 (req-package magit
+  :bind (("C-c g b" . magit-blame-addition)
+         ("C-c g B" . magit-run-git-gui-blame)
+         ("C-c g g" . magit-run-git-gui)
+         ("C-c g k" . magit-run-gitk)
+         ("C-c g a" . magit-run-gitk-all)
+         ("C-c g s" . magit-status)
+         ("C-S-g" .   magit-status))
+
   :config
-  (add-hook 'ido-setup-hook 'as-magit-ido-keys)
 
   (defun as-magit-ido-keys ()
     "Add Adam's keybindings for ido."
@@ -19,42 +26,7 @@
       (setq fallback 'magit-status)
       (setq ido-exit 'fallback)
       (exit-minibuffer)))
-
-  ;; Improved and updated version of this nice idea from
-  ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
-
-  ;; wait for
-  ;; https://gitlab.com/edvorg/req-package/issues/60
-  ;; (eval-after-load 'projectile
-  ;;   (progn
-  ;;     (require 'tramp)
-  ;;     (setq magit-repository-directories
-  ;;           (mapcar (lambda (dir) (directory-file-name dir))
-  ;;                   ;; remove tramp and non-git projects
-  ;;                   (remove-if
-  ;;                    (lambda (project)
-  ;;                      (or
-  ;;                       (tramp-tramp-file-p project)
-  ;;                       (not (file-directory-p (concat project "/.git")))))
-  ;;                    (projectile-relevant-known-projects))))
-  ;;     (setq magit-repo-dirs-depth 1)))
-
-  (bind-key "C-c g b"  'magit-blame)
-  (bind-key "C-c g B"  'magit-run-git-gui-blame)
-  (bind-key "C-c g g"  'magit-run-git-gui)
-  (bind-key "C-c g k"  'magit-run-gitk)
-  (bind-key "C-c g a"  'magit-run-gitk-all)
-  (bind-key "C-c g s"  'magit-status)
-  (bind-key "C-S-g"    'magit-status)
-
-  (autoload 'ido-buffer-internal "ido")
-  (defvar ido-default-buffer-method)
-  (defun ido-switch-magit-buffer ()
-    "Switch to a magit status buffer via `ido'."
-    (interactive)
-    (ido-buffer-internal ido-default-buffer-method
-                         nil "magit status: " nil "*magit: "))
-  (bind-key "C-M-g" 'ido-switch-magit-buffer)
+  (add-hook 'ido-setup-hook 'as-magit-ido-keys)
 
   ;; Stolen from https://github.com/syl20bnr/spacemacs/pull/3319/files
   ;; See also https://github.com/magit/magit/issues/1953#issuecomment-146900842
@@ -83,18 +55,51 @@
       ;; return buffer's window
       (get-buffer-window buffer))))
 
-(req-package magit-topgit)
+(req-package magit
+  ;; See https://gitlab.com/edvorg/req-package/issues/60
+  ;; (needs docs for how to handle config which involves multiple packages)
+  :require projectile
+  :config
+  ;; Improved and updated version of this nice idea from
+  ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
+  (require 'tramp)
+  (setq magit-repository-directories
+        (mapcar (lambda (dir) (directory-file-name dir))
+                ;; remove tramp and non-git projects
+                (remove-if
+                 (lambda (project)
+                   (or
+                    (tramp-tramp-file-p project)
+                    (not (file-directory-p (concat project "/.git")))))
+                 (projectile-relevant-known-projects))))
+  (setq magit-repo-dirs-depth 1))
+
+(req-package magit
+  ;; See https://gitlab.com/edvorg/req-package/issues/60
+  ;; (needs docs for how to handle config which involves multiple packages)
+  :require ido
+  :config
+  (autoload 'ido-buffer-internal "ido")
+  (defvar ido-default-buffer-method)
+  (defun ido-switch-magit-buffer ()
+    "Switch to a magit status buffer via `ido'."
+    (interactive)
+    (ido-buffer-internal ido-default-buffer-method
+                         nil "magit status: " nil "*magit: "))
+  (bind-key "C-M-g" 'ido-switch-magit-buffer))
+
+;; https://github.com/greenrd/magit-topgit/issues/10
+;;(req-package magit-topgit)
+
 (req-package magit-annex)
 
-(req-package magit-gerrit)
+;; https://github.com/terranpro/magit-gerrit/issues/62
+;; https://github.com/somtin/magit-gerrit/issues/1
+;;(req-package magit-gerrit)
 
-;; https://github.com/vermiculus/magithub/issues/300#issuecomment-390508549
-;; (req-package magithub
-;;   :require magit
-;;   :ensure t
-;;   :config
-;;   (magithub-feature-autoinject t)
-;;   (setq magithub-features '((pull-request-merge . t) (pull-request-checkout . nil))))
+(req-package forge
+  :require magit
+  :ensure t)
 
 ;; support for magit: links in org buffers
 (req-package org-magit

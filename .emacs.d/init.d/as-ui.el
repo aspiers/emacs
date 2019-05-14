@@ -3,6 +3,10 @@
 ;;{{{ fill-column-indicator
 
 (req-package fill-column-indicator
+  :quelpa (fill-column-indicator
+           :fetcher github
+           :repo "aspiers/Fill-Column-Indicator"
+           :branch "wrap-window-edge")
   :config
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook 'fci-mode)))
