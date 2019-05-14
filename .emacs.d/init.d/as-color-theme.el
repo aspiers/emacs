@@ -1,6 +1,7 @@
-(req-package color-theme-pastels-on-dark
-  :requires color-theme
-  :config (color-theme-pastels-on-dark)
-  :ensure nil)
+(req-package zenburn-theme
+  :config
+  (defvar zenburn-override-colors-alist
+    '(("zenburn-bg" . "#000000")))
+  (load-theme 'zenburn t))
 
 (provide 'as-color-theme)
