@@ -1997,6 +1997,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ,\"'" "." 5)) t)
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
+ '(org-export-dispatch-use-expert-ui nil)
  '(org-export-html-style
    "<style type=\"text/css\">
   html {
