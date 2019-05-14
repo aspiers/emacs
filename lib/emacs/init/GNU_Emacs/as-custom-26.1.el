@@ -375,37 +375,6 @@
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-whitespace-mode t)
- '(gnus-asynchronous t)
- '(gnus-cache-active-file "~/.gnus/cache/active")
- '(gnus-cache-directory "~/.gnus/cache/")
- '(gnus-expert-user t)
- '(gnus-generate-tree-function (quote gnus-generate-horizontal-tree))
- '(gnus-group-line-format "%M%S%p%P%3y: %(%g%)%l
-")
- '(gnus-group-mode-hook (quote (gnus-topic-mode)))
- '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
- '(gnus-novice-user nil)
- '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
- '(gnus-startup-hook
-   (quote
-    ((lambda nil
-       (if
-           (<=
-            (frame-width)
-            80)
-           (gnus-add-configuration
-            (quote
-             (article
-              (vertical 1.0
-                        (horizontal 0.25
-                                    (summary 0.75 point)
-                                    (tree 1.0))
-                        (article 1.0))))))))))
- '(gnus-summary-exit-hook (quote (gnus-summary-bubble-group)))
- '(gnus-summary-line-format "%U%R%z%4L:%([%1{%-15,15n%}]%) %2t %3{%B%}%2{%s%}
-")
- '(gnus-suppress-duplicates t)
- '(gnus-use-trees t)
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
