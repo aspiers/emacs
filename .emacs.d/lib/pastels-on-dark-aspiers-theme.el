@@ -1,6 +1,7 @@
 ;;; pastels-on-dark-theme.el --- Adam's version of pastels-on-dark theme
 
-;; Copyright (C) 2007 by Adam Spiers
+;; Copyright (C) 2007 by Shane Celis
+;; Copyright (C) 2009 by Adam Spiers
 
 ;; Author: Shane Celis
 ;; Author: Adam Spiers <emacs@adamspiers.org>
