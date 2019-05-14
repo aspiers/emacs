@@ -18,6 +18,7 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 MAJOR_MODES = major-modes
 MINOR_MODES = minor-modes
 UTILS       = utils
+export EMACS_BATCH = 1
 
 # }}}
 # {{{ Tweakable parameters

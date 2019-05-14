@@ -1,5 +1,7 @@
 ;; At this point emacs doesn't know where to find as-progress.
-(eval-and-compile (message "> Loading as-load-paths ..."))
+(eval-and-compile
+  (if (not (getenv "EMACS_BATCH"))
+      (message "> Loading as-load-paths ...")))
 
 ;; ~/.emacs.d/init.d was already added to load-path by as-pre-init-d.el
 (require 'as-vars)
@@ -29,5 +31,6 @@
 
 (provide 'as-load-paths)
 
-;;(eval-and-compile (as-loading-done))
-(eval-and-compile (message "> Loading as-load-paths ... done"))
+(eval-and-compile
+  (if (not (getenv "EMACS_BATCH"))
+      (message "> Loading as-load-paths ... done")))

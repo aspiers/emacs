@@ -255,7 +255,6 @@
       (modes quote
              (css-mode html-mode))))))
  '(align-sq-string-modes (quote (python-mode)))
- '(allout-auto-activation t)
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
  '(auto-revert-check-vc-info nil)
