@@ -1,8 +1,15 @@
 (req-package zenburn-theme
+  :no-require t
+
   :config
   (defvar zenburn-override-colors-alist
-    '(("zenburn-bg" . "#000000")))
-  (load-theme 'zenburn t))
+    '(("zenburn-bg" . "#000000"))))
+
+;; To choose a specific theme, either do something like this here:
+;;
+;;    (load-theme 'zenburn t)
+;;
+;; or customize the custom-enabled-themes variable.
 
 (add-to-list 'custom-theme-load-path as-themes-dir)
 
