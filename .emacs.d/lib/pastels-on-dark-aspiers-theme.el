@@ -36,7 +36,7 @@ Tweaked by Adam Spiers from December 2009 onwards.")
 (custom-theme-set-faces
  'pastels-on-dark-aspiers
 
- '(default ((t (:stipple nil :background "#211E1E" :foreground "Grey" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 87 :width semi-condensed :family "misc-fixed"))))
+ '(default ((t (:stipple nil :background "#211E1E" :foreground "Grey"))))
  '(mouse ((t (:foreground "Grey"))))
  '(cursor ((t (:foreground "white"))))
  '(border ((t (:foreground "Grey"))))
