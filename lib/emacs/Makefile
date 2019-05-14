@@ -198,6 +198,7 @@ all: .elcs install
 
 show-compiler:
 	@echo 'COMPILER:          "'"$(COMPILER)"'"'
+	@echo 'LOADPATH_OPTS:     "'"$(LOADPATH_OPTS)"'"'
 	@echo 'COMPILER_PRE_OPTS: "$(COMPILER_PRE_OPTS)"'
 	@echo 'COMPILER_OPTS:     "$(COMPILER_OPTS)"'
 
