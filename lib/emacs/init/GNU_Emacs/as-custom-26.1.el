@@ -1,35 +1,3 @@
-;; If you're using color-theme.el, this background should match the
-;; background of your chosen theme
-;; (setq as-default-background
-;;    "seashell1"
-;;    "wheat"
-;;    "blanched almond"
-;;    "antique white"
-;;    "gray90"
-;;    )
-
-;; (setq frame-background-mode
-;;       (cond ((and (= emacs-major-version 21) window-system) 'light)
-;;             (t 'dark)))
-
-;; (and (eq frame-background-mode 'light)
-;;      (custom-set-variables
-;;       `(vc-annotate-background ,as-default-background)))
-
-;; (and (>= emacs-major-version 21)
-;;      (progn
-;;        (custom-set-faces
-;;         `(default
-;;            ((((class color) (background light))
-;;              (:background ,as-default-background))))
-;;         `(fringe
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background))))
-;;         `(mmm-default-submode-face
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background)))))
-;;        ))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
