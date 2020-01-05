@@ -3,6 +3,7 @@
     ;;(quelpa-self-upgrade)
   (with-temp-buffer
     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+    (as-progress "Downloaded quelpa's bootstrap.el (%d bytes)" (buffer-size))
     (eval-buffer)))
 
 (as-progress "Setting up quelpa-use-package")
