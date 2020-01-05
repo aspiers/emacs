@@ -2,6 +2,12 @@
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode))
 
+(req-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
+
 ;; Allow modes such as jdl-mode to be given Python alignment rules
 (defcustom align-python-modes '(python-mode)
   "A list of modes where Python syntax is to be seen."
