@@ -1398,6 +1398,7 @@
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(magit-display-buffer-function (quote magit-display-buffer-fullscreen))
  '(magit-gitk-executable "/usr/bin/gitk")
+ '(magit-keep-region-overlay t)
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument (quote default))
  '(magit-prefer-remote-upstream t)
