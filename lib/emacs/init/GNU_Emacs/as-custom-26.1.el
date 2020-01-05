@@ -1551,6 +1551,43 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                 (quote deadline)
                 (quote scheduled)))))
        (org-agenda-prefix-format " %?-12t% s")))
+     ("Bd" "Blocko daily review"
+      ((tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #A TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#A\\]"
+                       (quote scheduled))))))
+       (tags-todo "officehrs+CATEGORY=\"SUSE\""
+                  ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#[AB]\\]"
+                       (quote scheduled))))))
+       (agenda ""
+               ((org-agenda-ndays 3)
+                (org-agenda-skip-function
+                 (as-org-agenda-skip-select-category-function "SUSE"))))
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#B\\]"
+                       (quote scheduled)))))))
+      ((org-agenda-compact-blocks t)
+       (org-agenda-skip-function
+        (lambda nil
+          (and nil
+               (org-agenda-skip-entry-if
+                (quote deadline)
+                (quote scheduled)))))
+       (org-agenda-prefix-format " %?-12t% s")))
      ("7" "weekly review"
       ((todo "CHASE"
              ((org-agenda-overriding-header "Items to CHASE")))
