@@ -1,3 +1,5 @@
+(message "custom-set-variables starting")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1254,6 +1256,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(yas-snippet-dirs
    (quote
     ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
+
+(message "custom-set-variables done")
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
