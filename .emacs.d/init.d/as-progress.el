@@ -10,10 +10,11 @@ as an extremely primitive profiler.")
 
 (defun as-progress-message (msg &rest args)
   "Output a message with a timestamp relative to the progress clock."
-  (let* ((now (float-time))
-         (delta (- now as-progress-clock))
-         (as-progress-clock now))
-    (message "[+%.3f] %s" delta (if args (format msg args) msg))))
+  (if (not (getenv "EMACS_BATCH"))
+      (let* ((now (float-time))
+             (delta (- now as-progress-clock))
+             (as-progress-clock now))
+        (message "[+%.3f] %s %s" delta (getenv "EMACS_BATCH") (if args (format msg args) msg)))))
 
 (defun as-abbreviated-load-file-name ()
   "Returns an abbreviated version of `load-file-name', if non-nil, otherwise

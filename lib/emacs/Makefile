@@ -18,6 +18,7 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 MAJOR_MODES = major-modes
 MINOR_MODES = minor-modes
 UTILS       = utils
+export EMACS_BATCH = 1
 
 # }}}
 # {{{ Tweakable parameters
@@ -198,6 +199,7 @@ all: .elcs install
 
 show-compiler:
 	@echo 'COMPILER:          "'"$(COMPILER)"'"'
+	@echo 'LOADPATH_OPTS:     "'"$(LOADPATH_OPTS)"'"'
 	@echo 'COMPILER_PRE_OPTS: "$(COMPILER_PRE_OPTS)"'
 	@echo 'COMPILER_OPTS:     "$(COMPILER_OPTS)"'
 

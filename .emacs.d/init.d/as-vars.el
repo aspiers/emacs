@@ -3,7 +3,9 @@
 
 ;; as-load-paths depends on this, so at this point emacs doesn't
 ;; know where to find as-progress.
-(eval-and-compile (message "> Loading as-vars ..."))
+(eval-and-compile
+  (if (not (getenv "EMACS_BATCH"))
+      (message "> Loading as-vars ...")))
 
 ;; XEmacs adds crap to emacs-version
 (defvar emacs-version-number
@@ -57,4 +59,6 @@ Libraries which do not appear in older emacs installs can be
 placed here.")
 
 (provide 'as-vars)
-(eval-and-compile (message "> Loading as-vars ... done"))
+(eval-and-compile
+  (if (not (getenv "EMACS_BATCH"))
+      (message "> Loading as-vars ... done")))
