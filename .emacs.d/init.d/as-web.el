@@ -37,6 +37,7 @@
 (req-package gist)
 (req-package haml-mode)
 (req-package sass-mode
-  :mode "\\.scss\\'")
+  :mode "\\.scss\\'"
+  :hook 'flycheck-mode)
 
 (provide 'as-web)
