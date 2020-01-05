@@ -2043,6 +2043,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
+ '(org-link-email-description-format "mail %c: %.30s")
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-frame)
