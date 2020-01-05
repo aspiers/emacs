@@ -2273,6 +2273,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
+ '(ruby-insert-encoding-magic-comment nil)
  '(safe-local-variable-values
    (quote
     ((org-drawers quote
