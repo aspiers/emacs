@@ -2221,7 +2221,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     ((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)")
      (sequence "PROJECT(p)" "PROJDONE(P)")
      (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|")
-     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c@)"))))
+     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)"))))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
