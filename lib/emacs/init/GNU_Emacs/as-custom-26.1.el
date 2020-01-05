@@ -417,6 +417,7 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(lua-indent-level 2)
  '(magit-branch-prefer-remote-upstream (quote ("master" "stable/3.0")))
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
