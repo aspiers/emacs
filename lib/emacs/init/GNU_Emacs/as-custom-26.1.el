@@ -1609,6 +1609,22 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                       (org-agenda-skip-entry-if
                        (quote notregexp)
                        "\\=.*\\[#C\\]"
+                       (quote scheduled))))))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#D\\]"
+                       (quote scheduled))))))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if
+                       (quote notregexp)
+                       "\\=.*\\[#E\\]"
                        (quote scheduled)))))))
       ((org-agenda-compact-blocks t))
       nil)
