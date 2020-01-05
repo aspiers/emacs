@@ -1186,7 +1186,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sendmail-program "msmtp-personal")
  '(sentence-end-base "\\([.?!…‽][]\"'”’)}]*\\|[;:]-?[])[(|DoO/]\\)")
  '(show-paren-delay 0)
- '(show-paren-mode t nil (paren))
+ '(show-paren-mode t)
  '(show-paren-ring-bell-on-mismatch nil)
  '(show-trailing-whitespace nil)
  '(smartparens-global-mode nil)
