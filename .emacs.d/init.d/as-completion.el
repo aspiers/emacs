@@ -6,7 +6,11 @@
   :bind (("M-x" . amx)
          ("M-X" . amx-major-mode-commands)))
 
-(req-package flx-ido)
+(req-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces nil))
 
 (req-package company
   :config
