@@ -2122,7 +2122,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (("ELPA" . "http://tromey.com/elpa/")
      ("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/")
      ("MELPA" . "http://melpa.milkbox.net/packages/")
      ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))
  '(passive-voice nil)
