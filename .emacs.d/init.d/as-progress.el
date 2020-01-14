@@ -39,7 +39,7 @@ the string \"unknown\"."
       ;; Anyway, for now, we cop out.
       ((caller-filename (as-abbreviated-load-file-name)))
     (as-progress-message
-     (concat caller-filename ": " (if args (format msg args) msg)))))
+     (concat caller-filename ": " (if args (apply 'format msg args) msg)))))
 
 (defun as-loading-started ()
   "Display progress of loading of init files."
