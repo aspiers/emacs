@@ -1,3 +1,3 @@
-(req-package keywiz)
+;;(req-package keywiz)
 
 (provide 'as-fun)
