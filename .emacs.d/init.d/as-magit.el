@@ -102,7 +102,7 @@
   :ensure t)
 
 ;; support for magit: links in org buffers
-(req-package org-magit
+(req-package orgit
   :require org magit)
 
 (provide 'as-magit)
