@@ -51,6 +51,8 @@ laptops outdoors in bright sunlight.")
  '(custom-button-face ((t (:foreground "dark cyan"))))
  '(custom-documentation-face ((t (:background "white"))))
  '(diary-face ((t (:foreground "red"))))
+ '(diff-refine-added-face ((t ((:foreground "white" :background "#168816"
+                                            :inherit diff-refine-changed)))))
  '(fg:black ((t (:foreground "black"))))
  '(font-lock-builtin-face ((t (:foreground "medium orchid"))))
  '(font-lock-comment-face ((t (:foreground "SteelBlue3"))))
