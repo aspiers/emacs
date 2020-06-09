@@ -880,6 +880,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (python . t)
      (shell . t))))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
+ '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "⋆")))
  '(org-capture-templates
    (quote
     (("s" "supportconfig madness" entry
