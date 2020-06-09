@@ -30,6 +30,8 @@
 ;;             (:background ,as-default-background)))))
 ;;        ))
 
+(message "custom-set-variables starting")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -1381,7 +1383,7 @@
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
    (quote
-    ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>"
+    ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>" "M-s"
      (dired-mode "%" "*" "C-t")
      (org-mode "C-c C-x"))))
  '(guide-key/popup-window-position (quote bottom))
@@ -1418,6 +1420,7 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(lua-indent-level 2)
  '(magit-branch-prefer-remote-upstream (quote ("master" "stable/3.0")))
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
@@ -1836,7 +1839,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-overriding-header "")
        (org-agenda-prefix-format "  - "))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: " "%2dd ago: ")))
- '(org-agenda-files (quote ("~/SUSE/TODO.org" "~/org/TODO.org")))
+ '(org-agenda-files
+   (quote
+    ("~/Blocko/TODO.org" "~/SUSE/TODO.org" "~/org/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
@@ -1877,6 +1882,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (python . t)
      (shell . t))))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
+ '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "⋆")))
  '(org-capture-templates
    (quote
     (("s" "supportconfig madness" entry
@@ -1996,6 +2002,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ,\"'" "." 5)) t)
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
+ '(org-export-dispatch-use-expert-ui nil)
  '(org-export-html-style
    "<style type=\"text/css\">
   html {
@@ -2042,11 +2049,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
+ '(org-link-email-description-format "mail %c: %.30s")
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-frame)
      (gnus . gnus-other-frame)
      (file . find-file))))
+ '(org-link-from-user-regexp
+   "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-log-done (quote time))
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
@@ -2131,7 +2141,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("Org" . "http://orgmode.org/elpa/")
      ("ELPA" . "http://tromey.com/elpa/")
      ("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/")
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
@@ -2256,56 +2265,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     ("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets"))))
 
+(message "custom-set-variables done")
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#211E1E" :foreground "#DADADA" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "unknown" :family "Inconsolata"))))
- '(cursor ((t (:background "dark orange"))))
- '(custom-button ((t (:background "lightgrey" :foreground "gray20" :box (:line-width 2 :style released-button)))))
- '(custom-face-tag ((t (:weight bold :height 1.44 :family "helvetica"))))
- '(custom-group-tag ((t (:weight bold :height 1.6 :family "helvetica"))))
- '(custom-variable-tag ((t (:foreground "deep sky blue" :weight bold :height 1.4 :family "helvetica"))))
- '(cvs-msg-face ((t (:slant italic))) t)
- '(diff-added ((t (:inherit diff-changed :foreground "green3"))))
- '(diff-file-header ((t (:foreground "dark orange" :weight bold))))
- '(diff-header ((t (:foreground "dark orange"))))
- '(diff-refine-added ((t (:inherit diff-refine-change :background "#168816"))))
- '(diff-refine-change ((t (:background "grey30"))) t)
- '(diff-refine-changed ((t (:background "grey30"))))
- '(diff-removed ((t (:inherit diff-changed :foreground "red3"))))
- '(erc-current-nick-face ((t (:background "green yellow" :weight bold))) t)
- '(erc-input-face ((t (:foreground "DarkOrange1" :weight bold))))
- '(erc-my-nick-face ((t (:background "plum1" :foreground "black"))) t)
- '(font-lock-preprocessor-face ((t (:foreground "magenta"))))
- '(header-line ((t (:background "grey20" :foreground "VioletRed1" :box nil))))
- '(highlight ((t (:background "dark slate blue"))))
- '(info-title-1 ((t (:inherit info-title-2 :height 1.2 :foundry "Inconsolata"))))
- '(info-title-2 ((t (:inherit info-title-3 :height 1.2 :foundry "Inconsolata"))))
- '(italic ((t (:foreground "sky blue" :slant italic))))
- '(magit-branch ((t (:foreground "yellow"))))
- '(magit-header ((t (:inherit header-line))) t)
- '(magit-item-highlight ((t (:background "#2e2732"))))
- '(magit-section-title ((t (:foreground "VioletRed1" :weight bold))))
- '(minibuffer-prompt ((t (:foreground "light blue"))))
- '(mode-line ((t (:background "grey45" :foreground "black" :box (:line-width -1 :style released-button)))))
- '(org-agenda-column-dateline ((t nil)))
- '(org-agenda-date ((t (:inherit org-agenda-structure :background "grey20"))))
- '(org-column ((t (:background "#211E1E" :strike-through nil :underline nil :slant normal :weight normal :height 122 :family "Inconsolata"))))
- '(org-done ((t (:background "ForestGreen" :foreground "snow1" :weight bold))))
- '(org-hide ((nil (:foreground "black"))))
- '(rpm-spec-dir-face ((((class color) (background light)) (:foreground "olive drab"))))
- '(rpm-spec-tag-face ((t (:foreground "deep sky blue"))))
- '(scroll-bar ((t (:background "grey45"))))
- '(sml/filename ((t (:inherit sml/global :foreground "green3" :weight bold))))
- '(sml/folder ((t (:inherit sml/global :foreground "green3" :weight normal))))
- '(sml/global ((t (:foreground "gray10"))))
- '(sml/prefix ((t (:inherit sml/global :foreground "#d07a00"))))
- '(sml/read-only ((t (:inherit sml/global :foreground "dodger blue"))))
- '(sml/time ((t (:inherit sml/global))))
- '(whitespace-indentation ((t (:background "#abab00" :foreground "firebrick"))))
- '(whitespace-space-after-tab ((t (:background "#abab00" :foreground "firebrick"))))
- '(whitespace-space-before-tab ((t (:background "#451a00" :foreground "firebrick"))))
- '(whitespace-tab ((t (:foreground "gray30"))))
- '(whitespace-trailing ((t (:background "#451a00" :foreground "yellow" :weight bold)))))
+ )
+
+;; custom-set-faces above should be empty!  Use themes instead.

@@ -1237,7 +1237,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
- '(tramp-completion-reread-directory-timeout 1800 nil (tramp))
+ '(tramp-completion-reread-directory-timeout 1800)
  '(tramp-verbose 9 nil (tramp))
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
@@ -1272,3 +1272,5 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; custom-set-faces above should be empty!  Use themes instead.
