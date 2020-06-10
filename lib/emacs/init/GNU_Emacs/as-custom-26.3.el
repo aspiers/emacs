@@ -410,6 +410,7 @@
  '(iswitchb-default-method (quote samewindow))
  '(jit-lock-stealth-nice 0.1)
  '(jit-lock-stealth-time 1)
+ '(js-switch-indent-offset 2)
  '(kept-old-versions 0)
  '(kill-whole-line t)
  '(lazy-lock-defer-on-scrolling t)
