@@ -8,4 +8,7 @@
 
 (req-package coffee-mode)
 
+(dir-locals-set-class-variables 'prettier-js
+                                '((js-mode . ((eval . (prettier-mode t))))))
+
 (provide 'as-javascript)
