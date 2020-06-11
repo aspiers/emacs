@@ -8,7 +8,12 @@
 
 (req-package coffee-mode)
 
+(defvar as-prettier-js-dir-locals-variables
+  '((js-mode . ((eval . (prettier-mode t)))))
+  "Variables for use with `dir-locals-set-class-variables' to
+enable prettier.el for Javascript files.")
+
 (dir-locals-set-class-variables 'prettier-js
-                                '((js-mode . ((eval . (prettier-mode t))))))
+                                as-prettier-js-dir-locals-variables)
 
 (provide 'as-javascript)
