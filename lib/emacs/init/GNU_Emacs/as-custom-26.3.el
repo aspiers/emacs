@@ -1265,8 +1265,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      autotest
      asciidoc
      apache-mode
-     ace-jump-mode
-     )))
+     ace-jump-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
