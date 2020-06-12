@@ -540,8 +540,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                 (quote deadline)
                 (quote scheduled)))))
        (org-agenda-prefix-format " %?-12t% s")))
-     ("wd" "SUSE daily review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+     ("wd" "Blocko daily review"
+      ((tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #A TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -549,7 +549,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#A\\]"
                        (quote scheduled))))))
-       (tags-todo "officehrs+CATEGORY=\"SUSE\""
+       (tags-todo "officehrs+CATEGORY=\"Blocko\""
                   ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
                    (org-agenda-skip-function
                     (lambda nil
@@ -560,8 +560,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (agenda ""
                ((org-agenda-ndays 3)
                 (org-agenda-skip-function
-                 (as-org-agenda-skip-select-category-function "SUSE"))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                 (as-org-agenda-skip-select-category-function "Blocko"))))
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -634,19 +634,19 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
         (as-org-agenda-skip-select-category-function "personal"))
        (org-agenda-prefix-format " %?-12t% s"))
       nil)
-     ("w7" "SUSE weekly review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/CHASE"
+     ("w7" "Blocko weekly review"
+      ((tags-todo "+CATEGORY=\"Blocko\"/CHASE"
                   ((org-agenda-overriding-header "Items to CHASE")))
-       (tags-todo "+CATEGORY=\"SUSE\"/WAITING"
+       (tags-todo "+CATEGORY=\"Blocko\"/WAITING"
                   ((org-agenda-overriding-header "Items still WAITING on somebody")))
        (stuck ""
               ((org-agenda-overriding-header "Stuck work projects")
                (org-stuck-projects
                 (quote
-                 ("+CATEGORY=\"SUSE\"/PROJECT"
+                 ("+CATEGORY=\"Blocko\"/PROJECT"
                   ("TODO" "NEXT" "NEXTACTION" "STARTED")
                   nil "")))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -654,7 +654,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#B\\]"
                        (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #C TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -761,7 +761,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("-" "easy" tags-todo "easy" nil)
      ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
+     ("w-" "easy Blocko tasks" tags-todo "+easy+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
      ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
@@ -790,13 +790,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("wa" "SUSE admin" tags-todo "+admin+CATEGORY=\"SUSE\""
+     ("wa" "Blocko admin" tags-todo "+admin+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wo" "SUSE org" tags-todo "+org+CATEGORY=\"SUSE\""
+     ("wo" "Blocko org" tags-todo "+org+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\""
+     ("wc" "Blocko computer" tags-todo "+computer+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wL" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
+     ("wL" "Blocko learning" tags-todo "+learning+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("c" "CHASE" todo "CHASE" nil)
      ("W" "WAITING" todo "WAITING" nil)
@@ -823,7 +823,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("wl" "work log" agenda "DONE"
       ((org-agenda-files
         (quote
-         ("~/SUSE/TODO.org" "~/SUSE/DONE.org")))
+         ("~/Blocko/TODO.org" "~/Blocko/DONE.org")))
        (org-agenda-span
         (quote week))
        (org-agenda-start-on-weekday 1)
