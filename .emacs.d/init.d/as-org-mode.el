@@ -8,9 +8,9 @@
 (use-package org
   :bind
   (("M-o a" . org-agenda)
+  (("M-o c" . org-capture)
    ("M-S-a" . as-org-switch-to-agenda-buffer) ;; X11 only
    ("M-o b" . as-org-switch-to-agenda-buffer)
-   ("M-o q" . org-remember)
    ("M-o M-o" . as-org-jump-clock-or-agenda)
 
    ("C-c C-x C-j" . org-clock-goto)
