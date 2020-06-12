@@ -26,7 +26,7 @@
                         (save-excursion
                           (forward-sexp)
                           (point)))
-      (while (re-search-forward " +" nil t)
+      (while (re-search-forward " +\b" nil t)
         (replace-match "\n"))))
   (indent-pp-sexp))
 
