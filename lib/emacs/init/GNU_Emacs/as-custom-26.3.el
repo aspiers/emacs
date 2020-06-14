@@ -1144,8 +1144,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (
-     tss
+    (tss
      typescript-mode
      haml-mode
      ido-completing-read+
