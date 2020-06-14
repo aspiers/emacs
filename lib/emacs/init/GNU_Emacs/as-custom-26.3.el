@@ -376,6 +376,7 @@
  '(git-rebase-auto-advance t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
+ '(global-prettier-mode nil)
  '(global-whitespace-mode t)
  '(guide-key-mode t)
  '(guide-key/guide-key-sequence
