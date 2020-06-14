@@ -849,6 +849,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
+ '(org-agenda-show-future-repeats (quote next))
  '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
@@ -858,6 +859,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
+ '(org-agenda-start-on-weekday -1)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
  '(org-agenda-time-grid
