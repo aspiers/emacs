@@ -1278,6 +1278,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(quelpa-build-explicit-tar-format-p t)
  '(quelpa-update-melpa-p nil)
  '(quelpa-upgrade-p nil)
  '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
