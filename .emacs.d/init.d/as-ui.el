@@ -49,6 +49,11 @@
   (setq enable-recursive-minibuffers t)
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
+(use-package ivy-rich
+  :after ivy
+  :config
+  (ivy-rich-mode 1))
+
 (use-package all-the-icons-ivy-rich
   :after ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
