@@ -1146,6 +1146,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(package-selected-packages
    (quote
     (tss
+     flymake-jshint
+     flymake-jslint
+     flymake-eslint
      typescript-mode
      haml-mode
      ido-completing-read+
