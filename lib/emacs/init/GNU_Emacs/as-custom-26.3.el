@@ -449,6 +449,7 @@
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
  '(mark-even-if-inactive t)
+ '(mc/always-run-for-all t)
  '(message-default-news-headers
    "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
