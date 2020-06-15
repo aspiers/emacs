@@ -1146,7 +1146,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (all-the-icons-ivy-rich-mode
+    (all-the-icons-ivy-rich
      ivy
      counsel
      rg
