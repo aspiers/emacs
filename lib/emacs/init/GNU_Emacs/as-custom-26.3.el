@@ -1146,11 +1146,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (tss
+    (ivy
+     counsel
      rg
      flymake-jshint
      flymake-jslint
      flymake-eslint
+     tss
      typescript-mode
      haml-mode
      ido-completing-read+

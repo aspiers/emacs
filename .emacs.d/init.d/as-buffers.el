@@ -12,7 +12,6 @@
   (revert-buffer t t))
 
 (bind-key "C-x K" 'as-destroy-buffer)
-(bind-key "C-!"   'ido-switch-buffer)
 (bind-key "C-c r" 'as-revert-buffer-without-confirmation)
 (bind-key "C-c b" 'bury-buffer)
 (bind-key "C-;"   'switch-to-prev-buffer)

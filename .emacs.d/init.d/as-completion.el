@@ -2,17 +2,45 @@
 
 (bind-key "M-<tab>" 'hippie-expand)
 
-(req-package amx
-  :bind (("M-x" . amx)
-         ("M-X" . amx-major-mode-commands)))
-
-(req-package flx-ido
+(use-package ivy
+  :after flx
   :config
-  (flx-ido-mode 1)
-  (setq ido-enable-flex-matching t
-        ido-use-faces nil))
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
-(req-package company
+(use-package swiper
+  :after ivy
+  :bind ("C-s" . swiper)
+
+  ;; enable this if you want `swiper' to use it
+  ;; (setq search-default-mode #'char-fold-to-regexp)
+  )
+
+(use-package counsel
+  :after ivy
+  :config
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+  :bind (("C-c C-r" . ivy-resume)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-!" . counsel-ibuffer)
+         ("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)
+         ("C-h o" . counsel-describe-symbol)
+         ("C-x M-f" . counsel-find-library)
+         ("C-h S" . counsel-info-lookup-symbol)
+         ;; ("<f2> u" . counsel-unicode-char)
+         ;; ("C-c g" . counsel-git)
+         ;; ("C-c j" . counsel-git-grep)
+         ;; ("C-c k" . counsel-ag)
+         ;; ("C-x l" . counsel-locate)
+         ;; ("C-S-o" . counsel-rhythmbox)
+         ))
+
+(use-package company
   :config
 
   ;; fci-mode breaks company :-(
@@ -33,9 +61,9 @@ If `fci-mode' was enabled turn it on.
 Argument IGNORE is not used."
     (when company-fci-mode-on-p (fci-mode 1)))
 
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
+  :hook ((company-completion-started . company-turn-off-fci)
+         (company-completion-finished . company-maybe-turn-on-fci)
+         (company-completion-cancelled . company-maybe-turn-on-fci)))
 
 ;; (req-package auto-complete-css)
 ;; (req-package auto-complete-emacs-lisp)
