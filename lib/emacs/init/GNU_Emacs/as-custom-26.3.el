@@ -1146,7 +1146,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (ivy
+    (all-the-icons-ivy-rich-mode
+     ivy
      counsel
      rg
      flymake-jshint

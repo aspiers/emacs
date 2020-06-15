@@ -41,6 +41,9 @@
 
 ;;}}}
 
+(use-package all-the-icons-ivy-rich-mode
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (req-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
