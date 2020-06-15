@@ -26,8 +26,8 @@
                         (save-excursion
                           (forward-sexp)
                           (point)))
-      (while (re-search-forward " +\\b" nil t)
-        (replace-match "\n"))))
+      (while (re-search-forward "\\([^[:space:]\n]\\) +\\([^[:space:]\n]\\)" nil t)
+        (replace-match "\\1\n\\2"))))
   (indent-pp-sexp))
 
 (defun as-expand-psp ()
