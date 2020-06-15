@@ -1147,6 +1147,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(package-selected-packages
    (quote
     (tss
+     rg
      flymake-jshint
      flymake-jslint
      flymake-eslint
