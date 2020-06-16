@@ -60,6 +60,8 @@ it's available."
 
 (as-progress "bootstrapping use-package and req-package... done")
 
+(setq use-package-verbose 'debug)
+
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-elpa-package
   "~/.emacs.d/elpa" "Find ELPA package: ")
