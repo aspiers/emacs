@@ -1146,7 +1146,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (all-the-icons-ivy-rich
+    (avy
+     all-the-icons-ivy-rich
      ivy
      counsel
      rg
@@ -1274,8 +1275,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      beacon
      autotest
      asciidoc
-     apache-mode
-     ace-jump-mode)))
+     apache-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)

@@ -22,8 +22,12 @@
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
-(req-package ace-jump-mode
-  :bind ("C-0" . ace-jump-mode))
+(use-package avy
+  :ensure t
+  ;; :config
+  ;; (avy-setup-default)
+  :bind (("C-0" . avy-goto-word-1)))
+
 (req-package idomenu
   :bind ("C-1" . idomenu))
 
