@@ -26,12 +26,14 @@
   :ensure t
   ;; :config
   ;; (avy-setup-default)
-  :bind (("C-0" . avy-goto-word-1)))
+  :bind (("C-0" . avy-goto-word-1)
+         ("C-9" . avy-goto-char-timer)
+         ("M-g" . avy-goto-line)))
 
 (req-package idomenu
   :bind ("C-1" . idomenu))
 
-(bind-key "M-g"   'goto-line)
+(bind-key "M-G"   'goto-line)
 (bind-key "M-S-e" 'mark-end-of-sentence)
 
 ;;;###autoload
