@@ -14,7 +14,7 @@ as an extremely primitive profiler.")
       (let* ((now (float-time))
              (delta (- now as-progress-clock))
              (as-progress-clock now))
-        (message "[+%.3f] %s %s" delta (getenv "EMACS_BATCH") (if args (format msg args) msg)))))
+        (message "[+%.3f] %s" delta (if args (format msg args) msg)))))
 
 (defun as-abbreviated-load-file-name ()
   "Returns an abbreviated version of `load-file-name', if non-nil, otherwise
