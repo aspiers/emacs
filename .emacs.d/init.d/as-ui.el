@@ -51,7 +51,7 @@
                                 (t . ivy--regex-fuzzy))))
 
 (use-package ivy-rich
-  :after ivy
+  :after counsel
   :config
   (ivy-rich-mode 1))
 
