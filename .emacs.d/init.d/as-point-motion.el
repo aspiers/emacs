@@ -24,7 +24,8 @@
 
 (use-package swiper
   :after ivy
-  :bind ("C-s" . swiper)
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward))
 
   ;; enable this if you want `swiper' to use it
   ;; (setq search-default-mode #'char-fold-to-regexp)
