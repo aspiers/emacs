@@ -1,4 +1,5 @@
-(setq scilla-root (concat (getenv "HOME") "/blockchain/scilla/scilla"))
+(defvar scilla-root (concat (getenv "HOME") "/blockchain/scilla/scilla")
+  "Directory where scilla repository is checked out.")
 
 (req-package scilla-mode
   :require flycheck
