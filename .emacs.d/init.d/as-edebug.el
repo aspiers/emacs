@@ -51,4 +51,9 @@ Use `edebug-where` to return."
 
 ;; edebug-view-point is already bound to both "v" and "P" which seems
 ;; excessive.  "P" is a natural mnemonic for the non-bouncing version of "p".
-(define-key edebug-mode-map "P" 'edebug-view-point)
+(use-package edebug
+  :defer t
+  :config
+  (define-key edebug-mode-map "P" 'edebug-view-point))
+
+(provide 'as-edebug)
