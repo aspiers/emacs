@@ -68,6 +68,7 @@
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-!" . counsel-ibuffer)
+         ("C-h a" . counsel-apropos)
          ("C-h b" . counsel-descbinds)
          ("C-h f" . counsel-describe-function)
          ("C-h v" . counsel-describe-variable)
