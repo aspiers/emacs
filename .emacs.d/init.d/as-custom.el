@@ -9,6 +9,8 @@
 (setq custom-file (format "%s/as-custom-%s.el"
                           as-init-dir emacs-version-number))
 
+(bind-key "C-c G" 'customize-group)
+
 (as-progress "loading %s ..." custom-file)
 ;; This load is required, according to the info pages:
 (load custom-file)
