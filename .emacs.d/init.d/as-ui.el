@@ -59,14 +59,6 @@
   :after ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
 
-(use-package swiper
-  :after ivy
-  :bind ("C-s" . swiper)
-
-  ;; enable this if you want `swiper' to use it
-  ;; (setq search-default-mode #'char-fold-to-regexp)
-  )
-
 (use-package counsel
   :after ivy
   :config

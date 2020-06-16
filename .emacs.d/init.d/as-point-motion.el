@@ -22,6 +22,14 @@
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
+(use-package swiper
+  :after ivy
+  :bind ("C-s" . swiper)
+
+  ;; enable this if you want `swiper' to use it
+  ;; (setq search-default-mode #'char-fold-to-regexp)
+  )
+
 (use-package avy
   :ensure t
   ;; :config
