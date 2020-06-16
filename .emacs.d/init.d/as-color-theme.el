@@ -13,6 +13,15 @@
 
 (add-to-list 'custom-theme-load-path as-themes-dir)
 
+(defun as-toggle-sunlight-theme ()
+  "Toggles the sunlight theme for outdoors vs. indoors."
+  (interactive)
+  (if (memq 'sunlight custom-enabled-themes)
+      (disable-theme 'sunlight)
+    (enable-theme 'sunlight)))
+
+(bind-key "C-c t o" 'as-toggle-sunlight-theme)
+
 ;; These are not needed as long as the themes directory is in
 ;; custom-theme-load-path:
 ;;
