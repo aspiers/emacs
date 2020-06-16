@@ -22,12 +22,27 @@
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
-(req-package ace-jump-mode
-  :bind ("C-0" . ace-jump-mode))
+(use-package swiper
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward))
+
+  ;; enable this if you want `swiper' to use it
+  ;; (setq search-default-mode #'char-fold-to-regexp)
+  )
+
+(use-package avy
+  :ensure t
+  ;; :config
+  ;; (avy-setup-default)
+  :bind (("C-0" . avy-goto-word-1)
+         ("C-9" . avy-goto-char-timer)
+         ("M-g" . avy-goto-line)))
+
 (req-package idomenu
   :bind ("C-1" . idomenu))
 
-(bind-key "M-g"   'goto-line)
+(bind-key "M-G"   'goto-line)
 (bind-key "M-S-e" 'mark-end-of-sentence)
 
 ;;;###autoload

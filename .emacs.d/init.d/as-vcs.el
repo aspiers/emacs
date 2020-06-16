@@ -28,7 +28,9 @@
 (autoload 'svn-status "psvn" "svn-status" t)
 (bind-key "C-c s s" 'svn-status)
 (bind-key "C-c s u" 'svn-status-update-cmd)
-(fset 'as-next-svn-buffer "C-xb*svn-status*")
+(defun as-next-svn-buffer ()
+  (interactive)
+  (switch-to-buffer (get-buffer "*svn-status*")))
 (bind-key "C-c s b"   'as-next-svn-buffer)
 ;; (require 'psvn)
 

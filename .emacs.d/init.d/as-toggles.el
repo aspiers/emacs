@@ -9,44 +9,12 @@
   (message "indent-tabs-mode set to %s" indent-tabs-mode))
 
 ;;}}}
+
 (bind-key "C-c t b"   'as-toggle-indent-tabs-mode)
-
-;;{{{ as-toggle-case-fold-search
-
-(defun as-toggle-case-fold-search ()
-  "Toggles the value of case-fold-search in the current buffer"
-  (interactive)
-  (setq case-fold-search (not case-fold-search))
-  (message "case-fold-search set to %s" case-fold-search))
-
-;;}}}
-(bind-key "C-c t c"   'as-toggle-case-fold-search)
-
-;;{{{ as-toggle-debug-on-error
-
-(defun as-toggle-debug-on-error ()
-  "Toggles the value of debug-on-error in the current buffer"
-  (interactive)
-  (setq debug-on-error (not debug-on-error))
-  (message "debug-on-error set to %s" debug-on-error))
-
-;;}}}
-(bind-key "C-c t e"   'as-toggle-debug-on-error)
-
+(bind-key "C-c t c"   'toggle-case-fold-search)
+(bind-key "C-c t e"   'toggle-debug-on-error)
 (bind-key "C-c t f"   'auto-fill-mode)
-
-;;{{{ as-toggle-truncate-lines
-
-(defun as-toggle-truncate-lines
-  ()
-  "Toggles the value of truncate lines in the current buffer"
-  (interactive)
-  (setq truncate-lines (not truncate-lines))
-  (redraw-display)
-  (message "truncate-lines set to %s" truncate-lines))
-
-;;}}}
-(bind-key "C-c t s"   'as-toggle-truncate-lines) ;; mnemonic: less -S
+(bind-key "C-c t s"   'toggle-truncate-lines) ;; mnemonic: less -S
 
 ;;{{{ as-set-tab-width
 

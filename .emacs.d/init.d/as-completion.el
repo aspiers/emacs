@@ -2,17 +2,7 @@
 
 (bind-key "M-<tab>" 'hippie-expand)
 
-(req-package amx
-  :bind (("M-x" . amx)
-         ("M-X" . amx-major-mode-commands)))
-
-(req-package flx-ido
-  :config
-  (flx-ido-mode 1)
-  (setq ido-enable-flex-matching t
-        ido-use-faces nil))
-
-(req-package company
+(use-package company
   :config
 
   ;; fci-mode breaks company :-(
@@ -33,9 +23,9 @@ If `fci-mode' was enabled turn it on.
 Argument IGNORE is not used."
     (when company-fci-mode-on-p (fci-mode 1)))
 
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
+  :hook ((company-completion-started . company-turn-off-fci)
+         (company-completion-finished . company-maybe-turn-on-fci)
+         (company-completion-cancelled . company-maybe-turn-on-fci)))
 
 ;; (req-package auto-complete-css)
 ;; (req-package auto-complete-emacs-lisp)

@@ -365,6 +365,7 @@
  '(fci-rule-column 80)
  '(flx-ido-mode t)
  '(flx-ido-threshhold 60000)
+ '(flycheck-global-modes (quote (python-mode js-mode)))
  '(folding-mode-prefix-key "")
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
@@ -374,6 +375,7 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
+ '(global-flycheck-mode t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-prettier-mode nil)
@@ -449,6 +451,7 @@
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
  '(mark-even-if-inactive t)
+ '(mc/always-run-for-all t)
  '(message-default-news-headers
    "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
@@ -1145,7 +1148,17 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (tss
+    (ripgrep
+     ag
+     avy
+     all-the-icons-ivy-rich
+     ivy
+     counsel
+     rg
+     flymake-jshint
+     flymake-jslint
+     flymake-eslint
+     tss
      typescript-mode
      haml-mode
      ido-completing-read+
@@ -1266,8 +1279,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      beacon
      autotest
      asciidoc
-     apache-mode
-     ace-jump-mode)))
+     apache-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)

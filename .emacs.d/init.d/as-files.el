@@ -36,12 +36,15 @@
 (define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
 (bind-key "C-c j /" 'as-find-from-root)
 
-(fset 'as-find-personal-todo "\C-x\C-f~/org/TODO.org")
+(defun as-find-personal-todo ()
+  (interactive)
+  (find-file "~/org/TODO.org"))
 (bind-key "C-c j t" 'as-find-personal-todo)
 (bind-key "C-\""    'as-find-personal-todo)
-(fset 'as-find-personal-diary "\C-x\C-f~/org/diary.org")
+(defun as-find-personal-diary ()
+  (interactive)
+  (find-file "~/org/diary.org"))
 (bind-key "C-c j d" 'as-find-personal-diary)
-;;(fset 'as-find-personal-note "\C-x\C-f~/org/notes/")
 
 (require 'as-find-file-in-dir)
 (define-find-file-in-dir-function as-find-personal-note

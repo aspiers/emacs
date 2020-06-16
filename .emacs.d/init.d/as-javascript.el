@@ -16,4 +16,6 @@ enable prettier.el for Javascript files.")
 (dir-locals-set-class-variables 'prettier-js
                                 as-prettier-js-dir-locals-variables)
 
+(req-package flymake-eslint)
+
 (provide 'as-javascript)
