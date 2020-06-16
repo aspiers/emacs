@@ -41,6 +41,8 @@
 
 ;;}}}
 
+(use-package flx)
+
 (use-package ivy
   :after flx
   :config
