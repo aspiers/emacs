@@ -16,11 +16,11 @@
 ;; These are not needed as long as the themes directory is in
 ;; custom-theme-load-path:
 ;;
-;; (req-package pastels-on-dark-aspiers-theme
+;; (use-package pastels-on-dark-aspiers-theme
 ;;   :no-require t
 ;;   :ensure nil)
 ;; 
-;; (req-package sunlight-theme
+;; (use-package sunlight-theme
 ;;   :no-require t
 ;;   :ensure nil)
 
