@@ -1472,6 +1472,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(package-selected-packages
    (quote
     (minimap
+     try
      ivy-hydra
      helm-org-rifle
      counsel-projectile

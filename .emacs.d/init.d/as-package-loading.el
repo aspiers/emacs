@@ -77,5 +77,8 @@ it's available."
 (require 'as-quelpa)
 (as-progress "bootstrapping quelpa... done")
 
+;; This is nice for trying out packages
+(use-package try)
+
 (provide 'as-package-loading)
 (eval-and-compile (as-loading-done))
