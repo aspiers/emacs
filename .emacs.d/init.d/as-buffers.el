@@ -11,6 +11,9 @@
   (interactive)
   (revert-buffer t t))
 
+(use-package frog-jump-buffer
+  :bind ("C-!" . frog-jump-buffer))
+
 (bind-key "C-x K" 'as-destroy-buffer)
 (bind-key "C-c r" 'as-revert-buffer-without-confirmation)
 (bind-key "C-c b" 'bury-buffer)
