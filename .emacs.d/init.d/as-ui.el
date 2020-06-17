@@ -66,9 +66,11 @@
   :config
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+  :chords ((",." . counsel-ibuffer))
   :bind (("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
+         ("C-1" . counsel-ibuffer)
          ("C-h a" . counsel-apropos)
          ("C-h b" . counsel-descbinds)
          ("C-h f" . counsel-describe-function)
