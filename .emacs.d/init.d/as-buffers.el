@@ -29,4 +29,13 @@
 (req-package switch-window
   :bind ("C-x o" . switch-window))
 
+(use-package minimap)
+
+;; (use-package sublimity
+;;   :config
+;;   (sublimity-mode 1)
+;;   (require 'sublimity-map)
+;;   (sublimity-map-set-delay 0.1)
+;;   (sublimity-map-show))
+
 (provide 'as-buffers)

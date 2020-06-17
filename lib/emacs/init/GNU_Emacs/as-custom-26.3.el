@@ -792,6 +792,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
  '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
+ '(minimap-mode t)
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
@@ -1470,7 +1471,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (ivy-hydra
+    (minimap
+     ivy-hydra
      helm-org-rifle
      counsel-projectile
      frog-jump-buffer
@@ -1737,6 +1739,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(minimap-active-region-background ((((background dark)) (:background "#333333" :extend t)) (t (:background "#C847D8FEFFFF" :extend t)))))
 
 ;; custom-set-faces above should be empty!  Use themes instead.
