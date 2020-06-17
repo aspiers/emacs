@@ -37,13 +37,16 @@
   ;; https://github.com/bbatsov/projectile/issues/496
   (projectile-mode))
 
-(require 'as-find-file-in-dir)
-(define-find-file-in-dir-function as-find-my-mrconfig
-  "~/.config/mr/" "Find mr config: ")
-(bind-key "C-c j m"  'as-find-my-mrconfig)
+(use-package as-find-file-in-dir
+  :ensure nil
 
-(define-find-file-in-dir-function as-find-stow-package
-  "~/.STOW/" "Find stow package: ")
-(bind-key "C-c j s"  'as-find-stow-package)
+  :config
+  (define-find-file-in-dir-function as-find-my-mrconfig
+    "~/.config/mr/" "Find mr config: ")
+  (define-find-file-in-dir-function as-find-stow-package
+    "~/.STOW/" "Find stow package: ")
+
+  :bind (("C-c j m" . as-find-my-mrconfig)
+         ("C-c j s" . as-find-stow-package)))
 
 (provide 'as-projects)

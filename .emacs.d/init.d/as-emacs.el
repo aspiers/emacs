@@ -14,10 +14,14 @@
 
 (bind-key "C-c F"        'font-lock-fontify-buffer)
 
-(require 'as-find-file-in-dir)
-(define-find-file-in-dir-function as-find-emacs-init-d
-  "~/.emacs.d/init.d" "Find emacs init.d file: ")
-(bind-key "C-c j e" 'as-find-emacs-init-d)
+(use-package as-find-file-in-dir
+  :ensure nil
+
+  :config
+  (define-find-file-in-dir-function as-find-emacs-init-d
+    "~/.emacs.d/init.d" "Find emacs init.d file: ")
+
+  :bind ("C-c j e" . as-find-emacs-init-d))
 
 (bind-key "C-h B"   'describe-personal-keybindings)
 
