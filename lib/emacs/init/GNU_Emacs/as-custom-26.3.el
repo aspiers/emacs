@@ -411,6 +411,12 @@
  '(ispell-program-name "aspell")
  '(iswitchb-case nil)
  '(iswitchb-default-method (quote samewindow))
+ '(ivy-height-alist
+   (quote
+    ((counsel-evil-registers . 5)
+     (counsel-yank-pop . 5)
+     (counsel-git-log . 4)
+     (counsel-ibuffer . 20))))
  '(jit-lock-stealth-nice 0.1)
  '(jit-lock-stealth-time 1)
  '(js-switch-indent-offset 2)
