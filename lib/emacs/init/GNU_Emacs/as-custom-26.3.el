@@ -1467,7 +1467,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (counsel-projectile
+    (helm-org-rifle
+     counsel-projectile
      frog-jump-buffer
      ivy-rich
      swiper

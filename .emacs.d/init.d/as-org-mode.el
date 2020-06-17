@@ -71,4 +71,13 @@
   :require org
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
+(defun as-helm-org-rifle-notes ()
+  (interactive)
+  (helm-org-rifle-directories '("~/org/notes")))
+
+(use-package helm-org-rifle
+  :bind (("M-o j a" . helm-org-rifle-agenda-files)
+         ("M-o j j" . helm-org-rifle-current-buffer)
+         ("M-o n" . as-helm-org-rifle-notes)))
+
 (provide 'as-org-mode)
