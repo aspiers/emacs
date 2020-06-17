@@ -8,7 +8,7 @@
 
     (use-package prettier
       :load-path prettier-el-home)
-  (warn "%s did not exist; won't install prettier.el"))
+  (warn "%s did not exist; won't install prettier.el" prettier-el-home))
 
 ;; Was experimenting with this quelpa/MELPA recipe, but first see
 ;; https://github.com/jscheid/prettier.el/issues/11
