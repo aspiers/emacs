@@ -9,7 +9,8 @@
                           (forward-sexp)
                           (point)))
       (while (re-search-forward "\\([^[:space:]\n]\\) +\\([^[:space:]\n]\\)" nil t)
-        (replace-match "\\1\n\\2"))))
+        (replace-match "\\1\n\\2")
+        (forward-char -1))))
   (indent-pp-sexp))
 
 (defun as-expand-psp ()
