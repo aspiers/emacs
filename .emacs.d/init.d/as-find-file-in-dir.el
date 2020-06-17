@@ -7,7 +7,8 @@
 This function was defined via `define-find-file-in-dir-function',
 and invokes `ido-file-internal'." ,dir)
     (interactive)
-    (ido-file-internal ido-default-file-method
-                       nil ,dir ,(or prompt "Find file: "))))
+    (counsel--find-file-1 ,(or prompt "Find file: ")
+                          ,dir #'counsel-find-file-action
+                          'counsel-find-file)))
 
 (provide 'as-find-file-in-dir)
