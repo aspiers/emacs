@@ -867,10 +867,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-start-on-weekday -1)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
- '(org-agenda-time-grid
-   (quote
-    (nil "----------------"
-         (800 1000 1200 1400 1600 1800 2000))))
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
  '(org-agenda-window-setup (quote current-window))
