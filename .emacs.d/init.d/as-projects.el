@@ -9,7 +9,8 @@
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
 (require 'as-key-chord)
-(req-package projectile
+(use-package projectile
+  :requires as-key-chord
 
   ;; Not needed since guide-key/recursive-key-sequence-flag is set:
   ;; (setq guide-key/guide-key-sequence
@@ -27,15 +28,12 @@
     (lookup-key projectile-mode-map (kbd "C-c p"))
     "The keymap which Projectile typically binds to C-c p.")
   (bind-key "C-x p" projectile-prefix-map)
-  (global-set-key (kbd "C-c p") 'previous-line)
-  (local-set-key (kbd "C-c p") 'previous-line)
-  (global-set-key [(control ?c) ?p] 'previous-line)
   (define-key mode-specific-map (kbd "p") nil)
-  (bind-key "C-c p" 'as-copy-previous-line-suffix)
-  (require 'as-key-chord)
 
   ;; https://github.com/bbatsov/projectile/issues/496
-  (projectile-mode))
+  (projectile-mode)
+
+  :bind ("C-c p" . as-copy-previous-line-suffix))
 
 (use-package as-find-file-in-dir
   :ensure nil
