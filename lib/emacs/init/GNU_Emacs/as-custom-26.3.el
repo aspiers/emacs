@@ -1374,7 +1374,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
  '(tramp-completion-reread-directory-timeout 1800)
- '(tramp-verbose 9 nil (tramp))
+ '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
