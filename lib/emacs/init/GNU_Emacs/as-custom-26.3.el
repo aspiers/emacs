@@ -1470,7 +1470,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (helm-org-rifle
+    (ivy-hydra
+     helm-org-rifle
      counsel-projectile
      frog-jump-buffer
      ivy-rich

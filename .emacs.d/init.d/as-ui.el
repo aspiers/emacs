@@ -52,6 +52,9 @@
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy))))
 
+;; C-o in ivy minibuffer is awesome!!
+(use-package ivy-hydra)
+
 (use-package ivy-rich
   :after counsel
   :config
