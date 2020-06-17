@@ -1231,34 +1231,34 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
-     ("I" "immediate work NEXT" entry
-      (file "~/SUSE/TODO.org")
+     ("I" "immediate E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
-     ("N" "work NEXT" entry
-      (file "~/SUSE/TODO.org")
+     ("N" "E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
-     ("M" "NEXT from work mail" entry
-      (file "~/SUSE/TODO.org")
+     ("M" "NEXT from E24P mail" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
-     ("L" "work learning material" entry
-      (file "~/SUSE/TODO.org")
+     ("L" "E24P learning material" entry
+      (file "~/Blocko/TODO.org")
       "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
   CLOSED: %U")
-     ("D" "work task DONE" entry
-      (file "~/SUSE/DONE.org")
+     ("D" "E24P task DONE" entry
+      (file "~/Blocko/DONE.org")
       "* DONE %?
   CLOSED: %U")
      ("X" "nuisance phone call" entry
