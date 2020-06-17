@@ -28,7 +28,7 @@ disable window saving.
 
 Use `edebug-where` to return."
   (interactive)
-  (if (not edebug-cactive)
+  (if (not edebug-active)
       (error "Edebug is not active"))
   (edebug-view-point-1)
 
