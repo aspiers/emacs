@@ -7,6 +7,7 @@
          ("C-c g k" . magit-run-gitk)
          ("C-c g a" . magit-run-gitk-all)
          ("C-c g s" . magit-status)
+         ("C-c g l" . magit-log-buffer-file)
          ("C-S-g" .   magit-status))
 
   :config
