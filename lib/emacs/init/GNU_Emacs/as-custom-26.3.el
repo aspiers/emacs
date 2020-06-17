@@ -1286,7 +1286,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :justification: %^{justification}
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:"))))
+  :END:")
+     ("e" "emacs NEXT" entry
+      (file+olp "" "computer and technology" "tool software development" "emacs")
+      "* NEXT %?" :prepend t :jump-to-captured t))))
  '(org-catch-invisible-edits (quote smart))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
