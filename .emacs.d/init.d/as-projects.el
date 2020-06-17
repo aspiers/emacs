@@ -35,6 +35,11 @@
 
   :bind ("C-c p" . as-copy-previous-line-suffix))
 
+(use-package counsel-projectile
+  :after (counsel projectile)
+  :config
+  (counsel-projectile-mode))
+
 (use-package as-find-file-in-dir
   :ensure nil
 
