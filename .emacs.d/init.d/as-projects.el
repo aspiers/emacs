@@ -20,6 +20,7 @@
            ("zm" . projectile-commander)
            ("zs" . projectile-switch-project)
            ("zf" . projectile-find-file)
+           ("zd" . projectile-find-dir)
            ("zb" . projectile-switch-to-buffer))
 
   :config
