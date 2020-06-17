@@ -1218,10 +1218,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "*" "•" "⋆")))
  '(org-capture-templates
    (quote
-    (("s" "supportconfig madness" entry
-      (file+headline "~/SUSE/TODO.org" "individual instances")
-      "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
-     ("o" "org mailing list item" entry
+    (("o" "org mailing list item" entry
       (file+headline "~/org/TODO.org" "to list")
       "* NEXT %?%:annotation" :prepend t)
      ("z" "property test" entry
@@ -1264,14 +1261,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("X" "nuisance phone call" entry
       (file "~/org/notes/NuisanceCalls.org")
       "* %T %?")
-     ("w" "Wipfel learning" entry
-      (file+headline "~/SUSE/TODO.org" "PROJECT rwipfel")
-      "* SOMEDAY %[~/.org-mairix-link]" :prepend t)
-     ("S" "PSO standup calls etc." entry
-      (file+headline "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning")
-      "*** %t
-***** me
-******* %?" :prepend t)
      ("p" "project" entry
       (file "~/org/TODO.org")
       "* PROJECT %^{project title}
