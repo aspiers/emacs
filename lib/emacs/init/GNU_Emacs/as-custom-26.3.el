@@ -792,7 +792,11 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
  '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
+ '(minimap-major-modes (quote (prog-mode text-mode org-mode)))
+ '(minimap-minimum-width 10)
  '(minimap-mode t)
+ '(minimap-width-fraction 0.12)
+ '(minimap-window-location (quote right))
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
@@ -1740,6 +1744,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(minimap-active-region-background ((((background dark)) (:background "#333333" :extend t)) (t (:background "#C847D8FEFFFF" :extend t)))))
+ '(minimap-active-region-background ((((background dark)) (:background "#444444" :extend t)) (t (:background "#C847D8FEFFFF" :extend t))))
+ '(minimap-font-face ((t (:height 20 :family "DejaVu Sans Mono")))))
 
 ;; custom-set-faces above should be empty!  Use themes instead.
