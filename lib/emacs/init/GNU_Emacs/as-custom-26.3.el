@@ -1242,7 +1242,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%:annotation" :prepend t)
+      "* NEXT %?%a" :prepend t)
      ("N" "E24P NEXT" entry
       (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
