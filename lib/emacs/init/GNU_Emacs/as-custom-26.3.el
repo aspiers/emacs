@@ -1223,7 +1223,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "*" "•" "⋆")))
  '(org-capture-templates
    (quote
-    (("o" "org mailing list item" entry
+    (("c" "CO2ken NEXT" entry
+      (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
+      "* NEXT %?" :prepend t :jump-to-captured t)
+     ("o" "org mailing list item" entry
       (file+headline "~/org/TODO.org" "to list")
       "* NEXT %?%:annotation" :prepend t)
      ("z" "property test" entry
