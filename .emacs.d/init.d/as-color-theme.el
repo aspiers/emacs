@@ -18,7 +18,7 @@
   (interactive)
   (if (memq 'sunlight custom-enabled-themes)
       (disable-theme 'sunlight)
-    (enable-theme 'sunlight)))
+    (load-theme 'sunlight)))
 
 (bind-key "C-c t o" 'as-toggle-sunlight-theme)
 
