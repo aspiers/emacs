@@ -22,7 +22,17 @@
                   scheme-mode-hook
                   lisp-interaction-mode-hook
                   eval-expression-minibuffer-setup-hook))
-    (add-hook mode 'enable-paredit-mode)))
+    (add-hook mode 'enable-paredit-mode))
+
+  :config
+  (defun as-paredit-top ()
+    "Move to top-level."
+    (interactive)
+    (condition-case nil
+        (paredit-up/down -100 +1)
+      (error nil)))
+
+  :bind ("C-M-S-u" . as-paredit-top))
 
 (req-package macrostep
   :defer t
