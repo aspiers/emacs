@@ -993,6 +993,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
+ '(org-agenda-start-on-weekday 1)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
  '(org-agenda-time-grid
