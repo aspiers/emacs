@@ -1405,6 +1405,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview orgit)))
  '(org-odd-levels-only t)
+ '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
    (quote
