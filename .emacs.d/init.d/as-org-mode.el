@@ -6,6 +6,7 @@
       (defvar org-default-extensions '(org-mouse))))
 
 (use-package org
+  :after counsel
   :bind
   (("M-o a" . org-agenda)
    ("M-o c" . org-capture)
@@ -13,6 +14,7 @@
    ("M-o b" . as-org-switch-to-agenda-buffer)
    ("M-o M-o" . as-org-jump-clock-or-agenda)
 
+   ("C-c C-j" . counsel-org-goto)
    ("C-c C-x C-j" . org-clock-goto)
    ("M-o r" . org-clock-in-daily-review)
 
