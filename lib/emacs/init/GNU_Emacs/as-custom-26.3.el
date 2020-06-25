@@ -1751,6 +1751,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(minimap-active-region-background ((((background dark)) (:background "#444444" :extend t)) (t (:background "#C847D8FEFFFF" :extend t))))
- '(minimap-font-face ((t (:height 20 :family "DejaVu Sans Mono")))))
+ '(minimap-font-face ((t (:height 20 :family "DejaVu Sans Mono"))))
+ '(org-verbatim ((t (:foreground "navajo white")))))
 
 ;; custom-set-faces above should be empty!  Use themes instead.
