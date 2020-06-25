@@ -1709,6 +1709,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/vc-mode-show-backend t)
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
+ '(tide-always-show-documentation t)
+ '(tide-completion-detailed t)
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
  '(tool-bar-mode nil)
