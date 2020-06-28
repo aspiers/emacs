@@ -426,7 +426,7 @@
  '(ido-case-fold nil)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
- '(ido-everywhere t)
+ '(ido-everywhere nil)
  '(ido-hacks-mode t)
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
@@ -449,6 +449,7 @@
      (counsel-switch-buffer . 20)
      (counsel-projectile-switch-to-buffer . 20)
      (counsel-projectile-find-file . 20))))
+ '(ivy-mode t)
  '(ivy-rich-display-transformers-list
    (quote
     (ivy-switch-buffer
