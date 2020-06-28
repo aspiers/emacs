@@ -35,7 +35,7 @@ as a starting point for convenient editing."
                        (format
                         "Set variable (default %s): " default-var)
                      "Set variable: ")
-                   obarray 'boundp t nil nil
+                   obarray 'boundp t nil 'set-any-variable-history
                    (if (symbolp default-var) (symbol-name default-var))))
           (var (intern (cond ((equal var-in "") default-var)
                              (t var-in))))
