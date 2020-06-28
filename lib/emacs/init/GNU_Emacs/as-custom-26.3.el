@@ -1643,6 +1643,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(req-package-log-level (quote debug))
  '(require-final-newline nil)
  '(rg-command-line-flags (quote ("--hidden")))
+ '(ripgrep-arguments (quote ("--hidden")))
  '(rm-blacklist
    (quote
     (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
