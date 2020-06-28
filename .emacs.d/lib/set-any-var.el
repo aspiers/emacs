@@ -30,16 +30,22 @@ as a starting point for convenient editing."
   (interactive
    (let* ((default-var (variable-at-point))
           (enable-recursive-minibuffers t)
-          (var-in (funcall
-                   (if (fboundp 'ivy-completing-read)
+          (completing-read-function
+           ;; FIXME: Why doesn't ivy automatically take over
+           ;; completing-read-default, given that ido (or maybe
+           ;; ido-everywhere) managed to?
+           (if (fboundp 'ivy-completing-read)
                        'ivy-completing-read
-                     'completing-read-default)
-                   (if (symbolp default-var)
-                       (format
-                        "Set variable (default %s): " default-var)
-                     "Set variable: ")
+             'completing-read-default))
+          (prompt (if (symbolp default-var)
+                      (format
+                       "Set variable (default %s): " default-var)
+                    "Set variable: "))
+          (default (if (symbolp default-var) (symbol-name default-var)))
+          (var-in (funcall completing-read-function
+                   prompt
                    obarray 'boundp t nil 'set-any-variable-history
-                   (if (symbolp default-var) (symbol-name default-var))))
+                   default))
           (var (intern (cond ((equal var-in "") default-var)
                              (t var-in))))
           (prop (get var 'variable-interactive))
