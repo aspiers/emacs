@@ -30,7 +30,10 @@ as a starting point for convenient editing."
   (interactive
    (let* ((default-var (variable-at-point))
           (enable-recursive-minibuffers t)
-          (var-in (completing-read
+          (var-in (funcall
+                   (if (fboundp 'ivy-completing-read)
+                       'ivy-completing-read
+                     'completing-read-default)
                    (if (symbolp default-var)
                        (format
                         "Set variable (default %s): " default-var)
