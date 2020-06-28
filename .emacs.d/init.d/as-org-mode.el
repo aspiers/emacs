@@ -42,9 +42,18 @@
               (imenu-add-to-menubar "Imenu")
               (setq comment-start nil)))
 
-  (require 'org-crypt)
-  (add-to-list 'org-modules 'org-timer)
-  (org-crypt-use-before-save-magic))
+  (add-to-list 'org-modules 'org-timer))
+
+;; FIXME: Enabling by default slows down file saving. Find a way of
+;; enabling only in files which need it, e.g. through local variables.
+;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
+(use-package org-crypt
+  :requires org
+  :ensure nil
+
+  :defer t
+  :init
+  (autoload 'org-crypt-use-before-save-magic "org-crypt"))
 
 (req-package as-gtd
   :require org
