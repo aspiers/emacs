@@ -38,6 +38,6 @@
 (req-package haml-mode)
 (req-package sass-mode
   :mode "\\.scss\\'"
-  :hook 'flycheck-mode)
+  :hook (sass-mode . flycheck-mode))
 
 (provide 'as-web)
