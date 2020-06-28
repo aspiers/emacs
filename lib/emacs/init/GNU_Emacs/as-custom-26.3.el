@@ -393,6 +393,9 @@
  '(flx-ido-threshhold 60000)
  '(flycheck-global-modes (quote (python-mode js-mode)))
  '(folding-mode-prefix-key "")
+ '(frog-jump-buffer-include-current-buffer nil)
+ '(frog-menu-posframe-border-width 10)
+ '(frog-menu-posframe-parameters nil)
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
  '(git-commit-mode-hook
