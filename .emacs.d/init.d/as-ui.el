@@ -49,9 +49,12 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
+  ;; suggests to use M-: (ivy-state-caller ivy-last) to figure out the keys
+  ;; in this alist.
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex-plus)
-          (counsel-git-grep-function . ivy--regex-plus)
+          (counsel-git-grep . ivy--regex-plus)
           (t . ivy--regex-fuzzy))))
 
 ;; C-o in ivy minibuffer is awesome!!
