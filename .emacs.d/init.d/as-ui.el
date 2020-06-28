@@ -55,7 +55,10 @@
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex-plus)
           (counsel-git-grep . ivy--regex-plus)
-          (t . ivy--regex-fuzzy))))
+          (t . ivy--regex-fuzzy)))
+  (add-to-list 'ivy-sort-matches-functions-alist
+               '(set-any-variable . ivy--prefix-sort)
+               'append))
 
 ;; C-o in ivy minibuffer is awesome!!
 (use-package ivy-hydra)
