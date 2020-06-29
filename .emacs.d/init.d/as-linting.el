@@ -1,4 +1,4 @@
-(defvar prettier-el-home "~/.GIT/3rd-party/prettier.el")
+(defvar prettier-el-home "~/.GIT/3rd-party/prettier.el/")
 
 (if (file-directory-p prettier-el-home)
     ;; We have to ensure the dependency because we're not using the
