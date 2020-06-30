@@ -32,8 +32,8 @@
   (concat as-emacs-dir "/GNU_Emacs")
   "Path to deprecated location for emacs libraries for a specific emacs vendor.")
 
-(defvar as-init-dir
-  (concat as-emacs-dir "/init/GNU_Emacs")
+(defvar as-custom-dir
+  (concat as-emacs-d "/custom")
   "Path to emacs init libraries for a specific emacs vendor.")
 
 (defvar as-version-pre-lib-dir

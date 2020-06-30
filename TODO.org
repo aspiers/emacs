@@ -1,5 +1,3 @@
-* get rid of lib/emacs/GNU_Emacs?
-*** e.g. .emacs.d/lib/{public,private} or .emacs.d/lib/person-adam.spiers
 * move Makefile to ~/.emacs.d
 * byte-compile .emacs.d/init.d/*.el
 * publish .emacs.d/lib/*.el as public packages

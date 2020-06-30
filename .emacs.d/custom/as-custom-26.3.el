@@ -456,7 +456,7 @@
      (:columns
       ((all-the-icons-ivy-rich-buffer-icon)
        (ivy-rich-candidate
-        (:width 35))
+        (:width 60))
        (ivy-rich-switch-buffer-indicators
         (:width 4 :face error :align right))
        (ivy-rich-switch-buffer-major-mode
@@ -478,7 +478,7 @@
      (:columns
       ((all-the-icons-ivy-rich-buffer-icon)
        (ivy-rich-candidate
-        (:width 30))
+        (:width 60))
        (ivy-rich-switch-buffer-indicators
         (:width 4 :face error :align right))
        (ivy-rich-switch-buffer-major-mode
@@ -500,7 +500,7 @@
      (:columns
       ((all-the-icons-ivy-rich-buffer-icon)
        (ivy-rich-candidate
-        (:width 45))
+        (:width 60))
        (ivy-rich-switch-buffer-indicators
         (:width 4 :face error :align right))
        (ivy-rich-switch-buffer-major-mode
@@ -522,7 +522,7 @@
      (:columns
       ((all-the-icons-ivy-rich-buffer-icon)
        (ivy-rich-candidate
-        (:width 35))
+        (:width 60))
        (ivy-rich-switch-buffer-indicators
         (:width 4 :face error :align right))
        (ivy-rich-switch-buffer-major-mode
@@ -1757,8 +1757,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(minimap-active-region-background ((((background dark)) (:background "#444444" :extend t)) (t (:background "#C847D8FEFFFF" :extend t))))
- '(minimap-font-face ((t (:height 20 :family "DejaVu Sans Mono"))))
- '(org-verbatim ((t (:foreground "navajo white")))))
+ )
 
 ;; custom-set-faces above should be empty!  Use themes instead.

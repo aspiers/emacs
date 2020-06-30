@@ -45,6 +45,18 @@ files, functions, and variables which are specific to my needs.
     *   [`lib/`](.emacs.d/lib/) -- `.el` files I wrote which could / should at some point
         be converted into packages, and published so that other people
         can benefit from them too.
+    *   [`custom/`](.emacs.d/custom/) -- contains `custom-file` files
+        for each emacs version I use.  Custom variables / faces change
+        between emacs versions, so I keep a file per version.  This is
+        maybe not the best way of doing it, but it works OK.  One
+        other possibility would be a git branch per version (which was
+        not an option when I first implemented this way back before
+        git existed), with the significant disadvantage of requiring a
+        lot more back- and forward-porting of stuff between branches,
+        since with the current system, porting is only required for
+        the contents of the custom files.  OTOH the current scheme is
+        incapable of tracking per-version differences, and this is a
+        problem when emacs' core API changes.
 *   [`bin/`](bin/) -- various scripts for launching and interacting with emacs
     in different ways.
 *   [`lib/emacs/`](lib/emacs/)
@@ -52,19 +64,6 @@ files, functions, and variables which are specific to my needs.
     gradually phasing out in favour of the above.
     *   [`Makefile`](lib/emacs/Makefile) -- byte-compiles files and
         generates autoload files
-    *   [`init/GNU_Emacs/`](lib/emacs/init/GNU_Emacs/) -- contains
-        `custom-file` files for each emacs version I use.  Custom
-        variables / faces change between emacs versions, so I keep a
-        file per version.  This is maybe not the best way of doing it,
-        but it works OK.  One other possibility would be a git branch
-        per version (which was not an option when I first implemented
-        this way back before git existed), with the disadvantage of
-        requiring a lot more back- and forward-porting of stuff
-        between branches, since with the current system, porting is
-        only required for the contents of the custom files.  OTOH the
-        current scheme is incapable of tracking per-version
-        differences, and this is a problem when emacs' core API
-        changes.
     *   [`major-modes/`](lib/emacs/major-modes/) -- what it sounds like.
     *   [`minor-modes/`](lib/emacs/minor-modes/) -- ditto.
     *   [`utils/`](lib/emacs/utils/) -- ditto.

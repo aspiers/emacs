@@ -7,7 +7,7 @@
 (require 'as-make-backup-file-name nil 'noerror) ;; need as-make-backup-file-name
 
 (setq custom-file (format "%s/as-custom-%s.el"
-                          as-init-dir emacs-version-number))
+                          as-custom-dir emacs-version-number))
 
 ;; FIXME: this seems misplaced
 (unless (fboundp 'as-make-backup-file-name)
