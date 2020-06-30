@@ -1483,7 +1483,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (minimap
+    (helm-org
+     minimap
      try
      ivy-hydra
      helm-org-rifle

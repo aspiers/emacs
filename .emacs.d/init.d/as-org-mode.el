@@ -89,6 +89,8 @@
   (interactive)
   (helm-org-rifle-directories '("~/org/notes")))
 
+(use-package helm-org)
+
 (use-package helm-org-rifle
   :bind (("M-o j a" . helm-org-rifle-agenda-files)
          ("M-o j j" . helm-org-rifle-current-buffer)
