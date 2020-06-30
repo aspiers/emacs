@@ -46,7 +46,7 @@
 
   :config
   (define-find-file-in-dir-function as-find-my-mrconfig
-    "~/.config/mr/" "Find mr config: ")
+    "~/.config/mr/groups.d" "Find mr config: ")
   (define-find-file-in-dir-function as-find-stow-package
     "~/.STOW/" "Find stow package: ")
 
