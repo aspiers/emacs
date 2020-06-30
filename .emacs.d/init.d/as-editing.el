@@ -71,7 +71,6 @@ the whole buffer."
          ("<F5>"    . as-duplicate-line)
          ("C-c A"   . as-align-to-previous-line)
          ("<F7>"    . as-align-to-previous-line)
-         ("C-c P"   . as-align-to-previous-line)
          ("<F8>"    . as-copy-previous-line-suffix)
          ("C-c p"   . as-copy-previous-line-suffix) ;; FIXME: conflict!
          ("C-x C-y" . vim-yy)
