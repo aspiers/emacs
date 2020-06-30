@@ -39,7 +39,11 @@
 
   (add-hook 'org-mode-hook
             (lambda ()
-              (imenu-add-to-menubar "Imenu")
+              ;; imenu is horribly slow and outdated, and with
+              ;; imenu-auto-rescan it triggers far too often, in
+              ;; org-mode captures at least.
+              ;;
+              ;; (imenu-add-to-menubar "Imenu")
               (setq comment-start nil)))
 
   (add-to-list 'org-modules 'org-timer))
