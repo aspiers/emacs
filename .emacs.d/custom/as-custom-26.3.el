@@ -1484,7 +1484,11 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (helm-org
+    (treemacs-magit
+     treemacs-icons-dired
+     treemacs-projectile
+     treemacs
+     helm-org
      minimap
      try
      ivy-hydra
