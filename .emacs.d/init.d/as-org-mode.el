@@ -44,9 +44,12 @@
 
   (add-to-list 'org-modules 'org-timer))
 
-;; FIXME: Enabling by default slows down file saving. Find a way of
-;; enabling only in files which need it, e.g. through local variables.
-;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
+;; Enabling by default slows down file saving. In files which need it,
+;; can be set through local variables, e.g.:
+;;
+;;   *** before-save-hook: (org-encrypt-entries) **
+;;
+;; See also https://orgmode.org/worg/org-tutorials/encrypting-files.html
 (use-package org-crypt
   :requires org
   :ensure nil
