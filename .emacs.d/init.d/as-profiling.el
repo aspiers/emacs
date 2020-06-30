@@ -67,4 +67,8 @@ _C_: customize profiler options
          :map profiler-report-mode-map
          ("." . profiler-stop)))
 
+;; (when (getenv "EMACS_PROFILE_INIT")
+;;   (load "elp")
+;;   (elp-instrument-package "blah")
+
 (provide 'as-profiling)
