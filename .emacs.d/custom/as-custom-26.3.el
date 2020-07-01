@@ -412,14 +412,6 @@
  '(global-msf-abbrev-mode t)
  '(global-prettier-mode nil)
  '(global-whitespace-mode t)
- '(guide-key-mode t)
- '(guide-key/guide-key-sequence
-   (quote
-    ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-x X" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>" "M-s"
-     (dired-mode "%" "*" "C-t")
-     (org-mode "C-c C-x"))))
- '(guide-key/popup-window-position (quote bottom))
- '(guide-key/recursive-key-sequence-flag t)
  '(help-window-select t)
  '(hippie-expand-try-functions-list
    (quote
@@ -1485,7 +1477,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (treemacs-magit
+    (which-key
+     treemacs-magit
      treemacs-icons-dired
      treemacs-projectile
      treemacs
