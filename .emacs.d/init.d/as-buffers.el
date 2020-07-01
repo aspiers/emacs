@@ -29,7 +29,8 @@
 (req-package switch-window
   :bind ("C-x o" . switch-window))
 
-(use-package minimap)
+(use-package minimap
+  :commands minimap-mode)
 
 ;; (use-package sublimity
 ;;   :config
