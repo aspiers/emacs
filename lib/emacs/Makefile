@@ -340,11 +340,8 @@ show-loaddefs-deps:
 # emacs 22 uses update-directory-autoloads
 LOADDEFS_DIRS_LISP=$(addsuffix ",$(addprefix ",$(LOADDEFS_DIRS)))
 define loaddefs_lisp
-(progn \
-    (setq generated-autoload-file "$(LOADDEFS)") \
-    (if (>= emacs-major-version 22) \
-        (update-directory-autoloads $(LOADDEFS_DIRS_LISP)) \
-        (update-autoloads-from-directories $(LOADDEFS_DIRS_LISP))))
+(let ((generated-autoload-file "$(LOADDEFS)")) \
+   (update-directory-autoloads $(LOADDEFS_DIRS_LISP)))
 endef
 
 .PHONY: loaddefs
