@@ -28,9 +28,8 @@
    ("C-x 4 '" . ffap-other-window)
    ("C-x 5 '" . ffap-other-frame)))
 
-(use-package as-find-file-in-dir
-  :ensure nil
-
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-from-home "~/")
   (define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
@@ -49,9 +48,8 @@
   (find-file "~/org/diary.org"))
 (bind-key "C-c j d" 'as-find-personal-diary)
 
-(use-package as-find-file-in-dir
-  :ensure nil
-
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-personal-note
     "~/org/notes" "Find note: ")

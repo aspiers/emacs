@@ -19,9 +19,8 @@
 ;; via quelpa, otherwise it will default to searching ELPA archives.
 (quelpa-use-package-activate-advice)
 
-(use-package as-find-file-in-dir
-  :ensure nil
-
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-quelpa-package
     "~/.emacs.d/quelpa/build" "Find quelpa package: ")

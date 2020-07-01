@@ -14,9 +14,8 @@
 
 (bind-key "C-c F"        'font-lock-fontify-buffer)
 
-(use-package as-find-file-in-dir
-  :ensure nil
-
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-emacs-init-d
     "~/.emacs.d/init.d" "Find emacs init.d file: ")

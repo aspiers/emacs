@@ -41,9 +41,8 @@
   :config
   (counsel-projectile-mode))
 
-(use-package as-find-file-in-dir
-  :ensure nil
-
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-my-mrconfig
     "~/.config/mr/groups.d" "Find mr config: ")

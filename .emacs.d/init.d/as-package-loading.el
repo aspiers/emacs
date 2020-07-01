@@ -62,8 +62,8 @@ it's available."
 
 (setq use-package-verbose 'debug)
 
-(use-package as-find-file-in-dir
-  :ensure nil
+(use-package find-file-in-dir
+ :ensure nil
   :config
   (define-find-file-in-dir-function as-find-elpa-package
     "~/.emacs.d/elpa" "Find ELPA package: ")
