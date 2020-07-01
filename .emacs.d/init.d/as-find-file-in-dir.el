@@ -7,7 +7,7 @@
        (format "Uses ido to find a file within %s.
 
 This function was defined via `define-find-file-in-dir-function',
-and invokes `ido-file-internal'." ,dir)
+and invokes `counsel--find-file-1'." ,dir)
        (interactive)
        (counsel--find-file-1 ,(or prompt "Find file: ")
                              ,dir #'counsel-find-file-action
