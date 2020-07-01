@@ -2,3 +2,5 @@
 * move Makefile to ~/.emacs.d
 * byte-compile .emacs.d/init.d/*.el
 * publish .emacs.d/lib/*.el as public packages
+* optimise for batch runs, using =noninteractive= test
+*** https://github.com/jwiegley/use-package/issues/416
