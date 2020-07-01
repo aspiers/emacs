@@ -1424,7 +1424,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html)
      ("OWRA-2014" :base-directory "~/OWRA/meetings/2014" :publishing-directory "~/OWRA/meetings/2014" :publishing-function org-html-publish-to-html)
      ("OWRA-2015" :base-directory "~/OWRA/meetings/2015" :publishing-directory "~/OWRA/meetings/2015" :publishing-function org-html-publish-to-html))))
- '(org-refile-targets (quote ((nil :maxlevel . 3))))
+ '(org-refile-targets (quote ((nil :maxlevel . 4))))
  '(org-refile-use-cache t)
  '(org-refile-use-outline-path t)
  '(org-replace-disputed-keys t)
