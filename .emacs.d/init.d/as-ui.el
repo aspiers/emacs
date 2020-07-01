@@ -44,8 +44,8 @@
 (use-package flx)
 
 (use-package ivy
-  :after flx
   :config
+  (require 'flx)
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
@@ -73,8 +73,10 @@
   :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package counsel
-  :after ivy
+  :defer 2
   :config
+  (require 'ivy)
+
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
   :chords ((",." . counsel-switch-buffer)

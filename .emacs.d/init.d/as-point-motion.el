@@ -28,7 +28,7 @@
 (bind-key "C-S-p" 'previous-logical-line)
 
 (use-package swiper
-  :after ivy
+  :defer 2
   :bind (("C-s" . swiper)
          ("C-r" . swiper-backward))
 
@@ -37,7 +37,6 @@
   )
 
 (use-package avy
-  :ensure t
   ;; :config
   ;; (avy-setup-default)
   :bind (("C-0" . avy-goto-word-1)
