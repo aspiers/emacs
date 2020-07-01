@@ -47,3 +47,5 @@
 ;;   :after treemacs persp-mode ;; or perspective vs. persp-mode
 ;;   :ensure t
 ;;   :config (treemacs-set-scope-type 'Perspectives))
+
+(provide 'as-treemacs)
