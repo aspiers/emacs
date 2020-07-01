@@ -106,7 +106,8 @@
 
 (bind-key "C-'" 'speedbar-get-focus)
 
-(req-package beacon
+(use-package beacon
+  :defer 5
   :config (beacon-mode 1))
 
 (req-package flycheck)

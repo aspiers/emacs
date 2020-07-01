@@ -100,7 +100,8 @@
   (interactive)
   (helm-org-rifle-directories '("~/org/notes")))
 
-(use-package helm-org)
+(use-package helm-org
+  :defer t)
 
 (use-package helm-org-rifle
   :bind (("M-o j a" . helm-org-rifle-agenda-files)

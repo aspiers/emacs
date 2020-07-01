@@ -1,6 +1,4 @@
-(use-package dash)
 (use-package hydra)
-(use-package s)
 
 (defun set-temp-cursor-color (new-color)
   (when (not (boundp 'original-cursor-color))
@@ -23,8 +21,12 @@
 
 (use-package profiler
   :ensure nil
-  :after (dash hydra s)
+  :after hydra
+
   :config
+  (require 'dash)
+  (require 's)
+
   (defun profiler-running-modes ()
     (let ((running-modes
            (-non-nil (list (if (profiler-cpu-running-p) "cpu")

@@ -3,7 +3,9 @@
   :config (rg-enable-default-bindings))
 
 ;; These are used by projectile:
-(use-package ripgrep)
-(use-package ag)
+(use-package ripgrep
+  :after projectile)
+(use-package ag
+  :after projectile)
 
 (provide 'as-search)

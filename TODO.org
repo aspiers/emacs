@@ -1,3 +1,4 @@
+* STARTED lazy-load everything which doesn't need to be loaded
 * move Makefile to ~/.emacs.d
 * byte-compile .emacs.d/init.d/*.el
 * publish .emacs.d/lib/*.el as public packages

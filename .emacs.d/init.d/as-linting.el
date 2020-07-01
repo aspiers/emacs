@@ -1,13 +1,13 @@
 (defvar prettier-el-home "~/.GIT/3rd-party/prettier.el/")
 
 (if (file-directory-p prettier-el-home)
-    ;; We have to ensure the dependency because we're not using the
-    ;; normal package-install mechanism here :-/  straight.el would
-    ;; probably fix this.
-    (use-package iter2)
-
     (use-package prettier
-      :load-path prettier-el-home)
+      :load-path prettier-el-home
+      :config
+      ;; We have to ensure the dependency because we're not using the
+      ;; normal package-install mechanism here :-/  straight.el would
+      ;; probably fix this.
+      (require 'iter2))
   (warn "%s did not exist; won't install prettier.el" prettier-el-home))
 
 ;; Was experimenting with this quelpa/MELPA recipe, but first see
