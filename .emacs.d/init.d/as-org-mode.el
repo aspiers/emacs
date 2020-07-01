@@ -44,6 +44,8 @@
               ;; (imenu-add-to-menubar "Imenu")
               (setq comment-start nil)))
 
+  (add-to-list 'org-show-context-detail '(org-goto . tree))
+
   (add-to-list 'org-modules 'org-timer))
 
 (use-package org
