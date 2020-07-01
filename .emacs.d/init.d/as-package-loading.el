@@ -58,6 +58,8 @@ it's available."
  'use-package-ensure-system-package
  'use-package-chords)
 
+(require 'with-packages)
+
 (as-progress "bootstrapping use-package and req-package... done")
 
 (setq use-package-verbose 'debug)
