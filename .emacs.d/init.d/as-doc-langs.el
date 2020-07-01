@@ -71,41 +71,26 @@ All Text add-on."
 ;;}}}
 ;;{{{ ReStructuredText mode
 
-;; (autoload 'rst-mode "rst")
 ;; (add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
-;; (autoload 'rst-text-mode-bindings "rst")
 
-;; This stomps over everything :-(
-;;(add-hook 'text-mode-hook 'rst-text-mode-bindings)
+(use-package rst
+  :commands rst-mode
 
-(eval-when-compile (load-library "rst"))
-(defun as-rst-bindings ()
-  "Adam's key bindings for `rst-mode'."
-  (interactive)
+  :bind
+  (:map rst-mode-map
+        ("C-="      . rst-adjust)
+        ("C-<up>"   . rst-backward-section)
+        ("C-<down>" . rst-forward-section)
+        ("C-c C-r"  . rst-shift-region-right)
+        ("C-c C-l"  . rst-shift-region-left)
+        ("C-p"      . rst-backward-section)
+        ("C-n"      . rst-forward-section)
+        ("C-r"      . rst-shift-region-right)
+        ("C-l"      . rst-shift-region-left))
 
-  (local-set-key [(control ?=)] 'rst-adjust)
-
-  (local-set-key [(control up  )] 'rst-backward-section)
-  (local-set-key [(control down)] 'rst-forward-section)
-  (local-set-key [(control c) (control r)] 'rst-shift-region-right)
-  (local-set-key [(control c) (control l)] 'rst-shift-region-left)
-;;   (define-key mode-specific-map [(control p)] 'rst-backward-section)
-;;   (define-key mode-specific-map [(control n)] 'rst-forward-section)
-;;   (define-key mode-specific-map [(control r)] 'rst-shift-region-right)
-;;   (define-key mode-specific-map [(control l)] 'rst-shift-region-left)
-
-  ;; Bind the rst commands on the C-c p prefix.
-;; FIXME: I can't find rst-prefix-map in rst.el any more, was it removed?
-;;  (local-set-key [(control c) (control p)] rst-prefix-map)
-  ;;(define-key mode-specific-map [(p)] 'rst-prefix-map)
-  )
-
-;; FIXME: do we always want these in text mode?
-;;(add-hook 'text-mode-hook 'as-rst-bindings)
-(add-hook 'rst-mode-hook 'as-rst-bindings)
-
-;; Update the TOC automatically everytime you adjust a section title::
-(add-hook 'rst-adjust-hook 'rst-toc-insert-update)
+  :config
+  ;; Update the TOC automatically everytime you adjust a section title::
+  (add-hook 'rst-adjust-hook 'rst-toc-insert-update))
 
 ;;}}}
 ;;{{{ Info
