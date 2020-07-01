@@ -29,7 +29,7 @@
    ("C-x 5 '" . ffap-other-frame)))
 
 (use-package find-file-in-dir
- :ensure nil
+  :ensure nil
   :config
   (define-find-file-in-dir-function as-find-from-home "~/")
   (define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
