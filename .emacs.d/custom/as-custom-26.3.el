@@ -1600,7 +1600,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      kmacro-decision
      keywiz
      key-chord
-     iy-go-to-char
      idomenu
      ido-vertical-mode
      ido-ubiquitous
