@@ -13,18 +13,20 @@
          (if (eq (cdr x) 'text-mode) (setcdr x 'indented-text-mode))))
       auto-mode-alist)
 
-(autoload 'server-edit "server")
-(defun as-save-server-buffer ()
-  "Save server buffer and quit editing."
-  (interactive)
-  (save-buffer)
-  (server-edit))
+(use-package server
+  :commands server-edit
 
-(defun as-set-local-server-edit-keys ()
-  "Set key bindings in local mode for editing via firefox It's
-All Text add-on."
-  (interactive)
-  (local-set-key [(control c) (control c)] 'as-save-server-buffer))
+  :config
+  (defun as-save-server-buffer ()
+    "Save server buffer and quit editing."
+    (interactive)
+    (save-buffer)
+    (server-edit))
+
+  (defun as-set-local-server-edit-keys ()
+    "Set key bindings in local mode for editing via browser extensions."
+    (interactive)
+    (local-set-key "C-c C-c" 'as-save-server-buffer)))
 
 ;; (defun as-set-local-edit-server-keys ()
 ;;   "Set key bindings in local mode for editing via
@@ -50,7 +52,7 @@ All Text add-on."
   ;; Expand all newly inserted tabs to spaces
   (setq indent-tabs-mode nil)
 
-  (as-setup-mode-for-discussion))  
+  (as-setup-mode-for-discussion))
 
 (add-hook 'text-mode-hook 'as-setup-text-mode)
 
