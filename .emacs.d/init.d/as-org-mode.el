@@ -48,6 +48,11 @@
 
   (add-to-list 'org-modules 'org-timer))
 
+(use-package org-jump-olp
+  :ensure nil
+  :after org
+  :commands org-jump-olp)
+
 (use-package org
   :after counsel
   :bind (:map org-mode-map
