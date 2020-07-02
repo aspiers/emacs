@@ -42,15 +42,10 @@
   (add-to-list 'vc-handled-backends 'osc 'append))
 
 ;;}}}
-;;{{{ git-gutter
 
-(req-package git-gutter+
+(use-package git-gutter-fringe
   :config
-  (global-git-gutter+-mode t))
-
-(req-package git-gutter-fringe+)
-
-;;}}}
+  (global-git-gutter-mode t))
 
 (use-package find-file-in-dir
  :ensure nil
