@@ -3,6 +3,53 @@
 (require 'as-mairix)
 (require 'org)
 
+(defvar as-personal-todo "~/org/TODO.org")
+
+(use-package as-jump
+  :ensure nil
+  :config
+
+  (define-find-file-in-dir-function as-find-personal-note
+    "~/org/notes" "Find note: ")
+
+  (defun as-find-personal-todo ()
+    (interactive)
+    (find-file as-personal-todo))
+
+  (defun as-find-personal-diary ()
+    (interactive)
+    (find-file "~/org/diary.org"))
+
+  (require 'org-jump-olp)
+
+  (defun as-org-jump-olp-and-next (file olp)
+    (interactive)
+    (org-jump-olp file olp)
+    (org-next-visible-heading 1)
+    ;; use org speed keys
+    (beginning-of-line))
+
+  (defun as-find-emacs-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo
+                  '("computer and technology"
+                    "tool software development"
+                    "emacs")))
+
+  (defun as-find-orgmode-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo
+                              '("GTD" "orgmode")))
+
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+  (bind-keys :map as-jump-map
+             ("t" "personal TODO" . as-find-personal-todo)
+             ("E" "emacs TODOs" . as-find-emacs-todos)
+             ("o" "orgmode TODOs" . as-find-orgmode-todos)
+             ("d" "personal diary" . as-find-personal-diary)
+             ("n" "personal note" . as-find-personal-note)))
+
 ;;;###autoload
 (defun as-org-convert-buffer-sub-to-effort ()
   "Convert all 'sub*' tags within a buffer into 'Effort' properties."

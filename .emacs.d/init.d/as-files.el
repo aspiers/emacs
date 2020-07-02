@@ -41,25 +41,11 @@
   :ensure nil
   :config
 
-  (define-find-file-in-dir-function as-find-personal-note
-    "~/org/notes" "Find note: ")
-
-  (defun as-find-personal-todo ()
-    (interactive)
-    (find-file "~/org/TODO.org"))
-
-  (defun as-find-personal-diary ()
-    (interactive)
-    (find-file "~/org/diary.org"))
-
   ;; Need to load which-key to ensure define-key is advised
   (require 'which-key)
   (bind-keys :map as-jump-map
              ("h" "Find from ~" . as-find-from-home)
-             ("/" "Find from /" . as-find-from-root)
-             ("t" "personal TODO" . as-find-personal-todo)
-             ("d" "personal diary" . as-find-personal-diary)
-             ("n" "personal note" . as-find-personal-note)))
+             ("/" "Find from /" . as-find-from-root)))
 
 (req-package as-find-file-matching-regexp-hook
   :ensure nil)
