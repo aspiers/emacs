@@ -78,17 +78,8 @@
   :require org
   :ensure nil)
 
-;; FIXME: use https://github.com/edvorg/req-package ?
-;; https://github.com/jwiegley/use-package/issues/71
-(defun guide-key/my-hook-function-for-org-mode ()
-  (guide-key/add-local-guide-key-sequence "C-c")
-  (guide-key/add-local-guide-key-sequence "C-c C-x")
-  (guide-key/add-local-highlight-command-regexp "org-"))
-(unless (getenv "EMACS_BATCH")
-  (add-hook 'org-mode-hook 'guide-key/my-hook-function-for-org-mode))
-
-(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
-
+;; FIXME: still need this?
+;;(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
 (req-package org-sync
   :require org)
