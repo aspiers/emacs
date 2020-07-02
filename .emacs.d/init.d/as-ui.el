@@ -86,7 +86,8 @@
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
   :chords ((",." . counsel-switch-buffer)
-           (",;" . counsel-switch-buffer-other-window))
+           (",;" . counsel-switch-buffer-other-window)
+           ("xf" . counsel-find-file))
   :bind (("C-x 4 b" . counsel-switch-buffer-other-window)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
