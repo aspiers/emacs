@@ -10,7 +10,7 @@ The `args' are passed straight to `use-package' for use as normal.
 Example usage:
 
   (with-packages (org counsel)
-    :bind (:keymap org-mode \"C-c C-j\" . counsel-org-goto))"
+    :bind (:map org-mode \"C-c C-j\" . counsel-org-goto))"
   (let ((pseudo-pkg-name
          (format
           "*with-packages/%s"
