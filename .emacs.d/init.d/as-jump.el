@@ -18,6 +18,9 @@
     (interactive)
     (switch-to-buffer (messages-buffer)))
 
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+
   (define-key as-jump-map "M" '("Switch to *Messages*" . switch-to-messages-buffer))
 
   (add-to-list 'as-which-key-no-delay-prefixes

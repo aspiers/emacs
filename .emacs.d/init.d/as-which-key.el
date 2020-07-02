@@ -5,13 +5,16 @@
 (use-package which-key
   :defer 0.1
   :diminish WK  ;; can't get this working
+
+  :init
+  ;; FIXME: This one has to go before the mode is *loaded*!
+  (setq which-key-enable-extended-define-key t)
+
   :config
 
   ;; These have to go before the mode is activated
   (setq which-key-idle-delay 0.1)
   (setq which-key-idle-secondary-delay 0.1)
-  ;; FIXME: This one doesn't work >-(
-  (setq which-key-enable-extended-define-key t)
   (setq which-key-lighter "")
 
   (which-key-mode)

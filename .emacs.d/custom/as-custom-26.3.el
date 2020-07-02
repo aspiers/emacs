@@ -1734,6 +1734,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-code-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
+ '(which-key-enable-extended-define-key t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
