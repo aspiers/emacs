@@ -40,7 +40,7 @@
 (req-package idomenu
   :bind ("C-1" . idomenu))
 
-(bind-key "M-G"   'goto-line)
+(bind-key "M-G l"   'goto-line)
 (bind-key "M-S-e" 'mark-end-of-sentence)
 
 (use-package bn-end-of-line-but-one
