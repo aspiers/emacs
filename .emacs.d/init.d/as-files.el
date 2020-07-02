@@ -28,33 +28,36 @@
    ("C-x 4 '" . ffap-other-window)
    ("C-x 5 '" . ffap-other-frame)))
 
-(use-package find-file-in-dir
+(require 'find-file-in-dir)
+
+(define-find-file-in-dir-function as-find-from-home "~/")
+(define-find-file-in-dir-function as-find-from-root
+  "/sudo:root@localhost:/")
+
+(bind-keys ("C-~"  . as-find-from-home)
+           ("C-\"" . as-find-personal-todo))
+
+(use-package as-jump
   :ensure nil
   :config
-  (define-find-file-in-dir-function as-find-from-home "~/")
-  (define-find-file-in-dir-function as-find-from-root "/sudo:root@localhost:/")
 
-  :bind (("C-~"     . as-find-from-home)
-         ("C-c j h" . as-find-from-home)
-         ("C-c j /" . as-find-from-root)))
-
-(defun as-find-personal-todo ()
-  (interactive)
-  (find-file "~/org/TODO.org"))
-(bind-key "C-c j t" 'as-find-personal-todo)
-(bind-key "C-\""    'as-find-personal-todo)
-(defun as-find-personal-diary ()
-  (interactive)
-  (find-file "~/org/diary.org"))
-(bind-key "C-c j d" 'as-find-personal-diary)
-
-(use-package find-file-in-dir
- :ensure nil
-  :config
   (define-find-file-in-dir-function as-find-personal-note
     "~/org/notes" "Find note: ")
 
-  :bind (("C-c j n" . as-find-personal-note)))
+  (defun as-find-personal-todo ()
+    (interactive)
+    (find-file "~/org/TODO.org"))
+
+  (defun as-find-personal-diary ()
+    (interactive)
+    (find-file "~/org/diary.org"))
+
+  (bind-keys :map as-jump-map
+             ("h" . '("Find from ~" as-find-from-home))
+             ("/" . as-find-from-root)
+             ("t" . as-find-personal-todo)
+             ("d" . as-find-personal-diary)
+             ("n" . as-find-personal-note)))
 
 (req-package as-find-file-matching-regexp-hook
   :ensure nil)
