@@ -26,6 +26,7 @@ _SPC_ whitespace-mode:   %`whitespace-mode
     ("a" abbrev-mode nil)
     ("d" toggle-debug-on-error nil)
     ("f" auto-fill-mode nil)
+    ("s" toggle-truncate-lines nil)
     ("S" toggle-truncate-lines nil)
     ("w" as-set-tab-width nil)
     ("TAB" as-toggle-indent-tabs-mode nil)
