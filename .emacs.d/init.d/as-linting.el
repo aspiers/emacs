@@ -1,6 +1,8 @@
 (defvar prettier-el-home "~/.GIT/3rd-party/prettier.el/")
 
 (if (file-directory-p prettier-el-home)
+    (use-package nvm)
+
     (use-package prettier
       :load-path prettier-el-home
       :config
