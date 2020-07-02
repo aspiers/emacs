@@ -39,6 +39,9 @@
 
 (req-package smartparens)
 
+(use-package rainbow-delimiters
+  :hook (prog-mode-hook . rainbow-delimiters-mode))
+
 ;;}}}
 
 (use-package flx)
@@ -103,9 +106,6 @@
          ;; ("C-x l" . counsel-locate)
          ;; ("C-S-o" . counsel-rhythmbox)
          ))
-
-(req-package rainbow-delimiters
-  :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (bind-key "C-'" 'speedbar-get-focus)
 
