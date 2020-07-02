@@ -8,7 +8,8 @@
   ;; want to use a fugly work-around of repeating dependencies in the
   ;; calling package (e.g. as-files) which are already declared in the
   ;; right place.
-  (defvar as-jump-map (make-sparse-keymap "Jump to"))
+  (defvar as-jump-map (make-sparse-keymap "Jump to")
+    "Adam's prefix keymap for quickly jumping to stuff")
 
   :defer 0.1
   :config

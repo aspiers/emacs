@@ -42,20 +42,26 @@ Git gutter:
   :bind ("M-G M-g" . hydra-git-gutter/body))
 
 
-(use-package find-file-in-dir
- :ensure nil
-  :config
-  (define-find-file-in-dir-function as-find-CVS-repo
-    "~/.CVS/" "Find CVS repo: ")
-  (define-find-file-in-dir-function as-find-my-git-repo
-    "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: ")
-  (define-find-file-in-dir-function as-find-upstream-git-repo
-    "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
+(require 'find-file-in-dir)
 
-  :bind (("C-c j C" . as-find-CVS-repo)
-         ("C-c j g" . as-find-my-git-repo)
-         ("C-c j 3" . as-find-upstream-git-repo)
-         ("C-c j G" . as-find-upstream-git-repo)))
+(define-find-file-in-dir-function as-find-CVS-repo
+  "~/.CVS/" "Find CVS repo: ")
+(define-find-file-in-dir-function as-find-my-git-repo
+  "~/.GIT/adamspiers.org/" "Find adamspiers.org git repo: ")
+(define-find-file-in-dir-function as-find-upstream-git-repo
+  "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
+
+(use-package as-jump
+  :ensure nil
+  :config
+
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+  (bind-keys :map as-jump-map
+             ("C" "CVS repos" . as-find-CVS-repo)
+             ("g" "my git repos" . as-find-my-git-repo)
+             ("3" "3rd party git repos" . as-find-upstream-git-repo)
+             ("G" "3rd party git repos" . as-find-upstream-git-repo)))
 
 (use-package git-timemachine
   :commands git-timemachine)
