@@ -58,7 +58,10 @@
           (t . ivy--regex-fuzzy)))
   (add-to-list 'ivy-sort-matches-functions-alist
                '(set-any-variable . ivy--prefix-sort)
-               'append))
+               'append)
+  (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
+  (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
+  (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile ""))
 
 ;; C-o in ivy minibuffer is awesome!!
 (use-package ivy-hydra)
