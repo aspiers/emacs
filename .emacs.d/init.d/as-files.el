@@ -57,9 +57,9 @@
   (bind-keys :map as-jump-map
              ("h" "Find from ~" . as-find-from-home)
              ("/" "Find from /" . as-find-from-root)
-             ("t" "Find personal TODO" . as-find-personal-todo)
-             ("d" "Find personal diary" . as-find-personal-diary)
-             ("n" "Find personal note" . as-find-personal-note)))
+             ("t" "personal TODO" . as-find-personal-todo)
+             ("d" "personal diary" . as-find-personal-diary)
+             ("n" "personal note" . as-find-personal-note)))
 
 (req-package as-find-file-matching-regexp-hook
   :ensure nil)
