@@ -1,15 +1,23 @@
+;; N.B. We cannot allow the definition of as-jump-map to defer,
+;; otherwise if as-jump's recursive dependencies aren't *all* loaded
+;; when doing (use-package as-jump) from elsewhere, as-jump-map won't
+;; be defined and their :config sections will error.
+;;
+;; We could but don't want to use a fugly work-around of repeating
+;; dependencies in the calling package (e.g. as-files) which are
+;; already declared in the right place.
+;;
+;; See as-package-loading.el for an example of how to set up bindings
+;; in the as-jump-map.
+
+(defvar as-jump-map (make-sparse-keymap "Jump to")
+  "Adam's prefix keymap for quickly jumping to stuff")
+
 (use-package as-which-key
+  ;; Need to load which-key to ensure define-key is advised
+  :after which-key
+
   :ensure nil
-  :init
-  ;; N.B. We cannot allow the definition of as-jump-map to defer,
-  ;; otherwise if as-jump's recursive dependencies aren't *all* loaded
-  ;; when doing (use-package as-jump) from elsewhere, as-jump-map won't
-  ;; be defined and this :config section will error.  We could but don't
-  ;; want to use a fugly work-around of repeating dependencies in the
-  ;; calling package (e.g. as-files) which are already declared in the
-  ;; right place.
-  (defvar as-jump-map (make-sparse-keymap "Jump to")
-    "Adam's prefix keymap for quickly jumping to stuff")
 
   :defer 0.1
   :config
@@ -23,9 +31,6 @@
     "Switches to the *Messages* buffer"
     (interactive)
     (switch-to-buffer (messages-buffer)))
-
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
 
   (bind-keys :map as-jump-map
              ("H" "*Help* buffer" . switch-to-help-buffer)

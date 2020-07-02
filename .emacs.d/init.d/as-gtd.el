@@ -5,8 +5,10 @@
 
 (defvar as-personal-todo "~/org/TODO.org")
 
+;; See as-jump.el / as-package-loading.el for explanation of usage
 (use-package as-jump
   :ensure nil
+  :after which-key
   :config
 
   (define-find-file-in-dir-function as-find-personal-note
@@ -41,8 +43,6 @@
     (as-org-jump-olp-and-next as-personal-todo
                               '("GTD" "orgmode")))
 
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
   (bind-keys :map as-jump-map
              ("t" "personal TODO" . as-find-personal-todo)
              ("E" "emacs TODOs" . as-find-emacs-todos)

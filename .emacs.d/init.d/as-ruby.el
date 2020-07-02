@@ -38,9 +38,9 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 
 (require 'as-jump)
 (use-package bundler
-  :config
   ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
+  :after which-key
+  :config
   (bind-keys :map as-jump-map
              ("o" "Ruby bundler gems" . bundle-open)))
 

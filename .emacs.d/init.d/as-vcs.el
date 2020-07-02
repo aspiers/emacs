@@ -51,12 +51,12 @@ Git gutter:
 (define-find-file-in-dir-function as-find-upstream-git-repo
   "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
 
+;; See as-jump.el / as-package-loading.el for explanation of usage
 (use-package as-jump
   :ensure nil
-  :config
+  :after which-key
 
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
+  :config
   (bind-keys :map as-jump-map
              ("C" "CVS repos" . as-find-CVS-repo)
              ("g" "my git repos" . as-find-my-git-repo)

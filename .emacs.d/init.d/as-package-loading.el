@@ -70,11 +70,13 @@ it's available."
 (define-find-file-in-dir-function as-find-el-get-package
   "~/.el-get" "Find el-get package: ")
 
+;; Need as-jump to ensure that as-jump-map is defined.
 (use-package as-jump
   :ensure nil
+  ;; Need to load which-key to ensure define-key is advised before it
+  ;; is used via bind-keys.
+  :after which-key
   :config
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
   (bind-keys :map as-jump-map
              ("l" "ELPA package" . as-find-elpa-package)
              ("L" "el-get package" . as-find-el-get-package)))

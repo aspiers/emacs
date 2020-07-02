@@ -37,12 +37,12 @@
 (bind-keys ("C-~"  . as-find-from-home)
            ("C-\"" . as-find-personal-todo))
 
+;; See as-jump.el / as-package-loading.el for explanation of usage
 (use-package as-jump
   :ensure nil
-  :config
+  :after which-key
 
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
+  :config
   (bind-keys :map as-jump-map
              ("h" "Find from ~" . as-find-from-home)
              ("/" "Find from /" . as-find-from-root)))

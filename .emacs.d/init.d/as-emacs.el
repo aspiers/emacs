@@ -18,11 +18,11 @@
 (define-find-file-in-dir-function as-find-emacs-init-d
   "~/.emacs.d/init.d" "Find emacs init.d file: ")
 
+;; See as-jump.el / as-package-loading.el for explanation of usage
 (use-package as-jump
   :ensure nil
+  :after which-key
   :config
-  ;; Need to load which-key to ensure define-key is advised
-  (require 'which-key)
   (bind-keys :map as-jump-map
              ("e" ".emacs.d/init.d/" . as-find-emacs-init-d)))
 
