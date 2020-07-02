@@ -23,6 +23,9 @@
          ("C-c j 3" . as-find-upstream-git-repo)
          ("C-c j G" . as-find-upstream-git-repo)))
 
+(use-package git-timemachine
+  :commands git-timemachine)
+
 (require 'as-magit)
 
 (req-package gerrit-download)
