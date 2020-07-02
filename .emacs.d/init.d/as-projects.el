@@ -48,8 +48,13 @@
 (define-find-file-in-dir-function as-find-stow-package
   "~/.STOW/" "Find stow package: ")
 
-(bind-keys :map as-jump-map
-          ("m" "mrconfig" . as-find-my-mrconfig)
-          ("s" "~/.STOW/" . as-find-stow-package))
+(use-package as-jump
+  :ensure nil
+  :config
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+  (bind-keys :map as-jump-map
+             ("m" "mrconfig" . as-find-my-mrconfig)
+             ("s" "~/.STOW/" . as-find-stow-package)))
 
 (provide 'as-projects)

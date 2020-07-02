@@ -23,7 +23,12 @@
 (define-find-file-in-dir-function as-find-quelpa-package
   "~/.emacs.d/quelpa/build" "Find quelpa package: ")
 
-(bind-keys :map as-jump-map
-           ("q" "quelpa package" . as-find-quelpa-package))
+(use-package as-jump
+  :ensure nil
+  :config
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+  (bind-keys :map as-jump-map
+             ("q" "quelpa package" . as-find-quelpa-package)))
 
 (provide 'as-quelpa)

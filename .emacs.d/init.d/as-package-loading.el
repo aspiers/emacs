@@ -70,9 +70,14 @@ it's available."
 (define-find-file-in-dir-function as-find-el-get-package
   "~/.el-get" "Find el-get package: ")
 
-(bind-keys :map as-jump-map
-           ("l" "ELPA package" . as-find-elpa-package)
-           ("L" "el-get package" . as-find-el-get-package))
+(use-package as-jump
+  :ensure nil
+  :config
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
+  (bind-keys :map as-jump-map
+             ("l" "ELPA package" . as-find-elpa-package)
+             ("L" "el-get package" . as-find-el-get-package)))
 
 (as-progress "bootstrapping quelpa...")
 (require 'as-quelpa)

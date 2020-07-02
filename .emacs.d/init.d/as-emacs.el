@@ -21,6 +21,8 @@
 (use-package as-jump
   :ensure nil
   :config
+  ;; Need to load which-key to ensure define-key is advised
+  (require 'which-key)
   (bind-keys :map as-jump-map
              ("e" ".emacs.d/init.d/" . as-find-emacs-init-d)))
 
