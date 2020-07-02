@@ -55,11 +55,11 @@
   ;; Need to load which-key to ensure define-key is advised
   (require 'which-key)
   (bind-keys :map as-jump-map
-             ("h" . ("Find from ~" . as-find-from-home))
-             ("/" . ("Find from /" . as-find-from-root))
-             ("t" . ("Find personal TODO" . as-find-personal-todo))
-             ("d" . ("Find personal diary" . as-find-personal-diary))
-             ("n" . ("Find personal note" . as-find-personal-note))))
+             ("h" "Find from ~" . as-find-from-home)
+             ("/" "Find from /" . as-find-from-root)
+             ("t" "Find personal TODO" . as-find-personal-todo)
+             ("d" "Find personal diary" . as-find-personal-diary)
+             ("n" "Find personal note" . as-find-personal-note)))
 
 (req-package as-find-file-matching-regexp-hook
   :ensure nil)
