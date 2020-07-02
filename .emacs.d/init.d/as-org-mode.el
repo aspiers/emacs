@@ -44,6 +44,7 @@
               ;; (imenu-add-to-menubar "Imenu")
               (setq comment-start nil)))
 
+  (setcdr (assq 'agenda org-show-context-detail) 'tree)
   (add-to-list 'org-show-context-detail '(org-goto . tree))
 
   (add-to-list 'org-modules 'org-timer))
