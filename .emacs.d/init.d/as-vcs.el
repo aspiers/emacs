@@ -23,18 +23,6 @@
 (add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
 
 ;;}}}
-;;{{{ psvn
-
-(autoload 'svn-status "psvn" "svn-status" t)
-(bind-key "C-c s s" 'svn-status)
-(bind-key "C-c s u" 'svn-status-update-cmd)
-(defun as-next-svn-buffer ()
-  (interactive)
-  (switch-to-buffer (get-buffer "*svn-status*")))
-(bind-key "C-c s b"   'as-next-svn-buffer)
-;; (require 'psvn)
-
-;;}}}
 ;;{{{ vc-osc
 
 (req-package vc-osc
