@@ -13,6 +13,11 @@
   :defer 0.1
   :config
 
+  (defun switch-to-help-buffer ()
+    "Switches to the *Help* buffer"
+    (interactive)
+    (switch-to-buffer (help-buffer)))
+
   (defun switch-to-messages-buffer ()
     "Switches to the *Messages* buffer"
     (interactive)
@@ -21,8 +26,9 @@
   ;; Need to load which-key to ensure define-key is advised
   (require 'which-key)
 
-  (define-key as-jump-map "M"
-    '("Switch to *Messages*" . switch-to-messages-buffer))
+  (bind-keys :map as-jump-map
+             ("H" "*Help* buffer" . switch-to-help-buffer)
+             ("M" "*Messages* buffer" . switch-to-messages-buffer))
 
   (add-to-list 'as-which-key-no-delay-prefixes
                "C-c j\\|<key-chord> \\(z j\\|j z\\)")
