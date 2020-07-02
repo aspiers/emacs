@@ -1223,9 +1223,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("c" "CO2ken NEXT" entry
       (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
       "* NEXT %?" :prepend t :jump-to-captured t)
-     ("o" "org mailing list item" entry
-      (file+headline "~/org/TODO.org" "to list")
-      "* NEXT %?%:annotation" :prepend t)
+     ("o" "orgmode NEXT" entry
+      (file+olp "~/org/TODO.org" "GTD" "orgmode")
+      "* NEXT %?%:annotation" :prepend t :immediate-finish t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
