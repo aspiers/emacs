@@ -1,35 +1,8 @@
 ;; Version control
 
-;;{{{ cvs helper modes
-
-;;;###autoload
-(defun bury-and-close-buffer ()
-  (interactive)
-  (bury-buffer)
-  (when (not (one-window-p))
-    (delete-window)))
-
-;;;###autoload
-(defun mhj-set-q-to-close ()
-  (local-set-key "q" 'bury-and-close-buffer))
-
-;; diff mode
-(add-hook 'diff-mode-hook 'mhj-set-q-to-close)
-
-;; cvs-status mode
-(add-hook 'cvs-status-mode-hook 'mhj-set-q-to-close)
-
-;; log-view mode
-(add-hook 'log-view-mode-hook 'mhj-set-q-to-close)
-
-;;}}}
-;;{{{ vc-osc
-
 (req-package vc-osc
   :config
   (add-to-list 'vc-handled-backends 'osc 'append))
-
-;;}}}
 
 (use-package git-gutter-fringe
   :config
