@@ -41,15 +41,15 @@
   :config
   (counsel-projectile-mode))
 
-(use-package find-file-in-dir
- :ensure nil
-  :config
-  (define-find-file-in-dir-function as-find-my-mrconfig
-    "~/.config/mr/groups.d" "Find mr config: ")
-  (define-find-file-in-dir-function as-find-stow-package
-    "~/.STOW/" "Find stow package: ")
+(require 'find-file-in-dir)
 
-  :bind (("C-c j m" . as-find-my-mrconfig)
-         ("C-c j s" . as-find-stow-package)))
+(define-find-file-in-dir-function as-find-my-mrconfig
+  "~/.config/mr/groups.d" "Find mr config: ")
+(define-find-file-in-dir-function as-find-stow-package
+  "~/.STOW/" "Find stow package: ")
+
+(bind-keys :map as-jump-map
+          ("m" "mrconfig" . as-find-my-mrconfig)
+          ("s" "~/.STOW/" . as-find-stow-package))
 
 (provide 'as-projects)

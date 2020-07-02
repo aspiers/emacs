@@ -64,16 +64,15 @@ it's available."
 
 (setq use-package-verbose 'debug)
 
-(use-package find-file-in-dir
- :ensure nil
-  :config
-  (define-find-file-in-dir-function as-find-elpa-package
-    "~/.emacs.d/elpa" "Find ELPA package: ")
-  (define-find-file-in-dir-function as-find-el-get-package
-    "~/.el-get" "Find el-get package: ")
+(require 'find-file-in-dir)
+(define-find-file-in-dir-function as-find-elpa-package
+  "~/.emacs.d/elpa" "Find ELPA package: ")
+(define-find-file-in-dir-function as-find-el-get-package
+  "~/.el-get" "Find el-get package: ")
 
-  :bind (("C-c j l" . as-find-elpa-package)
-         ("C-c j L" . as-find-el-get-package)))
+(bind-keys :map as-jump-map
+           ("l" "ELPA package" . as-find-elpa-package)
+           ("L" "el-get package" . as-find-el-get-package))
 
 (as-progress "bootstrapping quelpa...")
 (require 'as-quelpa)

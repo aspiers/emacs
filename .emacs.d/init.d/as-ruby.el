@@ -36,8 +36,11 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
    (defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
    (add-to-list 'load-path (concat rsense-home "/etc"))))
 
-(req-package bundler
-  :bind ("C-c j o" . bundle-open))
+(require 'as-jump)
+(use-package bundler
+  :config
+  (bind-keys :map as-jump-map
+             ("o" "Ruby bundler gems" . bundle-open)))
 
 (req-package rubocop)
 ;;(req-package rudel)
