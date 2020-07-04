@@ -41,8 +41,27 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
   ;; Need to load which-key to ensure define-key is advised
   :after which-key
   :config
+  ;; (defvar as-jump-ruby-map (make-sparse-keymap "Jump to Ruby")
+  ;;   "Adam's prefix keymap for quickly jumping to Ruby stuff")
+  ;; (bind-keys :map as-jump-ruby-map
+  ;;            ("g" "Ruby bundler gems" . bundle-open))
+
+  ;; Can't name prefix keymap - reported in:
+  ;; https://github.com/justbur/emacs-which-key/issues/253
+  ;; (define-key as-jump-map "r" '("Ruby" . as-jump-ruby-map))
+  ;; (bind-keys :map as-jump-map ("r" "Ruby" . as-jump-ruby-map))
   (bind-keys :map as-jump-map
-             ("o" "Ruby bundler gems" . bundle-open)))
+             :prefix "r"
+             :prefix-map as-jump-ruby-map
+             :prefix-docstring "foo"
+             :menu-name "ruby map"
+             ("g" "Ruby bundler gems" . bundle-open))
+
+  ;; Poor workaround which doesn't work for key chords:
+  ;; (which-key-add-key-based-replacements "C-c j r" "Ruby")
+
+  (push '((nil . "as-jump-ruby-map") . (nil . "Ruby")) which-key-replacement-alist))
+
 
 (req-package rubocop)
 ;;(req-package rudel)
