@@ -1481,7 +1481,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (which-key
+    (org-timeline
+     which-key
      treemacs-magit
      treemacs-icons-dired
      treemacs-projectile
