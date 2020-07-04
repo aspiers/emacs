@@ -1294,7 +1294,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :END:")
      ("e" "emacs NEXT" entry
       (file+olp "" "computer and technology" "tool software development" "emacs")
-      "* NEXT %?" :prepend t :jump-to-captured t))))
+      "* NEXT %?%a" :prepend t :jump-to-captured t))))
  '(org-catch-invisible-edits (quote smart))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
