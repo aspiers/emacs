@@ -89,6 +89,18 @@
                          nil "magit status: " nil "*magit: "))
   (bind-key "C-M-g" 'ido-switch-magit-buffer))
 
+(req-package magit
+  :require org
+  :config
+  (defun as-magit-post-display-org-buffer-hook ()
+    "Hook for `magit-diff-visit-file-hook' to automatically run
+`org-show-context'."
+    (org-show-context 'org-goto))
+  ;; Custom contexts break `widget-apply'.
+  ;; (add-to-list 'org-show-context-detail '(magit-diff . canonical))
+  (add-hook 'magit-diff-visit-file-hook
+            'as-magit-post-display-org-buffer-hook))
+
 ;; https://github.com/greenrd/magit-topgit/issues/10
 ;;(req-package magit-topgit)
 
