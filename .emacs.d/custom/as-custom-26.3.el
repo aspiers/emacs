@@ -1404,7 +1404,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit)))
+    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit-forge)))
  '(org-odd-levels-only t)
  '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
@@ -1481,7 +1481,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (org-timeline
+    (orgit-forge
+     org-timeline
      which-key
      treemacs-magit
      treemacs-icons-dired

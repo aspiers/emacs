@@ -86,8 +86,10 @@
   :require org)
 (req-package org
   :ensure org-plus-contrib)
-(req-package orgit
-  :require org)
+(use-package orgit
+  :after org)
+(use-package orgit-forge
+  :after org)
 
 (req-package org-bullets
   :require org
