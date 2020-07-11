@@ -60,8 +60,7 @@ Git gutter:
   (bind-keys :map as-jump-map
              ("C" "CVS repos" . as-find-CVS-repo)
              ("g" "my git repos" . as-find-my-git-repo)
-             ("3" "3rd party git repos" . as-find-upstream-git-repo)
-             ("G" "3rd party git repos" . as-find-upstream-git-repo)))
+             ("3" "3rd party git repos" . as-find-upstream-git-repo)))
 
 (use-package git-timemachine
   :commands git-timemachine)

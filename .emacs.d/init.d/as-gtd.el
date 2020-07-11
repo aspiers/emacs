@@ -38,6 +38,10 @@
                     "tool software development"
                     "emacs")))
 
+  (defun as-find-GTD-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo '("GTD")))
+
   (defun as-find-orgmode-todos ()
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
@@ -48,6 +52,7 @@
              ("E" "emacs TODOs" . as-find-emacs-todos)
              ("o" "orgmode TODOs" . as-find-orgmode-todos)
              ("d" "personal diary" . as-find-personal-diary)
+             ("G" "GTD TODOs" . as-find-GTD-todos)
              ("n" "personal note" . as-find-personal-note)))
 
 ;;;###autoload
