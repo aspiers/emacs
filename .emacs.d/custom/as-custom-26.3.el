@@ -1304,7 +1304,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound-quiet.wav")
  '(org-clone-delete-id t)
  '(org-columns-default-format
-   "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
+   "%TODO %PRIORITY(P) %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
  '(org-confirm-babel-evaluate nil)
