@@ -2,7 +2,8 @@
     (as-progress "Skipping buggy quelpa-self-upgrade")
     ;;(quelpa-self-upgrade)
   (with-temp-buffer
-    (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
+    ;; Work around https://github.com/quelpa/quelpa/issues/194
+    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
     (as-progress "Downloaded quelpa.el (%d bytes)" (buffer-size))
     (eval-buffer)))
 
