@@ -1392,6 +1392,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-link-from-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-log-done (quote time))
+ '(org-log-into-drawer t)
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
