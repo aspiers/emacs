@@ -42,11 +42,11 @@ elisp profiling (currently %s(profiler-running-modes))
 
 ^^Start / stop                          Reporting
 ^-^----------------------------------   ^-^----------------------------
-_s_: start (prompt for mode)            _f_: find profile
-_c_: start CPU profiling                _4_: find profile other window
-_m_: start memory profiling             _5_: find profile other frame
-_b_: start both CPU+memory profiling
-_._: stop profiling
+_s_: start (prompt for mode)            _r_: show report
+_c_: start CPU profiling
+_m_: start memory profiling             _f_: find profile
+_b_: start both CPU+memory profiling    _4_: find profile other window
+_._: stop profiling                     _5_: find profile other frame
 _R_: reset profiler logs
 
 _q_: quit
