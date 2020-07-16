@@ -69,7 +69,6 @@ the whole buffer."
   :bind (("C-x C-t" . as-transpose-lines)
          ("C-c d"   . as-duplicate-line)
          ("<F5>"    . as-duplicate-line)
-         ("C-c A"   . as-align-to-previous-line)
          ("<F7>"    . as-align-to-previous-line)
          ("<F8>"    . as-copy-previous-line-suffix)
          ("C-c p"   . as-copy-previous-line-suffix) ;; FIXME: conflict!

@@ -1,4 +1,5 @@
 (bind-key "C-c G" 'customize-group)
+(bind-key "C-c A" 'customize-apropos)
 
 (defun as-expand-sexp ()
   "Expand a sexp so that each word is on a separate line."
