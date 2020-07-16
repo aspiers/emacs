@@ -1195,7 +1195,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
    (quote
-    ((agenda habit-down time-up priority-down category-keep effort-up)
+    ((agenda time-up priority-down category-keep effort-up)
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
