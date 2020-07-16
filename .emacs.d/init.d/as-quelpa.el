@@ -4,7 +4,7 @@
   (with-temp-buffer
     ;; Work around https://github.com/quelpa/quelpa/issues/194
     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (as-progress "Downloaded quelpa.el (%d bytes)" (buffer-size))
+    (as-progress "Downloaded quelpa.el (%d bytes) into %s" (buffer-size) (buffer-name))
     (eval-buffer)))
 
 (as-progress "Setting up quelpa-use-package")
