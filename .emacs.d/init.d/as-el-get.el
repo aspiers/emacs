@@ -43,7 +43,5 @@ the directory pointed to by `el-get-el-get-dir'."
   (message "Don't own %s; will skip various installation steps."
            el-get-el-get-dir))
 
-(require 'as-el-get-emacswiki)
-
 (provide 'as-el-get)
 (eval-and-compile (as-loading-done))
