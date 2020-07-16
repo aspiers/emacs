@@ -1,35 +1,3 @@
-;; If you're using color-theme.el, this background should match the
-;; background of your chosen theme
-;; (setq as-default-background
-;;    "seashell1"
-;;    "wheat"
-;;    "blanched almond"
-;;    "antique white"
-;;    "gray90"
-;;    )
-
-;; (setq frame-background-mode
-;;       (cond ((and (= emacs-major-version 21) window-system) 'light)
-;;             (t 'dark)))
-
-;; (and (eq frame-background-mode 'light)
-;;      (custom-set-variables
-;;       `(vc-annotate-background ,as-default-background)))
-
-;; (and (>= emacs-major-version 21)
-;;      (progn
-;;        (custom-set-faces
-;;         `(default
-;;            ((((class color) (background light))
-;;              (:background ,as-default-background))))
-;;         `(fringe
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background))))
-;;         `(mmm-default-submode-face
-;;           ((((class color) (background light))
-;;             (:background ,as-default-background)))))
-;;        ))
-
 (message "custom-set-variables starting")
 
 (custom-set-variables
@@ -289,13 +257,15 @@
       (modes quote
              (css-mode html-mode))))))
  '(align-sq-string-modes (quote (python-mode)))
- '(allout-auto-activation t)
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
  '(auto-revert-check-vc-info nil)
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
+ '(beacon-blink-when-focused t)
+ '(beacon-lighter "")
+ '(beacon-mode t)
  '(blink-cursor-blinks 0)
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.3)
@@ -341,6 +311,32 @@
  '(completion-ignored-extensions
    (quote
     (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".hg/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".p64fsl" ".d64fsl" ".dx64fsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")))
+ '(counsel-projectile-switch-project-action
+   (quote
+    (13
+     ("o" counsel-projectile-switch-project-action "jump to a project buffer or file")
+     ("f" counsel-projectile-switch-project-action-find-file "jump to a project file")
+     ("d" counsel-projectile-switch-project-action-find-dir "jump to a project directory")
+     ("D" counsel-projectile-switch-project-action-dired "open project in dired")
+     ("b" counsel-projectile-switch-project-action-switch-to-buffer "jump to a project buffer")
+     ("m" counsel-projectile-switch-project-action-find-file-manually "find file manually from project root")
+     ("S" counsel-projectile-switch-project-action-save-all-buffers "save all project buffers")
+     ("k" counsel-projectile-switch-project-action-kill-buffers "kill all project buffers")
+     ("K" counsel-projectile-switch-project-action-remove-known-project "remove project from known projects")
+     ("c" counsel-projectile-switch-project-action-compile "run project compilation command")
+     ("C" counsel-projectile-switch-project-action-configure "run project configure command")
+     ("E" counsel-projectile-switch-project-action-edit-dir-locals "edit project dir-locals")
+     ("v" counsel-projectile-switch-project-action-vc "open project in vc-dir / magit / monky")
+     ("sg" counsel-projectile-switch-project-action-grep "search project with grep")
+     ("si" counsel-projectile-switch-project-action-git-grep "search project with git grep")
+     ("ss" counsel-projectile-switch-project-action-ag "search project with ag")
+     ("sr" counsel-projectile-switch-project-action-rg "search project with rg")
+     ("xs" counsel-projectile-switch-project-action-run-shell "invoke shell from project root")
+     ("xe" counsel-projectile-switch-project-action-run-eshell "invoke eshell from project root")
+     ("xt" counsel-projectile-switch-project-action-run-term "invoke term from project root")
+     ("xv" counsel-projectile-switch-project-action-run-vterm "invoke vterm from project root")
+     ("Oc" counsel-projectile-switch-project-action-org-capture "capture into project")
+     ("Oa" counsel-projectile-switch-project-action-org-agenda "open project agenda"))))
  '(cperl-auto-newline nil)
  '(cperl-auto-newline-after-colon t)
  '(cperl-autoindent-on-semi t)
@@ -353,9 +349,9 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
- '(custom-safe-themes
-   (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "756597b162f1be60a12dbd52bab71d40d6a2845a3e3c2584c6573ee9c332a66e" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8f392c0db8c92563397d55464320b53505ece8e6066e8d30575952663787e02f" "1dd84fe8349c012731e10e39c79627841744c1d38556f22fb970de5335a44c90" "056d98129e2f4f3200b16acfdaf2cf87a9442b2ac1ed4196a109edb8f082d7da" "56cb796e4712309ede12a316d99b0a2a8c3b48a8c63bf62c257861ca103cc4d1" "e41c402084437f037d1075fe825ad9d331abe36c4c45104f01c0d14c071b46ac" "3a963acc5629c10113409c0ea5c04a8e1c2159c628bf8b0830cbd154014efe3f" default)))
+ '(custom-enabled-themes (quote (pastels-on-dark-aspiers)))
+ '(custom-safe-themes t)
+ '(custom-theme-directory "~/.emacs.d/themes")
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
  '(cvs-buffer-switch-list (quote ("diff" "status" "log")))
  '(cvs-find-file-and-jump t)
@@ -369,6 +365,13 @@
  '(delete-old-versions t)
  '(delete-selection-mode nil)
  '(diff-switches "-u")
+ '(dired-guess-shell-alist-user
+   (quote
+    (("\\.pdf\\'" "evince")
+     ("\\.\\(docx?\\|pptx?\\|xlsx?|od[stp]\\)\\'" "libreoffice")
+     ("\\.jpg\\'" "pinta")
+     ("\\.png\\'" "pinta")
+     ("\\.java\\'" "idea"))))
  '(dired-kept-versions 0)
  '(dired-listing-switches "-l")
  '(display-time-mode nil)
@@ -385,959 +388,17 @@
  '(emms-player-list (quote (\"mplayer\" \"vlc\")))
  '(enable-local-eval t)
  '(enable-local-variables :all)
- '(erc-autojoin-channels-alist
-   (quote
-    (("freenode.net" "#suse" "#orgmode" "#linux-ha" "#openstack" "#opensuse-buildservice" "#tmux")
-     ("suse.de" "#suse" "#cloud" "#ha"))))
- '(erc-generate-log-file-name-function (quote erc-generate-log-file-name-target))
- '(erc-kill-buffer-on-part t)
- '(erc-kill-queries-on-quit t)
- '(erc-kill-server-buffer-on-quit t)
- '(erc-log-channels-directory (quote erc-generate-log-directory-name-network))
- '(erc-log-insert-log-on-open t)
- '(erc-log-mode t)
- '(erc-log-write-after-insert t)
- '(erc-log-write-after-send t)
- '(erc-modules
-   (quote
-    (autojoin button completion fill irccontrols log match menu netsplit networks noncommands readonly ring stamp track truncate)))
- '(erc-networks-alist
-   (quote
-    ((4-irc "4-irc.com")
-     (A5KNet "a5knet.com")
-     (AbleNet "ablenet.org")
-     (Accessirc "accessirc.net")
-     (Acestar "acestar.org")
-     (Action-IRC "action-irc.net")
-     (AfterNET "afternet.org")
-     (Alternativenet "altnet.org")
-     (AmigaNet "amiganet.org")
-     (AngelEyez "angeleyez.net")
-     (Anothernet "another.net")
-     (ArabChat "arabchat.org")
-     (Ars "arstechnica.com")
-     (AsiaTalk "asiatalk.org")
-     (AstroLink "astrolink.org")
-     (Asylumnet "asylumnet.org")
-     (Austnet "austnet.org")
-     (AwesomeChat "awesomechat.net")
-     (Awesomechristians "awesomechristians.com")
-     (Axenet "axenet.org")
-     (Beyondirc "beyondirc.net")
-     (BGIRC "bulgaria.org")
-     (Blabbernet "blabber.net")
-     (Blitzed "blitzed.org")
-     (BrasIRC "brasirc.net")
-     (BRASnet "brasnet.org")
-     (BubbleNet "bubblenet.org")
-     (CCnet "christian-chat.net")
-     (Chat-Net "chat-net.org")
-     (Chat-Solutions "chat-solutions.org")
-     (Chatcafe "chatcafe.net")
-     (Chatchannel "chatchannel.org")
-     (ChatCircuit "chatcircuit.com")
-     (Chatlink "chatlink.org")
-     (Chatnet "chatnet.org")
-     (ChatNut "chatnut.net")
-     (Chatpinoy "chatpinoy.com")
-     (ChatPR "chatpr.org")
-     (Chatroom "chatroom.org")
-     (Chatster "chatster.org")
-     (ChatX "chatx.net")
-     (China263 "263.net")
-     (Cineplex1 "cineplex1.com")
-     (CNN "cnn.com")
-     (CobraNet "cobra.net")
-     (Coolchat "coolchat.net")
-     (Criten "criten.net")
-     (Cyberchat "cyberchat.org")
-     (CyGanet "cyga.net")
-     (DALnet "dal.net")
-     (Dark-Tou-Net "d-t-net.de")
-     (Darkfire "darkfire.net")
-     (DarkMyst "darkmyst.org")
-     (Darkserv "darkserv.net")
-     (Darksystem "darksystem.com")
-     (Darktree "darktree.net")
-     (DayNet "daynet.org")
-     (Deepspace "deepspace.org")
-     (Different "different.net")
-     (Digarix "digarix.net")
-     (Digatech "digatech.net")
-     (Digital-Base "digital-base.net")
-     (Digitalirc "digitalirc.net")
-     (Discussioni "discussioni.org")
-     (DorukNet "doruk.net.tr")
-     (DWChat "dwchat.net")
-     (Dynastynet "dynastynet.net")
-     (EFnet nil)
-     (EgyptianIRC "egyptianirc.net")
-     (Eircnet "eircnet.org")
-     (Eleethal "eleethal.com")
-     (EntertheGame "enterthegame.com")
-     (EpiKnet "epiknet.org")
-     (EsperNet "esper.net")
-     (Esprit "esprit.net")
-     (euIRC "euirc.net")
-     (Evilzinc "evilzinc.net")
-     (ExodusIRC "exodusirc.net")
-     (FDFnet "fdfnet.net")
-     (FEFnet "fef.net")
-     (Financialchat "financialchat.com")
-     (Forestnet "forestnet.org")
-     (ForeverChat "foreverchat.net")
-     (Fraggers "fraggers.co.uk")
-     (FreedomChat "freedomchat.net")
-     (FreedomIRC "freedomirc.net")
-     (freenode "freenode.net")
-     (FunNet "funnet.org")
-     (GalaxyNet "galaxynet.org")
-     (Gamesnet "gamesnet.net")
-     (GammaForce "gammaforce.org")
-     (GIKInet "giki.edu.pk")
-     (GizNet "giznet.org")
-     (Globalchat "globalchat.org")
-     (GlobIRC "globirc.net")
-     (Goldchat "goldchat.nl")
-     (Goodchatting "goodchatting.com")
-     (GravityLords "gravitylords.net")
-     (GRnet "irc.gr")
-     (GulfChat "gulfchat.net")
-     (HabberNet "habber.net")
-     (HanIRC "hanirc.org")
-     (Hellenicnet "mirc.gr")
-     (IceNet "icenet.org.za")
-     (ICQnet "icq.com")
-     (iip "anon.iip")
-     (Infatech "infatech.net")
-     (Infinity "infinity-irc.org")
-     (Infomatrix "infomatrix.net")
-     (Inside3D "inside3d.net")
-     (InterlinkChat "interlinkchat.net")
-     (IRC-Chile "irc.cl")
-     (IRC-Hispano "irc-hispano.org")
-     (IRCchat "ircchat.tk")
-     (IRCGate "ircgate.net")
-     (IRCGeeks "ircgeeks.org")
-     (IRChat "irchat.net")
-     (IrcLordz "irclordz.com")
-     (IrcMalta "ircmalta.org")
-     (IRCnet nil)
-     (IRCSoulZ "ircsoulz.net")
-     (IRCSul "wnet.com.br")
-     (IrcTalk "irctalk.net")
-     (Irctoo "irctoo.net")
-     (IRCtown "irc.irctown.net")
-     (IRCworld "ircworld.org")
-     (ircXtreme "ircXtreme.net")
-     (Israelnet "israel.net")
-     (K0wNet "k0w.net")
-     (KDFSnet "kdfs.net")
-     (Kemik "kemik.net")
-     (Kewl\.Org "kewl.org")
-     (Kickchat "kickchat.com")
-     (KidsWorld "kidsworld.org")
-     (Knightnet "knightnet.net")
-     (Konfido\.Net "konfido.net")
-     (Kreynet "krey.net")
-     (Krono "krono.net")
-     (Krushnet "krushnet.org")
-     (LagNet "lagnet.org.za")
-     (Librenet "librenet.net")
-     (LinkNet "link-net.org")
-     (LinuxChix "cats.meow.at\\|linuxchix.org")
-     (Liquidized "liquidized.net")
-     (M-IRC "m-sys.org")
-     (MagicStar "magicstar.net")
-     (Mavra "mavra.net")
-     (MediaDriven "mediadriven.com")
-     (mIRC-X "mircx.com")
-     (Morat "morat.net")
-     (MusicCity "musiccity.com")
-     (Mysteria "mysteria.net")
-     (Mysterychat "mysterychat.net")
-     (Mystical "mystical.net")
-     (Narancs "narancs.com")
-     (Net-France "net-france.com")
-     (Nevernet "nevernet.net")
-     (Newnet "newnet.net")
-     (Nexusirc "nexusirc.org")
-     (NightStar "nightstar.net")
-     (NitrousNet "nitrousnet.net")
-     (Novernet "novernet.com")
-     (Nullrouted "nullrouted.org")
-     (NullusNet "nullus.net")
-     (OFTC "oftc.net")
-     (OpChat "opchat.org")
-     (Openprojects "openprojects.net")
-     (Othernet "othernet.org")
-     (OtherSide "othersideirc.net")
-     (Outsiderz "outsiderz.com")
-     (OzOrg "oz.org")
-     (Peacefulhaven "peacefulhaven.net")
-     (PhazedIRC "phazedirc.net")
-     (Philchat "philchat.net")
-     (phrozN "phrozn.net")
-     (PiNet "praetorians.org")
-     (Pinoycentral "abs-cbn.com")
-     (Planetarion "planetarion.com")
-     (POLNet "ircnet.pl")
-     (Psionics "psionics.net")
-     (PTirc "ptirc.com.pt")
-     (PTlink "ptlink.net")
-     (PTnet "ptnet.org")
-     (QChat "qchat.net")
-     (QuakeNet "quakenet.org")
-     (Realirc "realirc.org")
-     (RealmNET "realmnet.com")
-     (Rebelchat "rebelchat.org")
-     (Red-Latina "red-latina.org")
-     (RedLatona "redlatona.net")
-     (Relicnet "relic.net")
-     (Rezosup "rezosup.org")
-     (Risanet "risanet.com")
-     (Rubiks "rubiks.net")
-     (Rusnet "nil")
-     (Sandnet "sandnet.net")
-     (Scunc "scunc.net")
-     (SerbianCafe "serbiancafe.ws")
-     (SexNet "sexnet.org")
-     (ShadowFire "shadowfire.org")
-     (ShadowWorld "shadowworld.net")
-     (SkyNet "bronowski.pl")
-     (SlashNET "slashnet.org")
-     (SolarStone "solarstone.net")
-     (Sorcery "sorcery.net")
-     (SourceIRC "sourceirc.net")
-     (SpaceTronix "spacetronix.net")
-     (Spirit-Harmony "spirit-harmony.com")
-     (StarChat "starchat.net")
-     (StarEquinox "starequinox.net")
-     (Starlink "starlink.net")
-     (starlink-irc "starlink-irc.org")
-     (StarWars-IRC "starwars-irc.net")
-     (Stormdancing "stormdancing.net")
-     (Superchat "superchat.org")
-     (Sysopnet "sysopnet.org")
-     (Telstra "telstra.com")
-     (TR-net "dominet.com.tr")
-     (Tri-net "tri-net.org")
-     (TriLink "ft4u.net")
-     (TurkishChat "turkishchat.org")
-     (UberNinja "uberninja.net")
-     (UICN "uicn.net")
-     (UltraIRC "ultrairc.net")
-     (UnderChat "underchat.it")
-     (Undernet "undernet.org")
-     (UnderZ "underz.org")
-     (UniChat "irc.uni-chat.net")
-     (UnionLatina "unionlatina.org")
-     (Univers "univers.org")
-     (UnixR "unixr.net")
-     (Vidgamechat "vidgamechat.com")
-     (VirtuaNet "virtuanet.org")
-     (Vitamina "vitamina.ca")
-     (Voila "voila.fr")
-     (Wahou "wf-net.org")
-     (Warpednet "warped.net")
-     (Weaklinks "weaklinks.net")
-     (Webnet "webchat.org")
-     (WinChat "winchat.net")
-     (WinIRC "winirc.org")
-     (WorldIRC "worldirc.org")
-     (WyldRyde "wyldryde.net")
-     (XentoniX "xentonix.net")
-     (Xevion "xevion.net")
-     (XNet "xnet.org")
-     (XWorld "xworld.org")
-     (ZAnetNet "zanet.net")
-     (ZAnetOrg "zanet.org.za")
-     (ZiRC "zirc.org")
-     (ZUHnet "zuh.net")
-     (Zurna "zurna.net")
-     (SUSE "suse.de"))))
- '(erc-nick "aspiers")
- '(erc-server-alist
-   (quote
-    (("4-irc: Random server" 4-irc "4-irc.com" 6667)
-     ("A5KNet: Random server" A5KNet "irc.a5knet.com"
-      ((6660 6669)))
-     ("AbleNet: Random server" AbleNet "irc.ablenet.org" 6667)
-     ("Accessirc: Random server" Accessirc "irc.accessirc.net" 6667)
-     ("Acestar: Random server" Acestar "irc.acestar.org" 6667)
-     ("Action-IRC: Random server" Action-IRC "irc.action-irc.net"
-      ((6660 6669)))
-     ("AfterNET: Random server" AfterNET "irc.afternet.org" 6667)
-     ("Alternativenet: Random server" Alternativenet "irc.altnet.org" 6667)
-     ("AmigaNet: Random server" AmigaNet "irc.amiganet.org" 6667)
-     ("AngelEyez: Random server" AngelEyez "irc.angeleyez.net"
-      ((6666 7000)))
-     ("AnotherNet: Random server" Anothernet "irc.another.net"
-      (6667 7000))
-     ("ArabChat: Random server" ArabChat "irc.arabchat.org"
-      ((6660 6667)))
-     ("Ars-OpenIRC: Random server" Ars "irc.arstechnica.com" 6667)
-     ("AsiaTalk: Random server" AsiaTalk "irc.asiatalk.org"
-      ((6667 6669)
-       7000))
-     ("AstroLink: Random server" AstroLink "irc.astrolink.org"
-      ((6660 6667)))
-     ("Asylumnet: Random server" Asylumnet "irc.asylum-net.org"
-      ((6661 6669)
-       7000 7777))
-     ("Austnet: Random AU server" Austnet "au.austnet.org" 6667)
-     ("Austnet: Random NZ server" Austnet "nz.austnet.org" 6667)
-     ("Austnet: Random SG server" Austnet "sg.austnet.org" 6667)
-     ("Austnet: Random US server" Austnet "us.austnet.org" 6667)
-     ("AwesomeChat: Random server" AwesomeChat "irc.awesomechat.net"
-      ((6661 6669)))
-     ("Awesomechristians: Random server" Awesomechristians "irc.awesomechristians.com" 7000)
-     ("Axenet: Random server" Axenet "irc.axenet.org"
-      ((6660 6667)))
-     ("BeyondIRC: Random server" Beyondirc "irc.beyondirc.net"
-      ((6660 6669)))
-     ("BGIRC: Random server" BGIRC "irc.bulgaria.org"
-      ((6666 6669)
-       7000))
-     ("Blabbernet: Random server" Blabbernet "irc.blabber.net"
-      (6667 7000))
-     ("Blitzed: Random server" Blitzed "irc.blitzed.org"
-      (6667 7000))
-     ("Brasirc: Random server" Brasirc "irc.brasirc.net"
-      ((6666 6667)))
-     ("Brasirc: BR, PA, Belem" Brasirc "irc.libnet.com.br"
-      ((6666 6668)
-       7777 8002))
-     ("BRASnet: Random European server" BRASnet "eu.brasnet.org"
-      ((6665 6669)))
-     ("BRASnet: Random US server" BRASnet "us.brasnet.org"
-      ((6665 6669)))
-     ("BubbleNet: Random server" BubbleNet "irc.bubblenet.org"
-      ((6667 6669)))
-     ("CCnet: Random server" CCnet "irc.cchat.net"
-      (6667 7000))
-     ("CCnet: US, TX, Dallas" CCnet "irc2.cchat.net"
-      (6667 7000))
-     ("Chat-Net: Random server" Chat-Net "irc.chat-net.org" 6667)
-     ("Chat-Solutions: Random server" Chat-Solutions "irc.chat-solutions.org" 6667)
-     ("Chatcafe: Random server" Chatcafe "irc.chatcafe.net" 6667)
-     ("Chatchannel: Random server" Chatchannel "irc.chatchannel.org"
-      ((6666 6669)
-       7000))
-     ("ChatCircuit: Random server" ChatCircuit "irc.chatcircuit.com" 6668)
-     ("Chatlink: Random server" Chatlink "irc.chatlink.org" 6667)
-     ("Chatnet: Random AU server" Chatnet "au.chatnet.org" 6667)
-     ("Chatnet: Random EU server" Chatnet "eu.chatnet.org" 6667)
-     ("Chatnet: Random US server" Chatnet "us.chatnet.org" 6667)
-     ("ChatNut: Random server" ChatNut "irc.chatnut.net"
-      (6667 7000))
-     ("Chatpinoy: Random server" Chatpinoy "irc.chatpinoy.com" 6667)
-     ("ChatPR: Random server" ChatPR "irc.chatpr.org" 6667)
-     ("Chatroom: Random server" Chatroom "irc.chatroom.org" 6667)
-     ("Chatster: Random server" Chatster "irc.chatster.org" 6667)
-     ("ChatX: Random server" ChatX "irc.chatx.net" 6667)
-     ("China263: Random server" China263 "irc.263.net" 6667)
-     ("Cineplex1: Random server" Cineplex1 "irc.cineplex1.com"
-      ((6666 6668)))
-     ("CNN: CNN News discussions" CNN "chat.cnn.com"
-      ((6667 6669)
-       7000))
-     ("CobraNet: Random server" CobraNet "irc.cobra.net" 6667)
-     ("Coolchat: Random server" Coolchat "irc.coolchat.net" 6667)
-     ("Criten: Random server" Criten "irc.criten.net" 6667)
-     ("Cyberchat: Random server" Cyberchat "irc.cyberchat.org"
-      (6667 6668))
-     ("CyGanet: Random server" CyGanet "irc.cyga.net" 6667)
-     ("DALnet: AS, MY, Coins" DALnet "coins.dal.net"
-      ((6663 6668)
-       7000))
-     ("DALnet: CA, ON, Sodre" DALnet "sodre.on.ca.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: EU, DE, Nexgo" DALnet "nexgo.de.eu.dal.net"
-      ((6664 6669)
-       7000))
-     ("DALnet: EU, NO, Powertech" DALnet "powertech.no.eu.dal.net"
-      ((6666 6667)
-       7000))
-     ("DALnet: EU, SE, Borg" DALnet "borg.se.eu.dal.net"
-      (6667 7000))
-     ("DALnet: EU, SE, Ced" DALnet "ced.se.eu.dal.net"
-      (6667 7000))
-     ("DALnet: US, GA, Astro" DALnet "astro.ga.us.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: US, GA, Dragons" DALnet "dragons.ga.us.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: US, GA, Elysium" DALnet "elysium.ga.us.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: US, MA, Twisted" DALnet "twisted.ma.us.dal.net"
-      ((6660 6669)
-       7001 7002))
-     ("DALnet: US, MO, Global" DALnet "global.mo.us.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: US, NJ, Liberty" DALnet "liberty.nj.us.dal.net"
-      ((6662 6669)
-       7000))
-     ("DALnet: US, VA, Wombat" DALnet "wombat.va.us.dal.net"
-      ((6661 6669)
-       7000))
-     ("DALnet: Random EU server" DALnet "irc.eu.dal.net" 6667)
-     ("DALnet: Random US server" DALnet "irc.dal.net"
-      ((6660 6667)))
-     ("Dark-Tou-Net: Random server" Dark-Tou-Net "irc.d-t-net.de" 6667)
-     ("Darkfire: Random server" Darkfire "irc.darkfire.net"
-      (6667 7000 8000))
-     ("DarkMyst: Random server" DarkMyst "irc.darkmyst.org" 6667)
-     ("Darkserv: Random server" Darkserv "irc.darkserv.net" 6667)
-     ("Darksystem: Random server" Darksystem "irc.darksystem.com" 6667)
-     ("Darktree: Random server" Darktree "irc.darktree.net" 6667)
-     ("DayNet: Random server" DayNet "irc.daynet.org" 6667)
-     ("Deepspace: Disability network" Deepspace "irc.deepspace.org" 6667)
-     ("Different: Random server" Different "irc.different.net" 6667)
-     ("Digarix: Random server" Digarix "irc.digarix.net" 6667)
-     ("Digatech: Random server" Digatech "irc.digatech.net" 6667)
-     ("Digital-Base: Random server" Digital-Base "irc.digital-base.net"
-      ((6660 7000)))
-     ("Digitalirc: Random server" Digitalirc "irc.digitalirc.net" 6667)
-     ("Discussioni: Random server" Discussioni "irc.discussioni.org"
-      ((6666 6669)))
-     ("DorukNet: TR, Istanbul" DorukNet "irc.doruk.net.tr"
-      ((6660 6669)
-       7000 8888))
-     ("Dreamcast: Random server" Dreamcast "irc0.dreamcast.com" 6667)
-     ("DWChat: Random server" DWChat "irc.dwchat.net" 6667)
-     ("Dynastynet: Random server" Dynastynet "irc.dynastynet.net" 6667)
-     ("EFnet: CA, AB, Edmonton (arcti)" EFnet "irc.arcti.ca" 6667)
-     ("EFnet: CA, AB, Edmonton (mpls)" EFnet "irc.mpls.ca"
-      ((6660 6669)))
-     ("EFnet: CA, ON, Toronto" EFnet "irc2.magic.ca" 6667)
-     ("EFnet: CA, QB, Montreal" EFnet "irc.qeast.net" 6667)
-     ("EFnet: EU, DK, Aarhus" EFnet "irc.inet.tele.dk" 6667)
-     ("EFnet: EU, FI, Helsinki" EFnet "efnet.cs.hut.fi" 6667)
-     ("EFnet: EU, FR, Paris" EFnet "irc.isdnet.fr"
-      ((6667 6669)))
-     ("EFnet: EU, NL, Amsterdam" EFnet "efnet.vuurwerk.nl" 6667)
-     ("EFnet: EU, NO, Homelien" EFnet "irc.homelien.no"
-      (5190
-       (6666 6667)
-       (7000 7001)))
-     ("EFnet: EU, NO, Oslo" EFnet "irc.daxnet.no"
-      ((6666 7000)))
-     ("EFnet: EU, PL, Warszawa" EFnet "irc.efnet.pl" 6667)
-     ("EFnet: EU, RU, Moscow" EFnet "irc.rt.ru"
-      ((6661 6669)))
-     ("EFnet: EU, SE, Dalarna" EFnet "irc.du.se"
-      ((6666 6669)))
-     ("EFnet: EU, SE, Gothenberg" EFnet "irc.hemmet.chalmers.se"
-      ((6666 7000)))
-     ("EFnet: EU, SE, Sweden" EFnet "irc.light.se" 6667)
-     ("EFnet: EU, UK, London (carrier)" EFnet "irc.carrier1.net.uk"
-      ((6666 6669)))
-     ("EFnet: EU, UK, London (demon)" EFnet "efnet.demon.co.uk"
-      ((6665 6669)))
-     ("EFnet: ME, IL, Inter" EFnet "irc.inter.net.il"
-      ((6665 6669)))
-     ("EFnet: US, AZ, Phoenix" EFnet "irc.easynews.com"
-      (6660
-       (6665 6667)
-       7000))
-     ("EFnet: US, CA, San Jose" EFnet "irc.concentric.net"
-      ((6665 6668)))
-     ("EFnet: US, CA, San Luis Obispo" EFnet "irc.prison.net"
-      ((6666 6667)))
-     ("EFnet: US, GA, Atlanta" EFnet "irc.mindspring.com"
-      ((6660 6669)))
-     ("EFnet: US, MI, Ann Arbor" EFnet "irc.umich.edu" 6667)
-     ("EFnet: US, MN, Twin Cities" EFnet "irc.umn.edu"
-      ((6665 6669)))
-     ("EFnet: US, NY, Mineola" EFnet "irc.lightning.net"
-      ((6665 7000)))
-     ("EFnet: US, NY, New York (east)" EFnet "irc.east.gblx.net" 6667)
-     ("EFnet: US, NY, New York (flamed)" EFnet "irc.flamed.net"
-      ((6665 6669)))
-     ("EFnet: US, TX, Houston" EFnet "ircd.lagged.org"
-      ((6660 6669)))
-     ("EFnet: US, VA, Ashburn" EFnet "irc.secsup.uu.net"
-      ((6665 6669)
-       8080))
-     ("EFnet: Random AU server" EFnet "au.rr.efnet.net" 6667)
-     ("EFnet: Random CA server" EFnet "ca.rr.efnet.net" 6667)
-     ("EFnet: Random EU server" EFnet "eu.rr.efnet.net" 6667)
-     ("EFnet: Random US server" EFnet "us.rr.efnet.net" 6667)
-     ("EgyptianIRC: Random server" EgyptianIRC "irc.egyptianirc.net"
-      ((6667 6669)))
-     ("Eircnet: Random server" Eircnet "irc.eircnet.org"
-      ((6660 6669)
-       7000))
-     ("Eleethal: Random server" Eleethal "irc.eleethal.com"
-      ((6660 6669)
-       7000))
-     ("EntertheGame: Random server" EntertheGame "irc.enterthegame.com"
-      ((6667 6669)))
-     ("EpiKnet: Random server" EpiKnet "irc.epiknet.org"
-      ((6660 6669)
-       7000 7001))
-     ("EsperNet: Random server" EsperNet "irc.esper.net"
-      (5555
-       (6667 6669)))
-     ("Esprit: Random server" Esprit "irc.esprit.net" 6667)
-     ("euIRC: Random server" euIRC "irc.euirc.net"
-      ((6665 6669)))
-     ("Evilzinc: Random server" Evilzinc "irc.evilzinc.net"
-      ((6660 6669)
-       7000 8000))
-     ("ExodusIRC: Random server" ExodusIRC "irc.exodusirc.net"
-      ((6660 6669)))
-     ("FDFnet: Random server" FDFnet "irc.fdfnet.net"
-      ((6666 6668)
-       9999))
-     ("FEFnet: Random server" FEFnet "irc.fef.net" 6667)
-     ("Financialchat: Random server" Financialchat "irc.financialchat.com"
-      ((6667 6669)
-       7000))
-     ("Forestnet: Random server" Forestnet "irc.forestnet.org"
-      (6667 7000))
-     ("ForeverChat: Random server" ForeverChat "irc.foreverchat.net"
-      ((6660 6669)
-       7000))
-     ("Fraggers: Random server" Fraggers "irc.fraggers.co.uk"
-      ((6661 6669)
-       (7000 7001)))
-     ("FreedomChat: Random server" FreedomChat "chat.freedomchat.net" 6667)
-     ("FreedomIRC: Random server" FreedomIRC "irc.freedomirc.net" 6667)
-     ("Freenode: Random server" freenode "irc.freenode.net" 6667)
-     ("Freenode: Random EU server" freenode "irc.eu.freenode.net" 6667)
-     ("Freenode: Random US server" freenode "irc.us.freenode.net" 6667)
-     ("FunNet: Random server" FunNet "irc.funnet.org" 6667)
-     ("Galaxynet: Random server" GalaxyNet "irc.galaxynet.org"
-      ((6662 6668)
-       7000))
-     ("Galaxynet: AU, NZ, Auckland" GalaxyNet "auckland.nz.galaxynet.org"
-      ((6661 6669)))
-     ("Galaxynet: EU, BE, Online" GalaxyNet "online.be.galaxynet.org"
-      ((6661 6669)))
-     ("Galaxynet: US, FL, Florida" GalaxyNet "gymnet.us.galaxynet.org"
-      ((6661 6669)))
-     ("Gamesnet: Random east US server" Gamesnet "east.gamesnet.net" 6667)
-     ("Gamesnet: Random west US server" Gamesnet "west.gamesnet.net" 6667)
-     ("GammaForce: Random server" GammaForce "irc.gammaforce.org"
-      ((6660 6669)
-       7000))
-     ("GIKInet: Random server" GIKInet "irc.giki.edu.pk" 6667)
-     ("GizNet: Random server" GizNet "irc.giznet.org"
-      ((6666 6669)
-       7000))
-     ("Globalchat: Random server" Globalchat "irc.globalchat.org" 6667)
-     ("GlobIRC: Random server" GlobIRC "irc.globirc.net"
-      ((6666 6668)
-       9999))
-     ("Goldchat: Random server" Goldchat "irc.goldchat.nl"
-      ((6660 6669)
-       7000))
-     ("Goodchatting: Random server" Goodchatting "irc.goodchatting.com"
-      ((6661 6669)
-       7000))
-     ("GravityLords: Random server" GravityLords "irc.gravitylords.net" 6667)
-     ("Grnet: Random EU server" GRnet "gr.irc.gr"
-      (6667 7000))
-     ("Grnet: Random server" GRnet "srv.irc.gr"
-      (6667 7000))
-     ("Grnet: Random US server" GRnet "us.irc.gr"
-      (6667 7000))
-     ("GulfChat: Random server" GulfChat "irc.gulfchat.net"
-      ((6660 6669)))
-     ("HabberNet: Random server" HabberNet "irc.habber.net" 6667)
-     ("HanIRC: Random server" HanIRC "irc.hanirc.org" 6667)
-     ("Hellenicnet: Random server" Hellenicnet "irc.mirc.gr"
-      (6667 7000))
-     ("IceNet: Random server" IceNet "irc.icenet.org.za" 6667)
-     ("ICQnet: Random server" ICQnet "irc.icq.com" 6667)
-     ("Infatech: Random server" Infatech "irc.infatech.net"
-      ((6660 6669)))
-     ("Infinity: Random server" Infinity "irc.infinity-irc.org" 6667)
-     ("Infomatrix: Random server" Infomatrix "irc.infomatrix.net" 6667)
-     ("Inside3D: Random server" Inside3D "irc.inside3d.net"
-      ((6661 6669)))
-     ("InterlinkChat: Random server" InterlinkChat "irc.interlinkchat.net"
-      ((6660 6669)
-       7000))
-     ("IRC-Chile: Random server" IRC-Chile "irc.cl" 6667)
-     ("IRC-Hispano: Random server" IRC-Hispano "irc.irc-hispano.org" 6667)
-     ("IRCchat: Random server" IRCchat "irc.ircchat.tk" 6667)
-     ("IRCGate: Random server" IRCGate "irc.ircgate.net"
-      ((6667 6669)))
-     ("IRCGeeks: Random server" IRCGeeks "irc.ircgeeks.org"
-      ((6660 6669)))
-     ("IRChat: Random server" IRChat "irc.irchat.net"
-      ((6660 6669)))
-     ("IrcLordz: Random server" IrcLordz "irc.irclordz.com" 6667)
-     ("IrcMalta: Random server" IrcMalta "irc.ircmalta.org"
-      ((6660 6667)))
-     ("IRCnet: EU, FR, Random" IRCnet "irc.fr.ircnet.net" 6667)
-     ("IRCnet: EU, IT, Random" IRCnet "irc.ircd.it"
-      ((6665 6669)))
-     ("IRCnet: AS, IL, Haifa" IRCnet "ircnet.netvision.net.il"
-      ((6661 6668)))
-     ("IRCnet: AS, JP, Tokyo" IRCnet "irc.tokyo.wide.ad.jp" 6667)
-     ("IRCnet: AS, TW, Seed" IRCnet "irc.seed.net.tw" 6667)
-     ("IRCnet: EU, AT, Linz" IRCnet "linz.irc.at"
-      ((6666 6668)))
-     ("IRCnet: EU, AT, Wien" IRCnet "vienna.irc.at"
-      ((6666 6669)))
-     ("IRCnet: EU, BE, Brussels" IRCnet "irc.belnet.be" 6667)
-     ("IRCnet: EU, BE, Zaventem" IRCnet "ircnet.wanadoo.be"
-      ((6661 6669)))
-     ("IRCnet: EU, CZ, Prague" IRCnet "irc.felk.cvut.cz" 6667)
-     ("IRCnet: EU, DE, Berlin" IRCnet "irc.fu-berlin.de"
-      ((6665 6669)))
-     ("IRCnet: EU, DE, Dusseldorf" IRCnet "irc.freenet.de"
-      ((6665 6669)))
-     ("IRCnet: EU, DE, Stuttgart" IRCnet "irc.belwue.de"
-      ((6665 6669)))
-     ("IRCnet: EU, DK, Copenhagen" IRCnet "irc.ircnet.dk" 6667)
-     ("IRCnet: EU, EE, Tallinn" IRCnet "irc.estpak.ee"
-      ((6666 6668)))
-     ("IRCnet: EU, FI, Helsinki" IRCnet "irc.cs.hut.fi" 6667)
-     ("IRCnet: EU, GR, Thessaloniki" IRCnet "irc.ee.auth.gr"
-      ((6666 6669)))
-     ("IRCnet: EU, HU, Budapest" IRCnet "irc.elte.hu" 6667)
-     ("IRCnet: EU, IS, Reykjavik (ircnet)" IRCnet "irc.ircnet.is"
-      ((6661 6669)))
-     ("IRCnet: EU, IS, Reykjavik (simnet)" IRCnet "irc.simnet.is"
-      ((6661 6669)))
-     ("IRCnet: EU, IT, Rome" IRCnet "irc.tin.it"
-      ((6665 6669)))
-     ("IRCnet: EU, NL, Amsterdam (nlnet)" IRCnet "irc.nl.uu.net"
-      ((6660 6669)))
-     ("IRCnet: EU, NL, Amsterdam (xs4all)" IRCnet "irc.xs4all.nl"
-      ((6660 6669)))
-     ("IRCnet: EU, NL, Enschede" IRCnet "irc.snt.utwente.nl"
-      ((6660 6669)))
-     ("IRCnet: EU, NL, Nijmegen" IRCnet "irc.sci.kun.nl"
-      ((6660 6669)))
-     ("IRCnet: EU, NO, Oslo" IRCnet "irc.ifi.uio.no" 6667)
-     ("IRCnet: EU, NO, Trondheim" IRCnet "irc.pvv.ntnu.no" 6667)
-     ("IRCnet: EU, PL, Lublin" IRCnet "lublin.irc.pl"
-      ((6666 6668)))
-     ("IRCnet: EU, PL, Warsaw" IRCnet "warszawa.irc.pl"
-      ((6666 6668)))
-     ("IRCnet: EU, RU, Moscow" IRCnet "irc.msu.ru" 6667)
-     ("IRCnet: EU, SE, Lulea" IRCnet "irc.ludd.luth.se"
-      ((6661 6669)))
-     ("IRCnet: EU, UK, London (Demon)" IRCnet "ircnet.demon.co.uk"
-      ((6665 6669)))
-     ("IRCnet: EU, UK, London (Easynet)" IRCnet "ircnet.easynet.co.uk"
-      ((6666 6669)))
-     ("IRCnet: US, NY, New York" IRCnet "irc.stealth.net"
-      ((6660 6669)))
-     ("IRCnet: Random AU server" IRCnet "au.ircnet.org" 6667)
-     ("IRCnet: Random EU server" IRCnet "eu.ircnet.org"
-      ((6665 6668)))
-     ("IRCnet: Random US server" IRCnet "us.ircnet.org"
-      ((6665 6668)))
-     ("IRCSoulZ: Random server" IRCSoulZ "irc.ircsoulz.net" 6667)
-     ("IRCSul: BR, PR, Maringa" IRCSul "irc.wnet.com.br" 6667)
-     ("IrcTalk: Random server" IrcTalk "irc.irctalk.net"
-      ((6660 6669)))
-     ("Irctoo: Random server" Irctoo "irc.irctoo.net" 6667)
-     ("IRCtown: Random server" IRCtown "irc.irctown.net"
-      ((6666 6669)
-       7000))
-     ("IRCworld: Random server" IRCworld "irc.ircworld.org" 6667)
-     ("ircXtreme: Random server" ircXtreme "irc.ircXtreme.net"
-      ((6660 6669)))
-     ("Israelnet: Random server" Israelnet "irc.israel.net" 6667)
-     ("K0wNet: Random server" K0wNet "irc.k0w.net"
-      ((6660 6669)))
-     ("KDFSnet: Random server" KDFSnet "irc.kdfs.net"
-      ((6667 6669)))
-     ("Kemik: Random server" Kemik "irc.kemik.net" 6667)
-     ("Kewl.Org: Random server" Kewl\.Org "irc.kewl.org"
-      (6667 7000))
-     ("Kickchat: Random server" Kickchat "irc.kickchat.com"
-      ((6660 6669)
-       7000))
-     ("Kidsworld: Random server" KidsWorld "irc.kidsworld.org"
-      ((6666 6669)))
-     ("Knightnet: AF, ZA, Durban" Knightnet "orc.dbn.za.knightnet.net"
-      (6667 5555))
-     ("Knightnet: US, CA, Goldengate" Knightnet "goldengate.ca.us.knightnet.net"
-      (6667 5555))
-     ("Konfido.Net: Random server" Konfido\.Net "irc.konfido.net" 6667)
-     ("KreyNet: Random server" Kreynet "irc.krey.net" 6667)
-     ("Krono: Random server" Krono "irc.krono.net"
-      ((6660 6669)
-       7000))
-     ("Krushnet: Random server" Krushnet "irc.krushnet.org" 6667)
-     ("LagNet: Random server" LagNet "irc.lagnet.org.za" 6667)
-     ("LagNet: AF, ZA, Cape Town" LagNet "reaper.lagnet.org.za" 6667)
-     ("LagNet: AF, ZA, Johannesburg" LagNet "mystery.lagnet.org.za" 6667)
-     ("Librenet: Random server" Librenet "irc.librenet.net" 6667)
-     ("LinkNet: Random server" LinkNet "irc.link-net.org"
-      ((6667 6669)))
-     ("LinuxChix: Random server" LinuxChix "irc.linuxchix.org" 6667)
-     ("Liquidized: Random server" Liquidized "irc.liquidized.net"
-      (6667 7000))
-     ("M-IRC: Random server" M-IRC "irc.m-sys.org"
-      ((6667 6669)))
-     ("MagicStar: Random server" MagicStar "irc.magicstar.net" 6667)
-     ("Mavra: Random server" Mavra "irc.mavra.net" 6667)
-     ("MediaDriven: Random server" MediaDriven "irc.mediadriven.com"
-      ((6667 6669)))
-     ("mIRC-X: Random server" mIRC-X "irc.mircx.com"
-      (6667 7000))
-     ("Morat: Random server" Morat "irc.morat.net" 6667)
-     ("MusicCity: Random server" MusicCity "chat.musiccity.com" 6667)
-     ("Mysteria: Random server" Mysteria "irc.mysteria.net"
-      (6667 7000))
-     ("Mysterychat: Random server" Mysterychat "irc.mysterychat.net"
-      ((6667 6669)))
-     ("Mystical: Random server" Mystical "irc.mystical.net"
-      (6667 7000))
-     ("Narancs: Random server" Narancs "irc.narancs.com"
-      ((6667 6669)
-       7000))
-     ("Net-France: Random server" Net-France "irc.net-france.com" 6667)
-     ("Nevernet: Random server" Nevernet "irc.nevernet.net" 6667)
-     ("Newnet: Random server" Newnet "irc.newnet.net"
-      ((6665 6667)))
-     ("Nexusirc: Random server" Nexusirc "irc.nexusirc.org" 6667)
-     ("Nightstar: Random server" NightStar "irc.nightstar.net"
-      ((6665 6669)))
-     ("NitrousNet: Random server" NitrousNet "irc.nitrousnet.net" 6667)
-     ("Novernet: Random server" Novernet "irc.novernet.com"
-      ((6665 6669)
-       7000))
-     ("Nullrouted: Random server" Nullrouted "irc.nullrouted.org"
-      ((6666 6669)
-       7000))
-     ("NullusNet: Random server" NullusNet "irc.nullus.net" 6667)
-     ("OFTC: Random server" OFTC "irc.oftc.net"
-      ((6667 6670)
-       7000))
-     ("OpChat: Random server" OpChat "irc.opchat.org"
-      ((6667 6669)))
-     ("Othernet: Random server" Othernet "irc.othernet.org" 6667)
-     ("Othernet: US, FL, Miami" Othernet "miami.fl.us.othernet.org" 6667)
-     ("Othernet: US, MO, StLouis" Othernet "stlouis.mo.us.othernet.org" 6667)
-     ("Otherside: Random server" OtherSide "irc.othersideirc.net" 6667)
-     ("Outsiderz: Random server" Outsiderz "irc.outsiderz.com" 6667)
-     ("OzOrg: AU, Perth" OzOrg "iinet.perth.oz.org" 6667)
-     ("Peacefulhaven: Random server" Peacefulhaven "irc.peacefulhaven.net"
-      ((6660 6669)
-       7000))
-     ("PhazedIRC: Random server" PhazedIRC "irc.phazedirc.net" 6667)
-     ("Philchat: Random server" Philchat "irc.philchat.net" 6667)
-     ("phrozN: Random server" phrozN "irc.phrozn.net" 6667)
-     ("PiNet: Random server" PiNet "irc.praetorians.org"
-      ((6665 6669)))
-     ("Pinoycentral: Random server" Pinoycentral "chat.abs-cbn.com" 6667)
-     ("Planetarion: Random server" Planetarion "irc.planetarion.com" 6667)
-     ("POLNet: Random server" POLNet "irc.ircnet.pl" 6667)
-     ("Psionics: CA, PQ, Montreal" Psionics "chat.psionics.net"
-      ((6660 6669)))
-     ("PTirc: Random server" PTirc "irc.ptirc.com.pt" 6667)
-     ("PTlink: Random server" PTlink "irc.ptlink.net" 6667)
-     ("PTnet: Random server" PTnet "irc.ptnet.org" 6667)
-     ("QChat: Random server" QChat "irc.qchat.net" 6667)
-     ("QuakeNet: Random German server" QuakeNet "de.quakenet.org"
-      ((6667 6669)))
-     ("QuakeNet: Random server" QuakeNet "irc.quakenet.eu.org"
-      ((6667 6669)))
-     ("QuakeNet: Random Swedish server" QuakeNet "se.quakenet.org"
-      ((6667 6669)))
-     ("QuakeNet: Random UK server" QuakeNet "uk.quakenet.org"
-      ((6667 6669)))
-     ("QuakeNet: Random US server" QuakeNet "us.quakenet.org"
-      ((6667 6669)))
-     ("Realirc: Random server" Realirc "irc.realirc.org" 6667)
-     ("RealmNET: Random server" RealmNET "irc.realmnet.com" 6667)
-     ("Rebelchat: Random server" Rebelchat "irc.rebelchat.org" 6667)
-     ("Red-Latina: Random server" Red-Latina "irc.red-latina.org" 6667)
-     ("RedLatona: Random server" RedLatona "irc.redlatona.net"
-      (6667 6668))
-     ("Relicnet: Random server" Relicnet "irc.relic.net" 6667)
-     ("Rezosup: Random server" Rezosup "irc.rezosup.org" 6667)
-     ("Risanet: Random server" Risanet "irc.risanet.com"
-      ((6667 6669)))
-     ("Rizon: Random server" Rizon "irc.rizon.net"
-      (6633
-       (6660 6669)
-       6697 7000 8080 9999))
-     ("Rubiks: Random server" Rubiks "irc.rubiks.net" 6667)
-     ("Rusnet: EU, RU, Tomsk" Rusnet "irc.tsk.ru"
-      ((6667 6669)
-       (7770 7775)))
-     ("Rusnet: EU, RU, Vladivostok" Rusnet "irc.vladivostok.ru"
-      ((6667 6669)
-       (7770 7775)))
-     ("Rusnet: EU, UA, Kiev" Rusnet "irc.kar.net"
-      ((6667 6669)
-       (7770 7775)))
-     ("Sandnet: Random server" Sandnet "irc.sandnet.net"
-      ((6660 6669)
-       7000))
-     ("Scunc: Random server" Scunc "irc.scunc.net" 6667)
-     ("SerbianCafe: Random server" SerbianCafe "irc.serbiancafe.ws"
-      ((6665 6669)))
-     ("SexNet: Random server" SexNet "irc.sexnet.org" 6667)
-     ("ShadowFire: Random server" ShadowFire "irc.shadowfire.org" 6667)
-     ("ShadowWorld: Random server" ShadowWorld "irc.shadowworld.net" 6667)
-     ("SkyNet: Random server" SkyNet "irc.bronowski.pl"
-      ((6666 6668)))
-     ("Slashnet: Random server" Slashnet "irc.slashnet.org" 6667)
-     ("SolarStone: Random server" SolarStone "irc.solarstone.net"
-      ((6660 6669)))
-     ("Sorcerynet: Random server" Sorcery "irc.sorcery.net"
-      (6667 7000 9000))
-     ("Sorcerynet: EU, SE, Karlskrona" Sorcery "nexus.sorcery.net"
-      (6667 7000 9000))
-     ("Sorcerynet: US, CA, Palo Alto" Sorcery "kechara.sorcery.net"
-      (6667 7000 9000))
-     ("SourceIRC: Random server" SourceIRC "irc.sourceirc.net"
-      ((6667 6669)
-       7000))
-     ("SpaceTronix: Random server" SpaceTronix "irc.spacetronix.net"
-      ((6660 6669)
-       7000))
-     ("Spirit-Harmony: Random server" Spirit-Harmony "irc.spirit-harmony.com"
-      ((6661 6669)))
-     ("StarChat: Random server" StarChat "irc.starchat.net"
-      ((6667 6669)
-       7000))
-     ("StarEquinox: Random server" StarEquinox "irc.starequinox.net"
-      ((6660 6669)))
-     ("StarLink: Random server" Starlink "irc.starlink.net"
-      ((6660 6669)))
-     ("StarLink-irc: Random server" starlink-irc "irc.starlink-irc.org" 6667)
-     ("StarWars-IRC: Random server" StarWars-IRC "irc.starwars-irc.net"
-      ((6663 6667)))
-     ("Stormdancing: Random server" Stormdancing "irc.stormdancing.net"
-      ((6664 6669)
-       7000 9000))
-     ("Superchat: Random server" Superchat "irc.superchat.org"
-      ((6660 6668)))
-     ("SUSE" SUSE "irc.suse.de" 6667)
-     ("Sysopnet: Random server" Sysopnet "irc.sysopnet.org"
-      ((6666 6668)))
-     ("Telstra: Random server" Telstra "irc.telstra.com"
-      ((6667 6669)))
-     ("TR-net: EU, TR, Ankara" TR-net "irc.dominet.com.tr" 6667)
-     ("TR-net: EU, Tr, Istanbul" TR-net "irc.teklan.com.tr" 6667)
-     ("Tri-net: Random server" Tri-net "irc.tri-net.org" 6667)
-     ("TriLink: Random server" TriLink "irc.ft4u.net" 6667)
-     ("TurkishChat: Random server" TurkishChat "irc.turkishchat.org"
-      ((6660 6669)
-       7000))
-     ("UberNinja: Random server" UberNinja "irc.uberninja.net"
-      ((6667 6669)))
-     ("UICN: Random server" UICN "irc.uicn.net" 6667)
-     ("UltraIRC: Random server" UltraIRC "irc.ultrairc.net" 6667)
-     ("UnderChat: Random server" UnderChat "irc.underchat.it"
-      ((6660 6669)
-       7000))
-     ("Undernet: CA, ON, Toronto" Undernet "toronto.on.ca.undernet.org"
-      ((6661 6669)))
-     ("Undernet: CA, QC, Montreal" Undernet "montreal.qu.ca.undernet.org"
-      ((6660 6669)))
-     ("Undernet: EU, AT, Graz" Undernet "graz.at.eu.undernet.org"
-      ((6661 6669)))
-     ("Undernet: EU, BE, Antwerp" Undernet "flanders.be.eu.undernet.org"
-      ((6660 6669)))
-     ("Undernet: EU, BE, Brussels" Undernet "brussels.be.eu.undernet.org" 6667)
-     ("Undernet: EU, CH, Geneva" Undernet "geneva.ch.eu.undernet.org"
-      ((6660 6669)
-       7777 8000))
-     ("Undernet: EU, FR, Caen" Undernet "caen.fr.eu.undernet.org"
-      ((6666 6669)))
-     ("Undernet: EU, NL, Diemen" Undernet "diemen.nl.eu.undernet.org"
-      ((6660 6669)))
-     ("Undernet: EU, NL, Haarlem" Undernet "haarlem.nl.eu.undernet.org"
-      ((6660 6669)))
-     ("Undernet: EU, NO, Oslo" Undernet "oslo.no.eu.undernet.org"
-      ((6660 6669)))
-     ("Undernet: EU, SE, Stockholm" Undernet "stockholm.se.eu.undernet.org"
-      ((6666 6669)))
-     ("Undernet: EU, UK, Surrey" Undernet "surrey.uk.eu.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, AZ, Mesa" Undernet "mesa.az.us.undernet.org"
-      ((6665 6667)))
-     ("Undernet: US, CA, San Diego" Undernet "sandiego.ca.us.undernet.org"
-      ((6660 6670)))
-     ("Undernet: US, DC, Washington" Undernet "washington.dc.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, KS, Manhattan" Undernet "manhattan.ks.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, NV, Las Vegas" Undernet "lasvegas.nv.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, TX, Austin" Undernet "austin.tx.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, UT, Saltlake" Undernet "saltlake.ut.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, VA, Arlington" Undernet "arlington.va.us.undernet.org"
-      ((6660 6669)))
-     ("Undernet: US, VA, McLean" Undernet "mclean.va.us.undernet.org"
-      ((6666 6669)))
-     ("Undernet: Random EU server" Undernet "eu.undernet.org" 6667)
-     ("Undernet: Random US server" Undernet "us.undernet.org" 6667)
-     ("UnderZ: Random server" UnderZ "irc.underz.org"
-      ((6667 6668)))
-     ("UniChat: Random server" UniChat "irc.uni-chat.net" 6667)
-     ("UnionLatina: Random server" UnionLatina "irc.unionlatina.org" 6667)
-     ("Univers: Random server" Univers "irc.univers.org"
-      ((6665 6669)))
-     ("UnixR: Random server" UnixR "irc.unixr.net"
-      ((6667 6669)))
-     ("Vidgamechat: Random server" Vidgamechat "irc.vidgamechat.com" 6667)
-     ("VirtuaNet: Random server" VirtuaNet "irc.virtuanet.org"
-      ((6660 6669)
-       7000))
-     ("Vitamina: Random server" Vitamina "irc.vitamina.ca" 6667)
-     ("Voila: Random server" Voila "irc.voila.fr" 6667)
-     ("Wahou: Random server" Wahou "irc.wahou.org"
-      ((6665 6669)))
-     ("Warpednet: Random server" Warpednet "irc.warped.net" 6667)
-     ("Weaklinks: Random server" Weaklinks "irc.weaklinks.net"
-      ((6667 6669)))
-     ("Webnet: Random server" Webnet "irc.webchat.org"
-      ((6667 6669)
-       7000))
-     ("Webnet: US, CA, Santa Clara" Webnet "webmaster.ca.us.webchat.org"
-      ((6661 6669)))
-     ("WinChat: Random server" WinChat "irc.winchat.net"
-      ((6661 6669)))
-     ("WinIRC: Random server" WinIRC "irc.winirc.org"
-      ((6667 6669)
-       4400))
-     ("WorldIRC: Random server" WorldIRC "irc.worldirc.org"
-      ((6660 6667)))
-     ("WyldRyde: Random server" WyldRyde "irc.wyldryde.net"
-      ((6666 6669)))
-     ("XentoniX: Random server" XentoniX "irc.xentonix.net"
-      ((6661 6669)))
-     ("Xevion: Random server" Xevion "irc.xevion.net"
-      (6667 7000))
-     ("XNet: Random server" XNet "irc.xnet.org" 6667)
-     ("XWorld: Random server" XWorld "irc.xworld.org" 6667)
-     ("ZAnet Net: Random server" ZAnetNet "irc.zanet.net" 6667)
-     ("ZAnet Org: UK, London" ZAnetOrg "mystic.zanet.org.za" 6667)
-     ("ZiRC: Random server" ZiRC "irc.zirc.org"
-      ((6660 6669)))
-     ("ZUHnet: Random server" ZUHnet "irc.zuh.net" 6667)
-     ("Zurna: Random server" Zurna "irc.zurna.net" 6667))))
- '(erc-truncate-buffer-on-save t)
- '(erc-user-full-name "Adam Spiers")
  '(fast-lock-cache-directories (quote ("~/.emacs-flc")))
  '(fast-lock-minimum-size 4096)
  '(fci-rule-color "gray32")
  '(fci-rule-column 80)
  '(flx-ido-mode t)
  '(flx-ido-threshhold 60000)
+ '(flycheck-global-modes (quote (python-mode js-mode)))
  '(folding-mode-prefix-key "")
+ '(frog-jump-buffer-include-current-buffer nil)
+ '(frog-menu-posframe-border-width 10)
+ '(frog-menu-posframe-parameters nil)
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
  '(git-commit-mode-hook
@@ -1346,48 +407,11 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
+ '(global-flycheck-mode t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
+ '(global-prettier-mode nil)
  '(global-whitespace-mode t)
- '(gnus-asynchronous t)
- '(gnus-cache-active-file "~/.gnus/cache/active")
- '(gnus-cache-directory "~/.gnus/cache/")
- '(gnus-expert-user t)
- '(gnus-generate-tree-function (quote gnus-generate-horizontal-tree))
- '(gnus-group-line-format "%M%S%p%P%3y: %(%g%)%l
-")
- '(gnus-group-mode-hook (quote (gnus-topic-mode)))
- '(gnus-group-sort-function (quote gnus-group-sort-by-rank))
- '(gnus-novice-user nil)
- '(gnus-secondary-servers (quote ("news.linuxprinting.org")))
- '(gnus-startup-hook
-   (quote
-    ((lambda nil
-       (if
-           (<=
-            (frame-width)
-            80)
-           (gnus-add-configuration
-            (quote
-             (article
-              (vertical 1.0
-                        (horizontal 0.25
-                                    (summary 0.75 point)
-                                    (tree 1.0))
-                        (article 1.0))))))))))
- '(gnus-summary-exit-hook (quote (gnus-summary-bubble-group)))
- '(gnus-summary-line-format "%U%R%z%4L:%([%1{%-15,15n%}]%) %2t %3{%B%}%2{%s%}
-")
- '(gnus-suppress-duplicates t)
- '(gnus-use-trees t)
- '(guide-key-mode t)
- '(guide-key/guide-key-sequence
-   (quote
-    ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>" "M-s"
-     (dired-mode "%" "*" "C-t")
-     (org-mode "C-c C-x"))))
- '(guide-key/popup-window-position (quote bottom))
- '(guide-key/recursive-key-sequence-flag t)
  '(help-window-select t)
  '(hippie-expand-try-functions-list
    (quote
@@ -1397,7 +421,7 @@
  '(ido-case-fold nil)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
- '(ido-everywhere t)
+ '(ido-everywhere nil)
  '(ido-hacks-mode t)
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
@@ -1411,8 +435,315 @@
  '(ispell-program-name "aspell")
  '(iswitchb-case nil)
  '(iswitchb-default-method (quote samewindow))
- '(jit-lock-stealth-nice 0.1)
- '(jit-lock-stealth-time 1)
+ '(ivy-height-alist
+   (quote
+    ((counsel-evil-registers . 5)
+     (counsel-yank-pop . 5)
+     (counsel-git-log . 4)
+     (counsel-ibuffer . 20)
+     (counsel-switch-buffer . 20)
+     (counsel-projectile-switch-to-buffer . 20)
+     (counsel-projectile-find-file . 20))))
+ '(ivy-mode t)
+ '(ivy-rich-display-transformers-list
+   (quote
+    (ivy-switch-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     ivy-switch-buffer-other-window
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-switch-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-switch-buffer-other-window
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     persp-switch-to-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 30))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-M-x
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (counsel-M-x-transformer
+        (:width 50))
+       (ivy-rich-counsel-function-docstring
+        (:face font-lock-doc-face))))
+     counsel-describe-function
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (counsel-describe-function-transformer
+        (:width 50))
+       (ivy-rich-counsel-function-docstring
+        (:face font-lock-doc-face))))
+     counsel-describe-variable
+     (:columns
+      ((all-the-icons-ivy-rich-variable-icon)
+       (counsel-describe-variable-transformer
+        (:width 50))
+       (ivy-rich-counsel-variable-docstring
+        (:face font-lock-doc-face))))
+     counsel-set-variable
+     (:columns
+      ((all-the-icons-ivy-rich-variable-icon)
+       (counsel-describe-variable-transformer
+        (:width 50))
+       (ivy-rich-counsel-variable-docstring
+        (:face font-lock-doc-face))))
+     counsel-apropos
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-info-lookup-symbol
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-descbinds
+     (:columns
+      ((all-the-icons-ivy-rich-keybinding-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-find-file
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-read-file-transformer))
+      :delimiter "	")
+     counsel-file-jump
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-dired
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-read-file-transformer))
+      :delimiter "	")
+     counsel-dired-jump
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-el
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-fzf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-git
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-recentf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate
+        (:width 0.8))
+       (ivy-rich-file-last-modified-time
+        (:face font-lock-comment-face)))
+      :delimiter "	")
+     counsel-buffer-or-recentf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (counsel-buffer-or-recentf-transformer
+        (:width 0.8))
+       (ivy-rich-file-last-modified-time
+        (:face font-lock-comment-face)))
+      :delimiter "	")
+     counsel-bookmark
+     (:columns
+      ((ivy-rich-bookmark-type)
+       (all-the-icons-ivy-rich-bookmark-name
+        (:width 40))
+       (ivy-rich-bookmark-info))
+      :delimiter "	")
+     counsel-bookmarked-directory
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-package
+     (:columns
+      ((all-the-icons-ivy-rich-package-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-fonts
+     (:columns
+      ((all-the-icons-ivy-rich-font-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-major
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-find-library
+     (:columns
+      ((all-the-icons-ivy-rich-library-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-load-library
+     (:columns
+      ((all-the-icons-ivy-rich-library-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-load-theme
+     (:columns
+      ((all-the-icons-ivy-rich-theme-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-world-clock
+     (:columns
+      ((all-the-icons-ivy-rich-world-clock-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-tramp
+     (:columns
+      ((all-the-icons-ivy-rich-tramp-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-git-checkout
+     (:columns
+      ((all-the-icons-ivy-rich-git-branch-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-list-processes
+     (:columns
+      ((all-the-icons-ivy-rich-process-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-projectile-switch-project
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-projectile-find-file
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (counsel-projectile-find-file-transformer))
+      :delimiter "	")
+     counsel-projectile-find-dir
+     (:columns
+      ((all-the-icons-ivy-rich-project-icon)
+       (counsel-projectile-find-dir-transformer))
+      :delimiter "	")
+     counsel-minor
+     (:columns
+      ((all-the-icons-ivy-rich-mode-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-imenu
+     (:columns
+      ((all-the-icons-ivy-rich-imenu-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     treemacs-projectile
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	"))))
+ '(js-switch-indent-offset 2)
  '(kept-old-versions 0)
  '(kill-whole-line t)
  '(lazy-lock-defer-on-scrolling t)
@@ -1424,6 +755,7 @@
  '(magit-branch-prefer-remote-upstream (quote ("master" "stable/3.0")))
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
+ '(magit-diff-visit-avoid-head-blob t)
  '(magit-display-buffer-function (quote magit-display-buffer-fullscreen))
  '(magit-gitk-executable "/usr/bin/gitk")
  '(magit-log-auto-more t)
@@ -1435,6 +767,7 @@
    (quote
     ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
  '(magit-rewrite-inclusive t)
+ '(magit-section-initial-visibility-alist (quote ((stashes . show))))
  '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-status-headers-hook
@@ -1449,12 +782,18 @@
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
  '(mark-even-if-inactive t)
+ '(mc/always-run-for-all t)
  '(message-default-news-headers
    "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
  '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
+ '(minimap-major-modes (quote (prog-mode text-mode)))
+ '(minimap-minimum-width 10)
+ '(minimap-mode nil)
+ '(minimap-width-fraction 0.12)
+ '(minimap-window-location (quote right))
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
@@ -1541,8 +880,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                 (quote deadline)
                 (quote scheduled)))))
        (org-agenda-prefix-format " %?-12t% s")))
-     ("wd" "SUSE daily review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+     ("wd" "Blocko daily review"
+      ((tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #A TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1550,7 +889,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#A\\]"
                        (quote scheduled))))))
-       (tags-todo "officehrs+CATEGORY=\"SUSE\""
+       (tags-todo "officehrs+CATEGORY=\"Blocko\""
                   ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1561,8 +900,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (agenda ""
                ((org-agenda-ndays 3)
                 (org-agenda-skip-function
-                 (as-org-agenda-skip-select-category-function "SUSE"))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+                 (as-org-agenda-skip-select-category-function "Blocko"))))
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1635,19 +974,19 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
         (as-org-agenda-skip-select-category-function "personal"))
        (org-agenda-prefix-format " %?-12t% s"))
       nil)
-     ("w7" "SUSE weekly review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/CHASE"
+     ("w7" "Blocko weekly review"
+      ((tags-todo "+CATEGORY=\"Blocko\"/CHASE"
                   ((org-agenda-overriding-header "Items to CHASE")))
-       (tags-todo "+CATEGORY=\"SUSE\"/WAITING"
+       (tags-todo "+CATEGORY=\"Blocko\"/WAITING"
                   ((org-agenda-overriding-header "Items still WAITING on somebody")))
        (stuck ""
               ((org-agenda-overriding-header "Stuck work projects")
                (org-stuck-projects
                 (quote
-                 ("+CATEGORY=\"SUSE\"/PROJECT"
+                 ("+CATEGORY=\"Blocko\"/PROJECT"
                   ("TODO" "NEXT" "NEXTACTION" "STARTED")
                   nil "")))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1655,7 +994,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#B\\]"
                        (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #C TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1762,7 +1101,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("-" "easy" tags-todo "easy" nil)
      ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
+     ("w-" "easy Blocko tasks" tags-todo "+easy+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
      ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
@@ -1791,13 +1130,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("wa" "SUSE admin" tags-todo "+admin+CATEGORY=\"SUSE\""
+     ("wa" "Blocko admin" tags-todo "+admin+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wo" "SUSE org" tags-todo "+org+CATEGORY=\"SUSE\""
+     ("wo" "Blocko org" tags-todo "+org+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\""
+     ("wc" "Blocko computer" tags-todo "+computer+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wL" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
+     ("wL" "Blocko learning" tags-todo "+learning+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("c" "CHASE" todo "CHASE" nil)
      ("W" "WAITING" todo "WAITING" nil)
@@ -1824,7 +1163,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("wl" "work log" agenda "DONE"
       ((org-agenda-files
         (quote
-         ("~/SUSE/TODO.org" "~/SUSE/DONE.org")))
+         ("~/Blocko/TODO.org" "~/Blocko/DONE.org")))
        (org-agenda-span
         (quote week))
        (org-agenda-start-on-weekday 1)
@@ -1839,9 +1178,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-overriding-header "")
        (org-agenda-prefix-format "  - "))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: " "%2dd ago: ")))
- '(org-agenda-files
-   (quote
-    ("~/Blocko/TODO.org" "~/SUSE/TODO.org" "~/org/TODO.org")))
+ '(org-agenda-files (quote ("~/org/TODO.org" "~/Blocko/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
@@ -1852,21 +1189,19 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
+ '(org-agenda-show-future-repeats nil)
  '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
    (quote
-    ((agenda habit-down time-up priority-down category-keep effort-up)
+    ((agenda time-up priority-down category-keep effort-up)
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
+ '(org-agenda-start-on-weekday -1)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
- '(org-agenda-time-grid
-   (quote
-    (nil "----------------"
-         (800 1000 1200 1400 1600 1800 2000))))
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
  '(org-agenda-window-setup (quote current-window))
@@ -1882,15 +1217,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (python . t)
      (shell . t))))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
- '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "⋆")))
+ '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "*" "•" "⋆")))
  '(org-capture-templates
    (quote
-    (("s" "supportconfig madness" entry
-      (file+headline "~/SUSE/TODO.org" "individual instances")
-      "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
-     ("o" "org mailing list item" entry
-      (file+headline "~/org/TODO.org" "to list")
-      "* NEXT %?%:annotation" :prepend t)
+    (("c" "CO2ken NEXT" entry
+      (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
+      "* NEXT %?" :prepend t :jump-to-captured t)
+     ("o" "orgmode NEXT" entry
+      (file+olp "~/org/TODO.org" "GTD" "orgmode")
+      "* NEXT %?%:annotation" :prepend t :immediate-finish t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
@@ -1898,47 +1233,39 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
-     ("I" "immediate work NEXT" entry
-      (file "~/SUSE/TODO.org")
+     ("I" "immediate E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%:annotation" :prepend t)
-     ("N" "work NEXT" entry
-      (file "~/SUSE/TODO.org")
+      "* NEXT %?%a" :prepend t)
+     ("N" "E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
-     ("M" "NEXT from work mail" entry
-      (file "~/SUSE/TODO.org")
+     ("M" "NEXT from E24P mail" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
-     ("L" "work learning material" entry
-      (file "~/SUSE/TODO.org")
+     ("L" "E24P learning material" entry
+      (file "~/Blocko/TODO.org")
       "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
   CLOSED: %U")
-     ("D" "work task DONE" entry
-      (file "~/SUSE/DONE.org")
+     ("D" "E24P task DONE" entry
+      (file "~/Blocko/DONE.org")
       "* DONE %?
   CLOSED: %U")
      ("X" "nuisance phone call" entry
       (file "~/org/notes/NuisanceCalls.org")
       "* %T %?")
-     ("w" "Wipfel learning" entry
-      (file+headline "~/SUSE/TODO.org" "PROJECT rwipfel")
-      "* SOMEDAY %[~/.org-mairix-link]" :prepend t)
-     ("S" "PSO standup calls etc." entry
-      (file+headline "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning")
-      "*** %t
-***** me
-******* %?" :prepend t)
      ("p" "project" entry
       (file "~/org/TODO.org")
       "* PROJECT %^{project title}
@@ -1964,7 +1291,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :justification: %^{justification}
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:"))))
+  :END:")
+     ("e" "emacs NEXT" entry
+      (file+olp "" "computer and technology" "tool software development" "emacs")
+      "* NEXT %?%a" :prepend t :jump-to-captured t))))
  '(org-catch-invisible-edits (quote smart))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
@@ -1974,7 +1304,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound-quiet.wav")
  '(org-clone-delete-id t)
  '(org-columns-default-format
-   "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
+   "%TODO %PRIORITY(P) %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
  '(org-confirm-babel-evaluate nil)
@@ -2040,6 +1370,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0"))))
  '(org-goto-interface (quote outline))
  '(org-goto-max-level 7)
+ '(org-habit-following-days 0)
+ '(org-habit-graph-column 60)
+ '(org-habit-preceding-days 14)
+ '(org-habit-today-glyph 118)
  '(org-hide-leading-stars t)
  '(org-html-allow-name-attribute-in-anchors t)
  '(org-icalendar-store-UID t)
@@ -2058,6 +1392,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-link-from-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-log-done (quote time))
+ '(org-log-into-drawer t)
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
@@ -2070,8 +1405,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview orgit)))
+    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit orgit-forge)))
  '(org-odd-levels-only t)
+ '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
    (quote
@@ -2085,7 +1421,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html)
      ("OWRA-2014" :base-directory "~/OWRA/meetings/2014" :publishing-directory "~/OWRA/meetings/2014" :publishing-function org-html-publish-to-html)
      ("OWRA-2015" :base-directory "~/OWRA/meetings/2015" :publishing-directory "~/OWRA/meetings/2015" :publishing-function org-html-publish-to-html))))
- '(org-refile-targets (quote ((nil :maxlevel . 3))))
+ '(org-refile-targets (quote ((nil :maxlevel . 4))))
+ '(org-refile-use-cache t)
  '(org-refile-use-outline-path t)
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
@@ -2131,7 +1468,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-yank-adjusted-subtrees t)
  '(org2blog/wp-blog-alist
    (quote
-    (("blog.adamspiers.org" :url "https://blog.adamspiers.org/xmlrpc.php" :username "adam"))))
+    (("blog.adamspiers.org" :url "https://blog.adamspiers.org/xmlrpc.php" :username "adam")
+     ("suse.com" :url "https://www.suse.com/c/xmlrpc.php"))))
  '(org2blog/wp-image-thumbnails nil)
  '(org2blog/wp-sourcecode-default-params "")
  '(org2blog/wp-use-sourcecode-shortcode t)
@@ -2144,7 +1482,153 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (haml-mode ido-completing-read+ flycheck use-package use-package-el-get orgit ghub forge quelpa-use-package quelpa flycheck-ocaml tuareg caml org-crypt use-package-ensure-system-package use-package-chords messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company color-theme coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (orgit-forge
+     org-timeline
+     which-key
+     treemacs-magit
+     treemacs-icons-dired
+     treemacs-projectile
+     treemacs
+     helm-org
+     minimap
+     try
+     ivy-hydra
+     helm-org-rifle
+     counsel-projectile
+     frog-jump-buffer
+     ivy-rich
+     swiper
+     ripgrep
+     ag
+     avy
+     all-the-icons-ivy-rich
+     ivy
+     counsel
+     rg
+     flymake-jshint
+     flymake-jslint
+     flymake-eslint
+     tss
+     typescript-mode
+     haml-mode
+     ido-completing-read+
+     flycheck
+     edit-server
+     php-mode
+     phi-search
+     multiple-cursors
+     prettier
+     nvm
+     dash-functional
+     f
+     iter2
+     prettier-el
+     unicode-fonts
+     php-mode
+     company-lua
+     lua-mode
+     forge
+     org-bullets
+     ocp-indent
+     pastels-on-dark-theme
+     sunlight-theme
+     zenburn-theme
+     color-theme-modern
+     amx
+     use-package
+     orgit
+     ghub
+     quelpa-use-package
+     quelpa
+     flycheck-ocaml
+     tuareg
+     caml
+     go-gopath
+     go-mode
+     flymake-solidity
+     solidity-mode
+     org-crypt
+     use-package-ensure-system-package
+     use-package-chords
+     use-package-el-get
+     messages-are-flowing
+     yasnippet
+     projectile
+     tidy
+     git-timemachine
+     git-gutter+
+     git-gutter-fringe+
+     auto-package-update
+     git-gutter-fringe
+     projectile-codesearch
+     projectile-variable
+     ruby-mode
+     gmpl-mode
+     magit-gerrit
+     sclang-extensions
+     magit
+     magit-annex
+     org-plus-contrib
+     yaml-mode
+     web-mode
+     vc-osc
+     undo-tree
+     switch-window
+     smex
+     smartrep
+     smartparens
+     smart-mode-line
+     sass-mode
+     rubocop
+     rsense
+     rpm-spec-mode
+     req-package
+     region-bindings-mode
+     rainbow-delimiters
+     python
+     phi-search-mc
+     paredit
+     org2blog
+     org-sync
+     org-magit
+     muttrc-mode
+     mmm-mode
+     mediawiki
+     markdown-mode+
+     magit-topgit
+     macrostep
+     kmacro-decision
+     keywiz
+     key-chord
+     idomenu
+     ido-vertical-mode
+     ido-ubiquitous
+     hideshow-org
+     guide-key
+     goto-chg
+     git-gutter
+     gist
+     gerrit-download
+     folding
+     flymake-shell
+     flymake-sass
+     flymake-ruby
+     flymake-css
+     flycheck-package
+     flx-ido
+     fill-column-indicator
+     feature-mode
+     expand-region
+     emms
+     edit-server-htmlize
+     company
+     coffee-mode
+     bundler
+     beeminder
+     beacon
+     autotest
+     asciidoc
+     apache-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -2155,6 +1639,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(quelpa-build-explicit-tar-format-p t)
  '(quelpa-update-melpa-p nil)
  '(quelpa-upgrade-p nil)
  '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
@@ -2164,6 +1649,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(remote-file-name-inhibit-cache 1800)
  '(req-package-log-level (quote debug))
  '(require-final-newline nil)
+ '(rg-command-line-flags (quote ("--hidden")))
+ '(ripgrep-arguments (quote ("--hidden")))
  '(rm-blacklist
    (quote
     (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
@@ -2190,7 +1677,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sendmail-program "msmtp-personal")
  '(sentence-end-base "\\([.?!…‽][]\"'”’)}]*\\|[;:]-?[])[(|DoO/]\\)")
  '(show-paren-delay 0)
- '(show-paren-mode t nil (paren))
+ '(show-paren-mode t)
  '(show-paren-ring-bell-on-mismatch nil)
  '(show-trailing-whitespace nil)
  '(smartparens-global-mode nil)
@@ -2233,13 +1720,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/vc-mode-show-backend t)
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
+ '(tide-always-show-documentation t)
+ '(tide-completion-detailed t)
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
- '(tramp-completion-reread-directory-timeout 1800 nil (tramp))
- '(tramp-verbose 9 nil (tramp))
+ '(tramp-completion-reread-directory-timeout 1800)
+ '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
@@ -2252,6 +1741,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-code-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
+ '(which-key-enable-extended-define-key t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*

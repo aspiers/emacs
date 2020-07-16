@@ -263,6 +263,9 @@
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
  '(backup-directory-alist (quote (("." . ".emacs.backup"))))
+ '(beacon-blink-when-focused t)
+ '(beacon-lighter "")
+ '(beacon-mode t)
  '(blink-cursor-blinks 0)
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.3)
@@ -308,6 +311,32 @@
  '(completion-ignored-extensions
    (quote
     (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".hg/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".p64fsl" ".d64fsl" ".dx64fsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")))
+ '(counsel-projectile-switch-project-action
+   (quote
+    (13
+     ("o" counsel-projectile-switch-project-action "jump to a project buffer or file")
+     ("f" counsel-projectile-switch-project-action-find-file "jump to a project file")
+     ("d" counsel-projectile-switch-project-action-find-dir "jump to a project directory")
+     ("D" counsel-projectile-switch-project-action-dired "open project in dired")
+     ("b" counsel-projectile-switch-project-action-switch-to-buffer "jump to a project buffer")
+     ("m" counsel-projectile-switch-project-action-find-file-manually "find file manually from project root")
+     ("S" counsel-projectile-switch-project-action-save-all-buffers "save all project buffers")
+     ("k" counsel-projectile-switch-project-action-kill-buffers "kill all project buffers")
+     ("K" counsel-projectile-switch-project-action-remove-known-project "remove project from known projects")
+     ("c" counsel-projectile-switch-project-action-compile "run project compilation command")
+     ("C" counsel-projectile-switch-project-action-configure "run project configure command")
+     ("E" counsel-projectile-switch-project-action-edit-dir-locals "edit project dir-locals")
+     ("v" counsel-projectile-switch-project-action-vc "open project in vc-dir / magit / monky")
+     ("sg" counsel-projectile-switch-project-action-grep "search project with grep")
+     ("si" counsel-projectile-switch-project-action-git-grep "search project with git grep")
+     ("ss" counsel-projectile-switch-project-action-ag "search project with ag")
+     ("sr" counsel-projectile-switch-project-action-rg "search project with rg")
+     ("xs" counsel-projectile-switch-project-action-run-shell "invoke shell from project root")
+     ("xe" counsel-projectile-switch-project-action-run-eshell "invoke eshell from project root")
+     ("xt" counsel-projectile-switch-project-action-run-term "invoke term from project root")
+     ("xv" counsel-projectile-switch-project-action-run-vterm "invoke vterm from project root")
+     ("Oc" counsel-projectile-switch-project-action-org-capture "capture into project")
+     ("Oa" counsel-projectile-switch-project-action-org-agenda "open project agenda"))))
  '(cperl-auto-newline nil)
  '(cperl-auto-newline-after-colon t)
  '(cperl-autoindent-on-semi t)
@@ -365,7 +394,11 @@
  '(fci-rule-column 80)
  '(flx-ido-mode t)
  '(flx-ido-threshhold 60000)
+ '(flycheck-global-modes (quote (python-mode js-mode)))
  '(folding-mode-prefix-key "")
+ '(frog-jump-buffer-include-current-buffer nil)
+ '(frog-menu-posframe-border-width 10)
+ '(frog-menu-posframe-parameters nil)
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
  '(git-commit-mode-hook
@@ -374,17 +407,11 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
+ '(global-flycheck-mode t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
+ '(global-prettier-mode nil)
  '(global-whitespace-mode t)
- '(guide-key-mode t)
- '(guide-key/guide-key-sequence
-   (quote
-    ("C-x 4" "C-x C-k" "C-x n" "C-x r" "C-x v" "C-x 8" "C-x p" "C-c" "C-c i" "C-c g" "C-c m" "C-c t" "C-c C-v" "C-c w" "C-c j" "C-h" "C-S-SPC" "M-o" "zp" "pz" "<key-chord>" "M-s"
-     (dired-mode "%" "*" "C-t")
-     (org-mode "C-c C-x"))))
- '(guide-key/popup-window-position (quote bottom))
- '(guide-key/recursive-key-sequence-flag t)
  '(help-window-select t)
  '(hippie-expand-try-functions-list
    (quote
@@ -394,7 +421,7 @@
  '(ido-case-fold nil)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-default-file-method (quote selected-window))
- '(ido-everywhere t)
+ '(ido-everywhere nil)
  '(ido-hacks-mode t)
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
@@ -408,8 +435,315 @@
  '(ispell-program-name "aspell")
  '(iswitchb-case nil)
  '(iswitchb-default-method (quote samewindow))
- '(jit-lock-stealth-nice 0.1)
- '(jit-lock-stealth-time 1)
+ '(ivy-height-alist
+   (quote
+    ((counsel-evil-registers . 5)
+     (counsel-yank-pop . 5)
+     (counsel-git-log . 4)
+     (counsel-ibuffer . 20)
+     (counsel-switch-buffer . 20)
+     (counsel-projectile-switch-to-buffer . 20)
+     (counsel-projectile-find-file . 20))))
+ '(ivy-mode t)
+ '(ivy-rich-display-transformers-list
+   (quote
+    (ivy-switch-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     ivy-switch-buffer-other-window
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-switch-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-switch-buffer-other-window
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 60))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     persp-switch-to-buffer
+     (:columns
+      ((all-the-icons-ivy-rich-buffer-icon)
+       (ivy-rich-candidate
+        (:width 30))
+       (ivy-rich-switch-buffer-indicators
+        (:width 4 :face error :align right))
+       (ivy-rich-switch-buffer-major-mode
+        (:width 12 :face warning))
+       (ivy-rich-switch-buffer-project
+        (:width 15 :face success))
+       (ivy-rich-switch-buffer-path
+        (:width
+         (lambda
+           (x)
+           (ivy-rich-switch-buffer-shorten-path x
+                                                (ivy-rich-minibuffer-width 0.3))))))
+      :predicate
+      (lambda
+        (cand)
+        (get-buffer cand))
+      :delimiter "	")
+     counsel-M-x
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (counsel-M-x-transformer
+        (:width 50))
+       (ivy-rich-counsel-function-docstring
+        (:face font-lock-doc-face))))
+     counsel-describe-function
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (counsel-describe-function-transformer
+        (:width 50))
+       (ivy-rich-counsel-function-docstring
+        (:face font-lock-doc-face))))
+     counsel-describe-variable
+     (:columns
+      ((all-the-icons-ivy-rich-variable-icon)
+       (counsel-describe-variable-transformer
+        (:width 50))
+       (ivy-rich-counsel-variable-docstring
+        (:face font-lock-doc-face))))
+     counsel-set-variable
+     (:columns
+      ((all-the-icons-ivy-rich-variable-icon)
+       (counsel-describe-variable-transformer
+        (:width 50))
+       (ivy-rich-counsel-variable-docstring
+        (:face font-lock-doc-face))))
+     counsel-apropos
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-info-lookup-symbol
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-descbinds
+     (:columns
+      ((all-the-icons-ivy-rich-keybinding-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-find-file
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-read-file-transformer))
+      :delimiter "	")
+     counsel-file-jump
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-dired
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-read-file-transformer))
+      :delimiter "	")
+     counsel-dired-jump
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-el
+     (:columns
+      ((all-the-icons-ivy-rich-symbol-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-fzf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-git
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-recentf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate
+        (:width 0.8))
+       (ivy-rich-file-last-modified-time
+        (:face font-lock-comment-face)))
+      :delimiter "	")
+     counsel-buffer-or-recentf
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (counsel-buffer-or-recentf-transformer
+        (:width 0.8))
+       (ivy-rich-file-last-modified-time
+        (:face font-lock-comment-face)))
+      :delimiter "	")
+     counsel-bookmark
+     (:columns
+      ((ivy-rich-bookmark-type)
+       (all-the-icons-ivy-rich-bookmark-name
+        (:width 40))
+       (ivy-rich-bookmark-info))
+      :delimiter "	")
+     counsel-bookmarked-directory
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-package
+     (:columns
+      ((all-the-icons-ivy-rich-package-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-fonts
+     (:columns
+      ((all-the-icons-ivy-rich-font-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-major
+     (:columns
+      ((all-the-icons-ivy-rich-function-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-find-library
+     (:columns
+      ((all-the-icons-ivy-rich-library-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-load-library
+     (:columns
+      ((all-the-icons-ivy-rich-library-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-load-theme
+     (:columns
+      ((all-the-icons-ivy-rich-theme-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-world-clock
+     (:columns
+      ((all-the-icons-ivy-rich-world-clock-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-tramp
+     (:columns
+      ((all-the-icons-ivy-rich-tramp-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-git-checkout
+     (:columns
+      ((all-the-icons-ivy-rich-git-branch-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-list-processes
+     (:columns
+      ((all-the-icons-ivy-rich-process-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-projectile-switch-project
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-projectile-find-file
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (counsel-projectile-find-file-transformer))
+      :delimiter "	")
+     counsel-projectile-find-dir
+     (:columns
+      ((all-the-icons-ivy-rich-project-icon)
+       (counsel-projectile-find-dir-transformer))
+      :delimiter "	")
+     counsel-minor
+     (:columns
+      ((all-the-icons-ivy-rich-mode-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     counsel-imenu
+     (:columns
+      ((all-the-icons-ivy-rich-imenu-icon)
+       (ivy-rich-candidate))
+      :delimiter "	")
+     treemacs-projectile
+     (:columns
+      ((all-the-icons-ivy-rich-file-icon)
+       (ivy-rich-candidate))
+      :delimiter "	"))))
+ '(js-switch-indent-offset 2)
  '(kept-old-versions 0)
  '(kill-whole-line t)
  '(lazy-lock-defer-on-scrolling t)
@@ -421,9 +755,9 @@
  '(magit-branch-prefer-remote-upstream (quote ("master" "stable/3.0")))
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
+ '(magit-diff-visit-avoid-head-blob t)
  '(magit-display-buffer-function (quote magit-display-buffer-fullscreen))
  '(magit-gitk-executable "/usr/bin/gitk")
- '(magit-keep-region-overlay t)
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument (quote default))
  '(magit-prefer-remote-upstream t)
@@ -448,12 +782,18 @@
  '(mail-self-blind t)
  '(make-backup-file-name-function (quote as-make-backup-file-name))
  '(mark-even-if-inactive t)
+ '(mc/always-run-for-all t)
  '(message-default-news-headers
    "From: Adam Spiers <usenet@adamspiers.org>
 Reply-To: Adam Spiers <usenet@adamspiers.org>
 ")
  '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
+ '(minimap-major-modes (quote (prog-mode text-mode)))
+ '(minimap-minimum-width 10)
+ '(minimap-mode nil)
+ '(minimap-width-fraction 0.12)
+ '(minimap-window-location (quote right))
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
@@ -540,44 +880,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                 (quote deadline)
                 (quote scheduled)))))
        (org-agenda-prefix-format " %?-12t% s")))
-     ("wd" "SUSE daily review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #A TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#A\\]"
-                       (quote scheduled))))))
-       (tags-todo "officehrs+CATEGORY=\"SUSE\""
-                  ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#[AB]\\]"
-                       (quote scheduled))))))
-       (agenda ""
-               ((org-agenda-ndays 3)
-                (org-agenda-skip-function
-                 (as-org-agenda-skip-select-category-function "SUSE"))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#B\\]"
-                       (quote scheduled)))))))
-      ((org-agenda-compact-blocks t)
-       (org-agenda-skip-function
-        (lambda nil
-          (and nil
-               (org-agenda-skip-entry-if
-                (quote deadline)
-                (quote scheduled)))))
-       (org-agenda-prefix-format " %?-12t% s")))
-     ("Bd" "Blocko daily review"
+     ("wd" "Blocko daily review"
       ((tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #A TODOs")
                    (org-agenda-skip-function
@@ -586,7 +889,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#A\\]"
                        (quote scheduled))))))
-       (tags-todo "officehrs+CATEGORY=\"SUSE\""
+       (tags-todo "officehrs+CATEGORY=\"Blocko\""
                   ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
                    (org-agenda-skip-function
                     (lambda nil
@@ -597,7 +900,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (agenda ""
                ((org-agenda-ndays 3)
                 (org-agenda-skip-function
-                 (as-org-agenda-skip-select-category-function "SUSE"))))
+                 (as-org-agenda-skip-select-category-function "Blocko"))))
        (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
@@ -635,22 +938,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                       (org-agenda-skip-entry-if
                        (quote notregexp)
                        "\\=.*\\[#C\\]"
-                       (quote scheduled))))))
-       (tags-todo "/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#D\\]"
-                       (quote scheduled))))))
-       (tags-todo "/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#E\\]"
                        (quote scheduled)))))))
       ((org-agenda-compact-blocks t))
       nil)
@@ -681,76 +968,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                       (org-agenda-skip-entry-if
                        (quote notregexp)
                        "\\=.*\\[#C\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#D\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"personal\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#E\\]"
                        (quote scheduled)))))))
       ((org-agenda-compact-blocks t)
        (org-agenda-skip-function
         (as-org-agenda-skip-select-category-function "personal"))
        (org-agenda-prefix-format " %?-12t% s"))
       nil)
-     ("w7" "SUSE weekly review"
-      ((tags-todo "+CATEGORY=\"SUSE\"/CHASE"
-                  ((org-agenda-overriding-header "Items to CHASE")))
-       (tags-todo "+CATEGORY=\"SUSE\"/WAITING"
-                  ((org-agenda-overriding-header "Items still WAITING on somebody")))
-       (stuck ""
-              ((org-agenda-overriding-header "Stuck work projects")
-               (org-stuck-projects
-                (quote
-                 ("+CATEGORY=\"SUSE\"/PROJECT"
-                  ("TODO" "NEXT" "NEXTACTION" "STARTED")
-                  nil "")))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #B TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#B\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #C TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#C\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#D\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"SUSE\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#E\\]"
-                       (quote scheduled)))))))
-      ((org-agenda-compact-blocks t)
-       (org-agenda-prefix-format " %?-12t% s"))
-      nil)
-     ("B7" "Blocko weekly review"
+     ("w7" "Blocko weekly review"
       ((tags-todo "+CATEGORY=\"Blocko\"/CHASE"
                   ((org-agenda-overriding-header "Items to CHASE")))
        (tags-todo "+CATEGORY=\"Blocko\"/WAITING"
@@ -777,22 +1001,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                       (org-agenda-skip-entry-if
                        (quote notregexp)
                        "\\=.*\\[#C\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#D\\]"
-                       (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
-                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
-                   (org-agenda-skip-function
-                    (lambda nil
-                      (org-agenda-skip-entry-if
-                       (quote notregexp)
-                       "\\=.*\\[#E\\]"
                        (quote scheduled)))))))
       ((org-agenda-compact-blocks t)
        (org-agenda-prefix-format " %?-12t% s"))
@@ -893,7 +1101,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("-" "easy" tags-todo "easy" nil)
      ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("w-" "easy SUSE tasks" tags-todo "+easy+CATEGORY=\"SUSE\""
+     ("w-" "easy Blocko tasks" tags-todo "+easy+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
      ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
@@ -922,13 +1130,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("wa" "SUSE admin" tags-todo "+admin+CATEGORY=\"SUSE\""
+     ("wa" "Blocko admin" tags-todo "+admin+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wo" "SUSE org" tags-todo "+org+CATEGORY=\"SUSE\""
+     ("wo" "Blocko org" tags-todo "+org+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wc" "SUSE computer" tags-todo "+computer+CATEGORY=\"SUSE\""
+     ("wc" "Blocko computer" tags-todo "+computer+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
-     ("wL" "SUSE learning" tags-todo "+learning+CATEGORY=\"SUSE\""
+     ("wL" "Blocko learning" tags-todo "+learning+CATEGORY=\"Blocko\""
       ((org-agenda-prefix-format "")))
      ("c" "CHASE" todo "CHASE" nil)
      ("W" "WAITING" todo "WAITING" nil)
@@ -955,7 +1163,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("wl" "work log" agenda "DONE"
       ((org-agenda-files
         (quote
-         ("~/SUSE/TODO.org" "~/SUSE/DONE.org")))
+         ("~/Blocko/TODO.org" "~/Blocko/DONE.org")))
        (org-agenda-span
         (quote week))
        (org-agenda-start-on-weekday 1)
@@ -971,8 +1179,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-prefix-format "  - "))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: " "%2dd ago: ")))
  '(org-agenda-files (quote ("~/org/TODO.org" "~/Blocko/TODO.org")))
-   (quote
-    ("~/org/TODO.org" "~/Blocko/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
@@ -983,23 +1189,19 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c"))))
  '(org-agenda-scheduled-leaders (quote ("Sched: " "Sched.%2dx: ")))
- '(org-agenda-show-future-repeats (quote next))
+ '(org-agenda-show-future-repeats nil)
  '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown (quote not-today))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
    (quote
-    ((agenda habit-down time-up priority-down category-keep effort-up)
+    ((agenda time-up priority-down category-keep effort-up)
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
- '(org-agenda-start-on-weekday 1)
+ '(org-agenda-start-on-weekday -1)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
- '(org-agenda-time-grid
-   (quote
-    (nil "----------------"
-         (800 1000 1200 1400 1600 1800 2000))))
  '(org-agenda-use-time-grid nil)
  '(org-agenda-window-frame-fractions (quote (0.5 . 0.6)))
  '(org-agenda-window-setup (quote current-window))
@@ -1015,14 +1217,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (python . t)
      (shell . t))))
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item . auto))))
+ '(org-bullets-bullet-list (quote ("⦿" "◉" "✿" "○" "*" "•" "⋆")))
  '(org-capture-templates
    (quote
-    (("s" "supportconfig madness" entry
-      (file+headline "~/SUSE/TODO.org" "individual instances")
-      "***** %u %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
-     ("o" "org mailing list item" entry
-      (file+headline "~/org/TODO.org" "to list")
-      "* NEXT %?%:annotation" :prepend t)
+    (("c" "CO2ken NEXT" entry
+      (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
+      "* NEXT %?" :prepend t :jump-to-captured t)
+     ("o" "orgmode NEXT" entry
+      (file+olp "~/org/TODO.org" "GTD" "orgmode")
+      "* NEXT %?%:annotation" :prepend t :immediate-finish t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
@@ -1030,47 +1233,39 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
-     ("I" "immediate work NEXT" entry
-      (file "~/SUSE/TODO.org")
+     ("I" "immediate E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%:annotation" :prepend t)
-     ("N" "work NEXT" entry
-      (file "~/SUSE/TODO.org")
+      "* NEXT %?%a" :prepend t)
+     ("N" "E24P NEXT" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
-     ("M" "NEXT from work mail" entry
-      (file "~/SUSE/TODO.org")
+     ("M" "NEXT from E24P mail" entry
+      (file "~/Blocko/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
-     ("L" "work learning material" entry
-      (file "~/SUSE/TODO.org")
+     ("L" "E24P learning material" entry
+      (file "~/Blocko/TODO.org")
       "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
   CLOSED: %U")
-     ("D" "work task DONE" entry
-      (file "~/SUSE/DONE.org")
+     ("D" "E24P task DONE" entry
+      (file "~/Blocko/DONE.org")
       "* DONE %?
   CLOSED: %U")
      ("X" "nuisance phone call" entry
       (file "~/org/notes/NuisanceCalls.org")
       "* %T %?")
-     ("w" "Wipfel learning" entry
-      (file+headline "~/SUSE/TODO.org" "PROJECT rwipfel")
-      "* SOMEDAY %[~/.org-mairix-link]" :prepend t)
-     ("S" "PSO standup calls etc." entry
-      (file+headline "~/SUSE/notes/PSO.org" "logs of stand-up calls and sprint planning")
-      "*** %t
-***** me
-******* %?" :prepend t)
      ("p" "project" entry
       (file "~/org/TODO.org")
       "* PROJECT %^{project title}
@@ -1096,7 +1291,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :justification: %^{justification}
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:"))))
+  :END:")
+     ("e" "emacs NEXT" entry
+      (file+olp "" "computer and technology" "tool software development" "emacs")
+      "* NEXT %?%a" :prepend t :jump-to-captured t))))
  '(org-catch-invisible-edits (quote smart))
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state (quote as-org-clock-in-switch-to-state))
@@ -1106,7 +1304,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-clock-sound "~/lib/emacs/utils/org-clock-sound-quiet.wav")
  '(org-clone-delete-id t)
  '(org-columns-default-format
-   "%TODO %PRIORITY %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
+   "%TODO %PRIORITY(P) %40ITEM(Task) %Effort(ETC){:} %CLOCKSUM(Taken){:} %TAGS(Tags)")
  '(org-combined-agenda-icalendar-file "~/SUSE/org.ics")
  '(org-completion-use-ido t)
  '(org-confirm-babel-evaluate nil)
@@ -1172,6 +1370,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0"))))
  '(org-goto-interface (quote outline))
  '(org-goto-max-level 7)
+ '(org-habit-following-days 0)
+ '(org-habit-graph-column 60)
+ '(org-habit-preceding-days 14)
+ '(org-habit-today-glyph 118)
  '(org-hide-leading-stars t)
  '(org-html-allow-name-attribute-in-anchors t)
  '(org-icalendar-store-UID t)
@@ -1181,12 +1383,16 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     (("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("psorev" . "https://svn.innerweb.novell.com/viewsvn/pso-source?view=rev&revision="))))
+ '(org-link-email-description-format "mail %c: %.30s")
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-frame)
      (gnus . gnus-other-frame)
      (file . find-file))))
+ '(org-link-from-user-regexp
+   "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-log-done (quote time))
+ '(org-log-into-drawer t)
  '(org-lowest-priority 69)
  '(org-mairix-augmented-links nil)
  '(org-mairix-display-hook (quote org-mairix-mutt-display-results))
@@ -1199,8 +1405,9 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-habit org-id org-info org-mouse org-protocol org-w3m org-man org-timer org-docview orgit)))
+    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit orgit-forge)))
  '(org-odd-levels-only t)
+ '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
  '(org-publish-project-alist
    (quote
@@ -1214,7 +1421,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("OWRA-2013" :base-directory "~/OWRA/meetings/2013" :publishing-directory "~/OWRA/meetings/2013" :publishing-function org-html-publish-to-html)
      ("OWRA-2014" :base-directory "~/OWRA/meetings/2014" :publishing-directory "~/OWRA/meetings/2014" :publishing-function org-html-publish-to-html)
      ("OWRA-2015" :base-directory "~/OWRA/meetings/2015" :publishing-directory "~/OWRA/meetings/2015" :publishing-function org-html-publish-to-html))))
- '(org-refile-targets (quote ((nil :maxlevel . 3))))
+ '(org-refile-targets (quote ((nil :maxlevel . 4))))
+ '(org-refile-use-cache t)
  '(org-refile-use-outline-path t)
  '(org-replace-disputed-keys t)
  '(org-return-follows-link t)
@@ -1251,7 +1459,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
     ((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)")
      (sequence "PROJECT(p)" "PROJDONE(P)")
      (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|")
-     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)"))))
+     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c@)"))))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance (quote ("CRYPTKEY" "CATEGORY")))
@@ -1274,7 +1482,153 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("MELPA" . "http://melpa.milkbox.net/packages/"))))
  '(package-selected-packages
    (quote
-    (company-lua lua-mode php-mode forge org-bullets ocp-indent pastels-on-dark-theme sunlight-theme zenburn-theme color-theme-modern amx use-package orgit ghub quelpa-use-package quelpa flycheck-ocaml tuareg caml go-gopath go-mode flymake-solidity solidity-mode org-crypt use-package-ensure-system-package use-package-chords use-package-el-get messages-are-flowing yasnippet projectile tidy git-timemachine git-gutter+ git-gutter-fringe+ auto-package-update git-gutter-fringe projectile-codesearch projectile-variable ruby-mode gmpl-mode magit-gerrit sclang-extensions magit magit-annex org-plus-contrib yaml-mode web-mode vc-osc undo-tree switch-window smex smartrep smartparens smart-mode-line sass-mode rubocop rsense rpm-spec-mode req-package region-bindings-mode rainbow-delimiters python phi-search-mc paredit org2blog org-sync org-magit muttrc-mode mmm-mode mediawiki markdown-mode+ magit-topgit macrostep kmacro-decision keywiz key-chord iy-go-to-char idomenu ido-vertical-mode ido-ubiquitous hideshow-org guide-key goto-chg git-gutter gist gerrit-download folding flymake-shell flymake-sass flymake-ruby flymake-css flycheck-package flx-ido fill-column-indicator feature-mode expand-region emms edit-server-htmlize company coffee-mode bundler beeminder beacon autotest asciidoc apache-mode ace-jump-mode)))
+    (orgit-forge
+     org-timeline
+     which-key
+     treemacs-magit
+     treemacs-icons-dired
+     treemacs-projectile
+     treemacs
+     helm-org
+     minimap
+     try
+     ivy-hydra
+     helm-org-rifle
+     counsel-projectile
+     frog-jump-buffer
+     ivy-rich
+     swiper
+     ripgrep
+     ag
+     avy
+     all-the-icons-ivy-rich
+     ivy
+     counsel
+     rg
+     flymake-jshint
+     flymake-jslint
+     flymake-eslint
+     tss
+     typescript-mode
+     haml-mode
+     ido-completing-read+
+     flycheck
+     edit-server
+     php-mode
+     phi-search
+     multiple-cursors
+     prettier
+     nvm
+     dash-functional
+     f
+     iter2
+     prettier-el
+     unicode-fonts
+     php-mode
+     company-lua
+     lua-mode
+     forge
+     org-bullets
+     ocp-indent
+     pastels-on-dark-theme
+     sunlight-theme
+     zenburn-theme
+     color-theme-modern
+     amx
+     use-package
+     orgit
+     ghub
+     quelpa-use-package
+     quelpa
+     flycheck-ocaml
+     tuareg
+     caml
+     go-gopath
+     go-mode
+     flymake-solidity
+     solidity-mode
+     org-crypt
+     use-package-ensure-system-package
+     use-package-chords
+     use-package-el-get
+     messages-are-flowing
+     yasnippet
+     projectile
+     tidy
+     git-timemachine
+     git-gutter+
+     git-gutter-fringe+
+     auto-package-update
+     git-gutter-fringe
+     projectile-codesearch
+     projectile-variable
+     ruby-mode
+     gmpl-mode
+     magit-gerrit
+     sclang-extensions
+     magit
+     magit-annex
+     org-plus-contrib
+     yaml-mode
+     web-mode
+     vc-osc
+     undo-tree
+     switch-window
+     smex
+     smartrep
+     smartparens
+     smart-mode-line
+     sass-mode
+     rubocop
+     rsense
+     rpm-spec-mode
+     req-package
+     region-bindings-mode
+     rainbow-delimiters
+     python
+     phi-search-mc
+     paredit
+     org2blog
+     org-sync
+     org-magit
+     muttrc-mode
+     mmm-mode
+     mediawiki
+     markdown-mode+
+     magit-topgit
+     macrostep
+     kmacro-decision
+     keywiz
+     key-chord
+     idomenu
+     ido-vertical-mode
+     ido-ubiquitous
+     hideshow-org
+     guide-key
+     goto-chg
+     git-gutter
+     gist
+     gerrit-download
+     folding
+     flymake-shell
+     flymake-sass
+     flymake-ruby
+     flymake-css
+     flycheck-package
+     flx-ido
+     fill-column-indicator
+     feature-mode
+     expand-region
+     emms
+     edit-server-htmlize
+     company
+     coffee-mode
+     bundler
+     beeminder
+     beacon
+     autotest
+     asciidoc
+     apache-mode)))
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -1285,6 +1639,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(ps-lpr-command "kprinter")
  '(ps-paper-type (quote a4))
  '(ps-print-color-p (quote black-white))
+ '(quelpa-build-explicit-tar-format-p t)
  '(quelpa-update-melpa-p nil)
  '(quelpa-upgrade-p nil)
  '(region-bindings-mode-disable-predicates (quote ((lambda nil buffer-read-only))))
@@ -1294,6 +1649,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(remote-file-name-inhibit-cache 1800)
  '(req-package-log-level (quote debug))
  '(require-final-newline nil)
+ '(rg-command-line-flags (quote ("--hidden")))
+ '(ripgrep-arguments (quote ("--hidden")))
  '(rm-blacklist
    (quote
     (" hl-p" " WS" " ws" " Guide" " SP" " Flymake" " Projectile" " Projectile[lisp]" " Projectile[smart-mode-line]" " Projectile\\(\\[[^]]+\\]\\)?" " All" " Paredit")))
@@ -1303,7 +1660,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(rst-toc-insert-number-separator ". ")
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
- '(ruby-insert-encoding-magic-comment nil)
  '(safe-local-variable-values
    (quote
     ((org-drawers quote
@@ -1364,13 +1720,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(sml/vc-mode-show-backend t)
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
+ '(tide-always-show-documentation t)
+ '(tide-completion-detailed t)
  '(tidy-shell-command "htmltidy")
  '(tla-non-recursive-inventory nil)
  '(tool-bar-mode nil)
  '(tool-bar-position (quote top))
  '(tooltip-mode t)
- '(tramp-completion-reread-directory-timeout 1800 nil (tramp))
- '(tramp-verbose 9 nil (tramp))
+ '(tramp-completion-reread-directory-timeout 1800)
+ '(tramp-verbose 9)
  '(transient-mark-mode t)
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
@@ -1383,6 +1741,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-code-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
+ '(which-key-enable-extended-define-key t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
@@ -1403,4 +1762,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-hash ((t (:foreground "grey50")))))
+ )
+
+;; custom-set-faces above should be empty!  Use themes instead.
