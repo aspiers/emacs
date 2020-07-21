@@ -20,7 +20,11 @@
       (disable-theme 'sunlight)
     (load-theme 'sunlight)))
 
-(bind-key "C-c t o" 'as-toggle-sunlight-theme)
+(require 'as-toggles)
+(use-package hydra
+  :config
+  (defhydra+ hydra-toggle (:color pink)
+    ("o" as-toggle-sunlight-theme "toggle sunlight theme")))
 
 ;; These are not needed as long as the themes directory is in
 ;; custom-theme-load-path:

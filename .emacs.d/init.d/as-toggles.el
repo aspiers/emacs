@@ -13,15 +13,13 @@
 
 (use-package hydra
   :config
+  (defun format3 (var) (format "%3s" var))
   (defhydra hydra-toggle (:color pink)
     "
-  _a_ abbrev-mode:       %`abbrev-mode
-  _d_ debug-on-error:    %`debug-on-error
-  _f_ auto-fill-mode:    %`auto-fill-function
-  _S_ truncate-lines:    %`truncate-lines
-  _w_ tab-width:         %`tab-width
-_TAB_ indent-tabs-mode:  %`indent-tabs-mode
-_SPC_ whitespace-mode:   %`whitespace-mode
+  _a_ abbrev-mode:       %s(format3 abbrev-mode) ^^^^^^^^^^^^^^     _d_ debug-on-error:    %s(format3 debug-on-error)
+  _f_ auto-fill-mode:    %3s(if auto-fill-function \"yes\") ^^^     _S_ truncate-lines:    %s(format3 truncate-lines)
+  _w_ tab-width:         %s(format3 tab-width) ^^^^^^^^^^^^^^^^
+_SPC_ whitespace-mode:   %s(format3 whitespace-mode) ^^^^^^^^^^   _TAB_ indent-tabs-mode:  %s(format3 indent-tabs-mode)
 "
     ("a" abbrev-mode nil)
     ("d" toggle-debug-on-error nil)
