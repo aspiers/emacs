@@ -1,45 +1,61 @@
 (require 'as-org-mode)
 
-(defun org-show-effort ()
-  "Shows the effort of the entry at the current point."
-  (interactive)
-  (let ((effort (org-entry-get (point) org-effort-property)))
-    (message (if effort (format "Effort is %s" effort)
-               "No effort defined"))))
+(use-package org
+  :config
+  (defun org-show-effort ()
+    "Shows the effort of the entry at the current point."
+    (interactive)
+    (let ((effort (org-entry-get (point) org-effort-property)))
+      (message (if effort (format "Effort is %s" effort)
+                 "No effort defined"))))
 
-(add-hook
- 'org-mode-hook
- (lambda ()
-   ;; Zero effort is last (10th) element of global Effort_ALL property
-   ;; so that we get zero effort when pressing '0' in the Effort column
-   ;; in Column view, since this invokes `org-set-effort' with arg 0,
-   ;; which stands for the 10th allowed value.
-   (let ((effort-values
-          (car
-           (read-from-string
-            (concat "("
-                    (cdr (assoc "Effort_ALL" org-global-properties))
-                    ")")))))
-     (dotimes (effort-index 10)
-       (let* ((effort (nth effort-index effort-values))
-              (key-suffix (number-to-string
-                           (if (= effort-index 9) 0 (1+ effort-index))))
-              (fn-name (concat "org-set-effort-"
-                               (number-to-string effort-index)))
-              (fn (intern fn-name)))
-         ;; (message "Binding M-o %s to %s which sets effort to %s"
-         ;;          key-suffix fn-name effort)
-         (fset fn `(lambda ()
-                     ,(format "Sets effort to %s." effort)
-                     (interactive)
-                     (org-set-effort ,(1+ effort-index))))
-         (local-set-key (concat "\eo" key-suffix) fn)
-         (local-set-key "\eo\eo" 'org-show-effort))))))
+  (defun org-setup-effort-functions ()
+    "Define a function with prefix `org-set-effort-' for each predefined
+effort in the Effort_ALL global property, and bind convenient keys to it.
 
-(defun org-unset-effort ()
-  "Unsets the Effort property for the current headline."
-  (interactive)
-  (org-delete-property org-effort-property))
-(bind-key "M-o SPC" 'org-unset-effort)
+Zero effort is last (10th) element of global Effort_ALL
+property so that we get zero effort when pressing '0' in the
+Effort column in Column view, since this invokes `org-set-effort'
+with arg 0, which stands for the 10th allowed value."
+    (let ((effort-values
+           (car
+            (read-from-string
+             (concat "("
+                     (cdr (assoc "Effort_ALL" org-global-properties))
+                     ")")))))
+      (dotimes (effort-index 10)
+        (let* ((effort (nth effort-index effort-values))
+               (key-suffix (number-to-string
+                            (if (= effort-index 9) 0 (1+ effort-index))))
+               (fn-effort
+                (if (eq effort '0)
+                    "0"
+                  (let ((effort (symbol-name effort)))
+                    (cond ((string-prefix-p "0:" effort)
+                           (concat (substring effort 2) "m"))
+                          ((string-suffix-p ":00" effort)
+                           (concat (string-remove-suffix ":00" effort) "h"))
+                          (t (error "Couldn't parse effort %s" effort))))))
+               (fn-name (concat "org-set-effort-" fn-effort))
+               (fn (intern fn-name)))
+          ;; (message "Binding M-o %s to %s which sets effort to %s"
+          ;;          key-suffix fn-name effort)
+          (fset fn `(lambda ()
+                      ,(format "Sets effort to %s." effort)
+                      (interactive)
+                      (org-set-effort ,(1+ effort-index))))
+          (define-key org-mode-map
+            (concat "M-o" key-suffix) fn)))))
+
+  (org-setup-effort-functions)
+
+  (defun org-unset-effort ()
+    "Unsets the Effort property for the current headline."
+    (interactive)
+    (org-delete-property org-effort-property))
+
+  :bind (("M-o SPC" . org-unset-effort)
+         :map org-mode-map
+         ("M-o o" . org-show-effort)))
 
 (provide 'as-org-effort)
