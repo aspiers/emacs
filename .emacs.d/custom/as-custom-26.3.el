@@ -1222,10 +1222,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (("c" "CO2ken NEXT" entry
       (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
-      "* NEXT %?" :prepend t :jump-to-captured t)
+      "* NEXT %?%a" :prepend t :jump-to-captured t)
      ("o" "orgmode NEXT" entry
       (file+olp "~/org/TODO.org" "GTD" "orgmode")
-      "* NEXT %?%:annotation" :prepend t :immediate-finish t :jump-to-captured t)
+      "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
