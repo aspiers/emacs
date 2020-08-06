@@ -14,7 +14,7 @@
 (use-package hydra
   :config
   (defun format3 (var) (format "%3s" var))
-  (defhydra hydra-toggle (:color pink)
+  (defhydra hydra-toggle (:color blue)
     "
   _a_ abbrev-mode:       %s(format3 abbrev-mode) ^^^^^^^^^^^^^^     _d_ debug-on-error:    %s(format3 debug-on-error)
   _f_ auto-fill-mode:    %3s(if auto-fill-function \"yes\") ^^^     _S_ truncate-lines:    %s(format3 truncate-lines)
