@@ -45,7 +45,7 @@ with arg 0, which stands for the 10th allowed value."
                       (interactive)
                       (org-set-effort ,(1+ effort-index))))
           (define-key org-mode-map
-            (concat "M-o" key-suffix) fn)))))
+            (concat "\M-o" key-suffix) fn)))))
 
   (org-setup-effort-functions)
 
