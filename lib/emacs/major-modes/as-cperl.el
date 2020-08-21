@@ -4,8 +4,6 @@
 
 ;;{{{ as-cperl-set-indent-level
 
-(defvar cperl-indent-level)
-(defvar cperl-close-paren-offset)
 (defun as-cperl-set-indent-level (width)
   "Sets the `cperl-indent-level' variable to the given argument."
   (interactive "NNew cperl-indent-level: ")
@@ -37,37 +35,6 @@ Can be optionally given a numeric prefix which
   (insert (format "warn \"%2d\";" as-cperl-unique-warning-counter))
   (forward-line 2)
   (setq as-cperl-unique-warning-counter (+ as-cperl-unique-warning-counter 1)))
-
-;;}}}
-;;{{{ as-cperl-insert-check-syscall
-
-(defun as-cperl-insert-check-syscall ()
-  "Inserts a template for checking system calls."
-  (interactive)
-  (insert " or die \"")
-  (save-excursion (insert "() failed: $!\\n\";")))
-
-;; Better way of doing it, using tempo and abbrevs:
-
-(require 'tempo)
-
-(defvar tempo-template-perl-function-call
-  '((p "Function call: " fn) "(" (p "Arguments: " args) ")" n>
-                         "or die \"" (s fn) "(" (s args) ") failed: $!\\n\";")
-  "Template for function calls which need the return value checked.")
-
-(defun tempo-template-perl-file-function-call (function)
-  "Returns a tempo template for file-oriented syscalls which need the return value checked.
-Used internally for mass generation of tempo templates."
-  `(,function "("
-    (p "Handle: " handle) ", "
-    (p "Arguments: " args) ")" n>
-    "or die qq{" ,function "(" (s handle) ", " (s args) ") failed: $!\\n};"))
-
-;; (tempo-define-template "perl-open-call" tempo-template-perl-function-call "open")
-(tempo-define-template "perl-open-call" (tempo-template-perl-file-function-call "open") "op2en")
-                       
-(define-abbrev cperl-mode-abbrev-table "open" "" 'tempo-template-perl-open-call)
 
 ;;}}}
 ;;{{{ as-cperl-reinvert-if-unless
