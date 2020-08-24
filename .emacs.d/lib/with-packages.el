@@ -27,6 +27,7 @@ Example usage:
     `(use-package ,pseudo-pkg-name
        :no-require t
        :ensure nil
+       :straight nil
        :after when
        ,@args)
     (message "use-package done for %s" pseudo-pkg-name)))

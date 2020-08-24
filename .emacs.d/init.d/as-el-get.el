@@ -29,7 +29,7 @@
 ;;
 ;; (el-get 'sync)
 
-(require-elpa-packages 'use-package-el-get)
+(use-package use-package-el-get)
 
 (use-package-el-get-setup)
 

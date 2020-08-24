@@ -14,8 +14,7 @@ The list marked is the one that contains point or follows point."
 (bind-key "C-c o" 'overwrite-mode)
 (global-unset-key "\M-o")
 
-(req-package as-word-motion
-  :ensure nil
+(use-feature as-word-motion
   :bind (("M-F"   . as-forward-word-start)
          ("M-B"   . as-backward-before-word)
          ("C-M-S-f" . as-forward-sexp-start)
@@ -57,15 +56,13 @@ the whole buffer."
 
 (bind-key "M-s M-m" 'as-format-as-flowed-text)
 
-(req-package bn-kill-stuff
-  :ensure nil
+(use-feature bn-kill-stuff
   :bind (("C-M-(" . bn-strip-parentheses)
          ("C-w"   . bn-kill-region-or-backword-word)
          ("M-w"   . bn-kill-line-or-region-save)
          ("M-Z" . bn-zap-nearly-to-char)))
 
-(req-package as-line-ops
-  :ensure nil
+(use-feature as-line-ops
   :bind (("C-x C-t" . as-transpose-lines)
          ("C-c d"   . as-duplicate-line)
          ("<F5>"    . as-duplicate-line)
@@ -76,16 +73,14 @@ the whole buffer."
          ("C-M-y"   . as-join-line-with-next)))
 
 (bind-key "C-c p" 'as-copy-previous-line-suffix)
-(req-package as-key-chord
-  :ensure nil
+(use-feature as-key-chord
   :config
   (key-chord-define-global "pq" 'as-copy-previous-line-suffix))
 
 (bind-key "C-c l"   'align)
 (bind-key "C-c TAB" 'indent-region)
 
-(req-package fill-common-prefix-region
-  :ensure nil
+(use-feature fill-common-prefix-region
   :bind (
          ;; This one might get overridden by per-mode bindings:
          ("C-M-q"   . fill-common-prefix-region)

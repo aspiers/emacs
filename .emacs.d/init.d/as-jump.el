@@ -13,11 +13,9 @@
 (defvar as-jump-map (make-sparse-keymap "Jump to")
   "Adam's prefix keymap for quickly jumping to stuff")
 
-(use-package as-which-key
+(use-feature as-which-key
   ;; Need to load which-key to ensure define-key is advised
   :after which-key
-
-  :ensure nil
 
   :defer 0.1
   :config

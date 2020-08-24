@@ -2,11 +2,10 @@
 
 ;;{{{ fill-column-indicator
 
-(req-package fill-column-indicator
-  :quelpa (fill-column-indicator
-           :fetcher github
-           :repo "aspiers/Fill-Column-Indicator"
-           :branch "wrap-window-edge")
+(use-package fill-column-indicator
+  :straight (fill-column-indicator
+             :fork (:repo "aspiers/Fill-Column-Indicator"
+                          :branch "wrap-window-edge"))
   :config
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook 'fci-mode)))
@@ -115,12 +114,6 @@
   :config (beacon-mode 1))
 
 (req-package flycheck)
-(req-package flycheck-package)
-(req-package flymake-css)
-(req-package flymake-ruby)
-(req-package flymake-sass)
-(req-package flymake-shell)
-
 (req-package hideshow-org)
 
 (req-package ido-completing-read+)

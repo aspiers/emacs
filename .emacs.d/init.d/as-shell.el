@@ -8,6 +8,8 @@
   "Make shell scripts executable" t)
 (add-hook 'sh-mode-hook 'sh-ins-template)
 
+(req-package flymake-shell)
+
 ;; This can accidentally change permissions in git repos, for instance.
 ;;(add-hook 'after-save-hook 'make-buffer-file-executable-if-script-p)
 

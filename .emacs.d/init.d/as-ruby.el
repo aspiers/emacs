@@ -1,8 +1,11 @@
-(req-package ruby-mode
+(use-package ruby-mode
   :mode "\\(\\.\\(e?rb\\|rjs\\|rake\\)\\|Rakefile\\|Guardfile\\)\\'"
-  :interpreter "ruby\\|ruby[12]\.[0-9]\\|jruby\\|rbx")
+  :interpreter "ruby\\|ruby[12]\\.[0-9]\\|jruby\\|rbx")
 
-(add-to-list 'auto-mode-alist '("\\.gem\\'" . tar-mode))
+(req-package flymake-ruby)
+
+(use-feature tar-mode
+  :mode ("\\.gem\\'" . tar-mode))
 
 ;;{{{ rcov.el
 

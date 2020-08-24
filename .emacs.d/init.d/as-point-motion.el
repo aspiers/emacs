@@ -43,8 +43,7 @@
 (bind-key "M-G l"   'goto-line)
 (bind-key "M-S-e" 'mark-end-of-sentence)
 
-(use-package bn-end-of-line-but-one
-  :ensure nil
+(use-feature bn-end-of-line-but-one
   :bind ("C-S-e" . bn-end-of-line-but-one))
 
 (req-package expand-region

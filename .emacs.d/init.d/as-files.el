@@ -3,8 +3,7 @@
 (req-package tar-mode
   :mode ("\\.dump$" . tar-mode))
 
-(req-package auto-compression-mode
-  :ensure nil
+(use-feature auto-compression-mode
   :defer t
   :config
   (defun lac () "Load auto-compression-mode."
@@ -38,17 +37,14 @@
            ("C-\"" . as-find-personal-todo))
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
-(use-package as-jump
-  :ensure nil
+(use-feature as-jump
   :after which-key
-
   :config
   (bind-keys :map as-jump-map
              ("h" "Find from ~" . as-find-from-home)
              ("/" "Find from /" . as-find-from-root)))
 
-(req-package as-find-file-matching-regexp-hook
-  :ensure nil)
+(use-feature as-find-file-matching-regexp-hook)
 
 (require 'as-vars)
 ;; This is right for SUSE, at least, assuming that the

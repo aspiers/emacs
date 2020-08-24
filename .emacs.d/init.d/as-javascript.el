@@ -6,7 +6,12 @@
 ;;   :commands nil
 ;;   :mode ("\\.js\\(\.erb\\)?$" . js2-mode))
 
-(req-package coffee-mode)
+(use-package coffee-mode)
+(use-package flymake-eslint)
+(use-package flymake-jshint)
+(use-package flymake-jslint)
+(use-package typescript-mode)
+(use-package tss)
 
 (defvar as-prettier-js-dir-locals-variables
   '((js-mode . ((eval . (prettier-mode t)))))
@@ -15,7 +20,5 @@ enable prettier.el for Javascript files.")
 
 (dir-locals-set-class-variables 'prettier-js
                                 as-prettier-js-dir-locals-variables)
-
-(req-package flymake-eslint)
 
 (provide 'as-javascript)

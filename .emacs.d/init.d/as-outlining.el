@@ -25,7 +25,7 @@
   (folding-add-to-marks-list 'LilyPond-mode "% {{{ " "% }}}")
 
   (setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
-  
+
   (add-hook 'folding-mode-hook
           (lambda ()
             ;; Quick navigation

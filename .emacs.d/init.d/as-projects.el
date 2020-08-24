@@ -49,12 +49,11 @@
   "~/.STOW/" "Find stow package: ")
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
-(use-package as-jump
-  :ensure nil
+(use-feature as-jump
   :after which-key
   :config
   (bind-keys :map as-jump-map
              ("m" "mrconfig" . as-find-my-mrconfig)
-             ("s" "~/.STOW/" . as-find-stow-package)))
+             ("S" "~/.STOW/" . as-find-stow-package)))
 
 (provide 'as-projects)

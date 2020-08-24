@@ -42,12 +42,11 @@
 
   (add-to-list 'org-modules 'org-timer))
 
-(use-package org-jump-olp
-  :ensure nil
+(use-feature org-jump-olp
   :after org
   :commands org-jump-olp)
 
-(use-package org
+(use-feature org
   :after counsel
   :bind (:map org-mode-map
               ("C-c C-j" . counsel-org-goto))
@@ -60,32 +59,27 @@
 ;;   *** before-save-hook: (org-encrypt-entries) **
 ;;
 ;; See also https://orgmode.org/worg/org-tutorials/encrypting-files.html
-(use-package org-crypt
+(use-feature org-crypt
   :requires org
-  :ensure nil
 
   :defer t
   :init
   (autoload 'org-crypt-use-before-save-magic "org-crypt"))
 
-(req-package as-gtd
-  :require org
-  :ensure nil)
+(use-feature as-gtd
+  :after org)
 
 ;; FIXME: still need this?
 ;;(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
-(req-package org-sync
-  :require org)
-(req-package org
-  :ensure org-plus-contrib)
-(use-package orgit
-  :after org)
-(use-package orgit-forge
-  :after org)
+(use-package org-sync :after org)
+(use-package org-plus-contrib :after org)
+(use-package orgit :after org)
+(use-package orgit-forge :after org)
+(use-package org-timeline :after org)
 
-(req-package org-bullets
-  :require org
+(use-package org-bullets
+  :after org
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (defun as-helm-org-rifle-notes ()

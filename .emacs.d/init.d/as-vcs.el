@@ -1,6 +1,7 @@
 ;; Version control
 
-(req-package vc-osc
+(use-feature vc-osc
+  :straight (:local-repo "~/.GIT/adamspiers.org/vc-osc")
   :config
   (add-to-list 'vc-handled-backends 'osc 'append))
 
@@ -52,8 +53,7 @@ Git gutter:
   "~/.GIT/3rd-party/" "Find 3rd-party git repo: ")
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
-(use-package as-jump
-  :ensure nil
+(use-feature as-jump
   :after which-key
 
   :config

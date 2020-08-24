@@ -19,8 +19,7 @@
   (restore-cursor-color)
   (profiler-stop))
 
-(use-package profiler
-  :ensure nil
+(use-feature profiler
   :after hydra
 
   :config

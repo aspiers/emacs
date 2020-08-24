@@ -53,4 +53,6 @@
 
 (bind-key "C-x C-S-e" 'eval-and-replace)
 
+(use-package flycheck-package)
+
 (provide 'as-lisp)

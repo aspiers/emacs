@@ -2,17 +2,13 @@
 ;;
 ;; See also as-tech-langs.el and as-doc-langs.el
 
-(req-package rpm-spec-mode
+(use-package rpm-spec-mode
   :mode ("\\.spec$" . rpm-spec-mode))
 
-(req-package apache-mode
+(use-package apache-mode
   :mode ("\\.htaccess$\\|\\(httpd\\|srm\\|access\\)\\.conf$" . apache-mode))
 
-(req-package xrdb-mode
-  ;; Can't get this working:
-  ;; https://github.com/edvorg/req-package/issues/29
-  :ensure nil
-  :el-get t
+(use-package xrdb-mode
   :mode ("\\.Xdefaults$"    . xrdb-mode)
   :mode ("\\.Xenvironment$" . xrdb-mode)
   :mode ("\\.Xresources$"   . xrdb-mode)

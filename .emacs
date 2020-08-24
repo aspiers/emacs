@@ -32,7 +32,8 @@
          file))
          files)))
 
-;; Call (package-initialize) exactly when we want.
+;; Call (package-initialize) exactly when we want (actually never, because
+;; we're using straight.el now).
 (setq package-enable-at-startup nil)
 
 (defun as-load-hooks (hook-name)

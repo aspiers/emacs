@@ -24,7 +24,7 @@
           (w3m-find-file filename))
       (delete-file filename))))
 
-(req-package web-mode
+(use-package web-mode
   :mode "\\.\\(phtml\\|tpl\\.php\\|jsp\\|as[cp]x\\|erb\\|mustache\\|djhtml\\|html?\\)\\'"
   :config
   (define-key web-mode-map (kbd "C-;") nil)
@@ -34,10 +34,13 @@
             (lambda () (if (string= major-mode "web-mode")
                            (turn-off-fci-mode)))))
 
-(req-package gist)
-(req-package haml-mode)
-(req-package sass-mode
+(use-package gist)
+(use-package haml-mode
+  :mode "\\.haml\\'")
+(use-package sass-mode
   :mode "\\.scss\\'"
   :hook (sass-mode . flycheck-mode))
+(use-package flymake-sass)
+(use-package flymake-css)
 
 (provide 'as-web)

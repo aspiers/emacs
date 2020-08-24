@@ -29,12 +29,10 @@
 ;; These are not needed as long as the themes directory is in
 ;; custom-theme-load-path:
 ;;
-;; (use-package pastels-on-dark-aspiers-theme
-;;   :no-require t
-;;   :ensure nil)
+;; (use-feature pastels-on-dark-aspiers-theme
+;;   :no-require t)
 ;; 
-;; (use-package sunlight-theme
-;;   :no-require t
-;;   :ensure nil)
+;; (use-feature sunlight-theme
+;;   :no-require t)
 
 (provide 'as-color-theme)

@@ -22,7 +22,7 @@ conflicts."
       (find-buffer-visiting custom-file)
     (save-excursion
       (goto-char (point-min))
-      (cond ((re-search-forward "'(package-selected-packages")
+      (cond ((re-search-forward "'(package-selected-packages" nil 'noerror)
              (or (re-search-forward "(quote")
                  (error
                   "Couldn't find \"(quote\" after package-selected-packages in %s"
@@ -34,8 +34,8 @@ conflicts."
              (forward-char -1)
              (as-expand-sexp))
             (t
-             (warn "package-selected-packages not found in %s"
-                   custom-file))))))
+             ;; (warn "package-selected-packages not found in %s" custom-file)
+             )))))
 
 (defun as-custom-save-hook ()
   "Hook to tweak Adam's custom-file before saving it."

@@ -2,8 +2,7 @@
 
 (bind-key "C-h a" 'apropos)
 
-(req-package set-any-var
-  :ensure nil
+(use-feature set-any-var
   :commands set-any-variable
   :bind ("C-c v" . set-any-variable))
 
@@ -19,8 +18,7 @@
   "~/.emacs.d/init.d" "Find emacs init.d file: ")
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
-(use-package as-jump
-  :ensure nil
+(use-feature as-jump
   :after which-key
   :config
   (bind-keys :map as-jump-map

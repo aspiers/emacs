@@ -6,8 +6,7 @@
 (defvar as-personal-todo "~/org/TODO.org")
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
-(use-package as-jump
-  :ensure nil
+(use-feature as-jump
   :after which-key
   :config
 

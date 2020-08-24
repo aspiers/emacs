@@ -1,5 +1,7 @@
 (use-package sclang
-  :ensure nil  ; typically provided by supercollider installation
   :mode ("\\.sc\\'" . sclang-mode))
+
+(use-package sclang-snippets)
+(use-package sclang-extensions)
 
 (provide 'as-sclang)
