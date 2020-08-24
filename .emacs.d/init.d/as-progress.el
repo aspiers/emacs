@@ -14,7 +14,7 @@ as an extremely primitive profiler.")
       (let* ((now (float-time))
              (delta (- now as-progress-clock))
              (as-progress-clock now))
-        (message "[+%.3f] %s" delta (if args (format msg args) msg)))))
+        (message "[+%.3f] %s" delta (if args (apply 'format msg args) msg)))))
 
 (defun as-abbreviated-load-file-name ()
   "Returns an abbreviated version of `load-file-name', if non-nil, otherwise
@@ -41,18 +41,20 @@ the string \"unknown\"."
     (as-progress-message
      (concat caller-filename ": " (if args (apply 'format msg args) msg)))))
 
-(defun as-loading-started ()
+(defun as-loading-started (&optional load-target)
   "Display progress of loading of init files."
-  (as-progress-message "loading %s ..." (as-abbreviated-load-file-name)))
+  (as-progress-message "loading %s ..."
+                       (or load-target (as-abbreviated-load-file-name))))
 
-(defun as-loading-done ()
+(defun as-loading-done (&optional load-target)
   "Display progress of loading of init files."
-  (as-progress-message "loading %s ... done" (as-abbreviated-load-file-name)))
+  (as-progress-message "loading %s ... done"
+                       (or load-target (as-abbreviated-load-file-name))))
 
-(defmacro with-as-loading (&rest body)
+(defmacro with-as-loading (load-target &rest body)
   `(progn
-     (as-loading-started)
+     (as-loading-started load-target)
      ,@body
-     (as-loading-done)))
+     (as-loading-done load-target)))
 
 (provide 'as-progress)
