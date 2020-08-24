@@ -49,4 +49,10 @@ the string \"unknown\"."
   "Display progress of loading of init files."
   (as-progress-message "loading %s ... done" (as-abbreviated-load-file-name)))
 
+(defmacro with-as-loading (&rest body)
+  `(progn
+     (as-loading-started)
+     ,@body
+     (as-loading-done)))
+
 (provide 'as-progress)
