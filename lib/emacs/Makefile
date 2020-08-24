@@ -15,7 +15,6 @@ VERSION_NUMBER=$(shell echo "$(version)" | \
 
 # {{{ Un-tweakable parameters
 
-MAJOR_MODES = major-modes
 MINOR_MODES = minor-modes
 UTILS       = utils
 export EMACS_BATCH = 1
@@ -66,7 +65,6 @@ THIRD_PARTY_PKG_DIRS =
 # {{{ Where do we pick up .el files which don't have their own Makefiles?
 
 el_search_paths =                       \
-        $(wildcard $(MAJOR_MODES)/*.el) \
         $(MINOR_MODES)                  \
         $(UTILS)
 
