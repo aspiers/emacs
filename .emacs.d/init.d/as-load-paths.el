@@ -16,17 +16,6 @@
 (add-to-list 'load-path (concat as-version-post-lib-dir "/loaddefs") 'append-at-end)
 (add-to-list 'load-path as-version-post-lib-dir 'append-at-end)
 
-;; Add $ZDOTDIR/local/share/emacs/site-lisp and subdirs to load-path
-(let ((orig-dir default-directory))
-  (dolist (template '("%s/share/emacs/site-lisp"
-                    "%s/local/share/emacs/site-lisp"))
-    (let ((dir (format template edotdir)))
-      (when (file-accessible-directory-p dir)
-        (add-to-list 'load-path dir 'append-at-end)
-        (cd dir)
-        (normal-top-level-add-subdirs-to-load-path))))
-  (cd orig-dir))
-
 (require 'as-progress)
 
 (provide 'as-load-paths)
