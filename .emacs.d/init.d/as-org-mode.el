@@ -94,4 +94,7 @@
          ("M-o j j" . helm-org-rifle-current-buffer)
          ("M-o n" . as-helm-org-rifle-notes)))
 
+(use-package epoch
+  :straight (epoch :host github :repo "progfolio/epoch"))
+
 (provide 'as-org-mode)

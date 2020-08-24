@@ -2,6 +2,32 @@
 
 (use-package org
   :config
+
+  (defun as-org-convert-buffer-sub-to-effort ()
+    "Convert all 'sub*' tags within a buffer into 'Effort' properties."
+    (interactive)
+    (org-map-entries 'as-org-convert-headline-sub-to-effort nil 'file))
+
+  (defun as-org-convert-headline-sub-to-effort ()
+    "Convert a headline with a 'sub*' tag into an 'Effort' property."
+    (interactive)
+    (unless (org-on-heading-p)
+      (error "Not on heading"))
+    (let ((origtags (org-get-tags)))
+      (mapcar
+       (lambda (tag)
+         (when (equal (substring tag 0 3) "sub")
+           (org-set-property "Effort"
+                             (cdr (assoc (substring tag 3)
+                                         '(("10"  . "0:10")
+                                           ("30"  . "0:30")
+                                           ("60"  . "1:00")
+                                           ("120" . "2:00")
+                                           ("4"   . "4:00")
+                                           ("day" . "8:00")))))
+           (org-toggle-tag tag 'off)))
+       origtags)))
+
   (defun org-show-effort ()
     "Shows the effort of the entry at the current point."
     (interactive)
