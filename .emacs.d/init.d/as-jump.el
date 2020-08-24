@@ -30,8 +30,14 @@
     (interactive)
     (switch-to-buffer (messages-buffer)))
 
+  (defun switch-to-warnings-buffer ()
+    "Switches to the *Warnings* buffer"
+    (interactive)
+    (switch-to-buffer (get-buffer "*Warnings*")))
+
   (bind-keys :map as-jump-map
              ("H" "*Help* buffer" . switch-to-help-buffer)
+             ("W" "*Warnings* buffer" . switch-to-warnings-buffer)
              ("M" "*Messages* buffer" . switch-to-messages-buffer))
 
   (add-to-list 'as-which-key-no-delay-prefixes
