@@ -110,9 +110,15 @@
 ;; https://github.com/somtin/magit-gerrit/issues/1
 ;;(req-package magit-gerrit)
 
-(req-package forge
-  :require magit
-  :ensure t)
+(use-package forge
+  :config
+  (defun as-forge-fork ()
+    (interactive)
+    "Use `forge-fork' to create a fork within github.com/aspiers"
+    (forge-fork "aspiers" "github"))
+
+  (transient-append-suffix 'forge-dispatch 'forge-fork
+    '("c F" "fork to aspiers" as-forge-fork)))
 
 ;; support for magit: links in org buffers
 (req-package orgit
