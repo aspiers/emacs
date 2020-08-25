@@ -131,5 +131,20 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 (use-package try
   :commands try)
 
+(with-packages (straight magit)
+  :config
+  (defun as-straight-setup-git-config (recipe commit)
+    (straight-vc-git--destructure recipe
+        (package local-repo branch remote upstream-repo upstream-host
+                 upstream-remote fork-repo repo host nonrecursive depth)
+      (let ((success nil)
+            (default-directory (straight--repos-dir local-repo)))
+        (message "advising straight-vc-git-clone in %s; result %s"
+                 default-directory
+                 (magit-git-string "config" "--local"
+                                   "user.email" "emacs@adamspiers.org")))))
+
+  (advice-add 'straight-vc-git-clone :after #'as-straight-setup-git-config))
+
 (provide 'as-package-loading)
 (eval-and-compile (as-loading-done))
