@@ -1429,6 +1429,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-reverse-note-order t)
  '(org-special-ctrl-a/e (quote reversed))
  '(org-special-ctrl-k t)
+ '(org-startup-folded t)
  '(org-stuck-projects
    (quote
     ("/PROJECT"
