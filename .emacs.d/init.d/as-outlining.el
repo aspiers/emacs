@@ -1,4 +1,13 @@
-;;{{{ Folding mode
+;;; outshine-mode
+
+;; N.B. as per https://github.com/alphapapa/outshine/issues/11 if you
+;; want to change outline-minor-mode-prefix, it has to be done via
+;; customize-variable.
+(use-package outshine
+  :commands outshine-mode
+  :hook (emacs-lisp-mode . outshine-mode))
+
+;;; folding-mode
 
 (req-package folding
   :commands (folding-mode
@@ -61,8 +70,7 @@ consistent landing spot."
 
   (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
 
-;;}}}
-;;{{{ allout
+;;; allout
 
 ;; (defun as-allout-init ()
 ;;   "Initialize allout-mode the way Adam likes it."
@@ -91,13 +99,11 @@ consistent landing spot."
 (defvar allout-mode-leaders '((emacs-lisp-mode . ";;;_")
                               (muse-mode       . "*")))
 
-;;}}}
-;;{{{ outline-minor-mode
+;;; outline-minor-mode
 
 (add-hook 'outline-minor-mode-hook 'turn-on-auto-fill)
 
-;;}}}
-;;{{{ Key bindings
+;;; Key bindings
 
 ;; I do these here rather than in per-mode folds to get consistency
 ;; across modes.
@@ -105,7 +111,7 @@ consistent landing spot."
 ;; I need the following (in general, the entries within each section
 ;; are ordered in decreasing frequency of use):
 
-;;{{{ for changing visibility:
+;;;; for changing visibility:
 
 ;; These need to be easily repeatable, should be a chord:
 ;;
@@ -121,7 +127,7 @@ consistent landing spot."
 ;;     C-c C-w        hide entire tree
 
 
-;;{{{ M-C-{<,>} for foldout zoom/exit subtree in outline major/minor modes
+;;;;; M-C-{<,>} for foldout zoom/exit subtree in outline major/minor modes
 
 (autoload 'foldout-exit-fold    "foldout")
 (autoload 'foldout-zoom-subtree "foldout")
@@ -133,9 +139,7 @@ consistent landing spot."
               (local-set-key [(meta control >)] 'foldout-zoom-subtree)
               )))
 
-;;}}}
-
-;;{{{ as-folding-{hide,show}-current
+;;;;; as-folding-{hide,show}-current
 
 ;; (eval-when-compile (require 'folding))
 (eval-and-compile
@@ -201,8 +205,7 @@ consistent landing spot."
         (message "Not on top fold mark"))
     (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
-;;}}}
-;;{{{ as-allout-{show,hide}-current
+;;;;; as-allout-{show,hide}-current
 
 (autoload 'allout-current-topic-collapsed-p "allout")
 (autoload 'allout-hide-current-subtree "allout")
@@ -234,8 +237,7 @@ is already hidden."
     (define-key allout-mode-map [(control shift left)]  'allout-hide-current-subtree)
     (define-key allout-mode-map [(control shift right)] 'allout-show-current-subtree)))
 
-;;}}}
-;;{{{ as-show-current (outline-mode)
+;;;;; as-show-current (outline-mode)
 
 (eval-when (compile) (require 'outline))
 (defun as-show-current ()
@@ -244,9 +246,7 @@ is already hidden."
   (show-entry)
   (show-children))
 
-;;}}}
-
-;;{{{ folding-mode-hook bindings
+;;;;; folding-mode-hook bindings
 
 ;;(eval-when (compile) (require 'folding))
 
@@ -270,8 +270,7 @@ is already hidden."
             (local-set-key [(control shift left )] 'as-folding-hide-subtree)
             (local-set-key [(control shift right)] 'as-folding-show-subtree)))
 
-;;}}}
-;;{{{ org-mode-hook bindings
+;;;;; org-mode-hook bindings
 
 (require 'as-org-mode)
 
@@ -294,10 +293,7 @@ is already hidden."
             (define-key muse-mode-map [(shift down)] 'org-timestamp-down)
             ))
 
-;;}}}
-
-;;}}}
-;;{{{ for navigation:
+;;;; for navigation:
 
 ;; Need to be easily repeatable, should be a chord:
 ;;
@@ -342,8 +338,7 @@ is already hidden."
             (local-set-key [(control shift up  )] 'org-backward-same-level)
             (local-set-key [(control shift down)] 'org-forward-same-level)))
 
-;;}}}
-;;{{{ for editing structure:
+;;;; for editing structure:
 
 ;;    (choose to be analogous to navigation except:
 ;;      - with extra meta, current item moves with point
@@ -353,14 +348,12 @@ is already hidden."
 ;;                promote heading up a level
 ;;                demote heading down a level?
 
-;;}}}
-;;{{{ other misc:
+;;;; other misc:
 
 ;;                  mark subtree
 ;;
 
-;;}}}
-;;{{{ unassigned
+;;;; unassigned
 
 ;; in use by org-mode:
 ;;     S-{up,down}               org-shift{up,down}
@@ -401,8 +394,6 @@ is already hidden."
 ;; (global-set-key [(meta control shift  up   )] 'as-metacontrolshiftup)
 ;; (global-set-key [(meta control shift  down )] 'as-metacontrolshiftdown)
 
-;;}}}
-
-;;}}}
+;;; provide
 
 (provide 'as-outlining)

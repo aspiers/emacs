@@ -2,7 +2,7 @@
 ;;
 ;; See also as-config-langs.el and as-tech-langs.el.
 
-;;{{{ Text
+;;; Text
 
 ;;(setq major-mode 'indented-text-mode)
 
@@ -60,18 +60,15 @@
   (interactive)
   (indented-text-mode))
 
-;;}}}
-;;{{{ Markdown mode
+;;; Markdown mode
 
 (req-package markdown-mode+)
 
-;;}}}
-;;{{{ asciidoc mode
+;;; asciidoc mode
 
 (req-package asciidoc)
 
-;;}}}
-;;{{{ ReStructuredText mode
+;;; ReStructuredText mode
 
 ;; (add-to-list 'auto-mode-alist '("\\.re?st$" . rst-mode))
 
@@ -94,36 +91,34 @@
   ;; Update the TOC automatically everytime you adjust a section title::
   (add-hook 'rst-adjust-hook 'rst-toc-insert-update))
 
-;;}}}
-;;{{{ Info
+;;; Info
 
 (eval-after-load "info"
   '(define-key Info-mode-map [(shift tab)] 'Info-prev-reference))
 
-;;}}}
+;;; TeX
 
-;;{{{ TeX
-
-;;{{{ Set up tex-dvi-view (C-c C-v)
+;;;; Set up tex-dvi-view (C-c C-v)
 
 (setq tex-dvi-view-command
       (if (eq window-system 'x) "xdvi" "dvi2tty * | cat -s"))
 
-;;}}}
-
-;; Turn on font-lock mode on entry
+;;;; Turn on font-lock mode on entry
 
 (add-hook 'tex-mode-hook 'as-font-lock-mode-if-window-system)
 
-;;}}}
-;;{{{ man
+;;; man
 
 (eval-when-compile
   (defvar Man-notify-method))
 (setq Man-notify-method 'pushy)
 
-;;}}}
+;;; mediawiki
 
-(use-package mediawiki)
+;; Don't use until https://github.com/hexmode/mediawiki-el/issues/36
+;; is fixed:
+;; (use-package mediawiki)
+
+;;; provide
 
 (provide 'as-doc-langs)
