@@ -56,4 +56,9 @@
              ("m" "mrconfig" . as-find-my-mrconfig)
              ("S" "~/.STOW/" . as-find-stow-package)))
 
+;; Other interesting project-related packages:
+;;
+;;      projectile-codesearch
+;;      projectile-variable
+
 (provide 'as-projects)

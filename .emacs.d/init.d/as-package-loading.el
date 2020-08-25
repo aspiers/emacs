@@ -116,23 +116,6 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 
   :bind ("C-c S" . hydra-straight-helper/body))
 
-;; Packages previously in package-selected-packages which are missing
-;; use-package declarations:
-;;
-;;      ocp-indent
-;;      color-theme-modern
-;;      go-gopath
-;;      go-mode
-;;      flymake-solidity
-;;      solidity-mode
-;;      auto-package-update
-;;      projectile-codesearch
-;;      projectile-variable
-;;      gmpl-mode
-;;      org-magit
-;;      flx-ido
-;;      beeminder
-
 ;; Need as-jump to ensure that as-jump-map is defined.
 (use-feature as-jump
   ;; Need to load which-key to ensure define-key is advised before it

@@ -44,6 +44,7 @@
 ;;}}}
 
 (use-package flx)
+;; (use-package flx-ido)
 
 (use-package ivy
   :config

@@ -20,4 +20,6 @@
   (require 'as-org-stats)
   (require 'org-meeting-actions))
 
+;; (use-package beeminder)
+
 (provide 'as-gtd)
