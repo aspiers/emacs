@@ -46,12 +46,12 @@
   :after org
   :commands org-jump-olp)
 
-(use-feature org
-  :after counsel
-  :bind (:map org-mode-map
-              ("C-c C-j" . counsel-org-goto))
+(with-packages (org counsel)
   :config
-  (as-progress "org/counsel combined config"))
+  (as-progress "org/counsel combined config")
+
+  :bind (:map org-mode-map
+              (("C-c C-j" . counsel-org-goto))))
 
 ;; Enabling by default slows down file saving. In files which need it,
 ;; can be set through local variables, e.g.:

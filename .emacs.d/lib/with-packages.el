@@ -1,6 +1,6 @@
-;;; with-packages.el ---  package manager -*- lexical-binding: t -*-
+;;; with-packages.el --- multi-package config     -*- lexical-binding: t -*-
 
-;; Copyright (C) 2017-2019 Radon Rosborough and contributors
+;; Copyright (C) 2020 Adam Spiers
 
 ;; Author: Adam Spiers <emacs@adamspiers.org>
 ;; Created: 1 Jul 2020
@@ -10,9 +10,32 @@
 ;; SPDX-License-Identifier: MIT
 ;; Version: prerelease
 
-;;; Commentary
+;;; Introduction
 
-;; FIXME
+;; The popular `use-package' is great for setting up deferred loading
+;; of packages, and associating configuration to be activated when
+;; individual packages are lazy-loaded, but it's not so convenient
+;; when it is required to trigger configuration only after /multiple/
+;; packages are loaded.
+;;
+;; So this package provides an extension to `use-package' making that
+;; easy.
+
+;;; Example usage
+
+;; For example, imagine you had org-mode and counsel both set up for
+;; lazy loading in order to minimize your emacs start time.  The
+;; following binding would only be set up after both packages are
+;; loaded.
+;;
+;;   (with-packages (org counsel)
+;;     :bind (:map org-mode-map
+;;                 (("C-c C-j" . counsel-org-goto))))
+
+;;; History
+
+;; See https://github.com/jwiegley/use-package/issues/71 where this
+;; functionality was originally proposed and implementations
 
 ;;; Dependencies
 
@@ -32,7 +55,8 @@ The `args' are passed straight to `use-package' for use as normal.
 Example usage:
 
   (with-packages (org counsel)
-    :bind (:map org-mode \"C-c C-j\" . counsel-org-goto))"
+    :bind (:map org-mode-map
+                ((\"C-c C-j\" . counsel-org-goto))))"
   (let ((pseudo-pkg-name
          (format
           "*with-packages/%s"
@@ -46,13 +70,16 @@ Example usage:
                     (to (cdr repl)))
                 (setq s (replace-regexp-in-string from to s))))))))
     `(progn
-       (message "Defining pseudo-package %s" ,pseudo-pkg-name)
+       ;; (message "Defining pseudo-package %s" ,pseudo-pkg-name)
        (use-package ,pseudo-pkg-name
          :no-require t
+         :defer nil
+         :ensure nil
          :straight nil
          :after ,when
          ,@args)
-       (message "use-package done for %s" ,pseudo-pkg-name))))
+       ;; (message "use-package done for %s" ,pseudo-pkg-name)
+       )))
 
 (put 'with-packages 'lisp-indent-function 'defun)
 
