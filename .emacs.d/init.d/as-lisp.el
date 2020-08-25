@@ -54,4 +54,8 @@
 
 (use-package flycheck-package)
 
+(use-package describe-hash
+  :defer 20
+  :bind ("C-h H" . describe-hash))
+
 (provide 'as-lisp)
