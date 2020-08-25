@@ -72,6 +72,9 @@
 ;; FIXME: still need this?
 ;;(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
+;; Supposed to help debug org-plus-contrib load warning but doesn't
+(require 'use-package)
+
 (use-package org-sync :after org)
 (use-package org-plus-contrib :after org)
 (use-package orgit :after org)
