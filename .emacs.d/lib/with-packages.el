@@ -23,14 +23,14 @@ Example usage:
               (let ((from (car repl))
                     (to (cdr repl)))
                 (setq s (replace-regexp-in-string from to s))))))))
-    (message pseudo-pkg-name)
-    `(use-package ,pseudo-pkg-name
-       :no-require t
-       :ensure nil
-       :straight nil
-       :after when
-       ,@args)
-    (message "use-package done for %s" pseudo-pkg-name)))
+    `(progn
+       (message "Defining pseudo-package %s" ,pseudo-pkg-name)
+       (use-package ,pseudo-pkg-name
+         :no-require t
+         :straight nil
+         :after ,when
+         ,@args)
+       (message "use-package done for %s" ,pseudo-pkg-name))))
 
 (put 'with-packages 'lisp-indent-function 'defun)
 
