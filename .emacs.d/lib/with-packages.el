@@ -1,3 +1,25 @@
+;;; with-packages.el ---  package manager -*- lexical-binding: t -*-
+
+;; Copyright (C) 2017-2019 Radon Rosborough and contributors
+
+;; Author: Adam Spiers <emacs@adamspiers.org>
+;; Created: 1 Jul 2020
+;; Homepage: https://github.com/aspiers/emacs
+;; Keywords: extensions
+;; Package-Requires: ((use-package "0"))
+;; SPDX-License-Identifier: MIT
+;; Version: prerelease
+
+;;; Commentary
+
+;; FIXME
+
+;;; Dependencies
+
+(require 'use-package)
+
+;;; Code
+
 (defmacro with-packages (when &rest args)
   "Allow declaration of `use-package' config which is only
 triggered when a required set of packages are loaded.  The
@@ -34,4 +56,12 @@ Example usage:
 
 (put 'with-packages 'lisp-indent-function 'defun)
 
+;;;; Closing remarks
+
 (provide 'with-packages)
+
+;;; with-packages.el ends here
+
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:
