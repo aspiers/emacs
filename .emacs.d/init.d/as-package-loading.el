@@ -80,7 +80,7 @@ Add package PKG with ARGS to target list.
 (define-find-file-in-dir-function as-find-el-get-package
   "~/.el-get" "Find el-get package: ")
 (define-find-file-in-dir-function as-find-straight-package
-  (straight--dir) "Find straight.el package: ")
+  (straight--repos-dir) "Find straight.el package repository: ")
 
 (use-package hydra
   :config
