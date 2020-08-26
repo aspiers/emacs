@@ -130,19 +130,17 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 ;; This is nice for trying out packages
 (use-package try :commands try)
 
-;; FIXME: this doesn't affect any packages installed before magit is loaded.
-(with-packages (straight magit)
-  :config
-  (defun as-straight-setup-git-config (repo-dir remote url branch
-                                                depth commit)
-    (message "%s %s %s %s %s %s" repo-dir remote url branch depth commit)
-    (let* ((default-directory repo-dir)
-           (result (magit-git-string "config" "--local"
-                                     "user.email" "emacs@adamspiers.org")))
-      (message "advising straight-vc-git-clone in %s; result %s"
-               default-directory result)))
+(defun as-straight-setup-git-config (repo-dir remote url branch
+                                              depth commit)
+  (let* ((default-directory repo-dir)
+         (repo-name (file-name-nondirectory (directory-file-name repo-dir)))
+         (identifier (format "as-straight-set-email-%s" repo-name))
+         (buffer-name (format " *%s*" identifier)))
+    (start-process identifier buffer-name
+                   "git" "config" "--local"
+                   "user.email" "emacs@adamspiers.org")))
 
-    (add-hook 'straight-vc-git-post-clone-hook #'as-straight-setup-git-config))
+(add-hook 'straight-vc-git-post-clone-hook #'as-straight-setup-git-config)
 
 (provide 'as-package-loading)
 (eval-and-compile (as-loading-done))
