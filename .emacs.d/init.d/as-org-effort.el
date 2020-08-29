@@ -66,10 +66,14 @@ with arg 0, which stands for the 10th allowed value."
                (fn (intern fn-name)))
           ;; (message "Binding M-o %s to %s which sets effort to %s"
           ;;          key-suffix fn-name effort)
-          (fset fn `(lambda ()
-                      ,(format "Sets effort to %s." effort)
-                      (interactive)
-                      (org-set-effort ,(1+ effort-index))))
+          (eval
+           `(defun ,fn ()
+                ,(format "Sets effort to %s." effort)
+              (interactive)
+              (org-set-effort ,(1+ effort-index))))
+          ;; (declare-function fn
+          ;;                   (or (symbol-file 'org-show-effort)
+          ;;                       load-file-name))
           (define-key org-mode-map
             (concat "\M-o" key-suffix) fn)))))
 
