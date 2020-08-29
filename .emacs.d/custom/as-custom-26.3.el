@@ -1438,7 +1438,16 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-reverse-note-order t)
  '(org-special-ctrl-a/e (quote reversed))
  '(org-special-ctrl-k t)
- '(org-startup-folded t)
+ '(org-speed-commands-user
+   (quote
+    (("z" . org-add-note)
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("k" . ignore)
+     ("N" org-speed-move-safe
+      (quote org-forward-heading-same-level))
+     ("P" org-speed-move-safe
+      (quote org-backward-heading-same-level)))))
  '(org-stuck-projects
    (quote
     ("/PROJECT"
