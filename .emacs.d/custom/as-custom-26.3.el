@@ -1448,6 +1448,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       (quote org-forward-heading-same-level))
      ("P" org-speed-move-safe
       (quote org-backward-heading-same-level)))))
+ '(org-startup-folded t)
  '(org-stuck-projects
    (quote
     ("/PROJECT"
