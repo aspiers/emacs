@@ -56,12 +56,16 @@
   ;; suggests to use M-: (ivy-state-caller ivy-last) to figure out the keys
   ;; in this alist.
   (setq ivy-re-builders-alist
-        '((swiper . ivy--regex-plus)
+        '((swiper . ivy--regex)
           (counsel-git-grep . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
+
+  ;; See https://github.com/abo-abo/swiper/issues/2628
+  ;; ("Fallback in ivy-sort-functions-alist is ignored")
   (add-to-list 'ivy-sort-matches-functions-alist
                '(set-any-variable . ivy--prefix-sort)
                'append)
+
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile ""))
