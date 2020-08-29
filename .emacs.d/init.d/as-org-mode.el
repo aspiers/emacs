@@ -105,6 +105,10 @@
          ("M-o n" . as-helm-org-rifle-notes)))
 
 (use-package epoch
-  :straight (epoch :host github :repo "progfolio/epoch"))
+  :straight (epoch :host github :repo "progfolio/epoch")
+  :bind (:map org-mode-map
+              (("C-c C-S-t" . epoch-todo))
+              :map org-agenda-mode-map
+              (("C-c C-S-t" . epoch-agenda-todo))))
 
 (provide 'as-org-mode)
