@@ -13,7 +13,11 @@
    ;; my brain.
    ("C-c c" . org-capture)
 
-   ("C-c C-?" . org-occur-in-agenda-files))
+   ("C-c C-?" . org-occur-in-agenda-files)
+
+   :map org-mode-map
+   (("C-c C-S-w" . org-refile-reverse)
+    ("C-c s" . org-show-context)))
 
   :config
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
