@@ -134,11 +134,20 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
                                               depth commit)
   (let* ((default-directory repo-dir)
          (repo-name (file-name-nondirectory (directory-file-name repo-dir)))
-         (identifier (format "as-straight-set-email-%s" repo-name))
-         (buffer-name (format " *%s*" identifier)))
-    (start-process identifier buffer-name
-                   "git" "config" "--local"
-                   "user.email" "emacs@adamspiers.org")))
+         (identifier (format "as-straight-setup-%s" repo-name))
+         (buffer-name (format " *%s*" identifier))
+         (org-repo-p (equal repo-name "org"))
+         (email (concat (cond (org-repo-p "orgmode")
+                              (t "emacs"))
+                        "@adamspiers.org"))
+         (command (concat "git config --local user.email " email)))
+    (start-process-shell-command
+     identifier buffer-name
+     (if org-repo-p
+         (concat command "; "
+                 "git config --local "
+                 "sendemail.to emacs-orgmode@gnu.org")
+       command))))
 
 (add-hook 'straight-vc-git-post-clone-hook #'as-straight-setup-git-config)
 
