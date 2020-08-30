@@ -1,11 +1,19 @@
 ;; (use-package color-theme-modern)
 
-(req-package zenburn-theme
+(use-package zenburn-theme
   :no-require t
 
   :config
   (defvar zenburn-override-colors-alist
     '(("zenburn-bg" . "#000000"))))
+
+(use-package modus-operandi-theme)
+(use-package modus-vivendi-theme)
+
+;; https://protesilaos.com/modus-themes/#h:ea30ff0e-3bb6-4801-baf1-d49169d94cd5
+(set-face-attribute 'variable-pitch nil :family "DejaVu Sans" :height 110)
+(set-face-attribute 'fixed-pitch nil :family "Source Code Pro" :height 110)
+(set-face-attribute 'default nil :family "Fira Code" :height 105)
 
 ;; To choose a specific theme, either do something like this here:
 ;;
@@ -37,4 +45,4 @@
 ;; (use-feature sunlight-theme
 ;;   :no-require t)
 
-(provide 'as-color-theme)
+(provide 'as-themes)
