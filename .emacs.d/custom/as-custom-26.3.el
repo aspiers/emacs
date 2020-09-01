@@ -1421,7 +1421,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit orgit-forge)))
+    (org-habit org-id ol-info org-mouse org-protocol ol-bookmark org-choose ol-elisp-symbol org-mairix ol-man org-notify org-toc org-timer orgit orgit-forge)))
  '(org-odd-levels-only t)
  '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
