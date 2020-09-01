@@ -1503,6 +1503,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org2blog/wp-use-sourcecode-shortcode t)
  '(outline-auto-activation t)
  '(outline-minor-mode-prefix (kbd "M-#"))
+ '(outshine-speed-commands-user
+   (quote
+    (("z" . org-add-note)
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("k" . ignore)
+     ("N" . outline-forward-same-level)
+     ("P" . outline-backward-same-level))))
  '(outshine-startup-folded-p nil)
  '(outshine-use-speed-commands t)
  '(passive-voice nil)
