@@ -1,4 +1,13 @@
 (use-package org
+  ;; We want the org-plus-contrib package rather than just org, but
+  ;; there is no org-plus-contrib.el, so we have to load it a bit
+  ;; differently, as per:
+  ;; https://emacs.stackexchange.com/questions/41321/when-to-specify-a-package-name-in-use-packages-ensure-tag
+  ;; https://github.com/jwiegley/use-package/issues/597
+  ;; https://github.com/raxod502/straight.el/issues/252
+  :ensure org-plus-contrib
+  :straight org-plus-contrib
+
   :bind
   (("M-o a" . org-agenda)
    ("M-o c" . org-capture)
@@ -80,13 +89,6 @@
 (require 'use-package)
 
 (use-package org-sync :after org)
-
-;; org-plus-contrib is a package but there is no org-plus-contrib.el, so
-;; we have to load it a bit differently, as per:
-;; https://emacs.stackexchange.com/questions/41321/when-to-specify-a-package-name-in-use-packages-ensure-tag
-;; https://github.com/jwiegley/use-package/issues/597
-;; https://github.com/raxod502/straight.el/issues/252
-(use-package org :ensure org-plus-contrib)
 
 (use-package orgit :after org)
 (use-package orgit-forge :after org)
