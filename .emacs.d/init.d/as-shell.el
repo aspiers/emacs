@@ -1,7 +1,3 @@
-;; Autoload sh-script on invocation
-(autoload 'shell-script-mode "sh-script"
-  "Major mode for editing shell scripts" t)
-
 (autoload 'sh-ins-template "as-sh-mode-exts"
   "Template for new shell script texts" t)
 (autoload 'make-buffer-file-executable-if-script-p "as-sh-mode-exts"
