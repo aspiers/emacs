@@ -35,9 +35,15 @@
     (interactive)
     (switch-to-buffer (get-buffer "*Warnings*")))
 
+  (defun switch-to-scratch-buffer ()
+    "Switches to the *scratch* buffer"
+    (interactive)
+    (switch-to-buffer (get-buffer "*scratch*")))
+
   (bind-keys :map as-jump-map
              ("H" "*Help* buffer" . switch-to-help-buffer)
              ("W" "*Warnings* buffer" . switch-to-warnings-buffer)
+             ("x" "*scratch* buffer" . switch-to-scratch-buffer)
              ("M" "*Messages* buffer" . switch-to-messages-buffer))
 
   (add-to-list 'as-which-key-no-delay-prefixes

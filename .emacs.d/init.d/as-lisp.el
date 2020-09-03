@@ -58,4 +58,15 @@
   :defer 20
   :bind ("C-h H" . describe-hash))
 
+(use-package ielm
+  :bind (:map ielm-map
+              ;; This is suggested in the docstring for
+              ;; `ielm-prompt-read-only'.  Why on earth didn't they
+              ;; just implement it by default?
+              ("C-k" . comint-kill-whole-line)
+              ("C-w" . comint-kill-region)))
+
+;; For Common Lisp
+;; (use-package slime)
+
 (provide 'as-lisp)

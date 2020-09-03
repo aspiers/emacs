@@ -4,9 +4,7 @@
 
 (defvar as-personal-todo "~/org/TODO.org")
 
-(use-package org
-  :after as-org-mode
-
+(with-packages org
   :init
   ;;(require 'org-agenda)
 
