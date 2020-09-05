@@ -10,6 +10,10 @@
 ;;   (add-hook 'message-mode-hook
 ;;             'messages-are-flowing-use-and-mark-hard-newlines))
 
+
+(use-feature flowed-text
+  :bind ("M-s M-m" . format-as-flowed-text))
+
 (autoload 'mutt-mode "mutt" "Mode for editing mutt files")
 (add-to-list 'auto-mode-alist '("/mutt-\\|itsalltext.*mail\\.google" . mail-mode))
 (eval-when-compile (require 'sendmail))
