@@ -29,7 +29,7 @@ the filename to an absolute one with all symlinks resolved."
              ;; in interprogram-cut-function, which is x-select-text anyway.
              ;;         (x-select-text buffer-file-name)
              (setq fn (concat fn " (stored in kill ring and X selection)"))))
-      (message fn))))
+      (message "%s" fn))))
 
 ;;}}}
 ;;{{{ as-display-buffer-name
@@ -45,7 +45,7 @@ and in the X selection for other programs."
     (cond (prefix
            (kill-new fn)
            (setq fn (concat fn " (stored in kill ring and X selection)"))))
-    (message fn)))
+    (message "%s" fn)))
 
 ;;}}}
 
