@@ -349,7 +349,6 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
- '(custom-enabled-themes (quote (pastels-on-dark-aspiers)))
  '(custom-safe-themes t)
  '(custom-theme-directory "~/.emacs.d/themes")
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
