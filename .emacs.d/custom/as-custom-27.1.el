@@ -1140,16 +1140,16 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%a" :prepend t)
+      "* NEXT %?%a" :prepend t :jump-to-captured t)
      ("N" "E24P NEXT" entry
       (file "~/Blocko/TODO.org")
-      "* NEXT %?%:annotation" :prepend t)
+      "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t)
+      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("M" "NEXT from E24P mail" entry
       (file "~/Blocko/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t)
+      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
