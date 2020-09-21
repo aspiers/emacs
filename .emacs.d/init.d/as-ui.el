@@ -24,14 +24,6 @@
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
-;;{{{ ido - superior replacement for iswitchb
-
-(req-package ido
-  :commands (ido-mode)
-  :config
-  (ido-mode t))
-
-;;}}}
 ;;{{{ parentheses
 
 (require 'paren)
