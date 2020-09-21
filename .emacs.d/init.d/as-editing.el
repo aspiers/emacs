@@ -11,7 +11,6 @@ The list marked is the one that contains point or follows point."
   (push-mark (point) t t)
   (backward-list))
 
-(bind-key "C-c o" 'overwrite-mode)
 (global-unset-key "\M-o")
 
 (use-feature as-word-motion

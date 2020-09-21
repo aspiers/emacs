@@ -36,7 +36,7 @@
 (use-package hydra
   :config
   (defhydra+ hydra-toggle (:color blue)
-    ("o" as-toggle-bright-theme "toggle bright theme")))
+    ("t" as-toggle-bright-theme "toggle bright theme")))
 
 ;; These are not needed as long as the themes directory is in
 ;; custom-theme-load-path:

@@ -18,12 +18,13 @@
     "
   _a_ abbrev-mode:       %s(format3 abbrev-mode) ^^^^^^^^^^^^^^     _d_ debug-on-error:    %s(format3 debug-on-error)
   _f_ auto-fill-mode:    %3s(if auto-fill-function \"yes\") ^^^     _S_ truncate-lines:    %s(format3 truncate-lines)
-  _w_ tab-width:         %s(format3 tab-width) ^^^^^^^^^^^^^^^^
+  _o_ overwrite-mode:    %3s(if overwrite-mode \"yes\") ^^^^^^^     _w_ tab-width:         %s(format3 tab-width) ^^^^^^^^^^^^^^^^
 _SPC_ whitespace-mode:   %s(format3 whitespace-mode) ^^^^^^^^^^   _TAB_ indent-tabs-mode:  %s(format3 indent-tabs-mode)
 "
     ("a" abbrev-mode nil)
     ("d" toggle-debug-on-error nil)
     ("f" auto-fill-mode nil)
+    ("o" overwrite-mode nil)
     ("s" toggle-truncate-lines nil)
     ("S" toggle-truncate-lines nil)
     ("w" as-set-tab-width nil)
