@@ -25,11 +25,14 @@
 (defun as-toggle-bright-theme ()
   "Toggles a bright theme for outdoors vs. indoors."
   (interactive)
-  (let ((bright-theme
-         ;; 'sunlight
-         'modus-operandi))
+  (let ((dark-theme 'modus-vivendi)
+        (bright-theme 'modus-operandi))
+    ;; or sunlight and pastels-on-dark-aspiers
     (if (memq bright-theme custom-enabled-themes)
-        (disable-theme bright-theme)
+        (progn
+          (disable-theme bright-theme)
+          (load-theme dark-theme))
+      (disable-theme dark-theme)
       (load-theme bright-theme))))
 
 (require 'as-toggles)
