@@ -27,6 +27,8 @@
                           (buffer-substring contents-begin contents-end))))
           (setf (buffer-substring start end) (or desc path)))))))
 
+(defalias 'org-delinkify 'org-unlinkify)
+
 (defun org-refile-and-link ()
   "Refile heading, adding a link to the new location.
 Prefix arguments are interpreted by `org-refile'."
