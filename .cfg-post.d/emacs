@@ -1,18 +1,14 @@
 #!/bin/sh
 
-version=$( emacs --version | \
-             perl -ne '/^\s*(GNU |X)Emacs (\d+\.\d+)/ && print "$2"' )
-
 cd
-[ -e .eid ]            || ln -sf .emacs.d/init.d .eid
-[ -e .as-bindings.el ] && rm .as-bindings.el
-[ -e .as-gtd.el ]      || ln -sf lib/emacs/utils/as-gtd.el .as-gtd.el
-[ -e .el-get ]         || ln -sf .emacs.d/el-get .el-get
 
-ln -sf .emacs.d/custom/as-custom-$version.el .as-custom.el
-
-[ -e .msf-abbrevs ] || \
-    ln -sf lib/emacs/minor-modes/msf-abbrev/mode-abbrevs .msf-abbrevs
+for shortcut in \
+    .eid .as-bindings.el .as-gtd.el .el-get .as-custom .msf-abbrevs
+do
+    if [ -L $shortcut ]; then
+        rm $shortcut
+    fi
+done
 
 # Put this last as it's most likely to fail.
 emk
