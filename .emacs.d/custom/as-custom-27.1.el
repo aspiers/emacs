@@ -1266,7 +1266,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-from-is-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-global-properties
-   '(("Effort_ALL" . "0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00 16:00 0")))
+   '(("Effort_ALL" . "0:10 0:20 0:30 0:45 1:00 2:00 3:00 4:00 8:00 16:00 0")))
  '(org-goto-interface 'outline)
  '(org-goto-max-level 7)
  '(org-habit-following-days 0)
