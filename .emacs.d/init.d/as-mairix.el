@@ -14,6 +14,10 @@
       (if (looking-at "\n")
           (delete-char 1)))))
 
+;; I reserve C-c m for mode-specific user bindings
+(bind-key "C-c M y"   'as-mairix-yank-links)
+(bind-key "C-c M C-y" 'as-mairix-yank-links)
+
 (defcustom as-org-mairix-open-personal-command
   "mairix-profile personal %args% '%search%'"
   "The mairix command-line to use. If your paths are set up
@@ -84,5 +88,7 @@ shell command defined by `org-mairix-mutt-display-command'."
       (shell-command cmd tmpbuf tmpbuf)
       (or show-async-buf
           (delete-windows-on (get-buffer tmpbuf))))))
+
+(bind-key "C-c M RET" 'as-mairix-view-link-at-point)
 
 (provide 'as-mairix)

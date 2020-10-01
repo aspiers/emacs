@@ -1,7 +1,5 @@
 ;; Things to help me with Getting Things Done.
 
-(require 'as-mairix)
-
 (defvar as-personal-todo "~/org/TODO.org")
 
 (with-packages org
