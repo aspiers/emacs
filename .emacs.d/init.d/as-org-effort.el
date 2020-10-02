@@ -51,27 +51,27 @@ with arg 0, which stands for the 10th allowed value."
                      (cdr (assoc "Effort_ALL" org-global-properties))
                      ")")))))
       (dotimes (effort-index 10)
-        (let* ((effort (nth effort-index effort-values))
+        (let* ((effort-sym (nth effort-index effort-values))
                (key-suffix (number-to-string
                             (if (= effort-index 9) 0 (1+ effort-index))))
-               (fn-effort
-                (if (eq effort '0)
+               (effort-string
+                (if (eq effort-sym '0)
                     "0"
-                  (let ((effort (symbol-name effort)))
+                  (let ((effort (symbol-name effort-sym)))
                     (cond ((string-prefix-p "0:" effort)
                            (concat (substring effort 2) "m"))
                           ((string-suffix-p ":00" effort)
                            (concat (string-remove-suffix ":00" effort) "h"))
                           (t (error "Couldn't parse effort %s" effort))))))
-               (fn-name (concat "org-set-effort-" fn-effort))
+               (fn-name (concat "org-set-effort-" effort-string))
                (fn (intern fn-name)))
-          ;; (message "Binding M-o %s to %s which sets effort to %s"
-          ;;          key-suffix fn-name effort)
+          (message "Binding M-o %s to %s which sets effort to %s"
+                   key-suffix fn-name effort-string)
           (eval
            `(defun ,fn ()
-                ,(format "Sets effort to %s." effort)
+                ,(format "Sets effort to %s." effort-string)
               (interactive)
-              (org-set-effort ,(1+ effort-index))))
+              (org-set-effort nil ,effort-string)))
           ;; (declare-function fn
           ;;                   (or (symbol-file 'org-show-effort)
           ;;                       load-file-name))
