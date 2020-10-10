@@ -191,7 +191,7 @@ COMPILER_OPTS=$(COMPILER_BATCH)
 
 # }}}
 
-all: .elcs install
+default: all
 
 # {{{ debugging targets
 
@@ -389,8 +389,5 @@ $(LOADDEFS): $(LOADDEFS_DEPS)
 #       $(MAKE) $(@:.debug=) COMPILER_BATCH='-q -l bytecomp'
 
 # }}}
-# {{{ Special rules for utils files
 
-
-
-# }}}
+all: .elcs install $(LOADDEFS)
