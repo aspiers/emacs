@@ -349,7 +349,6 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
- '(custom-enabled-themes (quote (pastels-on-dark-aspiers)))
  '(custom-safe-themes t)
  '(custom-theme-directory "~/.emacs.d/themes")
  '(cvs-buffer-switch-alist (quote ("diff" "status" "log")))
@@ -426,7 +425,7 @@
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
  '(ido-mode (quote both) nil (ido))
- '(ido-ubiquitous-mode t)
+ '(ido-ubiquitous-mode nil)
  '(ido-use-faces nil)
  '(ido-vertical-mode t)
  '(imenu-auto-rescan t)
@@ -767,12 +766,21 @@
    (quote
     ("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git")))
  '(magit-rewrite-inclusive t)
- '(magit-section-initial-visibility-alist (quote ((stashes . show))))
+ '(magit-section-initial-visibility-alist
+   (quote
+    ((untracked . show)
+     (unstaged . show)
+     (unpulled . show)
+     (unpushed . show)
+     (stashes . show)
+     (pullreqs . show)
+     (issues . show))))
  '(magit-stage-all-confirm nil)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-status-headers-hook
    (quote
     (magit-insert-error-header magit-insert-diff-filter-header magit-insert-repo-header magit-insert-remote-header magit-insert-head-branch-header magit-insert-upstream-branch-header magit-insert-push-branch-header magit-insert-tags-header)))
+ '(magit-status-initial-section (quote (((unstaged) (status)) ((untracked) (status)) 1)))
  '(magit-status-sections-hook
    (quote
     (magit-insert-status-headers magit-insert-merge-log magit-insert-rebase-sequence magit-insert-am-sequence magit-insert-sequencer-sequence magit-insert-bisect-output magit-insert-bisect-rest magit-insert-bisect-log magit-insert-untracked-files magit-insert-unstaged-changes magit-insert-staged-changes magit-insert-stashes magit-insert-unpulled-from-upstream magit-insert-unpulled-from-pushremote magit-insert-unpushed-to-upstream magit-insert-unpushed-to-pushremote)))
@@ -794,6 +802,23 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(minimap-mode nil)
  '(minimap-width-fraction 0.12)
  '(minimap-window-location (quote right))
+ '(modus-operandi-theme-3d-modeline t)
+ '(modus-operandi-theme-intense-hl-line t)
+ '(modus-operandi-theme-intense-paren-match t)
+ '(modus-operandi-theme-mode-line t)
+ '(modus-operandi-theme-proportional-fonts t)
+ '(modus-operandi-theme-rainbow-headings t)
+ '(modus-operandi-theme-scale-headings t)
+ '(modus-operandi-theme-variable-pitch-headings t)
+ '(modus-vivendi-theme-3d-modeline t)
+ '(modus-vivendi-theme-intense-hl-line t)
+ '(modus-vivendi-theme-intense-paren-match t)
+ '(modus-vivendi-theme-mode-line t)
+ '(modus-vivendi-theme-proportional-fonts t)
+ '(modus-vivendi-theme-rainbow-headings t)
+ '(modus-vivendi-theme-scale-headings t)
+ '(modus-vivendi-theme-section-headings nil)
+ '(modus-vivendi-theme-variable-pitch-headings t)
  '(mouse-wheel-follow-mouse t)
  '(mouse-yank-at-point t)
  '(msf-abbrev-indent-after-expansion t)
@@ -1199,7 +1224,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep))))
- '(org-agenda-start-on-weekday -1)
+ '(org-agenda-start-on-weekday nil)
  '(org-agenda-start-with-follow-mode nil)
  '(org-agenda-sticky t)
  '(org-agenda-use-time-grid nil)
@@ -1222,10 +1247,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    (quote
     (("c" "CO2ken NEXT" entry
       (file+olp "~/org/TODO.org" "community" "green" "CO2ken")
-      "* NEXT %?" :prepend t :jump-to-captured t)
+      "* NEXT %?%a" :prepend t :jump-to-captured t)
      ("o" "orgmode NEXT" entry
       (file+olp "~/org/TODO.org" "GTD" "orgmode")
-      "* NEXT %?%:annotation" :prepend t :immediate-finish t :jump-to-captured t)
+      "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
       "%^{Effort}p" :prepend t)
@@ -1405,7 +1430,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-mobile-inbox-for-pull "~/org/org-mobile-incoming.org")
  '(org-modules
    (quote
-    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-toc org-info orgit orgit-forge)))
+    (org-timer org-habit org-id ol-info org-mouse org-protocol org-mairix ol-man org-info orgit orgit-forge)))
  '(org-odd-levels-only t)
  '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces (quote ((65 :weight bold))))
@@ -1429,6 +1454,18 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-reverse-note-order t)
  '(org-special-ctrl-a/e (quote reversed))
  '(org-special-ctrl-k t)
+ '(org-speed-commands-user
+   (quote
+    (("z" . org-add-note)
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("k" . ignore)
+     ("N" org-speed-move-safe
+      (quote org-forward-heading-same-level))
+     ("P" org-speed-move-safe
+      (quote org-backward-heading-same-level))
+     ("$" . org-archive-subtree))))
+ '(org-startup-folded t)
  '(org-stuck-projects
    (quote
     ("/PROJECT"
@@ -1474,161 +1511,17 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org2blog/wp-sourcecode-default-params "")
  '(org2blog/wp-use-sourcecode-shortcode t)
  '(outline-auto-activation t)
- '(package-archives
+ '(outline-minor-mode-prefix (kbd "M-#"))
+ '(outshine-speed-commands-user
    (quote
-    (("Org" . "http://orgmode.org/elpa/")
-     ("ELPA" . "http://tromey.com/elpa/")
-     ("gnu" . "http://elpa.gnu.org/packages/")
-     ("MELPA" . "http://melpa.milkbox.net/packages/"))))
- '(package-selected-packages
-   (quote
-    (orgit-forge
-     org-timeline
-     which-key
-     treemacs-magit
-     treemacs-icons-dired
-     treemacs-projectile
-     treemacs
-     helm-org
-     minimap
-     try
-     ivy-hydra
-     helm-org-rifle
-     counsel-projectile
-     frog-jump-buffer
-     ivy-rich
-     swiper
-     ripgrep
-     ag
-     avy
-     all-the-icons-ivy-rich
-     ivy
-     counsel
-     rg
-     flymake-jshint
-     flymake-jslint
-     flymake-eslint
-     tss
-     typescript-mode
-     haml-mode
-     ido-completing-read+
-     flycheck
-     edit-server
-     php-mode
-     phi-search
-     multiple-cursors
-     prettier
-     nvm
-     dash-functional
-     f
-     iter2
-     prettier-el
-     unicode-fonts
-     php-mode
-     company-lua
-     lua-mode
-     forge
-     org-bullets
-     ocp-indent
-     pastels-on-dark-theme
-     sunlight-theme
-     zenburn-theme
-     color-theme-modern
-     amx
-     use-package
-     orgit
-     ghub
-     quelpa-use-package
-     quelpa
-     flycheck-ocaml
-     tuareg
-     caml
-     go-gopath
-     go-mode
-     flymake-solidity
-     solidity-mode
-     org-crypt
-     use-package-ensure-system-package
-     use-package-chords
-     use-package-el-get
-     messages-are-flowing
-     yasnippet
-     projectile
-     tidy
-     git-timemachine
-     git-gutter+
-     git-gutter-fringe+
-     auto-package-update
-     git-gutter-fringe
-     projectile-codesearch
-     projectile-variable
-     ruby-mode
-     gmpl-mode
-     magit-gerrit
-     sclang-extensions
-     magit
-     magit-annex
-     org-plus-contrib
-     yaml-mode
-     web-mode
-     vc-osc
-     undo-tree
-     switch-window
-     smex
-     smartrep
-     smartparens
-     smart-mode-line
-     sass-mode
-     rubocop
-     rsense
-     rpm-spec-mode
-     req-package
-     region-bindings-mode
-     rainbow-delimiters
-     python
-     phi-search-mc
-     paredit
-     org2blog
-     org-sync
-     org-magit
-     muttrc-mode
-     mmm-mode
-     mediawiki
-     markdown-mode+
-     magit-topgit
-     macrostep
-     kmacro-decision
-     keywiz
-     key-chord
-     idomenu
-     ido-vertical-mode
-     ido-ubiquitous
-     hideshow-org
-     guide-key
-     goto-chg
-     git-gutter
-     gist
-     gerrit-download
-     folding
-     flymake-shell
-     flymake-sass
-     flymake-ruby
-     flymake-css
-     flycheck-package
-     flx-ido
-     fill-column-indicator
-     feature-mode
-     expand-region
-     emms
-     edit-server-htmlize
-     company
-     coffee-mode
-     bundler
-     beeminder
-     beacon
-     autotest
-     asciidoc
-     apache-mode)))
+    (("z" . org-add-note)
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("k" . ignore)
+     ("N" . outline-forward-same-level)
+     ("P" . outline-backward-same-level))))
+ '(outshine-startup-folded-p nil)
+ '(outshine-use-speed-commands t)
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(projectile-enable-caching t)
@@ -1733,7 +1626,6 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(undo-tree-mode-lighter "")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(use-package-always-ensure t)
  '(user-mail-address "adam@spiers.net")
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
