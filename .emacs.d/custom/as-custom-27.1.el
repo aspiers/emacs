@@ -1129,7 +1129,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
      ("z" "property test" entry
       (file "~/org/TODO.org")
-      "%^{Effort}p" :prepend t)
+      "%^{Effort}p" :prepend t :jump-to-captured t)
      ("i" "immediate personal NEXT" entry
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation
@@ -1140,7 +1140,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%a" :prepend t :jump-to-captured t)
+      "* NEXT %?%a%^{Effort}p" :prepend t :jump-to-captured t)
      ("N" "E24P NEXT" entry
       (file "~/Blocko/TODO.org")
       "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
@@ -1152,10 +1152,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
-      "* %^t %?%[~/.org-mairix-link]" :prepend t)
+      "* %^t %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
      ("L" "E24P learning material" entry
-      (file "~/Blocko/TODO.org")
-      "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
+      (file+olp "~/Blocko/TODO.org" "general learning")
+      "* NEXT read%? %a" :prepend t :jump-to-captured t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
@@ -1166,7 +1166,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   CLOSED: %U")
      ("X" "nuisance phone call" entry
       (file "~/org/notes/NuisanceCalls.org")
-      "* %T %?")
+      "* %T %?" :jump-to-captured t)
      ("p" "project" entry
       (file "~/org/TODO.org")
       "* PROJECT %^{project title}
@@ -1183,7 +1183,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** When?
 ***** Where?
 ***** Why?
-***** How?" :prepend t)
+***** How?" :prepend t :jump-to-captured t)
      ("P" "Procrastination" entry
       (file "~/org/notes/ProcrastinationLog.org")
       "* %T %^{activity}
@@ -1192,7 +1192,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   :justification: %^{justification}
   :attempted solution: %^{attempted solution}
   :resultant thoughts/feelings: %^{resultant thoughts/feelings}
-  :END:")
+  :END:" :jump-to-captured t)
      ("e" "emacs NEXT" entry
       (file+olp "" "computer and technology" "tool software development" "emacs")
       "* NEXT %?%a" :prepend t :jump-to-captured t)))
