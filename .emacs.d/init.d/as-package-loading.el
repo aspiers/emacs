@@ -41,7 +41,7 @@
 NAME and ARGS are as in `use-package'."
   (declare (indent defun))
   `(use-package ,name
-     :straight nil
+     :straight nil :ensure nil
      ,@args))
 ;; Looks like the above (declare ...) makes this unnecessary:
 ;;(put 'use-feature 'lisp-indent-function 'defun)
