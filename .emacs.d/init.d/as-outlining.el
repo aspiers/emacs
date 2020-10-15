@@ -266,7 +266,7 @@ is already hidden."
             ;;   folding-region-has-folding-marks-p
             ;;   folding-show-current-subtree
             ;;   folding-find-folding-mark
-            
+
             (local-set-key [(control shift left )] 'as-folding-hide-subtree)
             (local-set-key [(control shift right)] 'as-folding-show-subtree)))
 
@@ -304,20 +304,14 @@ is already hidden."
 ;;    C-up      prev heading
 ;;    C-down    next heading
 
-;; Define fast scroll keys, may be overridden per mode.
-(defun as-fast-up   () "Move up two lines."   (interactive) (forward-line -2))
-(defun as-fast-down () "Move down two lines." (interactive) (forward-line  2))
-;; (bind-key "S-<down>" 'as-fast-down)
-;; (bind-key "S-<up>"   'as-fast-up)
-
-(eval-when-compile (require 'allout))
-(add-hook 'allout-mode-hook
-          (lambda ()
-            (local-set-key [(control U         )] 'allout-up-current-level)
-            (local-set-key [(control up        )] 'allout-previous-visible-heading)
-            (local-set-key [(control down      )] 'allout-next-visible-heading)
-            (local-set-key [(control shift up  )] 'allout-backward-current-level)
-            (local-set-key [(control shift down)] 'allout-forward-current-level)))
+(use-package allout
+  :bind
+  (:map allout-mode-map
+        ([(control U         )] . allout-up-current-level)
+        ([(control up        )] . allout-previous-visible-heading)
+        ([(control down      )] . allout-next-visible-heading)
+        ([(control shift up  )] . allout-backward-current-level)
+        ([(control shift down)] . allout-forward-current-level)))
 
 (defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
@@ -329,14 +323,15 @@ is already hidden."
 (add-hook 'muse-mode-hook 'as-local-set-outline-nav-keys)
 (add-hook 'outline-mode-hook 'as-local-set-outline-nav-keys)
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key [(control U         )] 'outline-up-heading)
-                                                  ;; org-up-heading-safe is not interactive
-            (local-set-key [(control up        )] 'outline-previous-visible-heading)
-            (local-set-key [(control down      )] 'outline-next-visible-heading)
-            (local-set-key [(control shift up  )] 'org-backward-same-level)
-            (local-set-key [(control shift down)] 'org-forward-same-level)))
+(with-packages (org)
+  :bind
+  (:map org-mode-map
+        ("C-U" . outline-up-heading)
+        ;; org-up-heading-safe is not interactive
+        ([(control up)] . outline-previous-visible-heading)
+        ([(control down)] . outline-next-visible-heading)
+        ([(control shift up)] . org-backward-heading-same-level)
+        ([(control shift down)] . org-forward-heading-same-level)))
 
 ;;;; for editing structure:
 
