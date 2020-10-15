@@ -1095,7 +1095,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      (todo . "  %-9:c")
      (tags . "  %-9:c")))
  '(org-agenda-scheduled-leaders '("Sched: " "Sched.%2dx: "))
- '(org-agenda-show-future-repeats nil)
+ '(org-agenda-show-future-repeats t)
  '(org-agenda-skip-deadline-prewarning-if-scheduled t)
  '(org-agenda-skip-scheduled-if-deadline-is-shown 'not-today)
  '(org-agenda-skip-scheduled-if-done t)
