@@ -70,34 +70,7 @@ consistent landing spot."
 
   (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
 
-;;; allout
-
-;; (defun as-allout-init ()
-;;   "Initialize allout-mode the way Adam likes it."
-;;   (interactive)
-;;   (when (not (featurep 'allout))
-;;     (load "allout.el") ;; Loading .elc causes problems?
-;;     (if (boundp 'outline-init)
-;;         ;; Old versions init in a different way
-;;         (outline-init t)
-;;       (allout-init t))
-;;     (substitute-key-definition 'beginning-of-line 'move-beginning-of-line global-map)
-;;     (substitute-key-definition 'end-of-line 'move-end-of-line global-map)))
-
-;; (eval-after-load "outline" '(as-allout-init))
-;; (eval-after-load "muse" '(as-allout-init))
-
-;; (defun as-allout-maybe-init ()
-;;   "Hook for use within `find-file-hooks' to check whether a file needs
-;; allout mode initialized."
-;;   (interactive)
-;;   (when (boundp 'allout-layout)
-;;     (as-allout-init)))
-
-;; (add-hook 'find-file-hooks 'as-allout-maybe-init)
-
-(defvar allout-mode-leaders '((emacs-lisp-mode . ";;;_")
-                              (muse-mode       . "*")))
+;;; Use outshine instead of allout
 
 ;;; outline-minor-mode
 
@@ -205,38 +178,6 @@ consistent landing spot."
         (message "Not on top fold mark"))
     (message "`folding-get-mode-marks' didn't return valid top mark; check `folding-top-mark' and `folding-mode-marks-alist'.")))
 
-;;;;; as-allout-{show,hide}-current
-
-(autoload 'allout-current-topic-collapsed-p "allout")
-(autoload 'allout-hide-current-subtree "allout")
-(autoload 'allout-show-children "allout")
-(autoload 'allout-show-current-entry "allout")
-(autoload 'allout-up-current-level "allout")
-
-(defun as-allout-show-current ()
-  "Shows the body and children of the current topic."
-  (interactive)
-  (allout-show-current-entry)
-  (allout-show-children))
-
-(defun as-allout-hide-current ()
-  "Hides the current topic, or the containing topic if the current one
-is already hidden."
-  (interactive)
-  (cond ((allout-current-topic-collapsed-p)
-         (allout-up-current-level 1)
-         (allout-hide-current-subtree))
-        (t (allout-hide-current-subtree))))
-
-(req-package allout
-  :commands allout-mode
-  :config
-  (progn
-    (define-key allout-mode-map [(control left )] 'as-allout-hide-current)
-    (define-key allout-mode-map [(control right)] 'as-allout-show-current)
-    (define-key allout-mode-map [(control shift left)]  'allout-hide-current-subtree)
-    (define-key allout-mode-map [(control shift right)] 'allout-show-current-subtree)))
-
 ;;;;; as-show-current (outline-mode)
 
 (eval-when (compile) (require 'outline))
@@ -303,15 +244,6 @@ is already hidden."
 ;;    C-S-down  next heading at current level
 ;;    C-up      prev heading
 ;;    C-down    next heading
-
-(use-package allout
-  :bind
-  (:map allout-mode-map
-        ([(control U         )] . allout-up-current-level)
-        ([(control up        )] . allout-previous-visible-heading)
-        ([(control down      )] . allout-next-visible-heading)
-        ([(control shift up  )] . allout-backward-current-level)
-        ([(control shift down)] . allout-forward-current-level)))
 
 (defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
