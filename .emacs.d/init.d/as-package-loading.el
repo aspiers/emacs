@@ -87,25 +87,25 @@ Add package PKG with ARGS to target list.
 
   (defhydra hydra-straight-helper (:hint nil)
     "
-_c_heck all      |_f_etch all    |_m_erge all      |_n_ormalize all    |p_u_sh all
-_C_heck package  |_F_etch package|_M_erge package  |_N_ormalize package|p_U_sh package
+_c_heck package  |_f_etch package|_m_erge package  |_n_ormalize package|p_u_sh package
+_C_heck all      |_F_etch all    |_M_erge all      |_N_ormalize all    |p_U_sh all
 ^-^--------------+^-^------------+^-^--------------+^-^----------------+-^-^------||_q_uit||
-_r_ebuild all    |_p_ull all     |_v_ersions freeze|_w_atcher start    |_g_et recipe
-_R_ebuild package|_P_ull package |_V_ersions thaw  |_W_atcher quit     |prun_e_ build"
-    ("c" straight-check-all)
-    ("C" straight-check-package)
-    ("r" straight-rebuild-all)
-    ("R" straight-rebuild-package)
-    ("f" straight-fetch-all)
-    ("F" straight-fetch-package)
-    ("p" straight-pull-all)
-    ("P" straight-pull-package)
-    ("m" straight-merge-all)
-    ("M" straight-merge-package)
-    ("n" straight-normalize-all)
-    ("N" straight-normalize-package)
-    ("u" straight-push-all)
-    ("U" straight-push-package)
+_r_ebuild package|_p_ull package |_v_ersions freeze|_w_atcher start    |_g_et recipe
+_R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |prun_e_ build"
+    ("c" straight-check-package)
+    ("C" straight-check-all)
+    ("r" straight-rebuild-package)
+    ("R" straight-rebuild-all)
+    ("f" straight-fetch-package)
+    ("F" straight-fetch-all)
+    ("p" straight-pull-package)
+    ("P" straight-pull-all)
+    ("m" straight-merge-package)
+    ("M" straight-merge-all)
+    ("n" straight-normalize-package)
+    ("N" straight-normalize-all)
+    ("u" straight-push-package)
+    ("U" straight-push-all)
     ("v" straight-freeze-versions)
     ("V" straight-thaw-versions)
     ("w" straight-watcher-start)
