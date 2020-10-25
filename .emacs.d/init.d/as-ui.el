@@ -113,13 +113,6 @@
 (req-package flycheck)
 (req-package hideshow-org)
 
-(req-package ido-completing-read+)
-(req-package idomenu) ;; http://emacsrocks.com/e10.html
-;; ido-hacks
-;; ido-everywhere
-;; ido-ubiquitous now obsolete
-(req-package ido-vertical-mode)
-
 ;; Not impressed with this.  No native projectile integration, and can't
 ;; only display open files.
 ;;

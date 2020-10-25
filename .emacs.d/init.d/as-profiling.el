@@ -26,6 +26,13 @@
   (require 'dash)
   (require 's)
 
+  (defmacro profiler-profile-form (form)
+    `(progn
+       (profiler-start 'cpu)
+       ,form
+       (profiler-report)
+       (profiler-stop)))
+
   (defun profiler-running-modes ()
     (let ((running-modes
            (-non-nil (list (if (profiler-cpu-running-p) "cpu")
