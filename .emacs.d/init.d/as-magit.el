@@ -65,15 +65,14 @@
   ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
   (require 'tramp)
   (setq magit-repository-directories
-        (mapcar (lambda (dir) (directory-file-name dir))
+        (mapcar (lambda (dir) (cons (directory-file-name dir) 0))
                 ;; remove tramp and non-git projects
                 (remove-if
                  (lambda (project)
                    (or
                     (tramp-tramp-file-p project)
                     (not (file-directory-p (concat project "/.git")))))
-                 (projectile-relevant-known-projects))))
-  (setq magit-repo-dirs-depth 1))
+                 (projectile-relevant-known-projects)))))
 
 (req-package magit
   ;; See https://gitlab.com/edvorg/req-package/issues/60
