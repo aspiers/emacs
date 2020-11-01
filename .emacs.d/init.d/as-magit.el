@@ -92,4 +92,8 @@
 (use-package orgit
   :requires (org magit))
 
+(use-package magit-todos
+  :config
+  (magit-todos-mode))
+
 (provide 'as-magit)
