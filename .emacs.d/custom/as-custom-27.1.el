@@ -1091,7 +1091,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
  '(org-agenda-prefix-format
-   '((agenda . "  %-9:c%?-12t% s")
+   '((agenda . "%-3(or (org-entry-get (point) \"AGENDA_ORDER\") \"   \") %-9:c%?-12t% s")
      (timeline . "  % s")
      (todo . "  %-9:c")
      (tags . "  %-9:c")))
@@ -1101,7 +1101,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-agenda-skip-scheduled-if-deadline-is-shown 'not-today)
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-sorting-strategy
-   '((agenda time-up priority-down category-keep effort-up)
+   '((agenda time-up manual-up priority-down category-keep effort-up)
      (todo priority-down category-keep effort-up)
      (tags priority-down category-keep effort-up)
      (search category-keep)))

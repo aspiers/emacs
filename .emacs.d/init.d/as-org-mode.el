@@ -55,6 +55,14 @@
 
   (add-to-list 'org-modules 'org-timer))
 
+;; manual sorting for agenda items
+
+(bind-key "C-o" 'org-agenda-show-entry-manual-order org-agenda-mode-map)
+
+;;(setq org-agenda-cmp-user-defined 'org-cmp-agenda-order)
+(setq org-agenda-cmp-user-defined nil)
+
+
 (use-feature org-jump-olp
   :after org
   :commands org-jump-olp)
