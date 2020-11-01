@@ -347,7 +347,7 @@
      ("\\.png\\'" "pinta")
      ("\\.java\\'" "idea")))
  '(dired-kept-versions 0)
- '(dired-listing-switches "-l")
+ '(dired-listing-switches "-la")
  '(display-time-mode nil)
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
