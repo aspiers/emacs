@@ -721,7 +721,7 @@
  '(lazy-lock-stealth-verbose t)
  '(lua-indent-level 2)
  '(magit-branch-prefer-remote-upstream '("master" "stable/3.0"))
- '(magit-completing-read-function 'magit-ido-completing-read)
+ '(magit-completing-read-function 'ivy-completing-read)
  '(magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
  '(magit-diff-visit-avoid-head-blob t)
  '(magit-display-buffer-function 'magit-display-buffer-fullscreen)
