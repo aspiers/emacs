@@ -26,6 +26,11 @@
   (require 'dash)
   (require 's)
 
+  (setq profiler-report-cpu-line-format
+    '((70 left)
+      (24 right ((19 right)
+                 (5 right)))))
+
   ;; These two stolen from profiler.el.gz - they're commented out for
   ;; some reason.
   (cl-defmacro with-cpu-profiling ((&key sampling-interval) &rest body)
