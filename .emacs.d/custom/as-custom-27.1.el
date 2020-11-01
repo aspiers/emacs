@@ -326,6 +326,7 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
+ '(custom-enabled-themes '(modus-vivendi))
  '(custom-safe-themes t)
  '(custom-theme-directory "~/.emacs.d/themes")
  '(cvs-buffer-switch-alist '("diff" "status" "log"))
