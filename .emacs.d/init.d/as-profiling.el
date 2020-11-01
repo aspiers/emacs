@@ -26,12 +26,25 @@
   (require 'dash)
   (require 's)
 
-  (defmacro profiler-profile-form (form)
-    `(progn
-       (profiler-start 'cpu)
-       ,form
+  ;; These two stolen from profiler.el.gz - they're commented out for
+  ;; some reason.
+  (cl-defmacro with-cpu-profiling ((&key sampling-interval) &rest body)
+    `(unwind-protect
+         (progn
+           (ignore (profiler-cpu-log))
+           (profiler-cpu-start ,sampling-interval)
+           ,@body)
        (profiler-report)
-       (profiler-stop)))
+       (profiler-cpu-stop)))
+
+  (defmacro with-memory-profiling (&rest body)
+    `(unwind-protect
+         (progn
+           (ignore (profiler-memory-log))
+           (profiler-memory-start)
+           ,@body)
+       (profiler-report)
+       (profiler-memory-stop)))
 
   (defun profiler-running-modes ()
     (let ((running-modes
