@@ -247,7 +247,7 @@ consistent landing spot."
 
 (defun as-local-set-outline-nav-keys ()
   "Bind local outline navigation keys the way Adam likes them."
-  (local-set-key [(control U         )] 'outline-up-heading)
+  (local-set-key [(control shift u   )] 'outline-up-heading)
   (local-set-key [(control up        )] 'outline-previous-visible-heading)
   (local-set-key [(control down      )] 'outline-next-visible-heading)
   (local-set-key [(control shift down)] 'outline-forward-same-level)
