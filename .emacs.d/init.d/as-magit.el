@@ -1,6 +1,6 @@
 ;; See also as-vcs.el
 
-(req-package magit
+(use-package magit
   :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
@@ -39,10 +39,9 @@
       ;; return buffer's window
       (get-buffer-window buffer))))
 
-(req-package magit
+(with-packages (magit projectile)
   ;; See https://gitlab.com/edvorg/req-package/issues/60
   ;; (needs docs for how to handle config which involves multiple packages)
-  :require projectile
   :config
   ;; Improved and updated version of this nice idea from
   ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
@@ -57,8 +56,7 @@
                     (not (file-directory-p (concat project "/.git")))))
                  (projectile-relevant-known-projects)))))
 
-(req-package magit
-  :require org
+(with-packages (magit org)
   :config
   (defun as-magit-post-display-org-buffer-hook ()
     "Hook for `magit-diff-visit-file-hook' to automatically run
@@ -72,7 +70,7 @@
 ;; https://github.com/greenrd/magit-topgit/issues/10
 ;;(req-package magit-topgit)
 
-(req-package magit-annex)
+(use-package magit-annex)
 
 ;; https://github.com/terranpro/magit-gerrit/issues/62
 ;; https://github.com/somtin/magit-gerrit/issues/1
@@ -89,7 +87,9 @@
     '("c F" "fork to aspiers" as-forge-fork)))
 
 ;; support for magit: links in org buffers
-(req-package orgit
-  :require org magit)
+;; e.g. [[orgit:/path/to/repo/][my repo]]
+;; https://github.com/magit/orgit/
+(use-package orgit
+  :requires (org magit))
 
 (provide 'as-magit)
