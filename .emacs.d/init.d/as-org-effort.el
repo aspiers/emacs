@@ -1,6 +1,6 @@
 (require 'as-org-mode)
 
-(use-package org
+(with-packages org
   :config
 
   (defun as-org-convert-buffer-sub-to-effort ()

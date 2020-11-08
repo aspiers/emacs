@@ -2,7 +2,7 @@
 
 ;; See also as-mairix.el
 
-(use-package org
+(with-packages org
   :bind (("C-c L" . org-store-link))
 
   :config
