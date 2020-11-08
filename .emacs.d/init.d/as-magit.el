@@ -76,10 +76,8 @@
 ;; https://github.com/somtin/magit-gerrit/issues/1
 ;;(req-package magit-gerrit)
 
-(require 'as-org-mode)
-
 (use-package forge
-  :after (org)
+  :after org
   :config
   (defun as-forge-fork ()
     (interactive)
