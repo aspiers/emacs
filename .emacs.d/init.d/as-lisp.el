@@ -69,4 +69,6 @@
 ;; For Common Lisp
 ;; (use-package slime)
 
+(use-package etrace)
+
 (provide 'as-lisp)
