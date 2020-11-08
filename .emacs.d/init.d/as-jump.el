@@ -13,6 +13,14 @@
 (defvar as-jump-map (make-sparse-keymap "Jump to")
   "Adam's prefix keymap for quickly jumping to stuff")
 
+(defun switch-to-buffer-if-exists (buffer-or-name &optional description)
+  "Switches to the given buffer if it exists; otherwise emits a warning."
+  (interactive)
+  (if (get-buffer buffer-or-name)
+      (switch-to-buffer buffer-or-name)
+    (error "No %s buffer to jump to"
+           (or description buffer-or-name "<unknown>"))))
+
 (use-feature as-which-key
   ;; Need to load which-key to ensure define-key is advised
   :after which-key
@@ -23,22 +31,22 @@
   (defun switch-to-help-buffer ()
     "Switches to the *Help* buffer"
     (interactive)
-    (switch-to-buffer (help-buffer)))
+    (switch-to-buffer-if-exists (help-buffer)))
 
   (defun switch-to-messages-buffer ()
     "Switches to the *Messages* buffer"
     (interactive)
-    (switch-to-buffer (messages-buffer)))
+    (switch-to-buffer-if-exists (messages-buffer)))
 
   (defun switch-to-warnings-buffer ()
     "Switches to the *Warnings* buffer"
     (interactive)
-    (switch-to-buffer (get-buffer "*Warnings*")))
+    (switch-to-buffer-if-exists "*Warnings*"))
 
   (defun switch-to-scratch-buffer ()
     "Switches to the *scratch* buffer"
     (interactive)
-    (switch-to-buffer (get-buffer "*scratch*")))
+    (switch-to-buffer-if-exists "*scratch*"))
 
   (bind-keys :map as-jump-map
              ("H" "*Help* buffer" . switch-to-help-buffer)
