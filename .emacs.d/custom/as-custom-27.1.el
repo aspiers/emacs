@@ -350,6 +350,7 @@
  '(dired-kept-versions 0)
  '(dired-listing-switches "-la")
  '(display-time-mode nil)
+ '(dumb-jump-rg-search-args "")
  '(dvc-tips-enabled nil)
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")

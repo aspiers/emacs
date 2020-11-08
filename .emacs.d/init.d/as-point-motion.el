@@ -57,8 +57,12 @@
 
 (bind-key "M-i" 'indent-relative)
 
-(req-package goto-chg
+(use-package goto-chg
   :bind (("C-<" . goto-last-change)
          ("C->" . goto-last-change-reverse)))
+
+(use-package dumb-jump
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 (provide 'as-point-motion)
