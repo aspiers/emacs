@@ -56,7 +56,6 @@
   (add-to-list 'org-modules 'org-timer))
 
 (use-feature org-jump-olp
-  :after org
   :commands org-jump-olp)
 
 (with-packages (org counsel)
@@ -73,11 +72,7 @@
 ;;
 ;; See also https://orgmode.org/worg/org-tutorials/encrypting-files.html
 (use-feature org-crypt
-  :after org
-
-  :defer t
-  :init
-  (autoload 'org-crypt-use-before-save-magic "org-crypt"))
+  :commands org-crypt-use-before-save-magic)
 
 (use-feature as-gtd
   :after org)
@@ -88,12 +83,11 @@
 ;; Supposed to help debug org-plus-contrib load warning but doesn't
 (require 'use-package)
 
-(use-package org-sync :after org)
+(use-package org-sync)
 
-(use-package org-timeline :after org)
+(use-package org-timeline)
 
 (use-package org-bullets
-  :after org
   :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (defun as-helm-org-rifle-notes ()

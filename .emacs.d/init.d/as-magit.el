@@ -77,7 +77,6 @@
 ;;(req-package magit-gerrit)
 
 (use-package forge
-  :after org
   :config
   (defun as-forge-fork ()
     (interactive)
@@ -90,9 +89,8 @@
 ;; support for magit: links in org buffers
 ;; e.g. [[orgit:/path/to/repo/][my repo]]
 ;; https://github.com/magit/orgit/
-(use-package orgit
-  :after (org magit))
-(use-package orgit-forge :after (orgit forge))
+(use-package orgit)
+(use-package orgit-forge)
 
 (use-package magit-todos
   :config

@@ -1,5 +1,3 @@
-(require 'as-org-mode)
-
 (with-packages org
   :config
 
