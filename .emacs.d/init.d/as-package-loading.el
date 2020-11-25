@@ -88,10 +88,11 @@ Add package PKG with ARGS to target list.
   (defhydra hydra-straight-helper (:hint nil)
     "
 _c_heck package  |_f_etch package|_m_erge package  |_n_ormalize package|p_u_sh package
-_C_heck all      |_F_etch all    |_M_erge all      |_N_ormalize all    |p_U_sh all
-^-^--------------+^-^------------+^-^--------------+^-^----------------+-^-^------||_q_uit||
+_C_heck all      |_F_etch all    |_M_erge all      |_N_ormalize all    |
+^-^--------------+^-^------------+^-^--------------+^-^----------------+-^-^-----------
 _r_ebuild package|_p_ull package |_v_ersions freeze|_w_atcher start    |_g_et recipe
-_R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |prun_e_ build"
+_R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |_U_pdate repos
+prun_e_ build               || _q_uit ||"
     ("c" straight-check-package)
     ("C" straight-check-all)
     ("r" straight-rebuild-package)
@@ -105,12 +106,12 @@ _R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |prun_e_ 
     ("n" straight-normalize-package)
     ("N" straight-normalize-all)
     ("u" straight-push-package)
-    ("U" straight-push-all)
     ("v" straight-freeze-versions)
     ("V" straight-thaw-versions)
     ("w" straight-watcher-start)
     ("W" straight-watcher-quit)
     ("g" straight-get-recipe)
+    ("U" straight-pull-recipe-repositories)
     ("e" straight-prune-build)
     ("q" nil))
 
