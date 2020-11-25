@@ -123,10 +123,16 @@ prun_e_ build               || _q_uit ||"
   ;; is used via bind-keys.
   :after which-key
   :config
+  (defun switch-to-use-package-buffer ()
+    "Switches to the *use-package* buffer"
+    (interactive)
+    (switch-to-buffer-if-exists "*use-package*"))
+
   (bind-keys :map as-jump-map
              ("l" "ELPA package" . as-find-elpa-package)
              ("L" "el-get package" . as-find-el-get-package)
-             ("s" "straight.el package" . as-find-straight-package)))
+             ("s" "straight.el package" . as-find-straight-package)
+             ("U" "*use-package" . switch-to-use-package-buffer)))
 
 ;; This is nice for trying out packages
 (use-package try :commands try)
