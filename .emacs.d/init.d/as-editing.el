@@ -22,7 +22,9 @@ The list marked is the one that contains point or follows point."
          ("C-M-S-k" . as-kill-sexp)))
 
 (bind-key "C-M-k"   'kill-sexp)
-(bind-key "M-\\"    'fixup-whitespace)
+;; https://karthinks.com/software/batteries-included-with-emacs/#cycle-spacing--m-spc
+(bind-key "M-SPC"   'cycle-spacing)
+;; (bind-key "M-\\"    'fixup-whitespace)
 (bind-key "M-s M-k" 'delete-trailing-whitespace)
 
 (use-feature bn-kill-stuff
