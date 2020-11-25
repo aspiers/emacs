@@ -110,8 +110,8 @@
   :defer 5
   :config (beacon-mode 1))
 
-(req-package flycheck)
-(req-package hideshow-org)
+(use-package flycheck)
+(use-package hideshow-org)
 
 ;; Not impressed with this.  No native projectile integration, and can't
 ;; only display open files.
