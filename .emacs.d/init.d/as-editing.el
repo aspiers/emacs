@@ -27,6 +27,11 @@ The list marked is the one that contains point or follows point."
 ;; (bind-key "M-\\"    'fixup-whitespace)
 (bind-key "M-s M-k" 'delete-trailing-whitespace)
 
+;; https://karthinks.com/software/batteries-included-with-emacs/#dwim-commands--upcase-downcase-and-more
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
+
 (use-feature bn-kill-stuff
   :bind (("C-M-(" . bn-strip-parentheses)
          ("C-w"   . bn-kill-region-or-backword-word)
