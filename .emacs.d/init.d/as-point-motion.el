@@ -12,6 +12,9 @@
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
 
+;; https://karthinks.com/software/batteries-included-with-emacs/#view-mode--m-x-view-mode
+(setq view-read-only t)
+
 ;; Default right margin
 (setq fill-column 70)
 
