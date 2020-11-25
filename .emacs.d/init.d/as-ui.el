@@ -113,6 +113,10 @@
 (use-package flycheck)
 (use-package hideshow-org)
 
+(use-package insert-char-preview
+    :commands insert-char-preview
+    :bind ("C-x 8 RET" . insert-char-preview))
+
 ;; Not impressed with this.  No native projectile integration, and can't
 ;; only display open files.
 ;;
