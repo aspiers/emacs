@@ -23,6 +23,10 @@
            ("zd" . projectile-find-dir)
            ("zb" . projectile-switch-to-buffer))
 
+  :bind
+  (:map projectile-command-map
+        ("DEL" . projectile-remove-known-project))
+
   :config
   ;; https://github.com/bbatsov/projectile/issues/287
   (defvar projectile-prefix-map
