@@ -1494,6 +1494,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
+ '(whitespace-global-modes '(not magit-log-mode))
  '(whitespace-line-column 80)
  '(whitespace-style
    '(face trailing space-before-tab newline empty tab-mark tabs))
