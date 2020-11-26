@@ -96,4 +96,8 @@
   :config
   (magit-todos-mode))
 
+(use-package magit-pretty-graph
+  :straight (:host github :repo "georgek/magit-pretty-graph")
+  :bind ("C-c g p" . magit-pg-repo))
+
 (provide 'as-magit)
