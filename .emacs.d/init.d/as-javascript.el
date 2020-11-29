@@ -1,6 +1,6 @@
 ;; Steve Yegge to the rescue
 (use-package js2-mode
-  :mode ("\\.js\\(\.erb\\)?$")
+  :mode ("\\.jsx?\\(\.erb\\)?$")
   :config
 
   ;; Allow easy configuring of 3rd party repos for hard tab indents via:
