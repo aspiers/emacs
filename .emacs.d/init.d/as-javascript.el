@@ -1,14 +1,21 @@
 ;; Steve Yegge to the rescue
 (use-package js2-mode
-  :mode ("\\.js\\(\.erb\\)?$")
-  :config
+  :mode ("\\.js\\(\.erb\\)?$"))
 
-  ;; Allow easy configuring of 3rd party repos for hard tab indents via:
-  ;;    (dir-locals-set-directory-class "/path/to/repo/" 'js2-tab-8-indent)
-  (dir-locals-set-class-variables
-   'js2-tab-8-indent
-   '((js2-mode . ((indent-tabs-mode . t)
-                  (js2-basic-offset . 8))))))
+;; Allow easy configuring of 3rd party repos for various indentation
+;; strategies, via statements like:
+;;
+;;    (dir-locals-set-directory-class "/path/to/repo/" 'js-tab-8-indent)
+(dir-locals-set-class-variables
+ 'js-indent-8-tabs
+ '((nil . ((indent-tabs-mode . t)
+           (js-indent-level . 8)
+           (js2-basic-offset . 8)))))
+(dir-locals-set-class-variables
+ 'js-indent-2-no-tabs
+ '((nil . ((indent-tabs-mode . nil)
+           (js-indent-level . 2)
+           (js2-basic-offset . 2)))))
 
 (use-package coffee-mode)
 (use-package flymake-eslint)
