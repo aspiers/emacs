@@ -2,9 +2,16 @@
 ;; https://gist.github.com/aspiers/775ce717bd06d43d7adb
 
 ;; Steve Yegge to the rescue
-;; (req-package js2-mode
-;;   :commands nil
-;;   :mode ("\\.js\\(\.erb\\)?$" . js2-mode))
+(use-package js2-mode
+  :mode ("\\.js\\(\.erb\\)?$")
+  :config
+
+  ;; Allow easy configuring of 3rd party repos for hard tab indents via:
+  ;;    (dir-locals-set-directory-class "/path/to/repo/" 'js2-tab-8-indent)
+  (dir-locals-set-class-variables
+   'js2-tab-8-indent
+   '((js2-mode . ((indent-tabs-mode . t)
+                  (js2-basic-offset . 8))))))
 
 (use-package coffee-mode)
 (use-package flymake-eslint)
