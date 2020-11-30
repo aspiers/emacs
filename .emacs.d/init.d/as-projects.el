@@ -9,6 +9,8 @@
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
 (require 'as-key-chord)
+(require 'as-magit)
+
 (use-package projectile
   :requires as-key-chord
 
@@ -50,10 +52,9 @@ an existing magit status buffer if it exists, to save rebuilding it."
                       projectile-known-projects))))
   (or project-root (setq project-root (projectile-project-root)))
   (let ((vcs (projectile-project-vcs project-root)))
-    (or (and (eq vcs 'git)
-             (let ((buf (magit-get-mode-buffer 'magit-status-mode)))
-               (if buf (switch-to-buffer buf))))
-        (projectile-vc project-root))))
+    (if (eq vcs 'git)
+        (as-magit-status)
+      (projectile-vc project-root))))
 
 (defun as-counsel-projectile-switch-project (project)
   "Open PROJECT in vc-dir / magit / monky."
