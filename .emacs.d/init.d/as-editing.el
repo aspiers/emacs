@@ -78,4 +78,10 @@ The list marked is the one that contains point or follows point."
             (interactive)
             (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
 
+(use-package editorconfig
+  :ensure t
+  :diminish editorconfig-mode
+  :config
+  (editorconfig-mode 1))
+
 (provide 'as-editing)
