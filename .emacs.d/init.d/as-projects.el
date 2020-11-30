@@ -40,6 +40,28 @@
 
   :bind ("C-c p" . as-copy-previous-line-suffix))
 
+(defun as-projectile-switch-project (&optional project-root)
+  "Adam's wrapper around `projectile-vc' which just switches to
+an existing magit status buffer if it exists, to save rebuilding it."
+  (interactive (and current-prefix-arg
+                    (list
+                     (projectile-completing-read
+                      "Open project VC in: "
+                      projectile-known-projects))))
+  (or project-root (setq project-root (projectile-project-root)))
+  (let ((vcs (projectile-project-vcs project-root)))
+    (or (and (eq vcs 'git)
+             (let ((buf (magit-get-mode-buffer 'magit-status-mode)))
+               (if buf (switch-to-buffer buf))))
+        (projectile-vc project-root))))
+
+(defun as-counsel-projectile-switch-project (project)
+  "Open PROJECT in vc-dir / magit / monky."
+  (let ((projectile-switch-project-action 'as-projectile-switch-project))
+    (counsel-projectile-switch-project-by-name project)))
+
+(setq projectile-switch-project-action 'as-projectile-switch-project)
+
 (use-package counsel-projectile
   :after (counsel projectile)
   :config
