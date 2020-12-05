@@ -4,7 +4,6 @@
   :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
-         ("C-c g G" . magit-run-gitg)
          ("C-c g k" . magit-run-gitk)
          ("C-c g a" . magit-run-gitk-all)
          ("C-c g A" . magit-run-gitg)
