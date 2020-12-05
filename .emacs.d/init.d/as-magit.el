@@ -4,8 +4,10 @@
   :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
+         ("C-c g G" . magit-run-gitg)
          ("C-c g k" . magit-run-gitk)
          ("C-c g a" . magit-run-gitk-all)
+         ("C-c g A" . magit-run-gitg)
          ("C-c g s" . as-magit-status)
          ("C-c g l" . magit-log-buffer-file)
          ("C-S-g" .   as-magit-status))
@@ -37,7 +39,12 @@
       (set-window-dedicated-p nil nil)
       (set-window-buffer nil buffer)
       ;; return buffer's window
-      (get-buffer-window buffer))))
+      (get-buffer-window buffer)))
+
+  (defun magit-run-gitg ()
+    "Run `gitg' in the current repository."
+    (interactive)
+    (magit-process-file "gitg" nil 0)))
 
 (with-packages (magit projectile)
   ;; See https://gitlab.com/edvorg/req-package/issues/60
