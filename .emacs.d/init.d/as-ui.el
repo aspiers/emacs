@@ -74,6 +74,12 @@
   :after ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
 
+;; Maintained fork of smex for saving M-x history.  counsel-M-x will
+;; integrate with it automatically.
+(use-package amx
+  :config
+  (amx-mode 1))
+
 (use-package counsel
   :defer 2
   :config
