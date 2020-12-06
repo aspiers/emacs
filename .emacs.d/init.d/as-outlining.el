@@ -258,7 +258,7 @@ consistent landing spot."
 (with-packages (org)
   :bind
   (:map org-mode-map
-        ("C-U" . outline-up-heading)
+        ([(control shift u)] . outline-up-heading)
         ;; org-up-heading-safe is not interactive
         ([(control up)] . outline-previous-visible-heading)
         ([(control down)] . outline-next-visible-heading)
