@@ -23,6 +23,12 @@
     ;; use org speed keys
     (beginning-of-line))
 
+  (defun as-find-tool-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo
+                  '("computer and technology"
+                    "tool software development")))
+
   (defun as-find-emacs-todos ()
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
@@ -39,10 +45,17 @@
     (as-org-jump-olp-and-next as-personal-todo
                               '("GTD" "orgmode")))
 
+  (defun as-find-OW-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo
+                              '("community" "OW2000")))
+
   (bind-keys :map as-jump-map
              ("t" "personal TODO" . as-find-personal-todo)
+             ("T" "tool TODOs" . as-find-tool-todos)
              ("E" "emacs TODOs" . as-find-emacs-todos)
              ("o" "orgmode TODOs" . as-find-orgmode-todos)
+             ("O" "OW2000 TODOs" . as-find-OW-todos)
              ("d" "personal diary" . as-find-personal-diary)
              ("G" "GTD TODOs" . as-find-GTD-todos)
              ("n" "personal note" . as-find-personal-note)))
