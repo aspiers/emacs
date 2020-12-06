@@ -89,7 +89,8 @@
 
   :chords ((",." . counsel-switch-buffer)
            (",;" . counsel-switch-buffer-other-window)
-           ("xf" . counsel-find-file))
+           ("xf" . counsel-find-file)
+           ("xd" . (lambda () (interactive) (dired "."))))
   :bind (("C-x 4 b" . counsel-switch-buffer-other-window)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
