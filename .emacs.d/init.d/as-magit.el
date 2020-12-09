@@ -40,6 +40,14 @@
       ;; return buffer's window
       (get-buffer-window buffer)))
 
+  (defun as-magit-status ()
+    "Adam's wrapper around `magit-status' which just switches to
+an existing magit status buffer if it exists, to save rebuilding it."
+    (interactive)
+    (let ((buf (magit-get-mode-buffer 'magit-status-mode)))
+      (if buf (switch-to-buffer buf)
+        (magit-status))))
+
   (defun magit-run-gitg ()
     "Run `gitg' in the current repository."
     (interactive)
@@ -49,14 +57,6 @@
   ;; See https://gitlab.com/edvorg/req-package/issues/60
   ;; (needs docs for how to handle config which involves multiple packages)
   :config
-
-  (defun as-magit-status ()
-    "Adam's wrapper around `magit-status' which just switches to
-an existing magit status buffer if it exists, to save rebuilding it."
-    (interactive)
-    (let ((buf (magit-get-mode-buffer 'magit-status-mode)))
-      (if buf (switch-to-buffer buf)
-        (magit-status))))
 
   ;; Improved and updated version of this nice idea from
   ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
