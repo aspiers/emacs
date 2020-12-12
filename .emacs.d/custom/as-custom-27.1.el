@@ -1498,9 +1498,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-line-column 80)
  '(whitespace-style
    '(face trailing space-before-tab newline empty tab-mark tabs))
- '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
- '(yas-snippet-dirs
-   '("~/lib/emacs/minor-modes/yasnippet/snippets" "~/lib/emacs/minor-modes/yasnippets-rails/rails-snippets")))
+ '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$"))
 
 (message "custom-set-variables done")
 
