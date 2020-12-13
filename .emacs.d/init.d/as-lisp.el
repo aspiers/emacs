@@ -71,4 +71,14 @@
 
 (use-package etrace)
 
+(use-package ert
+  :config
+  (defun ert-eval-run-test-at-point ()
+    "Calls `eval-defun' and runs the resulting test interactively."
+    (interactive)
+    (let ((test (call-interactively #'eval-defun nil)))
+      (ert-run-tests-interactively test)))
+
+  :bind ("C-M-S-x" . ert-eval-run-test-at-point))
+
 (provide 'as-lisp)
