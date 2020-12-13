@@ -52,6 +52,19 @@
           (counsel-git-grep . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
 
+  (defun ivy-show-context ()
+    "Output a messaging with some helpful information about how ivy
+has built the current list of completion matches."
+    (interactive)
+    (let ((caller (ivy-state-caller ivy-last)))
+      (message "\nivy :caller %s, :matcher %s\n:sort (or %s %s), :re-builder %s\n:collection %s"
+               caller
+               (ivy-state-matcher ivy-last)
+               (ivy-state-sort ivy-last)
+               (assoc caller ivy-sort-functions-alist)
+               (ivy-state-re-builder ivy-last)
+               (ivy-state-collection ivy-last))))
+
   ;; See https://github.com/abo-abo/swiper/issues/2628
   ;; ("Fallback in ivy-sort-functions-alist is ignored")
   (add-to-list 'ivy-sort-matches-functions-alist
@@ -63,6 +76,9 @@
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile "")
 
   :bind
+  (:map ivy-mode-map
+        ("C-c M-c" . ivy-show-context))
+
   ;; https://github.com/abo-abo/swiper/wiki/FAQ#how-to-prevent-tab-from-selecting-the-only-candidate
   (:map ivy-minibuffer-map
         ("TAB" . ivy-partial)))
