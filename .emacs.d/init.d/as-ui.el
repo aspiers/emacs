@@ -35,13 +35,37 @@
 
 ;;}}}
 
-(use-package flx)
+(use-package selectrum
+  :config
+  (selectrum-mode +1))
+
+(use-package selectrum-prescient)
+;; (use-package flx)
 ;; (use-package flx-ido)
 
+;; Enable richer annotations using the Marginalia package
+(use-package marginalia
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
+
+  ;; Must be in the :init section of use-package such that the mode gets
+  ;; enabled right away. Note that this forces loading the package.
+  (marginalia-mode)
+
+  ;; Prefer richer, more heavy, annotations over the lighter default variant.
+  ;; E.g. M-x will show the documentation string additional to the keybinding.
+  ;; By default only the keybinding is shown as annotation.
+  ;; Note that there is the command `marginalia-cycle-annotators` to
+  ;; switch between the annotators.
+  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light)))
+
 (use-package ivy
+  :after flx
+
   :config
   (require 'flx)
   (ivy-mode 1)
+
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
   ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
@@ -108,6 +132,64 @@ has built the current list of completion matches."
 
 (key-chord-define-global "xd" (lambda () (interactive) (dired ".")))
 
+(use-package consult
+  ;; Replace bindings. Lazily loaded due to use-package.
+  :chords ((",." . consult-buffer)
+           (",;" . consult-buffer-other-window)
+           ("xf" . find-file))
+  :bind (("C-c h" . consult-history)
+         ("C-c o" . consult-outline)
+         ("C-x b" . consult-buffer)
+         ("C-x 4 b" . consult-buffer-other-window)
+         ("C-x 5 b" . consult-buffer-other-frame)
+         ("C-x r x" . consult-register)
+         ("C-x r b" . consult-bookmark)
+         ;; ("M-g o" . consult-outline) ;; "M-s o" is a good alternative
+         ;; ("M-g m" . consult-mark)    ;; "M-s m" is a good alternative
+         ;; ("M-g l" . consult-line)    ;; "M-s l" is a good alternative
+         ;; ("M-g i" . consult-imenu)   ;; "M-s i" is a good alternative
+         ;; ("M-g e" . consult-error)   ;; "M-s e" is a good alternative
+         ("M-s m" . consult-multi-occur)
+
+         ;; browse-kill-ring is an alternative option
+         ("M-Y" . consult-yank-pop)
+
+         ("<help> a" . consult-apropos))
+
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
+
+  ;; Replace functions (consult-multi-occur is a drop-in replacement)
+  (fset 'multi-occur #'consult-multi-occur)
+
+  ;; Configure other variables and modes in the :config section, after lazily loading the package
+  :config
+
+  ;; Optionally enable previews. Note that individual previews can be disabled
+  ;; via customization variables.
+  (consult-preview-mode))
+
+;; Enable Consult-Selectrum integration.
+;; This should be installed if Selectrum is used.
+(use-package consult-selectrum
+  :straight consult
+  :demand t)
+
+;; Install the consult-flycheck command.
+(use-package consult-flycheck
+  :straight consult
+  :bind (:map flycheck-command-map
+         ("!" . consult-flycheck)))
+
+;; Optionally enable richer annotations using the Marginalia package
+(use-package marginalia
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
+
+  ;; Must be in the :init section of use-package such that the mode gets
+  ;; enabled right away. Note that this forces loading the package.
+  (marginalia-mode))
+
 (use-package counsel
   :defer 2
   :config
@@ -115,21 +197,22 @@ has built the current list of completion matches."
 
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-  :chords ((",." . counsel-switch-buffer)
-           (",;" . counsel-switch-buffer-other-window)
-           ("xf" . counsel-find-file))
-  :bind (("C-x 4 b" . counsel-switch-buffer-other-window)
+  ;; :chords ((",." . counsel-switch-buffer)
+  ;;          (",;" . counsel-switch-buffer-other-window)
+  ;;          ("xf" . counsel-find-file))
+  :bind (
+         ;; ("C-x 4 b" . counsel-switch-buffer-other-window)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-1" . counsel-ibuffer)
-         ("C-h a" . counsel-apropos)
+         ;; ("C-h a" . counsel-apropos)
          ("C-h b" . counsel-descbinds)
-         ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable)
-         ("C-h o" . counsel-describe-symbol)
-         ("C-x M-f" . counsel-find-library)
-         ("C-h S" . counsel-info-lookup-symbol)
+         ;; ("C-h f" . counsel-describe-function)
+         ;; ("C-h v" . counsel-describe-variable)
+         ;; ("C-h o" . counsel-describe-symbol)
+         ;; ("C-x M-f" . counsel-find-library)
+         ;; ("C-h S" . counsel-info-lookup-symbol)
          ;; ("<f2> u" . counsel-unicode-char)
          ;; ("C-c g" . counsel-git)
          ;; ("C-c j" . counsel-git-grep)

@@ -38,6 +38,10 @@ The list marked is the one that contains point or follows point."
          ("M-w"   . bn-kill-line-or-region-save)
          ("M-Z" . bn-zap-nearly-to-char)))
 
+;; Use consult-yank-pop instead
+;; (use-package browse-kill-ring
+;;   :bind (("M-Y" . browse-kill-ring)))
+
 (use-feature as-line-ops
   :bind (("C-x C-t" . as-transpose-lines)
          ("C-c d"   . as-duplicate-line)
