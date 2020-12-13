@@ -60,7 +60,12 @@
 
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
-  (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile ""))
+  (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile "")
+
+  :bind
+  ;; https://github.com/abo-abo/swiper/wiki/FAQ#how-to-prevent-tab-from-selecting-the-only-candidate
+  (:map ivy-minibuffer-map
+        ("TAB" . ivy-partial)))
 
 ;; C-o in ivy minibuffer is awesome!!
 (use-package ivy-hydra)
