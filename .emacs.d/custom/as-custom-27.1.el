@@ -281,6 +281,7 @@
      (java-mode . "java")
      (awk-mode . "awk")
      (other . "gnu")))
+ '(calendar-week-start-day 1)
  '(case-fold-search t)
  '(coffee-tab-width 4)
  '(color-theme-is-cumulative t)
