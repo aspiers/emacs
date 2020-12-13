@@ -18,7 +18,7 @@ The list marked is the one that contains point or follows point."
          ("M-B"   . as-backward-before-word)
          ("C-M-S-f" . as-forward-sexp-start)
          ("C-M-S-b" . as-backward-before-sexp)
-         ("S-M-d"   . as-kill-word)
+         ("M-D"   . as-kill-word)
          ("C-M-S-k" . as-kill-sexp)))
 
 (bind-key "C-M-k"   'kill-sexp)
