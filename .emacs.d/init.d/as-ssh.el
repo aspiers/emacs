@@ -6,7 +6,9 @@
    (if (not (file-exists-p cache-file))
        (warn "Couldn't find %s" cache-file)
      (load cache-file)
-     (message "Using ssh-agent with pid %s" (getenv "SSH_AGENT_PID")))))
+     (message "Using ssh-agent with pid %s from %s"
+              (getenv "SSH_AGENT_PID")
+              cache-file))))
 
 (as-read-ssh-agent-cache)
 
