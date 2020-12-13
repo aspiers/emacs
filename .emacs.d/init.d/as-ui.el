@@ -106,6 +106,8 @@ has built the current list of completion matches."
   :config
   (amx-mode 1))
 
+(key-chord-define-global "xd" (lambda () (interactive) (dired ".")))
+
 (use-package counsel
   :defer 2
   :config
@@ -115,8 +117,7 @@ has built the current list of completion matches."
 
   :chords ((",." . counsel-switch-buffer)
            (",;" . counsel-switch-buffer-other-window)
-           ("xf" . counsel-find-file)
-           ("xd" . (lambda () (interactive) (dired "."))))
+           ("xf" . counsel-find-file))
   :bind (("C-x 4 b" . counsel-switch-buffer-other-window)
          ("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
