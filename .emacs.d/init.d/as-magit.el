@@ -1,15 +1,15 @@
 ;; See also as-vcs.el
 
 (use-package magit
+  :defer 4
+
   :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
          ("C-c g k" . magit-run-gitk)
          ("C-c g a" . magit-run-gitk-all)
          ("C-c g A" . magit-run-gitg)
-         ("C-c g s" . as-magit-status)
-         ("C-c g l" . magit-log-buffer-file)
-         ("C-S-g" .   as-magit-status))
+         ("C-c g l" . magit-log-buffer-file))
 
   :config
 
@@ -69,7 +69,10 @@ an existing magit status buffer if it exists, to save rebuilding it."
                    (or
                     (tramp-tramp-file-p project)
                     (not (file-directory-p (concat project "/.git")))))
-                 (projectile-relevant-known-projects)))))
+                 (projectile-relevant-known-projects))))
+
+  :bind (("C-c g s" . as-magit-status)
+         ("C-S-g"   . as-magit-status)))
 
 (with-packages (magit org)
   :config

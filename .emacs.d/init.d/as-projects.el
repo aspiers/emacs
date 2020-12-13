@@ -12,6 +12,7 @@
 (require 'as-magit)
 
 (use-package projectile
+  :defer 5
   :requires as-key-chord
 
   ;; Not needed since guide-key/recursive-key-sequence-flag is set:

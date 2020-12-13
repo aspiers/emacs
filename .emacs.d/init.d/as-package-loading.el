@@ -137,8 +137,8 @@ prun_e_ build               || _q_uit ||"
 ;; This is nice for trying out packages
 (use-package try :commands try)
 
-(defun as-straight-setup-git-config (repo-dir remote url branch
-                                              depth commit)
+(cl-defun as-straight-setup-git-config (&key repo-dir remote url branch
+                                             depth commit &allow-other-keys)
   (let* ((default-directory repo-dir)
          (repo-name (file-name-nondirectory (directory-file-name repo-dir)))
          (identifier (format "as-straight-setup-%s" repo-name))
