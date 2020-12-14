@@ -37,7 +37,9 @@
 
 (use-package selectrum
   :config
-  (selectrum-mode +1))
+  (selectrum-mode +1)
+  
+  :bind (("C-c C-r" . selectrum-repeat)))
 
 (use-package selectrum-prescient)
 ;; (use-package flx)
@@ -202,7 +204,7 @@ has built the current list of completion matches."
   ;;          ("xf" . counsel-find-file))
   :bind (
          ;; ("C-x 4 b" . counsel-switch-buffer-other-window)
-         ("C-c C-r" . ivy-resume)
+         ;;("C-c C-r" . ivy-resume)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-1" . counsel-ibuffer)
