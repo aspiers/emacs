@@ -41,7 +41,11 @@
   
   :bind (("C-c C-r" . selectrum-repeat)))
 
-(use-package selectrum-prescient)
+(use-package selectrum-prescient
+  :config
+  (selectrum-prescient-mode +1)
+  (prescient-persist-mode +1))
+
 ;; (use-package flx)
 ;; (use-package flx-ido)
 
