@@ -733,6 +733,7 @@
  '(magit-popup-use-prefix-argument 'default)
  '(magit-prefer-remote-upstream t)
  '(magit-push-always-verify t)
+ '(magit-refresh-verbose t)
  '(magit-remote-ref-format 'remote-slash-branch)
  '(magit-repo-dirs
    '("/home/adam/.GIT" "/home/adam/SUSE/git" "/home/adam/SUSE/cloud/git" "/home/adam/SUSE/cloud/chef/git" "/home/adam/SUSE/cloud/OpenStack/git"))
