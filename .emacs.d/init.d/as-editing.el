@@ -51,7 +51,6 @@ The list marked is the one that contains point or follows point."
          ("C-x C-y" . vim-yy)
          ("C-M-y"   . as-join-line-with-next)))
 
-(bind-key "C-c p" 'as-copy-previous-line-suffix)
 (use-feature as-key-chord
   :config
   (key-chord-define-global "pq" 'as-copy-previous-line-suffix))
