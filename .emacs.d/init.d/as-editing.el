@@ -75,10 +75,11 @@ The list marked is the one that contains point or follows point."
 
 (bind-key "M-Q" 'unfill-paragraph)
 
-(bind-key "C-x 8 e"
-          (lambda ()
-            (interactive)
-            (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names))))))
+(defun insert-euro-sign ()
+  "Insert a EURO SIGN Unicode character."
+  (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names)))))
+
+(bind-key "C-x 8 e" 'insert-euro-sign)
 
 (use-package editorconfig
   :ensure t
