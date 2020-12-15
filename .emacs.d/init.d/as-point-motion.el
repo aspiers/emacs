@@ -27,7 +27,9 @@
 (use-package ctrlf
   :defer 2
   :config
-  (ctrlf-mode +1))
+  (ctrlf-mode +1)
+  (add-to-list 'ctrlf-minibuffer-bindings '("<down>" . ctrlf-forward-literal))
+  (add-to-list 'ctrlf-minibuffer-bindings '("<up>"   . ctrlf-backward-literal)))
 
 ;; (use-package swiper
 ;;   :defer 2
