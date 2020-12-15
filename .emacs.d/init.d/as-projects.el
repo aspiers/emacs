@@ -64,10 +64,9 @@ an existing magit status buffer if it exists, to save rebuilding it."
 
 (setq projectile-switch-project-action 'as-projectile-switch-project)
 
-(use-package counsel-projectile
-  :after (counsel projectile)
+(with-packages (projectile selectrum)
   :config
-  (counsel-projectile-mode))
+  (setq projectile-completion-system 'default))
 
 (require 'find-file-in-dir)
 
