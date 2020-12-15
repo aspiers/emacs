@@ -130,12 +130,6 @@ has built the current list of completion matches."
   :after ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
 
-;; Maintained fork of smex for saving M-x history.  counsel-M-x will
-;; integrate with it automatically.
-(use-package amx
-  :config
-  (amx-mode 1))
-
 (key-chord-define-global "xd" (lambda () (interactive) (dired ".")))
 
 (use-package consult
@@ -209,7 +203,6 @@ has built the current list of completion matches."
   :bind (
          ;; ("C-x 4 b" . counsel-switch-buffer-other-window)
          ;;("C-c C-r" . ivy-resume)
-         ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-1" . counsel-ibuffer)
          ;; ("C-h a" . counsel-apropos)
