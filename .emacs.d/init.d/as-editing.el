@@ -33,8 +33,8 @@ The list marked is the one that contains point or follows point."
 
 (use-feature bn-kill-stuff
   :bind (("C-M-(" . bn-strip-parentheses)
-         ("C-w"   . bn-kill-region-or-backword-word)
-         ("M-w"   . bn-kill-line-or-region-save)
+         ([remap kill-region] . bn-kill-region-or-backword-word)
+         ([remap kill-ring-save] . bn-kill-line-or-region-save)
          ("M-Z" . bn-zap-nearly-to-char)))
 
 ;; Use consult-yank-pop instead
