@@ -69,7 +69,8 @@
 ;; For Common Lisp
 ;; (use-package slime)
 
-(use-package etrace)
+;; FIXME: get this playing nice with my local checkout of etrace
+;; (use-feature etrace)
 
 (use-package ert
   :config
