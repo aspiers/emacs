@@ -35,11 +35,40 @@
 
 ;;}}}
 
+;; WIP - see https://github.com/raxod502/selectrum/issues/272
+(defun selectrum-partial ()
+    "Complete the minibuffer text as much as possible."
+    (interactive)
+    (setq as-selectrum--refined-candidates selectrum--refined-candidates)
+    (let* ((matchstr (if minibuffer-completing-file-name
+                         (or (file-name-nondirectory
+                              (minibuffer-contents)) "")
+                       (minibuffer-contents)))
+           (parts (or (split-string matchstr " " t) (list "")))
+           (tail (last parts))
+           (postfix (car tail))
+           (new (try-completion postfix
+                                selectrum--refined-candidates)))
+      (cond ((or (eq new t) (null new)) nil)
+            ((string= new matchstr) nil)
+            ((string= (car tail) (car (split-string new " " t))) nil)
+            (new
+             (delete-region (save-excursion
+                              (search-backward matchstr nil t)
+                              (point))
+                            (point-max))
+             (setcar tail new)
+             (insert (mapconcat #'identity parts " "))
+             t))))
+
 (use-package selectrum
   :config
   (selectrum-mode +1)
-  
-  :bind (("C-c C-r" . selectrum-repeat)))
+
+  :bind (("C-c C-r" . selectrum-repeat)
+         ;; :map selectrum-minibuffer-map
+         ;; ("TAB" . selectrum-partial)
+         ))
 
 (use-package selectrum-prescient
   :config
