@@ -43,6 +43,15 @@ Prefix arguments are interpreted by `org-refile'."
                      (concat refile-file "::*" heading)))
              (desc heading))
         (open-line 1)
-        (insert (org-make-link-string link desc))))))
+        (insert (org-make-link-string link desc)))))
+
+  (defun as-org-insert-last-stored-link (arg)
+    "Insert the last link stored in `org-stored-links' like
+`org-insert-last-stored-link', but without a trailing newline."
+    (interactive "p")
+    (org-insert-all-links arg "" ""))
+
+  (org-defkey org-mode-map [remap org-insert-last-stored-link]
+              #'as-org-insert-last-stored-link))
 
 (provide 'as-org-links)
