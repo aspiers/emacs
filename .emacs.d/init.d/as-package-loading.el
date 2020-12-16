@@ -132,7 +132,7 @@ prun_e_ build               || _q_uit ||"
              ("l" "ELPA package" . as-find-elpa-package)
              ("L" "el-get package" . as-find-el-get-package)
              ("s" "straight.el package" . as-find-straight-package)
-             ("U" "*use-package" . switch-to-use-package-buffer)))
+             ("U" "*use-package*" . switch-to-use-package-buffer)))
 
 ;; This is nice for trying out packages
 (use-package try :commands try)
