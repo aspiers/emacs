@@ -398,7 +398,7 @@
  '(ido-hacks-mode t)
  '(ido-max-directory-size 100000)
  '(ido-max-prompt-path 0.8)
- '(ido-mode 'both nil (ido))
+ '(ido-mode nil nil (ido))
  '(ido-ubiquitous-mode t)
  '(ido-use-faces nil)
  '(ido-vertical-mode t)
