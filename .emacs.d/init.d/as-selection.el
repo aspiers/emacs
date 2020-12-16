@@ -1,4 +1,5 @@
 (use-package selectrum
+  :demand t
   :config
   (selectrum-mode +1)
 
