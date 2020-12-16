@@ -416,7 +416,6 @@
      (counsel-switch-buffer . 20)
      (counsel-projectile-switch-to-buffer . 20)
      (counsel-projectile-find-file . 20)))
- '(ivy-mode nil)
  '(ivy-rich-display-transformers-list
    '(ivy-switch-buffer
      (:columns
