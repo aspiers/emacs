@@ -24,17 +24,6 @@
 ;;       '((tool-bar-lines . 0)))
 
 ;;}}}
-;;{{{ parentheses
-
-(require 'paren)
-
-(req-package smartparens)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode-hook . rainbow-delimiters-mode))
-
-;;}}}
-
 
 (bind-key "C-'" 'speedbar-get-focus)
 
