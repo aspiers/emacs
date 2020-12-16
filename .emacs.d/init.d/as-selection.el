@@ -58,11 +58,9 @@
   (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light)))
 
 (use-package ivy
-  :after flx
+  :after prescient
 
   :config
-  (require 'flx)
-
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
   ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
@@ -108,6 +106,10 @@ has built the current list of completion matches."
   ;; https://github.com/abo-abo/swiper/wiki/FAQ#how-to-prevent-tab-from-selecting-the-only-candidate
   (:map ivy-minibuffer-map
         ("TAB" . ivy-partial)))
+
+(use-package ivy-prescient
+  :config
+  (ivy-prescient-mode))
 
 ;; C-o in ivy minibuffer is awesome!!
 (use-package ivy-hydra)
