@@ -1,12 +1,8 @@
-;; see also as-smart-mode-line.el
+;; see also as-smart-mode-line.el, as-selection.el
 
-(use-package fill-column-indicator
-  :straight (fill-column-indicator
-             :fork (:repo "aspiers/Fill-Column-Indicator"
-                          :branch "wrap-window-edge"))
-  :config
-  (dolist (hook '(prog-mode-hook indented-text-mode))
-    (add-hook hook 'fci-mode)))
+;; Native replacement for fci-mode from emacs 27.1
+(dolist (hook '(prog-mode-hook indented-text-mode))
+  (add-hook hook 'display-fill-column-indicator--turn-on))
 
 (bind-key "C-'" 'speedbar-get-focus)
 
