@@ -21,16 +21,4 @@
     :commands insert-char-preview
     :bind ("C-x 8 RET" . insert-char-preview))
 
-;; Not impressed with this.  No native projectile integration, and can't
-;; only display open files.
-;;
-;; (use-package neotree
-;;   :bind ("C-'" . neotree-toggle)
-;;   :after (all-the-icons projectile)
-;;   :config
-;;   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-;;   (setq neo-smart-open t)
-;;   ;; But I want this to be 'projectile-vc!
-;;   (setq projectile-switch-project-action 'neotree-projectile-action))
-
 (provide 'as-ui)

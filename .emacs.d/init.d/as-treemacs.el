@@ -1,3 +1,7 @@
+;; I came up with a neotree config, but rejected it in favour of
+;; treemacs due to lack of native projectile integration and inability
+;; to only display open files.
+
 (use-package treemacs
   :defer t
 
