@@ -165,12 +165,10 @@ has built the current list of completion matches."
 ;; Enable Consult-Selectrum integration.
 ;; This should be installed if Selectrum is used.
 (use-package consult-selectrum
-  :straight consult
   :demand t)
 
 ;; Install the consult-flycheck command.
 (use-package consult-flycheck
-  :straight consult
   :bind (:map flycheck-command-map
          ("!" . consult-flycheck)))
 
