@@ -1,3 +1,12 @@
+(use-package selectrum
+  :config
+  (selectrum-mode +1)
+
+  :bind (("C-c C-r" . selectrum-repeat)
+         ;; :map selectrum-minibuffer-map
+         ;; ("TAB" . selectrum-partial)
+         ))
+
 ;; WIP - see https://github.com/raxod502/selectrum/issues/272
 (defun selectrum-partial ()
     "Complete the minibuffer text as much as possible."
@@ -23,15 +32,6 @@
              (setcar tail new)
              (insert (mapconcat #'identity parts " "))
              t))))
-
-(use-package selectrum
-  :config
-  (selectrum-mode +1)
-
-  :bind (("C-c C-r" . selectrum-repeat)
-         ;; :map selectrum-minibuffer-map
-         ;; ("TAB" . selectrum-partial)
-         ))
 
 (use-package selectrum-prescient
   :config
