@@ -69,6 +69,7 @@
   ;; in this alist.
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex)
+          (swiper-isearch . ivy--regex)
           (counsel-git-grep . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
 

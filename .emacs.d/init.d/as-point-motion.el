@@ -36,8 +36,8 @@
 ;; Loaded by counsel
 (use-package swiper
   :demand t
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper-backward))
+  :bind (("C-s" . swiper-isearch)
+         ("C-r" . swiper-isearch-backward))
 
   ;; enable this if you want `swiper' to use it
   ;; (setq search-default-mode #'char-fold-to-regexp)
