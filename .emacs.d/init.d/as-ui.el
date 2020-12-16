@@ -1,7 +1,5 @@
 ;; see also as-smart-mode-line.el
 
-;;{{{ fill-column-indicator
-
 (use-package fill-column-indicator
   :straight (fill-column-indicator
              :fork (:repo "aspiers/Fill-Column-Indicator"
@@ -9,21 +7,6 @@
   :config
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook 'fci-mode)))
-
-;;}}}
-;;{{{ no toolbar
-
-;; This is best done with X resources, otherwise you get funny
-;; frame-resizing problems.  See ~/.Xresources/emacs.rdb.
-
-;; (and window-system
-;;      (>= emacs-major-version 21)
-;;      (tool-bar-mode -1))
-
-;; (setq default-frame-alist
-;;       '((tool-bar-lines . 0)))
-
-;;}}}
 
 (bind-key "C-'" 'speedbar-get-focus)
 
