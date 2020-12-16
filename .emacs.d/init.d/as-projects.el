@@ -64,6 +64,14 @@ an existing magit status buffer if it exists, to save rebuilding it."
 
 (setq projectile-switch-project-action 'as-projectile-switch-project)
 
+;; https://github.com/raxod502/selectrum/issues/281
+;; How to achieve similar with selectrum?  Maybe this?
+;; https://github.com/raxod502/selectrum/wiki/Useful-Commands#search-with-ripgrep-like-counsel-rg
+(use-package counsel-projectile
+  :after (counsel projectile)
+  :config
+  (define-key projectile-mode-map [remap projectile-grep] 'counsel-projectile-grep))
+
 (with-packages (projectile selectrum)
   :config
   (setq projectile-completion-system 'default))
