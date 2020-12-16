@@ -3,6 +3,7 @@
 ;; Native replacement for fci-mode from emacs 27.1
 (use-feature display-fill-column-indicator
   :config
+  (set-face-attribute 'fill-column-indicator nil :weight 'thin)
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook (lambda () (display-fill-column-indicator-mode +1)))))
 
