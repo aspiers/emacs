@@ -24,21 +24,24 @@
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
-(use-package ctrlf
-  :defer 2
-  :config
-  (ctrlf-mode +1)
-  (add-to-list 'ctrlf-minibuffer-bindings '("<down>" . ctrlf-forward-literal))
-  (add-to-list 'ctrlf-minibuffer-bindings '("<up>"   . ctrlf-backward-literal)))
-
-;; (use-package swiper
+;; Lack of C-w is currently a deal-breaker :-(
+;; https://github.com/raxod502/ctrlf/issues/65
+;; (use-package ctrlf
 ;;   :defer 2
-;;   :bind (("C-s" . swiper)
-;;          ("C-r" . swiper-backward))
-;; 
-;;   ;; enable this if you want `swiper' to use it
-;;   ;; (setq search-default-mode #'char-fold-to-regexp)
-;;   )
+;;   :config
+;;   (ctrlf-mode +1)
+;;   (add-to-list 'ctrlf-minibuffer-bindings '("<down>" . ctrlf-forward-literal))
+;;   (add-to-list 'ctrlf-minibuffer-bindings '("<up>"   . ctrlf-backward-literal)))
+
+;; Loaded by counsel
+(use-package swiper
+  :demand t
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward))
+
+  ;; enable this if you want `swiper' to use it
+  ;; (setq search-default-mode #'char-fold-to-regexp)
+  )
 
 (use-package avy
   ;; :config
