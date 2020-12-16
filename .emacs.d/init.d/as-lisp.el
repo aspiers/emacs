@@ -69,8 +69,9 @@
 ;; For Common Lisp
 ;; (use-package slime)
 
-;; FIXME: get this playing nice with my local checkout of etrace
-;; (use-feature etrace)
+;; FIXME: get this in MELPA
+(use-package etrace
+  :straight (etrace :host github :repo "aspiers/etrace"))
 
 (use-package ert
   :config
