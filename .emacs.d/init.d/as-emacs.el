@@ -40,7 +40,8 @@
 required to bind that sequence via `bind-key', `global-set-key'
 etc."
   (interactive)
-  (message (key-description (read-key-sequence "Enter key chord: "))))
+  (message (key-description
+            (read-key-sequence "Enter key sequence or chord: "))))
 
 (bind-key "C-h C-c" 'as-kbd-to-string)
 
