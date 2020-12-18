@@ -13,16 +13,22 @@
             (setq comment-start ";; ")
             (bind-key "C-S-t" 'transpose-sexps emacs-lisp-mode-map)))
 
+(use-package lispy
+  :diminish lispy-mode
+  :hook (emacs-lisp-mode . lispy-mode)
+  :config
+  (define-key lispy-mode-map-lispy (kbd "C-,") nil))
+
 (use-package paredit
   :commands enable-paredit-mode
   :init
-  (dolist (mode '(emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  ielm-mode-hook
-                  scheme-mode-hook
-                  lisp-interaction-mode-hook
-                  eval-expression-minibuffer-setup-hook))
-    (add-hook mode 'enable-paredit-mode))
+  ;; (dolist (mode '(emacs-lisp-mode-hook
+  ;;                 lisp-mode-hook
+  ;;                 ielm-mode-hook
+  ;;                 scheme-mode-hook
+  ;;                 lisp-interaction-mode-hook
+  ;;                 eval-expression-minibuffer-setup-hook))
+  ;;   (add-hook mode 'enable-paredit-mode))
 
   :config
   (defun as-paredit-top ()
