@@ -7,8 +7,6 @@
   (dolist (hook '(prog-mode-hook indented-text-mode))
     (add-hook hook (lambda () (display-fill-column-indicator-mode +1)))))
 
-(bind-key "C-'" 'speedbar-get-focus)
-
 (use-package beacon
   :defer 5
   :config (beacon-mode 1))
