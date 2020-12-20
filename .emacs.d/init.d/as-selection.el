@@ -34,6 +34,10 @@
              (insert (mapconcat #'identity parts " "))
              t))))
 
+(use-package prescient
+  :config
+  (setq prescient-filter-method '(literal regexp initialism fuzzy)))
+
 (use-package selectrum-prescient
   :config
   (selectrum-prescient-mode +1)
