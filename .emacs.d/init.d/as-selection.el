@@ -138,6 +138,7 @@ has built the current list of completion matches."
            ("xf" . find-file))
   :bind (("C-c h" . consult-history)
          ("C-c o" . consult-outline)
+         ("C-*" . consult-imenu)
          ("C-x b" . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
          ("C-x 5 b" . consult-buffer-other-frame)
