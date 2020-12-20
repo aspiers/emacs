@@ -109,4 +109,6 @@
               :map org-agenda-mode-map
               (("C-c C-S-t" . epoch-agenda-todo))))
 
+(use-package org-super-agenda)
+
 (provide 'as-org-mode)
