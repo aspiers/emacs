@@ -99,19 +99,6 @@ consistent landing spot."
 ;;     C-c C-o        show entire tree
 ;;     C-c C-w        hide entire tree
 
-
-;;;;; M-C-{<,>} for foldout zoom/exit subtree in outline major/minor modes
-
-(autoload 'foldout-exit-fold    "foldout")
-(autoload 'foldout-zoom-subtree "foldout")
-(dolist (hook '(outline-mode-hook outline-minor-mode-hook))
-  (add-hook hook
-            (lambda ()
-              ;; Quick navigation
-              (local-set-key [(meta control <)] 'foldout-exit-fold)
-              (local-set-key [(meta control >)] 'foldout-zoom-subtree)
-              )))
-
 ;;;;; as-folding-{hide,show}-current
 
 ;; (eval-when-compile (require 'folding))
