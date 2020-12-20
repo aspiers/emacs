@@ -76,6 +76,9 @@ an existing magit status buffer if it exists, to save rebuilding it."
   :config
   (setq projectile-completion-system 'default))
 
+(use-package helm-projectile
+  :defer 10)
+
 (require 'find-file-in-dir)
 
 (define-find-file-in-dir-function as-find-my-mrconfig
