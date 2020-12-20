@@ -13,6 +13,13 @@
             (setq comment-start ";; ")
             (bind-key "C-S-t" 'transpose-sexps emacs-lisp-mode-map)))
 
+(use-package navi-mode)
+(use-package helm-navi
+  :bind ("C-x c n" . helm-navi)
+  :config
+  (setf (cdr (assoc :ALL (cdr (assoc "emacs-lisp" navi-keywords))))
+        "^[[:space:]]*(\\(use-package\\|\\(cl-\\)\\{0,1\\}def[a-z]+\\)\\*? "))
+
 (use-package lispy
   :diminish lispy-mode
   :hook (emacs-lisp-mode . lispy-mode)
