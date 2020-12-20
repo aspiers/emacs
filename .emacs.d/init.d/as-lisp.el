@@ -89,4 +89,7 @@
 
   :bind ("C-M-S-x" . ert-eval-run-test-at-point))
 
+(use-package ppp
+  :defer t)
+
 (provide 'as-lisp)
