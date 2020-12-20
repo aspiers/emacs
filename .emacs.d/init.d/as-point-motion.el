@@ -75,4 +75,10 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+;; Add some more conventional bindings for occur-mode
+(define-key occur-mode-map "n" 'occur-next)
+(define-key occur-mode-map "p" 'occur-prev)
+(define-key occur-mode-map (kbd "TAB")
+  'occur-mode-goto-occurrence-other-window)
+
 (provide 'as-point-motion)
