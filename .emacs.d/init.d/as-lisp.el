@@ -20,6 +20,16 @@
   (setf (cdr (assoc :ALL (cdr (assoc "emacs-lisp" navi-keywords))))
         "^[[:space:]]*(\\(use-package\\|\\(cl-\\)\\{0,1\\}def[a-z]+\\)\\*? "))
 
+;; Nice idea, but causes "Buffer XXX.el was not set up for parsing".
+;; Supposedly M-x semantic-mode should set it up, but
+;; `semantic-new-buffer-fcn' bails due to `semantic--parse-table' not
+;; being set.  alphapapa says that Semantic is known to be a somewhat
+;; unruly package.
+;;
+;; (use-feature semantic
+;;   :config
+;;   :hook (emacs-lisp-mode . semantic-stickyfunc-mode))
+
 (use-package lispy
   :diminish lispy-mode
   :hook (emacs-lisp-mode . lispy-mode)
