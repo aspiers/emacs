@@ -3,9 +3,7 @@
   :config
   (defalias 'yamm 'yas-minor-mode)
   (defalias 'yagm 'yas-global-mode)
-  (yas-global-mode 1)
-  :bind (("C-M-<" . yasnippet-cmd-previous-real)
-         ("C-M->" . yasnippet-cmd-next-real)))
+  (yas-global-mode 1))
 
 (use-package yasnippet-snippets)
 
