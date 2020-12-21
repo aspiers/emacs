@@ -78,6 +78,7 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
+;; See also lispy-eval-and-replace
 (bind-key "C-x C-S-e" 'eval-and-replace)
 
 (use-package flycheck-package)
