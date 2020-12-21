@@ -50,12 +50,18 @@
     (as-org-jump-olp-and-next as-personal-todo
                               '("community" "OW2000")))
 
+  (defun as-find-CO2ken-todos ()
+    (interactive)
+    (as-org-jump-olp-and-next as-personal-todo
+                              '("community" "green" "CO2ken")))
+
   (bind-keys :map as-jump-map
              ("t" "personal TODO" . as-find-personal-todo)
              ("T" "tool TODOs" . as-find-tool-todos)
              ("E" "emacs TODOs" . as-find-emacs-todos)
              ("o" "orgmode TODOs" . as-find-orgmode-todos)
              ("O" "OW2000 TODOs" . as-find-OW-todos)
+             ("c" "CO2ken TODOs" . as-find-CO2ken-todos)
              ("d" "personal diary" . as-find-personal-diary)
              ("G" "GTD TODOs" . as-find-GTD-todos)
              ("n" "personal note" . as-find-personal-note)))
