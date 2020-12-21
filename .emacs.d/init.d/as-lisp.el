@@ -34,16 +34,7 @@
   :diminish lispy-mode
   :hook (emacs-lisp-mode . lispy-mode)
   :bind (:map lispy-mode-map-lispy
-         ("C-5" . lispy-show-top-level)
-         ("C-," . nil))
-  :config
-  (defun lispy-show-top-level ()
-    "Show first line of top-level form"
-    (interactive)
-    (save-excursion
-      (special-lispy-beginning-of-defun)
-      (message "%s"
-               (buffer-substring (point-at-bol) (point-at-eol))))))
+              ("C-," . nil)))
 
 (use-package paredit
   :commands enable-paredit-mode
