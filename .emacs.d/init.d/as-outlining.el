@@ -5,7 +5,9 @@
 ;; customize-variable.
 (use-package outshine
   :commands outshine-mode
-  :hook (emacs-lisp-mode . outshine-mode))
+  :hook (emacs-lisp-mode . outshine-mode)
+  :bind (:map outshine-mode-map
+              ("M-*" . outshine-navi)))
 
 ;;; folding-mode
 
