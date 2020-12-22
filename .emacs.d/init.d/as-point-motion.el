@@ -91,4 +91,10 @@
 (use-package back-button
   :config
   (back-button-mode 1))
+
+;; Doesn't seem to work?
+(use-package visible-mark
+  :config
+  (global-visible-mark-mode))
+
 (provide 'as-point-motion)
