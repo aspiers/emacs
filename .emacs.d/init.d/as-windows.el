@@ -8,6 +8,7 @@
 (bind-key "C-S-<tab>"         'previous-window-interactive)
 (bind-key "C-S-<iso-lefttab>" 'previous-window-interactive)
 
+;; There's also ace-window but it doesn't have fancy large numbers
 (use-package switch-window
   :bind (("C-x o" . switch-window)
          ("C-x 1" . switch-window-then-maximize)
