@@ -26,7 +26,7 @@ Argument IGNORE is not used."
   :hook ((company-completion-started . company-turn-off-fci)
          (company-completion-finished . company-maybe-turn-on-fci)
          (company-completion-cancelled . company-maybe-turn-on-fci)
-         (prog-mode-hook . company-mode)))
+         (prog-mode . company-mode)))
 
 ;; (req-package auto-complete-css)
 ;; (req-package auto-complete-emacs-lisp)
