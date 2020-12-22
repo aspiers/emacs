@@ -81,4 +81,14 @@
 (define-key occur-mode-map (kbd "TAB")
   'occur-mode-goto-occurrence-other-window)
 
+;; C-x then
+;;   SPC       back    in mark-ring
+;;   <left>    back    in mark-ring
+;;   <right>   forward in mark-ring
+;;   C-SPC     back    in global-mark-ring
+;;   C-<left>  back    in global-mark-ring
+;;   C-<right> forward in global-mark-ring
+(use-package back-button
+  :config
+  (back-button-mode 1))
 (provide 'as-point-motion)
