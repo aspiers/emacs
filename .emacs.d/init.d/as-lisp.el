@@ -34,7 +34,9 @@
   :diminish lispy-mode
   :hook (emacs-lisp-mode . lispy-mode)
   :bind (:map lispy-mode-map-lispy
-              ("C-," . nil)))
+              ("C-," . nil)
+              :map lispy-mode-map-c-digits
+              ("C-5" . lispy-show-top-level)))
 
 (use-package paredit
   :commands enable-paredit-mode
