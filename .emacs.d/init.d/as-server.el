@@ -32,4 +32,12 @@
   ((edit-server-start . edit-server-maybe-dehtmlize-buffer)
    (edit-server-done .  edit-server-maybe-htmlize-buffer)))
 
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server))
+
+(with-packages (atomic-chrome markdown-mode)
+  :config
+  (setq atomic-chrome-default-major-mode 'markdown-mode))
+
 (provide 'as-server)
