@@ -1387,7 +1387,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(outshine-use-speed-commands t)
  '(passive-voice nil)
  '(planner-use-day-pages t)
- '(prescient-filter-method '(literal regexp initialism fuzzy))
+ '(prescient-filter-method '(literal regexp initialism))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-keymap-prefix "p")
