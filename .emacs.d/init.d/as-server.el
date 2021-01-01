@@ -1,11 +1,7 @@
-(req-package server
+(use-package server
   :commands (server-start server-force-delete)
   :defer 10
   :config
-  (defun ss ()
-    "Abbreviation for `server-start'."
-    (interactive)
-    (server-start))
   (defun server-restart (interactive)
     "Equivalent to `server-force-delete' followed by `server-start'."
     (server-force-delete)
