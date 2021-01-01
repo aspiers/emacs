@@ -18,4 +18,10 @@
     :commands insert-char-preview
     :bind ("C-x 8 RET" . insert-char-preview))
 
+(use-package prism
+  :straight (:host github :repo "alphapapa/prism.el")
+  ;; :hook ((emacs-lisp-mode . prism-mode)
+  ;;        (python-mode . prism-mode))
+  )
+
 (provide 'as-ui)
