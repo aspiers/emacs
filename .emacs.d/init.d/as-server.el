@@ -11,7 +11,7 @@
         (server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(req-package edit-server
+(use-package edit-server
   :commands (edit-server-start edit-server-stop)
   :defer 10
   :config
@@ -24,13 +24,12 @@
         (edit-server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(req-package edit-server-htmlize
+(use-package edit-server-htmlize
   :commands (edit-server-maybe-dehtmlize-buffer
              edit-server-maybe-htmlize-buffer)
-  ;; FIXME: use req-package
-  :after 'edit-server
-  :config
-  (add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
-  (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer))
+  :after edit-server
+  :hook
+  ((edit-server-start . edit-server-maybe-dehtmlize-buffer)
+   (edit-server-done .  edit-server-maybe-htmlize-buffer)))
 
 (provide 'as-server)
