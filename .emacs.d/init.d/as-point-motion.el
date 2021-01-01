@@ -90,7 +90,8 @@
 ;;   C-<right> forward in global-mark-ring
 (use-package back-button
   :config
-  (back-button-mode 1))
+  (back-button-mode 1)
+  :diminish)
 
 ;; Doesn't seem to work?
 (use-package visible-mark

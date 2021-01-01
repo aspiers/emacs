@@ -5,6 +5,7 @@
 ;; customize-variable.
 (use-package outshine
   :commands outshine-mode
+  :diminish " Outsh"
   :hook (emacs-lisp-mode . outshine-mode)
   :bind (:map outshine-mode-map
               ("M-*" . outshine-navi)))
@@ -76,7 +77,9 @@ consistent landing spot."
 
 ;;; outline-minor-mode
 
-(add-hook 'outline-minor-mode-hook 'turn-on-auto-fill)
+(use-package outline
+  :diminish outline-minor-mode
+  :hook (outline-minor-mode . turn-on-auto-fill))
 
 ;;; Key bindings
 
