@@ -4,8 +4,8 @@
 ;; point automatically gets put in the buffer menu.
 (bind-key "C-x C-b" 'buffer-menu)
 
-(req-package bs
-  :bind ("C-x C-b" . bs-show))
+;; (req-package bs
+;;   :bind ("C-x C-b" . bs-show))
 
 (defun as-revert-buffer-without-confirmation ()
   (interactive)
