@@ -89,9 +89,9 @@ Add package PKG with ARGS to target list.
     "
 _c_heck package  |_f_etch package|_m_erge package  |_n_ormalize package|p_u_sh package
 _C_heck all      |_F_etch all    |_M_erge all      |_N_ormalize all    |
-^-^--------------+^-^------------+^-^--------------+^-^----------------+-^-^-----------
+^-^--------------+^-^------------+^-^--------------+^-^----------------+-^-^------------
 _r_ebuild package|_p_ull package |_v_ersions freeze|_w_atcher start    |_g_et recipe
-_R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |_U_pdate repos
+_R_ebuild all    |_P_ull all     |_V_ersions thaw  |_W_atcher quit     |_U_pdate recipes
 prun_e_ build               || _q_uit ||"
     ("c" straight-check-package)
     ("C" straight-check-all)
