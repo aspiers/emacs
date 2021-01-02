@@ -172,7 +172,7 @@ has built the current list of completion matches."
 
 (with-packages (consult projectile)
   :config
-  (setq consult-project-root-function 'projectile-project-root))
+  (setq consult-project-root-function #'projectile-project-root))
 
 ;; Enable Consult-Selectrum integration.
 ;; This should be installed if Selectrum is used.
