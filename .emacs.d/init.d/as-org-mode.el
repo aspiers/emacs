@@ -1,13 +1,4 @@
-(use-package org
-  ;; We want the org-plus-contrib package rather than just org, but
-  ;; there is no org-plus-contrib.el, so we have to load it a bit
-  ;; differently, as per:
-  ;; https://emacs.stackexchange.com/questions/41321/when-to-specify-a-package-name-in-use-packages-ensure-tag
-  ;; https://github.com/jwiegley/use-package/issues/597
-  ;; https://github.com/raxod502/straight.el/issues/252
-  ;; :ensure org-plus-contrib
-  :straight org-plus-contrib
-
+(use-package org-plus-contrib
   :bind
   (("M-o a" . org-agenda)
    ("M-o c" . org-capture)
@@ -75,7 +66,7 @@
   :commands org-crypt-use-before-save-magic)
 
 (use-feature as-gtd
-  :after org)
+  :after org-plus-contrib)
 
 ;; FIXME: still need this?
 ;;(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)

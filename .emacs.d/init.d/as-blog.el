@@ -1,5 +1,5 @@
 (use-package org2blog
-  :after org
+  :after org-plus-contrib
   :mode ("\\.o2b\\'" . org-mode)
   :config
   (add-hook 'org-mode-hook
