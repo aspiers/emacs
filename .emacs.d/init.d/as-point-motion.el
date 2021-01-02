@@ -3,11 +3,14 @@
   (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling")
   "Directory where smooth-scrolling repository is checked out.")
 
-(if (file-directory-p smooth-scrolling-repo-dir)
-    (use-package smooth-scrolling
-      :defer 3
-      :load-path smooth-scrolling-repo-dir)
-  (warn "Use mrco smooth-scrolling to check out the repository."))
+;; (if (file-directory-p smooth-scrolling-repo-dir)
+;;     (use-package smooth-scrolling
+;;       :defer 3
+;;       :load-path smooth-scrolling-repo-dir)
+;;   (warn "Use mrco smooth-scrolling to check out the repository."))
+
+(use-package good-scroll
+  :straight (:host github :repo "io12/good-scroll.el"))
 
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
