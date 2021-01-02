@@ -169,6 +169,10 @@ has built the current list of completion matches."
   ;; via customization variables.
   (consult-preview-mode))
 
+(with-packages (consult projectile)
+  :config
+  (setq consult-project-root-function 'projectile-project-root))
+
 ;; Enable Consult-Selectrum integration.
 ;; This should be installed if Selectrum is used.
 (use-package consult-selectrum
