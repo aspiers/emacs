@@ -244,6 +244,7 @@
  '(auto-revert-check-vc-info nil)
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
+ '(back-button-mode-lighter "")
  '(backup-directory-alist '(("." . ".emacs.backup")))
  '(beacon-blink-when-focused t)
  '(beacon-lighter "")
@@ -288,6 +289,7 @@
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
  '(column-number-mode t)
  '(comment-empty-lines ''eol)
+ '(company-idle-delay 0.2)
  '(completion-ignored-extensions
    '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".hg/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".p64fsl" ".d64fsl" ".dx64fsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo"))
  '(counsel-projectile-switch-project-action
@@ -1386,10 +1388,11 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(outshine-use-speed-commands t)
  '(passive-voice nil)
  '(planner-use-day-pages t)
- '(prescient-filter-method '(literal regexp initialism fuzzy))
+ '(prescient-filter-method '(literal regexp initialism))
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-keymap-prefix "p")
+ '(projectile-mode-line-prefix " p")
  '(projectile-switch-project-action 'projectile-vc)
  '(projectile-use-git-grep t)
  '(ps-lpr-command "kprinter")

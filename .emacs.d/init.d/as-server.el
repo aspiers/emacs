@@ -1,11 +1,7 @@
-(req-package server
+(use-package server
   :commands (server-start server-force-delete)
   :defer 10
   :config
-  (defun ss ()
-    "Abbreviation for `server-start'."
-    (interactive)
-    (server-start))
   (defun server-restart (interactive)
     "Equivalent to `server-force-delete' followed by `server-start'."
     (server-force-delete)
@@ -15,7 +11,7 @@
         (server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(req-package edit-server
+(use-package edit-server
   :commands (edit-server-start edit-server-stop)
   :defer 10
   :config
@@ -28,13 +24,21 @@
         (edit-server-start)
       (file-error (message "%s" (error-message-string err))))))
 
-(req-package edit-server-htmlize
+(use-package edit-server-htmlize
   :commands (edit-server-maybe-dehtmlize-buffer
              edit-server-maybe-htmlize-buffer)
-  ;; FIXME: use req-package
-  :after 'edit-server
+  :after edit-server
+  :hook
+  ((edit-server-start . edit-server-maybe-dehtmlize-buffer)
+   (edit-server-done .  edit-server-maybe-htmlize-buffer)))
+
+(use-package atomic-chrome
   :config
-  (add-hook 'edit-server-start-hook 'edit-server-maybe-dehtmlize-buffer)
-  (add-hook 'edit-server-done-hook  'edit-server-maybe-htmlize-buffer))
+  (atomic-chrome-start-server))
+
+(with-packages (atomic-chrome markdown-mode)
+  :config
+  (setq atomic-chrome-default-major-mode 'markdown-mode
+        atomic-chrome-buffer-open-style 'frame))
 
 (provide 'as-server)

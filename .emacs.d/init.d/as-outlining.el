@@ -5,6 +5,7 @@
 ;; customize-variable.
 (use-package outshine
   :commands outshine-mode
+  :diminish " Outsh"
   :hook (emacs-lisp-mode . outshine-mode)
   :bind (:map outshine-mode-map
               ("M-*" . outshine-navi)))
@@ -38,13 +39,13 @@
   (setq folding-default-keys-function 'folding-bind-backward-compatible-keys)
 
   (add-hook 'folding-mode-hook
-          (lambda ()
-            ;; Quick navigation
-            (local-set-key [(control meta <)] 'folding-shift-out)
-            (local-set-key [(control meta >)] 'folding-shift-in)
-            (local-set-key [(shift left)] 'folding-shift-out)
-            (local-set-key [(shift right)] 'folding-shift-in)
-            ))
+            (lambda ()
+              ;; Quick navigation
+              (local-set-key [(control meta <)] 'folding-shift-out)
+              (local-set-key [(control meta >)] 'folding-shift-in)
+              (local-set-key [(shift left)] 'folding-shift-out)
+              (local-set-key [(shift right)] 'folding-shift-in)
+              ))
 
   (defun as-folding-previous-visible-heading ()
     "Wrapper around `folding-previous-visible-heading' which ensures a
@@ -54,21 +55,21 @@ consistent landing spot."
          (folding-mark-look-at 'mark)))
 
   (defun as-folding-next-visible-heading ()
-  "Wrapper around `folding-next-visible-heading' which ensures a
+    "Wrapper around `folding-next-visible-heading' which ensures a
 consistent landing spot."
-  (interactive)
-  (and (folding-next-visible-heading)
-       (folding-mark-look-at 'mark)))
+    (interactive)
+    (and (folding-next-visible-heading)
+         (folding-mark-look-at 'mark)))
 
   (add-hook 'folding-mode-hook
-          (lambda ()
-            (local-set-key [(control up  )] 'as-folding-previous-visible-heading)
-            (local-set-key [(control down)] 'as-folding-next-visible-heading)
+            (lambda ()
+              (local-set-key [(control up  )] 'as-folding-previous-visible-heading)
+              (local-set-key [(control down)] 'as-folding-next-visible-heading)
 
-            ;; FIXME: not implemented yet
-;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
-;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
-            ))
+              ;; FIXME: not implemented yet
+              ;;             (local-set-key [(control shift up)]   'folding-backward-current-level)
+              ;;             (local-set-key [(control shift down)] 'folding-forward-current-level)
+              ))
 
   (defun fm () "Loads folding-mode." (interactive) (folding-mode)))
 
@@ -76,7 +77,9 @@ consistent landing spot."
 
 ;;; outline-minor-mode
 
-(add-hook 'outline-minor-mode-hook 'turn-on-auto-fill)
+(use-package outline
+  :diminish outline-minor-mode
+  :hook (outline-minor-mode . turn-on-auto-fill))
 
 ;;; Key bindings
 
