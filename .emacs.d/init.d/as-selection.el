@@ -165,6 +165,7 @@ has built the current list of completion matches."
   ;; Configure other variables and modes in the :config section, after lazily loading the package
   :config
 
+  (setq consult-narrow-key "<")
   ;; Optionally enable previews. Note that individual previews can be disabled
   ;; via customization variables.
   (consult-preview-mode))
