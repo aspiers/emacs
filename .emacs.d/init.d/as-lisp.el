@@ -36,7 +36,10 @@
   :bind (:map lispy-mode-map-lispy
               ("C-," . nil)
               :map lispy-mode-map-c-digits
-              ("C-5" . lispy-show-top-level)))
+              ("C-5" . lispy-show-top-level))
+  :config
+  ;; See https://github.com/abo-abo/lispy/issues/557
+  (lispy-set-key-theme '(special paredit lispy c-digits)))
 
 (use-package paredit
   :commands enable-paredit-mode
