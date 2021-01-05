@@ -33,10 +33,27 @@
 (use-package lispy
   :diminish lispy-mode
   :hook (emacs-lisp-mode . lispy-mode)
-  :bind (:map lispy-mode-map-lispy
-              ("C-," . nil)
-              :map lispy-mode-map-c-digits
-              ("C-5" . lispy-show-top-level))
+  :bind (
+         :map lispy-mode-map-base
+         ;; We want M-o for the usual stuff, and anyway we have C-M-b
+         ;; bound to lispy-backward.  Unfortunately this base gets
+         ;; copied to some of the other maps on package load, so we
+         ;; have to undefine it in those too.
+         ("M-o" . nil)
+
+         :map lispy-mode-map-lispy
+         ("M-o" . nil)
+         ("C-," . nil)
+
+         :map lispy-mode-map-paredit
+         ;; We want M-s for the usual stuff, and anyway we have /
+         ;; bound to special-lispy-splice
+         ("M-o" . nil)
+         ("M-s" . nil)
+
+         :map lispy-mode-map-c-digits
+         ("C-5" . lispy-show-top-level))
+
   :config
   ;; See https://github.com/abo-abo/lispy/issues/557
   (lispy-set-key-theme '(special paredit lispy c-digits)))
