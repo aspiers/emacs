@@ -54,6 +54,7 @@
          :map lispy-mode-map-c-digits
          ("C-5" . lispy-show-top-level))
 
+  :hook (eval-expression-minibuffer-setup . lispy-mode)
   :config
   ;; See https://github.com/abo-abo/lispy/issues/557
   (lispy-set-key-theme '(special paredit lispy c-digits)))
