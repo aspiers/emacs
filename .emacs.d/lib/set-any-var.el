@@ -22,6 +22,9 @@
 
 (require 'wid-edit)
 
+(defvar set-any-variable-minibuffer-setup-hook nil
+  "Hook run by `set-any-variable' when setting up the minibuffer.")
+
 (defun set-any-variable (var val)
   "Just like `set-variable', but allows you to set any variable, not just
 so-called \`user variables' (ones whose documentation begins with a \`*'
@@ -48,9 +51,15 @@ as a starting point for convenient editing."
                    (call-interactively `(lambda (arg)
                                           (interactive ,prop)
                                           arg))
-                 (read (read-string (format "Set %s to: " var)
-                                    (pp (symbol-value var))
-                                    'set-variable-value-history)))))
+                 (read
+                  (minibuffer-with-setup-hook
+                      (lambda ()
+                        (run-hooks 'set-any-variable-minibuffer-setup-hook))
+                    (read-string (format "Set %s to: " var)
+                                 (string-trim
+                                  (pp (symbol-value var))
+                                  nil "\n")
+                                 'set-variable-value-history))))))
      (list var val)))
 
   (let ((type (get var 'custom-type)))

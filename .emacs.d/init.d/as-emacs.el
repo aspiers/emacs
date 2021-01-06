@@ -4,7 +4,10 @@
 
 (use-feature set-any-var
   :commands set-any-variable
-  :bind ("C-c v" . set-any-variable))
+  :bind ("C-c v" . set-any-variable)
+  :config
+  (add-hook 'set-any-variable-minibuffer-setup-hook
+            #'lispy-mode))
 
 (bind-key "C-c V"    'customize-variable)
 
