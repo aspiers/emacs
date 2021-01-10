@@ -78,6 +78,10 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(use-package smart-jump
+  :config
+  (smart-jump-setup-default-registers))
+
 ;; Add some more conventional bindings for occur-mode
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
