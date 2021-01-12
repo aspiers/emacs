@@ -24,4 +24,9 @@
   ;;        (python-mode . prism-mode))
   )
 
+;; (use-package transient-posframe
+;;   :straight (:host github :repo "yanghaoxie/transient-posframe")
+;;   :config
+;;   (transient-posframe-mode))
+
 (provide 'as-ui)
