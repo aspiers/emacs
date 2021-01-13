@@ -52,6 +52,9 @@ Prefix arguments are interpreted by `org-refile'."
     (org-insert-all-links arg "" ""))
 
   (org-defkey org-mode-map [remap org-insert-last-stored-link]
-              #'as-org-insert-last-stored-link))
+              #'as-org-insert-last-stored-link)
+
+  ;; yasnippet rebinds C-c &
+  (org-defkey org-mode-map (kbd "C-c C-&") #'org-mark-ring-goto))
 
 (provide 'as-org-links)
