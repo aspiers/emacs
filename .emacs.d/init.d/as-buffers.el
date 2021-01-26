@@ -22,9 +22,11 @@
 (bind-key "C-c B" 'as-bounce-buffer)
 (bind-key "C-x I" 'insert-buffer)
 (bind-key "<F6>"  'as-bounce-buffer)
-(bind-key "C-c n" 'as-display-buffer-filename)
-(bind-key "C-c N" 'as-display-buffer-name)
 (bind-key "C-c C-S-r" 'as-rename-current-buffer)
+
+(use-feature as-display-buffer-names
+  :bind (("C-c n" . as-display-buffer-filename)
+         ("C-c N" . as-display-buffer-name)))
 
 (req-package switch-window
   :bind ("C-x o" . switch-window))
