@@ -171,11 +171,6 @@ has built the current list of completion matches."
   :config
   (setq consult-project-root-function #'projectile-project-root))
 
-;; Enable Consult-Selectrum integration.
-;; This should be installed if Selectrum is used.
-(use-package consult-selectrum
-  :demand t)
-
 ;; Install the consult-flycheck command.
 (use-package consult-flycheck
   :bind (:map flycheck-command-map
