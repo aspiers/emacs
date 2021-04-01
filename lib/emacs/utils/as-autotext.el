@@ -1,6 +1,6 @@
-;; Adam's auto-text utilities
+;;; Adam's auto-text utilities
 
-;;{{{ Information about me
+;;;; Information about me
 
 ;;;###autoload
 (defun as-insert-email-address (&optional prefix)
@@ -13,14 +13,14 @@
     ;; straight away.
     (or prefix (goto-char p))))
 
-(defvar as-work-email-address "aspiers@suse.com"
-  "Adam's work email address.")
+(defvar as-suse-email-address "suse@adamspiers.org"
+  "Adam's SUSE email address.")
 
 ;;;###autoload
-(defun as-insert-work-email-address ()
+(defun as-insert-suse-email-address ()
   "Inserts Adam's e-mail address"
   (interactive)
-  (insert as-work-email-address))
+  (insert as-suse-email-address))
 
 ;;;###autoload
 (defun as-insert-name ()
@@ -39,19 +39,13 @@
   (insert ">"))
 
 ;;;###autoload
-(defun as-insert-name-and-work-email ()
-  "Inserts Adam's name and work e-mail address"
+(defun as-insert-name-and-suse-email ()
+  "Inserts Adam's name and SUSE e-mail address"
   (interactive)
   (as-insert-name)
-  (insert " <" as-work-email-address ">"))
+  (insert " <" as-suse-email-address ">"))
 
-;;}}}
-;;{{{ Date/time stamps
-
-;; Functions I used to use for this:
-;;
-;; (current-time-string)
-;; (shell-command-to-string "date")
+;;;; Date/time stamps
 
 (defun as-date-to-epoch (date-time-string)
   "Uses date(1) to convert an arbitrary date string to UNIX epoch
@@ -170,16 +164,15 @@ version if a prefix argument is given."
 ;;;###autoload
 (defun as-insert-rpm-changelog-datestamp (&optional prefix)
   "Inserts an rpm changelog header containing the current date,
-time, and work email, into the current buffer at the point.
+time, and SUSE email, into the current buffer at the point.
 Designed to be run from the top of a .changes file."
   (interactive)
   (insert "-------------------------------------------------------------------\n")
   (as-insert-date as-rpm-changelog-format)
-  (insert " - " as-work-email-address "\n\n- \n\n")
+  (insert " - " as-suse-email-address "\n\n- \n\n")
   (backward-char 2))
 
-;;}}}
-;;{{{ as-insert-local-mode
+;;;; as-insert-local-mode
 
 ;;;###autoload
 (defun as-insert-local-mode
@@ -190,8 +183,7 @@ Designed to be run from the top of a .changes file."
   (insert "# -*- mode:  -*-\n\n")
   (backward-char 6))
 
-;;}}}
-;;{{{ Signatures
+;;;; Signatures
 
 ;;;###autoload
 (defun as-insert-japh-indirect-sig ()
@@ -205,8 +197,7 @@ Designed to be run from the top of a .changes file."
   (interactive)
   (insert-file-contents "~/.sig/perl/japh_method_chain"))
 
-;;}}}
-;;{{{ Scissors
+;;;; Scissors
 
 ;;;###autoload
 (defun as-insert-scissors ()
@@ -215,9 +206,6 @@ Designed to be run from the top of a .changes file."
   (open-line 1)
   (insert "--------- 8< --------- 8< --------- 8< --------- 8< --------- 8< ---------")
   (forward-line 1))
-
-;;}}}
-;;{{{ Snipping text
 
 ;;;###autoload
 (defun as-snip-region ()
@@ -235,4 +223,6 @@ line before and after the text."
     (replace-match "\n\n" nil nil))
   (re-search-forward "\\[snipped\\]\n\n" nil t))
 
-;;}}}
+;;;; provide
+
+(provide 'as-autotext)
