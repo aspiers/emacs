@@ -30,9 +30,10 @@
   (define-key web-mode-map (kbd "C-;") nil)
   ;; fci-mode *still* breaks web-mode :-(
   ;; https://github.com/alpaker/Fill-Column-Indicator/issues/46
-  (add-hook 'after-change-major-mode-hook
-            (lambda () (if (string= major-mode "web-mode")
-                           (turn-off-fci-mode)))))
+  ;; (add-hook 'after-change-major-mode-hook
+  ;;           (lambda () (if (string= major-mode "web-mode")
+  ;;                          (turn-off-fci-mode))))
+  )
 
 (use-package gist)
 (use-package haml-mode
