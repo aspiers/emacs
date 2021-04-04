@@ -101,8 +101,9 @@
   :diminish)
 
 ;; Doesn't seem to work?
-(use-package visible-mark
-  :config
-  (global-visible-mark-mode))
+;; https://todo.sr.ht/~iank/visible-mark/1
+;; (use-package visible-mark
+;;   :config
+;;   (global-visible-mark-mode))
 
 (provide 'as-point-motion)
