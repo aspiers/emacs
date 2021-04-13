@@ -1,4 +1,5 @@
 (use-package plantuml-mode
+  :mode ("\\.puml\\'" . plantuml-mode)
   :config
   (setq plantuml-default-exec-mode 'jar
         plantuml-jar-path "/usr/share/java/plantuml.jar"))
