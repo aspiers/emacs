@@ -1090,7 +1090,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-overriding-header "")
        (org-agenda-prefix-format "  - ")))))
  '(org-agenda-deadline-leaders '("Deadline: " "In %3dd: " "%2dd ago: "))
- '(org-agenda-files '("~/org/TODO.org" "~/Blocko/TODO.org"))
+ '(org-agenda-files '("~/org/TODO.org" "~/Panther/TODO.org"))
  '(org-agenda-fontify-priorities '((65 (:bold t :weight bold))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
