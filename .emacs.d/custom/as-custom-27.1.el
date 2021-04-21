@@ -1492,6 +1492,12 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(vc-follow-symlinks t)
  '(visible-bell t)
  '(web-mode-code-indent-offset 2)
+ '(web-mode-comment-formats
+   '(("java" . "/*")
+     ("javascript" . "//")
+     ("typescript" . "//")
+     ("php" . "/*")
+     ("css" . "/*")))
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
  '(what-cursor-show-names t)
