@@ -905,8 +905,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                 (quote deadline)
                 (quote scheduled)))))
        (org-agenda-prefix-format " %?-12t% s")))
-     ("wd" "Blocko daily review"
-      ((tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+     ("wd" "Panther daily review"
+      ((tags-todo "+CATEGORY=\"Panther\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #A TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -914,7 +914,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#A\\]"
                        (quote scheduled))))))
-       (tags-todo "officehrs+CATEGORY=\"Blocko\""
+       (tags-todo "officehrs+CATEGORY=\"Panther\""
                   ((org-agenda-overriding-header "Unscheduled [#AB] TODOs within office hours")
                    (org-agenda-skip-function
                     (lambda nil
@@ -925,8 +925,8 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (agenda ""
                ((org-agenda-ndays 3)
                 (org-agenda-skip-function
-                 (as-org-agenda-skip-select-category-function "Blocko"))))
-       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+                 (as-org-agenda-skip-select-category-function "Panther"))))
+       (tags-todo "+CATEGORY=\"Panther\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -999,19 +999,19 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
         (as-org-agenda-skip-select-category-function "personal"))
        (org-agenda-prefix-format " %?-12t% s"))
       nil)
-     ("w7" "Blocko weekly review"
-      ((tags-todo "+CATEGORY=\"Blocko\"/CHASE"
+     ("w7" "Panther weekly review"
+      ((tags-todo "+CATEGORY=\"Panther\"/CHASE"
                   ((org-agenda-overriding-header "Items to CHASE")))
-       (tags-todo "+CATEGORY=\"Blocko\"/WAITING"
+       (tags-todo "+CATEGORY=\"Panther\"/WAITING"
                   ((org-agenda-overriding-header "Items still WAITING on somebody")))
        (stuck ""
               ((org-agenda-overriding-header "Stuck work projects")
                (org-stuck-projects
                 (quote
-                 ("+CATEGORY=\"Blocko\"/PROJECT"
+                 ("+CATEGORY=\"Panther\"/PROJECT"
                   ("TODO" "NEXT" "NEXTACTION" "STARTED")
                   nil "")))))
-       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Panther\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1019,7 +1019,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
                        (quote notregexp)
                        "\\=.*\\[#B\\]"
                        (quote scheduled))))))
-       (tags-todo "+CATEGORY=\"Blocko\"/NEXT|STARTED"
+       (tags-todo "+CATEGORY=\"Panther\"/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #C TODOs")
                    (org-agenda-skip-function
                     (lambda nil
@@ -1126,7 +1126,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("-" "easy" tags-todo "easy" nil)
      ("p-" "easy personal tasks" tags-todo "+easy+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("w-" "easy Blocko tasks" tags-todo "+easy+CATEGORY=\"Blocko\""
+     ("w-" "easy Panther tasks" tags-todo "+easy+CATEGORY=\"Panther\""
       ((org-agenda-prefix-format "")))
      ("pa" "personal assistant" tags-todo "assist|virtassist" nil)
      ("pA" "personal admin" tags-todo "+admin+CATEGORY=\"personal\""
@@ -1155,13 +1155,13 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       ((org-agenda-prefix-format "")))
      ("p*" "personal community" tags-todo "+community+CATEGORY=\"personal\""
       ((org-agenda-prefix-format "")))
-     ("wa" "Blocko admin" tags-todo "+admin+CATEGORY=\"Blocko\""
+     ("wa" "Panther admin" tags-todo "+admin+CATEGORY=\"Panther\""
       ((org-agenda-prefix-format "")))
-     ("wo" "Blocko org" tags-todo "+org+CATEGORY=\"Blocko\""
+     ("wo" "Panther org" tags-todo "+org+CATEGORY=\"Panther\""
       ((org-agenda-prefix-format "")))
-     ("wc" "Blocko computer" tags-todo "+computer+CATEGORY=\"Blocko\""
+     ("wc" "Panther computer" tags-todo "+computer+CATEGORY=\"Panther\""
       ((org-agenda-prefix-format "")))
-     ("wL" "Blocko learning" tags-todo "+learning+CATEGORY=\"Blocko\""
+     ("wL" "Panther learning" tags-todo "+learning+CATEGORY=\"Panther\""
       ((org-agenda-prefix-format "")))
      ("c" "CHASE" todo "CHASE" nil)
      ("W" "WAITING" todo "WAITING" nil)
@@ -1188,7 +1188,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("wl" "work log" agenda "DONE"
       ((org-agenda-files
         (quote
-         ("~/Blocko/TODO.org" "~/Blocko/DONE.org")))
+         ("~/Panther/TODO.org" "~/Panther/DONE.org")))
        (org-agenda-span
         (quote week))
        (org-agenda-start-on-weekday 1)
@@ -1203,7 +1203,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
        (org-agenda-overriding-header "")
        (org-agenda-prefix-format "  - "))))))
  '(org-agenda-deadline-leaders (quote ("Deadline: " "In %3dd: " "%2dd ago: ")))
- '(org-agenda-files (quote ("~/org/TODO.org" "~/Blocko/TODO.org")))
+ '(org-agenda-files (quote ("~/org/TODO.org" "~/Panther/TODO.org")))
  '(org-agenda-fontify-priorities (quote ((65 (:bold t :weight bold)))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
@@ -1258,34 +1258,34 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       (file "~/org/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
-     ("I" "immediate E24P NEXT" entry
-      (file "~/Blocko/TODO.org")
+     ("I" "immediate Panther NEXT" entry
+      (file "~/Panther/TODO.org")
       "* NEXT %?%:annotation
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
      ("n" "personal NEXT" entry
       (file "~/org/TODO.org")
       "* NEXT %?%a" :prepend t)
-     ("N" "E24P NEXT" entry
-      (file "~/Blocko/TODO.org")
+     ("N" "Panther NEXT" entry
+      (file "~/Panther/TODO.org")
       "* NEXT %?%:annotation" :prepend t)
      ("m" "NEXT from personal mail" entry
       (file "~/org/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
-     ("M" "NEXT from E24P mail" entry
-      (file "~/Blocko/TODO.org")
+     ("M" "NEXT from Panther mail" entry
+      (file "~/Panther/TODO.org")
       "* NEXT %?%[~/.org-mairix-link]" :prepend t)
      ("a" "personal diary entry" entry
       (file "~/org/diary.org")
       "* %^t %?%[~/.org-mairix-link]" :prepend t)
-     ("L" "E24P learning material" entry
-      (file "~/Blocko/TODO.org")
+     ("L" "Panther learning material" entry
+      (file "~/Panther/TODO.org")
       "* SOMEDAY %?%[~/.org-mairix-link]	:learning:" :prepend t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
   CLOSED: %U")
-     ("D" "E24P task DONE" entry
-      (file "~/Blocko/DONE.org")
+     ("D" "Panther task DONE" entry
+      (file "~/Panther/DONE.org")
       "* DONE %?
   CLOSED: %U")
      ("X" "nuisance phone call" entry
