@@ -26,7 +26,7 @@
   (defun as-set-local-server-edit-keys ()
     "Set key bindings in local mode for editing via browser extensions."
     (interactive)
-    (local-set-key "C-c C-c" 'as-save-server-buffer)))
+    (local-set-key (kbd "C-c C-c") 'as-save-server-buffer)))
 
 ;; (defun as-set-local-edit-server-keys ()
 ;;   "Set key bindings in local mode for editing via
