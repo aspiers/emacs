@@ -95,11 +95,9 @@ has built the current list of completion matches."
   (add-to-list 'ivy-sort-matches-functions-alist
                '(set-any-variable . ivy--prefix-sort)
                'append)
-  (let ((existing (assoc 'ivy-switch-buffer
-                         ivy-sort-matches-functions-alist)))
-    (when existing
-      (setq ivy-sort-matches-functions-alist
-            (delete existing ivy-sort-matches-functions-alist))))
+  (setq ivy-sort-matches-functions-alist
+        (assq-delete-all #'ivy-switch-buffer
+                         ivy-sort-matches-functions-alist))
 
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
   (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
