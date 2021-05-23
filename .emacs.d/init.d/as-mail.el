@@ -14,14 +14,18 @@
 (use-feature flowed-text
   :bind ("M-s M-m" . format-as-flowed-text))
 
-(use-package mutt-mode
-  :mode ("/mutt-\\|itsalltext.*mail\\.google" . mail-mode)
+;; This is for mutt config files, not for writing mail
+(use-package mutt-mode)
+
+(use-feature mail-mode
+  :mode "/\\(neo\\)?mutt-\\|itsalltext.*mail\\.google"
+
   :config
   (require 'sendmail)
-  :hook (mail-mode-hook
-         . (lambda ()
-             (turn-on-auto-fill)
-             (as-setup-mode-for-discussion)
-             (as-set-local-server-edit-keys))))
+
+  :hook (mail-mode . (lambda ()
+                       (turn-on-auto-fill)
+                       (as-setup-mode-for-discussion)
+                       (as-set-local-server-edit-keys))))
 
 (provide 'as-mail)
