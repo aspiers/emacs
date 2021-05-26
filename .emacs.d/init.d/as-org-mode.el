@@ -1,4 +1,4 @@
-(use-package org-plus-contrib
+(use-package org-contrib
   :bind
   (("M-o a" . org-agenda)
    ("M-o c" . org-capture)
