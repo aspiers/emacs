@@ -33,12 +33,6 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 ;; and maybe also leaving processes running within emacs.
 ;; (req-package inf-ruby)
 
-(req-package rsense
-  :config
-  (progn
-   (defvar rsense-home (concat (getenv "HOME") "/.STOW/rsense"))
-   (add-to-list 'load-path (concat rsense-home "/etc"))))
-
 (require 'as-jump)
 (use-package bundler
   ;; Need to load which-key to ensure define-key is advised
