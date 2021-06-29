@@ -10,7 +10,14 @@
 ;;   (warn "Use mrco smooth-scrolling to check out the repository."))
 
 (use-package good-scroll
-  :straight (:host github :repo "io12/good-scroll.el"))
+  :straight (:host github :repo "io12/good-scroll.el")
+
+  ;; :config
+  ;; (good-scroll-mode 1)
+  ;;
+  ;; :bind (([next] . good-scroll-up-full-screen)
+  ;;        ([prior] . good-scroll-down-full-screen))
+  )
 
 (setq scroll-preserve-screen-position t)
 (setq scroll-conservatively 2)
