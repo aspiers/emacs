@@ -21,7 +21,10 @@
   (load bootstrap-file nil 'nomessage))
 
 (setq straight-use-package-by-default t)
-(setq straight-vc-git-default-clone-depth 10)  ;; or 'full
+
+;; Putting the integer in a list avoids --single-branch
+(setq straight-vc-git-default-clone-depth '(10))  ;; or 'full
+
 ;;(setq straight-vc-git-auto-fast-forward t)
 
 ;; Make sure we have our customized value of package-archives
