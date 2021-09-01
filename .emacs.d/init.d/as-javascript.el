@@ -46,6 +46,8 @@
   (add-to-list 'tree-sitter-major-mode-language-alist
                '(typescript-tsx-mode . tsx)))
 
+;; FIXME: maybe try https://github.com/ananthakumaran/tide
+
 (use-package tss)
 
 (defvar as-prettier-js-dir-locals-variables
