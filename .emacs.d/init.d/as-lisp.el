@@ -80,11 +80,6 @@
 
   :bind ("C-M-S-u" . as-paredit-top))
 
-(use-package simple-sticky-header
-  :straight (simple-sticky-header
-             :host github :repo "alphapapa/simple-sticky-header.el")
-  :hook (emacs-lisp-mode . simple-sticky-header-mode))
-
 (use-package macrostep
   :commands macrostep-expand
   :bind (:map emacs-lisp-mode-map
