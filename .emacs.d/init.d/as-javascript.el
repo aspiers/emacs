@@ -36,7 +36,7 @@
 (use-package tree-sitter
   :ensure t
   :hook ((typescript-mode . tree-sitter-hl-mode)
-	 (typescript-tsx-mode . tree-sitter-hl-mode)))
+         (typescript-tsx-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
   :ensure t
