@@ -21,11 +21,38 @@
 (use-package flymake-eslint)
 (use-package flymake-jshint)
 (use-package flymake-jslint)
-(use-package typescript-mode)
+(use-package jsx-mode)
+
+;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
+(use-package typescript-mode
+  :ensure t
+  :init
+  (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
+  :config
+  (setq typescript-indent-level 2)
+  (add-hook 'typescript-mode #'subword-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
+
+(use-package tree-sitter
+  :ensure t
+  :hook ((typescript-mode . tree-sitter-hl-mode)
+	 (typescript-tsx-mode . tree-sitter-hl-mode)))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter
+  :config
+  (tree-sitter-require 'tsx)
+  (add-to-list 'tree-sitter-major-mode-language-alist
+               '(typescript-tsx-mode . tsx)))
+
+;; FIXME: maybe try https://github.com/ananthakumaran/tide
+
 (use-package tss)
 
 (defvar as-prettier-js-dir-locals-variables
-  '((js-mode . ((eval . (prettier-mode t)))))
+  '((js-mode . ((eval . (prettier-mode t))))
+    (typescript-mode . ((eval . (prettier-mode t)))))
   "Variables for use with `dir-locals-set-class-variables' to
 enable prettier.el for Javascript files.")
 
