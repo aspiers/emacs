@@ -74,4 +74,6 @@ FIXME: needs to tweak align-*-modes too."
                     (modes    . align-python-modes)
                     (tab-stop . nil)))))
 
+(use-package lsp-python)
+
 (provide 'as-python)
