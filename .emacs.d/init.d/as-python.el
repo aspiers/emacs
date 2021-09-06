@@ -74,6 +74,9 @@ FIXME: needs to tweak align-*-modes too."
                     (modes    . align-python-modes)
                     (tab-stop . nil)))))
 
-(use-package lsp-python)
+;; Note: lsp-python is obsolete and broken
+(use-package lsp-pyright)
+;; (use-package lsp-pyre)
+;; (use-package lsp-python-ms)
 
 (provide 'as-python)
