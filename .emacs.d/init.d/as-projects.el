@@ -54,7 +54,7 @@ an existing magit status buffer if it exists, to save rebuilding it."
   (or project-root (setq project-root (projectile-project-root)))
   (let ((vcs (projectile-project-vcs project-root)))
     (if (eq vcs 'git)
-        (as-magit-status)
+        (magit-status-quick)
       (projectile-vc project-root))))
 
 (defun as-counsel-projectile-switch-project (project)

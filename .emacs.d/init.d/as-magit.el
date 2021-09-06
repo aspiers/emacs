@@ -40,14 +40,6 @@
       ;; return buffer's window
       (get-buffer-window buffer)))
 
-  (defun as-magit-status ()
-    "Adam's wrapper around `magit-status' which just switches to
-an existing magit status buffer if it exists, to save rebuilding it."
-    (interactive)
-    (let ((buf (magit-get-mode-buffer 'magit-status-mode)))
-      (if buf (switch-to-buffer buf)
-        (magit-status))))
-
   (defun magit-run-gitg ()
     "Run `gitg' in the current repository."
     (interactive)
@@ -71,8 +63,8 @@ an existing magit status buffer if it exists, to save rebuilding it."
                     (not (file-directory-p (concat project "/.git")))))
                  (projectile-relevant-known-projects))))
 
-  :bind (("C-c g s" . as-magit-status)
-         ("C-S-g"   . as-magit-status)))
+  :bind (("C-c g s" . magit-status-quick)
+         ("C-S-g"   . magit-status-quick)))
 
 (with-packages (magit org)
   :config
