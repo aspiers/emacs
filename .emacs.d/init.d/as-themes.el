@@ -7,9 +7,8 @@
   (defvar zenburn-override-colors-alist
     '(("zenburn-bg" . "#000000"))))
 
-(use-package modus-operandi-theme)
-
 (use-package modus-vivendi-theme
+  :straight modus-themes
   :config
 
   ;; https://protesilaos.com/modus-themes/#h:ea30ff0e-3bb6-4801-baf1-d49169d94cd5
