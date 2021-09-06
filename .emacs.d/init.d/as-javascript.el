@@ -21,7 +21,6 @@
 (use-package flymake-eslint)
 (use-package flymake-jshint)
 (use-package flymake-jslint)
-(use-package jsx-mode)
 
 ;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
 (use-package typescript-mode
@@ -46,9 +45,12 @@
   (add-to-list 'tree-sitter-major-mode-language-alist
                '(typescript-tsx-mode . tsx)))
 
-;; FIXME: maybe try https://github.com/ananthakumaran/tide
-
-(use-package tss)
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
 
 (defvar as-prettier-js-dir-locals-variables
   '((js-mode . ((eval . (prettier-mode t))))
