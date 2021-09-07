@@ -49,7 +49,7 @@ personal mail via mutt within an xterm.
     (org-mairix-open search)))
 
 ;; org-add-link-type is deprecated and provided by org-plus-contrib
-(req-package org
+(use-package org
   :ensure org-compat
   :config
   (org-add-link-type "mairixp" 'as-org-mairix-personal-open))

@@ -3,7 +3,7 @@
 ;; since er/expand-region is an autoload
 (require 'as-point-motion)
 
-(req-package multiple-cursors
+(use-package multiple-cursors
   :config
 
   ;; FIXME: One-shot keys
@@ -27,8 +27,8 @@
   (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair))
 
 ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
-(req-package smartrep
-  :require multiple-cursors
+(use-package smartrep
+  :after multiple-cursors
 
   :config
   ;; Keys we want to be able to hit repeatedly
@@ -53,7 +53,7 @@
       ("q"   . smartrep-quit)
       ("C-g" . smartrep-quit))))
 
-(req-package region-bindings-mode
+(use-package region-bindings-mode
   ;; FIXME: https://github.com/jwiegley/use-package/issues/71
   ;;
   ;; I added region-bindings-mode-enabled-modes to obsolete this:
@@ -62,7 +62,7 @@
   ;;                 emacs-lisp-mode-hook
   ;;                 ruby-mode-hook python-mode-hook))
   ;;   (add-hook hook 'region-bindings-mode-enable))
-  :require multiple-cursors
+  :after multiple-cursors
 
   :config
   (define-key region-bindings-mode-map "q"   'region-bindings-mode-off)
@@ -90,9 +90,10 @@
   (define-key region-bindings-mode-map "S"   'mc/mark-all-symbols-like-this)
   (define-key region-bindings-mode-map "D"   'mc/mark-all-dwim))
 
-(req-package phi-search
-  :require multiple-cursors)
-(req-package phi-search-mc
-  :require multiple-cursors)
+(use-package phi-search
+  :after multiple-cursors)
+
+(use-package phi-search-mc
+  :after multiple-cursors)
 
 (provide 'as-multiple-cursors)

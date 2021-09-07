@@ -1,6 +1,6 @@
 ;; File handling
 
-(req-package tar-mode
+(use-package tar-mode
   :mode ("\\.dump$" . tar-mode))
 
 (use-feature auto-compression-mode
@@ -10,7 +10,7 @@
     (interactive)
     (auto-compression-mode 1)))
 
-(req-package recentf
+(use-package recentf
   :if window-system
   :config
   (recentf-mode t))
@@ -21,7 +21,7 @@
 (bind-key "C-c K"   'as-destroy-buffer-delete-file)
 (bind-key "C-x M-f" 'find-library)
 
-(req-package ffap
+(use-package ffap
   :bind
   (("C-M-'"   . find-file-at-point)
    ("C-x 4 '" . ffap-other-window)
