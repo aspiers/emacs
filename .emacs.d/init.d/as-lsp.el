@@ -4,6 +4,14 @@
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "M-L")
 
+  :config
+  ;; Disable binding which clashes with my multiple-cursors binding
+  (define-key lsp-mode-map (kbd "C-S-SPC") nil)
+
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024))
+
   :hook ((python-mode . lsp)
          (js-mode . lsp)
          (typescript-mode . lsp)
