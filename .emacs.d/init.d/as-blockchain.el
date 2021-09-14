@@ -16,6 +16,15 @@
 
 (use-package company-solidity)
 
+(defvar as-prettier-solidity-dir-locals-variables
+  '((solidity-mode . ((eval . (prettier-mode t))))
+    (blahcanary . 7))
+  "Variables for use with `dir-locals-set-class-variables' to
+enable prettier.el for Solidity files.")
+
+(dir-locals-set-class-variables 'prettier-solidity
+                                as-prettier-solidity-dir-locals-variables)
+
 ;; Unmaintained: https://github.com/kootenpv/flymake-solidity/tree/master
 ;; (use-package flymake-solidity)
 
