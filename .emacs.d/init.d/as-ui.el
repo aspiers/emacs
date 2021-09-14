@@ -20,7 +20,8 @@
 
 ;; Nice top line of buffer showing context
 (use-package topsy
-  :hook (prog-mode . topsy-mode))
+  ;; emacs-lsp is better, so use that for now for other modes.
+  :hook (emacs-lisp-mode . topsy-mode))
 
 (use-package prism
   :straight (:host github :repo "alphapapa/prism.el")
