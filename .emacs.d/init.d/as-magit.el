@@ -98,7 +98,8 @@
 
   ;; Temporary workaround for https://github.com/magit/forge/issues/300
   (remove-hook 'find-file-hook 'forge-bug-reference-setup)
-  (remove-hook 'magit-mode-hook 'forge-bug-reference-setup))
+  (remove-hook 'magit-mode-hook 'forge-bug-reference-setup)
+  (remove-hook 'git-commit-setup-hook 'forge-bug-reference-setup))
 
 ;; support for magit: links in org buffers
 ;; e.g. [[orgit:/path/to/repo/][my repo]]
