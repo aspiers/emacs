@@ -40,6 +40,7 @@
 
   ;; https://github.com/bbatsov/projectile/issues/496
   (projectile-mode)
+  (setq projectile-switch-project-action 'as-projectile-switch-project)
 
   :bind ("C-c p" . as-copy-previous-line-suffix))
 
@@ -61,8 +62,6 @@ an existing magit status buffer if it exists, to save rebuilding it."
   "Open PROJECT in vc-dir / magit / monky."
   (let ((projectile-switch-project-action 'as-projectile-switch-project))
     (counsel-projectile-switch-project-by-name project)))
-
-(setq projectile-switch-project-action 'as-projectile-switch-project)
 
 ;; https://github.com/raxod502/selectrum/issues/281
 ;; How to achieve similar with selectrum?  Maybe this?
