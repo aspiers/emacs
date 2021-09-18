@@ -127,8 +127,6 @@ has built the current list of completion matches."
   :after ivy-rich
   :init (all-the-icons-ivy-rich-mode 1))
 
-(key-chord-define-global "xd" (lambda () (interactive) (dired ".")))
-
 (use-package consult
   ;; Replace bindings. Lazily loaded due to use-package.
   :chords ((",." . consult-buffer)

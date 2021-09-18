@@ -1,5 +1,28 @@
 ;; File handling
 
+(defun dir-locals-show-current-buffer ()
+  "Show the directory local variables configured for the current
+buffer. These are not necessarily the same as the active values."
+  (interactive)
+  (message "%s" (dir-locals-find-file (buffer-file-name))))
+
+(defun dired-current-file ()
+  "Open dired and jump the point to the current buffer's file."
+  (interactive)
+  (if (not (buffer-file-name))
+      (message "Current buffer has no file")
+    (let ((current-file (file-name-nondirectory (buffer-file-name))))
+      (dired ".")
+      (beginning-of-buffer)
+      (re-search-forward
+       (concat " " (regexp-quote current-file) "\\( \\|$\\)"))
+      (goto-char (match-beginning 0)))))
+
+(with-packages key-chord
+  :config
+  (key-chord-define-global "xd" 'dired-current-file)
+  (key-chord-define-global "ZL" 'dir-locals-show-current-buffer))
+
 (use-package tar-mode
   :mode ("\\.dump$" . tar-mode))
 
