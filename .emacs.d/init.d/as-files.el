@@ -15,8 +15,8 @@ buffer. These are not necessarily the same as the active values."
       (dired ".")
       (beginning-of-buffer)
       (re-search-forward
-       (concat " " (regexp-quote current-file) "\\( \\|$\\)"))
-      (goto-char (match-beginning 0)))))
+       (concat " \\(" (regexp-quote current-file) "\\( \\|$\\)\\)"))
+      (goto-char (match-beginning 1)))))
 
 (with-packages key-chord
   :config
