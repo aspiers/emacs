@@ -17,11 +17,12 @@
 (use-package company-solidity)
 
 (defvar as-prettier-solidity-dir-locals-variables
-  '((solidity-mode . ((eval . (prettier-mode t))))
-    (blahcanary . 7))
+  '((solidity-mode . ((eval . (prettier-mode t)))))
   "Variables for use with `dir-locals-set-class-variables' to
 enable prettier.el for Solidity files.")
 
+;; Remember that setting this class may override other classes,
+;; so .dir-locals.el might be a better option.
 (dir-locals-set-class-variables 'prettier-solidity
                                 as-prettier-solidity-dir-locals-variables)
 
