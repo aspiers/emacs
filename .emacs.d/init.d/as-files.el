@@ -7,10 +7,11 @@ buffer. These are not necessarily the same as the active values."
   (message "%s" (dir-locals-find-file (buffer-file-name))))
 
 (defun dired-current-file ()
-  "Open dired and jump the point to the current buffer's file."
+  "Open dired, and jump the point to the current buffer's file, if it
+has one."
   (interactive)
   (if (not (buffer-file-name))
-      (message "Current buffer has no file")
+      (dired default-directory)
     (let ((current-file (file-name-nondirectory (buffer-file-name))))
       (dired ".")
       (beginning-of-buffer)
