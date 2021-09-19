@@ -14,6 +14,7 @@ has one."
       (dired default-directory)
     (let ((current-file (file-name-nondirectory (buffer-file-name))))
       (dired ".")
+      (revert-buffer)
       (beginning-of-buffer)
       (re-search-forward
        (concat " \\(" (regexp-quote current-file) "\\( \\|$\\)\\)"))
