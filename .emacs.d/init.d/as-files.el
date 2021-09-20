@@ -14,11 +14,13 @@ has one."
       (dired default-directory)
     (let ((current-file (file-name-nondirectory (buffer-file-name))))
       (dired ".")
-      (revert-buffer)
-      (beginning-of-buffer)
-      (re-search-forward
-       (concat " \\(" (regexp-quote current-file) "\\( \\|$\\)\\)"))
-      (goto-char (match-beginning 1)))))
+      (if (not (file-exists-p current-file))
+          (message "Warning: %s doesn't exist yet" current-file)
+        (revert-buffer)
+        (beginning-of-buffer)
+        (re-search-forward
+         (concat " \\(" (regexp-quote current-file) "\\( \\|$\\)\\)"))
+        (goto-char (match-beginning 1))))))
 
 (with-packages key-chord
   :config
