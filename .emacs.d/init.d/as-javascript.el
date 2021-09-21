@@ -24,7 +24,6 @@
 
 ;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
 (use-package typescript-mode
-  :ensure t
   :init
   (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :config
@@ -33,12 +32,10 @@
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
 
 (use-package tree-sitter
-  :ensure t
   :hook ((typescript-mode . tree-sitter-hl-mode)
          (typescript-tsx-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
-  :ensure t
   :after tree-sitter
   :config
   (tree-sitter-require 'tsx)
@@ -46,7 +43,6 @@
                '(typescript-tsx-mode . tsx)))
 
 (use-package tide
-  :ensure t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
