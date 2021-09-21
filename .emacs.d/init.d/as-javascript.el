@@ -50,7 +50,9 @@
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
+         ;; Leave prettier.el to handle this
+         ;; (before-save . tide-format-before-save)
+         ))
 
 (defvar as-prettier-js-dir-locals-variables
   '((js-mode . ((eval . (prettier-mode t))))
