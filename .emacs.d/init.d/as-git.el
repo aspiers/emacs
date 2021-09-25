@@ -1,3 +1,6 @@
+(use-package browse-at-remote
+  :bind ("C-c g o" . browse-at-remote))
+
 (with-packages (projectile)
   :config
   (defun as-edit-git-assembly ()
