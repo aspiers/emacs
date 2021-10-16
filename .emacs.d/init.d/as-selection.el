@@ -62,70 +62,70 @@
   ;; switch between the annotators.
   (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light)))
 
-(use-package ivy
-  :after prescient
-
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
-  ;; suggests to use M-: (ivy-state-caller ivy-last) to figure out the keys
-  ;; in this alist.
-  (setq ivy-re-builders-alist
-        '((swiper . ivy--regex)
-          (swiper-isearch . ivy--regex)
-          (counsel-git-grep . ivy--regex-plus)
-          (t . ivy--regex-fuzzy)))
-
-  (defun ivy-show-context ()
-    "Output a messaging with some helpful information about how ivy
-has built the current list of completion matches."
-    (interactive)
-    (let ((caller (ivy-state-caller ivy-last)))
-      (message "\nivy :caller %s, :matcher %s\n:sort (or %s %s), :re-builder %s\n:collection %s"
-               caller
-               (ivy-state-matcher ivy-last)
-               (ivy-state-sort ivy-last)
-               (assoc caller ivy-sort-functions-alist)
-               (ivy-state-re-builder ivy-last)
-               (ivy-state-collection ivy-last))))
-
-  ;; See https://github.com/abo-abo/swiper/issues/2628
-  ;; ("Fallback in ivy-sort-functions-alist is ignored")
-  (add-to-list 'ivy-sort-matches-functions-alist
-               '(set-any-variable . ivy--prefix-sort)
-               'append)
-  (setq ivy-sort-matches-functions-alist
-        (assq-delete-all #'ivy-switch-buffer
-                         ivy-sort-matches-functions-alist))
-
-  (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
-  (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
-  (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile "")
-
-  :bind
-  (:map ivy-mode-map
-        ("C-c M-c" . ivy-show-context))
-
-  ;; https://github.com/abo-abo/swiper/wiki/FAQ#how-to-prevent-tab-from-selecting-the-only-candidate
-  (:map ivy-minibuffer-map
-        ("TAB" . ivy-partial)))
-
-(use-package ivy-prescient
-  :config
-  (ivy-prescient-mode))
-
-;; C-o in ivy minibuffer is awesome!!
-(use-package ivy-hydra)
-
-(use-package ivy-rich
-  :after counsel
-  :config
-  (ivy-rich-mode 1))
-
-(use-package all-the-icons-ivy-rich
-  :after ivy-rich
-  :init (all-the-icons-ivy-rich-mode 1))
+;; (use-package ivy
+;;   :after prescient
+;; 
+;;   :config
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq enable-recursive-minibuffers t)
+;;   ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
+;;   ;; suggests to use M-: (ivy-state-caller ivy-last) to figure out the keys
+;;   ;; in this alist.
+;;   (setq ivy-re-builders-alist
+;;         '((swiper . ivy--regex)
+;;           (swiper-isearch . ivy--regex)
+;;           (counsel-git-grep . ivy--regex-plus)
+;;           (t . ivy--regex-fuzzy)))
+;; 
+;;   (defun ivy-show-context ()
+;;     "Output a messaging with some helpful information about how ivy
+;; has built the current list of completion matches."
+;;     (interactive)
+;;     (let ((caller (ivy-state-caller ivy-last)))
+;;       (message "\nivy :caller %s, :matcher %s\n:sort (or %s %s), :re-builder %s\n:collection %s"
+;;                caller
+;;                (ivy-state-matcher ivy-last)
+;;                (ivy-state-sort ivy-last)
+;;                (assoc caller ivy-sort-functions-alist)
+;;                (ivy-state-re-builder ivy-last)
+;;                (ivy-state-collection ivy-last))))
+;; 
+;;   ;; See https://github.com/abo-abo/swiper/issues/2628
+;;   ;; ("Fallback in ivy-sort-functions-alist is ignored")
+;;   (add-to-list 'ivy-sort-matches-functions-alist
+;;                '(set-any-variable . ivy--prefix-sort)
+;;                'append)
+;;   (setq ivy-sort-matches-functions-alist
+;;         (assq-delete-all #'ivy-switch-buffer
+;;                          ivy-sort-matches-functions-alist))
+;; 
+;;   (ivy--alist-set 'ivy-initial-inputs-alist 'org-refile "")
+;;   (ivy--alist-set 'ivy-initial-inputs-alist 'org-agenda-refile "")
+;;   (ivy--alist-set 'ivy-initial-inputs-alist 'org-capture-refile "")
+;; 
+;;   :bind
+;;   (:map ivy-mode-map
+;;         ("C-c M-c" . ivy-show-context))
+;; 
+;;   ;; https://github.com/abo-abo/swiper/wiki/FAQ#how-to-prevent-tab-from-selecting-the-only-candidate
+;;   (:map ivy-minibuffer-map
+;;         ("TAB" . ivy-partial)))
+;; 
+;; (use-package ivy-prescient
+;;   :config
+;;   (ivy-prescient-mode))
+;; 
+;; ;; C-o in ivy minibuffer is awesome!!
+;; (use-package ivy-hydra)
+;; 
+;; (use-package ivy-rich
+;;   :after counsel
+;;   :config
+;;   (ivy-rich-mode 1))
+;; 
+;; (use-package all-the-icons-ivy-rich
+;;   :after ivy-rich
+;;   :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package consult
   ;; Replace bindings. Lazily loaded due to use-package.
