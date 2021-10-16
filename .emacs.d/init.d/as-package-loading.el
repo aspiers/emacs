@@ -53,7 +53,8 @@ NAME and ARGS are as in `use-package'."
 ;; will install el-get itself from MELPA.
 (require 'as-el-get)
 
-(straight-use-package 'req-package)
+(straight-use-package
+ '(req-package :type git :host github :repo "edvorg/req-package"))
 
 ;; Workaround missing ;;;###autoload cookie for req-package
 (autoload 'req-package "req-package" "\
