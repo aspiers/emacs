@@ -42,13 +42,13 @@
   (add-to-list 'tree-sitter-major-mode-language-alist
                '(typescript-tsx-mode . tsx)))
 
-(use-package tide
-  :after (typescript-mode company flycheck)
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)
-         ;; Leave prettier.el to handle this
-         ;; (before-save . tide-format-before-save)
-         ))
+;; (use-package tide
+;;   :after (typescript-mode company flycheck)
+;;   :hook ((typescript-mode . tide-setup)
+;;          (typescript-mode . tide-hl-identifier-mode)
+;;          ;; Leave prettier.el to handle this
+;;          ;; (before-save . tide-format-before-save)
+;;          ))
 
 (defvar as-prettier-js-dir-locals-variables
   '((js-mode . ((eval . (prettier-mode t))))
