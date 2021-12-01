@@ -382,6 +382,7 @@
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
  '(git-commit-mode-hook '(turn-on-auto-fill flyspell-mode git-commit-save-message) t)
+ '(git-commit-use-local-message-ring t)
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
