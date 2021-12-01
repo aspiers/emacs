@@ -407,6 +407,7 @@
  '(ido-ubiquitous-mode t)
  '(ido-use-faces nil)
  '(ido-vertical-mode t)
+ '(image-auto-resize 'fit-width)
  '(imenu-auto-rescan t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
