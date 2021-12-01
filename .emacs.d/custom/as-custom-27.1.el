@@ -289,7 +289,8 @@
  '(color-theme-legal-frame-parameters "\\(color\\|mode\\)$")
  '(column-number-mode t)
  '(comment-empty-lines ''eol)
- '(company-idle-delay 0.2)
+ '(company-idle-delay 0.5)
+ '(company-tooltip-align-annotations t)
  '(completion-ignored-extensions
    '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".hg/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".p64fsl" ".d64fsl" ".dx64fsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo"))
  '(counsel-projectile-switch-project-action
