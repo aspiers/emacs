@@ -359,6 +359,7 @@
  '(echo-keystrokes 0.01)
  '(ediff-custom-diff-options "-u")
  '(edit-server-port 9292)
+ '(editorconfig-mode t)
  '(el-get-sources
    '((:name org2blog :pkgname "aspiers/org2blog")
      (:name smooth-scrolling :pkgname "DarwinAwardWinner/smooth-scrolling")))
