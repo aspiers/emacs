@@ -2,7 +2,8 @@
   :mode ("\\.puml\\'" . plantuml-mode)
   :config
   (setq plantuml-default-exec-mode 'jar
-        plantuml-jar-path "/usr/share/java/plantuml.jar"))
+        plantuml-jar-path "/usr/share/java/plantuml.jar"
+        plantuml-indent-level 4))
 
 (use-package flycheck-plantuml)
 
