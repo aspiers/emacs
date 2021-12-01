@@ -726,6 +726,7 @@
  '(lazy-lock-minimum-size 4096)
  '(lazy-lock-stealth-time 15)
  '(lazy-lock-stealth-verbose t)
+ '(lsp-enable-dap-auto-configure nil)
  '(lsp-headerline-breadcrumb-enable t)
  '(lua-indent-level 2)
  '(magit-branch-prefer-remote-upstream '("master" "stable/3.0"))
