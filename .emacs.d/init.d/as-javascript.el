@@ -1,6 +1,10 @@
 ;; Steve Yegge to the rescue
+;; N.B. doesn't support jsx - use built-in js or other options for that
 (use-package js2-mode
   :mode ("\\.js\\(\.erb\\)?$"))
+
+(use-package js
+  :mode ("\\.jsx\\'"))
 
 ;; Allow easy configuring of 3rd party repos for various indentation
 ;; strategies, via statements like:
@@ -27,7 +31,6 @@
   :init
   (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :config
-  (setq typescript-indent-level 2)
   (add-hook 'typescript-mode #'subword-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
 
@@ -42,13 +45,49 @@
   (add-to-list 'tree-sitter-major-mode-language-alist
                '(typescript-tsx-mode . tsx)))
 
-;; (use-package tide
-;;   :after (typescript-mode company flycheck)
-;;   :hook ((typescript-mode . tide-setup)
-;;          (typescript-mode . tide-hl-identifier-mode)
-;;          ;; Leave prettier.el to handle this
-;;          ;; (before-save . tide-format-before-save)
-;;          ))
+;; Only useful for Rust so far
+(use-package tree-sitter-indent
+  :after tree-sitter)
+
+(use-package tide
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (typescript-mode . setup-tide-mode)
+         ;; Leave prettier.el to handle this
+         ;; (before-save . tide-format-before-save)
+         )
+
+  :config
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    ;; company is an optional dependency. You have to
+    ;; install it separately via package-install
+    ;; `M-x package-install [ret] company`
+    (company-mode +1)))
+
+(defun as-setup-tide-mode-for-tsx ()
+    (when (string-equal "tsx"
+                        (file-name-extension buffer-file-name))
+      (setup-tide-mode)))
+
+(with-packages (tide web-mode)
+  :mode ("\\.tsx\\'" . web-mode)
+  :hook ((web-mode . as-setup-tide-mode-for-tsx))
+
+  :config
+  (defun as-setup-tide-mode-for-tsx ()
+    (when (string-equal "tsx"
+                        (file-name-extension buffer-file-name))
+      (setup-tide-mode)))
+
+  ;; enable typescript-tslint checker
+  (flycheck-add-mode 'typescript-tslint 'web-mode))
 
 (defvar as-prettier-js-dir-locals-variables
   '((js-mode . ((eval . (prettier-mode t))))
