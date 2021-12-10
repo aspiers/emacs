@@ -4,26 +4,33 @@
 ;;   (autoload 'x-select-text "term/x-win" nil t))
 
 ;;;###autoload
-(defun as-display-buffer-filename (&optional save-to-clipboard)
+(defun as-display-buffer-filename (&optional mode)
   "Displays the current buffer's filename in the minibuffer.
 
 If a prefix argument is given, stores the result in the kill ring
-and in the X selection for other programs.  If the prefix argument
-is 2, forks the external program abs (must be in $PATH) to convert
-the filename to an absolute one with all symlinks resolved."
-  (interactive "P")
+and in the X selection for other programs.
+
+If the prefix argument is 2, forks the external program abs (must
+be in $PATH) to convert the filename to an absolute one with all
+symlinks resolved.
+
+If the prefix argument is 3 or 16, calculates the path relative to the
+project root."
+  (interactive "p")
   (let ((file-name
          (cond ((eq major-mode 'Info-mode)
                 Info-current-file)
                (buffer-file-name)
                (t
                 (error "No file associated with this buffer")))))
-    (let ((fn (cond ((and save-to-clipboard (eq save-to-clipboard 2))
+    (let ((fn (cond ((eq mode 2)
                      (substring
                       (shell-command-to-string (concat "abs " file-name))
                       0 -1))
+                    ((or (= mode 3) (= mode 16))
+                     (file-relative-name file-name (projectile-project-root)))
                     (t file-name))))
-      (cond (save-to-clipboard
+      (cond (mode
              (kill-new fn)
              ;; No need for x-select-text since kill-new calls function set
              ;; in interprogram-cut-function, which is x-select-text anyway.
