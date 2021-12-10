@@ -4,7 +4,11 @@
   "Show the directory local variables configured for the current
 buffer. These are not necessarily the same as the active values."
   (interactive)
-  (message "%s" (dir-locals-find-file (buffer-file-name))))
+  (message "%s" (if (buffer-file-name)
+                    (dir-locals-find-file (buffer-file-name))
+                  "No file associated with buffer")))
+
+;; Reminder: default-directory can be useful
 
 (defun dired-current-file ()
   "Open dired, and jump the point to the current buffer's file, if it
