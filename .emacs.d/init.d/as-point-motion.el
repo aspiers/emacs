@@ -58,7 +58,11 @@
   ;; (avy-setup-default)
   :bind (("C-0" . avy-goto-word-1)
          ("C-9" . avy-goto-char-timer)
-         ("M-g" . avy-goto-line)))
+         ("M-g" . avy-goto-line)
+         ("M-G d" . avy-copy-line)
+         ("M-G D" . avy-copy-region)
+         ("M-G y" . avy-move-line)
+         ("M-G Y" . avy-move-region)))
 
 (bind-key "M-G l"   'goto-line)
 (bind-key "M-S-e" 'mark-end-of-sentence)
