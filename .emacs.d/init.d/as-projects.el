@@ -8,6 +8,7 @@
 
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
+(require 'as-editing) ;; for as-copy-previous-line-suffix
 (require 'as-key-chord)
 (require 'as-magit)
 
