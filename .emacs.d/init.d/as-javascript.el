@@ -3,6 +3,9 @@
 (use-package js2-mode
   :mode ("\\.js\\(\.erb\\)?$"))
 
+;; TODO: maybe try https://github.com/js-emacs/js2-refactor.el
+;; although it wouldn't work with jsx or ts or tsx.
+
 (use-package js
   :mode ("\\.jsx\\'"))
 
