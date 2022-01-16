@@ -49,7 +49,8 @@ has one."
 (bind-key "C-c +"   'make-directory)
 (bind-key "C-c R"   'as-rename-current-buffer-file)
 (bind-key "C-c k"   'delete-file)
-(bind-key "C-c K"   'as-destroy-buffer-delete-file)
+(use-feature as-destroy-buffer
+  :bind ("C-c K" . as-destroy-buffer-delete-file))
 (bind-key "C-x M-f" 'find-library)
 
 (use-package ffap

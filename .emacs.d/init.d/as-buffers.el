@@ -14,7 +14,8 @@
 (use-package frog-jump-buffer
   :bind ("C-!" . frog-jump-buffer))
 
-(bind-key "C-x K" 'as-destroy-buffer)
+(use-feature as-destroy-buffer
+  :bind ("C-x K" . as-destroy-buffer))
 (bind-key "C-c r" 'as-revert-buffer-without-confirmation)
 (bind-key "C-c b" 'bury-buffer)
 (bind-key "C-;"   'switch-to-prev-buffer)
