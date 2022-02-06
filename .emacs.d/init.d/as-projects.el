@@ -8,7 +8,6 @@
 
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
-(require 'as-editing) ;; for as-copy-previous-line-suffix
 (require 'as-key-chord)
 (require 'as-magit)
 
@@ -41,8 +40,10 @@
 
   ;; https://github.com/bbatsov/projectile/issues/496
   (projectile-mode)
-  (setq projectile-switch-project-action 'as-projectile-switch-project)
+  (setq projectile-switch-project-action 'as-projectile-switch-project))
 
+(with-packages (projectile as-editing)
+  (require 'as-editing) ;; for as-copy-previous-line-suffix
   :bind ("C-c p" . as-copy-previous-line-suffix))
 
 (defun as-projectile-switch-project (&optional project-root)
