@@ -26,27 +26,27 @@
        (treemacs-git-mode 'simple))))
   :bind
   (:map global-map
-        ("C-'"       . treemacs-select-window)
+        ("C-'"       . treemacs)
         ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
+        ("C-x t t"   . treemacs-select-window)
         ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t C-f" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
 
 (use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  :after treemacs projectile)
 
 (use-package treemacs-icons-dired
   :after dired
-  :ensure t
   :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
+  :after treemacs magit)
 
-;; treemacs-persective if you use perspective.el vs. persp-mode
+(use-package treemacs-indent-guide-mode
+  :after treemacs)
+
+;; treemacs-perspective if you use perspective.el vs. persp-mode
 ;; (use-package treemacs-persp
 ;;   :after treemacs persp-mode ;; or perspective vs. persp-mode
 ;;   :ensure t
