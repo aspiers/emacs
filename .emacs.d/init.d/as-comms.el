@@ -17,4 +17,11 @@ other people."
 (bind-key "C-$"   'ispell-complete-word)
 (bind-key "C-M-$" 'ispell-buffer)
 
+(defun as-noop ()
+  "Do nothing."
+  (interactive))
+
+;; Protect a key binding for push-to-talk
+(bind-key "s-'" 'as-noop)
+
 (provide 'as-comms)
