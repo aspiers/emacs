@@ -1,13 +1,15 @@
 ;; Steve Yegge to the rescue
 ;; N.B. doesn't support jsx - use built-in js or other options for that
 (use-package js2-mode
-  :mode ("\\.js\\(\.erb\\)?$"))
+  :mode ("\\.[cm]?js\\(\.erb\\)?$")
+  :hook ((js2-mode . electric-pair-mode)))
 
 ;; TODO: maybe try https://github.com/js-emacs/js2-refactor.el
 ;; although it wouldn't work with jsx or ts or tsx.
 
 (use-package js
-  :mode ("\\.jsx\\'"))
+  :mode ("\\.jsx\\'")
+  :hook ((js-mode . electric-pair-mode)))
 
 ;; Allow easy configuring of 3rd party repos for various indentation
 ;; strategies, via statements like:
@@ -33,8 +35,9 @@
 (use-package typescript-mode
   :init
   (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
+  :hook ((typescript-mode . subword-mode)
+         (typescript-mode . electric-pair-mode))
   :config
-  (add-hook 'typescript-mode #'subword-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
 
 (use-package tree-sitter
