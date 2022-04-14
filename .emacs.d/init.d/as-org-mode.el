@@ -1,5 +1,4 @@
-(use-package org
-  :hook (org-mode . org-indent-mode))
+(use-package org)
 
 (use-package org-contrib
   :bind
@@ -105,10 +104,11 @@
 
 (use-package org-super-agenda)
 
-(use-package org-modern
-  :after org
-  :straight (org-modern :host github :repo "minad/org-modern")
-  :hook ((org-mode . org-modern-mode)
-         (org-agenda-finalize . org-modern-agenda)))
+;; (use-package org-modern
+;;   :after org
+;;   :straight (org-modern :host github :repo "minad/org-modern")
+;;   :hook ((org-mode . org-modern-mode)
+;;          (org-mode . org-indent-mode)
+;;          (org-agenda-finalize . org-modern-agenda)))
 
 (provide 'as-org-mode)
