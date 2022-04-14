@@ -65,8 +65,8 @@
                     (not (file-directory-p (concat project "/.git")))))
                  (projectile-relevant-known-projects))))
 
-  :bind (("C-c g s" . magit-status-quick)
-         ("C-S-g"   . magit-status-quick)))
+  :bind (("C-c g s" . magit-status)
+         ("C-S-g"   . magit-status)))
 
 (with-packages (magit org)
   :config
@@ -87,6 +87,8 @@
 ;; https://github.com/terranpro/magit-gerrit/issues/62
 ;; https://github.com/somtin/magit-gerrit/issues/1
 ;;(req-package magit-gerrit)
+
+(use-package emacsql-sqlite-module)
 
 (use-package forge
   :config
