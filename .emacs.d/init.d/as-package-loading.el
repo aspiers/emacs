@@ -49,10 +49,6 @@ NAME and ARGS are as in `use-package'."
 ;; Looks like the above (declare ...) makes this unnecessary:
 ;;(put 'use-feature 'lisp-indent-function 'defun)
 
-;; This has to be loaded before req-package, otherwise req-package
-;; will install el-get itself from MELPA.
-(require 'as-el-get)
-
 (straight-use-package
  '(req-package :type git :host github :repo "edvorg/req-package"))
 
