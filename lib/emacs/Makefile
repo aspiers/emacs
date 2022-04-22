@@ -28,7 +28,6 @@ EMACSLIB = $(HOME)/lib/emacs
 EMACS_D  = $(HOME)/.emacs.d
 INIT_D   = $(EMACS_D)/init.d
 LIB_DIR  = $(EMACS_D)/lib
-EL_GET   = $(EMACS_D)/el-get
 
 GNUINSTALL_DIR = $(EMACSLIB)/GNU_Emacs
 
@@ -174,7 +173,6 @@ POST_INSTALL_DIR = $(INSTALL_DIR)/post
 
 COMPILER=$(EMACS) --no-site-file
 COMPILER += --eval '(setq debug-on-error t)'
-#COMPILER_OPTS += --eval '(setq el-get-verbose t)'
 COMPILER_BATCH=-batch -f batch-byte-compile
 COMPILER_OPTS=$(COMPILER_BATCH)
 

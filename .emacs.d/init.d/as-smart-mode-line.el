@@ -1,5 +1,3 @@
-(require 'as-el-get)
-
 (req-package smart-mode-line
   :config
   (progn

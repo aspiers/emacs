@@ -17,19 +17,10 @@ I use:
     *   its dependency tracking is version-aware
     *   MELPA has tons of great packages
     *   MELPA stable is nice when I'm feeling risk-averse
-*   [`el-get`](http://www.emacswiki.org/emacs/el-get) for installing and
-    compiling packages when I want to work with more bleeding edge code
-    (but I try to keep it to a minimum, because [it's not great at
-    dependency and version handling](https://github.com/dimitri/el-get/issues/created_by/aspiers))
 *   John Wiegley's nifty [`use-package`](https://github.com/jwiegley/use-package)
     and [`bind-key`](https://github.com/jwiegley/use-package/blob/master/bind-key.el)
     utilities for setting up autoloads, key bindings, and other
     per-package configuration.
-*   [`req-package`](https://github.com/edvorg/req-package) so that
-    *   I can correctly handle dependencies and ensure packages get
-        loaded in the right order, and
-    *   I can easily control whether to install packages from *ELPA
-        or `el-get`.
 
 I generally adhere to the convention of adding an `as-` prefix to any
 files, functions, and variables which are specific to my needs.
