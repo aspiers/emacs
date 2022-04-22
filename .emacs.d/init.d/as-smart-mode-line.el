@@ -1,4 +1,4 @@
-(req-package smart-mode-line
+(use-package smart-mode-line
   :config
   (progn
     (sml/setup)
