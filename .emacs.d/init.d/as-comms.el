@@ -21,4 +21,11 @@ other people."
 ;; https://zevlg.github.io/telega.el/
 ;; (use-package telega)
 
+(defun as-noop ()
+  "Do nothing."
+  (interactive))
+
+;; Protect a key binding for push-to-talk
+(bind-key "s-'" 'as-noop)
+
 (provide 'as-comms)
