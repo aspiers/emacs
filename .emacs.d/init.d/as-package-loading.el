@@ -49,10 +49,6 @@ NAME and ARGS are as in `use-package'."
 ;; Looks like the above (declare ...) makes this unnecessary:
 ;;(put 'use-feature 'lisp-indent-function 'defun)
 
-;; This has to be loaded before req-package, otherwise req-package
-;; will install el-get itself from MELPA.
-(require 'as-el-get)
-
 (straight-use-package
  '(req-package :type git :host github :repo "edvorg/req-package"))
 
@@ -81,8 +77,6 @@ Add package PKG with ARGS to target list.
 (require 'find-file-in-dir)
 (define-find-file-in-dir-function as-find-elpa-package
   "~/.emacs.d/elpa" "Find ELPA package: ")
-(define-find-file-in-dir-function as-find-el-get-package
-  "~/.el-get" "Find el-get package: ")
 (define-find-file-in-dir-function as-find-straight-package
   (straight--repos-dir) "Find straight.el package repository: ")
 
@@ -134,7 +128,6 @@ prun_e_ build               || _q_uit ||"
 
   (bind-keys :map as-jump-map
              ("l" "ELPA package" . as-find-elpa-package)
-             ("L" "el-get package" . as-find-el-get-package)
              ("s" "straight.el package" . as-find-straight-package)
              ("U" "*use-package*" . switch-to-use-package-buffer)))
 

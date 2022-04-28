@@ -3,7 +3,7 @@
 cd
 
 for shortcut in \
-    .eid .as-bindings.el .as-gtd.el .el-get .as-custom .msf-abbrevs
+    .eid .as-bindings.el .as-gtd.el .as-custom .msf-abbrevs
 do
     if [ -L $shortcut ]; then
         rm $shortcut

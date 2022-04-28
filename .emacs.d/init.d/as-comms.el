@@ -17,6 +17,10 @@ other people."
 (bind-key "C-$"   'ispell-complete-word)
 (bind-key "C-M-$" 'ispell-buffer)
 
+;; Telegram client for emacs!
+;; https://zevlg.github.io/telega.el/
+;; (use-package telega)
+
 (defun as-noop ()
   "Do nothing."
   (interactive))

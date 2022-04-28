@@ -1,11 +1,3 @@
-;; Used to install via el-get:
-;;
-;; https://github.com/dimitri/el-get/issues/1471
-;; https://github.com/dimitri/el-get/issues/1472
-;; https://github.com/dimitri/el-get/issues/1473
-;; Finally managed to install by fixing dependencies manually
-;; (#1471), #1472, #1473
-
 (custom-set-variables '(projectile-keymap-prefix "p"))
 
 (require 'as-key-chord)

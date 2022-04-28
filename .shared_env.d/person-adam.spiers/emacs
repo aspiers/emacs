@@ -2,7 +2,6 @@
 
 ED=$ZDOTDIR/.emacs.d
   EID=$ZDOTDIR/.emacs.d/init.d
-  ELG=$ZDOTDIR/.emacs.d/el-get
   ELPA=$ZDOTDIR/.emacs.d/elpa
   ES=$ZDOTDIR/.emacs.d/straight
     ESR=$ES/repos
