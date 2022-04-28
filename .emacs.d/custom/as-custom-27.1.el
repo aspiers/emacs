@@ -244,11 +244,14 @@
  '(auto-revert-check-vc-info nil)
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
+ '(avy-keys
+   '(97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 121))
  '(back-button-mode-lighter "")
  '(backup-directory-alist '(("." . ".emacs.backup")))
  '(beacon-blink-when-focused t)
  '(beacon-lighter "")
  '(beacon-mode t)
+ '(before-save-hook '(as-custom-save-hook))
  '(blink-cursor-blinks 0)
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.3)
@@ -341,6 +344,7 @@
    '("Executing ssh-askpass to query the password.*$" ".*Remote host denied X11 forwarding.*$" ".*New directory `.*' -- ignored.*$" ".*warning: directory CVS specified in argument.*$" ".*but CVS uses CVS for its own purposes; skipping CVS directory.*$"))
  '(cvs-reuse-cvs-buffer 'subdir)
  '(cvs-use-fileinfo-caches t)
+ '(debug-on-error nil)
  '(debugger-batch-max-lines 1000)
  '(delete-old-versions t)
  '(delete-selection-mode nil)
@@ -390,6 +394,7 @@
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-prettier-mode nil)
+ '(global-visible-mark-mode nil)
  '(global-whitespace-mode t)
  '(help-window-select t)
  '(hippie-expand-try-functions-list
@@ -1317,6 +1322,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-odd-levels-only t)
  '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces '((65 :weight bold)))
+ '(org-priority-lowest 69)
  '(org-publish-project-alist
    '(("OWRA" :components
       ("OWRA-2008" "OWRA-2009" "OWRA-2010" "OWRA-2011" "OWRA-2012" "OWRA-2013"))
@@ -1396,6 +1402,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(passive-voice nil)
  '(planner-use-day-pages t)
  '(prescient-filter-method '(literal regexp initialism fuzzy))
+ '(prescient-sort-length-enable nil)
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
  '(projectile-keymap-prefix "p")
