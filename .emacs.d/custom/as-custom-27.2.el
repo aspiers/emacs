@@ -392,6 +392,7 @@
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
  '(global-prettier-mode nil)
+ '(global-so-long-mode t)
  '(global-visible-mark-mode nil)
  '(global-whitespace-mode t)
  '(help-window-select t)
