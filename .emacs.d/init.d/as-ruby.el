@@ -2,7 +2,7 @@
   :mode "\\(\\.\\(e?rb\\|rjs\\|rake\\)\\|Rakefile\\|Guardfile\\)\\'"
   :interpreter "ruby\\|ruby[12]\\.[0-9]\\|jruby\\|rbx")
 
-(req-package flymake-ruby)
+(use-package flymake-ruby)
 
 (use-feature tar-mode
   :mode ("\\.gem\\'" . tar-mode))
@@ -27,11 +27,11 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (autoload 'rcov-buffer "rcov-overlay" "rcov-overlay" t)
 ;; (bind-key "C-c C-r"   'rcov-buffer)
 
-(req-package autotest :commands autotest)
+(use-package autotest :commands autotest)
 
 ;; I don't use this and it seems to have bugs with autoloading
 ;; and maybe also leaving processes running within emacs.
-;; (req-package inf-ruby)
+;; (use-package inf-ruby)
 
 (require 'as-jump)
 (use-package bundler
@@ -60,7 +60,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
   (push '((nil . "as-jump-ruby-map") . (nil . "Ruby")) which-key-replacement-alist))
 
 
-(req-package rubocop)
-;;(req-package rudel)
+(use-package rubocop)
+;; (use-package rudel)
 
 (provide 'as-ruby)

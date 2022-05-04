@@ -133,4 +133,6 @@
 (use-package ppp
   :defer t)
 
+(use-package elmacro)
+
 (provide 'as-lisp)

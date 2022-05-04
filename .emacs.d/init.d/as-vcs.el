@@ -29,6 +29,6 @@
 
 (require 'as-magit)
 
-(req-package gerrit-download)
+(use-package gerrit-download)
 
 (provide 'as-vcs)

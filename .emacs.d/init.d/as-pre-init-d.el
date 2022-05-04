@@ -29,8 +29,9 @@
 (require 'as-load-paths)
 (require 'as-progress)
 
-;; req-package is common enough that we don't want to have to require
-;; it in each file which uses it.  This also requires as-custom.
+;; package loading is common enough that we don't want to have to
+;; require it in each file which uses it.  This also requires
+;; as-custom.
 (require 'as-package-loading)
 
 (as-loading-done)

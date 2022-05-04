@@ -33,12 +33,11 @@
 
 ;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
 (use-package typescript-mode
+  :mode ("\\.tsx?\\'" . typescript-tsx-mode)
   :init
   (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :hook ((typescript-mode . subword-mode)
-         (typescript-mode . electric-pair-mode))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
+         (typescript-mode . electric-pair-mode)))
 
 (use-package tree-sitter
   :hook ((typescript-mode . tree-sitter-hl-mode)

@@ -1,9 +1,9 @@
-(req-package python
+(use-package python
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode))
 
 ;; elpy has serious performance issues
-;; (req-package elpy
+;; (use-package elpy
 ;;   :ensure t
 ;;   :defer t
 ;;   :init

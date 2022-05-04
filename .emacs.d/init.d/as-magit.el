@@ -80,13 +80,13 @@
             'as-magit-post-display-org-buffer-hook))
 
 ;; https://github.com/greenrd/magit-topgit/issues/10
-;;(req-package magit-topgit)
+;; (use-package magit-topgit)
 
 (use-package magit-annex)
 
 ;; https://github.com/terranpro/magit-gerrit/issues/62
 ;; https://github.com/somtin/magit-gerrit/issues/1
-;;(req-package magit-gerrit)
+;; (use-package magit-gerrit)
 
 (use-package emacsql-sqlite-module)
 
@@ -111,9 +111,9 @@
 (use-package orgit)
 (use-package orgit-forge)
 
-(use-package magit-todos
-  :config
-  (magit-todos-mode))
+;; (use-package magit-todos
+;;   :config
+;;   (magit-todos-mode))
 
 (use-package magit-pretty-graph
   :straight (:host github :repo "georgek/magit-pretty-graph")

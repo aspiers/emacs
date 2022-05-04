@@ -5,7 +5,7 @@
 ;;
 ;; But even if it was, it's really annoying to continually reprompt
 ;; https://github.com/legoscia/messages-are-flowing/issues/6
-;; (req-package messages-are-flowing
+;; (use-package messages-are-flowing
 ;;   :config
 ;;   (add-hook 'message-mode-hook
 ;;             'messages-are-flowing-use-and-mark-hard-newlines))

@@ -28,9 +28,9 @@ Argument IGNORE is not used."
          (company-completion-cancelled . company-maybe-turn-on-fci)
          (prog-mode . company-mode)))
 
-;; (req-package auto-complete-css)
-;; (req-package auto-complete-emacs-lisp)
-;; (req-package auto-complete-ruby)
-;; (req-package auto-complete-yasnippet)
+;; (use-package auto-complete-css)
+;; (use-package auto-complete-emacs-lisp)
+;; (use-package auto-complete-ruby)
+;; (use-package auto-complete-yasnippet)
 
 (provide 'as-completion)

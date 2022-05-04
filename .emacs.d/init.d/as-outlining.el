@@ -12,7 +12,7 @@
 
 ;;; folding-mode
 
-(req-package folding
+(use-package folding
   :commands (folding-mode
              folding-mode-find-file
              folding-mode-add-find-file-hook

@@ -1,4 +1,4 @@
-(req-package mmm-mode
+(use-package mmm-mode
   :commands mmm-mode)
 
 (provide 'as-mmm-mode)

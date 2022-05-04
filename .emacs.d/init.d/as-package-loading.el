@@ -1,9 +1,5 @@
-;; Ensure that use-package, req-package, and any dependencies (such as
-;; use-package extensions) are all available and ready to use.
-;;
-;; Since req-package and its dependencies are used so commonly, we
-;; load this file up-front via as-pre-init-d, and then all the other
-;; files don't need to explicitly require it.
+;; Ensure that use-package, and any dependencies (such as use-package
+;; extensions) are all available and ready to use.
 
 (eval-and-compile (as-loading-started))
 
@@ -28,13 +24,9 @@
 ;;(setq straight-vc-git-auto-fast-forward t)
 
 ;; Make sure we have our customized value of package-archives
-;;
-;; Also req-package-log-level only takes effect if defined before
-;; req-package is loaded.
-;; https://github.com/edvorg/req-package/issues/33#issuecomment-211359690
 (require 'as-load-custom)
 
-(as-progress "bootstrapping use-package and req-package...")
+(as-progress "bootstrapping use-package...")
 
 (straight-use-package 'use-package)
 
@@ -49,15 +41,6 @@ NAME and ARGS are as in `use-package'."
 ;; Looks like the above (declare ...) makes this unnecessary:
 ;;(put 'use-feature 'lisp-indent-function 'defun)
 
-(straight-use-package
- '(req-package :type git :host github :repo "edvorg/req-package"))
-
-;; Workaround missing ;;;###autoload cookie for req-package
-(autoload 'req-package "req-package" "\
-Add package PKG with ARGS to target list.
-
-\(fn PKG &rest ARGS)" nil t)
-
 ;; Allow stuff like :ensure-system-package npm in
 ;; use-package declarations:
 (straight-use-package 'use-package-ensure-system-package)
@@ -70,7 +53,7 @@ Add package PKG with ARGS to target list.
 ;; config which takes effect when the given packages are all loaded.
 (require 'with-packages)
 
-(as-progress "bootstrapping use-package and req-package... done")
+(as-progress "bootstrapping use-package... done")
 
 (setq use-package-verbose 'debug)
 

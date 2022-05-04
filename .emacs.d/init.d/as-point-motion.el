@@ -70,7 +70,7 @@
 (use-feature bn-end-of-line-but-one
   :bind ("C-S-e" . bn-end-of-line-but-one))
 
-(req-package expand-region
+(use-package expand-region
   :bind ("C-M-S-SPC" . er/expand-region))
 
 ;; emacs < 22 doesn't have x-clipboard-yank

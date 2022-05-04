@@ -4,7 +4,7 @@
 ;; point automatically gets put in the buffer menu.
 (bind-key "C-x C-b" 'buffer-menu)
 
-;; (req-package bs
+;; (use-package bs
 ;;   :bind ("C-x C-b" . bs-show))
 
 (defun as-revert-buffer-without-confirmation ()
@@ -29,7 +29,7 @@
   :bind (("C-c n" . as-display-buffer-filename)
          ("C-c N" . as-display-buffer-name)))
 
-(req-package switch-window
+(use-package switch-window
   :bind ("C-x o" . switch-window))
 
 (use-package minimap

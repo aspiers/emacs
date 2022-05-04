@@ -1,6 +1,6 @@
 ;; automatically kill unused buffers
 
-(req-package midnight
+(use-package midnight
   :if (not (as-quick-startup)))
 
 (provide 'as-midnight)

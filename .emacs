@@ -60,6 +60,4 @@
 (unless (getenv "EMACS_BATCH")
   (as-load-hooks as-init-d-suffix))
 
-(req-package-finish)
-
 (as-progress "end of ~/.emacs")

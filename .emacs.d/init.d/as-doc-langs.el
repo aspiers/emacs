@@ -62,11 +62,11 @@
 
 ;;; Markdown mode
 
-(req-package markdown-mode+)
+(use-package markdown-mode+)
 
 ;;; asciidoc mode
 
-(req-package asciidoc)
+(use-package asciidoc)
 
 ;;; ReStructuredText mode
 
