@@ -18,6 +18,7 @@
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode t)
+    (treemacs-indent-guide-mode t)
     (pcase (cons (not (null (executable-find "git")))
                  (not (null treemacs-python-executable)))
       (`(t . t)
@@ -42,9 +43,6 @@
 
 (use-package treemacs-magit
   :after treemacs magit)
-
-(use-package treemacs-indent-guide-mode
-  :after treemacs)
 
 ;; treemacs-perspective if you use perspective.el vs. persp-mode
 ;; (use-package treemacs-persp
