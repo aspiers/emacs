@@ -62,8 +62,11 @@ an existing magit status buffer if it exists, to save rebuilding it."
 ;; https://github.com/raxod502/selectrum/wiki/Useful-Commands#search-with-ripgrep-like-counsel-rg
 (use-package counsel-projectile
   :after (counsel projectile)
+  :chords (("zb" . counsel-projectile-switch-to-buffer))
   :config
-  (define-key projectile-mode-map [remap projectile-grep] 'counsel-projectile-grep))
+  (define-key projectile-mode-map [remap projectile-grep]
+    'counsel-projectile-grep)
+  (setq counsel-projectile-preview-buffers t))
 
 (with-packages (projectile selectrum)
   :config
