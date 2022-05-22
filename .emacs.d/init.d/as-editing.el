@@ -87,4 +87,11 @@ The list marked is the one that contains point or follows point."
   :config
   (editorconfig-mode 1))
 
+(use-package drag-stuff
+  :config
+  (drag-stuff-define-keys)
+  (add-to-list 'drag-stuff-except-modes 'org-mode)
+  (add-to-list 'drag-stuff-except-modes 'lispy-mode)
+  (drag-stuff-global-mode t))
+
 (provide 'as-editing)
