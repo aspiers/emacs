@@ -89,6 +89,7 @@ The list marked is the one that contains point or follows point."
 
 (use-package drag-stuff
   :config
+  (setq drag-stuff-modifier '(meta shift))
   (drag-stuff-define-keys)
   (add-to-list 'drag-stuff-except-modes 'org-mode)
   (add-to-list 'drag-stuff-except-modes 'lispy-mode)
