@@ -82,7 +82,7 @@
       (setup-tide-mode)))
 
 (with-packages (tide web-mode)
-  :mode ("\\.tsx\\'" . web-mode)
+  ;; :mode ("\\.tsx\\'" . web-mode)
   :hook ((web-mode . as-setup-tide-mode-for-tsx))
 
   :config
