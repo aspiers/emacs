@@ -88,6 +88,7 @@ The list marked is the one that contains point or follows point."
   (editorconfig-mode 1))
 
 (use-package drag-stuff
+  :diminish drag-stuff-mode
   :config
   (setq drag-stuff-modifier '(meta shift))
   (drag-stuff-define-keys)
