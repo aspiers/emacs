@@ -20,6 +20,8 @@ project root."
   (let ((file-name
          (cond ((eq major-mode 'Info-mode)
                 Info-current-file)
+               ((eq major-mode 'dired-mode)
+                dired-directory)
                (buffer-file-name)
                (t
                 (error "No file associated with this buffer")))))
