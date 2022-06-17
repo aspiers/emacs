@@ -6,10 +6,19 @@
 (use-package multiple-cursors
   :config
 
+  (defun as/mark-all-words-like-this ()
+    (interactive)
+    (let ((orig-subword-mode subword-mode))
+      (when orig-subword-mode
+        (subword-mode 0))
+      (mc/mark-all-words-like-this)
+      (when orig-subword-mode
+        (subword-mode t))))
+
   ;; FIXME: One-shot keys
   (bind-key "C-S-SPC A"         'mc/mark-all-like-this)
   (bind-key "C-S-SPC R"         'mc/mark-all-in-region)
-  (bind-key "C-S-SPC W"         'mc/mark-all-words-like-this)
+  (bind-key "C-S-SPC W"         'as/mark-all-words-like-this)
   (bind-key "C-S-SPC S"         'mc/mark-all-symbols-like-this)
   (bind-key "C-S-SPC D"         'mc/mark-all-dwim)
   (bind-key "C-S-SPC m"         'mc/mark-more-like-this-extended)
