@@ -104,11 +104,33 @@
 
 (use-package org-super-agenda)
 
-;; (use-package org-modern
-;;   :after org
-;;   :straight (org-modern :host github :repo "minad/org-modern")
-;;   :hook ((org-mode . org-modern-mode)
-;;          (org-mode . org-indent-mode)
-;;          (org-agenda-finalize . org-modern-agenda)))
+(use-package org-modern
+  :after org
+  ;; :straight (org-modern :host github :repo "minad/org-modern")
+  :custom
+  (org-modern-hide-stars nil) ; adds extra indentation
+  :hook
+  (org-mode . org-modern-mode)
+  (org-agenda-finalize . org-modern-agenda))
+
+(use-package org-modern-indent
+  :after org-modern
+  :straight (org-modern-indent :host github :repo "jdtsmith/org-modern-indent")
+  :hook
+  (org-indent-mode . org-modern-indent-mode))
+
+;; The default fixed-pitch font (from which org-meta-line inherits)
+;; has line spacing >1.0 on some systems. This will introduce gaps
+;; even if your default font is changed, and line-space is nil. To
+;; correct it, add:
+
+(set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0) ; or whatever font family
+
+;; Also optional; use org-bullets instead for nicely aligned bullet stars.
+
+(use-package org-bullets-mode
+  :ensure org-bullets
+  :config
+  :hook org-mode)
 
 (provide 'as-org-mode)
