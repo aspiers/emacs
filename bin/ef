@@ -13,6 +13,14 @@ while [ $# != 0 ]; do
     esac
 done
 
+here=$(pwd)
+
 for file in "$@"; do
-    quick-emacs --bg-if-poss $create_frame --eval "(find-file \"$file\")"
+    if [[ $file =~ ^\.\.?/ ]]; then
+        file="$here/$file"
+    fi
+
+    quick-emacs \
+        --bg-if-poss $create_frame \
+        --eval "(find-file-with-location \"$file\")"
 done
