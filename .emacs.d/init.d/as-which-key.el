@@ -4,7 +4,7 @@
 
 (use-package which-key
   :defer 0.1
-  :diminish WK  ;; can't get this working
+  :diminish WK ;; can't get this working
 
   :init
   ;; FIXME: This one has to go before the mode is *loaded*!
@@ -27,6 +27,37 @@
                  prefix))
            0)
           (t 1.0)))
-  (add-to-list 'which-key-delay-functions 'as-which-key-delay-function))
+  (add-to-list 'which-key-delay-functions
+               'as-which-key-delay-function)
+
+  ;; Can't name prefix keymap - reported in:
+  ;;
+  ;;   https://github.com/justbur/emacs-which-key/issues/253
+  ;;
+  ;; in which this workaround was suggested but doesn't work:
+  ;;
+  ;;   (define-prefix-command 'as-jump-ruby)
+  ;;   (define-key as-jump-map "r" '("Ruby" . as-jump-ruby))
+
+  ;; Neither does this:
+  ;;
+  ;;   (bind-keys :map as-jump-map ("r" "Ruby" . as-jump-ruby))
+
+  ;; So write a helper function to fix it, which effectively does
+  ;; something like this:
+  ;;
+  ;;   (push '((nil . "as-jump-ruby-map") . (nil . "Ruby")) which-key-replacement-alist)
+  (defun as-which-key-add-map-title (map text)
+    "Assign a which-key title of TEXT to the prefix map MAP, if it's
+not already done."
+    (let* ((map-name (symbol-name map))
+           (key (cons nil map-name))
+           (existing (cdr (assoc key which-key-replacement-alist)))
+           (replacement (cons nil text)))
+      (if existing
+          (if (not (equal existing replacement))
+              (warn "Tried to set %s to %s but was already %s"
+                    map-name text (cdr existing)))
+        (push (cons key replacement) which-key-replacement-alist)))))
 
 (provide 'as-which-key)
