@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: neq
 # key: neq
+# group: numeric comparisons
 # --
 [ ${1:-s1} -eq ${2:-s2} ]

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sr
 # key: sr
+# group: processes
 # --
 safe_run () {
     if ! "$@"; then

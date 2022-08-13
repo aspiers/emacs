@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: if
 # key: if
+# group: flow control
 # --
 if ${1:-expression}; then
     $0

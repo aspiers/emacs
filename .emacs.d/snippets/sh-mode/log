@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: log
 # key: log
+# group: logging
 # --
 _log () { echo "$*"; }
 

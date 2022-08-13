@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: de
 # key: de
+# group: file tests
 # --
 [ -d "${1:-dirname}" ]

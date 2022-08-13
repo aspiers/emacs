@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: v
 # key: v
+# group: variables
 # --
 "$${1:-varname}"

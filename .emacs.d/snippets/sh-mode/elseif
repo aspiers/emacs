@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: elseif
 # key: elseif
+# group: flow control
 # --
 elif [ ${1:-expression} ]; then
     $0

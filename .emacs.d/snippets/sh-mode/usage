@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: usage
 # key: usage
+# group: argument processing
 # --
 usage () {
     # Call as: usage [EXITCODE] [USAGE MESSAGE]

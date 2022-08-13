@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: getopts
 # key: getopts
+# group: argument processing
 # --
 parse_opts () {
     while [ $# != 0 ]; do

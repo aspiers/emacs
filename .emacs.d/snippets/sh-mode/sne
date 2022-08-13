@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: sne
 # key: sne
+# group: string comparisons
 # --
 [ ${1:-s1} != ${2:-s2} ]

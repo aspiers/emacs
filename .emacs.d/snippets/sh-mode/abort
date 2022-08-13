@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: abort
 # key: abort
+# group: logging
 # --
 abort () {
     die "$*; aborting."

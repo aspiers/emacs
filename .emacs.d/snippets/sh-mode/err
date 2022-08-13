@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: err
 # key: err
+# group: logging
 # --
 echo >&2 "ERROR: <cursor>"
 exit 1

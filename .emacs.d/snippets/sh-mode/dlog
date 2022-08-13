@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: dlog
 # key: dlog
+# group: logging
 # --
 _dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
 debug    () { _dlog "$*";                                           }

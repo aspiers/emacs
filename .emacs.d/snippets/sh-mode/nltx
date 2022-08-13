@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: nltx
 # key: nltx
+# group: numeric comparisons
 # --
 [[ ${1:-s1} -lt ${2:-s2} ]]

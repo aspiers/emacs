@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: sex
 # key: sex
+# group: string comparisons
 # --
 [[ ${1:-s1} == ${2:-s2} ]]
