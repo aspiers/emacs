@@ -2,7 +2,7 @@
 # name: tmp
 # key: tmp
 # --
-if ! tmpfile=`mktemp ${1:-path}/$me.tmp.XXXXXXXX`; then
+if ! tmpfile=\`mktemp ${1:-path}/$me.tmp.XXXXXXXX\`; then
   echo "mktemp failed: $!"
   exit 1
 fi

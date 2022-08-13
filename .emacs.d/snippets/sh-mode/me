@@ -3,4 +3,4 @@
 # key: me
 # group: script context
 # --
-me=`basename $0`
+me=$(basename $0)

@@ -3,4 +3,4 @@
 # key: here
 # group: script context
 # --
-here=`dirname $0`
+here=$(dirname $0)

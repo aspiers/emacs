@@ -2,7 +2,7 @@
 # name: tmpd
 # key: tmpd
 # --
-if ! tmpdir=`mktemp -d ${1:-path}/$me.tmp.XXXXXXXX`; then
+if ! tmpdir=\`mktemp -d ${1:-path}/$me.tmp.XXXXXXXX\`; then
   echo "mktemp failed: $!"
   exit 1
 fi
