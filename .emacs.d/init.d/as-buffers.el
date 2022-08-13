@@ -22,7 +22,7 @@
 (bind-key "C-:"   'switch-to-next-buffer)
 (bind-key "C-c B" 'as-bounce-buffer)
 (bind-key "C-x I" 'insert-buffer)
-(bind-key "<F6>"  'as-bounce-buffer)
+(bind-key "<f6>"  'as-bounce-buffer)
 (bind-key "C-c C-S-r" 'as-rename-current-buffer)
 
 (use-feature as-display-buffer-names
