@@ -3,7 +3,7 @@
 # key: clog
 # group: logging
 # --
-_color_log () { color="$1"; shift; tput setaf "$color"; echo "$*"; tput sgr0; }
+_color_log () { color="\$1"; shift; tput setaf "$color"; echo "$*"; tput sgr0; }
 _bold_color_log () { tput bold; _color_log "$@"; }
 _log  () { echo "`date` $*" >>& "$LOGFILE"; }
 

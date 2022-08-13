@@ -6,8 +6,8 @@
 usage () {
     # Call as: usage [EXITCODE] [USAGE MESSAGE]
     exit_code=1
-    if [[ "$1" == [0-9] ]]; then
-        exit_code="$1"
+    if [[ "\$1" == [0-9] ]]; then
+        exit_code="\$1"
         shift
     fi
 
@@ -21,7 +21,7 @@ Options:
 ${3:-options}
 EOF
 
-    if [ -n "$1" ]; then
+    if [ -n "\$1" ]; then
         echo >&2
         echo >&2 "$*"
     fi
@@ -30,7 +30,7 @@ EOF
 }
 
 main () {
-    if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
+    if [ "\$1" == '-h' ] || [ "\$1" == '--help' ]; then
         usage 0
     fi
     # or use getoptsx

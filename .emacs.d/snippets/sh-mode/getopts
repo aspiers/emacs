@@ -5,7 +5,7 @@
 # --
 parse_opts () {
     while [ $# != 0 ]; do
-        case "$1" in
+        case "\$1" in
             -h|--help)
                 usage 0
                 ;;
@@ -13,7 +13,7 @@ parse_opts () {
                 echo "$me $VERSION"
                 ;;
             -*)
-                usage "Unrecognised option: $1"
+                usage "Unrecognised option: \$1"
                 ;;
             *)
                 break
