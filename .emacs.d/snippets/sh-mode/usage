@@ -33,5 +33,5 @@ main () {
     if [ "\$1" == '-h' ] || [ "\$1" == '--help' ]; then
         usage 0
     fi
-    # or use getoptsx
+    # or use getopts
 }
