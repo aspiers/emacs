@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: bunzip
-# key: bunzip
-# --
-bzcat ${1:-filename} | tar xvf -
