@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: abort
-# key: abort
+# key: ab
 # group: logging
 # --
 abort () {
