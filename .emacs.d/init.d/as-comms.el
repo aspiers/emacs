@@ -27,5 +27,6 @@ other people."
 
 ;; Protect a key binding for push-to-talk
 (bind-key "s-'" 'as-noop)
+(bind-key "<f8>" 'as-noop)
 
 (provide 'as-comms)
