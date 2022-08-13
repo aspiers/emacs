@@ -11,7 +11,7 @@ usage () {
         shift
     fi
 
-    me=\`basename $0\`
+    me=$(basename \$0)
 
     cat <<EOF >&2
 Usage: $me ${1:-[options]} ${2:-ARGS}
