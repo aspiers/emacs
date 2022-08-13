@@ -1,0 +1,39 @@
+#!/bin/bash
+
+MSF_DIR=~/lib/emacs/minor-modes/msf-abbrev/mode-abbrevs
+YASNIPPET_DIR=~/.GIT/adamspiers.org/emacs/.emacs.d/snippets
+cd "$MSF_DIR"
+
+for msf in sh-mode/*x; do
+    mode="$(dirname $msf)"
+    name="$(basename $msf)"
+    name="${name%x}"
+
+    snippet_dir="$YASNIPPET_DIR/$mode"
+    snippet="$snippet_dir/$name"
+    if [ -e "$snippet" ]; then
+        echo "$snippet already exists"
+        continue
+    fi
+
+    if ! [ -d "$snippet_dir" ]; then
+        mkdir -p "$YASNIPPET_DIR/$mode"
+        echo "mkdir $YASNIPPET_DIR/$mode"
+    fi
+
+    (
+        cat <<EOF
+# -*- mode: snippet -*-
+# name: $name
+# key: $name
+# --
+EOF
+        cat "$msf"
+    ) | perl -lpe '
+        s/<field "([^"]+)">/"\${" . (++$x) . ":-$1}"/ge;
+        s/<endpoint>/\$0/g;
+        s/<indent>//g;
+    ' >"$snippet"
+    echo "Wrote $snippet:"
+    cat "$snippet"
+done

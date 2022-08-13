@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: nge
+# key: nge
+# --
+[ ${1:-s1} -ge ${2:-s2} ]

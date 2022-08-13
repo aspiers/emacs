@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: warn
+# key: warn
+# --
+echo >&2 "${1:-WARNING}"

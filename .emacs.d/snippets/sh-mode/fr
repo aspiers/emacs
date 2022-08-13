@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fr
+# key: fr
+# --
+[ -r "${1:-filename}" ]

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: nle
+# key: nle
+# --
+[ ${1:-s1} -le ${2:-s2} ]

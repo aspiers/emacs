@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hb
+# key: hb
+# --
+#!/bin/sh
+

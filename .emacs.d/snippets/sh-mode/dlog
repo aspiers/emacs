@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: dlog
+# key: dlog
+# --
+_dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
+debug    () { _dlog "$*";                                           }
+progress () { _dlog "$*";        echo     "$me: $*";                }
+warn     () { _dlog "$*";        echo >&2 "$me: $*";                }
+error    () { _dlog "ERROR: $*"; echo >&2 "$me: ERROR: $*";         }
+fatal    () { _dlog "FATAL: $*"; echo >&2 "$me: FATAL: $*"; exit 1; }

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: passthru
+# key: passthru
+# --
+${1+"$@"}

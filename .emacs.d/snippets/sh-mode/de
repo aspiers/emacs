@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: de
+# key: de
+# --
+[ -d "${1:-dirname}" ]

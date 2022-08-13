@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: filesize
+# key: filesize
+# --
+filesize () {
+    ls -al $1 | awk '{print $5}'
+}

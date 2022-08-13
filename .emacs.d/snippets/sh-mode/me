@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: me
+# key: me
+# --
+me=`basename $0`

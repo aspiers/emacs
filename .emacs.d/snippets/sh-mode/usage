@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: usage
+# key: usage
+# --
+usage () {
+    # Call as: usage [EXITCODE] [USAGE MESSAGE]
+    exit_code=1
+    if [[ "$1" == [0-9] ]]; then
+        exit_code="$1"
+        shift
+    fi
+
+    me=`basename $0`
+
+    cat <<EOF >&2
+Usage: $me ${1:-[options]} ${2:-ARGS}
+Options:
+  -h, --help     Show this help and exit
+  -v, --version  Output version information and exit
+${3:-options}
+EOF
+
+    if [ -n "$1" ]; then
+        echo >&2
+        echo >&2 "$*"
+    fi
+
+    exit "$exit_code"
+}
+
+main () {
+    if [ "$1" == '-h' ] || [ "$1" == '--help' ]; then
+        usage 0
+    fi
+    # or use getoptsx
+}

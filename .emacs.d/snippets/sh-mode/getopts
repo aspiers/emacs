@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: getopts
+# key: getopts
+# --
+parse_opts () {
+    while [ $# != 0 ]; do
+        case "$1" in
+            -h|--help)
+                usage 0
+                ;;
+            -v|--version)
+                echo "$me $VERSION"
+                ;;
+            -*)
+                usage "Unrecognised option: $1"
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
+
+    if [ $# -lt 2 ]; then
+        usage
+    fi
+
+    ARGV=( "$@" )
+}
+

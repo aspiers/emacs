@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: err
+# key: err
+# --
+echo >&2 "ERROR: <cursor>"
+exit 1

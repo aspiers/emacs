@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: clog
+# key: clog
+# --
+_color_log () { color="$1"; shift; tput setaf "$color"; echo "$*"; tput sgr0; }
+_bold_color_log () { tput bold; _color_log "$@"; }
+_log  () { echo "`date` $*" >>& "$LOGFILE"; }
+
+progress () { _bold_color_log 2 "$@"    ; }
+warn     () { _bold_color_log 3 "$@" >&2; }
+error    () { _bold_color_log 1 "$@" >&2; }
+fatal    () { error "$@"; exit 1;         }

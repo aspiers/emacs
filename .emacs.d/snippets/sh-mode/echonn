@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: echonn
+# key: echonn
+# --
+EchoNoNewline() {
+    if [ "`echo -n`" = "-n" ]; then
+	echo "$@\c"
+    else
+	echo -n "$@"
+    fi
+}

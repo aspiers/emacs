@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: abort
+# key: abort
+# --
+abort () {
+    die "$*; aborting."
+}

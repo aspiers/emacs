@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: nlex
+# key: nlex
+# --
+[[ ${1:-s1} -le ${2:-s2} ]]

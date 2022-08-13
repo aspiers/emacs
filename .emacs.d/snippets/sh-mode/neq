@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: neq
+# key: neq
+# --
+[ ${1:-s1} -eq ${2:-s2} ]
