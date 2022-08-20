@@ -383,7 +383,7 @@
  '(frog-menu-posframe-parameters nil)
  '(gc-cons-threshold 200000)
  '(gdb-many-windows t)
- '(git-commit-mode-hook '(turn-on-auto-fill flyspell-mode git-commit-save-message) t)
+ '(git-commit-mode-hook '(turn-on-auto-fill flyspell-mode git-commit-save-message))
  '(git-commit-use-local-message-ring t)
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
