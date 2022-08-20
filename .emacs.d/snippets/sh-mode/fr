@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: fr
-# key: fr
-# group: file tests
-# --
-[ -r "${1:-filename}" ]

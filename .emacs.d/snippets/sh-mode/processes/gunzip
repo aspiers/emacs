@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gunzip
+# key: gunzip
+# --
+gunzip -qc ${1:filename} | tar xvf -

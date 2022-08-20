@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: nne
-# key: nne
-# group: numeric comparisons
-# --
-[ ${1:-s1} -ne ${2:-s2} ]

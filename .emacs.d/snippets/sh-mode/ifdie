@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: ifdie
-# key: ifdie
-# group: flow control
-# --
-if ${1:-expression}; then
-echo >&2 "${2:-ERROR}"
-exit 1
-fi

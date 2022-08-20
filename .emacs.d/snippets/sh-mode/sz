@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sz
-# key: sz
-# group: string tests
-# --
-[ -z "$${1:-var}" ]

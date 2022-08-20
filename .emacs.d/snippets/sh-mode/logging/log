@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: log
+# key: log
+# --
+_log () { echo "$*"; }
+
+progress () { _log "$@"    ; }
+warn     () { _log "$@" >&2; }
+error    () { _log "$@" >&2; }
+fatal    () { error "$@"; exit 1; }

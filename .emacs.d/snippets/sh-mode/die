@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: die
-# key: die
-# group: logging
-# --
-die () {
-    echo >&2 "$*"
-    exit 1
-}

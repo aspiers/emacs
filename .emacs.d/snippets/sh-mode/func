@@ -2,6 +2,6 @@
 # name: func
 # key: func
 # --
-function ${1:-name} {
+function ${1:name} {
     $0
 }

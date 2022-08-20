@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: safe_run
+# key: sr
+# --
+safe_run () {
+    if ! "$@"; then
+        fatal "$* failed! Aborting." >&2
+        exit 1
+    fi
+}

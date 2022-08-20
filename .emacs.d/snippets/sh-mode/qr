@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: qr
-# key: qr
-# --
-if ! out=$(${1:-cmd} 2>&1); then
-  echo "$out"
-fi

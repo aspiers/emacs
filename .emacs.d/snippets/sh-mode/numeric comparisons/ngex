@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ngex
+# key: ngex
+# --
+[[ ${1:s1} -ge ${2:s2} ]]

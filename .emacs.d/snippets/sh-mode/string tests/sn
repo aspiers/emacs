@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sn
+# key: sn
+# --
+[ -n "$${1:var}" ]

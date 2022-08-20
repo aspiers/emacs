@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: nroot
+# key: nroot
+# --
+if [ "$USER" == root ]; then
+  echo >&2 "Must not be root"
+  exit 1
+fi

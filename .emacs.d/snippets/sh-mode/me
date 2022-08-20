@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: me
-# key: me
-# group: script context
-# --
-me=$(basename \$0)

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: root
-# key: root
-# group: permissions
-# --
-if [ "$USER" != root ]; then
-  echo >&2 "Must be root"
-  exit 1
-fi

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ngtx
+# key: ngtx
+# --
+[[ ${1:s1} -gt ${2:s2} ]]

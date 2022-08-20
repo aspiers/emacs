@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: for
-# key: for
-# group: flow control
-# --
-for ${1:-var} in ${2:-range}; do
-${3:-action}
-done

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: vx
-# key: vx
-# group: variables
-# --
-"${${1:-varname}}"

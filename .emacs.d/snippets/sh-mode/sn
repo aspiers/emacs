@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sn
-# key: sn
-# group: string comparisons
-# --
-[ -n "$${1:-var}" ]

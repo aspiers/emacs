@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fx
+# key: fx
+# --
+[ -x "${1:filename}" ]

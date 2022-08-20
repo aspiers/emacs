@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: while
-# key: while
-# group: flow control
-# --
-while ${1:-true}; do
-    $0
-done

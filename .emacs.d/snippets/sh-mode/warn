@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: warn
-# key: warn
-# group: logging
-# --
-echo >&2 "${1:-WARNING}"

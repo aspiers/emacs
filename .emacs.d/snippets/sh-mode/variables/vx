@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vx
+# key: vx
+# --
+"${${1:varname}}"

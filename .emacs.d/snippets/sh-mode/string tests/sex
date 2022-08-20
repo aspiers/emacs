@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sex
+# key: sex
+# --
+[[ ${1:s1} == ${2:s2} ]]
