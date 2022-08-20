@@ -126,11 +126,4 @@
 
 (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0) ; or whatever font family
 
-;; Also optional; use org-bullets instead for nicely aligned bullet stars.
-
-(use-package org-bullets-mode
-  :ensure org-bullets
-  :config
-  :hook org-mode)
-
 (provide 'as-org-mode)
