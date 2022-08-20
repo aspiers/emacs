@@ -11,6 +11,10 @@
   (interactive)
   (revert-buffer t t))
 
+(require 'as-mode-lighters)
+
+(use-feature autorevert :diminish 'auto-revert-mode)
+
 (use-package frog-jump-buffer
   :bind ("C-!" . frog-jump-buffer))
 

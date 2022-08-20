@@ -1,3 +1,3 @@
-(use-package diminish)
+(use-package diminish :demand)
 
 (provide 'as-mode-lighters)

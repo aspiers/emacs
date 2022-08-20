@@ -2,9 +2,11 @@
   "List of regexps matching keymap prefix bindings for which
 `which-key` should not delay showing the keymap's bindings.")
 
+(require 'as-mode-lighters)
+
 (use-package which-key
   :defer 0.1
-  :diminish WK  ;; can't get this working
+  :diminish
 
   :init
   ;; FIXME: This one has to go before the mode is *loaded*!

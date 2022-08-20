@@ -2,7 +2,10 @@
 
 (bind-key "M-<tab>" 'hippie-expand)
 
+(require 'as-mode-lighters)
+
 (use-package company
+  :diminish company-mode
   :config
 
   ;; fci-mode breaks company :-(

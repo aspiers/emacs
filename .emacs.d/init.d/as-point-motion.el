@@ -99,6 +99,8 @@
 (define-key occur-mode-map (kbd "TAB")
   'occur-mode-goto-occurrence-other-window)
 
+(require 'as-mode-lighters)
+
 ;; C-x then
 ;;   SPC       back    in mark-ring
 ;;   <left>    back    in mark-ring

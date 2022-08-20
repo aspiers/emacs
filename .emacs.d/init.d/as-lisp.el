@@ -30,8 +30,10 @@
 ;;   :config
 ;;   :hook (emacs-lisp-mode . semantic-stickyfunc-mode))
 
+(require 'as-mode-lighters)
+
 (use-package lispy
-  :diminish lispy-mode
+  :diminish
   :hook (emacs-lisp-mode . lispy-mode)
   :bind (
          :map lispy-mode-map-base

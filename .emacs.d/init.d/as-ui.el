@@ -11,7 +11,7 @@
   :defer 5
   :config (beacon-mode 1))
 
-(use-package flycheck)
+(use-package flycheck :diminish)
 (use-package hideshow-org)
 
 (use-package insert-char-preview

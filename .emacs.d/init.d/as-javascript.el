@@ -40,6 +40,7 @@
          (typescript-mode . electric-pair-mode)))
 
 (use-package tree-sitter
+  :diminish
   :hook ((typescript-mode . tree-sitter-hl-mode)
          (typescript-tsx-mode . tree-sitter-hl-mode)))
 

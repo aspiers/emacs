@@ -1,4 +1,5 @@
 (use-package prettier
+  :diminish " pr"
   :straight (prettier :type git :flavor melpa
                       :files (:defaults "dist/*")
                       :branch "master" :host github

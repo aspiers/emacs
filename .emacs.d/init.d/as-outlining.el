@@ -1,11 +1,13 @@
 ;;; outshine-mode
 
+(require 'as-mode-lighters)
+
 ;; N.B. as per https://github.com/alphapapa/outshine/issues/11 if you
 ;; want to change outline-minor-mode-prefix, it has to be done via
 ;; customize-variable.
 (use-package outshine
   :commands outshine-mode
-  :diminish " Outsh"
+  :diminish outshine-mode
   :hook (emacs-lisp-mode . outshine-mode)
   :bind (:map outshine-mode-map
               ("M-*" . outshine-navi)))

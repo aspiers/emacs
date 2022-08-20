@@ -1,5 +1,8 @@
+(require 'as-mode-lighters)
+
 (use-package yasnippet
   :commands yas-minor-mode
+  :diminish yas-minor-mode
   :config
   (defalias 'yamm 'yas-minor-mode)
   (defalias 'yagm 'yas-global-mode)
