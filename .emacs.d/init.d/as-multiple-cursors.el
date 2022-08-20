@@ -33,7 +33,9 @@
   (bind-key "C-S-SPC 1"         'mc/insert-numbers)
   (bind-key "C-S-SPC +"         'mc/sort-regions)
   (bind-key "C-S-SPC -"         'mc/reverse-regions)
-  (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair))
+  (bind-key "C-S-SPC <"         'mc/mark-sgml-tag-pair)
+  (bind-key "C-S-SPC v"         'mc/vertical-align)
+  (bind-key "C-S-SPC V"         'mc/vertical-align-with-space))
 
 ;; found smartrep here: http://stackoverflow.com/a/17209600/179332
 (use-package smartrep

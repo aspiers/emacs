@@ -84,4 +84,6 @@ has one."
 (setq find-function-C-source-directory
       (format "/usr/src/debug/emacs-%s/src" emacs-version-number))
 
+(require 'find-location-in-file)
+
 (provide 'as-files)

@@ -73,7 +73,8 @@ currently on.  ARG can be negative, in which case the current line is
 not included in the text copied."
   (interactive "p")
   (if mark-active
-      (kill-ring-save (region-beginning) (region-end))
+      (save-mark-and-excursion
+        (kill-ring-save (region-beginning) (region-end)))
     (let ((bol (save-excursion (beginning-of-line) (point)))
           (bonl (save-excursion (forward-line arg) (point))))
       (kill-ring-save bol bonl))))
