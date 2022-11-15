@@ -984,6 +984,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   }
 </style>")
  '(org-extend-today-until 3)
+ '(org-fold-catch-invisible-edits 'smart)
  '(org-from-is-user-regexp
    "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
  '(org-global-properties
