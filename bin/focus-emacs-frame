@@ -63,6 +63,10 @@ main () {
         debug "Switching to $target_window_id"
         wmctrl -ia "$target_window_id"
 
+        debug "sleeping $sleep"
+        sleep $sleep
+        sleep=$( echo "$sleep * 2" | bc )
+
         current_window_id="$(current-window-id)"
         debug "Current window id is $current_window_id"
         if [ "$current_window_id" = "$target_window_id" ]; then
@@ -70,9 +74,6 @@ main () {
             debug "Window name at end: $(current-window-name)"
             exit 0
         fi
-        debug "sleeping $sleep"
-        sleep $sleep
-        sleep=$( echo "$sleep * 2" | bc )
     done
 
     fatal "Failed to focus emacs window $target_window_id"
