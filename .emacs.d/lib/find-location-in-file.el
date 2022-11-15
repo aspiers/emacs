@@ -14,7 +14,7 @@ present) line and column numbers."
     (list (match-string 1 str)
           (string-to-number (match-string 2 str))
           (string-to-number (match-string 3 str))))
-   (t str)))
+   (t (list str))))
 
 (defun find-location-in-file (file &optional line column)
   "Find a file, optionally specifying a line and even column within
