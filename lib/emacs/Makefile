@@ -328,7 +328,7 @@ LOADDEFS=$(LOADDEFS_DIR)/as-loaddefs.el
 show-loaddefs:
 	@echo '$(LOADDEFS)'
 LOADDEFS_DEPS_CANDIDATES = $(addsuffix /*.el,$(LOADDEFS_DIRS))
-LOADDEFS_DEPS = $(shell grep -l '^;;;\#\#\#autoload' $(LOADDEFS_DEPS_CANDIDATES))
+LOADDEFS_DEPS = $(shell grep -l '^;;;###autoload' $(LOADDEFS_DEPS_CANDIDATES))
 show-loaddefs-deps:
 	@echo $(LOADDEFS_DEPS)
 
