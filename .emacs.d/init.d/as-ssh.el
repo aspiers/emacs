@@ -1,8 +1,9 @@
 (defun as-read-ssh-agent-cache ()
   (interactive)
-  (let* ((cache-file (format "/tmp/.dsa-cache-%s-%s.el"
+  (let* ((short-hostname (car (split-string (system-name) "\\.")))
+         (cache-file (format "/tmp/.dsa-cache-%s-%s.el"
                              (user-real-login-name)
-                             (system-name))))
+                             short-hostname)))
    (if (not (file-exists-p cache-file))
        (warn "Couldn't find %s" cache-file)
      (load cache-file)
