@@ -14,4 +14,6 @@
      ([(control tab)]         . [(control meta tab)]))))
  '(org-replace-disputed-keys t))
 
+(use-package org)
+
 (provide 'as-org-mode-early)

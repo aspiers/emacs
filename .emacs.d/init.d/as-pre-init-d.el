@@ -34,6 +34,8 @@
 ;; as-custom.
 (require 'as-package-loading)
 
+(require 'as-org-mode-early)
+
 (as-loading-done)
 
 (provide 'as-pre-init-d)

@@ -1,5 +1,3 @@
-(use-package org)
-
 (use-package org-contrib
   :bind
   (("M-o a" . org-agenda)
