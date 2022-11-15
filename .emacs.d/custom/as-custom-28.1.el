@@ -1036,7 +1036,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
      ("HOWTO" :background "slate blue")
      ("IGNORE" :background "slate grey" :strike-through t)))
  '(org-modules
-   '(org-habit org-id ol-info org-mouse org-protocol ol-bookmark org-choose ol-elisp-symbol org-mairix ol-man org-notify org-toc org-timer orgit orgit-forge))
+   '(org-habit org-id ol-info org-mouse org-protocol ol-bookmark org-choose ol-elisp-symbol org-mairix ol-man org-toc org-timer orgit orgit-forge))
  '(org-odd-levels-only t)
  '(org-outline-path-complete-in-steps nil)
  '(org-priority-faces '((65 :weight bold)))
