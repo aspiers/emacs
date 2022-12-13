@@ -34,7 +34,8 @@
 
 (use-package lispy
   :diminish
-  :hook (emacs-lisp-mode . lispy-mode)
+  :hook ((emacs-lisp-mode . lispy-mode)
+         (lisp-data-mode . lispy-mode))
   :bind (
          :map lispy-mode-map-base
          ;; We want M-o for the usual stuff, and anyway we have C-M-b
