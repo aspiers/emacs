@@ -27,7 +27,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
 (autoload 'rcov-buffer "rcov-overlay" "rcov-overlay" t)
 ;; (bind-key "C-c C-r"   'rcov-buffer)
 
-(use-package autotest :commands autotest)
+;; (use-package autotest :commands autotest)
 
 ;; I don't use this and it seems to have bugs with autoloading
 ;; and maybe also leaving processes running within emacs.
