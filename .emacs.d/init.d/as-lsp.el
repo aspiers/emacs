@@ -12,11 +12,11 @@
   (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024))
 
-  :hook ((python-mode . lsp)
-         (js-mode . lsp)
-         (typescript-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
+  ;; :hook ((python-mode . lsp)
+  ;;        (js-mode . lsp)
+  ;;        (typescript-mode . lsp)
+  ;;        ;; if you want which-key integration
+  ;;        (lsp-mode . lsp-enable-which-key-integration))
 
   :commands lsp)
 
@@ -34,5 +34,9 @@
 (use-package which-key
     :config
     (which-key-mode))
+
+(use-package lsp-bridge
+  :config
+  (global-lsp-bridge-mode))
 
 (provide 'as-lsp)
