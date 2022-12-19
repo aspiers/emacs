@@ -18,13 +18,11 @@
 (dir-locals-set-class-variables
  'js-indent-8-tabs
  '((nil . ((indent-tabs-mode . t)
-           (js-indent-level . 8)
-           (js2-basic-offset . 8)))))
+           (js-indent-level . 8)))))
 (dir-locals-set-class-variables
  'js-indent-2-no-tabs
  '((nil . ((indent-tabs-mode . nil)
-           (js-indent-level . 2)
-           (js2-basic-offset . 2)))))
+           (js-indent-level . 2)))))
 
 (use-package coffee-mode)
 (use-package flymake-eslint)
