@@ -35,8 +35,27 @@
     :config
     (which-key-mode))
 
+;; Installation checklist
+;; ----------------------
+;;
+;; - zypper install ShellCheck
+;;
+;; - pip3 install epc orjson sexpdata six
+;;
+;; - $ESR/lsp-bridge/lsp_bridge.py exists
+;;   (FIXME: melpa recipe doesn't achieve this yet)
+;;
+;; - (executable-find "python3") => Python where required modules
+;;   are installed (check exec-path variable if not)
+;;
+;; - npm install -g {bash,typescript,yaml}-language-server typescript emmet-ls vscode-langservers-extracted
+;;
+;; - (getenv "PATH") => includes path where npm modules are installed.
+;;   If not, (setenv "PATH" "...")
+
 (use-package lsp-bridge
   :config
-  (global-lsp-bridge-mode))
+  (global-lsp-bridge-mode)
+  (setq acm-backend-yas-match-by-trigger-keyword t))
 
 (provide 'as-lsp)
