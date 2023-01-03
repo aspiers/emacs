@@ -40,7 +40,7 @@
 ;;
 ;; - zypper install ShellCheck
 ;;
-;; - pip3 install epc orjson sexpdata six
+;; - pip3 install --user epc orjson sexpdata six
 ;;
 ;; - $ESR/lsp-bridge/lsp_bridge.py exists
 ;;   (FIXME: melpa recipe doesn't achieve this yet)
@@ -50,9 +50,24 @@
 ;;
 ;; - npm install -g {bash,typescript,yaml}-language-server typescript emmet-ls vscode-langservers-extracted
 ;;
+;; - make sure lsp-bridge has patches for eslint multi-server
+;;
+;; - make sure lsp-bridge-multi-lang-server-mode-list has eslint entries
+;;
 ;; - (getenv "PATH") => includes path where npm modules are installed.
-;;   If not, (setenv "PATH" "...")
-
+;;   If not:
+;;
+;;     (setenv "PATH" "...")
+;;
+;;   e.g.
+;;
+;;     (setenv "PATH" (concat "/home/adam/.nvm/versions/node/v16.18.0/bin:" (getenv "PATH")))
+;;
+;;   (or use ielm to interactively edit) and then
+;;
+;;     M-x lsp-bridge-restart-process
+;;
+;;   so that lsp_bridge.py can inherit the right PATH.
 (use-package lsp-bridge
   :config
   (global-lsp-bridge-mode)
