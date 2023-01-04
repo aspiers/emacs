@@ -40,7 +40,7 @@
 ;;
 ;; - zypper install ShellCheck
 ;;
-;; - pip3 install --user epc orjson sexpdata six
+;; - pip3 install --user epc orjson sexpdata six pyright
 ;;
 ;; - $ESR/lsp-bridge/lsp_bridge.py exists
 ;;   (FIXME: melpa recipe doesn't achieve this yet)
@@ -53,6 +53,8 @@
 ;; - make sure lsp-bridge has patches for eslint multi-server
 ;;
 ;; - make sure lsp-bridge-multi-lang-server-mode-list has eslint entries
+;;
+;; - M-x lsp-bridge-restart-process after changing multi-server JSON files
 ;;
 ;; - (getenv "PATH") => includes path where npm modules are installed.
 ;;   If not:
@@ -68,6 +70,10 @@
 ;;     M-x lsp-bridge-restart-process
 ;;
 ;;   so that lsp_bridge.py can inherit the right PATH.
+;;
+;; - Check *lsp-bridge* buffer for errors.
+;;   Set lsp-bridge-enable-log
+;;
 (use-package lsp-bridge
   :config
   (global-lsp-bridge-mode)
