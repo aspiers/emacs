@@ -1245,6 +1245,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-style
    '(face trailing space-before-tab newline empty tab-mark tabs))
  '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
+ '(yas-also-auto-indent-first-line t)
  '(yas-triggers-in-field t))
 
 (message "custom-set-variables done")
