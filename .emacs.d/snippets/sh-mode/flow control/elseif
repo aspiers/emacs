@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: elseif
-# key: elseif
+# key: eli
 # --
-elif [ ${1:expression} ]; then
+elif ${1:expression}; then
     $0
-fi
