@@ -86,4 +86,14 @@ has one."
 
 (require 'find-location-in-file)
 
+(use-package file-info
+  :straight (:host github :repo "artawower/file-info.el")
+  :bind (("C-c M-n" . 'file-info-show))
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
+                                               :internal-border-width 2
+                                               :internal-border-color "#61AFEF"
+                                               :left-fringe 16
+                                               :right-fringe 16)))
 (provide 'as-files)
