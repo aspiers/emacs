@@ -75,6 +75,7 @@
 ;;   Set lsp-bridge-enable-log
 ;;
 (use-package lsp-bridge
+  :after yasnippet
   :config
   (global-lsp-bridge-mode)
   (setq acm-backend-yas-match-by-trigger-keyword t))
