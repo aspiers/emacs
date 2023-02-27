@@ -34,14 +34,18 @@
 (bind-key "C-S-n" 'next-logical-line)
 (bind-key "C-S-p" 'previous-logical-line)
 
+;; Issues with ctrlf:
+;;
+;;  - can't disable wraparound
+;;    https://github.com/radian-software/ctrlf/issues/68
+;;
+;;  - minibuffer overview only via M-s o => ctrlf-occur
+;;    which has no native integration
+;;    https://github.com/radian-software/ctrlf/issues/69
 (use-package ctrlf
   :defer 2
   :config
   (ctrlf-mode +1)
-  (add-to-list 'ctrlf-minibuffer-bindings '("<down>" . ctrlf-forward-literal))
-  (add-to-list 'ctrlf-minibuffer-bindings '("<up>"   . ctrlf-backward-literal))
-  (add-to-list 'ctrlf-minibuffer-bindings '("C-w"    . ctrlf-yank-word-or-char))
-  (add-to-list 'ctrlf-minibuffer-bindings '("M-j"    . ctrlf-yank-word-or-char))
 
   ;; https://github.com/raxod502/ctrlf/issues/65
   (defun ctrlf-yank-word-or-char ()
@@ -55,7 +59,12 @@
                           ctrlf--current-starting-point)
                       (progn (forward-word) (point)))))
         (goto-char (field-end (point-max)))
-        (insert yank)))))
+        (insert yank))))
+
+  :bind (:map ctrlf-minibuffer-mode-map
+              ("<down>" . 'ctrlf-forward-literal)
+              ("<up>" . 'ctrlf-backward-literal)
+              ("M-j" . 'ctrlf-yank-word-or-char)))
 
 ;; Loaded by counsel
 ;; (use-package swiper
