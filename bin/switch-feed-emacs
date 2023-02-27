@@ -16,14 +16,15 @@ if [ "$1" = -l ]; then
 fi
 
 if fast-X11-display; then
-    # Assume we already have an emacs running.  We could alternatively
-    # use quick-emacs at this point.
+    : Assume we already have an emacs running.  We could alternatively
+    : use quick-emacs at this point.
     xdotool set_desktop 0 # prefer first desktop
     focus-emacs-frame || exit $?
     echo "`date` $me: `current-window-id` / `current-window-name`" \
         >> ~/.log/switch-feed-emacs.log 2>&1
     feed-X11
 else
+    : No fast X11 display
     # The bash manual says:
     #
     #   If a command is followed by a & and job control is not active,
