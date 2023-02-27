@@ -106,7 +106,7 @@
 ;; e.g. [[orgit:/path/to/repo/][my repo]]
 ;; https://github.com/magit/orgit/
 (use-package orgit)
-(use-package orgit-forge)
+;; (use-package orgit-forge)
 
 ;; (use-package magit-todos
 ;;   :config
