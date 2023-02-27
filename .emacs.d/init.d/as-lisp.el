@@ -1,3 +1,6 @@
+;; TODO: check out ideas from
+;; https://www.reddit.com/r/emacs/comments/1051bfu/what_packages_do_i_need_to_for_the_best_elisp/
+
 (add-hook 'lisp-mode-hook 'as-font-lock-mode-if-window-system)
 
 (add-hook 'emacs-lisp-mode-hook       'turn-on-eldoc-mode)

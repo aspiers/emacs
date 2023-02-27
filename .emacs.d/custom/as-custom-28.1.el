@@ -1094,7 +1094,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
    '((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)")
      (sequence "PROJECT(p)" "PROJDONE(P)")
      (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|")
-     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c@)")))
+     (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)")))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
  '(org-use-property-inheritance '("CRYPTKEY" "CATEGORY"))
@@ -1245,8 +1245,15 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(whitespace-style
    '(face trailing space-before-tab newline empty tab-mark tabs))
  '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
+ '(yas-also-auto-indent-first-line t)
  '(yas-triggers-in-field t))
 
 (message "custom-set-variables done")
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 ;; custom-set-faces above should be empty!  Use themes instead.

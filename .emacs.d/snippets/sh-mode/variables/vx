@@ -2,4 +2,4 @@
 # name: vx
 # key: vx
 # --
-"${${1:varname}}"
+"\${${1:varname}}"
