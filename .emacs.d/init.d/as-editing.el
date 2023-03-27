@@ -98,6 +98,7 @@ The list marked is the one that contains point or follows point."
   (add-to-list 'drag-stuff-except-modes 'org-agenda-mode)
   (add-to-list 'drag-stuff-except-modes 'lispy-mode)
   (add-to-list 'drag-stuff-except-modes 'calendar-mode)
+  (add-to-list 'drag-stuff-except-modes 'minibuffer-mode)
   (drag-stuff-global-mode t))
 
 (provide 'as-editing)
