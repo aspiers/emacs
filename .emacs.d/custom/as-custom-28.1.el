@@ -1168,6 +1168,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(show-paren-delay 0)
  '(show-paren-mode t)
  '(show-paren-ring-bell-on-mismatch nil)
+ '(show-smartparens-global-mode t)
  '(show-trailing-whitespace nil)
  '(smartparens-global-mode nil)
  '(sml/active-background-color "grey39")
