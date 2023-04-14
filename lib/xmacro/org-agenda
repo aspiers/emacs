@@ -1,7 +1,7 @@
 # This works regardless of key-binding or current
 # buffer.  Also Escape should be more portable than Meta_L etc.
-\e x org-agenda \n a
+#\e x org-agenda \n a
 
 # Another way of doing it since I bind M-o a to `org-agenda'
 # both in org-mode and globally.
-#\e o a
+\e o a

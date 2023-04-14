@@ -1,2 +1,5 @@
 # See org-agenda
-C-g \e x org-agenda \n d
+#C-g \e x org-agenda \n d
+
+# Escape should be more portable than Meta_L etc.
+\e o a d
