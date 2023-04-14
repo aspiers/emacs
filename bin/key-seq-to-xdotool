@@ -1,0 +1,77 @@
+#!/usr/bin/perl
+#
+# Converts STDIN sequences such as 'M-right C-u M-e foo \n' into
+# the equivalent xmacroplay commands.
+
+use strict;
+use warnings;
+
+my (%keysyms, %chars);
+open(KEYSYMS, "/usr/include/X11/keysymdef.h")
+  or die "Couldn't open(keysymdef.h): $!\n";
+while (<KEYSYMS>) {
+  /#define XK_(\w\S+)/ && $keysyms{$1}++;
+
+  if (/#define XK_(\w\S+)\s+0x00([0-9a-f]{2})/) {
+    $chars{chr hex $2} = $1;
+  }
+}
+close(KEYSYMS);
+
+my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
+my @words = ();
+foreach (@actions) {
+  #print "Got: [$_]\n";
+
+  if (/^((?:[CMSH]-){1,4})(.+)$/) {
+    my ($modifiers, $key) = ($1, $2);
+    my @mods = split /-/, $modifiers;
+    foreach my $abbrev (@mods) {
+      my $keysym = $abbrev eq 'C' ? 'Control_L'
+                 : $abbrev eq 'M' ? 'Meta_L'
+                 : $abbrev eq 'S' ? 'Super_R'
+                 : $abbrev eq 'H' ? 'Hyper_R'
+                 : die "BUG";
+      push @words, "keydown", $keysym;
+    }
+    push @words, "key", $key;
+    foreach my $abbrev (reverse @mods) {
+      my $keysym = $abbrev eq 'C' ? 'Control_L'
+                 : $abbrev eq 'M' ? 'Meta_L'
+                 : $abbrev eq 'S' ? 'Super_R'
+                 : $abbrev eq 'H' ? 'Hyper_R'
+                 : die "BUG";
+      push @words, "keyup", $keysym;
+    }
+    next;
+  }
+
+  if (/^\\n$/) {
+    push @words, "key Return";
+    next;
+  }
+
+  if (/^\\e$/) {
+    push @words, "key Escape";
+    next;
+  }
+
+  if (/^\\t$/) {
+    push @words, "key Tab";
+    next;
+  }
+
+  if ($keysyms{$_}) {
+    push @words, "key $_";
+    next;
+  }
+
+  if (/^\\(.+)$/ and $keysyms{$1}) {
+    # escaped keysym -> treat as string
+    s/^\\//;
+  }
+
+  # We assume anything else is a normal string.
+  push @words, "key", map { $chars{$_} || $_ } split //, $_;
+}
+print "@words\n";

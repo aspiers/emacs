@@ -5,4 +5,4 @@ if [ -z "$DISPLAY" ]; then
     exit 1
 fi
 
-key-seq-to-xmacro | xmacroplay $DISPLAY >/dev/null
+key-seq-to-xdotool | xdotool -
