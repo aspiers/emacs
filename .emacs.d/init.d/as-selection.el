@@ -34,9 +34,38 @@
              (insert (mapconcat #'identity parts " "))
              t))))
 
+;; Set prescient-filter-method as a function, as allowed by
+;;
+;;   https://github.com/radian-software/prescient.el/pull/110
+;;
+;; However this doesn't work usefully yet:
+;;
+;;   https://github.com/radian-software/prescient.el/issues/146
+(defun as/prescient-filter-method ()
+  "Dynamically calculate a list for instructing prescient how to
+filter matches."
+  ;; (message "cur %s" current-minibuffer-command)
+  ;; (message "this %s" this-command)
+  ;; (message "major %s" major-mode)
+  (or
+   '(literal regexp)
+   (pcase major-mode
+     ('org-mode '(literal)))
+   (let ((completion-category
+          (completion-metadata-get
+           (completion-metadata (minibuffer-contents)
+                                minibuffer-completion-table
+                                minibuffer-completion-predicate)
+           'category)))
+     (message "completion-category %s" completion-category)
+     (cond ((eql completion-category 'file)          '(fuzzy))
+           ((eql completion-category 'command)       '(fuzzy))
+           ((eql completion-category 'consult-multi) '(fuzzy))
+           (t                                        '(literal regexp initialism)))))))
+
 (use-package prescient
   :config
-  (setq prescient-filter-method '(literal regexp initialism fuzzy)))
+  (setq prescient-filter-method 'as/prescient-filter-method))
 
 (use-package selectrum-prescient
   :config
