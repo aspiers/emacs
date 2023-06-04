@@ -145,7 +145,7 @@
          ;; ("M-g l" . consult-line)    ;; "M-s l" is a good alternative
          ;; ("M-g i" . consult-imenu)   ;; "M-s i" is a good alternative
          ;; ("M-g e" . consult-error)   ;; "M-s e" is a good alternative
-         ("M-s m" . consult-multi-occur)
+         ("M-s m" . consult-line-multi)
 
          ;; browse-kill-ring is an alternative option
          ("M-Y" . consult-yank-pop)
@@ -155,8 +155,8 @@
   ;; The :init configuration is always executed (Not lazy!)
   :init
 
-  ;; Replace functions (consult-multi-occur is a drop-in replacement)
-  (fset 'multi-occur #'consult-multi-occur)
+  ;; Replace functions (consult-line-multi is a drop-in replacement)
+  (fset 'multi-occur #'consult-line-multi)
 
   ;; Configure other variables and modes in the :config section, after lazily loading the package
   :config
