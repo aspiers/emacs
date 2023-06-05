@@ -5,4 +5,12 @@ if [ -z "$DISPLAY" ]; then
     exit 1
 fi
 
+# If this is triggered via a keyboard shortcut, make sure
+# no modifiers still pressed are going to affect the results.
+xdotool keyup Shift_L
+xdotool keyup Shift_R
+xdotool keyup Control_L
+xdotool keyup Meta_L
+xdotool keyup Super_R
+
 key-seq-to-xdotool | xdotool -
