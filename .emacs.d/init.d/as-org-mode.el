@@ -1,3 +1,10 @@
+(use-feature org-refile-narrowed
+  :bind
+  (("C-c C-S-w i" . org-refile-in-sibling)
+   ("C-c C-S-w C-w" . org-refile-in-sibling)
+   ("C-c C-S-w u" . org-refile-in-subtree)
+   ("C-c C-S-w C-c" . org-refile-in-subtree)))
+
 (use-package org-contrib
   :bind
   (("M-o a" . org-agenda)
@@ -16,7 +23,7 @@
    ("C-c C-?" . org-occur-in-agenda-files)
 
    :map org-mode-map
-   (("C-c C-S-w" . org-refile-reverse)
+   (("C-c C-S-w r" . org-refile-reverse)
     ("C-c s" . org-show-context)))
 
   :config
