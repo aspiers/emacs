@@ -21,6 +21,10 @@
            (file+olp "~/org/TODO.org" "GTD" "orgmode")
            "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
 
+          ("O" "OW2000" entry
+           (file+olp "~/org/TODO.org" "community" "OW2000")
+           "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
+
           ("e" "emacs NEXT" entry
            (file+olp "" "computer and technology" "tool software development" "emacs")
            "* NEXT %?%a" :prepend t :jump-to-captured t)
