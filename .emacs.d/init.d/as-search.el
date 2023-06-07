@@ -6,6 +6,12 @@
 ;;  - minibuffer overview only via M-s o => ctrlf-occur
 ;;    which has no native integration
 ;;    https://github.com/radian-software/ctrlf/issues/69
+;;
+;;  - doesn't reveal org structure correctly
+;;    https://github.com/radian-software/ctrlf/issues/118
+;;    Workaround requires switching back to slower older `overlays'
+;;    option for org-fold-core-style.
+;;
 ;; (use-package ctrlf
 ;;   :defer 2
 ;;   :config
