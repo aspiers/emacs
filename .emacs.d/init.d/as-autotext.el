@@ -169,7 +169,9 @@ Designed to be run from the top of a .changes file."
   (interactive)
   (insert "-------------------------------------------------------------------\n")
   (as-insert-date as-rpm-changelog-format)
-  (insert " - " as-suse-email-address "\n\n- \n\n")
+  (insert " - ")
+  (as-insert-name-and-suse-email)
+  (insert "\n\n- \n\n")
   (backward-char 2))
 
 ;;;; as-insert-local-mode
