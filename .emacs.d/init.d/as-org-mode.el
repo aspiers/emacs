@@ -1,4 +1,4 @@
-(use-package org-mode
+(use-package org
   :config
 
   ;; Refresh agendas if any agenda file reverts due to the underlying
