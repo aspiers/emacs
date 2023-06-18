@@ -61,7 +61,7 @@ filter matches."
      (cond ((eql completion-category 'file)          '(fuzzy))
            ((eql completion-category 'command)       '(fuzzy))
            ((eql completion-category 'consult-multi) '(fuzzy))
-           (t                                        '(literal regexp initialism)))))))
+           (t                                        '(literal regexp initialism))))))
 
 (use-package prescient
   :config
