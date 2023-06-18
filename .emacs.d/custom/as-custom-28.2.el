@@ -510,6 +510,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
  '(native-comp-async-report-warnings-errors 'silent)
+ '(org-adapt-indentation t)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-custom-commands
    '(("b" "bandhand TODOs" alltodo ""
