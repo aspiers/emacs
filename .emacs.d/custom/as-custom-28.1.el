@@ -241,7 +241,6 @@
  '(align-sq-string-modes '(python-mode))
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
- '(auto-revert-check-vc-info nil)
  '(auto-revert-interval 10)
  '(auto-save-interval 120)
  '(avy-keys
@@ -510,6 +509,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(muse-wiki-wikiword-regexp "\\<\\([A-Z]+[a-z]+[A-Z]+[a-zA-Z0-9]*+\\)")
  '(mwheel-follow-mouse t)
  '(native-comp-async-report-warnings-errors 'silent)
+ '(org-adapt-indentation t)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-custom-commands
    '(("b" "bandhand TODOs" alltodo ""
@@ -1094,7 +1094,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(show-paren-ring-bell-on-mismatch nil)
  '(show-smartparens-global-mode t)
  '(show-trailing-whitespace nil)
- '(smartparens-global-mode nil)
+ '(smartparens-global-mode t)
  '(sml/active-background-color "grey39")
  '(sml/active-foreground-color "black")
  '(sml/hidden-modes
@@ -1159,7 +1159,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
  '(what-cursor-show-names t)
- '(which-key-enable-extended-define-key t t)
+ '(which-key-enable-extended-define-key t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
