@@ -3,7 +3,7 @@
 (defun org-new-subheading ()
   "Add a new heading, demoted from the current heading level."
   (interactive)
-  (org-insert-heading)
+  (org-insert-heading-respect-content)
   (org-do-demote))
 
 (defcustom org-subheading-todo-alist nil
