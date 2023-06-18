@@ -1,3 +1,14 @@
+(use-package org-mode
+  :config
+
+  ;; Refresh agendas if any agenda file reverts due to the underlying
+  ;; file on disk changing.
+  ;;
+  ;; Adapted from https://www.reddit.com/r/orgmode/comments/mu6n5b/comment/gv7yxul/
+  (defadvice revert-buffer (after refresh-org-agenda-on-revert activate)
+    (if (member (buffer-file-name (current-buffer)) org-agenda-files)
+        (org-agenda-redo-all t))))
+
 (use-feature org-refile-narrowed
   :bind
   (("C-c C-S-w i" . org-refile-in-sibling)
