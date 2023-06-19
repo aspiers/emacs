@@ -66,6 +66,9 @@
              ("G" "GTD TODOs" . as-find-GTD-todos)
              ("n" "personal note" . as-find-personal-note)))
 
+(with-packages (key-chord as-jump)
+  :chords (("ZN" . as-find-personal-note)))
+
 (defun as-org-clock-in-switch-to-state (current-state)
   "Function for use with `org-clock-in-switch-to-state'."
   (if (equal current-state "NEXT") "STARTED" current-state))
