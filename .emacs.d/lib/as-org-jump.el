@@ -57,7 +57,7 @@
 
   (bind-keys :map as-jump-map
              ("t" "personal TODO" . as-find-personal-todo)
-             ("T" "tool TODOs" . as-find-tool-todos)
+             ("l" "tool TODOs" . as-find-tool-todos)
              ("E" "emacs TODOs" . as-find-emacs-todos)
              ("o" "orgmode TODOs" . as-find-orgmode-todos)
              ("O" "OW2000 TODOs" . as-find-OW-todos)
