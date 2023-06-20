@@ -7,6 +7,12 @@
            (file "~/org/TODO.org")
            "* NEXT %?%a%^{Effort}p" :prepend t :jump-to-captured t)
 
+          ("c" "NEXT from clipboard" entry
+           (file "~/org/TODO.org")
+           "* NEXT %?
+  %x%^{Effort}p" :prepend t
+           :jump-to-captured t)
+
           ("i" "immediate personal NEXT" entry
            (file "~/org/TODO.org")
            "* NEXT %?%:annotation
@@ -82,6 +88,17 @@
            "%^{Effort}p" :prepend t :jump-to-captured t)
 
           ("T" "Toucan capture templates")
+          ("Tc" "NEXT from clipboard" entry
+           (file "~/Toucan/TODO.org")
+           "* NEXT %?
+  %x%^{Effort}p" :prepend t
+           :jump-to-captured t)
+          ("Ts" "NEXT from Slack" entry
+           (file "~/Toucan/TODO.org")
+           "* NEXT %?
+  %:annotation
+  %i%^{Effort}p" :prepend t
+           :jump-to-captured t)
           ("Tn" "Toucan NEXT" entry
            (file "~/Toucan/TODO.org")
            "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
