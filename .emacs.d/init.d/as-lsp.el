@@ -78,6 +78,10 @@
   :after yasnippet
   :bind (("M-." . lsp-bridge-find-def))
   :config
+  ;; Stop lsp-bridge interfering with perfectly good emacs backup
+  ;; and lockfile mechanisms which I depend on (e.g. in git-safe-push-to-checkout).
+  (setq lsp-bridge-disable-backup nil)
+
   (global-lsp-bridge-mode)
   (setq acm-backend-yas-match-by-trigger-keyword t))
 
