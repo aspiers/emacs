@@ -15,6 +15,13 @@ if [ "$1" = -l ]; then
     shift
 fi
 
+feed_X11 () {
+    (
+        echo "C-g C-g"
+        cat
+    ) | feed-X11
+}
+
 if fast-X11-display; then
     : Assume we already have an emacs running.  We could alternatively
     : use quick-emacs at this point.
@@ -22,7 +29,7 @@ if fast-X11-display; then
     focus-emacs-frame || exit $?
     echo "`date` $me: `current-window-id` / `current-window-name`" \
         >> ~/.log/switch-feed-emacs.log 2>&1
-    feed-X11
+    feed_X11
 else
     : No fast X11 display
     # The bash manual says:
@@ -35,7 +42,7 @@ else
     # output end of the pipe which will receive the key macro to feed
     # to feed-X11.
     exec 3<&0
-    ( sleep 2; feed-X11 <&3 ) &
+    ( sleep 2; feed_X11 <&3 ) &
 
     # For some reason we don't need STDIN to be a tty for
     # interactive emacs to run happily in the foreground?!
