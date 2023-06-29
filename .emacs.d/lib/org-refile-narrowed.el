@@ -1,3 +1,6 @@
+;; FIXME: these should be auto-generated
+(autoload 'list-has-prefix "as-list-utils")
+
 (defun org-olp-is-sibling (a b)
   "Return t if olp lists `a' and `b` are siblings."
   (and (equal (length a) (length b))
