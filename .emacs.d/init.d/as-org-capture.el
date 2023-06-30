@@ -2,15 +2,17 @@
   :config
   (setq org-capture-templates
         '(
+          ;; Effort estimate can be asked for via %^{Effort}p
+
           ;; add a new NEXT for various things
           ("n" "personal NEXT" entry
            (file "~/org/TODO.org")
-           "* NEXT %?%a%^{Effort}p" :prepend t :jump-to-captured t)
+           "* NEXT %?%a" :prepend t :jump-to-captured t)
 
           ("c" "NEXT from clipboard" entry
            (file "~/org/TODO.org")
            "* NEXT %?
-  %x%^{Effort}p" :prepend t
+  %x" :prepend t
            :jump-to-captured t)
 
           ("i" "immediate personal NEXT" entry
@@ -85,19 +87,19 @@
 
           ("z" "property test" entry
            (file "~/org/TODO.org")
-           "%^{Effort}p" :prepend t :jump-to-captured t)
+           "" :prepend t :jump-to-captured t)
 
           ("T" "Toucan capture templates")
           ("Tc" "NEXT from clipboard" entry
            (file "~/Toucan/TODO.org")
            "* NEXT %?
-  %x%^{Effort}p" :prepend t
+  %x" :prepend t
            :jump-to-captured t)
           ("Ts" "NEXT from Slack" entry
            (file "~/Toucan/TODO.org")
            "* NEXT %?
   %:annotation
-  %i%^{Effort}p" :prepend t
+  %i" :prepend t
            :jump-to-captured t)
           ("Tn" "Toucan NEXT" entry
            (file "~/Toucan/TODO.org")
