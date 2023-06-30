@@ -1,1 +1,2 @@
-C-x C-f ~/org/TODO.org \n
+#C-x C-f ~/org/TODO.org \n
+C-c j t
