@@ -114,7 +114,7 @@
            "* NEXT %?%[~/.org-mairix-link]" :prepend t
            :jump-to-captured t)
           ("Tl" "Toucan learning material" entry
-           (file+olp "~/Toucan/TODO.org" "general learning")
+           (file+olp "~/Toucan/TODO.org" "learning")
            "* NEXT read%? %a" :prepend t :jump-to-captured t)
           ("Td" "Toucan task DONE" entry
            (file "~/Toucan/DONE.org")
