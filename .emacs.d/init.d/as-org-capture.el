@@ -17,7 +17,7 @@
 
           ("i" "immediate personal NEXT" entry
            (file "~/org/TODO.org")
-           "* NEXT %?%:annotation
+           "* NEXT %?%a
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
 
           ("m" "NEXT from personal mail" entry
@@ -27,11 +27,11 @@
           ;; topic-specific NEXTs
           ("o" "orgmode NEXT" entry
            (file+olp "~/org/TODO.org" "GTD" "orgmode")
-           "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
+           "* NEXT %?%a" :prepend t :jump-to-captured t)
 
           ("O" "OW2000" entry
            (file+olp "~/org/TODO.org" "community" "OW2000")
-           "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
+           "* NEXT %?%a" :prepend t :jump-to-captured t)
 
           ("e" "emacs NEXT" entry
            (file+olp "" "computer and technology" "tool software development" "emacs")
@@ -103,10 +103,10 @@
            :jump-to-captured t)
           ("Tn" "Toucan NEXT" entry
            (file "~/Toucan/TODO.org")
-           "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
+           "* NEXT %?%a" :prepend t :jump-to-captured t)
           ("Ti" "immediate Toucan NEXT" entry
            (file "~/Toucan/TODO.org")
-           "* NEXT %?%:annotation
+           "* NEXT %?%a
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t
            :clock-in t)
           ("Tm" "NEXT from Toucan mail" entry
@@ -124,10 +124,10 @@
           ("P" "Panther capture templates")
           ("Pn" "Panther NEXT" entry
            (file "~/Panther/TODO.org")
-           "* NEXT %?%:annotation" :prepend t :jump-to-captured t)
+           "* NEXT %?%a" :prepend t :jump-to-captured t)
           ("Pi" "immediate Panther NEXT" entry
            (file "~/Panther/TODO.org")
-           "* NEXT %?%:annotation
+           "* NEXT %?%a
   SCHEDULED: %T" :prepend t :immediate-finish t :jump-to-captured t :clock-in t)
           ("Pm" "NEXT from Panther mail" entry
            (file "~/Panther/TODO.org")
