@@ -1,0 +1,28 @@
+#!/bin/bash
+
+me=`basename $0`
+
+if [ -z "$DISPLAY" ]; then
+    echo "$me: Need \$DISPLAY set for $me to work; aborting." >&2
+    sleep 1 # ensure we see the message if we're in mutt
+    exit 1
+fi
+
+if ! fast-X11-display; then
+    # switch-feed-emacs seems to care about this scenario, but
+    # I can't remember why.
+    : No fast X11 display
+    exit 1
+fi
+
+: Assume we already have an emacs running.  We could alternatively
+: use quick-emacs at this point.
+xdotool set_desktop 0 # prefer first desktop
+focus-emacs-frame || exit $?
+echo "`date` $me: `current-window-id` / `current-window-name`" \
+     >> ~/.log/switch-emacs-eval.log 2>&1
+
+code="$1"
+shift
+
+emacsclient --quiet --no-wait --eval "(load \"$code\")" "$@"

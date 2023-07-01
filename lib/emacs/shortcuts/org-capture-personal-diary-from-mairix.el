@@ -1,0 +1,1 @@
+(org-capture "a")
