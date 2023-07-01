@@ -17,7 +17,7 @@ fi
 
 feed_X11 () {
     (
-        echo "C-g C-g"
+        echo "C-g"
         cat
     ) | feed-X11
 }
