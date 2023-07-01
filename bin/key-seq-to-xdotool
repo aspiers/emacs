@@ -6,72 +6,127 @@
 use strict;
 use warnings;
 
-my (%keysyms, %chars);
-open(KEYSYMS, "/usr/include/X11/keysymdef.h")
-  or die "Couldn't open(keysymdef.h): $!\n";
-while (<KEYSYMS>) {
-  /#define XK_(\w\S+)/ && $keysyms{$1}++;
+my $DEBUG = 0;
 
-  if (/#define XK_(\w\S+)\s+0x00([0-9a-f]{2})/) {
-    $chars{chr hex $2} = $1;
+my %mod_keysyms = (
+  'C' => 'Control_L',
+  'M' => 'Meta_L',
+  'S' => 'Super_R',
+  'H' => 'Hyper_R',
+);
+
+sub debug ($) {
+  return unless $DEBUG;
+  warn "@_\n";
+}
+
+sub get_keysyms () {
+  my (%keysym2char, %char2keysym);
+  open(KEYSYMS, "/usr/include/X11/keysymdef.h")
+    or die "Couldn't open(keysymdef.h): $!\n";
+  while (<KEYSYMS>) {
+    /#define XK_(\w\S+)/ && $keysym2char{$1}++;
+
+    if (/#define XK_(\w\S+)\s+0x00([0-9a-f]{2})/) {
+      $char2keysym{chr hex $2} = $1;
+    }
+  }
+  close(KEYSYMS);
+  return (\%keysym2char, \%char2keysym);
+}
+
+sub press_mods ($$$) {
+  my ($words, $current, $desired) = @_;
+  # Press any modifiers we need
+  foreach my $needed (keys %$desired) {
+    debug "    Need $needed";
+    if ($current->{$needed}) {
+      debug "    . Already pressed $needed; won't press";
+      next;
+    }
+    my $keysym = $mod_keysyms{$needed}
+      or die "BUG: unrecognised modifier $needed";
+    debug "  + keydown $keysym";
+    push @$words, "keydown", $keysym;
+    $current->{$needed}++;
   }
 }
-close(KEYSYMS);
 
-my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
-my @words = ();
-foreach (@actions) {
-  #print "Got: [$_]\n";
-
-  if (/^((?:[CMSH]-){1,4})(.+)$/) {
-    my ($modifiers, $key) = ($1, $2);
-    my @mods = split /-/, $modifiers;
-    foreach my $abbrev (@mods) {
-      my $keysym = $abbrev eq 'C' ? 'Control_L'
-                 : $abbrev eq 'M' ? 'Meta_L'
-                 : $abbrev eq 'S' ? 'Super_R'
-                 : $abbrev eq 'H' ? 'Hyper_R'
-                 : die "BUG";
-      push @words, "keydown", $keysym;
+sub release_mods ($$$) {
+  my ($words, $current, $desired) = @_;
+  # Release any modifiers we don't need
+  foreach my $pressed (keys %$current) {
+    debug "    Pressed: $pressed";
+    # Release unless still needed
+    if ($desired->{$pressed}) {
+      debug "    . Still need $pressed; won't release";
+      next;
     }
-    push @words, "key", $key;
-    foreach my $abbrev (reverse @mods) {
-      my $keysym = $abbrev eq 'C' ? 'Control_L'
-                 : $abbrev eq 'M' ? 'Meta_L'
-                 : $abbrev eq 'S' ? 'Super_R'
-                 : $abbrev eq 'H' ? 'Hyper_R'
-                 : die "BUG";
-      push @words, "keyup", $keysym;
-    }
-    next;
+    my $keysym = $mod_keysyms{$pressed}
+      or die "BUG: unrecognised modifier $pressed";
+    debug "  - keyup $keysym";
+    push @$words, "keyup", $keysym;
+    delete $current->{$pressed};
   }
-
-  if (/^\\n$/) {
-    push @words, "key Return";
-    next;
-  }
-
-  if (/^\\e$/) {
-    push @words, "key Escape";
-    next;
-  }
-
-  if (/^\\t$/) {
-    push @words, "key Tab";
-    next;
-  }
-
-  if ($keysyms{$_}) {
-    push @words, "key $_";
-    next;
-  }
-
-  if (/^\\(.+)$/ and $keysyms{$1}) {
-    # escaped keysym -> treat as string
-    s/^\\//;
-  }
-
-  # We assume anything else is a normal string.
-  push @words, "key", map { $chars{$_} || $_ } split //, $_;
 }
-print "@words\n";
+
+sub main {
+  my %current_mods = ();
+
+  my (%keysym2char, %chars) = get_keysyms();
+
+  my @actions = split /\s+/, join '', grep ! /^\s*(#|$)/, <>;
+  my @words = ();
+  foreach (@actions) {
+    debug "Got: $_";
+
+    if (/^((?:[CMSH]-){1,4})(.+)$/) {
+      my ($modifiers, $key) = ($1, $2);
+      my @desired_mods = split /-/, $modifiers;
+      my %desired_mods = map { $_ => 1 } @desired_mods;
+      debug "= Desired: @desired_mods";
+
+      release_mods(\@words, \%current_mods, \%desired_mods);
+      press_mods(\@words, \%current_mods, \%desired_mods);
+      push @words, "key", $key;
+      next;
+    }
+
+    release_mods(\@words, \%current_mods, {});
+
+    if (/^\\n$/) {
+      push @words, "key Return";
+      next;
+    }
+
+    if (/^\\e$/) {
+      push @words, "key Escape";
+      next;
+    }
+
+    if (/^\\t$/) {
+      push @words, "key Tab";
+      next;
+    }
+
+    if ($keysym2char{$_}) {
+      debug "  key $_";
+      push @words, "key $_";
+      next;
+    }
+
+    if (/^\\(.+)$/ and $keysym2char{$1}) {
+      # escaped keysym -> treat as string
+      s/^\\//;
+    }
+
+    # We assume anything else is a normal string.
+    my @keys = map { $chars{$_} || $_ } split //, $_;
+    debug "  key @keys";
+    push @words, "key", @keys;
+  }
+  release_mods(\@words, \%current_mods, {});
+  print "@words\n";
+}
+
+main();
