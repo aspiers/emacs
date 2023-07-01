@@ -98,7 +98,7 @@ do_editing () {
     emacsclient $EMACSCLIENT_TTY "$@" >/dev/null
 
     if [ -n "$client_winid" ]; then
-    # If we can, switch back to window from which emacsclient was invoked.
+        # If we can, switch back to window from which emacsclient was invoked.
         wmctrl -ia "$client_winid"
     fi
 }
