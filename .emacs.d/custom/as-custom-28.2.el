@@ -1151,7 +1151,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-markup-indent-offset 2)
  '(what-cursor-show-names t)
- '(which-key-enable-extended-define-key t)
+ '(which-key-enable-extended-define-key t t)
  '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
 \\)+\\)\\{2\\}\\)")
  '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
