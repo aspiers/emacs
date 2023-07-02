@@ -387,6 +387,7 @@
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
+ '(global-auto-revert-non-file-buffers t)
  '(global-flycheck-mode t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-msf-abbrev-mode t)
