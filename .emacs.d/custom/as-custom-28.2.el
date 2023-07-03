@@ -922,8 +922,10 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(org-habit-today-glyph 118)
  '(org-hide-leading-stars t)
  '(org-html-allow-name-attribute-in-anchors t)
- '(org-icalendar-store-UID t)
+ '(org-icalendar-store-UID nil)
  '(org-icalendar-timezone "Europe/London")
+ '(org-icalendar-use-deadline '(event-if-todo-not-done todo-due))
+ '(org-icalendar-use-scheduled '(event-if-todo-not-done todo-start))
  '(org-link-abbrev-alist
    '(("bnc" . "https://bugzilla.novell.com/show_bug.cgi?id=")
      ("bug" . "https://bugzilla.novell.com/show_bug.cgi?id=")
