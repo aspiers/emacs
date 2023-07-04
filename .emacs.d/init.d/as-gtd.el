@@ -20,9 +20,25 @@
 (use-package org-pomodoro
   :after (org)
   :bind (:map org-mode-map
-         ("C-c C-x C-S-i" . 'org-pomodoro)
-         :map org-agenda-mode-map
-         ("P" . 'org-pomodoro)))
+              ("C-c C-x C-S-i" . 'org-pomodoro)
+              :map org-agenda-mode-map
+              ("P" . 'org-pomodoro))
+  :config
+  ;; Test sounds with:
+  ;;   (org-pomodoro-play-sound :start)
+  ;;   (org-pomodoro-play-sound :pomodoro)  ;; pomodoro finished
+  ;;   (org-pomodoro-play-sound :overtime)
+  ;;   (org-pomodoro-play-sound :killed)
+  ;;   (org-pomodoro-play-sound :short-break)
+  ;;   (org-pomodoro-play-sound :long-break)
+  ;;   (org-pomodoro-play-sound :tick)
+  (setq org-pomodoro-audio-player "mplayer"
+        org-pomodoro-finished-sound-args "-volume 40"
+        org-pomodoro-overtime-sound "/usr/share/sounds/workrave/default/daily-limit.wav"
+        org-pomodoro-short-break-sound "/usr/share/sounds/workrave/default/micro-break-started.wav"
+        org-pomodoro-finished-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
+        org-pomodoro-long-break-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
+        org-pomodoro-killed-sound "/usr/share/sounds/workrave/default/break-ignored.wav"))
 
 ;; (use-package beeminder)
 
