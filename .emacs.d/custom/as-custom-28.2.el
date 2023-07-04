@@ -19,6 +19,7 @@
       ("MidiAll" "")))
  '(LilyPond-pdf-command "okular")
  '(adaptive-fill-regexp "[ 	]\\{,10\\}\\([-!|#%;>*·•‣⁃◦]+[ 	]*\\)*")
+ '(ag-arguments '("--smart-case" "--stats" "--hidden"))
  '(align-dq-string-modes
    '(vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode))
  '(align-exclude-rules-list
