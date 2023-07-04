@@ -18,11 +18,11 @@
   (require 'org-meeting-actions))
 
 (use-package org-pomodoro
-  :after org-plus-contrib
+  :after (org)
   :bind (:map org-mode-map
          ("C-c C-x C-S-i" . 'org-pomodoro)
          :map org-agenda-mode-map
-         ("I" . 'org-pomodoro)))
+         ("P" . 'org-pomodoro)))
 
 ;; (use-package beeminder)
 

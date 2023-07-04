@@ -48,7 +48,7 @@ personal mail via mutt within an xterm.
          as-org-mairix-mutt-display-personal-command))
     (org-mairix-open search)))
 
-;; org-add-link-type is deprecated and provided by org-plus-contrib
+;; org-add-link-type is deprecated and provided by org-compat
 (use-package org
   :ensure org-compat
   :config

@@ -1,22 +1,4 @@
 (use-package org
-  :config
-
-  ;; Refresh agendas if any agenda file reverts due to the underlying
-  ;; file on disk changing.
-  ;;
-  ;; Adapted from https://www.reddit.com/r/orgmode/comments/mu6n5b/comment/gv7yxul/
-  (defadvice revert-buffer (after refresh-org-agenda-on-revert activate)
-    (if (member (buffer-file-name (current-buffer)) org-agenda-files)
-        (org-agenda-redo-all t))))
-
-(use-feature org-refile-narrowed
-  :bind
-  (("C-c C-S-w i" . org-refile-in-sibling)
-   ("C-c C-S-w C-w" . org-refile-in-sibling)
-   ("C-c C-S-w u" . org-refile-in-subtree)
-   ("C-c C-S-w C-c" . org-refile-in-subtree)))
-
-(use-package org-contrib
   :bind
   (("M-o a" . org-agenda)
    ("M-o c" . org-capture)
@@ -38,6 +20,15 @@
     ("C-c s" . org-show-context)))
 
   :config
+
+  ;; Refresh agendas if any agenda file reverts due to the underlying
+  ;; file on disk changing.
+  ;;
+  ;; Adapted from https://www.reddit.com/r/orgmode/comments/mu6n5b/comment/gv7yxul/
+  (defadvice revert-buffer (after refresh-org-agenda-on-revert activate)
+    (if (member (buffer-file-name (current-buffer)) org-agenda-files)
+        (org-agenda-redo-all t)))
+
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
 
   (defun org-clock-in-daily-review ()
@@ -64,6 +55,14 @@
 
   (add-to-list 'org-modules 'org-timer))
 
+(use-feature org-refile-narrowed
+  :after (org)
+  :bind
+  (("C-c C-S-w i" . org-refile-in-sibling)
+   ("C-c C-S-w C-w" . org-refile-in-sibling)
+   ("C-c C-S-w u" . org-refile-in-subtree)
+   ("C-c C-S-w C-c" . org-refile-in-subtree)))
+
 (use-feature org-jump-olp
   :commands org-jump-olp)
 
@@ -84,12 +83,12 @@
   :commands org-crypt-use-before-save-magic)
 
 (use-feature as-gtd
-  :after org-plus-contrib)
+  :after (org))
 
 ;; FIXME: still need this?
 ;;(autoload 'bzg/org-annotation-helper "org-annotation-helper" nil t)
 
-;; Supposed to help debug org-plus-contrib load warning but doesn't
+;; Supposed to help debug old org-plus-contrib load warning but doesn't
 (require 'use-package)
 
 (use-package org-sync)
