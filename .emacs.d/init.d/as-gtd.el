@@ -1,4 +1,5 @@
 ;; Things to help me with Getting Things Done.
+;; http://orgmode.org/worg/org-gtd-etc.php
 
 (defvar as-personal-todo "~/org/TODO.org")
 
