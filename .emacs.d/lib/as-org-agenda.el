@@ -1,10 +1,10 @@
 ;;;###autoload
 (defun as-org-switch-to-agenda-buffer ()
-  "Switch to an existing *Org Agenda* buffer, otherwise run
+  "Switch to an existing *Org Agenda(d)* buffer, otherwise run
 `org-agenda' with Adam's custom day view."
   (interactive)
-  (if (get-buffer "*Org Agenda*")
-      (switch-to-buffer "*Org Agenda*")
+  (if (get-buffer "*Org Agenda(d)*")
+      (switch-to-buffer "*Org Agenda(d)*")
     (org-agenda nil "d")))
 
 ;;;###autoload
