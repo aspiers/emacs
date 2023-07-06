@@ -40,6 +40,12 @@
         org-pomodoro-long-break-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
         org-pomodoro-killed-sound "/usr/share/sounds/workrave/default/break-ignored.wav"))
 
+(use-package org-heatmap
+  :straight (:host github :repo "Elilif/org-heatmap")
+  :after (org)
+  :config
+  (org-heatmap-mode))
+
 ;; (use-package beeminder)
 
 (provide 'as-gtd)
