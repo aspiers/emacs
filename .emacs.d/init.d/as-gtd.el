@@ -40,11 +40,12 @@
         org-pomodoro-long-break-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
         org-pomodoro-killed-sound "/usr/share/sounds/workrave/default/break-ignored.wav"))
 
-;; Unmaintained fork of org-habit:
+;; Unmaintained fork of org-habit; unfortunately breaks org-agenda:
 ;; https://github.com/myshevchuk/org-habit-plus/issues/4
-(use-package org-habit-plus
-  :straight (:host github :repo "myshevchuk/org-habit-plus")
-  :after (org))
+;;
+;; (use-package org-habit-plus
+;;   :straight (:host github :repo "myshevchuk/org-habit-plus")
+;;   :after (org))
 
 (use-package org-heatmap
   :straight (:host github :repo "Elilif/org-heatmap")
