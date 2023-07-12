@@ -12,6 +12,8 @@
   (or (getenv "ZDOTDIR") "~")
   "Home directory to be used to retrieve emacs init files.")
 
+(setq user-emacs-directory (expand-file-name ".emacs.d" edotdir))
+
 (defvar as-init-d-suffix ".emacs.d/init.d")
 (message "Using emacs config from %s" edotdir)
 (load (concat edotdir "/" as-init-d-suffix "/as-pre-init-d"))
