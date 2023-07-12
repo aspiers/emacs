@@ -55,6 +55,9 @@
 
   (add-to-list 'org-modules 'org-timer))
 
+(use-package org-contrib
+  :after (org))
+
 (use-feature org-refile-narrowed
   :after (org)
   :bind
