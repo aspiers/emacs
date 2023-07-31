@@ -18,7 +18,8 @@
           ("i" "immediate personal NEXT" entry
            (file "~/org/TODO.org")
            "* NEXT %?%a
-  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
+  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t
+          :clock-keep t)
 
           ("m" "personal NEXT from mairix" entry
            (file "~/org/TODO.org")
@@ -108,7 +109,7 @@
            (file "~/Toucan/TODO.org")
            "* NEXT %?%a
   SCHEDULED: %T" :prepend t :jump-to-captured t
-           :clock-in t)
+           :clock-in t :clock-keep t)
           ("Tm" "Toucan NEXT from mairix" entry
            (file "~/Toucan/TODO.org")
            "* NEXT %?%[~/.org-mairix-link]" :prepend t
@@ -128,7 +129,8 @@
           ("Pi" "Panther immediate NEXT" entry
            (file "~/Panther/TODO.org")
            "* NEXT %?%a
-  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
+  SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t
+          :clock-keep t)
           ("Pm" "Panther NEXT from mairix" entry
            (file "~/Panther/TODO.org")
            "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
