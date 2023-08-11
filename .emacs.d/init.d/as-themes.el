@@ -74,13 +74,22 @@
   ;; (modus-themes-load-vivendi)
   )
 
+(defun as-gnome-terminal-profile (profile)
+  "Call gnome-terminal-profile to set the active profile"
+  (start-process "gnome-terminal-profile" nil
+                 "gnome-terminal-profile" profile))
+
 (defun as-toggle-bright-theme ()
   "Toggles a bright theme for outdoors vs. indoors."
   (interactive)
   (cond ((or
           (memq 'ef-summer custom-enabled-themes)
           (memq 'ef-winter custom-enabled-themes))
-         (ef-themes-toggle))
+         (let ((new-theme (ef-themes-toggle)))
+           (as-gnome-terminal-profile
+            (pcase new-theme
+              ('ef-summer "Bright")
+              ('ef-winter "Dark")))))
         (t
          ;; toggle modus-theme
          (let ((dark-theme 'modus-vivendi)
@@ -89,9 +98,11 @@
            (if (memq bright-theme custom-enabled-themes)
                (progn
                  (disable-theme bright-theme)
-                 (load-theme dark-theme))
+                 (load-theme dark-theme)
+                 (as-gnome-terminal-profile "Dark"))
              (disable-theme dark-theme)
-             (load-theme bright-theme))))))
+             (load-theme bright-theme)
+             (as-gnome-terminal-profile "Bright"))))))
 
 (require 'as-toggles)
 (use-package hydra
