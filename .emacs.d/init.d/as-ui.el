@@ -34,4 +34,7 @@
 ;;   :config
 ;;   (transient-posframe-mode))
 
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode))
+
 (provide 'as-ui)
