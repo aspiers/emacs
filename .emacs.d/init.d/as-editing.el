@@ -77,9 +77,11 @@ The list marked is the one that contains point or follows point."
 
 (defun insert-euro-sign ()
   "Insert a EURO SIGN Unicode character."
-  (ucs-insert (cdr (assoc-string "EURO SIGN" (ucs-names)))))
+  (interactive)
+  (require 'ucs-utils)
+  (insert-char (ucs-utils-char "euro sign"))))
 
-(bind-key "C-x 8 e" 'insert-euro-sign)
+(bind-key "C-x 8 £" 'insert-euro-sign)
 
 (require 'as-mode-lighters)
 
