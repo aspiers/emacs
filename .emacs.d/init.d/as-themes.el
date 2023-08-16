@@ -77,7 +77,10 @@
 (defun as-gnome-terminal-profile (profile)
   "Call gnome-terminal-profile to set the active profile"
   (start-process "gnome-terminal-profile" nil
-                 "gnome-terminal-profile" profile))
+                 "gnome-terminal-profile" profile)
+  (with-temp-file
+      (expand-file-name "~/.config/gnome-terminal-profile")
+    (insert profile "\n")))
 
 (defun as-toggle-bright-theme ()
   "Toggles a bright theme for outdoors vs. indoors."
