@@ -79,7 +79,7 @@ The list marked is the one that contains point or follows point."
   "Insert a EURO SIGN Unicode character."
   (interactive)
   (require 'ucs-utils)
-  (insert-char (ucs-utils-char "euro sign"))))
+  (insert-char (ucs-utils-char "euro sign")))
 
 (bind-key "C-x 8 £" 'insert-euro-sign)
 
