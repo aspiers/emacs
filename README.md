@@ -11,16 +11,21 @@ packages.
 OVERVIEW
 --------
 
-I use:
+I use `straight.el` for installing most packages, because:
 
-*   `package.el` for installing most packages, because:
-    *   its dependency tracking is version-aware
-    *   MELPA has tons of great packages
-    *   MELPA stable is nice when I'm feeling risk-averse
-*   John Wiegley's nifty [`use-package`](https://github.com/jwiegley/use-package)
-    and [`bind-key`](https://github.com/jwiegley/use-package/blob/master/bind-key.el)
-    utilities for setting up autoloads, key bindings, and other
-    per-package configuration.
+*   its dependency tracking is version-aware
+*   MELPA has tons of great packages
+*   MELPA stable is nice when I'm feeling risk-averse
+
+That said, I intend to try switching to
+[elpaca](https://github.com/progfolio/elpaca) soon.
+
+I use John Wiegley's nifty
+[`use-package`](https://github.com/jwiegley/use-package) and
+[`bind-key`](https://github.com/jwiegley/use-package/blob/master/bind-key.el)
+utilities for setting up autoloads, key bindings, and other
+per-package configuration.  These are now natively included in emacs
+29.1 and later.
 
 I generally adhere to the convention of adding an `as-` prefix to any
 files, functions, and variables which are specific to my needs.
