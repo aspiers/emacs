@@ -80,8 +80,8 @@ attempting to use it directly.  However, you will probably be able to
 benefit from reading through it and stealing at least ideas, if not
 code.  If you discover something which you think is useful enough to
 deserve being properly packaged and published, then feel free to
-pester me into doing so.  Stuff in `.emacs.d/lib` is already earmarked
-for publishing when I get free time for it.
+pester me into doing so.  Stuff in [`.emacs.d/lib`](.emacs.d/lib/) is
+already earmarked for publishing when I get free time for it.
 
 This repository is designed to be
 [stowed](http://www.gnu.org/software/stow/) directly into your home
