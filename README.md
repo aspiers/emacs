@@ -2,11 +2,15 @@ Adam's emacs config
 ===================
 
 This is my collection of configuration files and utilities for
-[emacs](http://emacs.org/).  I started tracking this in a CVS
-repository in 1999, and in 2011 finally migrated it to git.  Due to
-its age, there is unsurprisingly a fair bit of cruft, although I'm
-gradually replacing the outdated hacks with the help of modern emacs
-packages.
+[emacs](http://emacs.org/).  I started
+[tracking](https://github.com/aspiers/emacs/commit/1d101301bcff6bd48fc544d201f1af6f2a0a6033)
+this in a CVS repository in
+[1999](https://github.com/aspiers/emacs/commit/73c73a15dd91bdee30ef64cbf11783b16fdeeef3),
+and in 2011 finally
+[migrated](https://github.com/aspiers/emacs/commit/d33b0618550ce396e6b5b52a9941da0699e403a7)
+it to git.  Due to its age, there is unsurprisingly a fair bit of
+cruft, although I'm gradually replacing the outdated hacks with the
+help of modern emacs packages.
 
 OVERVIEW
 --------
