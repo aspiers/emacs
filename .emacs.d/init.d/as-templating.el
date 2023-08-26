@@ -10,35 +10,6 @@
 
 (use-package yasnippet-snippets)
 
-;;{{{ msf-abbrev
-
-(autoload 'msf-abbrev-mode "msf-abbrev" nil t)
-
-(eval-after-load "msf-abbrev"
-  '(setq msf-abbrev-root
-         (concat as-emacs-dir "/minor-modes/msf-abbrev/mode-abbrevs")))
-
-
-;; Has indent-region changed arity?  Do we need a compatability wrapper?
-;; (eval-after-load "msf-abbrev"
-;;   (let ((arity (function-arity 'indent-region)))
-;;     (if (eq (car arity) 2)
-;;         (defun indent-region ...
-
-;; This goes into an infinite loop :-(
-;; (defadvice abbrev-mode (before abbrev-mode-msf-advice act)
-;;   "Always use `msf-abbrev-mode' when `abbrev-mode' is enabled."
-;;   (msf-abbrev-mode 1))
-
-;; custom-set-variables takes care of this:
-;;(eval-after-load "abbrev" '(require 'msf-abbrev))
-
-(defun msf (&optional prefix)
-  "Alias for msf-abbrev-mode."
-  (interactive "p")
-  (msf-abbrev-mode (or prefix 1)))
-
-;;}}}
 ;;{{{ _I_nsert auto-text (C-c i)
 
 (use-feature as-autotext
