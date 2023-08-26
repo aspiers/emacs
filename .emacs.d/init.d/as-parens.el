@@ -1,11 +1,13 @@
 (require 'paren)
 
 (use-package smartparens
+  :custom
+  (sp-ignore-modes-list
+   '(minibuffer-mode
+     minibuffer-inactive-mode
+     emacs-lisp-mode))
+
   :config
-  (setq sp-ignore-modes-list
-        '(minibuffer-mode
-          minibuffer-inactive-mode
-          emacs-lisp-mode))
   (smartparens-global-mode t)
   (show-smartparens-global-mode t))
 

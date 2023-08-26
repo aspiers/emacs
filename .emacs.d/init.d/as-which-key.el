@@ -12,13 +12,14 @@
   ;; FIXME: This one has to go before the mode is *loaded*!
   (setq which-key-enable-extended-define-key t)
 
-  :config
+  :custom
 
   ;; These have to go before the mode is activated
-  (setq which-key-idle-delay 0.1)
-  (setq which-key-idle-secondary-delay 0.1)
-  (setq which-key-lighter "")
+  (which-key-idle-delay 0.1)
+  (which-key-idle-secondary-delay 0.1)
+  (which-key-lighter "")
 
+  :config
   (which-key-mode)
 
   (require 's)

@@ -25,8 +25,9 @@
          ("C-X 4 C-o" . switch-window-then-display-buffer)
 
          ("C-X 4 0" . switch-window-then-kill-buffer))
-  :config
-  (setq switch-window-multiple-frames t))
+
+  :custom
+  (switch-window-multiple-frames t))
 
 ;; TODO: check out https://www.emacswiki.org/emacs/WinnerMode
 

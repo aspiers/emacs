@@ -1,12 +1,12 @@
 ;; Lefteris FTW! https://github.com/ethereum/emacs-solidity/
 (use-package solidity-mode
-  :config
-  (setq solidity-comment-style 'slash))
+  :custom
+  (solidity-comment-style 'slash))
 
 (use-package solidity-flycheck
-  :config
-  (setq solidity-flycheck-solc-checker-active t)
-  (setq solidity-flycheck-solium-checker-active t)
+  :custom
+  (solidity-flycheck-solc-checker-active t)
+  (solidity-flycheck-solium-checker-active t)
   ;; (setq solidity-flycheck-chaining-error-level ...)
   )
 

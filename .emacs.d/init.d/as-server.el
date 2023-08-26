@@ -37,8 +37,8 @@
   (atomic-chrome-start-server))
 
 (with-packages (atomic-chrome markdown-mode)
-  :config
-  (setq atomic-chrome-default-major-mode 'markdown-mode
-        atomic-chrome-buffer-open-style 'frame))
+  :custom
+  (atomic-chrome-default-major-mode 'markdown-mode)
+  (atomic-chrome-buffer-open-style 'frame))
 
 (provide 'as-server)

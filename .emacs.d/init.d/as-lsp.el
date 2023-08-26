@@ -8,8 +8,11 @@
   ;; Disable binding which clashes with my multiple-cursors binding
   (define-key lsp-mode-map (kbd "C-S-SPC") nil)
 
+  :custom
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  (setq gc-cons-threshold 100000000)
+  (gc-cons-threshold 100000000)
+
+  :config
   (setq read-process-output-max (* 1024 1024))
 
   ;; :hook ((python-mode . lsp)
@@ -82,9 +85,9 @@
   ;; Stop lsp-bridge interfering with perfectly good emacs backup
   ;; and lockfile mechanisms which I depend on (e.g. in git-safe-push-to-checkout).
   (lsp-bridge-disable-backup nil)
+  (acm-backend-yas-match-by-trigger-keyword t)
 
   :config
-  (global-lsp-bridge-mode)
-  (setq acm-backend-yas-match-by-trigger-keyword t))
+  (global-lsp-bridge-mode))
 
 (provide 'as-lsp)

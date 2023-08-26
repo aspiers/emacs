@@ -10,7 +10,7 @@
 (add-to-list 'custom-theme-load-path as-themes-dir)
 
 (use-package ef-themes
-  :config
+  :custom
   ;; Make customisations that affect Emacs faces BEFORE loading a theme
   ;; (any change needs a theme re-load to take effect).
 
@@ -18,9 +18,9 @@
   ;; can specify them in `ef-themes-to-toggle' and then invoke the command
   ;; `ef-themes-toggle'.  All the themes are included in the variable
   ;; `ef-themes-collection'.
-  (setq ef-themes-to-toggle '(ef-summer ef-winter))
+  (ef-themes-to-toggle '(ef-summer ef-winter))
 
-  ;; (setq ef-themes-headings ; read the manual's entry or the doc string
+  ;; (ef-themes-headings ; read the manual's entry or the doc string
   ;;       '((0 variable-pitch light 1.9)
   ;;         (1 variable-pitch light 1.8)
   ;;         (2 variable-pitch regular 1.7)
@@ -32,13 +32,14 @@
   ;;         (t variable-pitch 1.1)))
 
   ;; They are nil by default...
-  (setq ef-themes-mixed-fonts t
-        ef-themes-variable-pitch-ui t)
+  (ef-themes-mixed-fonts t)
+  (ef-themes-variable-pitch-ui t)
 
   ;; Read the doc string or manual for this one.  The symbols can be
   ;; combined in any order.
-  (setq ef-themes-region '(intense no-extend neutral))
+  (ef-themes-region '(intense no-extend neutral))
 
+  :config
   ;; Disable all other themes to avoid awkward blending:
   (mapc #'disable-theme custom-enabled-themes)
 

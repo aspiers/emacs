@@ -45,7 +45,8 @@
     (interactive)
     (magit-process-file "gitg" nil 0))
 
-  (setq git-commit-use-local-message-ring t))
+  :custom
+  (git-commit-use-local-message-ring t))
 
 (with-packages (magit projectile)
   ;; See https://gitlab.com/edvorg/req-package/issues/60

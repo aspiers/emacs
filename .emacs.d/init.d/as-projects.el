@@ -32,7 +32,9 @@
 
   ;; https://github.com/bbatsov/projectile/issues/496
   (projectile-mode)
-  (setq projectile-switch-project-action 'as-projectile-switch-project))
+
+  :custom
+  (projectile-switch-project-action 'as-projectile-switch-project))
 
 (with-packages (projectile as-editing)
   (require 'as-editing) ;; for as-copy-previous-line-suffix
@@ -69,8 +71,8 @@ an existing magit status buffer if it exists, to save rebuilding it."
   (setq counsel-projectile-preview-buffers t))
 
 (with-packages (projectile selectrum)
-  :config
-  (setq projectile-completion-system 'default))
+  :custom
+  (projectile-completion-system 'default))
 
 (use-package helm-projectile
   :defer 10)

@@ -23,7 +23,7 @@
               ("C-c C-x C-S-i" . 'org-pomodoro)
               :map org-agenda-mode-map
               ("P" . 'org-pomodoro))
-  :config
+  :custom
   ;; Test sounds with:
   ;;   (org-pomodoro-play-sound :start)
   ;;   (org-pomodoro-play-sound :pomodoro)  ;; pomodoro finished
@@ -32,13 +32,13 @@
   ;;   (org-pomodoro-play-sound :short-break)
   ;;   (org-pomodoro-play-sound :long-break)
   ;;   (org-pomodoro-play-sound :tick)
-  (setq org-pomodoro-audio-player "mplayer"
-        org-pomodoro-finished-sound-args "-volume 40"
-        org-pomodoro-overtime-sound "/usr/share/sounds/workrave/default/daily-limit.wav"
-        org-pomodoro-short-break-sound "/usr/share/sounds/workrave/default/micro-break-started.wav"
-        org-pomodoro-finished-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
-        org-pomodoro-long-break-sound "/usr/share/sounds/workrave/default/rest-break-started.wav"
-        org-pomodoro-killed-sound "/usr/share/sounds/workrave/default/break-ignored.wav"))
+  (org-pomodoro-audio-player "mplayer")
+  (org-pomodoro-finished-sound-args "-volume 40")
+  (org-pomodoro-overtime-sound "/usr/share/sounds/workrave/default/daily-limit.wav")
+  (org-pomodoro-short-break-sound "/usr/share/sounds/workrave/default/micro-break-started.wav")
+  (org-pomodoro-finished-sound "/usr/share/sounds/workrave/default/rest-break-started.wav")
+  (org-pomodoro-long-break-sound "/usr/share/sounds/workrave/default/rest-break-started.wav")
+  (org-pomodoro-killed-sound "/usr/share/sounds/workrave/default/break-ignored.wav"))
 
 ;; Unmaintained fork of org-habit; unfortunately breaks org-agenda:
 ;; https://github.com/myshevchuk/org-habit-plus/issues/4

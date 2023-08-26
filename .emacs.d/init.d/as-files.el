@@ -89,8 +89,9 @@ has one."
 (use-package file-info
   :straight (:host github :repo "artawower/file-info.el")
   :bind (("C-c M-n" . 'file-info-show))
+  :custom
+  (hydra-hint-display-type 'posframe)
   :config
-  (setq hydra-hint-display-type 'posframe)
   (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
                                                :internal-border-width 2
                                                :internal-border-color "#61AFEF"

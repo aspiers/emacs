@@ -64,8 +64,8 @@ filter matches."
            (t                                        '(literal regexp initialism))))))
 
 (use-package prescient
-  :config
-  (setq prescient-filter-method 'as/prescient-filter-method))
+  :custom
+  (prescient-filter-method 'as/prescient-filter-method))
 
 (use-package selectrum-prescient
   :config
@@ -84,28 +84,30 @@ filter matches."
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode)
 
+  :custom
   ;; Prefer richer, more heavy, annotations over the lighter default variant.
   ;; E.g. M-x will show the documentation string additional to the keybinding.
   ;; By default only the keybinding is shown as annotation.
   ;; Note that there is the command `marginalia-cycle-annotators` to
   ;; switch between the annotators.
-  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light)))
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light)))
 
 ;; (use-package ivy
 ;;   :after prescient
 ;; 
-;;   :config
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq enable-recursive-minibuffers t)
+;;   :custom
+;;   (ivy-use-virtual-buffers t)
+;;   (enable-recursive-minibuffers t)
 ;;   ;; https://github.com/abo-abo/swiper/issues/2620#issuecomment-645665878
 ;;   ;; suggests to use M-: (ivy-state-caller ivy-last) to figure out the keys
 ;;   ;; in this alist.
-;;   (setq ivy-re-builders-alist
-;;         '((swiper . ivy--regex)
-;;           (swiper-isearch . ivy--regex)
-;;           (counsel-git-grep . ivy--regex-plus)
-;;           (t . ivy--regex-fuzzy)))
+;;   (ivy-re-builders-alist
+;;     '((swiper . ivy--regex)
+;;       (swiper-isearch . ivy--regex)
+;;       (counsel-git-grep . ivy--regex-plus)
+;;       (t . ivy--regex-fuzzy)))
 ;; 
+;;   :config
 ;;   (defun ivy-show-context ()
 ;;     "Output a messaging with some helpful information about how ivy
 ;; has built the current list of completion matches."
@@ -188,9 +190,8 @@ filter matches."
   (fset 'multi-occur #'consult-line-multi)
 
   ;; Configure other variables and modes in the :config section, after lazily loading the package
-  :config
-
-  (setq consult-narrow-key "<"))
+  :custom
+  (consult-narrow-key "<"))
 
 (with-packages (consult projectile)
   :config
