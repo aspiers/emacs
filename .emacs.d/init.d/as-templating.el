@@ -10,33 +10,6 @@
 
 (use-package yasnippet-snippets)
 
-;;{{{ tempo
-
-(defvar tempo-initial-pos nil
-  "Initial position in template after expansion")
-
-;; FIXME: this should be done using tempo-user-elements, not defadvice.
-(defadvice tempo-insert (around tempo-insert-pos act)
-  "Define initial position."
-  (if (eq element '~)
-      (setq tempo-initial-pos (point-marker))
-    ad-do-it))
-
-(defadvice tempo-insert-template (around tempo-insert-template-pos act)
-  "Set initial position when defined.  ChristophConrad"
-  (setq tempo-initial-pos nil)
-  ad-do-it
-  (if tempo-initial-pos
-      (progn
-        (put template 'no-self-insert t)
-        (goto-char tempo-initial-pos))
-    (put template 'no-self-insert nil)))
-
-(defadvice tempo-define-template (after no-self-insert-in-abbrevs activate)
-  "Skip self-insert if template function is called by an abbrev."
-  (put (intern (concat "tempo-template-" (ad-get-arg 0))) 'no-self-insert t))
-
-;;}}}
 ;;{{{ msf-abbrev
 
 (autoload 'msf-abbrev-mode "msf-abbrev" nil t)
