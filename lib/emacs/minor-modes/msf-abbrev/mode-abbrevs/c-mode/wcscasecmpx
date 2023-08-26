@@ -1,1 +1,0 @@
-wcscasecmp(<field "const wchar_t *WS1">, <field "const wchar_T *WS2">)<endpoint>

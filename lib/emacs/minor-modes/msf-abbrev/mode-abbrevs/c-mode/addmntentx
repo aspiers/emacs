@@ -1,1 +1,0 @@
-addmntent(<field "FILE *STREAM">, <field "const struct mntent *MNT">)<endpoint>

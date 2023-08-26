@@ -1,1 +1,0 @@
-strtok(<field "char *restrict s1">, <field "const char *restrict s2">)

@@ -1,1 +1,0 @@
-makecontext(<field "ucontext_t *UCP">, <field "void(">, <field "*FUNC">, <field ")(">, <field "VOID">, <field ")">, <field "int ARGC">, <field "...">)<endpoint>

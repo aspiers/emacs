@@ -1,1 +1,0 @@
-vasprintf(<field "char **PTR">, <field "const char *TEMPLATE">, <field "va_list AP">)<endpoint>

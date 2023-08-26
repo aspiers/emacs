@@ -1,1 +1,0 @@
-fputs(<field "const char *restrict s">, <field "FILE *restrict stream">)

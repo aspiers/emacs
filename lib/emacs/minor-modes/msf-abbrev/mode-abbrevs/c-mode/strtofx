@@ -1,1 +1,0 @@
-strtof(<field "const char *restrict s">, <field "char **restrict endptr">)

@@ -1,1 +1,0 @@
-mount(<field "const char *SPECIAL_FILE">, <field "const char *DIR">, <field "const char *FSTYPE">, <field "unsigned long int OPTIONS">, <field "const void *DATA">)<endpoint>

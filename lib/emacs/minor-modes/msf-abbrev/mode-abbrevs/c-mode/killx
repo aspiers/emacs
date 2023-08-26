@@ -1,1 +1,0 @@
-kill(<field "pid_t PID">, <field "int SIGNUM">)<endpoint>

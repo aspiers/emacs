@@ -1,1 +1,0 @@
-setsockopt(<field "int SOCKET">, <field "int LEVEL">, <field "int OPTNAME">, <field "void *OPTVAL">, <field "socklen_t OPTLEN">)<endpoint>

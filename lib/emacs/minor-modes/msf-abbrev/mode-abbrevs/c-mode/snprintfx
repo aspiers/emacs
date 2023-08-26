@@ -1,1 +1,0 @@
-snprintf(<field "char *restrict s">, <field "size_t n">, <field "const char *restrict format">, <field "...">)

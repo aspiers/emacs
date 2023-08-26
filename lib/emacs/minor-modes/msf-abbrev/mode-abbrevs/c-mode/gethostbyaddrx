@@ -1,1 +1,0 @@
-gethostbyaddr(<field "const char *ADDR">, <field "size_t LENGTH">, <field "int FORMAT">)<endpoint>

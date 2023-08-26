@@ -1,1 +1,0 @@
-stpncpy(<field "char *restrict TO">, <field "const char *restrict FROM">, <field "size_t SIZE">)<endpoint>

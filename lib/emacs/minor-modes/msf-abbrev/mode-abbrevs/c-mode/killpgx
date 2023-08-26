@@ -1,1 +1,0 @@
-killpg(<field "int PGID">, <field "int SIGNUM">)<endpoint>

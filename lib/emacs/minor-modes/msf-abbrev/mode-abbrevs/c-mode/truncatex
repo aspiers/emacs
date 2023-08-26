@@ -1,1 +1,0 @@
-truncate(<field "const char *FILENAME">, <field "off_t LENGTH">)<endpoint>

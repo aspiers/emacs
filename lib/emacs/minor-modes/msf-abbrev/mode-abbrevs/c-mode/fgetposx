@@ -1,1 +1,0 @@
-fgetpos(<field "FILE *restrict stream">, <field "fpos_t *restrict pos">)

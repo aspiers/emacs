@@ -1,1 +1,0 @@
-wmemmove(<field "wchar *WTO">, <field "const wchar_t *WFROM">, <field "size_t SIZE">)<endpoint>

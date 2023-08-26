@@ -1,1 +1,0 @@
-wcscat(<field "wchar_t *restrict WTO">, <field "const wchar_t *restrict WFROM">)<endpoint>

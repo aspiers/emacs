@@ -1,1 +1,0 @@
-setregid(<field "gid_t RGID">, <field "gid_t EGID">)<endpoint>

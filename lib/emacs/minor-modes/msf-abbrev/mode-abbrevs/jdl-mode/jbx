@@ -1,3 +1,0 @@
-class <field "myjob">(Job):
-
-    def job_started_event(self):

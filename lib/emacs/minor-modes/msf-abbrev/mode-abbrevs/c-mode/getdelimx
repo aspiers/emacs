@@ -1,1 +1,0 @@
-getdelim(<field "char **LINEPTR">, <field "size_t *N">, <field "int DELIMITER">, <field "FILE *STREAM">)<endpoint>

@@ -1,1 +1,0 @@
-adjtime(<field "const struct timeval *DELTA">, <field "struct timeval *OLDDELTA">)<endpoint>

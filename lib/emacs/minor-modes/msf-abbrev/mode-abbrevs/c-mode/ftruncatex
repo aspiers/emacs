@@ -1,1 +1,0 @@
-ftruncate(<field "int FD">, <field "off_t LENGTH">)<endpoint>

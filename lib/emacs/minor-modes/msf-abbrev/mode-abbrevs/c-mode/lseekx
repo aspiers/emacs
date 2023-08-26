@@ -1,1 +1,0 @@
-lseek(<field "int FILEDES">, <field "off_t OFFSET">, <field "int WHENCE">)<endpoint>

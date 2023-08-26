@@ -1,1 +1,0 @@
-tcflush(<field "int FILEDES">, <field "int QUEUE">)<endpoint>

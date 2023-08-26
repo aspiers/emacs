@@ -1,1 +1,0 @@
-vsprintf(<field "char *restrict s">, <field "const char *restrict format">, <field "va_list ap">)

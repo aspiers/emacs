@@ -1,1 +1,0 @@
-wcsncasecmp(<field "const wchar_t *WS1">, <field "const wchar_t *S2">, <field "size_t N">)<endpoint>

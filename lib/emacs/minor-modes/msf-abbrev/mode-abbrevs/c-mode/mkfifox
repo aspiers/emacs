@@ -1,1 +1,0 @@
-mkfifo(<field "const char *FILENAME">, <field "mode_t MODE">)<endpoint>

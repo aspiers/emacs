@@ -1,2 +1,0 @@
-int MPI_Irecv(<field "void *buf">, <field "int count">, MPI_CHAR, <field "int source">,
-              <field "int tag">, MPI_COMM_WORLD, <field "MPI_Request *request">)

@@ -1,1 +1,0 @@
-sigprocmask(<field "int HOW">, <field "const sigset_t *restrict SET">, <field "sigset_t *restrict OLDSET">)<endpoint>

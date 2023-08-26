@@ -1,4 +1,0 @@
-std::set_intersection(<QUERY "container1: ">.begin(), <QUERY "container1: ">.end(),
-                      <QUERY "container2: ">.begin(), <QUERY "container2: ">.end(),
-                      std::inserter(<QUERY "result container: ">,
-                                    <QUERY "result container: ">.begin()));

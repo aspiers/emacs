@@ -1,1 +1,0 @@
-updwtmp(<field "const char *WTMP_FILE">, <field "const struct utmp *UTMP">)<endpoint>

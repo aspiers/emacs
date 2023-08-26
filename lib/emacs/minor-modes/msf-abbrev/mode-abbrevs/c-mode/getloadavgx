@@ -1,1 +1,0 @@
-getloadavg(<field "double LOADAVG[]">, <field "int NELEM">)<endpoint>

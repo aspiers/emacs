@@ -1,1 +1,0 @@
-getline(<field "char **LINEPTR">, <field "size_t *N">, <field "FILE *STREAM">)<endpoint>

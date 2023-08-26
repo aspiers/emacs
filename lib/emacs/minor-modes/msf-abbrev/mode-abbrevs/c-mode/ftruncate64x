@@ -1,1 +1,0 @@
-ftruncate64(<field "int ID">, <field "off64_t LENGTH">)<endpoint>

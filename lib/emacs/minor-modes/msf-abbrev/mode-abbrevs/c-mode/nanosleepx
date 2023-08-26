@@ -1,1 +1,0 @@
-nanosleep(<field "const struct timespec *REQUESTED_TIME">, <field "struct timespec *REMAINING">)<endpoint>

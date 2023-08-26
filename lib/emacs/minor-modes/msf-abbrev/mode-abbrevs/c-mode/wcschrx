@@ -1,1 +1,0 @@
-wcschr(<field "const wchar_t *WSTRING">, <field "int WC">)<endpoint>

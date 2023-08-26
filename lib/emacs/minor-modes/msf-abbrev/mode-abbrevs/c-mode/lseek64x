@@ -1,1 +1,0 @@
-lseek64(<field "int FILEDES">, <field "off64_t OFFSET">, <field "int WHENCE">)<endpoint>

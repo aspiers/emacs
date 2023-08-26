@@ -1,1 +1,0 @@
-ftw(<field "const char *FILENAME">, <field "__ftw_func_t FUNC">, <field "int DESCRIPTORS">)<endpoint>

@@ -1,3 +1,0 @@
-for (<QUERY "Loop iterator: "> = 0; <QUERY "Loop iterator: "> < <QUERY "Loop max: ">; <QUERY "Loop iterator: ">++) {
-    <cursor>
-}

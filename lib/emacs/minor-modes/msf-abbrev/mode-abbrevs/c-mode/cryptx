@@ -1,1 +1,0 @@
-crypt(<field "const char *KEY">, <field "const char *SALT">)<endpoint>

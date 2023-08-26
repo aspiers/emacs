@@ -1,1 +1,0 @@
-vscanf(<field "const char *restrict format">, <field "va_list ap">)

@@ -1,1 +1,0 @@
-sigwait(<field "const sigset_t *SET">, <field "int *SIG">)<endpoint>

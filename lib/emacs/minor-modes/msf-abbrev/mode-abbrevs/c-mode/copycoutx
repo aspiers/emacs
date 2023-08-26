@@ -1,1 +1,0 @@
-std::copy(<QUERY "container variable name: ">.begin(), <QUERY "container variable name: ">.end(), ostream_iterator<<QUERY "datatype: ">>(cout, " "))

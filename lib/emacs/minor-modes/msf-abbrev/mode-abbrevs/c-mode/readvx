@@ -1,1 +1,0 @@
-readv(<field "int FILEDES">, <field "const struct iovec *VECTOR">, <field "int COUNT">)<endpoint>

@@ -1,3 +1,0 @@
-<field link="constraint" "constraint"> = AndConstraint()
-<linked "constraint">.add(<field "c1">)
-<linked "constraint">.add(<field "c2">)

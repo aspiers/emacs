@@ -1,5 +1,0 @@
-#ifdef OLD_SSTREAM
-#include <strstream.h>
-#else
-#include <sstream>
-#endif

@@ -1,1 +1,0 @@
-wcstok(<field "wchar_t *NEWSTRING">, <field "const char *DELIMITERS">)<endpoint>

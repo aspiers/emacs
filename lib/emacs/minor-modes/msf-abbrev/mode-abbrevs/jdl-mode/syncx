@@ -1,2 +1,0 @@
-<field link="method" "method"> = \
-    synchronize.make_synchronized(<linked "method">)

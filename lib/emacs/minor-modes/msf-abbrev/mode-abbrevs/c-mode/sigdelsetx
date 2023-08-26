@@ -1,1 +1,0 @@
-sigdelset(<field "sigset_t *SET">, <field "int SIGNUM">)<endpoint>

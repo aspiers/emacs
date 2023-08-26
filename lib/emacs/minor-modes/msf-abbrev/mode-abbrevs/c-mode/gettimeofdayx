@@ -1,1 +1,0 @@
-gettimeofday(<field "struct timeval *TP">, <field "struct timezone *TZP">)<endpoint>

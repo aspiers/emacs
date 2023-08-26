@@ -1,3 +1,0 @@
-try {
-    Thread.sleep(<field "milliseconds">);
-} catch(InterruptedException ignored) {}

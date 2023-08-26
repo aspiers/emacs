@@ -1,1 +1,0 @@
-getgroups(<field "int COUNT">, <field "gid_t *GROUPS">)<endpoint>

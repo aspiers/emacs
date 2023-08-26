@@ -1,1 +1,0 @@
-fnmatch(<field "const char *PATTERN">, <field "const char *STRING">, <field "int FLAGS">)<endpoint>

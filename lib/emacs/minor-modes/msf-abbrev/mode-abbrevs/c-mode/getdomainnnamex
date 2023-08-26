@@ -1,1 +1,0 @@
-getdomainnname(<field "char *NAME">, <field "size_t LENGTH">)<endpoint>

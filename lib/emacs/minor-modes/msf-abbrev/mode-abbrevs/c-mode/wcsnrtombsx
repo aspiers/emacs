@@ -1,1 +1,0 @@
-wcsnrtombs(<field "char *restrict DST">, <field "const wchar_t **restrict SRC">, <field "size_t NWC">, <field "size_t LEN">, <field "mbstate_t *restrict PS">)<endpoint>

@@ -1,1 +1,0 @@
-lstat64(<field "const char *FILENAME">, <field "struct stat64 *BUF">)<endpoint>

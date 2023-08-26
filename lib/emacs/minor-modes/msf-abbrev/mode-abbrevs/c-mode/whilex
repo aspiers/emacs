@@ -1,3 +1,0 @@
-while (<field "condition">) {
-    <endpoint>
-}

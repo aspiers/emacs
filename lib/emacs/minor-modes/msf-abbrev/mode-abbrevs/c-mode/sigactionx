@@ -1,1 +1,0 @@
-sigaction(<field "int SIGNUM">, <field "const struct sigaction *restrict ACTION">, <field "struct sigaction *restrict OLD-ACTION">)<endpoint>

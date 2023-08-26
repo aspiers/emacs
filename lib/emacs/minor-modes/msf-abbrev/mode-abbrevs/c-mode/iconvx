@@ -1,1 +1,0 @@
-iconv(<field "iconv_t CD">, <field "char **INBUF">, <field "size_t *INBYTESLEFT">, <field "char **OUTBUF">, <field "size_t *OUTBYTESLEFT">)<endpoint>

@@ -1,1 +1,0 @@
-mremap(<field "void *ADDRESS">, <field "size_t LENGTH">, <field "size_t NEW_LENGTH">, <field "int FLAG">)<endpoint>

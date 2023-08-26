@@ -1,1 +1,0 @@
-sigstack(<field "const struct sigstack *STACK">, <field "struct sigstack *OLDSTACK">)<endpoint>

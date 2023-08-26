@@ -1,1 +1,0 @@
-getutmp(<field "const struct utmpx *utmpx">, <field "struct utmp *utmp">)<endpoint>

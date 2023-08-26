@@ -1,1 +1,0 @@
-wordexp(<field "const char *WORDS">, <field "wordexp_t *WORD-VECTOR-PTR">, <field "int FLAGS">)<endpoint>

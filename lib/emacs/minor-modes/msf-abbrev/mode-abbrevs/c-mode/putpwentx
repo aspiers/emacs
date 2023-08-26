@@ -1,1 +1,0 @@
-putpwent(<field "const struct passwd *P">, <field "FILE *STREAM">)<endpoint>

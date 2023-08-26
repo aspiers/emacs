@@ -1,1 +1,0 @@
-wcsrchr(<field "const wchar_t *WSTRING">, <field "wchar_t C">)<endpoint>

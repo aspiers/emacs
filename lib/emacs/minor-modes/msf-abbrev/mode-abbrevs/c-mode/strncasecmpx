@@ -1,1 +1,0 @@
-strncasecmp(<field "const char *S1">, <field "const char *S2">, <field "size_t N">)<endpoint>

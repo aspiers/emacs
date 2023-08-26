@@ -1,1 +1,0 @@
-strchr(<field "const char *s">, <field "int c">)

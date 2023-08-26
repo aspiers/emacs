@@ -1,1 +1,0 @@
-sendmsg(<field "int SOCKET">, <field "const struct msghdr *MESSAGE">, <field "int FLAGS">)<endpoint>

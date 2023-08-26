@@ -1,1 +1,0 @@
-gethostbyname2(<field "const char *NAME">, <field "int AF">)<endpoint>

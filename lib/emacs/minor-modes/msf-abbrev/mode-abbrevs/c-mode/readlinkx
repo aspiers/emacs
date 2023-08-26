@@ -1,1 +1,0 @@
-readlink(<field "const char *FILENAME">, <field "char *BUFFER">, <field "size_t SIZE">)<endpoint>

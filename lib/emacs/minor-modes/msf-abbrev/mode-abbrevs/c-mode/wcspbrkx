@@ -1,1 +1,0 @@
-wcspbrk(<field "const wchar_t *WSTRING">, <field "const wchar_t *STOPSET">)<endpoint>

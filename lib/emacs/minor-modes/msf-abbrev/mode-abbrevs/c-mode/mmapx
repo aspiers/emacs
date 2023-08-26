@@ -1,1 +1,0 @@
-mmap(<field "void *ADDRESS">, <field "size_t LENGTH">, <field "int PROTECT">, <field "int FLAGS">, <field "int FILEDES">, <field "off_t OFFSET">)<endpoint>

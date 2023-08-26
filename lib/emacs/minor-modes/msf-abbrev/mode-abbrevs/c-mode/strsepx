@@ -1,1 +1,0 @@
-strsep(<field "char **STRING_PTR">, <field "const char *DELIMITER">)<endpoint>

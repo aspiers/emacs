@@ -1,1 +1,0 @@
-wcstold(<field "const wchar_t *STRING">, <field "wchar_t **TAILPTR">)<endpoint>

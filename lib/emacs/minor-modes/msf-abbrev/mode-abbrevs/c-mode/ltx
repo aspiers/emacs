@@ -1,4 +1,0 @@
-bool operator<(const ITEM & i) const
-{
-    ;
-}

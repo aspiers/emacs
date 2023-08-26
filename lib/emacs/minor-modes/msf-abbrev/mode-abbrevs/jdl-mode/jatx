@@ -1,1 +1,0 @@
-        self.setFact("job.autoterminate", <field "False">)

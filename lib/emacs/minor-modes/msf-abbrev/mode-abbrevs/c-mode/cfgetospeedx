@@ -1,1 +1,0 @@
-cfgetospeed(<field "const struct termios *TERMIOS-P">)<endpoint>

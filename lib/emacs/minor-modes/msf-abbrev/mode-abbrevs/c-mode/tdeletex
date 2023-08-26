@@ -1,1 +1,0 @@
-tdelete(<field "const void *KEY">, <field "void **ROOTP">, <field "comparison_fn_t COMPAR">)<endpoint>

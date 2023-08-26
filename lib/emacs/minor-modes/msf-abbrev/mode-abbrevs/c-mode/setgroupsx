@@ -1,1 +1,0 @@
-setgroups(<field "size_t COUNT">, <field "gid_t *GROUPS">)<endpoint>

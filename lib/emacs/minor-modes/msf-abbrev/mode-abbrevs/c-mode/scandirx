@@ -1,1 +1,0 @@
-scandir(<field "const char *DIR">, <field "struct dirent ***NAMELIST">, <field "int(">, <field "*SELECTOR">, <field ")(">, <field "CONST">, <field "STRUCT">, <field "DIRENT">, <field "*">, <field ")">, <field "int(">, <field "*CMP">, <field ")(">, <field "CONST">, <field "VOID">, <field "*">, <field " ">, <field "CONST">, <field "VOID">, <field "*">, <field ")">)<endpoint>

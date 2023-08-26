@@ -1,1 +1,0 @@
-sigaltstack(<field "const stack_t *restrict STACK">, <field "stack_t *restrict OLDSTACK">)<endpoint>

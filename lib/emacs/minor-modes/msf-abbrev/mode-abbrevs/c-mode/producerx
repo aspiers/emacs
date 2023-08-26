@@ -1,5 +1,0 @@
-# Produce one item
-cv.acquire()
-make_an_item_available()
-cv.notify()
-cv.release()

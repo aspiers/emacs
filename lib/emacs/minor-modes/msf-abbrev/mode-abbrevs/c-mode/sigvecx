@@ -1,1 +1,0 @@
-sigvec(<field "int SIGNUM">, <field "const struct sigvec *ACTION">, <field "struct sigvec *OLD-ACTION">)<endpoint>

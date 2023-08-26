@@ -1,1 +1,0 @@
-asprintf(<field "char **PTR">, <field "const char *TEMPLATE">, <field "...">)<endpoint>

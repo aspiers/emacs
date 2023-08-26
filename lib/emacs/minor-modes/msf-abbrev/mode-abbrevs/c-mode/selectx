@@ -1,1 +1,0 @@
-select(<field "int NFDS">, <field "fd_set *READ-FDS">, <field "fd_set *WRITE-FDS">, <field "fd_set *EXCEPT-FDS">, <field "struct timeval *TIMEOUT">)<endpoint>

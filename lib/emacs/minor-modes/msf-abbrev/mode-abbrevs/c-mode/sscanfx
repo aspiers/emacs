@@ -1,1 +1,0 @@
-sscanf(<field "const char *restrict s">, <field "const char *restrict format">, <field "...">)

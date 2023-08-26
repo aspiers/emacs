@@ -1,3 +1,0 @@
-<field link="constraint" "constraint"> = EqConstraint()
-<linked "constraint">.setFact(<field "fact">)
-<linked "constraint">.setValue(<field "value">)

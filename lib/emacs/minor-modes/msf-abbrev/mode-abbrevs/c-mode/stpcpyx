@@ -1,1 +1,0 @@
-stpcpy(<field "char *restrict TO">, <field "const char *restrict FROM">)<endpoint>
