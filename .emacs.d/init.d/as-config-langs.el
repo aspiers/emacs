@@ -14,7 +14,7 @@
   :mode ("\\.Xresources$"   . xrdb-mode)
   :mode (".*\\.ad$"         . xrdb-mode)
   :mode (".*\\.x?rdb$"      . xrdb-mode)
-  :config
-  (add-hook 'xrdb-mode-hook (lambda () (setq comment-start "! "))))
+  :hook
+  (xrdb-mode . (lambda () (setq comment-start "! "))))
 
 (provide 'as-config-langs)
