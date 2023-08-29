@@ -11,8 +11,8 @@
   )
 
 (with-packages (solidity-mode solidity-flycheck)
-  :hook
-  (solidity-mode . flycheck-mode))
+  :config
+  (add-hook 'solidity-mode-hook 'flycheck-mode))
 
 (use-package company-solidity)
 
