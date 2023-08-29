@@ -5,16 +5,17 @@ single space, and that \"> \" quoting prefixes are replaced with
 \">\".  Operates on the current region if active, otherwise on
 the whole buffer."
   (interactive)
-  (let ((start (if (use-region-p) (region-beginning) (point-min)))
-        (end (if (use-region-p) (region-end) (point-max))))
+  (let ((start (if (use-region-p) (copy-marker (region-beginning)) (point-min-marker)))
+        (end (if (use-region-p) (copy-marker (region-end)) (point-max-marker))))
     (save-excursion
       (goto-char start)
       ;; Ensure appropriate lines end with a space
-      (while (re-search-forward "^\\(>+ ?\\)?\\S-.\\{10,\\}\\S-$" end t)
+      (while (re-search-forward "^\\(>+ ?\\)?\\S-.\\{10,\\}\\S-$"
+                                (marker-position end) t)
         (replace-match "\\& " t))
 
       ;; Replace "> " quoting prefixes with ">"
-      (goto-char start)
+      (goto-char (marker-position start))
       (let ((eol)
             (eolm (make-marker)))
         (while (setq eol (re-search-forward "^>.*" end t))
