@@ -94,6 +94,16 @@
   (back-button-mode 1)
   :diminish)
 
+(use-package jump-char
+  :bind
+  (("M-m" . jump-char-forward)
+   ("M-M" . jump-char-backward)))
+
+(use-package mwim
+  :bind
+  (("C-a" . mwim-beginning-of-code-or-line)
+   ("C-e" . mwim-end-of-code-or-line)))
+
 ;; Doesn't seem to work?
 ;; https://todo.sr.ht/~iank/visible-mark/1
 ;; (use-package visible-mark
