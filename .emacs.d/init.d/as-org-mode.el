@@ -21,14 +21,6 @@
 
   :config
 
-  ;; Refresh agendas if any agenda file reverts due to the underlying
-  ;; file on disk changing.
-  ;;
-  ;; Adapted from https://www.reddit.com/r/orgmode/comments/mu6n5b/comment/gv7yxul/
-  (defadvice revert-buffer (after refresh-org-agenda-on-revert activate)
-    (if (member (buffer-file-name (current-buffer)) org-agenda-files)
-        (org-agenda-redo-all t)))
-
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
 
   (defun org-clock-in-daily-review ()
@@ -119,8 +111,6 @@
               (("C-c C-S-t" . epoch-todo))
               :map org-agenda-mode-map
               (("C-c C-S-t" . epoch-agenda-todo))))
-
-(use-package org-super-agenda)
 
 (use-package org-modern
   :after org
