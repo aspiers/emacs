@@ -46,6 +46,10 @@
   ;; (setq search-default-mode #'char-fold-to-regexp)
   )
 
+;; C-o in ivy mode (e.g. in swiper) gives this super helpful hydra
+(use-package ivy-hydra
+  :after swiper)
+
 (use-package rg
   :chords ("zr" . rg)
   :chords ("ZR" . rg-dwim)
