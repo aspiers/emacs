@@ -2,6 +2,10 @@
 
 me=`basename $0`
 
+log () {
+    echo "`date` $me: $*" >> ~/.log/$me.log 2>&1
+}
+
 if [ -z "$DISPLAY" ]; then
     echo "$me: Need \$DISPLAY set for $me to work; aborting." >&2
     sleep 1 # ensure we see the message if we're in mutt
@@ -19,8 +23,7 @@ fi
 : use quick-emacs at this point.
 xdotool set_desktop 0 # prefer first desktop
 focus-emacs-frame || exit $?
-echo "`date` $me: `current-window-id` / `current-window-name`" \
-     >> ~/.log/switch-emacs-eval.log 2>&1
+log "`current-window-id` / `current-window-name`"
 
 code="$1"
 shift
