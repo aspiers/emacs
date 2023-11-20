@@ -28,4 +28,21 @@ log "`current-window-id` / `current-window-name`"
 code="$1"
 shift
 
-emacsclient --quiet --no-wait --eval "(load \"$code\")" "$@"
+if [ -f "$code" ]; then
+    echo >&2 "Will eval file $code"
+    code="(load \"$code\")"
+fi
+
+if [[ $# -gt 0 ]]; then
+    # Escape double quotes
+    escaped_args=("${@//\"/\\\"}")
+
+    # Surround each arg with double quotes
+    quoted_args=("${escaped_args[@]/#*/\"&\"}")
+
+    code="(progn (setq emacsclient-args '(${quoted_args[@]})) $code)"
+fi
+
+log "$code"
+
+emacsclient --quiet --no-wait --eval "$code"
