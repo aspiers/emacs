@@ -1,11 +1,21 @@
 ;;;###autoload
-(defun as-org-switch-to-agenda-buffer ()
-  "Switch to an existing *Org Agenda(d)* buffer, otherwise run
-`org-agenda' with Adam's custom day view."
+(defun as-org-switch-to-agenda-buffer (&optional mode redisplay)
+  "Switch to an existing *Org Agenda(%s)* buffer, otherwise run
+`org-agenda' to generate that buffer and then switch to it."
   (interactive)
-  (if (get-buffer "*Org Agenda(d)*")
-      (switch-to-buffer "*Org Agenda(d)*")
-    (org-agenda nil "d")))
+  (setq mode (or mode "a"))
+  (let ((buf (format "*Org Agenda(%s)*" mode)))
+    (cond ((get-buffer buf)
+           (switch-to-buffer buf))
+          (t
+           (message "Loading %s..." buf)
+           (org-agenda nil mode)
+           (message "Loading %s...done" buf)))
+    (when redisplay
+      (message "Refreshing %s..." buf)
+      (redisplay)
+      (org-agenda-redo-all)
+      (message "Refreshing %s...done" buf))))
 
 ;;;###autoload
 (defun as-org-agenda-skip-select-category-function (category-to-select)

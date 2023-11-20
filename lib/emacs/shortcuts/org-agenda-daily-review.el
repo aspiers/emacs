@@ -1,4 +1,1 @@
-(progn
-  (as-org-switch-to-agenda-buffer)
-  (redisplay)
-  (org-agenda-redo-all))
+(as-org-switch-to-agenda-buffer (car emacsclient-args) t)
