@@ -96,8 +96,8 @@
 
 (use-package jump-char
   :bind
-  (("M-m" . jump-char-forward)
-   ("M-M" . jump-char-backward)))
+  (("M-'" . jump-char-forward)
+   ("C-M-'" . jump-char-backward)))
 
 (use-package mwim
   :custom
