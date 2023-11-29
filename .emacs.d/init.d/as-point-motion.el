@@ -100,9 +100,16 @@
    ("M-M" . jump-char-backward)))
 
 (use-package mwim
+  :custom
+  (mwim-beginning-position-functions
+   '(mwim-line-beginning mwim-block-beginning mwim-code-beginning
+                         mwim-comment-beginning))
+  (mwim-end-position-functions
+   '(mwim-line-end mwim-block-end mwim-code-end))
+
   :bind
-  (("C-a" . mwim-beginning-of-code-or-line)
-   ("C-e" . mwim-end-of-code-or-line)))
+  (("C-a" . mwim-beginning)
+   ("C-e" . mwim-end)))
 
 ;; Doesn't seem to work?
 ;; https://todo.sr.ht/~iank/visible-mark/1
