@@ -1,19 +1,8 @@
 (use-package org
   :bind
-  (("M-o a" . org-agenda)
+  (
    ("M-o c" . org-capture)
-   ("M-S-a" . as-org-switch-to-agenda-buffer) ;; X11 only
-   ("M-o b" . as-org-switch-to-agenda-buffer)
-   ("M-o M-o" . as-org-jump-clock-or-agenda)
-
-   ("C-c C-x C-j" . org-clock-goto)
-   ("M-o r" . org-clock-in-daily-review)
-
-   ;; Try to use C-c c but keeping this for backwards compatability with
-   ;; my brain.
    ("C-c c" . org-capture)
-
-   ("C-c C-?" . org-occur-in-agenda-files)
 
    :map org-mode-map
    (("C-c C-S-w r" . org-refile-reverse)
