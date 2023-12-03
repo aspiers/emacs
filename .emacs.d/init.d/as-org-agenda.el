@@ -32,7 +32,8 @@
      ("r" . "reviews")
      ("d" "day agenda"
       ((agenda ""
-               ((org-agenda-ndays 1))))
+               ((org-agenda-span 1)
+                (org-deadline-warning-days 1))))
       ((org-agenda-compact-blocks t)
        (org-agenda-skip-function
         (lambda nil
@@ -50,7 +51,8 @@
                     (lambda nil
                       (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#[AB]\\]" 'scheduled)))))
        (agenda ""
-               ((org-agenda-ndays 3)))
+               ((org-agenda-span 3)
+                (org-deadline-warning-days 1)))
        (tags-todo "/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #B TODOs")
                    (org-agenda-skip-function
@@ -76,7 +78,19 @@
                   ((org-agenda-overriding-header "Unscheduled #C TODOs")
                    (org-agenda-skip-function
                     (lambda nil
-                      (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#C\\]" 'scheduled))))))
+                      (org-agenda-skip-entry-if 'notregexp
+   "\\=.*\\[#C\\]" 'scheduled)))))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #D TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if 'notregexp
+   "\\=.*\\[#D\\]" 'scheduled)))))
+       (tags-todo "/NEXT|STARTED"
+                  ((org-agenda-overriding-header "Unscheduled #E TODOs")
+                   (org-agenda-skip-function
+                    (lambda nil
+                      (org-agenda-skip-entry-if 'notregexp "\\=.*\\[#E\\]" 'scheduled))))))
       ((org-agenda-compact-blocks t))
       nil)
      ("b" "bandhand TODOs" alltodo ""
