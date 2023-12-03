@@ -18,19 +18,17 @@
       ("Midi" "")
       ("MidiAll" "")))
  '(LilyPond-pdf-command "okular")
- '(adaptive-fill-regexp "[ 	]\\{,10\\}\\([-!|#%;>*·•‣⁃◦]+[ 	]*\\)*")
+ '(adaptive-fill-regexp "[ \11]\\{,10\\}\\([-!|#%;>*·•‣⁃◦]+[ \11]*\\)*")
  '(ag-arguments '("--smart-case" "--stats" "--hidden"))
  '(align-dq-string-modes
    '(vhdl-mode emacs-lisp-mode lisp-interaction-mode lisp-mode scheme-mode c++-mode c-mode java-mode python-mode))
  '(align-exclude-rules-list
    '((exc-dq-string
-      (regexp . "\"\\([^\"
-]+\\)\"")
+      (regexp . "\"\\([^\"\12]+\\)\"")
       (repeat . t)
       (modes . align-dq-string-modes))
      (exc-sq-string
-      (regexp . "'\\([^'
-]+\\)'")
+      (regexp . "'\\([^'\12]+\\)'")
       (repeat . t)
       (modes . align-sq-string-modes))
      (exc-open-comment
@@ -38,8 +36,7 @@
               (end reverse)
               (funcall
                (if reverse 're-search-backward 're-search-forward)
-               (concat "[^ 	
-\\\\]"
+               (concat "[^ \11\12\\\\]"
                        (regexp-quote comment-start)
                        "\\(.+\\)$")
                end t))
@@ -49,8 +46,7 @@
       (repeat . t)
       (modes . align-c++-modes))
      (exc-c-func-params
-      (regexp . "(\\([^)
-]+\\))")
+      (regexp . "(\\([^)\12]+\\))")
       (repeat . t)
       (modes . align-c++-modes))
      (exc-c-macro
@@ -66,8 +62,7 @@
       (modes quote
              (org-mode)))
      (lisp-second-arg
-      (regexp . "\\(^\\s-+[^( 	
-]\\|(\\(\\S-+\\)\\s-+\\)\\S-+\\(\\s-+\\)")
+      (regexp . "\\(^\\s-+[^( \11\12]\\|(\\(\\S-+\\)\\s-+\\)\\S-+\\(\\s-+\\)")
       (group . 3)
       (modes . align-lisp-modes)
       (run-if lambda nil current-prefix-arg))
@@ -80,8 +75,7 @@
               (end reverse)
               (funcall
                (if reverse 're-search-backward 're-search-forward)
-               (concat "[^ 	
-\\\\]"
+               (concat "[^ \11\12\\\\]"
                        (regexp-quote comment-start)
                        "\\(.+\\)$")
                end t))
@@ -90,8 +84,7 @@
       (regexp . "^\\s-*#\\s-*define\\s-+\\S-+\\(\\s-+\\)")
       (modes . align-c++-modes))
      (c-variable-declaration
-      (regexp . "[*&0-9A-Za-z_]>?[&*]*\\(\\s-+[*&]*\\)[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|=[^=
-].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?\\s-*[;,]\\|)\\s-*$\\)")
+      (regexp . "[*&0-9A-Za-z_]>?[&*]*\\(\\s-+[*&]*\\)[A-Za-z_][0-9A-Za-z:_]*\\s-*\\(\\()\\|=[^=\12].*\\|(.*)\\|\\(\\[.*\\]\\)*\\)?\\s-*[;,]\\|)\\s-*$\\)")
       (group . 1)
       (modes . align-c++-modes)
       (justify . t)
@@ -117,43 +110,34 @@
                    (c-guess-basic-syntax))
                   'c))))))
      (c-assignment
-      (regexp . "[^-=!^&*+<>/| 	
-]\\(\\s-*[-=!^&*+<>/|]*\\)=\\(\\s-*\\)\\([^= 	
-]\\|$\\)")
+      (regexp . "[^-=!^&*+<>/| \11\12]\\(\\s-*[-=!^&*+<>/|]*\\)=\\(\\s-*\\)\\([^= \11\12]\\|$\\)")
       (group 1 2)
       (modes . align-c++-modes)
       (justify . t)
       (tab-stop))
      (perl-assignment
-      (regexp . "[^=!^&*-+<>/| 	
-]\\(\\s-*\\)=[~>]?\\(\\s-*\\)\\([^>= 	
-]\\|$\\)")
+      (regexp . "[^=!^&*-+<>/| \11\12]\\(\\s-*\\)=[~>]?\\(\\s-*\\)\\([^>= \11\12]\\|$\\)")
       (group 1 2)
       (modes . align-perl-modes)
       (tab-stop))
      (python-assignment
-      (regexp . "[^=!<> 	
-]\\(\\s-*\\)=\\(\\s-*\\)\\([^>= 	
-]\\|$\\)")
+      (regexp . "[^=!<> \11\12]\\(\\s-*\\)=\\(\\s-*\\)\\([^>= \11\12]\\|$\\)")
       (group 1 2)
       (modes . align-python-modes)
       (tab-stop))
      (make-assignment
-      (regexp . "^\\s-*\\w+\\(\\s-*\\):?=\\(\\s-*\\)\\([^	
- \\\\]\\|$\\)")
+      (regexp . "^\\s-*\\w+\\(\\s-*\\):?=\\(\\s-*\\)\\([^\11\12 \\\\]\\|$\\)")
       (group 1 2)
       (modes quote
              (makefile-mode))
       (tab-stop))
      (c-comma-delimiter
-      (regexp . ",\\(\\s-*\\)[^/ 	
-]")
+      (regexp . ",\\(\\s-*\\)[^/ \11\12]")
       (repeat . t)
       (modes . align-c++-modes)
       (run-if lambda nil current-prefix-arg))
      (basic-comma-delimiter
-      (regexp . ",\\(\\s-*\\)[^# 	
-]")
+      (regexp . ",\\(\\s-*\\)[^# \11\12]")
       (repeat . t)
       (modes append align-perl-modes
              '(python-mode))
@@ -220,7 +204,7 @@
       (regexp . "\\(\\s-*\\)\\\\\\\\")
       (modes . align-tex-modes))
      (text-column
-      (regexp . "\\(^\\|\\S-\\)\\([ 	]+\\)\\(\\S-\\|$\\)")
+      (regexp . "\\(^\\|\\S-\\)\\([ \11]+\\)\\(\\S-\\|$\\)")
       (group . 2)
       (modes . align-text-modes)
       (repeat . t)
@@ -376,7 +360,7 @@
  '(flx-ido-mode t)
  '(flx-ido-threshhold 60000)
  '(flycheck-global-modes '(python-mode js-mode))
- '(folding-mode-prefix-key "")
+ '(folding-mode-prefix-key "\3")
  '(forge-database-connector 'sqlite-module)
  '(frog-jump-buffer-include-current-buffer nil)
  '(frog-menu-posframe-border-width 10)
@@ -477,9 +461,7 @@
  '(mark-even-if-inactive t)
  '(mc/always-run-for-all t)
  '(message-default-news-headers
-   "From: Adam Spiers <usenet@adamspiers.org>
-Reply-To: Adam Spiers <usenet@adamspiers.org>
-")
+   "From: Adam Spiers <usenet@adamspiers.org>\12Reply-To: Adam Spiers <usenet@adamspiers.org>\12")
  '(message-log-max 1000)
  '(message-sendmail-f-is-evil t)
  '(minimap-major-modes '(prog-mode text-mode))
@@ -694,40 +676,12 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
       [(control meta tab)])))
  '(org-drawers '("PROPERTIES" "CLOCK" "HIDE" "STATE"))
  '(org-email-link-description-format "mail %c: %.30s")
- '(org-emphasis-regexp-components '(" 	('\"" "- 	.,:?;'\")" " 	
-,\"'" "." 5) t)
+ '(org-emphasis-regexp-components '(" \11('\"" "- \11.,:?;'\")" " \11\12,\"'" "." 5) t)
  '(org-enforce-todo-checkbox-dependencies t)
  '(org-enforce-todo-dependencies t)
  '(org-export-dispatch-use-expert-ui nil)
  '(org-export-html-style
-   "<style type=\"text/css\">
-  html {
-	font-family: Times, serif;
-	font-size: 12pt;
-  }
-  .title { text-align: center; }
-  .initialtext {
-        text-align: center;
-        font-size: 16pt;
-  }
-  .todo  { color: red; }
-  .done { color: green; }
-  .timestamp { color: grey }
-  .timestamp-kwd { color: CadetBlue }
-  .tag { background-color:lightblue; font-weight:normal }
-  .target { background-color: lavender; }
-  pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-  }
-  table { border-collapse: collapse; }
-  td, th {
-	vertical-align: top;
-	<!--border: 1pt solid #ADB9CC;-->
-  }
-</style>")
+   "<style type=\"text/css\">\12  html {\12\11font-family: Times, serif;\12\11font-size: 12pt;\12  }\12  .title { text-align: center; }\12  .initialtext {\12        text-align: center;\12        font-size: 16pt;\12  }\12  .todo  { color: red; }\12  .done { color: green; }\12  .timestamp { color: grey }\12  .timestamp-kwd { color: CadetBlue }\12  .tag { background-color:lightblue; font-weight:normal }\12  .target { background-color: lavender; }\12  pre {\12\11border: 1pt solid #AEBDCC;\12\11background-color: #F3F5F7;\12\11padding: 5pt;\12\11font-family: courier, monospace;\12  }\12  table { border-collapse: collapse; }\12  td, th {\12\11vertical-align: top;\12\11<!--border: 1pt solid #ADB9CC;-->\12  }\12</style>")
  '(org-extend-today-until 3)
  '(org-fold-catch-invisible-edits 'smart)
  '(org-from-is-user-regexp
@@ -872,7 +826,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(prescient-sort-length-enable nil)
  '(projectile-enable-caching t)
  '(projectile-global-mode t)
- '(projectile-keymap-prefix "p")
+ '(projectile-keymap-prefix "\30p")
  '(projectile-mode-line-prefix " p")
  '(projectile-switch-project-action 'projectile-vc)
  '(projectile-use-git-grep t)
@@ -974,16 +928,14 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
  '(web-mode-markup-indent-offset 2)
  '(what-cursor-show-names t)
  '(which-key-enable-extended-define-key t t)
- '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ 	]*
-\\)+\\)\\{2\\}\\)")
- '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ 	]*
-\\)+\\)\\{2\\}\\)")
+ '(whitespace-empty-at-bob-regexp "^\\(\\(\\([ \11]*\12\\)+\\)\\{2\\}\\)")
+ '(whitespace-empty-at-eob-regexp "^\\(\\(\\([ \11]*\12\\)+\\)\\{2\\}\\)")
  '(whitespace-global-modes
    '(not magit-status-mode magit-log-mode magit-process-mode vterm-mode))
  '(whitespace-line-column 80)
  '(whitespace-style
    '(face trailing space-before-tab newline empty tab-mark tabs))
- '(whitespace-trailing-regexp "[^>]\\([	  ]+\\)$")
+ '(whitespace-trailing-regexp "[^>]\\([\11  ]+\\)$")
  '(yas-also-auto-indent-first-line t)
  '(yas-triggers-in-field t))
 
