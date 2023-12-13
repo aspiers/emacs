@@ -44,7 +44,7 @@ It is good to use rcov with Rake because it `cd's appropriate directory.
   ;;            ("g" "Ruby bundler gems" . bundle-open))
 
   (bind-keys :map as-jump-map
-             :prefix "r"
+             :prefix "R"
              :prefix-map as-jump-ruby-map
              :prefix-docstring "foo"
              :menu-name "ruby map"
