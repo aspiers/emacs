@@ -123,4 +123,19 @@
 
 (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0) ; or whatever font family
 
+;; Hide annoying :PROPERTIES: drawers.
+;;
+;; Unfortunately it currently breaks speed keys:
+;;
+;;   https://github.com/jxq0/org-tidy/issues/11
+;;
+;; TODO: renable this when fixed.
+;;
+;; Also https://github.com/jxq0/org-tidy/issues/13 is annoying but not
+;;a dealbreaker.
+;;
+;; (use-package org-tidy
+;;   :hook
+;;   (org-mode . org-tidy-mode))
+
 (provide 'as-org-mode)
