@@ -26,15 +26,15 @@
   (defun as-find-tool-todos ()
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
-                  '("computer and technology"
-                    "tool software development")))
+                              '("computer and technology"
+                                "tool software development")))
 
   (defun as-find-emacs-todos ()
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
-                  '("computer and technology"
-                    "tool software development"
-                    "emacs")))
+                              '("computer and technology"
+                                "tool software development"
+                                "emacs")))
 
   (defun as-find-GTD-todos ()
     (interactive)
