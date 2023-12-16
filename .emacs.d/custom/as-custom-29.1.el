@@ -682,7 +682,7 @@
  '(org-todo-keywords
    '((sequence "NEXT(n)" "STARTED(>)" "|" "DONE(d)")
      (sequence "PROJECT(p)" "PROJDONE(P)")
-     (sequence "ONGOING(o)" "WAITING(w@)" "CHASE(C@)" "|")
+     (sequence "ONGOING(o)" "WAITING(w)" "CHASE(C)" "|")
      (sequence "SOMEDAY(s)" "MAYBE(m)" "|" "CANCELLED(c)")))
  '(org-use-extra-keys t)
  '(org-use-fast-todo-selection t)
