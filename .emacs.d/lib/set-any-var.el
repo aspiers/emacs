@@ -21,6 +21,7 @@
 ;;; Code:
 
 (require 'wid-edit)
+(require 's)
 
 (defvar set-any-variable-minibuffer-setup-hook nil
   "Hook run by `set-any-variable' when setting up the minibuffer.
@@ -78,6 +79,33 @@ as a starting point for convenient editing."
   ;; Force a thorough redisplay for the case that the variable
   ;; has an effect on the display, like `tab-width' has.
   (force-mode-line-update))
+
+(defun set-env-variable (var val)
+  "Interactively set an environment variable."
+  (interactive
+   (let* ((at-point (thing-at-point 'symbol))
+          (default-var (if (and (stringp at-point)
+                                (s-uppercase-p at-point))
+                           at-point "PATH"))
+          (enable-recursive-minibuffers t)
+          (prompt (if default-var
+                      (format "Set environment variable (default %s): " default-var)
+                    "Set environment variable: "))
+          (env-vars (mapcar
+                     (lambda (x)
+                       (replace-regexp-in-string "=.*" "" x))
+                     process-environment))
+          (var (completing-read
+                   prompt
+                   env-vars 'stringp t nil 'set-env-variable-history
+                   default-var))
+          (val (read-string (format "Set %s to: " var)
+                            (getenv var)
+                            nil ""
+                            'set-variable-value-history)))
+     (list var val)))
+
+  (setenv var val))
 
 (provide 'set-any-variable)
 
