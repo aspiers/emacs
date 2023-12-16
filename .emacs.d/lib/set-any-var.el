@@ -23,7 +23,10 @@
 (require 'wid-edit)
 
 (defvar set-any-variable-minibuffer-setup-hook nil
-  "Hook run by `set-any-variable' when setting up the minibuffer.")
+  "Hook run by `set-any-variable' when setting up the minibuffer.
+
+This can be used to set the minibuffer to a particular mode such as
+lispy-mode for convenient editing of the elisp value.")
 
 (defun set-any-variable (var val)
   "Just like `set-variable', but allows you to set any variable, not just
