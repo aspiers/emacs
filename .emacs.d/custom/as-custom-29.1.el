@@ -368,7 +368,6 @@
  '(gc-cons-threshold 100000000 nil nil "Customized with use-package lsp-mode")
  '(gdb-many-windows t)
  '(git-commit-mode-hook '(turn-on-auto-fill flyspell-mode git-commit-save-message))
- '(git-commit-use-local-message-ring t nil nil "Customized with use-package magit")
  '(git-commit-without-user-email nil)
  '(git-gutter:lighter "")
  '(git-rebase-auto-advance t)
