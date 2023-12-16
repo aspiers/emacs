@@ -708,7 +708,6 @@
  '(outshine-use-speed-commands t)
  '(passive-voice nil)
  '(planner-use-day-pages t)
- '(prescient-filter-method '(literal regexp initialism))
  '(prescient-sort-full-matches-first t)
  '(prescient-sort-length-enable nil)
  '(projectile-enable-caching t)
