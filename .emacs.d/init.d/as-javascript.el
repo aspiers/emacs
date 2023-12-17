@@ -35,22 +35,6 @@
   (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :hook ((typescript-mode . subword-mode)))
 
-(use-package tree-sitter
-  :diminish
-  :hook ((typescript-mode . tree-sitter-hl-mode)
-         (typescript-tsx-mode . tree-sitter-hl-mode)))
-
-(use-package tree-sitter-langs
-  :after tree-sitter
-  :config
-  (tree-sitter-require 'tsx)
-  (add-to-list 'tree-sitter-major-mode-language-alist
-               '(typescript-tsx-mode . tsx)))
-
-;; Only useful for Rust so far
-(use-package tree-sitter-indent
-  :after tree-sitter)
-
 (use-package tide
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
