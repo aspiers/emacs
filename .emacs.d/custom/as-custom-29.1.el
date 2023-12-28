@@ -597,7 +597,7 @@
      (gnus . gnus-other-frame)
      (file . find-file)))
  '(org-link-from-user-regexp
-   "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\)\\>")
+   "\\<\\(adam@spiers\\.net\\|Adam Spiers\\|@\\(adamspiers\\|tigerpig\\)\\.org\\|aspiers@\\(novell\\|suse\\)\\.com\\|adam@\\(toucan\\.earth\\|pantherprotocol\\.io\\)\\)\\>")
  '(org-log-done 'time)
  '(org-log-into-drawer t)
  '(org-lowest-priority 69)
