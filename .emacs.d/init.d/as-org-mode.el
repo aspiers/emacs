@@ -125,17 +125,15 @@
 
 ;; Hide annoying :PROPERTIES: drawers.
 ;;
-;; Unfortunately it currently breaks speed keys:
-;;
-;;   https://github.com/jxq0/org-tidy/issues/11
-;;
-;; TODO: renable this when fixed.
-;;
-;; Also https://github.com/jxq0/org-tidy/issues/13 is annoying but not
-;;a dealbreaker.
-;;
-;; (use-package org-tidy
-;;   :hook
-;;   (org-mode . org-tidy-mode))
+;; See https://github.com/jxq0/org-tidy/issues/13 is annoying but not
+;; a dealbreaker.
+(use-package org-tidy
+  :hook
+  (org-mode . org-tidy-mode)
+  :custom
+  ;; Avoid breaking org-mode's speed keys:
+  ;;
+  ;;   https://github.com/jxq0/org-tidy/issues/11
+  (org-tidy-protect-overlay nil))
 
 (provide 'as-org-mode)
