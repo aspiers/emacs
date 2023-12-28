@@ -783,7 +783,6 @@
  '(sml/show-battery nil)
  '(sml/show-client t)
  '(sml/vc-mode-show-backend t)
- '(sp-ignore-modes-list '(minibuffer-mode minibuffer-inactive-mode emacs-lisp-mode))
  '(speedbar-directory-unshown-regexp "^\\(CVS\\|RCS\\|SCCS\\|\\.emacs\\.backup\\)\\'")
  '(speedbar-tag-split-minimum-length 30)
  '(tide-always-show-documentation t)
