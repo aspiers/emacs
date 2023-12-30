@@ -74,7 +74,8 @@
   (defun as-magit-post-display-org-buffer-hook ()
     "Hook for `magit-diff-visit-file-hook' to automatically run
 `org-show-context'."
-    (org-show-context 'org-goto))
+    (when (eq major-mode 'org-mode)
+      (org-show-context 'org-goto)))
   ;; Custom contexts break `widget-apply'.
   ;; (add-to-list 'org-fold-show-context-detail '(magit-diff . canonical))
   (add-hook 'magit-diff-visit-file-hook
