@@ -10,6 +10,14 @@
 
 (use-package yasnippet-snippets)
 
+(use-package yasnippet-treesitter-shim
+  :straight (:host github :repo "fbrosda/yasnippet-treesitter-shim"
+                   :files ("snippets/*"))
+  :no-require t
+  :config
+  (add-to-list 'yas-snippet-dirs
+               (straight--build-dir "yasnippet-treesitter-shim")))
+
 ;;{{{ _I_nsert auto-text (C-c i)
 
 (use-feature as-autotext
