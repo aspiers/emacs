@@ -76,7 +76,7 @@
 `org-show-context'."
     (org-show-context 'org-goto))
   ;; Custom contexts break `widget-apply'.
-  ;; (add-to-list 'org-show-context-detail '(magit-diff . canonical))
+  ;; (add-to-list 'org-fold-show-context-detail '(magit-diff . canonical))
   (add-hook 'magit-diff-visit-file-hook
             'as-magit-post-display-org-buffer-hook))
 
