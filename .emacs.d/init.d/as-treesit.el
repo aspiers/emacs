@@ -4,6 +4,10 @@
   (treesit-auto-install 'prompt)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
+
+  ;; Workaround for https://github.com/renzmann/treesit-auto/issues/76
+  (setq major-mode-remap-alist (treesit-auto--build-major-mode-remap-alist))
+
   (global-treesit-auto-mode))
 
 ;; From https://github.com/mickeynp/combobulate
