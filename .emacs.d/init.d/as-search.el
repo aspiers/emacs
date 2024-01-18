@@ -53,7 +53,11 @@
 (use-package rg
   :chords ("zr" . rg)
   :chords ("ZR" . rg-dwim)
-  :config (rg-enable-default-bindings))
+  :config
+  (rg-enable-default-bindings)
+  (rg-define-toggle "-A 3" "A")
+  (rg-define-toggle "-B 3" "B")
+  (rg-define-toggle "-C 3" "C"))
 
 ;; These are used by projectile:
 (use-package ripgrep
