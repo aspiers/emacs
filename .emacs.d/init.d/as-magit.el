@@ -120,7 +120,12 @@
     (forge-fork "aspiers" "github"))
 
   (transient-append-suffix 'forge-dispatch 'forge-fork
-    '("c F" "fork to aspiers" as-forge-fork)))
+    '("c F" "fork to aspiers" as-forge-fork))
+
+  :custom
+  (forge-owned-accounts
+   '(("aspiers" remote-name github remote-name aspiers)
+     ("ToucanProtocol" remote-name ToucanProtocol))))
 
 ;; support for magit: links in org buffers
 ;; e.g. [[orgit:/path/to/repo/][my repo]]
