@@ -78,6 +78,18 @@
 ;;   Set lsp-bridge-enable-log
 ;;
 (use-package lsp-bridge
+  ;; Check / reset recipe cache:
+  ;;
+  ;; (gethash "lsp-bridge" straight--recipe-cache)
+  ;; (remhash "lsp-bridge" straight--recipe-cache)
+  ;;
+  ;; This won't work interactively; need to bypass the cache
+  ;; to register the recipe the first time:
+  ;; (straight-use-package 'lsp-bridge)
+  :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+            :build (:not compile))
+
   :after yasnippet
   :bind (("M-." . lsp-bridge-find-def))
 
