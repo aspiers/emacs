@@ -9,7 +9,10 @@
          ("C-c g k" . magit-run-gitk)
          ("C-c g a" . magit-run-gitk-all)
          ("C-c g A" . magit-run-gitg)
-         ("C-c g l" . magit-log-buffer-file))
+         ("C-c g l" . magit-log-buffer-file)
+
+         (:map magit-diff-mode-map
+               ("J" . magit-jump-to-first-diff)))
 
   :config
 
@@ -39,6 +42,14 @@
       (set-window-buffer nil buffer)
       ;; return buffer's window
       (get-buffer-window buffer)))
+
+  (defun magit-jump-to-first-diff ()
+    (interactive)
+    (goto-char (point-min))
+    (magit-jump-to-diffstat-or-diff)
+    (forward-line)
+    (magit-jump-to-diffstat-or-diff)
+    (re-search-forward "^[+-]"))
 
   (defun magit-run-gitg ()
     "Run `gitg' in the current repository."
