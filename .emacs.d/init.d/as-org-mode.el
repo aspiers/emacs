@@ -106,6 +106,12 @@
   ;; :straight (org-modern :host github :repo "minad/org-modern")
   :custom
   (org-modern-hide-stars nil) ; adds extra indentation
+  (org-modern-table nil)
+  (org-modern-list
+   '(;; (?- . "-")
+     (?* . "•")
+     (?+ . "‣")))
+  (org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly
   :hook
   (org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda))
@@ -113,6 +119,8 @@
 (use-package org-modern-indent
   :after org-modern
   :straight (org-modern-indent :host github :repo "jdtsmith/org-modern-indent")
+  :custom
+  (org-startup-indented nil)
   :hook
   (org-indent-mode . org-modern-indent-mode))
 
