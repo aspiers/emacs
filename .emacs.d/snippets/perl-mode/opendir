@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: opendir
+# key: opendir
+# --
+opendir(${1:-DIR}, <field link="dir" "directory">)
+  or die "opendir(<linked "dir">) failed: $!\n";

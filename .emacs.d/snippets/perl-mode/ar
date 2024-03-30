@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ar
+# key: ar
+# --
+sub <field link="attribute" "attribute"> { shift->{<linked "attribute">} }

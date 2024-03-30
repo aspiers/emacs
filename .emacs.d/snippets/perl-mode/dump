@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dump
+# key: dump
+# --
+use Data::Dumper;
+warn Dumper(<cursor>);

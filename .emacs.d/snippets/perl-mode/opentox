@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: opentox
+# key: opentox
+# --
+open(<cursor><field link="fh" "FH">, "|-", <field link="cmd" "cmd">, ${1:-args})
+  or die "Couldn't open(| <linked "cmd">): $!\n";
+print <linked "fh"> ${2:-...};
+${3:-...;}$0
+close(<linked "fh">)
+  or die "close(| <linked "cmd">) failed: $!\n";

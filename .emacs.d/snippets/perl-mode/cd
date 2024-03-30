@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cd
+# key: cd
+# --
+chdir(<field link="dir" "dir">) or die "chdir(<linked "dir">) failed: $!\n";

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: foreach
+# key: foreach
+# --
+foreach my $${1:-var} (${2:-list}) {
+  ${3:-...}
+}

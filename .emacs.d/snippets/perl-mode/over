@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: over
+# key: over
+# --
+=over 4
+
+=item * ${1:-item}
+
+${2:-contents}
+
+=back
+

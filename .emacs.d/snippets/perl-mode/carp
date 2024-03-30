@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: carp
+# key: carp
+# --
+use Carp qw(carp cluck croak confess);

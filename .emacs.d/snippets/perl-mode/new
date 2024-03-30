@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: new
+# key: new
+# --
+sub new {
+  my $self = shift;
+  my $class = ref($self) || $self;
+  my (${1:-args}) = @_;
+
+  ${2:-code}
+
+  my $new = bless {
+  }, $class;
+
+  return $new;
+}

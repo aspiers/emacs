@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: methx
+# key: methx
+# --
+=head2 <cursor><field link="method" "methodname">
+
+${1:-docs}
+
+=cut
+
+<include "~/.msf-abbrevs/perl-mode/methx">

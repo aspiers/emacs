@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: test
+# key: test
+# --
+=over 4
+
+=item * <region><cursor>
+
+=back
+

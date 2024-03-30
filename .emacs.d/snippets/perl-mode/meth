@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: meth
+# key: meth
+# --
+sub <linked "method"> {
+  my $self = shift;
+  my (${1:-args}) = @_;
+  ${2:-code}
+}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: debug
+# key: debug
+# --
+sub debug {
+  my $level = shift;
+  warn @_, "\n" if $opts{verbosity} >= $level;
+}

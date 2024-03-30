@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: openfrom
+# key: openfrom
+# --
+open(<cursor><field link="fh" "FH">, "<field link="cmd" "cmd">|")
+  or die "Couldn't open(<linked "cmd">|): $!\n";
+while (<<linked "fh">>) {
+    ${1:-...};
+}
+${2:-...;}$0
+close(<linked "fh">)
+  or die "close(<linked "cmd">|) failed: $!\n";

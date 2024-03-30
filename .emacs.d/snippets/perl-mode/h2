@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: h2
+# key: h2
+# --
+=head2 ${1:-heading}
+
+${2:-text}
+
+=cut
+

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: md
+# key: md
+# --
+mkdir(<field link="dir" "dir">) or die "mkdir(<linked "dir">) failed: $!\n";

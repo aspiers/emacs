@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: psub
+# key: psub
+# --
+=head2 <field link="subr" "subrname">
+
+${1:-docs}
+
+=cut
+
+sub <linked "subr"> {
+  my (${2:-args}) = @_;
+  ${3:-code}<cursor>
+}

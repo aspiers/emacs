@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: constr
+# key: constr
+# --
+=head1 CONSTRUCTORS
+
+<cursor>
+
+=cut
+

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: find
+# key: find
+# --
+use File::Find;
+
+find(\&<field link="subr" "wanted">, ${1:-dir});
+
+sub <link "subr"> {
+  ${2:-code}
+  if ($_ eq 'OLD') {
+    $File::Find::prune = 1;
+    return;
+  }
+  return unless /\.java$/;
+  return unless $File::Find::name =~ m!^(?:\./)?(.+/src/(.+\.java))$!;
+  return unless $File::Find::dir eq 'src';
+}

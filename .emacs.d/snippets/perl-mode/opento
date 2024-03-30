@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: opento
+# key: opento
+# --
+open(<cursor><field link="fh" "FH">, "| <field link="cmd" "cmd">")
+  or die "Couldn't open(| <linked "cmd">): $!\n";
+print <linked "fh"> ${1:-...};
+${2:-...;}$0
+close(<linked "fh">)
+  or die "close(| <linked "cmd">) failed: $!\n";

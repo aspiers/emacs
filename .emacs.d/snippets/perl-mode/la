@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: la
+# key: la
+# --
+<comment "local attribute">my $<field link="name" "var"> = $self-><linked "name">;

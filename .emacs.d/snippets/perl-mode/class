@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+my $class = shift;

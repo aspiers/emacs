@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: open
+# key: open
+# --
+open(<cursor><field link="fh" "FH">, <field link="file" "file">)
+  or die "Couldn't open(<linked "file">): $!\n";
+while (<<linked "fh">>) {
+${1:-...;}$0
+}
+close(<linked "fh">);

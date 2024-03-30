@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: db
+# key: db
+# --
+debug(${1:-1}, "${2:-message}\n");

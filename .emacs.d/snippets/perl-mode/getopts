@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: getopts
+# key: getopts
+# --
+use Getopt::Long;
+
+Getopt::Long::Configure('bundling');
+
+my %opts = ( verbosity => 1 );
+GetOptions(
+  \%opts,
+  'help|h',
+  'debug|d',
+  'verbosity|verbose|v:+',
+  'version|V',
+  <cursor>${1:-options}
+) or usage();
+usage() if @ARGV == 0 or $opts{help};

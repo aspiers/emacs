@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: me
+# key: me
+# --
+(my $ME = $0) =~ s,.*/,,;

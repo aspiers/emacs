@@ -4,7 +4,7 @@ MSF_DIR=~/lib/emacs/minor-modes/msf-abbrev/mode-abbrevs
 YASNIPPET_DIR=~/.GIT/adamspiers.org/emacs/.emacs.d/snippets
 cd "$MSF_DIR"
 
-for msf in sh-mode/*x; do
+for msf in perl-mode/*x; do
     mode="$(dirname $msf)"
     name="$(basename $msf)"
     name="${name%x}"

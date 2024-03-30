@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: sub
+# key: sub
+# --
+sub ${1:-subrname} {
+  my (${2:-args}) = @_;
+  ${3:-code}
+}

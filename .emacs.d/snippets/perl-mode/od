@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: od
+# key: od
+# --
+or die "${1:-text} failed: $!\n";

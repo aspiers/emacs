@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: main
+# key: main
+# --
+#!/usr/bin/perl -w
+
+use strict;
+
+my $numargs = $#ARGV + 1;
+//my $filename = $ARGV[0];
+
+# error checking argument
+if ($numargs != 1) {
+    printf("Usage: %s <filename>\n", $0);
+    exit(1);
+}

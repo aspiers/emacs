@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: hb
+# key: hb
+# --
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+

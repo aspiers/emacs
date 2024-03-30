@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: openw
+# key: openw
+# --
+open(<cursor><field link="fh" "FH">, "><field link="file" "file">")
+  or die "Couldn't open(><linked "file">): $!\n";
+print <linked "fh"> ${1:-...}$0;
+close(<linked "fh">);
