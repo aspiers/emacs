@@ -88,6 +88,8 @@ The list marked is the one that contains point or follows point."
 (use-package editorconfig
   :ensure t
   :diminish editorconfig-mode
+  :custom
+  (editorconfig-exclude-modes '(snippet))
   :config
   (editorconfig-mode 1))
 
