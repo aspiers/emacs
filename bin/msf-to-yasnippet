@@ -29,7 +29,7 @@ for msf in sh-mode/*x; do
 # --
 EOF
         cat "$msf"
-    ) | perl -lpe '
+    ) | perl -pe '
         s/<field "([^"]+)">/"\${" . (++$x) . ":-$1}"/ge;
         s/<endpoint>/\$0/g;
         s/<indent>//g;
