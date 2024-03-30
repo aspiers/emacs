@@ -2,13 +2,13 @@
 # name: psub
 # key: psub
 # --
-=head2 <field link="subr" "subrname">
+=head2 ${1:subrname}
 
-${1:-docs}
+${2:docs}
 
 =cut
 
-sub <linked "subr"> {
-  my (${2:-args}) = @_;
-  ${3:-code}<cursor>
+sub $1 {
+  my (${3:args}) = @_;
+  ${4:code}$0
 }

@@ -2,6 +2,6 @@
 # name: for
 # key: for
 # --
-for my $${1:-var} (${2:-list}) {
-  ${3:-...}
+for my $${1:var} (${2:list}) {
+  ${3:...}
 }

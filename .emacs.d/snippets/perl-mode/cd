@@ -2,4 +2,4 @@
 # name: cd
 # key: cd
 # --
-chdir(<field link="dir" "dir">) or die "chdir(<linked "dir">) failed: $!\n";
+chdir(${1:dir}) or die "chdir($1) failed: $!\n";

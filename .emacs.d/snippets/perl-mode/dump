@@ -3,4 +3,4 @@
 # key: dump
 # --
 use Data::Dumper;
-warn Dumper(<cursor>);
+warn Dumper($0);

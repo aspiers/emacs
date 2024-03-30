@@ -8,12 +8,12 @@ sub usage {
   (my $ME = $0) =~ s,.*/,,;
 
   die <<EOUSAGE;
-Usage: $ME ${1:-options}
+Usage: $ME ${1:options}
 Options:
   -h, --help           Show this help
   -v, --verbose[=N]    Increase [specify] verbosity (defaults to 1)
   -V, --version        Show version
-${2:-options2}
+${2:options2}
 EOUSAGE
 }
 

@@ -30,9 +30,16 @@ for msf in perl-mode/*x; do
 EOF
         cat "$msf"
     ) | perl -pe '
-        s/<field "([^"]+)">/"\${" . (++$x) . ":-$1}"/ge;
+        BEGIN { $i = 0; }
+        s/<field( link="([^"]+)")? "([^"]+)">/
+           $i++;
+           if ($1) { $ids{$2} = $i; }
+           "\${$i:$3}"
+        /ge;
+        s/<linked "([^"]+)">/$ids{$1} ? "\$$ids{$1}": $&/ge;
+        s/<cursor>/\$0/g;
         s/<endpoint>/\$0/g;
-        s/<indent>//g;
+        s/<indent>/\$>/g;
     ' >"$snippet"
     echo "Wrote $snippet:"
     cat "$snippet"

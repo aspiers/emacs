@@ -2,9 +2,9 @@
 # name: methx
 # key: methx
 # --
-=head2 <cursor><field link="method" "methodname">
+=head2 $0${1:methodname}
 
-${1:-docs}
+${2:docs}
 
 =cut
 

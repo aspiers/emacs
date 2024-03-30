@@ -2,4 +2,4 @@
 # name: arg
 # key: arg
 # --
-my (<cursor>) = @_;
+my ($0) = @_;

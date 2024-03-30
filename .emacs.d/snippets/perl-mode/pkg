@@ -2,26 +2,26 @@
 # name: pkg
 # key: pkg
 # --
-package <field link="package" "Package">;
+package ${1:Package};
 
 =head1 NAME
 
-<linked "package"> - ${1:-name}
+$1 - ${2:name}
 
 =head1 SYNOPSIS
 
-${2:-synopsis}
+${3:synopsis}
 
 =head1 DESCRIPTION
 
-${3:-description}
+${4:description}
 
 =cut
 
 use strict;
 use warnings;
 
-${4:-code}
+${5:code}
 
 =head1 BUGS
 

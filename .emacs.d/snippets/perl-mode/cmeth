@@ -4,6 +4,6 @@
 # --
 sub <linked "method"> {
   my $class = shift;
-  my (${1:-args}) = @_;
-  ${2:-code}
+  my (${1:args}) = @_;
+  ${2:code}
 }

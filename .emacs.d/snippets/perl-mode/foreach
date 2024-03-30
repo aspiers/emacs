@@ -2,6 +2,6 @@
 # name: foreach
 # key: foreach
 # --
-foreach my $${1:-var} (${2:-list}) {
-  ${3:-...}
+foreach my $${1:var} (${2:list}) {
+  ${3:...}
 }

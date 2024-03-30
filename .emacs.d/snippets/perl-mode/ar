@@ -2,4 +2,4 @@
 # name: ar
 # key: ar
 # --
-sub <field link="attribute" "attribute"> { shift->{<linked "attribute">} }
+sub ${1:attribute} { shift->{$1} }

@@ -13,6 +13,6 @@ GetOptions(
   'debug|d',
   'verbosity|verbose|v:+',
   'version|V',
-  <cursor>${1:-options}
+  $0${1:options}
 ) or usage();
 usage() if @ARGV == 0 or $opts{help};

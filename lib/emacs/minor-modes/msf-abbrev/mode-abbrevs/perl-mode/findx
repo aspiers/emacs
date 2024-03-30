@@ -2,7 +2,7 @@ use File::Find;
 
 find(\&<field link="subr" "wanted">, <field "dir">);
 
-sub <link "subr"> {
+sub <linked "subr"> {
   <field "code">
   if ($_ eq 'OLD') {
     $File::Find::prune = 1;

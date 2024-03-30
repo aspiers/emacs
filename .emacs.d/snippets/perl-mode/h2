@@ -2,9 +2,9 @@
 # name: h2
 # key: h2
 # --
-=head2 ${1:-heading}
+=head2 ${1:heading}
 
-${2:-text}
+${2:text}
 
 =cut
 

@@ -2,4 +2,4 @@
 # name: md
 # key: md
 # --
-mkdir(<field link="dir" "dir">) or die "mkdir(<linked "dir">) failed: $!\n";
+mkdir(${1:dir}) or die "mkdir($1) failed: $!\n";

@@ -4,10 +4,10 @@
 # --
 use File::Find;
 
-find(\&<field link="subr" "wanted">, ${1:-dir});
+find(\&${1:wanted}, ${2:dir});
 
-sub <link "subr"> {
-  ${2:-code}
+sub $1 {
+  ${3:code}
   if ($_ eq 'OLD') {
     $File::Find::prune = 1;
     return;

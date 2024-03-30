@@ -2,5 +2,5 @@
 # name: opendir
 # key: opendir
 # --
-opendir(${1:-DIR}, <field link="dir" "directory">)
-  or die "opendir(<linked "dir">) failed: $!\n";
+opendir(${1:DIR}, ${2:directory})
+  or die "opendir($2) failed: $!\n";

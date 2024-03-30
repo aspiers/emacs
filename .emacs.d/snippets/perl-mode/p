@@ -2,4 +2,4 @@
 # name: p
 # key: p
 # --
-print "${1:-OUTPUT}\n";
+print "${1:OUTPUT}\n";

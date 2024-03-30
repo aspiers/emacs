@@ -2,4 +2,4 @@
 # name: pf
 # key: pf
 # --
-printf("<cursor>");
+printf("$0");

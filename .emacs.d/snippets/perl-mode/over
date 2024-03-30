@@ -4,9 +4,9 @@
 # --
 =over 4
 
-=item * ${1:-item}
+=item * ${1:item}
 
-${2:-contents}
+${2:contents}
 
 =back
 

@@ -2,4 +2,4 @@
 # name: la
 # key: la
 # --
-<comment "local attribute">my $<field link="name" "var"> = $self-><linked "name">;
+<comment "local attribute">my $${1:var} = $self->$1;

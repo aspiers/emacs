@@ -2,9 +2,9 @@
 # name: cmethx
 # key: cmethx
 # --
-=head2 <field link="method" "methodname">
+=head2 ${1:methodname}
 
-${1:-docs}
+${2:docs}
 
 =cut
 
