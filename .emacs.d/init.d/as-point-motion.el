@@ -102,8 +102,18 @@
 (use-package mwim
   :custom
   (mwim-beginning-position-functions
-   '(mwim-line-beginning mwim-block-beginning mwim-code-beginning
-                         mwim-comment-beginning))
+   ;; FIXME: this still not quite right.  mwim-comment-beginning
+   ;; ignores the comment prefix, so typically it would be the
+   ;; rightmost position yielded by these four.  However putting
+   ;; it third or last results in the mwim-line-beginning position
+   ;; never being reached on a comment line.  Reproduce via the
+   ;; following in a shell buffer, for instance:
+   ;;
+   ;; <indent># a comment
+   '(mwim-line-beginning
+     mwim-comment-beginning
+     mwim-block-beginning
+     mwim-code-beginning))
   (mwim-end-position-functions
    '(mwim-line-end mwim-block-end mwim-code-end))
 
