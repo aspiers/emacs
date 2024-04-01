@@ -2,8 +2,8 @@
 # name: cmeth
 # key: cmeth
 # --
-sub <linked "method"> {
+sub ${1:class_method} {
   my $class = shift;
-  my (${1:args}) = @_;
-  ${2:code}
+  my (${2:args}) = @_;
+  ${3:code}
 }

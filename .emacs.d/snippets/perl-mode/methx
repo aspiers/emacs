@@ -2,10 +2,14 @@
 # name: methx
 # key: methx
 # --
-=head2 $0${1:methodname}
+=head2 ${1:methodname}
 
 ${2:docs}
 
 =cut
 
-<include "~/.msf-abbrevs/perl-mode/methx">
+sub $1 {
+  my $self = shift;
+  my (${3:args}) = @_;
+  ${4:code}
+}

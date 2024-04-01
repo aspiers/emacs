@@ -2,8 +2,8 @@
 # name: meth
 # key: meth
 # --
-sub <linked "method"> {
+sub ${1:method} {
   my $self = shift;
-  my (${1:args}) = @_;
-  ${2:code}
+  my (${2:args}) = @_;
+  ${3:code}
 }
