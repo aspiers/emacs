@@ -95,8 +95,6 @@ point somewhere *before* the if/unless/while/until/for/foreach modifier."
   (local-set-key "\C-cmt"      'as-cperl-reinvert-if-unless)
   (local-set-key [(f10)]       'as-cperl-insert-unique-warning)
   (local-set-key [(backspace)] 'cperl-electric-backspace)
-  (setq indent-tabs-mode nil)
-  (make-variable-buffer-local 'cperl-indent-level)
-  (set-default 'cperl-indent-level 2))
+  (setq indent-tabs-mode nil))
 
 (provide 'as-cperl)
