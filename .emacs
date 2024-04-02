@@ -59,7 +59,7 @@
     ;;   (forward-word))
     ))
 
-(unless (getenv "EMACS_BATCH")
+(unless (or (getenv "EMACS_BATCH") (getenv "DEBUG_EMACS_INIT"))
   (as-load-hooks as-init-d-suffix))
 
 (as-progress "end of ~/.emacs")
