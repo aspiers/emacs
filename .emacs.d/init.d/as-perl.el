@@ -7,7 +7,7 @@
 (autoload 'as-cperl-setup "as-cperl" "as-cperl-setup")
 (add-hook 'cperl-mode-hook 'as-cperl-setup)
 (add-hook 'cperl-mode-hook 'turn-on-auto-fill)
-(defun cp () "Abbreviation for `cperl-mode'." (interactive) (cperl-mode))
+(defalias 'cp 'cperl-mode "Abbreviation for `cperl-mode'.")
 (add-hook 'cperl-mode-hook (lambda () (setq comment-start "#")))
 
 (add-to-list 'auto-mode-alist '("\\.\\(pod\\|t\\)\\'" . cperl-mode))
