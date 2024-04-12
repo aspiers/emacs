@@ -18,6 +18,7 @@
   (which-key-idle-delay 0.1)
   (which-key-idle-secondary-delay 0.1)
   (which-key-lighter "")
+  (which-key-max-description-length nil)
 
   :config
   (which-key-mode)
