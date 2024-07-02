@@ -135,13 +135,17 @@
 ;;
 ;; See https://github.com/jxq0/org-tidy/issues/13 is annoying but not
 ;; a dealbreaker.
-(use-package org-tidy
-  :hook
-  (org-mode . org-tidy-mode)
-  :custom
-  ;; Avoid breaking org-mode's speed keys:
-  ;;
-  ;;   https://github.com/jxq0/org-tidy/issues/11
-  (org-tidy-protect-overlay nil))
+;;
+;; However unfortunately the performance issue described here is a dealbreaker:
+;; https://github.com/jxq0/org-tidy/issues/20
+
+;; (use-package org-tidy
+;;   :hook
+;;   (org-mode . org-tidy-mode)
+;;   :custom
+;;   ;; Avoid breaking org-mode's speed keys:
+;;   ;;
+;;   ;;   https://github.com/jxq0/org-tidy/issues/11
+;;   (org-tidy-protect-overlay nil))
 
 (provide 'as-org-mode)
