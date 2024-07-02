@@ -27,13 +27,13 @@
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
                               '("computer and technology"
-                                "tool software development")))
+                                "toolchain software")))
 
   (defun as-find-emacs-todos ()
     (interactive)
     (as-org-jump-olp-and-next as-personal-todo
                               '("computer and technology"
-                                "tool software development"
+                                "toolchain software"
                                 "emacs")))
 
   (defun as-find-GTD-todos ()
