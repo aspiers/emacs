@@ -111,9 +111,9 @@
    ;;
    ;; <indent># a comment
    '(mwim-line-beginning
-     mwim-comment-beginning
      mwim-block-beginning
-     mwim-code-beginning))
+     mwim-code-beginning
+     mwim-comment-beginning))
   (mwim-end-position-functions
    '(mwim-line-end mwim-block-end mwim-code-end))
 
