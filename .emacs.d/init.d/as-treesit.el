@@ -1,3 +1,7 @@
+(use-feature treesit
+  :bind
+  ("C-c C-=" . treesit-explore-mode))
+
 ;; https://github.com/renzmann/treesit-auto
 (use-package treesit-auto
   :custom
