@@ -8,6 +8,17 @@
    (("C-c C-S-w r" . org-refile-reverse)
     ("C-c s" . org-show-context)))
 
+  :hook (org-mode
+         . (lambda ()
+             (setq comment-start nil)
+
+             ;; imenu is horribly slow and outdated, and with
+             ;; imenu-auto-rescan it triggers far too often, in
+             ;; org-mode captures at least.
+             ;;
+             ;; (imenu-add-to-menubar "Imenu")
+             ))
+
   :config
 
   (defun om () "Abbreviation for `org-mode'." (interactive) (org-mode))
@@ -21,15 +32,6 @@
          (org-find-exact-headline-in-buffer "daily review" todo-buffer 'pos-only))
         (org-clock-in)))
     (as-org-switch-to-agenda-buffer))
-
-  (add-hook 'org-mode-hook
-            (lambda ()
-              ;; imenu is horribly slow and outdated, and with
-              ;; imenu-auto-rescan it triggers far too often, in
-              ;; org-mode captures at least.
-              ;;
-              ;; (imenu-add-to-menubar "Imenu")
-              (setq comment-start nil)))
 
   (setcdr (assq 'agenda org-fold-show-context-detail) 'tree)
   (add-to-list 'org-fold-show-context-detail '(org-goto . tree))
