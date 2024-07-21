@@ -10,6 +10,7 @@
 
   :hook (org-mode
          . (lambda ()
+             (turn-on-auto-fill)
              (setq comment-start nil)
 
              ;; imenu is horribly slow and outdated, and with
