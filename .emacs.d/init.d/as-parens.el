@@ -11,7 +11,12 @@
   (smartparens-global-mode t)
   (show-smartparens-global-mode t))
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+;; No integration with treesit.el:
+;; https://github.com/Fanael/rainbow-delimiters/issues/81
+;;
+;; so produces unreliable results.
+;;
+;; (use-package rainbow-delimiters
+;;   :hook (prog-mode . rainbow-delimiters-mode))
 
 (provide 'as-parens)
