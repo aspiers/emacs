@@ -104,28 +104,31 @@
               :map org-agenda-mode-map
               (("C-c C-S-t" . epoch-agenda-todo))))
 
-(use-package org-modern
-  :after org
-  ;; :straight (org-modern :host github :repo "minad/org-modern")
-  :custom
-  (org-modern-hide-stars nil) ; adds extra indentation
-  (org-modern-table nil)
-  (org-modern-list
-   '(;; (?- . "-")
-     (?* . "•")
-     (?+ . "‣")))
-  (org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly
-  :hook
-  (org-mode . org-modern-mode)
-  (org-agenda-finalize . org-modern-agenda))
-
-(use-package org-modern-indent
-  :after org-modern
-  :straight (org-modern-indent :host github :repo "jdtsmith/org-modern-indent")
-  :custom
-  (org-startup-indented nil)
-  :hook
-  (org-indent-mode . org-modern-indent-mode))
+;; This causes too many problems.  This was definitely not the only one:
+;;   - https://github.com/minad/org-modern/issues/39
+;;
+;; (use-package org-modern
+;;   :after org
+;;   ;; :straight (org-modern :host github :repo "minad/org-modern")
+;;   :custom
+;;   (org-modern-hide-stars nil) ; adds extra indentation
+;;   (org-modern-table nil)
+;;   (org-modern-list
+;;    '(;; (?- . "-")
+;;      (?* . "•")
+;;      (?+ . "‣")))
+;;   (org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly
+;;   :hook
+;;   (org-mode . org-modern-mode)
+;;   (org-agenda-finalize . org-modern-agenda))
+;;
+;; (use-package org-modern-indent
+;;   :after org-modern
+;;   :straight (org-modern-indent :host github :repo "jdtsmith/org-modern-indent")
+;;   :custom
+;;   (org-startup-indented nil)
+;;   :hook
+;;   (org-indent-mode . org-modern-indent-mode))
 
 ;; The default fixed-pitch font (from which org-meta-line inherits)
 ;; has line spacing >1.0 on some systems. This will introduce gaps
