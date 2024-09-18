@@ -80,13 +80,13 @@
                    (org-agenda-skip-function
                     (lambda nil
                       (org-agenda-skip-entry-if 'notregexp
-   "\\=.*\\[#C\\]" 'scheduled)))))
+                                                "\\=.*\\[#C\\]" 'scheduled)))))
        (tags-todo "/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #D TODOs")
                    (org-agenda-skip-function
                     (lambda nil
                       (org-agenda-skip-entry-if 'notregexp
-   "\\=.*\\[#D\\]" 'scheduled)))))
+                                                "\\=.*\\[#D\\]" 'scheduled)))))
        (tags-todo "/NEXT|STARTED"
                   ((org-agenda-overriding-header "Unscheduled #E TODOs")
                    (org-agenda-skip-function
