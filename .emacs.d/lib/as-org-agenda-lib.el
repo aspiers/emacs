@@ -35,4 +35,4 @@ search should be continued."
          ;; the invisible-ok param below is crucial to avoid infinite loops
          (org-end-of-subtree t)))))
 
-(provide 'as-org-agenda)
+(provide 'as-org-agenda-lib)

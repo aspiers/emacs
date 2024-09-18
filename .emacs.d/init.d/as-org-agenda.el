@@ -8,6 +8,7 @@
   (defadvice revert-buffer (after refresh-org-agenda-on-revert activate)
     (if (member (buffer-file-name (current-buffer)) org-agenda-files)
         (org-agenda-redo-all t)))
+  (require 'as-org-agenda-lib)
 
   :bind
   (("M-o a" . org-agenda)
