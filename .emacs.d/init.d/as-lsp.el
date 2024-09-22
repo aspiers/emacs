@@ -87,8 +87,8 @@
   ;; to register the recipe the first time:
   ;; (straight-use-package 'lsp-bridge)
   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-            :build (:not compile))
+                         :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+                         :build (:not compile))
 
   :after yasnippet
   :bind (("M-." . lsp-bridge-find-def))
@@ -100,6 +100,8 @@
   (acm-backend-yas-match-by-trigger-keyword t)
 
   :config
-  (global-lsp-bridge-mode))
+  ;; Not good enough to use everywhere yet
+  ;; (global-lsp-bridge-mode)
+  )
 
 (provide 'as-lsp)
