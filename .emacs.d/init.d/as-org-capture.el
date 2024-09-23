@@ -35,7 +35,7 @@
       "* NEXT %?%a" :prepend t :jump-to-captured t)
 
      ("e" "emacs NEXT" entry
-      (file+olp "" "computer and technology" "tool software development" "emacs")
+      (file+olp "" "computer and technology" "toolchain software" "emacs")
       "* NEXT %?%a" :prepend t :jump-to-captured t)
 
      ("f" "finance NEXT" entry
@@ -44,9 +44,9 @@
       :refile-targets ((nil :regexp . "finance")))
 
      ("l" "tools NEXT" entry
-      (file+olp "" "computer and technology" "tool software development")
+      (file+olp "" "computer and technology" "toolchain software")
       "* NEXT %?%a" :prepend t :jump-to-captured t
-      :refile-targets ((nil :regexp . "tool software development")))
+      :refile-targets ((nil :regexp . "toolchain software")))
 
      ("r" "rmx NEXT" entry
       (file+olp "" "welfare and self-development" "rmx")
