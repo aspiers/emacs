@@ -10,21 +10,21 @@
 
 ;; There's also ace-window but it doesn't have fancy large numbers
 (use-package switch-window
-  :bind (("C-X o" . switch-window)
-         ("C-X 1" . switch-window-then-maximize)
-         ("C-X 2" . switch-window-then-split-below)
-         ("C-X 3" . switch-window-then-split-right)
-         ("C-X 0" . switch-window-then-delete)
+  :bind (("C-S-x o" . switch-window)
+         ("C-S-x 1" . switch-window-then-maximize)
+         ("C-S-x 2" . switch-window-then-split-below)
+         ("C-S-x 3" . switch-window-then-split-right)
+         ("C-S-x 0" . switch-window-then-delete)
 
-         ("C-X 4 d" . switch-window-then-dired)
-         ("C-X 4 f" . switch-window-then-find-file)
-         ("C-X 4 m" . switch-window-then-compose-mail)
-         ("C-X 4 r" . switch-window-then-find-file-read-only)
+         ("C-S-x 4 d" . switch-window-then-dired)
+         ("C-S-x 4 f" . switch-window-then-find-file)
+         ("C-S-x 4 m" . switch-window-then-compose-mail)
+         ("C-S-x 4 r" . switch-window-then-find-file-read-only)
 
-         ("C-X 4 C-f" . switch-window-then-find-file)
-         ("C-X 4 C-o" . switch-window-then-display-buffer)
+         ("C-S-x 4 C-f" . switch-window-then-find-file)
+         ("C-S-x 4 C-o" . switch-window-then-display-buffer)
 
-         ("C-X 4 0" . switch-window-then-kill-buffer))
+         ("C-S-x 4 0" . switch-window-then-kill-buffer))
 
   :custom
   (switch-window-multiple-frames t))
