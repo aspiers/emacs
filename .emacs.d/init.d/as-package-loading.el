@@ -62,6 +62,8 @@ NAME and ARGS are as in `use-package'."
   "~/.emacs.d/elpa" "Find ELPA package: ")
 (define-find-file-in-dir-function as-find-straight-package
   (straight--repos-dir) "Find straight.el package repository: ")
+(define-find-file-in-dir-function as-find-straight-package-build
+  (straight--build-dir) "Find straight.el package build: ")
 
 (use-package hydra
   :config
@@ -112,6 +114,7 @@ prun_e_ build               || _q_uit ||"
   (bind-keys :map as-jump-map
              ("l" "ELPA package" . as-find-elpa-package)
              ("s" "straight.el package" . as-find-straight-package)
+             ("b" "straight.el package" . as-find-straight-package-build)
              ("U" "*use-package*" . switch-to-use-package-buffer)))
 
 ;; This is nice for trying out packages
