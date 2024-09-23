@@ -361,7 +361,6 @@
  '(flx-ido-threshhold 60000)
  '(flycheck-global-modes '(python-mode js-mode))
  '(folding-mode-prefix-key "\3")
- '(forge-database-connector 'sqlite-module)
  '(frog-jump-buffer-include-current-buffer nil)
  '(frog-menu-posframe-border-width 10)
  '(frog-menu-posframe-parameters nil)
