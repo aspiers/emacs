@@ -109,6 +109,7 @@
 ;; (use-package magit-gerrit)
 
 (use-package forge
+  :after magit
   :config
   (defun as-forge-fork ()
     (interactive)
