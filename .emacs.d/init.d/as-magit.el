@@ -108,10 +108,6 @@
 ;; https://github.com/somtin/magit-gerrit/issues/1
 ;; (use-package magit-gerrit)
 
-(use-package sqlite3)
-(use-package emacsql-sqlite-module
-  :after (emacsql sqlite3))
-
 (use-package forge
   :config
   (defun as-forge-fork ()
