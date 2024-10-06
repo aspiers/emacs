@@ -361,7 +361,6 @@
  '(flx-ido-threshhold 60000)
  '(flycheck-global-modes '(python-mode js-mode))
  '(folding-mode-prefix-key "\3")
- '(forge-database-connector 'sqlite-module)
  '(frog-jump-buffer-include-current-buffer nil)
  '(frog-menu-posframe-border-width 10)
  '(frog-menu-posframe-parameters nil)
@@ -496,7 +495,7 @@
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-deadline-leaders '("Deadline: " "In %3dd: " "%2dd ago: "))
  '(org-agenda-files
-   '("/home/adam/org/TODO.org" "/home/adam/blockchain/Toucan/TODO.org" "/home/adam/Panther/TODO.org"))
+   '("/home/adam/org/TODO.org" "/home/adam/blockchain/Toucan/TODO.org"))
  '(org-agenda-fontify-priorities '((65 (:bold t :weight bold))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
