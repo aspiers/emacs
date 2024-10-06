@@ -529,7 +529,7 @@
      (python . t)
      (shell . t)))
  '(org-blank-before-new-entry '((heading) (plain-list-item . auto)))
- '(org-bullets-bullet-list '("⦿" "◉" "✿" "○" "*" "•" "⋆"))
+ '(org-bullets-bullet-list '("⦿" "✿" "◉" "○" "*" "•" "⋆"))
  '(org-catch-invisible-edits 'smart)
  '(org-clock-idle-time 5)
  '(org-clock-in-switch-to-state 'as-org-clock-in-switch-to-state)
