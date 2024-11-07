@@ -21,9 +21,9 @@
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t
       :clock-keep t)
 
-     ("m" "personal NEXT from mairix" entry
+     ("m" "personal NEXT from mail" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
 
      ;; topic-specific NEXTs
      ("o" "orgmode NEXT" entry
@@ -73,9 +73,9 @@
 
      ;; --------------------------------------------------
      ;; Logging stuff which already happened
-     ("a" "personal diary entry from mairix" entry
+     ("a" "personal diary entry from mail" entry
       (file "~/org/diary.org")
-      "* %^t %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* %^t %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
 
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
@@ -120,9 +120,9 @@
       "* NEXT %?%a
   SCHEDULED: %T" :prepend t :jump-to-captured t
       :clock-in t :clock-keep t)
-     ("Tm" "Toucan NEXT from mairix" entry
+     ("Tm" "Toucan NEXT from mail" entry
       (file "~/Toucan/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t
+      "* NEXT %?%[~/.org-mail-link]" :prepend t
       :jump-to-captured t)
      ("Tl" "Toucan learning material" entry
       (file+olp "~/Toucan/TODO.org" "learning")
@@ -141,9 +141,9 @@
       "* NEXT %?%a
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t
       :clock-keep t)
-     ("Pm" "Panther NEXT from mairix" entry
+     ("Pm" "Panther NEXT from mail" entry
       (file "~/Panther/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
      ("Pl" "Panther learning material" entry
       (file+olp "~/Panther/TODO.org" "general learning")
       "* NEXT read%? %a" :prepend t :jump-to-captured t)

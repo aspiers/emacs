@@ -857,7 +857,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
      ("m" "personal NEXT from mairix" entry
       (file "~/org/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
      ("o" "orgmode NEXT" entry
       (file+olp "~/org/TODO.org" "GTD" "orgmode")
       "* NEXT %?%a" :prepend t :jump-to-captured t)
@@ -890,7 +890,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
 ***** How?" :prepend t :jump-to-captured t)
      ("a" "personal diary entry from mairix" entry
       (file "~/org/diary.org")
-      "* %^t %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* %^t %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
      ("d" "personal task DONE" entry
       (file "~/org/DONE.org")
       "* DONE %?
@@ -929,7 +929,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
      ("Tm" "Toucan NEXT from mairix" entry
       (file "~/Toucan/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
      ("Tl" "Toucan learning material" entry
       (file+olp "~/Toucan/TODO.org" "learning")
       "* NEXT read%? %a" :prepend t :jump-to-captured t)
@@ -947,7 +947,7 @@ Reply-To: Adam Spiers <usenet@adamspiers.org>
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t)
      ("Pm" "Panther NEXT from mairix" entry
       (file "~/Panther/TODO.org")
-      "* NEXT %?%[~/.org-mairix-link]" :prepend t :jump-to-captured t)
+      "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
      ("Pl" "Panther learning material" entry
       (file+olp "~/Panther/TODO.org" "general learning")
       "* NEXT read%? %a" :prepend t :jump-to-captured t)
