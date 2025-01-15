@@ -1,6 +1,6 @@
 (use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode))
+  :mode ("\\.py\\'" . python-ts-mode)
+  :interpreter ("python" . python-ts-mode))
 
 ;; elpy has serious performance issues
 ;; (use-package elpy
