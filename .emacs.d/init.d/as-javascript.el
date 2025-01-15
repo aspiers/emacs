@@ -62,6 +62,9 @@
                         (file-name-extension buffer-file-name))
       (setup-tide-mode)))
 
+(use-package vue-ts-mode
+  :straight (:host github :repo "8uff3r/vue-ts-mode"))
+
 (with-packages (tide web-mode)
   ;; :mode ("\\.tsx\\'" . web-mode)
   :hook ((web-mode . as-setup-tide-mode-for-tsx))
