@@ -1,3 +1,10 @@
+;; https://whhone.com/posts/org-agenda-repeated-tasks/
+(defun my/org-agenda-repeater ()
+  "The repeater shown in org-agenda-prefix for agenda."
+  (if (org-before-first-heading-p)
+      "-------"  ; fill the time grid
+    (format "%5s: " (or (org-get-repeat) ""))))
+
 (with-packages org
   :config
 
@@ -9,6 +16,10 @@
     (if (member (buffer-file-name (current-buffer)) org-agenda-files)
         (org-agenda-redo-all t)))
   (require 'as-org-agenda-lib)
+
+  ;; Add `my/org-agenda-repeater' to the agenda prefix.
+  (setcdr (assoc 'agenda org-agenda-prefix-format)
+          " %i %-12:c%?-12t%s%(my/org-agenda-repeater)")
 
   :bind
   (("M-o a" . org-agenda)
@@ -24,6 +35,10 @@
    ("M-o r d" . org-clock-in-daily-review))
 
   :custom
+  ;; Shorten the leaders to reserve spaces for the repeater.
+  (org-agenda-scheduled-leaders '("Sched" "S.%2dx"))
+  (org-agenda-deadline-leaders '("Deadl" "In%2dd" "D.%2dx"))
+
   ;; Make [M-x org-agenda a] show just one day
   (org-agenda-span 'day)
 
