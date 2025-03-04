@@ -41,10 +41,6 @@ NAME and ARGS are as in `use-package'."
 ;; Looks like the above (declare ...) makes this unnecessary:
 ;;(put 'use-feature 'lisp-indent-function 'defun)
 
-;; Allow stuff like :ensure-system-package npm in
-;; use-package declarations:
-(straight-use-package 'use-package-ensure-system-package)
-
 ;; Allow stuff like :chords (("ZB" . bookmark-jump)) in
 ;; use-package declarations:
 (straight-use-package 'use-package-chords)
