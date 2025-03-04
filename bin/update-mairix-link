@@ -1,4 +1,12 @@
 #!/bin/sh
+#
+# Selects next mairix link in emacs, opens it in mutt,
+# re-stores the link, and replaces the existing link
+# in emacs with the new one.
+#
+# Written 17 years ago so can't remember what this was
+# for; perhaps some kind of link format change or
+# reindexing.
 
 # find next direct link to a message
 echo 'C-s <mairix://m: \n' | switch-feed-emacs
