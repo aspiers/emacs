@@ -16,10 +16,9 @@
   "Defines function which invokes equivalent of `counsel-find-file'
   from within a given directory."
   `(defun ,name ()
-     (format "Uses counsel to find a file within %s.
-
+     ,(format "Uses counsel to find a file within %s.
 This function was defined via `define-find-file-in-dir-function',
-and invokes `counsel--find-file-1'." ,dir)
+and invokes `counsel--find-file-1'." dir)
      (interactive)
      (counsel--find-file-1 ,(or prompt "Find file: ")
                            ,dir #'counsel-find-file-action
