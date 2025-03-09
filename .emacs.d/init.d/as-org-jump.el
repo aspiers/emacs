@@ -13,7 +13,7 @@
 The file can be a string or symbol (variable name), followed by optional outline path elements.")
 
 (use-feature as-jump
-  :after which-key
+  :after (org which-key)
   :config
 
   (define-find-file-in-dir-function as-find-personal-note
@@ -81,9 +81,11 @@ DESC is the human-readable description used for docstring, which-key, and alist 
   (as-define-jump-command "k" "Kernel TODOs")
 
   ;; Add the manual bindings
-  (bind-keys :map as-jump-map
-            ("d" "personal diary" . as-find-personal-diary)
-            ("n" "personal note" . as-find-personal-note)))
+  (bind-keys
+   ("C-\"" . as-find-personal-todo)
+   :map as-jump-map
+   ("d" "personal diary" . as-find-personal-diary)
+   ("n" "personal note" . as-find-personal-note)))
 
 (with-packages (key-chord as-jump)
   :chords (("ZN" . as-find-personal-note)))

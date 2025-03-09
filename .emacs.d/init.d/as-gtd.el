@@ -1,5 +1,7 @@
 ;; Things to help me with Getting Things Done.
 ;; http://orgmode.org/worg/org-gtd-etc.php
+;;
+;; See also as-org-jump
 
 (defvar as-personal-todo "~/org/TODO.org")
 
@@ -13,7 +15,6 @@
 
   :config
   (require 'as-org-agenda)
-  (require 'as-org-jump)
   (require 'as-org-stats)
   (require 'org-meeting-actions))
 
