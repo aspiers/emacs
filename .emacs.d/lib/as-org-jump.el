@@ -8,7 +8,6 @@
       ("GTD TODOs" (,as-personal-todo "GTD"))
       ("orgmode TODOs" (,as-personal-todo "GTD" "orgmode"))
       ("OW2000 TODOs" (,as-personal-todo "community" "OW2000"))
-      ("CO2ken TODOs" (,as-personal-todo "community" "CO2ken"))
       ("Kernel TODOs" (,as-personal-todo "career" "Kernel")))
     "Alist mapping human-readable descriptions to (file outline-path...) lists.
 The file can be a string or symbol (variable name), followed by optional outline path elements.")
@@ -78,7 +77,6 @@ DESC is the human-readable description used for docstring, which-key, and alist 
   (as-define-jump-command "E" "emacs TODOs")
   (as-define-jump-command "o" "orgmode TODOs")
   (as-define-jump-command "O" "OW2000 TODOs")
-  (as-define-jump-command "c" "CO2ken TODOs")
   (as-define-jump-command "G" "GTD TODOs")
   (as-define-jump-command "k" "Kernel TODOs")
 
