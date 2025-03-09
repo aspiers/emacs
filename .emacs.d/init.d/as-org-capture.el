@@ -38,6 +38,14 @@
       (file+olp "" "computer and technology" "toolchain software" "emacs")
       "* NEXT %?%a" :prepend t :jump-to-captured t)
 
+     ("k" "Kernel NEXT" entry
+      (file+olp "" "career" "Kernel")
+      "* NEXT %?%a" :prepend t :jump-to-captured t)
+
+     ("R" "rotki NEXT" entry
+      (file+olp "" "finance" "cryptocurrency" "portfolio tracking" "rotki")
+      "* NEXT %?%a" :prepend t :jump-to-captured t)
+
      ("f" "finance NEXT" entry
       (file+olp "" "finance")
       "* NEXT %?%a" :prepend t :jump-to-captured t
