@@ -1,4 +1,17 @@
 ;; See as-jump.el / as-package-loading.el for explanation of usage
+
+(defvar as-org-jump-targets
+    `(("personal TODO" (,as-personal-todo))  ; Just opens the file
+      ("tool TODOs" (,as-personal-todo "computer and technology" "toolchain software"))
+      ("emacs TODOs" (,as-personal-todo "computer and technology" "toolchain software" "emacs"))
+      ("email TODOs" (,as-personal-todo "computer and technology" "email"))
+      ("GTD TODOs" (,as-personal-todo "GTD"))
+      ("orgmode TODOs" (,as-personal-todo "GTD" "orgmode"))
+      ("OW2000 TODOs" (,as-personal-todo "community" "OW2000"))
+      ("CO2ken TODOs" (,as-personal-todo "community" "CO2ken")))
+    "Alist mapping human-readable descriptions to (file outline-path...) lists.
+The file can be a string or symbol (variable name), followed by optional outline path elements.")
+
 (use-feature as-jump
   :after which-key
   :config
@@ -16,6 +29,26 @@
 
   (require 'org-jump-olp)
 
+  (defun as-jump-target (desc)
+    "Jump to a target specified by DESC in `as-org-jump-targets'."
+    (interactive
+     (list (completing-read "Jump to: "
+                           (mapcar #'car as-org-jump-targets))))
+    (let* ((target (assoc desc as-org-jump-targets))
+           (file-and-path (cadr target))  ; Get the first element of the cdr
+           (file (if (listp file-and-path)
+                    (car file-and-path)
+                  file-and-path))
+           (olp (if (listp file-and-path)
+                   (cdr file-and-path)
+                 nil))
+           (resolved-file (if (symbolp file)
+                            (symbol-value file)
+                          file)))
+      (if olp
+          (as-org-jump-olp-and-next resolved-file olp)
+        (find-file resolved-file))))
+
   (defun as-org-jump-olp-and-next (file olp)
     (interactive)
     (org-jump-olp file olp)
@@ -23,49 +56,34 @@
     ;; use org speed keys
     (beginning-of-line))
 
-  (defun as-find-tool-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo
-                              '("computer and technology"
-                                "toolchain software")))
+  (defmacro as-define-jump-command (key desc)
+    "Define a jump command and its binding spec for `as-jump-map'.
+KEY is the key sequence in `as-jump-map'.
+DESC is the human-readable description used for docstring, which-key, and alist lookup."
+    (let ((func-name (intern (format "as-jump-to-%s"
+                                   (replace-regexp-in-string "[^a-zA-Z0-9]+" "-"
+                                                             (downcase desc))))))
+      `(progn
+         (defun ,func-name ()
+           ,(format "Jump to %s using `as-jump-target'." desc)
+           (interactive)
+           (as-jump-target ,desc))
+         (bind-keys :map as-jump-map
+                    (,key ,desc . ,func-name)))))
 
-  (defun as-find-emacs-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo
-                              '("computer and technology"
-                                "toolchain software"
-                                "emacs")))
+  ;; Define all the jump commands
+  (as-define-jump-command "t" "personal TODO")
+  (as-define-jump-command "l" "tool TODOs")
+  (as-define-jump-command "E" "emacs TODOs")
+  (as-define-jump-command "o" "orgmode TODOs")
+  (as-define-jump-command "O" "OW2000 TODOs")
+  (as-define-jump-command "c" "CO2ken TODOs")
+  (as-define-jump-command "G" "GTD TODOs")
 
-  (defun as-find-email-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo
-                              '("computer and technology"
-                                "email")))
-
-  (defun as-find-GTD-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo '("GTD")))
-
-  (defun as-find-orgmode-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo
-                              '("GTD" "orgmode")))
-
-  (defun as-find-OW-todos ()
-    (interactive)
-    (as-org-jump-olp-and-next as-personal-todo
-                              '("community" "OW2000")))
-
+  ;; Add the manual bindings
   (bind-keys :map as-jump-map
-             ("t" "personal TODO" . as-find-personal-todo)
-             ("l" "tool TODOs" . as-find-tool-todos)
-             ("E" "emacs TODOs" . as-find-emacs-todos)
-             ("o" "orgmode TODOs" . as-find-orgmode-todos)
-             ("O" "OW2000 TODOs" . as-find-OW-todos)
-             ("c" "CO2ken TODOs" . as-find-CO2ken-todos)
-             ("d" "personal diary" . as-find-personal-diary)
-             ("G" "GTD TODOs" . as-find-GTD-todos)
-             ("n" "personal note" . as-find-personal-note)))
+            ("d" "personal diary" . as-find-personal-diary)
+            ("n" "personal note" . as-find-personal-note)))
 
 (with-packages (key-chord as-jump)
   :chords (("ZN" . as-find-personal-note)))
