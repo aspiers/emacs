@@ -182,7 +182,7 @@ has built the current list of completion matches."
          ;; browse-kill-ring is an alternative option
          ("M-Y" . consult-yank-pop)
 
-         ("<help> a" . consult-apropos))
+         ("<help> a" . describe-symbol))
 
   ;; The :init configuration is always executed (Not lazy!)
   :init
