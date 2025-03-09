@@ -1,22 +1,17 @@
-(require 'org-mairix nil t)
+(use-package org-contrib
+  :config
+  (require 'org-mairix nil t)
 
-(defvar as-mairix-links-clipboard "~/.org-mairix-link"
-  "[Deprecated] Pseudo-clipboard file where mairix URLs get copied to.")
+  :custom
+  ;; Store links from notmuch in here too so that the same bindings
+  ;; will yank from whichever of notmuch and mairix were recently
+  ;; used.
+  (org-mairix-link-clipboard "~/.org-mail-link")
 
-(defun as-mairix-yank-links ()
-  "[Deprecated] Yank from file defined by `as-mairix-links-clipboard'."
-  (interactive)
-  (let ((bytes (cadr (insert-file-contents
-                      (expand-file-name as-mairix-links-clipboard)))))
-    (forward-char bytes)
-    (save-excursion
-      (forward-char -1)
-      (if (looking-at "\n")
-          (delete-char 1)))))
-
-;; I reserve C-c m for mode-specific user bindings
-(bind-key "C-c M y"   'as-mairix-yank-links)
-(bind-key "C-c M C-y" 'as-mairix-yank-links)
+  :bind
+  ;; I reserve C-c m for mode-specific user bindings
+  (("C-c M y"   . 'org-mairix-insert-link)
+   ("C-c M C-y" . 'org-mairix-insert-link)))
 
 (defcustom as-org-mairix-open-personal-command
   "mairix-profile personal %args% '%search%'"
