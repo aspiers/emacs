@@ -30,9 +30,9 @@
 ;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode)
-         ("\\.tsx\\'" . typescript-tsx-mode))
+         ("\\.tsx\\'" . tsx-ts-mode))
   :init
-  (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
+  ;; (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :hook ((typescript-mode . subword-mode)))
 
 (use-package tide
