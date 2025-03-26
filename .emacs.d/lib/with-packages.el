@@ -58,17 +58,17 @@ Example usage:
     :bind (:map org-mode-map
                 ((\"C-c C-j\" . counsel-org-goto))))"
   (let ((pseudo-pkg-name
-         (format
-          "*with-packages/%s"
-          (let ((s (prin1-to-string when)))
-            (dolist (repl '(("(\\(.+\\))" . "\\1")
-                            (" " . "-")
-                            (":any" . "any")
-                            (":all" . "all"))
-                          s)
-              (let ((from (car repl))
-                    (to (cdr repl)))
-                (setq s (replace-regexp-in-string from to s))))))))
+         (intern (format
+           "*with-packages/%s"
+           (let ((s (prin1-to-string when)))
+             (dolist (repl '(("(\\(.+\\))" . "\\1")
+                             (" " . "-")
+                             (":any" . "any")
+                             (":all" . "all"))
+                           s)
+               (let ((from (car repl))
+                     (to (cdr repl)))
+                 (setq s (replace-regexp-in-string from to s)))))))))
     `(progn
        ;; (message "Defining pseudo-package %s" ,pseudo-pkg-name)
        (use-package ,pseudo-pkg-name
