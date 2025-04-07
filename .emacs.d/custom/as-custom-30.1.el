@@ -441,7 +441,6 @@
  '(magit-unstage-all-confirm nil)
  '(mail-envelope-from 'header)
  '(mail-self-blind t)
- '(make-backup-file-name-function 'as-make-backup-file-name)
  '(marginalia-mode t)
  '(mark-even-if-inactive t)
  '(mc/always-run-for-all t)
