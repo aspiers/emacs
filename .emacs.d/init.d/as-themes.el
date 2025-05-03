@@ -75,8 +75,11 @@
   ;; (modus-themes-load-vivendi)
   )
 
-(defun as-gnome-terminal-profile (profile)
-  "Call gnome-terminal-profile to set the active profile"
+(defun as-terminal-profile (profile)
+  "Call xfce4-terminal-config and gnome-terminal-profile to set the
+active terminal profiles."
+  (start-process "xfce4-terminal-config" nil
+                 "xfce4-terminal-config" profile)
   (start-process "gnome-terminal-profile" nil
                  "gnome-terminal-profile" profile)
   (with-temp-file
@@ -90,7 +93,7 @@
           (memq 'ef-summer custom-enabled-themes)
           (memq 'ef-winter custom-enabled-themes))
          (let ((new-theme (ef-themes-toggle)))
-           (as-gnome-terminal-profile
+           (as-terminal-profile
             (pcase new-theme
               ('ef-summer "Bright")
               ('ef-winter "Dark")))))
@@ -103,10 +106,10 @@
                (progn
                  (disable-theme bright-theme)
                  (load-theme dark-theme)
-                 (as-gnome-terminal-profile "Dark"))
+                 (as-terminal-profile "Dark"))
              (disable-theme dark-theme)
              (load-theme bright-theme)
-             (as-gnome-terminal-profile "Bright"))))))
+             (as-terminal-profile "Bright"))))))
 
 (require 'as-toggles)
 (use-package hydra
