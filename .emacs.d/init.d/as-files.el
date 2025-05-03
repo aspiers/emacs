@@ -65,8 +65,7 @@ has one."
 (define-find-file-in-dir-function as-find-from-root
   "/sudo:root@localhost:/")
 
-(bind-keys ("C-~"  . as-find-from-home)
-           ("C-\"" . as-find-personal-todo))
+(bind-keys ("C-~"  . as-find-from-home))
 
 ;; See as-jump.el / as-package-loading.el for explanation of usage
 (use-feature as-jump
