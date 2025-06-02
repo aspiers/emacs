@@ -436,6 +436,7 @@
                                  magit-insert-unpulled-from-pushremote
                                  magit-insert-unpushed-to-upstream
                                  magit-insert-unpushed-to-pushremote
+                                 forge-insert-pullreqs
                                  forge-insert-issues))
  '(magit-status-show-hashes-in-headers t)
  '(magit-unstage-all-confirm nil)
