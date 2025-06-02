@@ -119,8 +119,6 @@
   (transient-append-suffix 'forge-dispatch 'forge-fork
     '("c F" "fork to aspiers" as-forge-fork))
 
-  (debug-watch 'magit-status-sections-hook)
-
   :custom
   (forge-owned-accounts
    '(("aspiers" remote-name github remote-name aspiers)
