@@ -30,7 +30,7 @@ while [ $# != 0 ]; do
     esac
 done
 
-if echo "$*" | egrep -q '(^| )-e( |$)'; then
+if echo "$*" | grep -Eq '(^| )-e( |$)'; then
     echo "-e would only work with emacsclient, not with new-emacs; aborting." >&2
     exit 1
 fi
