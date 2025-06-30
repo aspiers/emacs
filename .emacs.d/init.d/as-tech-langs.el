@@ -10,7 +10,10 @@
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
-(use-package json-mode
-  :mode ("\\.json\\'" . json-mode))
+;; (use-package json-mode
+;;   :mode ("\\.json\\'" . json-mode))
+
+(use-package jsonian
+  :mode ("\\.json\\'" . jsonian-mode))
 
 (provide 'as-tech-langs)
