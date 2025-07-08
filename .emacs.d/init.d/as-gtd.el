@@ -48,13 +48,15 @@
 ;;   :straight (:host github :repo "myshevchuk/org-habit-plus")
 ;;   :after (org))
 
-;; Currently suffers from truncated entry bug:
+;; Currently suffers from showstopper bugs:
 ;; https://github.com/Elilif/org-heatmap/issues/9
-(use-package org-heatmap
-  :straight (:host github :repo "Elilif/org-heatmap")
-  :after (org)
-  :config
-  (org-heatmap-mode))
+;; https://github.com/Elilif/org-heatmap/issues/10
+;;
+;; (use-package org-heatmap
+;;   :straight (:host github :repo "Elilif/org-heatmap")
+;;   :after (org)
+;;   :config
+;;   (org-heatmap-mode))
 
 ;; (use-package beeminder)
 
