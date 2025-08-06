@@ -62,7 +62,8 @@
 
 ;;; Markdown mode
 
-(use-package markdown-mode+)
+(use-package markdown-mode+
+    :hook (markdown-mode . (lambda () (setq word-wrap t))))
 
 ;;; asciidoc mode
 
