@@ -67,7 +67,13 @@
 
 ;;; asciidoc mode
 
-(use-package asciidoc)
+(use-package asciidoc
+    ;; Enable word-wrap for .adoc files
+    :hook (find-file .
+              (lambda ()
+                  (when (and buffer-file-name
+                            (string-match "\\.adoc\\'" buffer-file-name))
+                      (setq word-wrap t)))))
 
 ;;; ReStructuredText mode
 
