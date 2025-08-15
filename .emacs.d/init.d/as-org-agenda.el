@@ -21,8 +21,13 @@
   (setcdr (assoc 'agenda org-agenda-prefix-format)
           " %i %-12:c%?-12t%s%(my/org-agenda-repeater)")
 
+  (defun as-edit-agenda-custom-commands ()
+    (interactive)
+    (customize-variable 'org-agenda-custom-commands))
+
   :bind
   (("M-o a" . org-agenda)
+   ("M-o C" . as-edit-agenda-custom-commands)
    ("M-S-a" . as-org-switch-to-agenda-buffer) ;; X11 only
    ("M-o b" . as-org-switch-to-agenda-buffer)
 
