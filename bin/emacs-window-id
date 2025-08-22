@@ -3,7 +3,7 @@
 LOGFILE=$HOME/.log/emacs-window-id.log
 me=`basename $0`
 
-_dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
+_dlog    () { echo "`date` $*" > "$LOGFILE" 2>&1;                   }
 debug    () { _dlog "$*";                                           }
 fatal    () { _dlog "FATAL: $*"; echo >&2 "$me: FATAL: $*"; exit 1; }
 
