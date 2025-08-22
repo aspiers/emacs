@@ -7,7 +7,7 @@
 LOGFILE=$HOME/.log/focus-emacs-frame.log
 me=`basename $0`
 
-_dlog    () { echo "`date` $*" >> "$LOGFILE" 2>&1;                  }
+_dlog    () { echo "`date` $*" > "$LOGFILE" 2>&1;                   }
 debug    () { _dlog "$*";                                           }
 progress () { _dlog "$*";        echo     "$me: $*";                }
 warn     () { _dlog "$*";        echo >&2 "$me: $*";                }
