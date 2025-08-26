@@ -3,6 +3,11 @@
 (use-package magit
   :defer 4
 
+  :init
+  ;; Prevent so-long-mode from affecting magit-status buffers
+  (with-eval-after-load 'so-long
+    (setq so-long-target-modes (delq 'magit-status-mode so-long-target-modes)))
+
   :bind (("C-c g b" . magit-blame-addition)
          ("C-c g B" . magit-run-git-gui-blame)
          ("C-c g g" . magit-run-git-gui)
