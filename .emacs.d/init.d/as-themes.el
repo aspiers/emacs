@@ -75,53 +75,30 @@
   ;; (modus-themes-load-vivendi)
   )
 
-(defun as-terminal-profile (profile)
-  "Call xfce4-terminal-config and gnome-terminal-profile to set the
-active terminal profiles."
-  (start-process "xfce4-terminal-config" nil
-                 "xfce4-terminal-config" profile)
-  (start-process "gnome-terminal-profile" nil
-                 "gnome-terminal-profile" profile)
-  (with-temp-file
-      (expand-file-name "~/.config/gnome-terminal-profile")
-    (insert profile "\n")))
-
 (defun as--using-ef-themes-p ()
   "Return t if currently using ef-themes."
   (or (memq 'ef-summer custom-enabled-themes)
       (memq 'ef-winter custom-enabled-themes)))
 
-(defun as-set-theme (target-theme &optional call-terminal-scripts)
-  "Set theme to 'light' or 'dark'. Optionally call terminal scripts."
-  (let ((terminal-profile (if (string= target-theme "light") "Bright" "Dark")))
-
-    (if (as--using-ef-themes-p)
-        ;; Handle ef-themes
-        (ef-themes-select (if (string= target-theme "light") 'ef-summer 'ef-winter))
-      ;; Handle modus-themes
-      (let ((dark-theme 'modus-vivendi)
-            (light-theme 'modus-operandi))
-        (if (string= target-theme "light")
-            (progn
-              (disable-theme dark-theme)
-              (load-theme light-theme))
-          (disable-theme light-theme)
-          (load-theme dark-theme))))
-
-    (when call-terminal-scripts
-      (as-terminal-profile terminal-profile))))
+(defun as-set-theme (target-theme)
+  "Set theme to 'light' or 'dark'."
+  (if (as--using-ef-themes-p)
+      (ef-themes-select
+       (if (string= target-theme "light") 'ef-summer 'ef-winter))
+    (let ((dark-theme 'modus-vivendi)
+          (light-theme 'modus-operandi))
+      (if (string= target-theme "light")
+          (progn
+            (disable-theme dark-theme)
+            (load-theme light-theme))
+        (disable-theme light-theme)
+        (load-theme dark-theme)))))
 
 (defun as-toggle-theme ()
   "Toggle between light and dark themes."
   (interactive)
   (if (as--using-ef-themes-p)
-      ;; For ef-themes, use built-in toggle then call terminal scripts
-      (let ((new-theme (ef-themes-toggle)))
-        (as-terminal-profile
-         (pcase new-theme
-           ('ef-summer "Bright")
-           ('ef-winter "Dark"))))
-    ;; For modus-themes, determine current and toggle
+      (let ((new-theme (ef-themes-toggle))))
     (let ((current-light (memq 'modus-operandi custom-enabled-themes)))
       (as-set-theme (if current-light "dark" "light") t))))
 
