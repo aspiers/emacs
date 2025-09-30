@@ -3,12 +3,12 @@
   :custom
   (solidity-comment-style 'slash))
 
-(use-package solidity-flycheck
-  :custom
-  (solidity-flycheck-solc-checker-active t)
-  (solidity-flycheck-solium-checker-active t)
-  ;; (setq solidity-flycheck-chaining-error-level ...)
-  )
+;; (use-package solidity-flycheck
+;;   :custom
+;;   (solidity-flycheck-solc-checker-active t)
+;;   (solidity-flycheck-solium-checker-active t)
+;;   ;; (setq solidity-flycheck-chaining-error-level ...)
+;;   )
 
 (with-packages (solidity-mode solidity-flycheck)
   :config
