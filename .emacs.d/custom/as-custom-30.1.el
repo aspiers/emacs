@@ -789,6 +789,7 @@
  '(vc-annotate-background "nil")
  '(vc-follow-symlinks t)
  '(visible-bell t)
+ '(visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
  '(web-mode-code-indent-offset 2)
  '(web-mode-comment-formats
    '(("java" . "/*") ("javascript" . "//") ("typescript" . "//")
