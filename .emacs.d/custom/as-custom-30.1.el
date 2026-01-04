@@ -481,8 +481,8 @@
  '(org-adapt-indentation t)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-files
-   '("/home/adam/org/TODO.org" "/home/adam/blockchain/Toucan/TODO.org"
-     "/home/adam/org/notes/Hypercerts.org"))
+   '("~/Hypercerts/TODO.org" "/home/adam/org/TODO.org"
+     "/home/adam/blockchain/Toucan/TODO.org"))
  '(org-agenda-fontify-priorities '((65 (:bold t :weight bold))))
  '(org-agenda-include-deadlines t)
  '(org-agenda-include-diary t)
