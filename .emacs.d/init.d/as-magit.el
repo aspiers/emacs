@@ -61,6 +61,25 @@
     (interactive)
     (magit-process-file "gitg" nil 0))
 
+  (defun as-read-worktree-directory-dotworktrees (prompt branch)
+    "Call `read-directory-name' in a .worktrees subdirectory of the repo.
+For `read-directory-name's INITIAL argument use a string based on
+BRANCH, replacing slashes with dashes.  If BRANCH is nil, use nil
+as INITIAL.  Always forward PROMPT as-is.
+
+Creates the .worktrees directory if it doesn't exist."
+    (let* ((toplevel (magit-toplevel))
+           (worktrees-dir (file-name-as-directory
+                           (expand-file-name ".worktrees" toplevel))))
+      (unless (file-directory-p worktrees-dir)
+        (make-directory worktrees-dir t))
+      (let ((default-directory worktrees-dir))
+        (read-directory-name prompt nil nil nil
+                             (and branch (string-replace "/" "-" branch))))))
+
+  (setq magit-read-worktree-directory-function
+        #'as-read-worktree-directory-dotworktrees)
+
   :custom
   (git-commit-use-local-message-ring t))
 
