@@ -140,23 +140,23 @@
       "* DONE %?
   CLOSED: %U")
 
-     ("P" "Panther capture templates")
-     ("Pn" "Panther NEXT" entry
-      (file "~/Panther/TODO.org")
+     ("H" "Hypercerts capture templates")
+     ("Hn" "Hypercerts NEXT" entry
+      (file "~/Hypercerts/TODO.org")
       "* NEXT %?%a" :prepend t :jump-to-captured t)
-     ("Pi" "Panther immediate NEXT" entry
-      (file "~/Panther/TODO.org")
+     ("Hi" "Hypercerts immediate NEXT" entry
+      (file "~/Hypercerts/TODO.org")
       "* NEXT %?%a
   SCHEDULED: %T" :prepend t :jump-to-captured t :clock-in t
       :clock-keep t)
-     ("Pm" "Panther NEXT from mail" entry
-      (file "~/Panther/TODO.org")
+     ("Hm" "Hypercerts NEXT from mail" entry
+      (file "~/Hypercerts/TODO.org")
       "* NEXT %?%[~/.org-mail-link]" :prepend t :jump-to-captured t)
-     ("Pl" "Panther learning material" entry
-      (file+olp "~/Panther/TODO.org" "general learning")
+     ("Hl" "Hypercerts learning material" entry
+      (file+olp "~/Hypercerts/TODO.org" "general learning")
       "* NEXT read%? %a" :prepend t :jump-to-captured t)
-     ("Pd" "Panther DONE" entry
-      (file "~/Panther/DONE.org")
+     ("Hd" "Hypercerts DONE" entry
+      (file "~/Hypercerts/DONE.org")
       "* DONE %?
   CLOSED: %U"))))
 
