@@ -1,26 +1,4 @@
-;; Scrolling
-(defvar smooth-scrolling-repo-dir
-  (concat edotdir "/.GIT/adamspiers.org/smooth-scrolling")
-  "Directory where smooth-scrolling repository is checked out.")
-
-;; (if (file-directory-p smooth-scrolling-repo-dir)
-;;     (use-package smooth-scrolling
-;;       :defer 3
-;;       :load-path smooth-scrolling-repo-dir)
-;;   (warn "Use mrco smooth-scrolling to check out the repository."))
-
-(use-package good-scroll
-  :straight (:host github :repo "io12/good-scroll.el")
-
-  ;; :config
-  ;; (good-scroll-mode 1)
-  ;;
-  ;; :bind (([next] . good-scroll-up-full-screen)
-  ;;        ([prior] . good-scroll-down-full-screen))
-  )
-
-(setq scroll-preserve-screen-position t)
-(setq scroll-conservatively 2)
+;; See also as-scrolling.el and as-ui.el
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/#view-mode--m-x-view-mode
 (setq view-read-only t)
