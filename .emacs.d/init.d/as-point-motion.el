@@ -48,6 +48,7 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+;; Defaults to binding M-. globally
 (use-package smart-jump
   :config
   (smart-jump-setup-default-registers))
