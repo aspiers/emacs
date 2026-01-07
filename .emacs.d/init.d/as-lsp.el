@@ -91,7 +91,8 @@
                          :build (:not compile))
 
   :after yasnippet
-  :bind (("M-." . lsp-bridge-find-def))
+  :bind (:map lsp-bridge-mode-map
+              ("M-." . lsp-bridge-find-def))
 
   :custom
   ;; Stop lsp-bridge interfering with perfectly good emacs backup
