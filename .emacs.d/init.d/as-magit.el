@@ -15,6 +15,8 @@
          ("C-c g a" . magit-run-gitk-all)
          ("C-c g A" . magit-run-gitg)
          ("C-c g l" . magit-log-buffer-file)
+         ("C-c g s" . magit-status)
+         ("C-S-g"   . magit-status)
 
          (:map magit-diff-mode-map
                ("J" . magit-jump-to-first-diff)))
@@ -99,10 +101,7 @@ Creates the .worktrees directory if it doesn't exist."
                    (or
                     (tramp-tramp-file-p project)
                     (not (file-directory-p (concat project "/.git")))))
-                 (projectile-relevant-known-projects))))
-
-  :bind (("C-c g s" . magit-status)
-         ("C-S-g"   . magit-status)))
+                 (projectile-relevant-known-projects)))))
 
 (with-packages (magit org)
   :config
