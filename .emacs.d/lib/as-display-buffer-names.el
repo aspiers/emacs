@@ -31,7 +31,8 @@ project root."
                       0 -1))
                     ((or (= mode 3) (= mode 16))
                      (file-relative-name file-name (projectile-project-root)))
-                    (t file-name))))
+                     (t file-name))))
+      (setq fn (abbreviate-file-name fn))
       (cond (mode
              (kill-new fn)
              ;; No need for x-select-text since kill-new calls function set
