@@ -33,8 +33,9 @@
   :bind (("C-c n" . as-display-buffer-filename)
          ("C-c N" . as-display-buffer-name)))
 
-(use-package switch-window
-  :bind ("C-x o" . switch-window))
+;; I never use multiple windows enough to justify this overhead.
+;; (use-package switch-window
+;;   :bind ("C-x o" . switch-window))
 
 (use-package minimap
   :commands minimap-mode)
