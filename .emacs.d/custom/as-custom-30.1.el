@@ -280,7 +280,11 @@
  '(cperl-lineup-step 0)
  '(cperl-merge-trailing-else nil)
  '(cperl-under-as-char nil)
- '(custom-enabled-themes '(modus-vivendi))
+ ;; Don't set custom-enabled-themes here; it triggers theme loading
+ ;; before straight.el has set up load paths, causing the system-bundled
+ ;; modus-themes (v3) to be loaded instead of straight.el's (v4+).
+ ;; Theme loading is handled by as-themes.el instead.
+ ;; '(custom-enabled-themes '(modus-vivendi))
  '(custom-safe-themes t)
  '(custom-theme-directory "~/.emacs.d/themes")
  '(cvs-buffer-switch-alist '("diff" "status" "log"))
