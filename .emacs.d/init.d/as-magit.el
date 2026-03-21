@@ -83,7 +83,8 @@ Creates the .worktrees directory if it doesn't exist."
         #'as-read-worktree-directory-dotworktrees)
 
   :custom
-  (git-commit-use-local-message-ring t))
+  (git-commit-use-local-message-ring t)
+  (magit-process-apply-ansi-colors filter))
 
 (with-packages (magit projectile)
   ;; See https://gitlab.com/edvorg/req-package/issues/60

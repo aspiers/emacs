@@ -402,6 +402,7 @@
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument 'default)
  '(magit-prefer-remote-upstream t)
+ '(magit-process-apply-ansi-colors 'filter)
  '(magit-push-always-verify t)
  '(magit-read-worktree-directory-function 'magit-read-worktree-directory-sibling)
  '(magit-refresh-verbose t)
