@@ -24,7 +24,13 @@ for file in "$@"; do
         file="$here/$file"
     fi
 
-    quick-emacs \
-        --bg-if-poss $create_frame \
-        --eval "(find-file-with-location \"$file\")"
+    if [ -d "$file" ] && { [ -d "$file/.git" ] || [ -f "$file/.git" ]; }; then
+        quick-emacs \
+            --bg-if-poss $create_frame \
+            --eval "(magit-status \"$file\")"
+    else
+        quick-emacs \
+            --bg-if-poss $create_frame \
+            --eval "(find-file-with-location \"$file\")"
+    fi
 done
