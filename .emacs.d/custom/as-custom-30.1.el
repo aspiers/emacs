@@ -734,7 +734,8 @@
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values
-   '((org-drawers quote ("PROPERTIES" "HIDE"))
+   '((feature-indent-offset . 2) (feature-indent-level . 2)
+     (org-drawers quote ("PROPERTIES" "HIDE"))
      (byte-compile-warnings redefine callargs free-vars unresolved
                             obsolete noruntime)
      (auto-recompile)))
