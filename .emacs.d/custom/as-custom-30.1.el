@@ -402,6 +402,7 @@
  '(magit-log-auto-more t)
  '(magit-popup-use-prefix-argument 'default)
  '(magit-prefer-remote-upstream t)
+ '(magit-process-apply-ansi-colors 'filter nil nil "Customized with use-package magit")
  '(magit-push-always-verify t)
  '(magit-read-worktree-directory-function 'magit-read-worktree-directory-sibling)
  '(magit-refresh-verbose t)
@@ -733,7 +734,8 @@
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values
-   '((org-drawers quote ("PROPERTIES" "HIDE"))
+   '((feature-indent-offset . 2) (feature-indent-level . 2)
+     (org-drawers quote ("PROPERTIES" "HIDE"))
      (byte-compile-warnings redefine callargs free-vars unresolved
                             obsolete noruntime)
      (auto-recompile)))
