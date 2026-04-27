@@ -743,7 +743,6 @@
  '(save-abbrevs 'silently)
  '(scroll-bar-mode 'right)
  '(scroll-conservatively 10)
- '(scroll-margin 10)
  '(scroll-preserve-screen-position t)
  '(search-upper-case t)
  '(send-mail-function 'sendmail-send-it)
